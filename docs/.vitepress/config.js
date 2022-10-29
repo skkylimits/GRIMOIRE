@@ -96,31 +96,30 @@ export default {
             ],
             '/thepentest101/': [
                 {
-                    text: '1. What a pentest is',
+                    text: '1. The pentest',
                     collapsible: true,
                     items: [
-                        { text: 'Penetration test', link: '/thepentest101/what-is-a-pentest/penetration-test' },
-                        { text: 'Types of pentest', link: '/thepentest101/what-is-a-pentest/types-of-pentest' },
-                        { text: 'The deliverables', link: '/thepentest101/what-is-a-pentest/the-deliverables' },
+                        { text: 'The penetration test', link: '/thepentest101/the-pentest/the-penetration-test' },
+                        { text: 'Types of pentest', link: '/thepentest101/the-pentest/types-of-pentest' },
+                        { text: 'The deliverables', link: '/thepentest101/the-pentest/the-deliverables' },
                     ]
                 },
                 {
-                    text: '2. The deliverables of pentesting',
+                    text: '2. The deliverables',
                     collapsible: true,
                     items: [
-                        { text: 'Defining the deliverables of a pentest', link: '/thepentest101/the-deliverables-of-pentesting/defining-the-deliverables' },
-                        { text: 'Contract template', link: '/thepentest101/the-deliverables-of-pentesting/contract-template' },
-                        { text: 'Bug template', link: '/thepentest101/the-deliverables-of-pentesting/bug-template' },
+                        { text: 'Defining the deliverables', link: '/thepentest101/the-deliverables/defining-the-deliverables' },
+                        { text: 'NDA', link: '/thepentest101/the-deliverables/NDA' },
+                        { text: 'Contract template', link: '/thepentest101/the-deliverables/contract-template' },
+                        { text: 'Bug template', link: '/thepentest101/the-deliverables/bug-template' },
                     ]
                 },
                 {
-                    text: '3. Test plan',
+                    text: '3. The test plan',
                     collapsible: true,
                     items: [
-                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
-                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
-                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
-                        { text: 'PTES', link: '/lab/security/ptes' },
+                        { text: 'The testing plan', link: '/thepentest101/the-test-plan/the-testing-plan' },
+                        { text: 'Test plan template', link: '/thepentest101/the-test-plan/test-plan-template' },
                     ]
                 },
                 {
