@@ -99,19 +99,18 @@ export default {
                     text: '1. What a pentest is',
                     collapsible: true,
                     items: [
-                        { text: 'Defining what a pentest is', link: '/thepentest101/what-is-a-pentest/defining-what-a-pentest-is.md' },
-                        { text: 'Defining the types of pentest', link: '/thepentest101/what-is-a-pentest/defining-the-types-of-pentest' },
-                        { text: 'Defining the deliverables', link: '/thepentest101/what-is-a-pentest/defining-the-deliverables' },
+                        { text: 'Penetration test', link: '/thepentest101/what-is-a-pentest/penetration-test' },
+                        { text: 'Types of pentest', link: '/thepentest101/what-is-a-pentest/types-of-pentest' },
+                        { text: 'The deliverables', link: '/thepentest101/what-is-a-pentest/the-deliverables' },
                     ]
                 },
                 {
                     text: '2. The deliverables of pentesting',
                     collapsible: true,
                     items: [
-                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
-                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
-                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
-                        { text: 'PTES', link: '/lab/security/ptes' },
+                        { text: 'Defining the deliverables of a pentest', link: '/thepentest101/the-deliverables-of-pentesting/defining-the-deliverables' },
+                        { text: 'Contract template', link: '/thepentest101/the-deliverables-of-pentesting/contract-template' },
+                        { text: 'Bug template', link: '/thepentest101/the-deliverables-of-pentesting/bug-template' },
                     ]
                 },
                 {
