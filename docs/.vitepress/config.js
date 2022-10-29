@@ -96,11 +96,55 @@ export default {
             ],
             '/thepentest101/': [
                 {
-                    text: 'The Pentest 101',
+                    text: '1. What a pentest is',
+                    collapsible: true,
                     items: [
-                        { text: 'Index', link: '/thepentest101/' },
+                        { text: 'Defining what a pentest is', link: '/thepentest101/what-is-a-pentest/defining-what-a-pentest-is.md' },
+                        { text: 'Defining the types of pentest', link: '/thepentest101/what-is-a-pentest/defining-the-types-of-pentest' },
+                        { text: 'Defining the deliverables', link: '/thepentest101/what-is-a-pentest/defining-the-deliverables' },
                     ]
-                }
+                },
+                {
+                    text: '2. The deliverables of pentesting',
+                    collapsible: true,
+                    items: [
+                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
+                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
+                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
+                        { text: 'PTES', link: '/lab/security/ptes' },
+                    ]
+                },
+                {
+                    text: '3. Test plan',
+                    collapsible: true,
+                    items: [
+                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
+                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
+                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
+                        { text: 'PTES', link: '/lab/security/ptes' },
+                    ]
+                },
+                {
+                    text: '4. Test Report',
+                    collapsible: true,
+                    items: [
+                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
+                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
+                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
+                        { text: 'PTES', link: '/lab/security/ptes' },
+                    ]
+                },
+                {
+                    text: '5. Extra',
+                    collapsible: true,
+                    collapsed: true,
+                    items: [
+                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
+                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
+                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
+                        { text: 'PTES', link: '/lab/security/ptes' },
+                    ]
+                },
             ]
         }
     },
