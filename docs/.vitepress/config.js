@@ -6,6 +6,7 @@ export default {
     themeConfig: {
         nav: [
             { text: 'The Lab', link: '/lab/' },
+            { text: 'Methodologies', link: '/methodologies/' },
             {
                 text: 'Knowledge Base',
                 items: [
@@ -23,6 +24,28 @@ export default {
             '/lab/': [
                 {
                     text: 'The Lab',
+                    collapsible: true,
+                    items: [
+                        { text: 'Bare Metal', link: '/lab/bare-metal' },
+                        { text: 'Virtual Machine', link: '/lab/virtual-machine' },
+                        { text: 'Hyperviser', link: '/lab/hypervisor' },
+                        { text: 'Docker', link: '/lab/docker' },
+                    ]
+                },
+                {
+                    text: 'Security',
+                    collapsible: true,
+                    items: [
+                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
+                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
+                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
+                        { text: 'PTES', link: '/lab/security/ptes' },
+                    ]
+                }
+            ],
+            '/methodologies/': [
+                {
+                    text: 'PTES',
                     collapsible: true,
                     items: [
                         { text: 'Bare Metal', link: '/lab/bare-metal' },
@@ -123,24 +146,11 @@ export default {
                     ]
                 },
                 {
-                    text: '4. Test Report',
+                    text: '4. The test Report',
                     collapsible: true,
                     items: [
-                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
-                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
-                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
-                        { text: 'PTES', link: '/lab/security/ptes' },
-                    ]
-                },
-                {
-                    text: '5. Extra',
-                    collapsible: true,
-                    collapsed: true,
-                    items: [
-                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
-                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
-                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
-                        { text: 'PTES', link: '/lab/security/ptes' },
+                        { text: 'The test report', link: '/thepentest101/the-test-report/the-test-report' },
+                        { text: 'Test report template', link: '/thepentest101/the-test-report/test-report-template' },
                     ]
                 },
             ]
