@@ -49,9 +49,7 @@ export default {
                     collapsible: true,
                     items: [
                         { text: 'CIA triad', link: '/lab/security/cia-triad' },
-                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
                         { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
-                        { text: 'PTES', link: '/lab/security/ptes' },
                     ]
                 }
             ],
@@ -60,42 +58,15 @@ export default {
                     text: 'PTES',
                     collapsible: true,
                     items: [
-                        { text: 'Bare Metal', link: '/lab/bare-metal' },
-                        { text: 'Virtual Machine', link: '/lab/virtual-machine' },
-                        { text: 'Hyperviser', link: '/lab/hypervisor' },
-                        { text: 'Docker', link: '/lab/docker' },
+                        { text: 'PTES', link: '/methodologies/ptes/ptes' },
                     ]
                 },
                 {
-                    text: 'Security',
+                    text: 'Cyber Kill Chain',
                     collapsible: true,
                     items: [
-                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
-                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
-                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
-                        { text: 'PTES', link: '/lab/security/ptes' },
-                    ]
-                }
-            ],
-            '/lab/': [
-                {
-                    text: 'The Lab',
-                    collapsible: true,
-                    items: [
-                        { text: 'Bare Metal', link: '/lab/bare-metal' },
-                        { text: 'Virtual Machine', link: '/lab/virtual-machine' },
-                        { text: 'Hyperviser', link: '/lab/hypervisor' },
-                        { text: 'Docker', link: '/lab/docker' },
-                    ]
-                },
-                {
-                    text: 'Security',
-                    collapsible: true,
-                    items: [
-                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
-                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
-                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
-                        { text: 'PTES', link: '/lab/security/ptes' },
+                        { text: 'Cyber kill chain', link: '/methodologies/cyber-kill-chain/cyber-kill-chain' },
+                       
                     ]
                 }
             ],

@@ -1,1 +1,0 @@
-# Penetration Test Execution Standard
