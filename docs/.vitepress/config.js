@@ -62,7 +62,7 @@ export default {
                     ]
                 },
                 {
-                    text: 'Cyber Kill Chain',
+                    text: 'Cyber Kill Chain®',
                     collapsible: true,
                     items: [
                         { text: 'Cyber kill chain', link: '/methodologies/cyber-kill-chain/cyber-kill-chain' },
