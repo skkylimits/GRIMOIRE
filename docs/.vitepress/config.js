@@ -6,7 +6,19 @@ export default {
     themeConfig: {
         nav: [
             { text: 'The Lab', link: '/lab/' },
-            { text: 'Methodologies', link: '/methodologies/' },
+            { text: 'Methodologies ', link: '/methodologies/' },
+            {
+                text: 'Instruments',
+                items: [
+                    { text: 'Nmap', link: '/nmap/' },
+                ]
+            },
+            {
+                text: 'Vulnerabilities',
+                items: [
+                    { text: 'XSS', link: '/xss/' },
+                ]
+            },
             {
                 text: 'Knowledge Base',
                 items: [
@@ -46,6 +58,50 @@ export default {
             '/methodologies/': [
                 {
                     text: 'PTES',
+                    collapsible: true,
+                    items: [
+                        { text: 'Bare Metal', link: '/lab/bare-metal' },
+                        { text: 'Virtual Machine', link: '/lab/virtual-machine' },
+                        { text: 'Hyperviser', link: '/lab/hypervisor' },
+                        { text: 'Docker', link: '/lab/docker' },
+                    ]
+                },
+                {
+                    text: 'Security',
+                    collapsible: true,
+                    items: [
+                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
+                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
+                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
+                        { text: 'PTES', link: '/lab/security/ptes' },
+                    ]
+                }
+            ],
+            '/lab/': [
+                {
+                    text: 'The Lab',
+                    collapsible: true,
+                    items: [
+                        { text: 'Bare Metal', link: '/lab/bare-metal' },
+                        { text: 'Virtual Machine', link: '/lab/virtual-machine' },
+                        { text: 'Hyperviser', link: '/lab/hypervisor' },
+                        { text: 'Docker', link: '/lab/docker' },
+                    ]
+                },
+                {
+                    text: 'Security',
+                    collapsible: true,
+                    items: [
+                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
+                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
+                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
+                        { text: 'PTES', link: '/lab/security/ptes' },
+                    ]
+                }
+            ],
+            '/instruments/': [
+                {
+                    text: 'Instruments',
                     collapsible: true,
                     items: [
                         { text: 'Bare Metal', link: '/lab/bare-metal' },
@@ -125,6 +181,7 @@ export default {
                         { text: 'The penetration test', link: '/thepentest101/the-pentest/the-penetration-test' },
                         { text: 'Types of pentest', link: '/thepentest101/the-pentest/types-of-pentest' },
                         { text: 'The deliverables', link: '/thepentest101/the-pentest/the-deliverables' },
+                        { text: 'The pitch', link: '/thepentest101/the-pentest/the-pitch' },
                     ]
                 },
                 {
