@@ -134,6 +134,7 @@ export default {
                         { text: 'Defining the deliverables', link: '/thepentest101/the-deliverables/defining-the-deliverables' },
                         { text: 'NDA', link: '/thepentest101/the-deliverables/NDA' },
                         { text: 'Contract template', link: '/thepentest101/the-deliverables/contract-template' },
+                        { text: 'Letter-of-engagement', link: '/thepentest101/the-deliverables/letter-of-engagement' },
                         { text: 'Bug template', link: '/thepentest101/the-deliverables/bug-template' },
                     ]
                 },
