@@ -16,7 +16,7 @@ export default {
             {
                 text: 'Vulnerabilities',
                 items: [
-                    { text: 'XSS', link: '/xss/' },
+                    { text: 'XSS', link: '/vulnerabilities/xss/' },
                 ]
             },
             {
@@ -66,7 +66,7 @@ export default {
                     collapsible: true,
                     items: [
                         { text: 'Cyber kill chain', link: '/methodologies/cyber-kill-chain/cyber-kill-chain' },
-                       
+
                     ]
                 }
             ],
@@ -92,6 +92,31 @@ export default {
                     ]
                 }
             ],
+
+            // Vulnerabilities
+            '/vulnerabilities/xss/': [
+                {
+                    text: 'XSS Intro',
+                    items: [     
+                        { text: 'Zine', link: '/vulnerabilities/xss/intro/zine' },                  
+                        { text: 'XSS 101', link: '/vulnerabilities/xss/intro/cross-site-scripting' },
+                        { text: 'Types of XSS', link: '/vulnerabilities/xss/intro/types-of-xss' },
+                        { text: 'XSS context', link: '/vulnerabilities/xss/intro/xss-context' },
+                        { text: 'How to test', link: '/vulnerabilities/xss/intro/how-to-test' },
+                        { text: 'RXSS labs', link: '/vulnerabilities/xss/intro/rxss-labs' },
+                        { text: 'Brute\'s labs', link: '/vulnerabilities/xss/intro/brutes-labs' },
+                    ]
+                },
+                {
+                    text: 'XSS Context',
+                    items: [
+                        // This shows `/istqb/index.md` page.
+                        { text: 'html-comment-context', link: '/vulnerabilities/xss/xss-context/html-comment' }, // /istqb/index.md
+                        { text: 'XSS', link: '/vulnerabilities/xss/advanced/xss' } // /istqb/four.md
+                    ]
+                }
+            ],
+            // Knowledge Base
             // This sidebar gets displayed when user is
             // under `istqb` directory.
             '/istqb/': [
@@ -187,6 +212,6 @@ export default {
     },
     markdown: {
         theme: 'material-palenight',
-        lineNumbers: true
+        lineNumbers: false
     }
 }
