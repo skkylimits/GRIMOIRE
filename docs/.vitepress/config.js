@@ -1,7 +1,7 @@
 export default {
     base: '/',
     lang: 'en-US',
-    title: 'Shadow Lab',
+    title: 'Nameless',
     description: 'Just playing around.',
     themeConfig: {
         nav: [
