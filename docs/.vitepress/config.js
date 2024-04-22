@@ -155,7 +155,37 @@ export default {
       ],
       '/knowledge-base/networking/': [
         {
-          text: 'Networking',
+          text: 'Introduction',
+          items: [
+            { text: 'Networking Overview', link: 'knowledge-base/networking/introduction/networking-overview' },
+          ],
+        },
+        {
+          text: 'Networking Structure',
+          items: [
+            { text: 'Index', link: '/networking/' },
+          ],
+        },
+        {
+          text: 'Networking Workflow',
+          items: [
+            { text: 'Index', link: '/networking/' },
+          ],
+        },
+        {
+          text: 'Addressing',
+          items: [
+            { text: 'Index', link: '/networking/' },
+          ],
+        },
+        {
+          text: 'Protocols & Terminology',
+          items: [
+            { text: 'Index', link: '/networking/' },
+          ],
+        },
+        {
+          text: 'Connection Establishment',
           items: [
             { text: 'Index', link: '/networking/' },
           ],
