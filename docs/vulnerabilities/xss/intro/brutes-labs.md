@@ -4,7 +4,6 @@
 
 <iframe src="./xss-cheat-sheet.pdf#page=1&zoom=66" width="100%" height="660px"></iframe>
 
-
 ## The 7
 
 The [7](https://brutelogic.com.br/blog/the-7-main-xss-cases-everyone-should-know/) Main XSS Cases Everyone Should Know!

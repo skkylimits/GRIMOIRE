@@ -35,10 +35,10 @@ In the world we live in, online security is critical, and one must practice good
 ## The five levels of Cybercrime
 
 1.  ***Computer as a tool***- Fraud, identity theft, phishing scams, spam, propagation of illegal material.
-2.  ***Computer as a target*** - Viruses, denial of service, malware.
-3.  ***Cyberterrorism*** - Government level attacks on foreign intelligence services and governments.
-4.  ***Cyberextortion*** - When a system is subjected to or threatened with repeated denial of service, ransomware or other attacks by malicious hackers.
-5.  ***Cyberwarfare*** - National-level attacks on other national-level agencies or infrastructure.
+2.  ***Computer as a target*** - Viruses, denial of service, malware.
+3.  ***Cyberterrorism*** - Government level attacks on foreign intelligence services and governments.
+4.  ***Cyberextortion*** - When a system is subjected to or threatened with repeated denial of service, ransomware or other attacks by malicious hackers.
+5.  ***Cyberwarfare*** - National-level attacks on other national-level agencies or infrastructure.
 
 Unfortunately, many business owners think of cybercrime as only relating to levels 3, 4 or 5, and disregarding the possibility of their computer being a tool or a target. The statistics and occurrence tell us otherwise. This is like thinking "Robbers only go after big banks and large organisations" when in reality, robbers go after the easy hit, ie a corner shop or local service station.
 
@@ -52,19 +52,19 @@ The average amounts lost per cybercrime incident are:
 
 ## The common types of cybercrime on small to medium businesses
 
-**Password** -- an attacker attempts to guess your password using automation and technology that can uncover passwords within hours or even minutes.
+**Password** -- an attacker attempts to guess your password using automation and technology that can uncover passwords within hours or even minutes.
 
-**Ransomware** -- After accessing your systems and files, an attacker locks your data using encryption then asks for payment to unlock it.
+**Ransomware** -- After accessing your systems and files, an attacker locks your data using encryption then asks for payment to unlock it.
 
-**Malware/viruses** - Malicious code or program written to alter the way a computer operates and is designed to spread from one computer to another.
+**Malware/viruses** - Malicious code or program written to alter the way a computer operates and is designed to spread from one computer to another.
 
-**Active hacking** -- Automated or manual unauthorised access of a network or data.
+**Active hacking** -- Automated or manual unauthorised access of a network or data.
 
-**Denial of Service (DoS)**- Rendering a machine or network resource unavailable to its intended users.
+**Denial of Service (DoS)**- Rendering a machine or network resource unavailable to its intended users.
 
-**Social engineering** - A broad range of malicious activities accomplished through human interactions, such as a seemingly harmless email with a link to a harmful file or site; or a phone call from a seemingly friendly agency requesting your security details.
+**Social engineering** - A broad range of malicious activities accomplished through human interactions, such as a seemingly harmless email with a link to a harmful file or site; or a phone call from a seemingly friendly agency requesting your security details.
 
-**Malicious insider** - Malicious insiders can be employees, former employees, contractors, or business associates who have legitimate access to your systems and data, but use that access to destroy data, steal data or sabotage your systems (intentionally or by mistake).
+**Malicious insider** - Malicious insiders can be employees, former employees, contractors, or business associates who have legitimate access to your systems and data, but use that access to destroy data, steal data or sabotage your systems (intentionally or by mistake).
 
 ## Definitions
 

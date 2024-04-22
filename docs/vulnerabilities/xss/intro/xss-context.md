@@ -14,7 +14,6 @@ Some useful ways of executing JavaScript are:
 
 When the XSS context is into an HTML tag attribute value, you might sometimes be able to terminate the attribute value, close the tag, and introduce a new one. For example:
 
-
 ```javascript
 "><script>alert(document.domain)</script>
 ```
@@ -24,7 +23,6 @@ More commonly in this situation, angle brackets are blocked or encoded, so your 
 ```javascript
 " autofocus onfocus=alert(document.domain) x="
 ```
-
 
 The above payload creates an `onfocus` event that will execute JavaScript when the element receives the focus, and also adds the `autofocus` attribute to try to trigger the `onfocus` event automatically without any user interaction. Finally, it adds `x="` to gracefully repair the following markup.
 
@@ -82,7 +80,6 @@ You can now use the alternative payload:
 
 which gets converted to:
 
-
 ```javascript
 \\';alert(document.domain)//
 ```
@@ -116,7 +113,6 @@ and the application blocks or escapes single quote characters, you can use the f
 ```
 
 The `&apos;` sequence is an HTML entity representing an apostrophe or single quote. Because the browser HTML-decodes the value of the `onclick` attribute before the JavaScript is interpreted, the entities are decoded as quotes, which become string delimiters, and so the attack succeeds.
-
 
 ## XSS in JavaScript template literals
 

@@ -1,8 +1,8 @@
 # CIA Triad
 
-The concept of the CIA triad formed over time and does not have a single creator. 
+The concept of the CIA triad formed over time and does not have a single creator.
 
-Confidentiality may have first been proposed as early as 1976 in a study by the U.S. Air Force. Likewise, the concept of integrity was explored in a 1987 paper titled "A Comparison of Commercial and Military Computer Security Policies" written by David Clark and David Wilson. 
+Confidentiality may have first been proposed as early as 1976 in a study by the U.S. Air Force. Likewise, the concept of integrity was explored in a 1987 paper titled "A Comparison of Commercial and Military Computer Security Policies" written by David Clark and David Wilson.
 
 The paper recognized that commercial computing had a need for accounting records and data correctness. Even though it is not as easy to find an initial source, the concept of availability became more widespread one year later in 1988.
 
@@ -40,9 +40,9 @@ Just as it is important that unauthorized users are kept out of an organization'
 
 ## Why is the CIA triad important?
 
-The CIA triad provides organizations with a clear and comprehensive checklist to evaluate their incident response plan in the event of a cyber breach. 
+The CIA triad provides organizations with a clear and comprehensive checklist to evaluate their incident response plan in the event of a cyber breach.
 
-The CIA triad is especially important for navigating sources of vulnerabilities and helping discover what went wrong after a network has been compromised. 
+The CIA triad is especially important for navigating sources of vulnerabilities and helping discover what went wrong after a network has been compromised.
 
 From there, this information can be used to help inform weak points, address vulnerabilities, and identify areas of strength.
 
@@ -55,7 +55,6 @@ The CIA triad alone is not enough to keep your data secure. You also need to be 
 SecurityScorecard can help you monitor your information security across 10 groups of [risk factors](https://securityscorecard.com/blog/securityscorecard-10-risk-factors-explained) with our easy-to-understand security ratings. Our ratings continuously monitor every part of your security operation.
 
 We monitor your information security by keeping an eye on your data and the systems and networks you have in place to protect it, and we also monitor your cybersecurity by making sure your organization's systems are patched when they need to be, and that there's no hacker chatter about your organization on the dark web. Once your [score drops](https://securityscorecard.com/platform/security-ratings), you'll know that something has changed, and our platform will then offer remediations to help you fix the problem before there's a breach.
-
 
 ## CIA Triad Use Cases
 
@@ -100,4 +99,3 @@ This is best ensured by rigorously maintaining all hardware, performing hardware
 
 Fast and adaptive disaster recovery is essential for the worst-case scenarios; that capacity relies on the existence of a comprehensive DR plan. Safeguards against data loss or interruptions in connections must include unpredictable events such as natural disasters and fire. To prevent data loss from such occurrences, a backup copy may be stored in a geographically isolated location, perhaps even in a fireproof, waterproof safe. Extra security equipment or software such as firewalls and proxy servers can guard against downtime and unreachable data blocked by malicious denial-of-service (DoS) attacks and network intrusions.
 :::
-

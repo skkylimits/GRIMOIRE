@@ -10,10 +10,9 @@ XSS is present in website but XSS exploit not possible
 Sometimes it can be elevated
 :::
 
+## Reflected XSS
 
-## Reflected XSS 
-
-Reflected XSS attacks, also known as non-persistent attacks, occur when a malicious script is reflected off of a web application to the victim's browser. 
+Reflected XSS attacks, also known as non-persistent attacks, occur when a malicious script is reflected off of a web application to the victim's browser.
 
 The script is activated through a link, which sends a request to a website with a vulnerability that enables execution of malicious scripts.
 
@@ -65,12 +64,12 @@ Stored XSS is a type of XSS that stores malicious code on the application server
 :::
 
 ::: warning Reflected vs Stored
-Stored XSS, also known as persistent XSS, is the more damaging of the two. It occurs when a malicious script is injected directly into a vulnerable web application. 
+Stored XSS, also known as persistent XSS, is the more damaging of the two. It occurs when a malicious script is injected directly into a vulnerable web application.
 
 Reflected XSS involves the reflecting of a malicious script off of a web application, onto a user's browser.
 :::
 
-## DOM based 
+## DOM based
 
 DOM Based XSS (or as it is called in some texts, “type-0 XSS”) is an XSS attack wherein the attack payload is executed as a result of modifying the DOM “environment” in the victim's browser used by the original client side script, so that the client side code runs in an “unexpected” manner.
 
@@ -86,8 +85,6 @@ results.innerHTML = 'You searched for: ' + search;
   - Often reflected xss. Why? If you see that hashtag. That fragment. That basically means that that data never goes onto the server. Data is only read by the browser and never written onto the server. Meaning refelcted xss is now then possible. IF it goes to a dom sink then it now becomes DOM XSS
 :::
 
-
-
 ### Sinks
 
 DOM based cross site scripting occurs when JavaScript code accepts a user’s input (source) and passes that input to another function that displays the results back to the page (sink) in an unsafe manner. Unsafe meaning, there’s no security checks on the input before is displayed back on the screen, more on that later.
@@ -101,9 +98,6 @@ The key thing to keep in mind here is that DOM based requests/attacks aren’t p
   - innerHTML
   - ..
 :::
-
-
-
 
 ## Source based XSS
 
@@ -120,13 +114,13 @@ Here are some common sources:
 - document.referrer
 
 ::: warning DOM vs Source based
-**Dom**   
-    - Everything surrounding your page.  
-    - Like URL  
-    - Like History  
-    - Can only be investigated in the developer console or browser  
+**Dom**
+    - Everything surrounding your page.
+    - Like URL
+    - Like History
+    - Can only be investigated in the developer console or browser
 
-**Source**    
+**Source**
     - Source Code of a website
 :::
 
@@ -179,8 +173,7 @@ It is like a Server Side Template Injection but in the client. The SSTI can allo
 :::
 
 ::: tip
-The way to test for this vulnerability is very similar as in the case of SSTI, the interpreter is going to expect something to execute between doubles keys and will execute it. 
+The way to test for this vulnerability is very similar as in the case of SSTI, the interpreter is going to expect something to execute between doubles keys and will execute it.
 
 For example using something like: {{ 7-7 }} if the server is vulnerable you will see a 0 and if not you will see the original: {{ 7-7 }}
 :::
-

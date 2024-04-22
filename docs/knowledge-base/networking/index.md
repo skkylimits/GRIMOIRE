@@ -2,7 +2,7 @@
 
 ## How To Take Over Any Company In The World
 
-<p>Open the 
+<p>Open the
     <a href="./the-art-of-network-penetration-testing-how-to-take-over-any-company-cissp-workbook.pdf#page=1&zoom=100" target=”_blank”>
     The Art Of Network Penetration Testing How To Take Over Any Company
     </a> in a new tab window fullscreen.
@@ -12,7 +12,7 @@
 
 ## Linux Basics For Hackers
 
-<p>Open the 
+<p>Open the
     <a href="./linux-basics-for-hackers-by-otw.pdf#page=1&zoom=100" target=”_blank”>
     Linux Basics For Hackers
     </a>

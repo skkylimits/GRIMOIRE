@@ -32,7 +32,6 @@ All are simple, if they break the page or insert image, look deeper
 Replace the `<img src>` tag with your own tag like `<script>`
 :::
 
-
 ## Passive Method
 
 - As soon as you register, enter attack vector into
@@ -50,7 +49,6 @@ Replace the `<img src>` tag with your own tag like `<script>`
 - Test a payload based on the location the value
  - is reflected in
 - Test alternative payloads
-
 
 ## Stored XSS
 
@@ -76,9 +74,8 @@ Replace the `<img src>` tag with your own tag like `<script>`
     - Identify context
     - Craft exploit based on context
       - I.e. if string enters in double qoute, we might break out by using double quote
-    - If your data gets URL-encoded before being processed 
+    - If your data gets URL-encoded before being processed
       - an XSS attack is unlikely to work.
-
 
 ## Getting around Filters
 
@@ -91,7 +88,6 @@ Many different filters out there
    Try putting blacklisted word into other blacklisted
    word as filtering might only happen one time
    leaving our original blacklisted word intact
-
 
 ## Raising our impact
 

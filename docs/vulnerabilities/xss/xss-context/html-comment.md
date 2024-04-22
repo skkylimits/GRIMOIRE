@@ -4,14 +4,11 @@
 
 ![](./html-random-value.png)
 
-
 ## Look at inspector
 
 Notice the html comment in inspector
 
 ![](./html-random-value-inspector.png)
-
-
 
 ## Break out of comment
 
