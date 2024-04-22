@@ -5,51 +5,53 @@ export default {
     description: 'Just playing around.',
     themeConfig: {
         nav: [
-            { text: 'The Lab', link: '/lab/' },
+            { text: 'The Lab', link: '/the-lab/' },
             { text: 'Methodologies ', link: '/methodologies/' },
             {
                 text: 'Instruments',
                 items: [
-                    { text: 'Nmap', link: '/nmap/' },
+                    { text: 'git', link: '/instruments/git/' },
+                    { text: 'nmap', link: '/instruments/nmap/' },
                 ]
             },
             {
                 text: 'Vulnerabilities',
                 items: [
                     { text: 'XSS', link: '/vulnerabilities/xss/' },
+                    { text: 'CRSF', link: '/vulnerabilities/csrf/' },
                 ]
             },
             {
                 text: 'Knowledge Base',
                 items: [
-                    { text: 'ISTQB', link: '/istqb/' },
-                    { text: 'CISSP', link: '/cisp/' },
-                    { text: 'CNWPP', link: '/cnwp/' },
-                    { text: 'Networking', link: '/networking/' },
-                    { text: 'System Administration', link: '/sysadmin/' },
-                    { text: 'Operating Systems', link: '/os/' },
-                    { text: 'The Pentest 101', link: '/thepentest101/' },
+                    { text: 'ISTQB', link: '/knowledge-base/istqb/' },
+                    { text: 'CISSP', link: '/knowledge-base/cissp/' },
+                    { text: 'CNWPP', link: '/knowledge-base/cnwpp/' },
+                    { text: 'Networking', link: '/knowledge-base/networking/' },
+                    { text: 'System Administration', link: '/knowledge-base/sysadmin/' },
+                    { text: 'Operating Systems', link: '/knowledge-base/os/' },
+                    { text: 'The Pentest 101', link: '/knowledge-base/thepentest101/' },
                 ]
             }
         ],
         sidebar: {
-            '/lab/': [
+            '/the-lab/': [
                 {
                     text: 'The Lab',
                     collapsible: true,
                     items: [
-                        { text: 'Bare Metal', link: '/lab/bare-metal' },
-                        { text: 'Virtual Machine', link: '/lab/virtual-machine' },
-                        { text: 'Hyperviser', link: '/lab/hypervisor' },
-                        { text: 'Docker', link: '/lab/docker' },
+                        { text: 'Bare Metal', link: '/the-lab/bare-metal' },
+                        { text: 'Virtual Machine', link: '/the-lab/virtual-machine' },
+                        { text: 'Hyperviser', link: '/the-lab/hypervisor' },
+                        { text: 'Docker', link: '/the-lab/docker' },
                     ]
                 },
                 {
                     text: 'Security',
                     collapsible: true,
                     items: [
-                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
-                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
+                        { text: 'CIA triad', link: '/the-lab/security/cia-triad' },
+                        { text: 'Hacking modus operandi', link: '/the-lab/security/hacking-modus-operandi' },
                     ]
                 }
             ],
@@ -70,27 +72,26 @@ export default {
                     ]
                 }
             ],
-            '/instruments/': [
+
+            // instruments
+            '/instruments/nmap': [
                 {
-                    text: 'Instruments',
+                    text: 'nmap',
                     collapsible: true,
                     items: [
-                        { text: 'Bare Metal', link: '/lab/bare-metal' },
-                        { text: 'Virtual Machine', link: '/lab/virtual-machine' },
-                        { text: 'Hyperviser', link: '/lab/hypervisor' },
-                        { text: 'Docker', link: '/lab/docker' },
+                        { text: 'nmap', link: '/instruments/nmap/intro/nmap' },
                     ]
                 },
+            ],
+
+            '/instruments/git': [
                 {
-                    text: 'Security',
+                    text: 'git',
                     collapsible: true,
                     items: [
-                        { text: 'CIA triad', link: '/lab/security/cia-triad' },
-                        { text: 'Cyber kill chain', link: '/lab/security/cyber-kill-chain' },
-                        { text: 'Hacking modus operandi', link: '/lab/security/hacking-modus-operandi' },
-                        { text: 'PTES', link: '/lab/security/ptes' },
+                        { text: 'git', link: '/instruments/git/intro/git' },
                     ]
-                }
+                },
             ],
 
             // Vulnerabilities
@@ -110,50 +111,49 @@ export default {
                 {
                     text: 'XSS Context',
                     items: [
-                        // This shows `/istqb/index.md` page.
-                        { text: 'html-comment-context', link: '/vulnerabilities/xss/xss-context/html-comment' }, // /istqb/index.md
-                        { text: 'XSS', link: '/vulnerabilities/xss/advanced/xss' } // /istqb/four.md
+                        { text: 'html-comment-context', link: '/vulnerabilities/xss/xss-context/html-comment' },
+                        { text: 'XSS', link: '/vulnerabilities/xss/advanced/xss' }
                     ]
                 }
             ],
+            '/vulnerabilities/csrf/': [
+                {
+                    text: 'CSRF',
+                    items: [     
+                        { text: 'CSRF', link: '/vulnerabilities/csrf/intro/csrf' },                  
+                    ]
+                },
+            ],
+
             // Knowledge Base
             // This sidebar gets displayed when user is
             // under `istqb` directory.
-            '/istqb/': [
+            '/knowledge-base/istqb/': [
                 {
                     text: 'ISTQB',
                     items: [
                         // This shows `/istqb/index.md` page.
                         { text: 'Index', link: '/istqb/' }, // /istqb/index.md
-                        { text: 'One', link: '/istqb/One' } // /istqb/four.md
                     ]
                 }
             ],
-            '/cisp/': [
+            '/knowledge-base/cissp/': [
                 {
-                    text: 'CISP',
+                    text: 'CISSP',
                     items: [
-                        { text: 'Index', link: '/cisp/' },
+                        { text: 'Index', link: '/cissp/' },
                     ]
                 }
             ],
-            '/cnwp/': [
+            '/knowledge-base/cnwpp/': [
                 {
                     text: 'CNWP',
                     items: [
-                        { text: 'Index', link: '/cnwp/' },
+                        { text: 'Index', link: '/cnwpp/' },
                     ]
                 }
             ],
-            '/sysadmin/': [
-                {
-                    text: 'System Administration',
-                    items: [
-                        { text: 'Index', link: '/sysadmin/' },
-                    ]
-                }
-            ],
-            '/networking/': [
+            '/knowledge-base/networking/': [
                 {
                     text: 'Networking',
                     items: [
@@ -161,7 +161,15 @@ export default {
                     ]
                 }
             ],
-            '/os/': [
+            '/knowledge-base/sysadmin/': [
+                {
+                    text: 'System Administration',
+                    items: [
+                        { text: 'Index', link: '/sysadmin/' },
+                    ]
+                }
+            ],
+            '/knowledge-base/os/': [
                 {
                     text: 'Operating Systems',
                     items: [
@@ -169,42 +177,42 @@ export default {
                     ]
                 }
             ],
-            '/thepentest101/': [
+            '/knowledge-base/thepentest101/': [
                 {
                     text: '1. The pentest',
                     collapsible: true,
                     items: [
-                        { text: 'The penetration test', link: '/thepentest101/the-pentest/the-penetration-test' },
-                        { text: 'Types of pentest', link: '/thepentest101/the-pentest/types-of-pentest' },
-                        { text: 'The deliverables', link: '/thepentest101/the-pentest/the-deliverables' },
-                        { text: 'The pitch', link: '/thepentest101/the-pentest/the-pitch' },
+                        { text: 'The penetration test', link: '/knowledge-base/thepentest101/the-pentest/the-penetration-test' },
+                        { text: 'Types of pentest', link: '/knowledge-base/thepentest101/the-pentest/types-of-pentest' },
+                        { text: 'The deliverables', link: '/knowledge-base/thepentest101/the-pentest/the-deliverables' },
+                        { text: 'The pitch', link: '/knowledge-base/thepentest101/the-pentest/the-pitch' },
                     ]
                 },
                 {
                     text: '2. The deliverables',
                     collapsible: true,
                     items: [
-                        { text: 'Defining the deliverables', link: '/thepentest101/the-deliverables/defining-the-deliverables' },
-                        { text: 'NDA', link: '/thepentest101/the-deliverables/NDA' },
-                        { text: 'Contract template', link: '/thepentest101/the-deliverables/contract-template' },
-                        { text: 'Letter-of-engagement', link: '/thepentest101/the-deliverables/letter-of-engagement' },
-                        { text: 'Bug template', link: '/thepentest101/the-deliverables/bug-template' },
+                        { text: 'Defining the deliverables', link: '/knowledge-base/thepentest101/the-deliverables/defining-the-deliverables' },
+                        { text: 'NDA', link: '/knowledge-base/thepentest101/the-deliverables/NDA' },
+                        { text: 'Contract template', link: '/knowledge-base/thepentest101/the-deliverables/contract-template' },
+                        { text: 'Letter-of-engagement', link: '/knowledge-base/thepentest101/the-deliverables/letter-of-engagement' },
+                        { text: 'Bug template', link: '/knowledge-base/thepentest101/the-deliverables/bug-template' },
                     ]
                 },
                 {
                     text: '3. The test plan',
                     collapsible: true,
                     items: [
-                        { text: 'The testing plan', link: '/thepentest101/the-test-plan/the-testing-plan' },
-                        { text: 'Test plan template', link: '/thepentest101/the-test-plan/test-plan-template' },
+                        { text: 'The testing plan', link: '/knowledge-base/thepentest101/the-test-plan/the-testing-plan' },
+                        { text: 'Test plan template', link: '/knowledge-base/thepentest101/the-test-plan/test-plan-template' },
                     ]
                 },
                 {
                     text: '4. The test Report',
                     collapsible: true,
                     items: [
-                        { text: 'The test report', link: '/thepentest101/the-test-report/the-test-report' },
-                        { text: 'Test report template', link: '/thepentest101/the-test-report/test-report-template' },
+                        { text: 'The test report', link: '/knowledge-base/thepentest101/the-test-report/the-test-report' },
+                        { text: 'Test report template', link: '/knowledge-base/thepentest101/the-test-report/test-report-template' },
                     ]
                 },
             ]

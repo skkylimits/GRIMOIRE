@@ -1,2 +1,0 @@
-# ISTQB
-asdsad
