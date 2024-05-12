@@ -1,1 +1,9 @@
+# Logs
+*.log
+
+# Directory
 node_modules
+dist
+
+# Files
+.DS_Store

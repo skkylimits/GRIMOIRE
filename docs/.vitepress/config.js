@@ -30,6 +30,7 @@ export default {
           { text: 'Networking', link: '/knowledge-base/networking/' },
           { text: 'System Administration', link: '/knowledge-base/sysadmin/' },
           { text: 'Operating Systems', link: '/knowledge-base/os/' },
+          { text: 'Cyber Crusades', link: '/knowledge-base/cyber-crusades/' },
           { text: 'The Pentest 101', link: '/knowledge-base/thepentest101/' },
         ],
       },
@@ -258,6 +259,29 @@ export default {
           items: [
             { text: 'The test report', link: '/knowledge-base/thepentest101/the-test-report/the-test-report' },
             { text: 'Test report template', link: '/knowledge-base/thepentest101/the-test-report/test-report-template' },
+          ],
+        },
+      ],
+      '/knowledge-base/cyber-crusades/': [
+        {
+          text: 'Web 1',
+          collapsible: true,
+          items: [
+            { text: 'What Is Web?', link: '/knowledge-base/cyber-crusades/web-1/1-what-is-web' },
+          ],
+        },
+        {
+          text: 'Web 2',
+          collapsible: true,
+          items: [
+            { text: 'Intro', link: '/' },
+          ],
+        },
+        {
+          text: 'Networking',
+          collapsible: true,
+          items: [
+            { text: 'Intro', link: '/' },
           ],
         },
       ],
