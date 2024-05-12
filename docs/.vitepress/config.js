@@ -88,9 +88,11 @@ export default {
       '/instruments/git': [
         {
           text: 'git',
-          collapsible: true,
           items: [
-            { text: 'git', link: '/instruments/git/intro/git' },
+            { text: 'Git Started', link: '/instruments/git/git-and-github/1-git-started' },
+            { text: 'Remote', link: '/instruments/git/git-and-github/2-remote' },
+            { text: 'Collaboration', link: '/instruments/git/git-and-github/3-collaboration' },
+            { text: 'Advanced', link: '/instruments/git/git-and-github/4-advanced' },
           ],
         },
       ],
