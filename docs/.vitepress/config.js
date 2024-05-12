@@ -157,37 +157,52 @@ export default {
         {
           text: 'Introduction',
           items: [
-            { text: 'Networking Overview', link: 'knowledge-base/networking/introduction/networking-overview' },
+            { text: 'Networking Overview', link: '/knowledge-base/networking/1-introduction/networking-overview' },
           ],
         },
         {
           text: 'Networking Structure',
           items: [
-            { text: 'Index', link: '/networking/' },
+            { text: 'Network Types', link: '/knowledge-base/networking/2-networking-structure/1-network-types' },
+            { text: 'Networking Topologies', link: '/knowledge-base/networking/2-networking-structure/2-networking-topologies' },
+            { text: 'Proxies', link: '/knowledge-base/networking/2-networking-structure/3-proxies' },
           ],
         },
         {
           text: 'Networking Workflow',
           items: [
-            { text: 'Index', link: '/networking/' },
+            { text: 'Networking Models', link: '/knowledge-base/networking/3-networking-workflow/1-networking-models' },
+            { text: 'The OSI Model', link: '/knowledge-base/networking/3-networking-workflow/2-the-osi-model' },
+            { text: 'The TCP/IP Model', link: '/knowledge-base/networking/3-networking-workflow/3-the-tcp-ip-model' },
           ],
         },
         {
           text: 'Addressing',
           items: [
-            { text: 'Index', link: '/networking/' },
+            { text: 'Networking Layer', link: '/knowledge-base/networking/4-networking-addressing/1-network-layer' },
+            { text: 'IPv4 Addresses', link: '/knowledge-base/networking/4-networking-addressing/2-ipv4-addresses' },
+            { text: 'Subnetting', link: '/knowledge-base/networking/4-networking-addressing/3-subnetting' },
+            { text: 'MAC Addresses', link: '/knowledge-base/networking/4-networking-addressing/4-mac-addresses' },
+            { text: 'IPv6 Addresses', link: '/knowledge-base/networking/4-networking-addressing/5-ipv6-addresses' },
           ],
         },
         {
           text: 'Protocols & Terminology',
           items: [
-            { text: 'Index', link: '/networking/' },
+            { text: 'Networking Key Terminology', link: '/knowledge-base/networking/5-protocols-and-terminology/1-protocols-and-terminology' },
+            { text: 'Common Protocols', link: '/knowledge-base/networking/5-protocols-and-terminology/2-common-protocols' },
+            { text: 'Wireless Networks', link: '/knowledge-base/networking/5-protocols-and-terminology/3-wireless-networks' },
+            { text: 'Virtual Private Networks', link: '/knowledge-base/networking/5-protocols-and-terminology/4-virtual-private-networks' },
+            { text: 'Vendor Specific Information', link: '/knowledge-base/networking/5-protocols-and-terminology/5-vendor-specific-information' },
           ],
         },
         {
           text: 'Connection Establishment',
           items: [
-            { text: 'Index', link: '/networking/' },
+            { text: 'Key Exchange Mechanisms', link: '/knowledge-base/networking/6-connection-establishment/1-key-exchange-mechanisms' },
+            { text: 'Authentication Protocols', link: '/knowledge-base/networking/6-connection-establishment/2-authentication-protocols' },
+            { text: 'TCP/UDP Connections', link: '/knowledge-base/networking/6-connection-establishment/3-tcp-udp-connections' },
+            { text: 'Cryptograhy', link: '/knowledge-base/networking/6-connection-establishment/4-cryptography' },
           ],
         },
       ],
