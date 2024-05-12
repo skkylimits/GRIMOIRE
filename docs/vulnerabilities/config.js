@@ -45,7 +45,6 @@ export default {
       },
     ],
     sidebar: {
-      // the lab
       '/the-lab/': [
         {
           text: 'The Lab',
@@ -66,8 +65,6 @@ export default {
           ],
         },
       ],
-
-      // methodologies
       '/methodologies/': [
         {
           text: 'PTES',
@@ -81,42 +78,6 @@ export default {
           collapsible: true,
           items: [
             { text: 'Cyber kill chain', link: '/methodologies/cyber-kill-chain/cyber-kill-chain' },
-
-          ],
-        },
-      ],
-
-      // scripting
-      '/scripting/': [
-        {
-          text: 'bash',
-          collapsible: true,
-          collapsed: true,
-          items: [
-            { text: 'Start', link: '/' },
-          ],
-        },
-        {
-          text: 'JavaScript',
-          collapsible: true,
-          items: [
-            { text: 'Start', link: '/' },
-          ],
-        },
-        {
-          text: 'Python',
-          collapsible: true,
-          items: [
-            { text: 'Start', link: '/' },
-
-          ],
-        },
-        {
-          text: 'SQL',
-          collapsible: true,
-          collapsed: true,
-          items: [
-            { text: 'Start', link: '/' },
 
           ],
         },

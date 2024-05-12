@@ -5,4 +5,4 @@ TODO: Add how to do a pentest (sales pitch)
 TODO: Get familiar with devslide for powerpoints
 TODO: hotreload doesnt work anymore
 
-## add python/javascript/bash?
+## add python/javascript/bash/sql?
