@@ -71,14 +71,6 @@ export default {
             { text: 'Hacking modus operandi', link: '/the-lab/security/hacking-modus-operandi' },
           ],
         },
-        {
-          text: 'Exploits',
-          collapsible: true,
-          items: [
-            { text: 'DDoS', link: '/the-lab/exploits/DDoS' },
-
-          ],
-        },
       ],
 
       // methodologies
