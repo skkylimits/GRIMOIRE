@@ -153,7 +153,6 @@ on:
   pull_request:
     branches: [ master ]
 
-
 jobs:
   test_pull_request:
     runs-on: ubuntu-latest
@@ -210,7 +209,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
-
     publish-gpr:
         needs: build
         runs-on: ubuntu-latest
@@ -240,7 +238,6 @@ on:
   issues:
     types: [opened]
 
-
 jobs:
   post_slack_message:
     runs-on: ubuntu-latest
@@ -249,7 +246,7 @@ jobs:
     - uses: rtCamp/action-slack-notify@v2.0.0
     env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_USERNAME: CyberJeff 
+        SLACK_USERNAME: CyberJeff
         SLACK_CHANNEL: gh-issues
 ```
 

@@ -50,9 +50,9 @@ Create a new branch and move into it:
 
 Merge conflicts happen when two commits affect the same line of code at the same time.
 
-1 Feature branch modifies line 5 and commits.  
-2 Master branch modifies line 5 and commits.  
-3 Master branch tries to merge feature branch.  
+1 Feature branch modifies line 5 and commits.
+2 Master branch modifies line 5 and commits.
+3 Master branch tries to merge feature branch.
 
 Here’s how a merge conflict looks from the command line:
 

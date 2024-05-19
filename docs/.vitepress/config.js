@@ -31,6 +31,12 @@ export default {
         ],
       },
       {
+        text: 'Exploits',
+        items: [
+          { text: 'DDoS', link: '/exploits/ddos/' },
+        ],
+      },
+      {
         text: 'Knowledge Base',
         items: [
           { text: 'ISTQB', link: '/knowledge-base/istqb/' },
@@ -63,6 +69,14 @@ export default {
           items: [
             { text: 'CIA triad', link: '/the-lab/security/cia-triad' },
             { text: 'Hacking modus operandi', link: '/the-lab/security/hacking-modus-operandi' },
+          ],
+        },
+        {
+          text: 'Exploits',
+          collapsible: true,
+          items: [
+            { text: 'DDoS', link: '/the-lab/exploits/DDoS' },
+
           ],
         },
       ],
@@ -145,7 +159,7 @@ export default {
         },
       ],
 
-      // Vulnerabilities
+      // vulnerabilities
       '/vulnerabilities/xss/': [
         {
           text: 'XSS Intro',
@@ -172,6 +186,16 @@ export default {
           text: 'CSRF',
           items: [
             { text: 'CSRF', link: '/vulnerabilities/csrf/intro/csrf' },
+          ],
+        },
+      ],
+
+      // exploits
+      '/exploits/': [
+        {
+          text: 'Distributed Denial of Service',
+          items: [
+            { text: 'DDoS', link: '/exploits/ddos/DDoS' },
           ],
         },
       ],
@@ -205,6 +229,12 @@ export default {
         },
       ],
       '/knowledge-base/networking/': [
+        {
+          text: 'The Internet',
+          items: [
+            { text: 'What Is The Internet?', link: '/knowledge-base/networking/0-the-internet/the-internet.md' },
+          ],
+        },
         {
           text: 'Introduction',
           items: [
