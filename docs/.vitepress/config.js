@@ -222,6 +222,13 @@ export default {
       ],
       '/knowledge-base/networking/': [
         {
+          text: 'MIW',
+          items: [
+            { text: 'Applicatie laag', link: '/knowledge-base/networking/miw/4-applicatie-laag.md' },
+            { text: 'Applicatieprotocollen', link: '/knowledge-base/networking/miw/5-applicatieprotocollen.md' },
+          ],
+        },
+        {
           text: 'The Internet',
           items: [
             { text: 'What Is The Internet?', link: '/knowledge-base/networking/0-the-internet/the-internet.md' },
