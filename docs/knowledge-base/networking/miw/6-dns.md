@@ -1,5 +1,10 @@
 # Het Domain Name System (DNS)
 
+<p>Open de
+    <a href="./assets/les-2a-dns-transport-layer-tcp.pdf#page=1&zoom=75" target=”_blank”>les 2b dns transport layer</a>
+    in a new tab window fullscreen.
+</p>
+
 Het Domain Name System (DNS) is een essentieel protocol op het internet dat het mogelijk maakt om mensvriendelijke hostnamen te vertalen naar IP-adressen van apparaten zoals computers en servers. Dit voorkomt dat gebruikers IP-adressen moeten onthouden en kunnen ze in plaats daarvan gebruiksvriendelijke namen gebruiken, zoals www.nu.nl of facebook.com.
 
 ## Uitdagingen met IP-adressen
@@ -48,11 +53,11 @@ De root DNS-servers vormen de ingang van het DNS-systeem en zijn verspreid over 
 
 ## Top-Level Domain (TLD) servers
 
-De TLD-servers bevinden zich onder de root DNS-servers en zijn verantwoordelijk voor het beheer van specifieke top-level domeinen, zoals .com, .org, .net, enzovoort.
+De TLD-servers zijn verantwoordelijk voor het beheren van domeinen zoals .com, .org, .net, enzovoort. Ze vertegenwoordigen landcodes zoals .nl voor Nederland, .be voor België, enzovoort. Er komen steeds meer TLD's bij, zoals .museum en .info.
 
 ## Authoritative DNS-servers
 
-De authoritative DNS-servers bevinden zich onder de TLD-servers en zijn verantwoordelijk voor het beheren van de DNS-records voor specifieke domeinen. Ze bevatten informatie over de hostnamen en IP-adressen binnen die domeinen.
+De authoritative DNS-servers zijn servers van specifieke organisaties of bedrijven. Ze bevatten informatie over de hostnamen en IP-adressen binnen die organisatie of dat bedrijf. Bijvoorbeeld, als je het IP-adres van rooster.haag.nl wilt vinden, zal de authoritative DNS-server van Haag.nl deze informatie hebben.
 
 ## Werking van DNS-servers
 
@@ -61,14 +66,6 @@ DNS-servers werken samen om gebruikers te voorzien van de juiste IP-adressen voo
 ## Hiërarchie van DNS-servers
 
 In werkelijkheid zijn de punten op de kaart clusters van meerdere datacentra, verspreid over verschillende locaties. Deze clusters werken samen als één en dezelfde server. Deze 13 root DNS-servers bevinden zich op bekende locaties en zijn altijd bereikbaar voor DNS-verzoeken.
-
-## Top-Level Domain (TLD) servers
-
-De TLD-servers zijn verantwoordelijk voor het beheren van domeinen zoals .com, .org, .net, enzovoort. Ze vertegenwoordigen landcodes zoals .nl voor Nederland, .be voor België, enzovoort. Er komen steeds meer TLD's bij, zoals .museum en .info.
-
-## Authoritative DNS-servers
-
-De authoritative DNS-servers zijn servers van specifieke organisaties of bedrijven. Ze bevatten informatie over de hostnamen en IP-adressen binnen die organisatie of dat bedrijf. Bijvoorbeeld, als je het IP-adres van rooster.haag.nl wilt vinden, zal de authoritative DNS-server van Haag.nl deze informatie hebben.
 
 ## Local DNS-server
 
@@ -128,6 +125,6 @@ Hoewel DNSSEC een effectieve beveiligingsmaatregel is, wordt het nog niet breed 
 
 ## Aanbevolen filmpje voor verdere uitleg
 
-Voor een uitgebreidere uitleg over DNS en DNSSEC wordt aangeraden om het volgende filmpje over het [Domain Name System van Peter Explains](https://www.youtube.com/watch?v=GlZC4Jwf3xQ) te bekijken, waarin de concepten met animaties worden uitgelegd.
+Voor een uitgebreidere uitleg over DNS en DNSSEC wordt aangeraden om het volgende filmpje over het [Domain Name System van PeterExplainsTech](https://www.youtube.com/watch?v=GlZC4Jwf3xQ) te bekijken, waarin de concepten met animaties worden uitgelegd.
 
 [DNS Explained in 100 seconds](https://www.youtube.com/watch?v=UVR9lhUGAyU)

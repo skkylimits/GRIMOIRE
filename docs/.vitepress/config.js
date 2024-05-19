@@ -224,9 +224,11 @@ export default {
         {
           text: 'MIW',
           items: [
-            { text: 'Applicatie laag', link: '/knowledge-base/networking/miw/4-applicatie-laag.md' },
+            { text: 'Applicatielaag', link: '/knowledge-base/networking/miw/4-applicatie-laag.md' },
             { text: 'Applicatieprotocollen', link: '/knowledge-base/networking/miw/5-applicatieprotocollen.md' },
             { text: 'DNS', link: '/knowledge-base/networking/miw/6-dns.md' },
+            { text: 'Transportlaag', link: '/knowledge-base/networking/miw/7-transportlaag.md' },
+            { text: 'Netwerklaag', link: '/knowledge-base/networking/miw/8-netwerklaag.md' },
           ],
         },
         {
