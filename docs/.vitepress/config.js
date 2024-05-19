@@ -226,6 +226,7 @@ export default {
           items: [
             { text: 'Applicatie laag', link: '/knowledge-base/networking/miw/4-applicatie-laag.md' },
             { text: 'Applicatieprotocollen', link: '/knowledge-base/networking/miw/5-applicatieprotocollen.md' },
+            { text: 'DNS', link: '/knowledge-base/networking/miw/6-dns.md' },
           ],
         },
         {
