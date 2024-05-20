@@ -1,0 +1,187 @@
+# Virtual Machine Setup
+
+## Install Virtual Box
+
+### 1: Download VirtualBox
+
+1. **Visit the VirtualBox website**
+   - Go to the [VirtualBox download page](https://www.virtualbox.org/wiki/Downloads).
+2. **Download for Windows**
+   - Click "Windows hosts" to download the installer.
+
+### 2: Install VirtualBox
+
+1. **Run the installer**
+   - Open the downloaded installer file.
+2. **Installation steps**
+   - Follow the prompts: Click "Next", "Yes" (for UAC), and "Install".
+   - Respond to any Windows security prompts by clicking "Install".
+
+### 3: Complete Installation
+
+1. **Finish the installation**
+   - Click "Finish" and optionally start VirtualBox.
+
+### 4: Set Up a Virtual Machine
+
+1. **Open VirtualBox**
+   - Launch VirtualBox from your desktop or start menu.
+2. **Create a new VM**
+   - Click "New" and enter the details: Name, OS type, and version.
+   - Allocate memory and create a virtual hard disk with default settings.
+
+### 5: Install an Operating System
+
+1. **Start the VM**
+   - Select your VM and click "Start".
+2. **Select startup disk**
+   - Choose your OS installation media (ISO file or physical disk).
+3. **Install the OS**
+   - Follow the installation instructions for your chosen OS.
+
+You're all set! VirtualBox is now ready with a new virtual machine.
+
+### 6: Open an OVA File
+
+1. **Open VirtualBox**
+   - Launch VirtualBox from your desktop or start menu.
+
+### 7: Import the OVA File
+
+1. **Open the Import Appliance Wizard**
+   - In the VirtualBox Manager, click on "File" in the menu bar.
+   - Select "Import Appliance" from the dropdown menu.
+
+2. **Select the OVA File**
+   - Click on the folder icon next to the "File" field.
+   - Browse to the location of your OVA file, select it, and click "Open".
+
+3. **Review and Modify Settings (Optional)**
+   - After selecting the OVA file, click "Next".
+   - Review the appliance settings. You can modify settings like the VM name, network settings, etc., if necessary.
+
+4. **Import the Appliance**
+   - Click "Import" to start the import process. This may take a few minutes depending on the size of the OVA file and your system's performance.
+
+### 8: Start the Imported Virtual Machine
+
+1. **Start the VM**
+   - Once the import is complete, the new virtual machine will appear in your VirtualBox Manager.
+   - Select the new VM and click "Start" to launch it.
+2. **Log In As Student**
+   - userid: student
+   - password: Hva_student
+3. **Log In As Root:**
+   - userid: root
+   - password: HvA_root
+
+That's it! Your `existing` OVA file has been successfully added and imported into VirtualBox. You can now start and use the virtual machine.
+
+## Create Ubuntu Machine
+
+Sure! Here is the step-by-step guide to setting up a brand `new` Ubuntu virtual machine in VirtualBox:
+
+### Step 1: Download and Install VirtualBox
+
+1. **Download VirtualBox:**
+   - Go to the [VirtualBox download page](https://www.virtualbox.org/wiki/Downloads).
+   - Choose the appropriate version for your operating system (Windows, macOS, Linux, etc.).
+2. **Install VirtualBox:**
+   - Run the installer and follow the on-screen instructions to complete the installation.
+
+### Step 2: Download Ubuntu ISO
+
+1. **Download Ubuntu:**
+   - Go to the [Ubuntu download page](https://ubuntu.com/download/desktop).
+   - Choose the version you want to install (usually the latest LTS version is recommended for stability).
+   - Download the ISO file.
+
+### Step 3: Create a New Virtual Machine
+
+1. **Open VirtualBox:**
+   - Launch VirtualBox from your applications menu.
+2. **Create a New VM:**
+   - Click on the "New" button.
+   - Enter a name for your VM (e.g., "Ubuntu VM").
+   - Choose "Linux" as the type and "Ubuntu" as the version.
+   - Click "Next".
+
+### Step 4: Allocate Memory (RAM)
+
+1. **Set Memory Size:**
+   - Allocate memory for your VM. A minimum of 2 GB (2048 MB) is recommended, but 4 GB (4096 MB) is better if your host system has enough RAM.
+   - Click "Next".
+
+### Step 5: Create a Virtual Hard Disk
+
+1. **Create a Virtual Hard Disk:**
+   - Select "Create a virtual hard disk now" and click "Create".
+   - Choose "VDI (VirtualBox Disk Image)" and click "Next".
+   - Choose "Dynamically allocated" and click "Next".
+   - Set the size of the virtual hard disk. A minimum of 25 GB is recommended.
+   - Click "Create".
+
+### Step 6: Configure the VM Settings
+
+1. **Access VM Settings:**
+   - Select your newly created VM and click on the "Settings" button.
+2. **System Settings:**
+   - Go to the "System" section.
+   - Under the "Processor" tab, allocate at least 2 CPUs if your host system supports it.
+   - Go to the "Acceleration" tab and ensure that hardware virtualization is enabled.
+3. **Storage Settings:**
+   - Go to the "Storage" section.
+   - Under "Controller: IDE", click on the empty disc icon.
+   - Click on the disc icon next to "Optical Drive" and select "Choose a disk file".
+   - Browse and select the Ubuntu ISO file you downloaded.
+4. **Network Settings:**
+   - Go to the "Network" section.
+   - Ensure that "Attached to" is set to "NAT" (this is the default setting and should be fine for most users).
+
+### Step 7: Start the VM and Install Ubuntu
+
+1. **Start the VM:**
+   - Click the "Start" button.
+2. **Boot from ISO:**
+   - The VM should boot from the ISO file and display the Ubuntu installation menu.
+   - Select "Install Ubuntu".
+3. **Follow Installation Steps:**
+   - Choose your language and click "Continue".
+   - Select your keyboard layout and click "Continue".
+   - Choose "Normal installation" and check the box for "Download updates while installing Ubuntu" (optional but recommended).
+   - Click "Continue".
+   - Select "Erase disk and install Ubuntu" (this only affects the virtual disk) and click "Install Now".
+   - Confirm any prompts and click "Continue".
+   - Select your time zone and click "Continue".
+   - Enter your details (name, computer name, username, and password) and click "Continue".
+
+### Step 8: Complete Installation and Reboot
+
+1. **Installation:**
+   - The installer will copy files and complete the installation process.
+2. **Reboot:**
+   - Once installation is complete, you will be prompted to restart the VM.
+   - Click "Restart Now".
+3. **Remove Installation Media:**
+   - After the reboot, you might be prompted to remove the installation media. Go to "Devices" > "Optical Drives" > "Remove disk from virtual drive".
+   - Press "Enter" to reboot the VM.
+
+### Step 9: Post-Installation Steps
+
+1. **Log In:**
+   - After the reboot, you will be presented with the login screen.
+   - Enter your password to log in.
+2. **Update System:**
+   - Open a terminal (Ctrl+Alt+T).
+   - Run the following commands to update your system:
+
+     ```bash
+     sudo apt update
+     sudo apt upgrade
+     ```
+
+3. **Install Guest Additions:**
+   - In the VirtualBox menu, go to "Devices" > "Insert Guest Additions CD image".
+   - Follow the prompts to install Guest Additions, which improves performance and provides additional features like shared folders and better video support.
+
+Your Ubuntu VM should now be ready to use!
