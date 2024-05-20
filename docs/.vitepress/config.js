@@ -229,6 +229,10 @@ export default {
             { text: 'DNS', link: '/knowledge-base/networking/miw/6-dns.md' },
             { text: 'Transportlaag', link: '/knowledge-base/networking/miw/7-transportlaag.md' },
             { text: 'Netwerklaag', link: '/knowledge-base/networking/miw/8-netwerklaag.md' },
+            { text: 'Routing & Forwarding', link: '/knowledge-base/networking/miw/9-routing-en-forwarding.md' },
+            { text: 'Netwerklaagprotocollen', link: '/knowledge-base/networking/miw/10-netwerklaagprotocollen.md' },
+            { text: 'Subnetting', link: '/knowledge-base/networking/miw/11.subnetting.md' },
+            { text: 'Linklaag', link: '/knowledge-base/networking/miw/12-linklaag.md' },
           ],
         },
         {
