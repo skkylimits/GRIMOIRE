@@ -224,6 +224,9 @@ export default {
         {
           text: 'MIW',
           items: [
+            { text: 'Netwerk Architektuur', link: '/knowledge-base/networking/miw/1-netwerk-architektuur.md' },
+            { text: 'Protocol Stack', link: '/knowledge-base/networking/miw/2-protocol-stack.md' },
+            { text: 'Intro Beveiliging', link: '/knowledge-base/networking/miw/3-intro-beveiliging.md' },
             { text: 'Applicatielaag', link: '/knowledge-base/networking/miw/4-applicatie-laag.md' },
             { text: 'Applicatieprotocollen', link: '/knowledge-base/networking/miw/5-applicatieprotocollen.md' },
             { text: 'DNS', link: '/knowledge-base/networking/miw/6-dns.md' },
@@ -231,8 +234,10 @@ export default {
             { text: 'Netwerklaag', link: '/knowledge-base/networking/miw/8-netwerklaag.md' },
             { text: 'Routing & Forwarding', link: '/knowledge-base/networking/miw/9-routing-en-forwarding.md' },
             { text: 'Netwerklaagprotocollen', link: '/knowledge-base/networking/miw/10-netwerklaagprotocollen.md' },
-            { text: 'Subnetting', link: '/knowledge-base/networking/miw/11.subnetting.md' },
+            { text: 'Subnetting', link: '/knowledge-base/networking/miw/11-subnetting.md' },
             { text: 'Linklaag', link: '/knowledge-base/networking/miw/12-linklaag.md' },
+            { text: 'Beveiliging', link: '/knowledge-base/networking/miw/13-beveiliging.md' },
+            { text: 'Beveiligingsmaatregelen', link: '/knowledge-base/networking/miw/14-beveiligingsmaatregelen.md' },
           ],
         },
         {

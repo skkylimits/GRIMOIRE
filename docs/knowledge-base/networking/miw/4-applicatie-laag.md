@@ -1,9 +1,12 @@
 # Applicatielaag
 
-<p>Open de
-    <a href="./assets/les-1b-application-layer.pdf#page=1&zoom=75" target=”_blank”>les 1b application layer</a>
+<p>
+    Open de
+    <a href="./assets/lessen/les-1b-application-layer.pdf#page=1&zoom=75" target=”_blank”>les 1b application layer</a>
     in a new tab window fullscreen.
 </p>
+
+## Intro
 
 Hallo en welkom terug bij deze tweede les over infrastructuur. In de vorige les hebben we al gekeken naar computernetwerken en zijn we Rotterdam tegengekomen. We hebben daar een beetje structuur gebracht aan de hand van een gelaagd model. Deze keer gaan we verder met de bovenste laag van dit model en kijken we naar de applicatielaag en wat we daar zoal tegenkomen. Hier zitten we opnieuw bij de TCP/IP-protocolstack, dus laten we als eerste nog even kort herhalen wat dat inhoudt en ook kijken waar we deze twee termen precies tegenkomen op jouw computer en hoe dat verband houdt met het operatingsysteem op dat apparaat.
 

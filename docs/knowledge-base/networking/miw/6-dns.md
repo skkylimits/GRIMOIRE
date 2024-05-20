@@ -1,7 +1,7 @@
 # Het Domain Name System (DNS)
 
 <p>Open de
-    <a href="./assets/les-2a-dns-transport-layer-tcp.pdf#page=1&zoom=75" target=”_blank”>les 2b dns transport layer</a>
+    <a href="./assets/lessen/les-2a-dns-transport-layer-tcp.pdf#page=1&zoom=75" target=”_blank”>les 2b dns transport layer</a>
     in a new tab window fullscreen.
 </p>
 

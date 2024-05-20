@@ -1,5 +1,7 @@
 # Netwerklaagprotocollen
 
+## Intro
+
 In voorgaande colleges hebben we al het een en ander geleerd over de netwerklaag. We hebben een idee over wat er precies gebeurt en hoe dat allemaal in zijn werk gaat. In dit laatste filmpje van vandaag wil ik met jullie praten over de netwerklaagprotocollen, dus de protocollen die ervoor zorgen dat de netwerklaag informatie kan doorsturen.
 
 ## Belangrijke Protocollen
@@ -75,7 +77,7 @@ Network Address Translation (NAT) fungeert als een overgangsoplossing tijdens de
 
 ## Aanbevolen Filmpje: Heldere Uitleg van NAT
 
-Het aanbevolen filmpje van [Nat by PieterExplainsTech](https://www.youtube.com/watch?v=QBqPzHEDzvo) behandelt NAT op een visuele en begrijpelijke manier. Het voegt waarde toe aan de besproken onderwerpen en is een aanvulling op de eerdere uitleg in de colleges.
+Het aanbevolen filmpje van [NAT by PieterExplainsTech](https://www.youtube.com/watch?v=QBqPzHEDzvo) behandelt NAT op een visuele en begrijpelijke manier. Het voegt waarde toe aan de besproken onderwerpen en is een aanvulling op de eerdere uitleg in de colleges.
 
 ## Volgende College: Dieper In op Subnetten
 

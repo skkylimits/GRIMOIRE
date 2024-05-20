@@ -1,5 +1,13 @@
 # Netwerklaag
 
+<p>
+    Open de
+    <a href="./assets/lessen/les-2b-netwerklaag.pdf#page=1&zoom=75" target=”_blank”>les 2b netwerklaag</a>
+    in a new tab window fullscreen.
+</p>
+
+## Intro
+
 Beste studenten, hallo en welkom terug bij het volgende college infrastructuur. Vandaag gaan we het hebben over de netwerklaag. We zullen de netwerklaag onder de loep nemen en een aantal filmpjes bekijken. In deze filmpjes zullen we allereerst kijken naar wat de netwerklaag is en wat deze precies voor ons doet. Ook zullen we de belangrijkste taken van de netwerklaag ontdekken.
 
 ## Diensten van de Netwerklaag
@@ -118,4 +126,4 @@ Het network mask geeft aan hoeveel IP-adressen beschikbaar zijn op hetzelfde net
 
 ## Verwijzing naar verdere informatie
 
-Voor meer informatie en een diepere duik in de netwerklaag, kun je kijken naar het filmpje van [PieterExplainsTech](https://www.youtube.com/watch?v=RUZohsAxPxQ), waarvan je de link ook in de demo kunt vinden. Dit zal je helpen beter te begrijpen hoe routers ervoor zorgen dat onze pakketjes de juiste bestemming bereiken.
+Voor meer informatie en een diepere duik in de netwerklaag, kun je kijken naar het filmpje van [DHCP PieterExplainsTech](https://www.youtube.com/watch?v=RUZohsAxPxQ), waarvan je de link ook in de demo kunt vinden. Dit zal je helpen beter te begrijpen hoe routers ervoor zorgen dat onze pakketjes de juiste bestemming bereiken.

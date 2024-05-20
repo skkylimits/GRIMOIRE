@@ -1,5 +1,7 @@
 # Routing & Forwarding
 
+## Intro
+
 Welkom terug allemaal! In het vorige filmpje hebben we een introductie gehad op de netwerklaag en we hebben gezien dat de netwerklaag er verantwoordelijk voor is om pakketjes van een bepaalde host af te leveren bij een andere host ergens in het netwerk.
 
 Omdat dit kan doen, moet de netwerklaag dus voor zorgen dat die pakketjes worden doorgestuurd van de ene router naar de andere router, en de volgende router, tot ze uiteindelijk de juiste bestemming bereiken. Om dat te kunnen doen, moet de netwerklaag twee belangrijke functies vervullen. Zoals beloofd, ga ik in dit filmpje daar verder op in. We gaan kijken naar routing en forwarding, ik leg uit wat die twee dingen zijn en hoe ze met elkaar samenwerken.
@@ -80,6 +82,16 @@ Een router heeft meerdere poorten, die bij professionele routers tientallen kunn
 
 Binnen een router komen fysieke signalen binnen via bijvoorbeeld ethernet- of glasvezelkabels. Deze signalen worden omgezet in digitale signalen en verwerkt door de linklaag. Een inputpoort bevat een wachtrij waarin binnenkomende datagrammen worden geplaatst. Als het druk is, moeten pakketjes even wachten in de wachtrij voordat ze worden doorgestuurd.
 
+Hier is de volgorde van hoe inputpoorten werken, van line termination tot aan de link layer, lookup forwarding en switching fabric:
+
+1. **Line Termination**: Wanneer een signaal van buitenaf binnenkomt op de inputpoort, wordt het signaal eerst beëindigd en omgezet naar digitale gegevens die begrijpelijk zijn voor de router. Dit proces omvat het einde van de fysieke lijn en de conversie van het analoge signaal naar digitale bits.
+
+2. **Link Layer Processing**: Nadat het signaal is omgezet naar digitale gegevens, wordt het door de linklaag verwerkt. Dit omvat het toevoegen van headerinformatie aan de gegevens, zoals MAC-adressen, om het pakket correct te kunnen routeren binnen het lokale netwerk.
+
+3. **Lookup Forwarding**: Vervolgens wordt de informatie in de header van het pakket geanalyseerd door de router om te bepalen naar welke uitgangspoort het pakket moet worden doorgestuurd. Deze analyse omvat het zoeken in de routingtabel van de router om de optimale route voor het pakket te bepalen op basis van het doel-MAC-adres.
+
+4. **Switching Fabric**: Zodra de uitgangspoort is bepaald, wordt het pakket doorgestuurd naar de switching fabric van de router. De switching fabric is verantwoordelijk voor het doorsturen van het pakket naar de juiste uitgangspoort op basis van de routingbeslissing die is genomen tijdens de lookup forwarding. Dit proces omvat het doorgeven van het pakket door de interne verbindingen van de router naar de juiste poort voor uitvoer.
+
 ## Beheer van de wachtrij
 
 Als de wachtrij vol raakt, moet de router beslissen wat te doen. Als er geen plek meer is, kan de router ervoor kiezen om pakketjes te laten vallen, wat betekent dat ze niet worden doorgestuurd. Dit kan gebeuren als de router overbelast is. In dat geval moeten pakketjes wachten tot er ruimte vrijkomt in de wachtrij.
@@ -91,6 +103,16 @@ Om efficiënt om te gaan met de wachtrij, kan de router slimme beslissingen neme
 ## Outputpoorten en switching
 
 Aan de andere kant van de router bevinden zich de outputpoorten, waar pakketjes worden doorgestuurd naar hun volgende bestemming. Dit gebeurt op een vergelijkbare manier als bij de inputpoorten, maar dan in omgekeerde volgorde. Een router heeft aparte input- en outputpoorten, hoewel in de autosport dit soort zaken zelfs naar hetzelfde aansluitpunt kan gaan via bijvoorbeeld een ethernet-kabel.
+
+Hier is hoe de werking van de outputpoorten verloopt:
+
+1. **Queueing**: Nadat het pakket door de switching fabric is doorgestuurd naar de juiste uitgangspoort, kan het in de uitgangsbuffer van die poort worden geplaatst. Als er meerdere pakketten zijn die naar dezelfde uitgangspoort worden doorgestuurd, worden ze in de wachtrij geplaatst om in de juiste volgorde te worden verwerkt.
+
+2. **Dequeueing**: Wanneer een pakket aan de beurt is om te worden doorgestuurd, wordt het uit de wachtrij verwijderd in een proces dat dequeueing wordt genoemd. Het pakket dat het eerst in de wachtrij werd geplaatst, wordt als eerste uit de wachtrij gehaald voor verzending.
+
+3. **Link Layer Processing**: Voordat het pakket daadwerkelijk wordt verzonden, ondergaat het link layer processing. Hier wordt de header van het pakket gecontroleerd en gevalideerd. Eventuele fouten worden gecorrigeerd en de juiste MAC-adressen worden toegevoegd aan de header voor verzending over het lokale netwerk.
+
+4. **Line Termination**: Tenslotte wordt het pakket omgezet naar het juiste formaat voor verzending over het fysieke medium, zoals het omzetten van digitale gegevens naar elektrische signalen of optische signalen, afhankelijk van het type medium dat wordt gebruikt (bijv. ethernetkabel, glasvezel). Dit proces wordt line termination genoemd en bereidt het pakket voor op verzending via de fysieke verbinding naar de ontvangende partij.
 
 ## Wachtrijen en vertragingen
 
@@ -104,6 +126,26 @@ Pakketjes worden vervolgens ingepakt onder een frame en fysiek doorgestuurd via 
 
 Een nieuwe benadering genaamd Software Defined Networking (SDN) wint aan populariteit. Dit is een meer centrale manier van netwerkbeheer, waarbij alle routers onder een centrale aansturing werken. Deze aanpak biedt verschillende voordelen ten opzichte van de traditionele decentrale aanpak.
 
+## SDN
+
+Software Defined Networking (SDN) is een architectuur die netwerken beheert en controleert door de scheiding van de controlelaag (die de routingbeslissingen neemt) en de datalaag (die het eigenlijke doorsturen van gegevens uitvoert). In traditionele netwerken zijn de controle- en datavlakken geïntegreerd in de netwerkapparaten zelf, zoals routers en switches. SDN verplaatst de controle naar externe softwareapplicaties die op een centrale controller draaien.
+
+De belangrijkste componenten van SDN zijn:
+
+1. **SDN Controller**: Dit is het centrale brein van het SDN-netwerk. De controller is verantwoordelijk voor het nemen van routingbeslissingen en het beheer van het netwerkverkeer. Het communiceert met de netwerkapparaten via een protocol zoals OpenFlow.
+
+2. **Dataplane Devices (Switches en Routers)**: Deze apparaten bevatten de fysieke componenten die het netwerkverkeer daadwerkelijk doorsturen. In een SDN-architectuur zijn deze apparaten eenvoudiger van aard, omdat ze alleen gegevens doorsturen op basis van de instructies die ze van de SDN-controller ontvangen.
+
+3. **SDN Applicaties**: Dit zijn softwaretoepassingen die bovenop de SDN-controller draaien en specifieke netwerkbeheertaken uitvoeren, zoals verkeersprioritering, beveiligingsbeleidimplementatie, bandbreedtebeheer, enzovoort.
+
+SDN biedt verschillende voordelen, waaronder:
+
+- **Flexibiliteit en programmeerbaarheid**: Netwerkbeheerders kunnen het netwerkgedrag dynamisch aanpassen door programmatische controle over de infrastructuur.
+- **Centralisatie van beleidscontrole**: Beleidsregels voor netwerkbeheer kunnen centraal worden gedefinieerd en toegepast via de SDN-controller, waardoor het beheer eenvoudiger wordt.
+- **Verbeterde schaalbaarheid en beheerbaarheid**: SDN vereenvoudigt het beheer van grootschalige netwerken door abstractie van de onderliggende fysieke infrastructuur en het bieden van geautomatiseerde beheerfuncties.
+
+Kortom, SDN transformeert de manier waarop netwerken worden beheerd door het mogelijk te maken om netwerkconfiguratie en -beheer te automatiseren, te programmeren en te centraliseren.
+
 ## Voordelen van SDN
 
 Met SDN kan het netwerk dynamisch worden aangepast aan de behoeften. Bijvoorbeeld, als er een belangrijke vergadering plaatsvindt, kan het netwerk automatisch bandbreedte reserveren voor de videoconferentie, zelfs als andere verkeer wordt vertraagd. Dit zorgt voor een efficiënter gebruik van netwerkresources.
@@ -111,6 +153,7 @@ Met SDN kan het netwerk dynamisch worden aangepast aan de behoeften. Bijvoorbeel
 ## Toepassingen van SDN
 
 Organisaties zoals de NAVO onderzoeken het gebruik van SDN om pakketjes over verschillende routes te sturen, afhankelijk van de vertrouwelijkheid van de informatie. Als een bericht bijvoorbeeld zeer vertrouwelijk is, kan het worden doorgestuurd via een route met minder risico op afluisteren. Dit maakt het netwerk flexibeler en veiliger.
+
 ## Flexibiliteit en veiligheid
 
 Met SDN kunnen gevoelige pakketjes mogelijk liever via een omweg worden gestuurd, maar wel op een veilige route. Als het pakketje geen belangrijke informatie bevat, maakt het minder uit hoe het wordt gerouteerd. Dit soort aanpassingen kunnen gemakkelijker worden gemaakt met een centrale aansturing van het netwerk.

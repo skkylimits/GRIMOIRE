@@ -1,6 +1,12 @@
 # Transportlaag
 
-## Welkom Terug
+<p>
+    Open de
+    <a href="./assets/lessen/les-2a-dns-transport-layer-tcp.pdf#page=1&zoom=75" target=”_blank”>les 2a dns transport layer tcp</a>
+    in a new tab window fullscreen.
+</p>
+
+## Intro
 
 Welkom terug voor het tweede deel van dit college. Zoals gezegd staat in deze les de transportlaag centraal. We hebben al een beetje gekeken naar de transportlaag in het kader van applicaties en applicatieprotocollen die de hulp van de transportlaag inroepen om berichten via het internet te versturen.
 
@@ -122,7 +128,7 @@ In het algemeen verstuurt TCP een pakketje, wacht op een bevestiging, en verstuu
 
 ## Communicatie en Herstel
 
-Dit keer komt de bevestiging gelukkig wel aan, en de ontvanger weet nu dat de data correct is aangekomen. Ook over deze processen heeft Peter een leuk filmpje gemaakt. Je kunt de link naar dit filmpje vinden op de deelpagina. Als je nog een keer een frisse uitleg wilt of een ander perspectief over TCP en de transportlaagprotocollen, is dit filmpje van [UDP vs TCP van PieterExplainsTech](https://www.youtube.com/watch?v=Vdc8TCESIg8&t=333s) harte aanbevolen.
+Dit keer komt de bevestiging gelukkig wel aan, en de ontvanger weet nu dat de data correct is aangekomen. Ook over deze processen heeft Peter een leuk filmpje gemaakt. Je kunt de link naar dit filmpje vinden op de deelpagina. Als je nog een keer een frisse uitleg wilt of een ander perspectief over TCP en de transportlaagprotocollen, is dit filmpje van [TCP vs UDP van PieterExplainsTech](https://www.youtube.com/watch?v=Vdc8TCESIg8&t=333s) harte aanbevolen.
 
 ## Vooruitblik naar de Netwerklaag
 

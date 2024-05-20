@@ -1,5 +1,7 @@
 # Applicatieprotocollen
 
+## Intro
+
 Hallo allemaal, zoals gezegd zullen we in het vervolg van dit college kijken naar hoe een aantal van de principes die we juist hebben behandeld over applicatieprotocollen worden toegepast in een aantal populaire protocollen die we bijna elke dag gebruiken. We gaan kijken naar HTTP om websites te bladeren, naar protocollen voor het versturen van e-mail en zullen ook kijken naar BitTorrent, wat natuurlijk heel populair is voor het downloaden en verspreiden van bestanden.
 
 ## Overzicht van HTTP

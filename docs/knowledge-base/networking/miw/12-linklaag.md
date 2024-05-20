@@ -1,4 +1,12 @@
-## Linklaag
+# Linklaag
+
+<p>
+   Open de
+    <a href="./assets/lessen/les-3a-2-link-layer.pdf#page=1&zoom=75" target=”_blank”>les 3b linklaag</a>
+    in a new tab window fullscreen.
+</p>
+
+## Welkom Terug
 
 Goeiedag allemaal en welkom bij het volgende werkcollege. We zijn inmiddels aangekomen bij de linklaag. Hoewel we vorige week bij de netwerklaag waren en we daar uitgebreid hebben gekeken naar hoe de netwerklaag werkt, komen we nu bij de linklaag, de laag eronder. Hier gaan we uitgebreid op in.
 
