@@ -62,6 +62,8 @@
      4. **Slechte Gegevensback-up Procedures**
          - Onvoldoende of onjuiste gegevensback-upprocedures kunnen leiden tot het verlies van belangrijke gegevens in geval van systeemstoringen, ransomware-aanvallen, of andere noodsituaties.
 
+## Stap 2: Factors for Estimating Likelihood
+
 ### 1. **Externe aanvaller verkrijgt toegang tot bestelpagina**
 
 #### Threat Agent Factors
