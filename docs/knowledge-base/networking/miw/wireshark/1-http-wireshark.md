@@ -149,7 +149,7 @@ I see html data which is not listed in the header but as line-based text:
 
 ## 8. Inspect the contents of the first HTTP GET request from your browser to the server. Do you see an “IF-MODIFIED-SINCE” line in the HTTP GET?
 
-```
+```txt
 Frame 30: 464 bytes on wire (3712 bits), 464 bytes captured (3712 bits) on interface en0, id 0
 Ethernet II, Src: Apple_df:a3:03 (b4:fa:48:df:a3:03), Dst: SagemcomBroa_f4:b9:eb (b0:5b:99:f4:b9:eb)
 Internet Protocol Version 4, Src: 192.168.178.98, Dst: 128.119.245.12
@@ -174,7 +174,7 @@ No.
 
 ## 9. Inspect the contents of the server response. Did the server explicitly return the contents of the file? How can you tell?
 
-```
+```txt
 Frame 34: 784 bytes on wire (6272 bits), 784 bytes captured (6272 bits) on interface en0, id 0
 Ethernet II, Src: SagemcomBroa_f4:b9:eb (b0:5b:99:f4:b9:eb), Dst: Apple_df:a3:03 (b4:fa:48:df:a3:03)
 Internet Protocol Version 4, Src: 128.119.245.12, Dst: 192.168.178.98
@@ -213,7 +213,7 @@ It does. Under the Line-based text data.
 
 ## 10. Now inspect the contents of the second HTTP GET request from your browser to the server. Do you see an “IF-MODIFIED-SINCE:” line in the HTTP GET7? If so, what information follows the “IF-MODIFIED-SINCE:” header?
 
-```
+```txt
 Frame 109: 550 bytes on wire (4400 bits), 550 bytes captured (4400 bits) on interface en0, id 0
 Ethernet II, Src: Apple_df:a3:03 (b4:fa:48:df:a3:03), Dst: SagemcomBroa_f4:b9:eb (b0:5b:99:f4:b9:eb)
 Internet Protocol Version 4, Src: 192.168.178.98, Dst: 128.119.245.12
@@ -241,9 +241,9 @@ Hypertext Transfer Protocol
 
 Tue, 21 May 2024 05:59:02 GMT\r\n
 
-## 11. What is the HTTP status code and phrase returned from the server in response to this second HTTP GET?  Did the server explicitly return the contents of the file? Explain.
+## 11. What is the HTTP status code and phrase returned from the server in response to this second HTTP GET?  Did the server explicitly return the contents of the file? Explain
 
-```
+```txt
 Frame 117: 294 bytes on wire (2352 bits), 294 bytes captured (2352 bits) on interface en0, id 0
 Ethernet II, Src: SagemcomBroa_f4:b9:eb (b0:5b:99:f4:b9:eb), Dst: Apple_df:a3:03 (b4:fa:48:df:a3:03)
 Internet Protocol Version 4, Src: 128.119.245.12, Dst: 192.168.178.98
@@ -276,31 +276,31 @@ This helps reduce bandwidth and speed up page loading by avoiding unnecessary da
 
 My browser send 2 HTTP GET request:
 
-`173	14.724806	192.168.178.98	128.119.245.12	HTTP	464	GET /wireshark-labs/HTTP-wireshark-file3.html HTTP/1.1 `
+`173 14.724806 192.168.178.98 128.119.245.12 HTTP 464 GET /wireshark-labs/HTTP-wireshark-file3.html HTTP/1.1`
 
-`183	14.861617	192.168.178.98	128.119.245.12	HTTP	421	GET /favicon.ico HTTP/1.1 `
+`183 14.861617 192.168.178.98 128.119.245.12 HTTP 421 GET /favicon.ico HTTP/1.1`
 
 Packet number 180 contained the message for the Bill or Rights:
 
-`180	14.830551	128.119.245.12	192.168.178.98	HTTP	535	HTTP/1.1 200 OK  (text/html)`
+`180 14.830551 128.119.245.12 192.168.178.98 HTTP 535 HTTP/1.1 200 OK  (text/html)`
 
 ## 13. Which packet number in the trace contains the status code and phrase associated with the response to the HTTP GET request?
 
 Packet number 180
 
-`180	14.830551	128.119.245.12	192.168.178.98	HTTP	535	HTTP/1.1 200 OK  (text/html)`
+`180 14.830551 128.119.245.12 192.168.178.98 HTTP 535 HTTP/1.1 200 OK  (text/html)`
 
 ## 14. What is the status code and phrase in the response?
 
 With the 200 OK repsonse.
 
-`180	14.830551	128.119.245.12	192.168.178.98	HTTP	535	HTTP/1.1 200 OK  (text/html)`
+`180 14.830551 128.119.245.12 192.168.178.98 HTTP 535 HTTP/1.1 200 OK  (text/html)`
 
 ## 15. How many data-containing TCP segments were needed to carry the single HTTP response and the text of the Bill of Rights?
 
 4 reassambled TCP segments where needed to carry the singly HTTP response and the text of the Bill of Rights.
 
-```
+```txt
 [4 Reassembled TCP Segments (4861 bytes): #177(1460), #178(1460), #179(1460), #180(481)]
     [Frame: 177, payload: 0-1459 (1460 bytes)]
     [Frame: 178, payload: 1460-2919 (1460 bytes)]
@@ -320,21 +320,21 @@ Hypertext Transfer Protocol
 
 The first one was send to the webserver itself to get the html file `128.119.245.12`
 
-`24	4.810564	192.168.178.98	128.119.245.12	HTTP	464	GET /wireshark-labs/HTTP-wireshark-file4.html HTTP/1.1`
+`24 4.810564 192.168.178.98 128.119.245.12 HTTP 464 GET /wireshark-labs/HTTP-wireshark-file4.html HTTP/1.1`
 
 The second one to `128.119.245.12` to retrieve the peason.png logo
 
-`30	4.956728	192.168.178.98	128.119.245.12	HTTP	421	GET /pearson.png HTTP/1.1`
+`30 4.956728 192.168.178.98 128.119.245.12 HTTP 421 GET /pearson.png HTTP/1.1`
 
 The third one to `178.79.137.164` to retrieve 8E_cover_small.jpg
 
-`47	5.072184	192.168.178.98	178.79.137.164	HTTP	400	GET /8E_cover_small.jpg HTTP/1.1`
+`47 5.072184 192.168.178.98 178.79.137.164 HTTP 400 GET /8E_cover_small.jpg HTTP/1.1`
 
 And lastly one for the favicon to  the webserver itself located at `128.119.245.12`
 
-`64	5.213073	192.168.178.98	128.119.245.12	HTTP	421	GET /favicon.ico HTTP/1.1`
+`64 5.213073 192.168.178.98 128.119.245.12 HTTP 421 GET /favicon.ico HTTP/1.1`
 
-## 17. Can you tell whether your browser downloaded the two images serially, or whether they were downloaded from the two web sites in parallel?  Explain.
+## 17. Can you tell whether your browser downloaded the two images serially, or whether they were downloaded from the two web sites in parallel?  Explain
 
 The two images and even the favicon where downloaded in parallel. This is because all the images have the exact same date:
 
@@ -348,13 +348,13 @@ In the header
 
 It's giving 401 Unauthorized.
 
-`51	3.925513	128.119.245.12	192.168.178.98	HTTP	771	HTTP/1.1 401 Unauthorized  (text/html)`
+`51 3.925513 128.119.245.12 192.168.178.98 HTTP 771 HTTP/1.1 401 Unauthorized  (text/html)`
 
 ## 19. When your browser’s sends the HTTP GET message for the second time, what new field is included in the HTTP GET message?
 
 The new field is Authorization.
 
-```
+```txt
 Frame 214: 539 bytes on wire (4312 bits), 539 bytes captured (4312 bits) on interface en0, id 0
 Ethernet II, Src: Apple_df:a3:03 (b4:fa:48:df:a3:03), Dst: SagemcomBroa_f4:b9:eb (b0:5b:99:f4:b9:eb)
 Internet Protocol Version 4, Src: 192.168.178.98, Dst: 128.119.245.12
