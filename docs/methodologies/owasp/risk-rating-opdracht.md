@@ -238,33 +238,74 @@
 
 ### Stap 6: Customizing Your Risk Rating Model
 
-### 1 Toevoegen van factoren
+Zeker, hier zijn drie concrete voorbeelden die elk van de aanpassingsmethoden illustreren:
 
-Overweeg het toevoegen van factoren die bijzonder relevant zijn voor Hamerslag:
+### 1. Adding Factors
 
-1. **Verlies van Klantvertrouwens**
-   - **Hoeveel zal een inbreuk het vertrouwen van de klant schaden?**
-    - Minimaal (1), Gemiddeld (5), Ernstig (9)
+**Voorbeeld**:
+- **Factor toevoegen: Verlies van Gevoelige Gegevens**
+  - **Impact**: Dit houdt rekening met het risico van verlies van gevoelige bedrijfsgegevens.
+  - **Specificatie**: Bij een bedrijf in de gezondheidszorg kan deze factor rekening houden met de impact van het verlies van patiëntgegevens.
+  - **Score**: Laag (1), Gemiddeld (5), Hoog (9)
+- Kosten van Incidentrespons
 
-2. **Operationele Impact:**
-   - **Hoeveel zal de inbreuk dagelijkse operaties verstoren?**
-    - Verwaarloosbaar (1), Enige Verstoring (5), Grote Verstoring (9)
+- **Factor toevoegen: Kosten van Incidentrespons**
+  - **Impact**: Dit houdt rekening met de kosten voor het reageren op en herstellen van een inbreuk.
+  - **Specificatie**: Bij een bedrijf in de financiële sector kan deze factor de financiële impact van het incident benadrukken, inclusief kosten voor forensisch onderzoek, herstel van systemen en juridische procedures.
+  - **Score**: Laag (1), Gemiddeld (5), Hoog (9)
 
-3. **Kosten van Incidentrespons:**
-   - **Hoeveel zal het kosten om te reageren op en te herstellen van de inbreuk?**
-      Laag (1), Gemiddeld (5), Hoog (9)
+- **Factor toevoegen: Compliance Impact**
+  - **Impact**: Dit houdt rekening met de invloed van de inbreuk op de naleving van wettelijke en regelgevende vereisten.
+  - **Specificatie**: Bij een bedrijf dat persoonsgegevens verwerkt, zoals een online retailer, kan deze factor rekening houden met de impact op GDPR-compliance en de mogelijke boetes.
+  - **Score**: Verwaarloosbaar (1), Enige Overtredingen (5), Grote Overtredingen (9)
 
-### 2 Aanpassen van opties
+- **Factor toevoegen: Bedrijfscontinuïteit**
+  - **Impact**: Dit houdt rekening met de impact van de inbreuk op de continuïteit van het bedrijf.
+  - **Specificatie**: Bij een bedrijf met een online dienst, zoals een cloudprovider, kan deze factor rekening houden met de mogelijke downtime en het verlies van inkomsten als gevolg van de inbreuk.
+  - **Score**: Verwaarloosbaar (1), Enige Onderbreking (5), Grote Onderbreking (9)
 
-1. **Externe Aanvaller**
-   - Beginner (3), Bekwaam (5), Expert (7), Staatsgesponsord (9)
+**Factor toevoegen: Operationele Impact**
+- **Impact**: Dit houdt rekening met de mate waarin de inbreuk dagelijkse operaties zal verstoren.
+- **Specificatie**: Bij een bedrijf dat afhankelijk is van dagelijkse operationele processen, zoals een productiebedrijf, kan deze factor rekening houden met de mate van verstoring in de productie en distributie als gevolg van de inbreuk.
+- **Score**: Verwaarloosbaar (1), Enige Verstoring (5), Grote Verstoring (9)
 
-### 2 Aanpassen van opties
+**Factor toevoegen: Externe Aanvaller**
+- **Impact**: Dit houdt rekening met de vaardigheidsniveaus van externe aanvallers die een bedreiging kunnen vormen voor het bedrijf.
+- **Specificatie**: Pas de vaardigheidsniveaus aan om de bedreigingslandschap specifiek voor je bedrijf te weerspiegelen. Bijvoorbeeld, een techbedrijf kan te maken krijgen met aanvallers variërend van beginners tot staatsgesponsorde actoren.
+- **Score**: Beginner (3), Bekwaam (5), Expert (7), Staatsgesponsord (9)
 
-1. **Klantvertrouwen**
-   - herstelbaar (3), verlies (5), schadelijk (7), onherstelbaar (9)
+### 2. Customizing Options
 
-### Tabel met risico's
+**Voorbeeld**:
+- **Optie aanpassen: Skill Level van Bedreigingsactoren**
+  - **Origineel**: Beginner (3), Bekwaam (5), Expert (7), Staatsgesponsord (9)
+  - **Aangepast**: Junior Medewerker (2), Ervaren Medewerker (4), Senior Medewerker (6), Externe Specialist (8)
+  - **Context**: In een organisatie waar interne bedreigingen een groter risico vormen, kan het nuttig zijn om de skill levels aan te passen aan interne rollen.
+
+### 3. Weighting Factors
+
+**Voorbeeld**:
+- **Factor gewicht: Operationele Impact**
+  - **Origineel**: Elke factor heeft een gelijke weging.
+  - **Gewicht**: Operationele Impact wordt zwaarder gewogen, bijvoorbeeld met een factor van 2.
+  - **Context**: In een productiebedrijf waar stilstand directe financiële verliezen veroorzaakt, kan de operationele impact zwaarder wegen dan andere factoren.
+  - **Score**: Bijvoorbeeld, als de operationele impact normaal 5 scoort, wordt deze nu 5 * 2 = 10.
+
+### Voorbeeld van Tabel met Nieuwe Toegevoegde Factoren
+
+| Risico                                               | Impact  | Kans             | Verlies van Klantvertrouwen | Operationele Impact | Kosten van Incidentrespons | Compliance Impact | Bedrijfscontinuïteit | Totaal |
+|------------------------------------------------------|---------|------------------|-----------------------------|---------------------|---------------------------|-------------------|----------------------|--------|
+| Externe aanvaller verkrijgt toegang tot bestelpagina | 7.5     | **8.375** (High) | 9                           | 7                   | 8                         | 7                 | 6                    | 44.875 |
+| Interne medewerker met kwade bedoelingen             | 5       | **6** (Medium)   | 5                           | 5                   | 6                         | 5                 | 5                    | 32      |
+| Gegevensverlies door interne fout                    | 5.5     | **6** (Medium)   | 5                           | 6                   | 5                         | 4                 | 5                    | 31.5    |
+
+Deze tabel dient uitsluitend als voorbeeld te worden gebruikt.
+
+## Conclusie
+
+Door deze aanvullende weegfactoren toe te voegen, kan Hamerslag een nauwkeuriger en genuanceerder beeld krijgen van de risico's en de prioriteit van mitigatiemaatregelen beter bepalen. Het helpt ook om specifieke aandachtspunten te identificeren, zoals klantvertrouwen en operationele continuïteit, die mogelijk meer gewicht moeten krijgen bij het bepalen van de ernst van de risico's.
+
+### Tabel met Risico's
 
 | Risico                                               | Impact | Kans             | Mitigatie                                                      | CIA-aanval      |
 |------------------------------------------------------|--------|------------------|----------------------------------------------------------------|-----------------|
