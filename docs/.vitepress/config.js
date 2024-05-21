@@ -98,6 +98,7 @@ export default {
           collapsible: true,
           items: [
             { text: 'OWASP Risk Rating Methodology', link: '/methodologies/owasp/owasp-risk-rating-methodology' },
+            { text: 'Risk Rating Opdracht', link: '/methodologies/owasp/risk-rating-opdracht' },
 
           ],
         },
