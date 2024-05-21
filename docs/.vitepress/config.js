@@ -90,6 +90,14 @@ export default {
 
           ],
         },
+        {
+          text: 'OWASP',
+          collapsible: true,
+          items: [
+            { text: 'OWASP Risk Rating Methodology', link: '/methodologies/owasp/owasp-risk-rating-methodology' },
+
+          ],
+        },
       ],
 
       // scripting
