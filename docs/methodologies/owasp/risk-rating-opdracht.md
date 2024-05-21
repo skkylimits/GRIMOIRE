@@ -238,11 +238,8 @@
 
 ### Stap 6: Customizing Your Risk Rating Model
 
-Zeker, hier zijn drie concrete voorbeelden die elk van de aanpassingsmethoden illustreren:
-
 ### 1. Adding Factors
 
-**Voorbeeld**:
 - **Factor toevoegen: Verlies van Gevoelige Gegevens**
   - **Impact**: Dit houdt rekening met het risico van verlies van gevoelige bedrijfsgegevens.
   - **Specificatie**: Bij een bedrijf in de gezondheidszorg kan deze factor rekening houden met de impact van het verlies van patiëntgegevens.
@@ -264,19 +261,18 @@ Zeker, hier zijn drie concrete voorbeelden die elk van de aanpassingsmethoden il
   - **Specificatie**: Bij een bedrijf met een online dienst, zoals een cloudprovider, kan deze factor rekening houden met de mogelijke downtime en het verlies van inkomsten als gevolg van de inbreuk.
   - **Score**: Verwaarloosbaar (1), Enige Onderbreking (5), Grote Onderbreking (9)
 
-**Factor toevoegen: Operationele Impact**
-- **Impact**: Dit houdt rekening met de mate waarin de inbreuk dagelijkse operaties zal verstoren.
-- **Specificatie**: Bij een bedrijf dat afhankelijk is van dagelijkse operationele processen, zoals een productiebedrijf, kan deze factor rekening houden met de mate van verstoring in de productie en distributie als gevolg van de inbreuk.
-- **Score**: Verwaarloosbaar (1), Enige Verstoring (5), Grote Verstoring (9)
+- **Factor toevoegen: Operationele Impact**
+  - **Impact**: Dit houdt rekening met de mate waarin de inbreuk dagelijkse operaties zal verstoren.
+  - **Specificatie**: Bij een bedrijf dat afhankelijk is van dagelijkse operationele processen, zoals een productiebedrijf, kan deze factor rekening houden met de mate van verstoring in de productie en distributie als gevolg van de inbreuk.
+  - **Score**: Verwaarloosbaar (1), Enige Verstoring (5), Grote Verstoring (9)
 
-**Factor toevoegen: Externe Aanvaller**
-- **Impact**: Dit houdt rekening met de vaardigheidsniveaus van externe aanvallers die een bedreiging kunnen vormen voor het bedrijf.
-- **Specificatie**: Pas de vaardigheidsniveaus aan om de bedreigingslandschap specifiek voor je bedrijf te weerspiegelen. Bijvoorbeeld, een techbedrijf kan te maken krijgen met aanvallers variërend van beginners tot staatsgesponsorde actoren.
-- **Score**: Beginner (3), Bekwaam (5), Expert (7), Staatsgesponsord (9)
+- **Factor toevoegen: Externe Aanvaller**
+  - **Impact**: Dit houdt rekening met de vaardigheidsniveaus van externe aanvallers die een bedreiging kunnen vormen voor het bedrijf.
+  - **Specificatie**: Pas de vaardigheidsniveaus aan om de bedreigingslandschap specifiek voor je bedrijf te weerspiegelen. Bijvoorbeeld, een techbedrijf kan te maken krijgen met aanvallers variërend van beginners tot staatsgesponsorde actoren.
+  - **Score**: Beginner (3), Bekwaam (5), Expert (7), Staatsgesponsord (9)
 
 ### 2. Customizing Options
 
-**Voorbeeld**:
 - **Optie aanpassen: Skill Level van Bedreigingsactoren**
   - **Origineel**: Beginner (3), Bekwaam (5), Expert (7), Staatsgesponsord (9)
   - **Aangepast**: Junior Medewerker (2), Ervaren Medewerker (4), Senior Medewerker (6), Externe Specialist (8)
@@ -284,7 +280,6 @@ Zeker, hier zijn drie concrete voorbeelden die elk van de aanpassingsmethoden il
 
 ### 3. Weighting Factors
 
-**Voorbeeld**:
 - **Factor gewicht: Operationele Impact**
   - **Origineel**: Elke factor heeft een gelijke weging.
   - **Gewicht**: Operationele Impact wordt zwaarder gewogen, bijvoorbeeld met een factor van 2.
