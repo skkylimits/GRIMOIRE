@@ -57,10 +57,13 @@ export default {
           text: 'The Lab',
           collapsible: true,
           items: [
-            { text: 'Bare Metal', link: '/the-lab/bare-metal' },
-            { text: 'Virtual Machine', link: '/the-lab/virtual-machine' },
-            { text: 'Hyperviser', link: '/the-lab/hypervisor' },
-            { text: 'Docker', link: '/the-lab/docker' },
+            { text: 'Bare Metal', link: '/the-lab/the-lab/bare-metal' },
+            { text: 'Virtual Machines', link: '/the-lab/the-lab/virtual-machines' },
+            { text: 'Hypervisor', link: '/the-lab/the-lab/hypervisor' },
+            { text: 'Docker', link: '/the-lab/the-lab/docker' },
+            { text: 'Terminal', link: '/the-lab/the-lab/terminal' },
+            { text: 'GUI', link: '/the-lab/the-lab/gui' },
+
           ],
         },
         {
