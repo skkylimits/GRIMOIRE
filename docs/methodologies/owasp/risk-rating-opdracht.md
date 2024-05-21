@@ -244,7 +244,6 @@
   - **Impact**: Dit houdt rekening met het risico van verlies van gevoelige bedrijfsgegevens.
   - **Specificatie**: Bij een bedrijf in de gezondheidszorg kan deze factor rekening houden met de impact van het verlies van patiëntgegevens.
   - **Score**: Laag (1), Gemiddeld (5), Hoog (9)
-- Kosten van Incidentrespons
 
 - **Factor toevoegen: Kosten van Incidentrespons**
   - **Impact**: Dit houdt rekening met de kosten voor het reageren op en herstellen van een inbreuk.
@@ -295,10 +294,6 @@
 | Gegevensverlies door interne fout                    | 5.5     | **6** (Medium)   | 5                           | 6                   | 5                         | 4                 | 5                    | 31.5    |
 
 Deze tabel dient uitsluitend als voorbeeld te worden gebruikt.
-
-## Conclusie
-
-Door deze aanvullende weegfactoren toe te voegen, kan Hamerslag een nauwkeuriger en genuanceerder beeld krijgen van de risico's en de prioriteit van mitigatiemaatregelen beter bepalen. Het helpt ook om specifieke aandachtspunten te identificeren, zoals klantvertrouwen en operationele continuïteit, die mogelijk meer gewicht moeten krijgen bij het bepalen van de ernst van de risico's.
 
 ### Tabel met Risico's
 
