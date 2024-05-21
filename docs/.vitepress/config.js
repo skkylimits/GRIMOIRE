@@ -253,6 +253,12 @@ export default {
           ],
         },
         {
+          text: 'Wireshark',
+          items: [
+            { text: 'HTTP', link: '/knowledge-base/networking/miw/wireshark/1-http-wireshark' },
+          ],
+        },
+        {
           text: 'The Internet',
           items: [
             { text: 'What Is The Internet?', link: '/knowledge-base/networking/0-the-internet/the-internet.md' },
