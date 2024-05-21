@@ -201,31 +201,30 @@
   - Het incident kan resulteren in een matig verlies van klantvertrouwen en goodwill.
 - **Non-compliance**: 5 (clear violation)
   - De gegevensverliesincident kan resulteren in duidelijke overtredingen van regelgeving.
-- **Privacy violation**: 5 (honderden mensen)
+- **Privacy violation**: 7 (thousands of people)
   - Het gegevensverlies kan de privacy van honderden klanten aantasten.
 
 ## Stap 4: Determining Severity of the Risk
 
 1. **Externe aanvaller verkrijgt toegang tot bestelpagina**
-   - **Likelihood**: 8.5 (High)
-   - **Impact**: 6.5 (High)
-   - **Severity**: 7.5 (Critical)
+   - **Likelihood**: 8.375 (High)
+   - **Impact**: 6.5 | 7.5 (High)
+   - **Severity**: Critical
 
 2. **Interne medewerker met kwade bedoelingen**
    - **Likelihood**: 6 (Medium)
-   - **Impact**: 5.75 (Medium)
+   - **Impact**: 6.5 | 5 (Medium)
    - **Severity**: Medium
 
 3. **Gegevensverlies door interne fout**
    - **Likelihood**: 6 (Medium)
-   - **Impact**: 5.75 (Medium)
+   - **Impact**: 5.75 | 5.5 (Medium)
    - **Severity**: Medium
 
 ## Stap 5: Deciding What to Fix
 
 1. **Critical Severity Risks**
    - **Externe aanvaller verkrijgt toegang tot bestelpagina**
-   - **Gegevensverlies door externe aanval**
 
 2. **Medium Severity Risks**
    - **Interne medewerker met kwade bedoelingen**
@@ -242,6 +241,14 @@
 3. **Weighting Factors**
    - Geef meer gewicht aan factoren die kritischer zijn voor het bedrijf, zoals reputatieschade en financiële schade.
 
+### Tabel met risico's
+
+| Risico                                          | Impact                                     | Kans    | Mitigatie                                                                                                                                         | CIA-aanval                        |
+|-------------------------------------------------|--------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------|
+| Externe aanvaller verkrijgt toegang tot bestelpagina | **Loss of Confidentiality**: 7<br>**Loss of Integrity**: 5<br>**Loss of Availability**: 5<br>**Loss of Accountability**: 9 | **8.375** (High) | - Implementeren van sterke authenticatiemethoden (2FA)<br>- Regelmatige beveiligingsaudits en penetratietests<br>- Monitoring en logging met actieve beoordeling | Confidentialiteit, Integriteit, Beschikbaarheid |
+| Interne medewerker met kwade bedoelingen        | **Loss of Confidentiality**: 7<br>**Loss of Integrity**: 7<br>**Loss of Availability**: 5<br>**Loss of Accountability**: 7 | **6** (Medium) | - Strikte toegangscontrole en periodieke toegangsbeoordelingen<br>- Gedetailleerde logging en monitoring van interne activiteiten<br>- Regelmatige training en bewustwording | Confidentialiteit, Integriteit, Beschikbaarheid |
+| Gegevensverlies door interne fout               | **Loss of Confidentiality**: 6<br>**Loss of Integrity**: 7<br>**Loss of Availability**: 5<br>**Loss of Accountability**: 5 | **6** (Medium) | - Implementeren van geautomatiseerde back-upsystemen<br>- Regelmatige trainingen voor medewerkers over databeheer en beveiliging<br>- Foutpreventiesystemen en gedetailleerde logboekregistratie | Confidentialiteit, Integriteit, Beschikbaarheid |
+
 ## Conclusie
 
-De firma Hamerslag moet zich richten op het verminderen van risico's die de grootste impact kunnen hebben op hun bedrijfsvoering en reputatie. Het is van cruciaal belang om maatregelen te nemen tegen externe aanvallen en ervoor te zorgen dat het systeem effectief ongeautoriseerde toegang detecteert en rapporteert. Tegelijkertijd moeten interne risico's en menselijke fouten ook worden beheerd door middel van training en bewustwording onder de medewerkers.
+De firma Hamerslag moet zich richten op het verminderen van risico's die de grootste impact kunnen hebben op hun bedrijfsvoering en reputatie. Het is van cruciaal belang om maatregelen te nemen tegen externe aanvallen en ervoor te zorgen dat het systeem niet alleen effectief ongeautoriseerde toegang detecteert en rapporteert, maar ook blokkeert. Tegelijkertijd moeten interne risico's en menselijke fouten ook worden beheerd door middel van training en bewustwording onder de medewerkers.
