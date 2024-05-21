@@ -141,6 +141,7 @@
 ### 1. **Externe aanvaller verkrijgt toegang tot bestelpagina**
 
 #### Technical Impact Factors
+
 - **Loss of Confidentiality**: 7 (extensive critical data disclosed)
   - Een aanvaller kan toegang krijgen tot gevoelige klantgegevens en bedrijfsinformatie.
 - **Loss of Integrity**: 5 (extensive slightly corrupt data)
@@ -151,6 +152,7 @@
   - De aanvaller kan volledig anoniem blijven, waardoor opsporing moeilijk is.
 
 #### Business Impact Factors
+
 - **Financial damage**: 7 (significant effect on annual profit)
   - Het bedrijf kan aanzienlijke financiële verliezen lijden door de aanval.
 - **Reputation damage**: 9 (brand damage)
@@ -163,6 +165,7 @@
 ### 2. **Interne medewerker met kwade bedoelingen**
 
 #### Technical Impact Factors
+
 - **Loss of Confidentiality**: 7 (extensive critical data disclosed)
   - Een kwaadwillende medewerker kan toegang krijgen tot en het lekken van grote hoeveelheden interne gevoelige gegevens.
 - **Loss of Integrity**: 7 (extensive seriously corrupt data)
@@ -173,6 +176,7 @@
   - De acties van de medewerker kunnen met enige moeite worden getraceerd.
 
 #### Business Impact Factors
+
 - **Financial damage**: 3 (minor effect on annual profit)
   - De kwaadwillige acties kunnen leiden tot beperkte financiële verliezen.
 - **Reputation damage**: 5 ( loss of goodwill)
@@ -185,6 +189,7 @@
 ### 3. **Gegevensverlies door interne fout**
 
 #### Technical Impact Factors
+
 - **Loss of Confidentiality**: 6 (extensive non-sensitive data disclosed)
   - Een interne fout kan leiden tot het onbedoeld onthullen van grote hoeveelheden niet-gevoelige gegevens.
 - **Loss of Integrity**: 7 (extensive seriously corrupt data)
@@ -195,6 +200,7 @@
   - De oorzaak van de fout kan met enige moeite worden geïdentificeerd en getraceerd.
 
 #### Business Impact Factors
+
 - **Financial damage**: 5 (minor effect on annual profit)
   - De fout kan leiden tot beperkte financiële verliezen voor het bedrijf.
 - **Reputation damage**: 5 (loss of goodwill )
@@ -232,23 +238,44 @@
 
 ### Stap 6: Customizing Your Risk Rating Model
 
-1. **Adding Factors**
-   - Overweeg factoren zoals de impact van gegevensverlies op wettelijke naleving en klantvertrouwen.
+### 1 Toevoegen van factoren
 
-2. **Customizing Options**
-   - Pas opties aan die specifiek zijn voor het bedrijf, zoals specifieke bedreigingen die uniek zijn voor de e-commerce sector.
+Overweeg het toevoegen van factoren die bijzonder relevant zijn voor Hamerslag:
 
-3. **Weighting Factors**
-   - Geef meer gewicht aan factoren die kritischer zijn voor het bedrijf, zoals reputatieschade en financiële schade.
+1. **Verlies van Klantvertrouwens**
+   - **Hoeveel zal een inbreuk het vertrouwen van de klant schaden?**
+    - Minimaal (1), Gemiddeld (5), Ernstig (9)
+
+2. **Operationele Impact:**
+   - **Hoeveel zal de inbreuk dagelijkse operaties verstoren?**
+    - Verwaarloosbaar (1), Enige Verstoring (5), Grote Verstoring (9)
+
+3. **Kosten van Incidentrespons:**
+   - **Hoeveel zal het kosten om te reageren op en te herstellen van de inbreuk?**
+      Laag (1), Gemiddeld (5), Hoog (9)
+
+### 2 Aanpassen van opties
+
+1. **Externe Aanvaller**
+   - Beginner (3), Bekwaam (5), Expert (7), Staatsgesponsord (9)
+
+### 2 Aanpassen van opties
+
+1. **Klantvertrouwen**
+   - herstelbaar (3), verlies (5), schadelijk (7), onherstelbaar (9)
 
 ### Tabel met risico's
 
-| Risico                                          | Impact                                     | Kans    | Mitigatie                                                                                                                                         | CIA-aanval                        |
-|-------------------------------------------------|--------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------|
-| Externe aanvaller verkrijgt toegang tot bestelpagina | **Loss of Confidentiality**: 7<br>**Loss of Integrity**: 5<br>**Loss of Availability**: 5<br>**Loss of Accountability**: 9 | **8.375** (High) | - Implementeren van sterke authenticatiemethoden (2FA)<br>- Regelmatige beveiligingsaudits en penetratietests<br>- Monitoring en logging met actieve beoordeling | Confidentialiteit, Integriteit, Beschikbaarheid |
-| Interne medewerker met kwade bedoelingen        | **Loss of Confidentiality**: 7<br>**Loss of Integrity**: 7<br>**Loss of Availability**: 5<br>**Loss of Accountability**: 7 | **6** (Medium) | - Strikte toegangscontrole en periodieke toegangsbeoordelingen<br>- Gedetailleerde logging en monitoring van interne activiteiten<br>- Regelmatige training en bewustwording | Confidentialiteit, Integriteit, Beschikbaarheid |
-| Gegevensverlies door interne fout               | **Loss of Confidentiality**: 6<br>**Loss of Integrity**: 7<br>**Loss of Availability**: 5<br>**Loss of Accountability**: 5 | **6** (Medium) | - Implementeren van geautomatiseerde back-upsystemen<br>- Regelmatige trainingen voor medewerkers over databeheer en beveiliging<br>- Foutpreventiesystemen en gedetailleerde logboekregistratie | Confidentialiteit, Integriteit, Beschikbaarheid |
+| Risico                                               | Impact | Kans             | Mitigatie                                                      | CIA-aanval      |
+|------------------------------------------------------|--------|------------------|----------------------------------------------------------------|-----------------|
+| Externe aanvaller verkrijgt toegang tot bestelpagina | High   | **8.375** (High) | - Implementeren van sterke authenticatiemethoden (2FA)         | CIA             |
+| Interne medewerker met kwade bedoelingen             | Medium | **6** (Medium)   | - Strikte toegangscontrole en periodieke toegangsbeoordelingen | CIA             |
+| Gegevensverlies door interne fout                    | Medium | **6** (Medium)   | - Implementeren van geautomatiseerde back-upsystemen           | Beschikbaarheid |
 
 ## Conclusie
 
-De firma Hamerslag moet zich richten op het verminderen van risico's die de grootste impact kunnen hebben op hun bedrijfsvoering en reputatie. Het is van cruciaal belang om maatregelen te nemen tegen externe aanvallen en ervoor te zorgen dat het systeem niet alleen effectief ongeautoriseerde toegang detecteert en rapporteert, maar ook blokkeert. Tegelijkertijd moeten interne risico's en menselijke fouten ook worden beheerd door middel van training en bewustwording onder de medewerkers.
+De firma Hamerslag moet zich richten op het verminderen van risico's die de grootste impact kunnen hebben op hun bedrijfsvoering en reputatie.
+
+Het is van cruciaal belang om maatregelen te nemen tegen externe aanvallen en ervoor te zorgen dat het systeem niet alleen effectief ongeautoriseerde toegang detecteert en rapporteert, maar ook blokkeert.
+
+Tegelijkertijd moeten interne risico's en menselijke fouten ook worden beheerd door middel van training en bewustwording onder de medewerkers.
