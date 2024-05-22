@@ -1,0 +1,85 @@
+# nmap
+
+> Remember if any scans show too much output to fit the screen, you can always use linux output redirection.
+
+> Use `nmap | more ` to see the result per page or `nmap | filename` to store it in a file
+
+## Scan Available Host
+
+This should return a list of available hosts.
+
+`sudo nmap -sn -PS 192.168.178.98`
+
+The command `sudo nmap -sn -PS 192.168.178.98` performs a specific type of network scan using `nmap`, a powerful network scanning tool. Here is a breakdown of what each part of the command does:
+
+- `sudo`: Runs the command with superuser (root) privileges. This is often necessary for certain network operations that require higher permissions.
+
+- `nmap`: Invokes the Nmap tool.
+
+- `-sn`: This option tells Nmap to perform a "ping scan," which means it will only try to determine if the host(s) are up (i.e., online or reachable) without doing a full port scan. This used to be known as a "ping sweep."
+
+- `-PS`: This option specifies a TCP SYN Ping. Nmap sends TCP SYN packets to the specified host(s) to determine if they are up. If the target host responds with a SYN/ACK packet, it indicates that the host is up. The default port used for the SYN ping is port 80, but you can specify other ports if needed.
+
+- `192.168.178.98`: This is the IP address of the target host that you want to scan.
+
+In summary, the command `sudo nmap -sn -PS 192.168.178.98` sends a TCP SYN ping to the host at IP address `192.168.178.98` to check if the host is up and reachable. It does not perform a detailed scan of open ports or services on the host; it simply checks for the host's availability.
+
+## Scanning The OS
+
+`sudo nmap -O 192.168.178.98`
+
+The command sudo nmap -O 192.168.178.98 uses Nmap to perform an operating system detection scan on the target host. Here is a detailed breakdown of the command:
+
+- `sudo`: Runs the command with superuser (root) privileges. This is often necessary for certain network operations that require higher permissions.
+
+- `nmap`: Invokes the Nmap tool.
+
+-`O`: Enables OS detection. Nmap will attempt to determine the operating system running on the target host by analyzing various network characteristics and responses from the host.
+
+- `192.168.178.98`: This is the IP address of the target host that you want to scan.
+
+## Port Scan -A
+
+`sudo nmap -A 192.168.178.98`
+
+`sudo`: Runs the command with superuser (root) privileges. This is necessary for certain network operations that require higher permissions.
+
+`nmap`: Invokes the Nmap tool.
+
+`-A`: Enables aggressive scan options. This includes several advanced and detailed scanning techniques:
+
+`OS Detection`: Determines the operating system running on the target.
+
+`Version Detection`: Identifies versions of services running on open ports.
+
+`Script Scanning`: Runs a set of Nmap scripting engine (NSE) scripts against the target, which can include a variety of functions like vulnerability detection and more detailed service interrogation.
+
+`Traceroute`: Maps the path packets take to reach the target.
+
+`192.168.178.98`: This is the IP address of the target host that you want to scan.
+
+## Port Scan -sV
+
+`sudo nmap -sV 192.168.178.98`
+
+`sudo`: Runs the command with superuser (root) privileges. This is often necessary for certain network operations that require higher permissions.
+
+`nmap`: Invokes the Nmap tool.
+
+`-sV`: This option enables version detection. Nmap will attempt to determine the version of the services running on open ports by probing the services and analyzing the responses.
+
+`192.168.178.98`: This is the IP address of the target host that you want to scan.
+
+## Vulnerability Detection
+
+`sudo nmap -Pn --script vuln 192.168.178.98`
+
+`sudo`: Runs the command with superuser (root) privileges. This is often necessary for certain network operations that require higher permissions.
+
+`nmap`: Invokes the Nmap tool.
+
+`-Pn`: This option tells Nmap to treat the target host as if it is up, without performing an initial host discovery ping. This is useful for scanning targets that do not respond to ICMP echo requests or if ICMP requests are being blocked by a firewall.
+
+`--script vuln`: This option specifies that Nmap should run a set of NSE (Nmap Scripting Engine) scripts that are designed to detect vulnerabilities. The vuln script category includes scripts that check for various known vulnerabilities on the target host.
+
+`192.168.178.98`: This is the IP address of the target host that you want to scan.

@@ -146,7 +146,7 @@ export default {
           text: 'nmap',
           collapsible: true,
           items: [
-            { text: 'nmap', link: '/instruments/nmap/intro/nmap' },
+            { text: 'nmap', link: '/instruments/nmap/scan/nmap' },
           ],
         },
       ],
@@ -256,6 +256,7 @@ export default {
           text: 'Wireshark',
           items: [
             { text: 'HTTP', link: '/knowledge-base/networking/miw/wireshark/1-http-wireshark' },
+            { text: 'DNS', link: '/knowledge-base/networking/miw/wireshark/2-dns-wireshark' },
           ],
         },
         {
