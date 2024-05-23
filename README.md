@@ -71,7 +71,7 @@ Vervolgvak op Netwerk Architektuur + Beveiliging
 
 ## Opdrachten
 
-[ ] Droom thuisnetwerk
+[x] Droom thuisnetwerk
 [x] Lab preparatie. VMware/Docker/Virtual Machine
 [x] nmap
 [x] python udppinger
