@@ -2,15 +2,15 @@
 
 ## 01 BGP Message types
 
-## 1. What BGP message types do you see in the capture? What is the purpose of each of the message types? Refer to the sources listed at the end of the document if you’re looking for more information!
+## 1. What BGP message types do you see in the capture? What is the purpose of each of the message types? Refer to the sources listed at the end of the document if you’re looking for more information
 
-`8	8.004042	192.168.0.15	192.168.0.33	BGP	83	OPEN Message`
+`8 8.004042 192.168.0.15 192.168.0.33 BGP 83 OPEN Message`
     - OPEN Message: Establishes a BGP session between two routers.
 
-`12	8.338115	192.168.0.15	192.168.0.33	BGP	73	KEEPALIVE Message`
+`12 8.338115 192.168.0.15 192.168.0.33 BGP 73 KEEPALIVE Message`
     - KEEPALIVE Message: Ensures the connection between BGP peers remains active by periodically confirming the session's status.
 
-`17	8.549476	192.168.0.33	192.168.0.15	BGP	118	UPDATE Message`
+`17 8.549476 192.168.0.33 192.168.0.15 BGP 118 UPDATE Message`
     - UPDATE Message: Exchange routing information
 
 ## 02 BGP Open message
@@ -39,12 +39,13 @@ Both of them are in the same AS systems.
 
 ## BGP Update message
 
-## 3. The capture contains two update messages?. Containing route updates. For each update message, answer the following:
+## 3. The capture contains two update messages?. Containing route updates. For each update message, answer the following
+
     - The update gives information about a route to reach which subnet?
     - What is the advertised NEXT_HOP router to reach this subnet?
     - What Autonomous Systems are contained in the AS_PATH attribute?
 
-2: `16	8.544149	192.168.0.15	192.168.0.33	BGP	270	KEEPALIVE Message, UPDATE Message, UPDATE Message`
+2: `16 8.544149 192.168.0.15 192.168.0.33 BGP 270 KEEPALIVE Message, UPDATE Message, UPDATE Message`
 
 ```bash
 Frame 16: 270 bytes on wire (2160 bits), 270 bytes captured (2160 bits)
@@ -182,11 +183,12 @@ Border Gateway Protocol - UPDATE Message
             Cluster List: 192.168.0.250
     Network Layer Reachability Information (NLRI)
 ```
+
 `192.168.0.33`
 `Path Attribute - AS_PATH: {500, 500} 65211`
 `Path Attribute - NEXT_HOP: 192.168.0.15`
 
-2: `17	8.549476	192.168.0.33	192.168.0.15	BGP	118	UPDATE Message`
+2: `17 8.549476 192.168.0.33 192.168.0.15 BGP 118 UPDATE Message`
 
 ```bash
 Frame 17: 118 bytes on wire (944 bits), 118 bytes captured (944 bits)
@@ -237,16 +239,17 @@ Border Gateway Protocol - UPDATE Message
                     Community value: 600
     Network Layer Reachability Information (NLRI)
 ```
+
 `192.168.0.15`
 `Path Attribute - AS_PATH: empty`
-`Path Attribute - NEXT_HOP: 192.168.0.33 `
+`Path Attribute - NEXT_HOP: 192.168.0.33`
 
-## 4. Explain how BGP uses the AS_PATH attribute to detect and prevent routing loops.
+## 4. Explain how BGP uses the AS_PATH attribute to detect and prevent routing loops
 
 BGP uses the AS_PATH attribute to prevent loops by rejecting routes that contain the router's own AS number.
 
 So if it sees it own AS number it will reject the advertised route.
 
-## 6 Will a BGP router always choose the route with the shortest AS_PATH length? Explain your answer.
+## 6 Will a BGP router always choose the route with the shortest AS_PATH length? Explain your answer
 
 No, policy considerations can be more important. A router might prefer a longer route for financial or strategic reasons.

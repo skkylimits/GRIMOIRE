@@ -6,4 +6,4 @@ The model identifies what the adversaries must complete in order to achieve thei
 
 The seven steps of the Cyber Kill Chain® enhance visibility into an attack and enrich an analyst’s understanding of an adversary’s tactics, techniques and procedures.
 
-![](./cyber-kill-chain.png)
+![Cyber Kill Chain](./cyber-kill-chain.png)

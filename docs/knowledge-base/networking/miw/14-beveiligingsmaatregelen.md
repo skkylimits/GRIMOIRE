@@ -8,7 +8,7 @@ Welkom terug allemaal uit twee gedeelten van het college over netwerk security. 
 
 Maar wat zijn nu de concrete technische maatregelen die wij kunnen gaan inzetten om die vier eigenschappen daadwerkelijk te realiseren? Gelukkig zijn er een heleboel, en een aantal daarvan zullen in dit tweede deel van het college behandeld worden. We gaan het hebben over cryptografie, digitale handtekeningen, SSL, virtual private networks, firewalls, intrusion detection systems en authenticatie.
 
-## De 4 beveiligingsprincipe:
+## De 4 beveiligingsprincipe
 
 1. **Vertrouwelijkheid**: Zorg ervoor dat alleen geautoriseerde personen toegang hebben tot gevoelige informatie.
 

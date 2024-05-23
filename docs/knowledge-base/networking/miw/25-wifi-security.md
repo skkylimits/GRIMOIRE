@@ -31,6 +31,7 @@ De meeste wifi-adapters zijn niet meteen geschikt om al het verkeer van iedereen
 ## Speciale Wifi-Adapters
 
 Je kunt ook speciale wifi-adapters kopen die juist bestemd zijn om het verkeer in de omgeving af te luisteren. Een voorbeeld hiervan is de Alfa AWUS036ACH USB wifi-adapter. Deze kun je voor iets minder dan 300 dollar online bestellen en geeft jou de mogelijkheid om al het wifi-verkeer in de omgeving af te luisteren en ook je eigen wifi-frames te manipuleren zoals jij wilt en op het netwerk te versturen.
+
 ## Combineren met Wireshark
 
 Als je dit combineert met een tool zoals Wireshark, betekent dit dat eigenlijk al het internetverkeer dat door de lucht wordt verstuurd in jouw omgeving zichtbaar wordt, inclusief info over de protocollen die gebruikt worden, IP-adressen, MAC-adressen, eigenlijk alles.
@@ -58,6 +59,7 @@ WPA2 komt in twee varianten: een variant voor persoonlijk gebruik, die je herken
 ## Onveiligheid van WEP
 
 Zoals ik al zei, is de oude variant van wifi-encryptie, WEP, helemaal niet meer veilig. Als hacker hoef je maar een paar minuten verkeer af te luisteren en je haalt dat door een standaardprogramma dat je gewoon kunt downloaden van het internet. Dat programma ziet dan dat bepaalde cryptografische codes, de zogenaamde initialisatievectoren, steeds opnieuw gebruikt worden. Op basis daarvan laat je een stukje wiskunde los en kan die de encryptie dus heel makkelijk breken. Dan weet je dus jouw wifi-wachtwoord. Niet alleen kan de hacker dan gebruik maken van jouw wifi, maar met dat wifi-wachtwoord kan hij ook het wifi-verkeer dat hij opvangt ontsleutelen.
+
 ## Ontsleutelen met Wireshark
 
 Ontsleutelen is iets wat je kunt bekijken in het filmpje dat gelinkt is. Dit kun je op je gemak proberen, en we zullen dit ook zelf doen in het practicum.
@@ -73,6 +75,7 @@ Een hacker luistert het wifi-netwerk af totdat hij een aanmeldbericht onderschep
 ## WPA3: De Toekomst
 
 Gelukkig is er goed nieuws: er is een opvolger van WPA2, namelijk WPA3. Deze standaard is beschikbaar sinds 2018 en biedt betere beveiliging. Een van de voordelen is basisencryptie voor open wifi-hotspots, wat een grote vooruitgang is.
+
 ## Welkom bij het Videocollege
 
 Hallo allemaal en welkom terug bij het videocollege met werk en chain 1. In het vorige filmpje hebben we gesproken over draadloze netwerken. We hebben gezien welke apparatuur we nodig hebben om een draadloos netwerk op te bouwen en welke uitdagingen we tegenkomen om die draadloze verbinding goed te laten werken. Gelukkig is het afgelopen jaar gelukt om een aantal bruikbare technieken voor draadloze netwerken te ontwikkelen. Een van de meest populaire daarvan is wifi en daar wil ik in dit filmpje iets uitgebreider op ingaan.

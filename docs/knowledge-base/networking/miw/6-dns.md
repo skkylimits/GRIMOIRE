@@ -5,7 +5,7 @@
     in a new tab window fullscreen.
 </p>
 
-Het Domain Name System (DNS) is een essentieel protocol op het internet dat het mogelijk maakt om mensvriendelijke hostnamen te vertalen naar IP-adressen van apparaten zoals computers en servers. Dit voorkomt dat gebruikers IP-adressen moeten onthouden en kunnen ze in plaats daarvan gebruiksvriendelijke namen gebruiken, zoals www.nu.nl of facebook.com.
+Het Domain Name System (DNS) is een essentieel protocol op het internet dat het mogelijk maakt om mensvriendelijke hostnamen te vertalen naar IP-adressen van apparaten zoals computers en servers. Dit voorkomt dat gebruikers IP-adressen moeten onthouden en kunnen ze in plaats daarvan gebruiksvriendelijke namen gebruiken, zoals <www.nu.nl> of facebook.com.
 
 ## Uitdagingen met IP-adressen
 

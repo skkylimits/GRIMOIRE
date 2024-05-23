@@ -17,6 +17,7 @@ Reflected XSS attacks, also known as non-persistent attacks, occur when a malici
 The script is activated through a link, which sends a request to a website with a vulnerability that enables execution of malicious scripts.
 
 ::: details User input gets reflected
+
 - Into an attribute of an html tag
 - Into the HTML page
 - Into the javascript javascript context
@@ -24,6 +25,7 @@ The script is activated through a link, which sends a request to a website with 
 :::
 
 ::: details User input does not get stored into database
+
 - Interactionfull
 :::
 
@@ -34,6 +36,7 @@ The script is activated through a link, which sends a request to a website with 
 :::
 
 ::: details Can occur with POST calls
+
 - add CSRF to the mix
 :::
 
@@ -45,6 +48,7 @@ Stored XSS is a type of XSS that stores malicious code on the application server
 :::
 
 ::: details Database value gets reflected
+
 - Into the HTML page
 - Into HTML tag attribute
 - Into the javascript javascript context
@@ -52,12 +56,14 @@ Stored XSS is a type of XSS that stores malicious code on the application server
 :::
 
 ::: details User input is not properly sanitized
+
 - At input
 - And at write to the database
 - And at read from the database
 :::
 
 ::: details User input can contain malicious javascript
+
 - At input
 - And at write to the database
 - And at read from the database
@@ -78,7 +84,9 @@ var search = document.getElementById('search').value;
 var result = document.getElementById('results');
 results.innerHTML = 'You searched for: ' + search;
 ```
+
 ::: danger Most common sources of XSS
+
 - Arises from window.location
 - Usually in query string
 - Or fragment position of URL(#)
@@ -92,6 +100,7 @@ DOM based cross site scripting occurs when JavaScript code accepts a user’s in
 The key thing to keep in mind here is that DOM based requests/attacks aren’t persisted or handled by the server but on the user’s browser. Therefore, depending on the functions used in the JavaScript code on the loaded page, a DOM-Based XSS vulnerability could be trivial to discover and exploit.
 
 ::: details DOM Sinks
+
 - Don't try to find these manually. Let tools do it for you.
 - Where user input enters the DOM
   - Eval()
@@ -129,11 +138,12 @@ Here are some common sources:
 Blind XSS is quite similar to stored Cross-Site Scripting attack where the input provided by the attacker is saved or stored by the web server and this stored input is reflected in various other applications which are linked with each other but you can;t see the result directly.
 
 ::: details Blind XSS
+
 - Relies heavily on out of band servers
 - Implements the use a payload but no results
 - Later we get a call informing payload triggered
 - Can be stored and reflected
-    - Reflected in case of knowing a page and parameter exist but no acces
+  - Reflected in case of knowing a page and parameter exist but no acces
 :::
 
 ## Mutation XSS

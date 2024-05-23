@@ -34,11 +34,11 @@ In the world we live in, online security is critical, and one must practice good
 
 ## The five levels of Cybercrime
 
-1.  ***Computer as a tool***- Fraud, identity theft, phishing scams, spam, propagation of illegal material.
-2.  ***Computer as a target*** - Viruses, denial of service, malware.
-3.  ***Cyberterrorism*** - Government level attacks on foreign intelligence services and governments.
-4.  ***Cyberextortion*** - When a system is subjected to or threatened with repeated denial of service, ransomware or other attacks by malicious hackers.
-5.  ***Cyberwarfare*** - National-level attacks on other national-level agencies or infrastructure.
+1. ***Computer as a tool***- Fraud, identity theft, phishing scams, spam, propagation of illegal material.
+2. ***Computer as a target*** - Viruses, denial of service, malware.
+3. ***Cyberterrorism*** - Government level attacks on foreign intelligence services and governments.
+4. ***Cyberextortion*** - When a system is subjected to or threatened with repeated denial of service, ransomware or other attacks by malicious hackers.
+5. ***Cyberwarfare*** - National-level attacks on other national-level agencies or infrastructure.
 
 Unfortunately, many business owners think of cybercrime as only relating to levels 3, 4 or 5, and disregarding the possibility of their computer being a tool or a target. The statistics and occurrence tell us otherwise. This is like thinking "Robbers only go after big banks and large organisations" when in reality, robbers go after the easy hit, ie a corner shop or local service station.
 
@@ -46,9 +46,9 @@ According to the Australian Cyber Security Centre (ACSC), over the 2020--21 fina
 
 The average amounts lost per cybercrime incident are:
 
--   A$8,899.00 for small businesses
--   A$33,442.00 for medium businesses
--   A$19,306.00 for large businesses
+- A$8,899.00 for small businesses
+- A$33,442.00 for medium businesses
+- A$19,306.00 for large businesses
 
 ## The common types of cybercrime on small to medium businesses
 
@@ -76,7 +76,7 @@ The average amounts lost per cybercrime incident are:
 
 Cybercrime has evolved into a sophisticated form of destruction and extortion, especially for Small to Medium Businesses (SMB's). This is because cyber criminals have the technology as well as the ways and the means to easily:
 
--   Seek out and isolate vulnerabilities in internet connected devices
--   Gain illegal access to databases, files and devices
--   Insert malware and obtain information or lock up data for ransom
--   Extort large amounts of money that is untraceable (thanks to Bitcoin and seamless international borders)
+- Seek out and isolate vulnerabilities in internet connected devices
+- Gain illegal access to databases, files and devices
+- Insert malware and obtain information or lock up data for ransom
+- Extort large amounts of money that is untraceable (thanks to Bitcoin and seamless international borders)

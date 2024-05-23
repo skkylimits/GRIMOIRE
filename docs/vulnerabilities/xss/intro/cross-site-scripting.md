@@ -27,6 +27,7 @@ In source code, it would be:
 ```php
 <h1>Hello, John!</h1>
 ```
+
 ![](./xss-101.png)
 
 So, if an attacker use the URL `“http://mydomain.com/hello.php?user=<script>alert(1)</script>”` he/she will be able to make the browser generate the following source code:

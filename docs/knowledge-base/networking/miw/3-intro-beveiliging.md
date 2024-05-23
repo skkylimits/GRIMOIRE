@@ -15,20 +15,25 @@ Netwerkbeveiliging draait om het beschermen van de integriteit, beschikbaarheid 
 ## Malware: Virussen en Wormen
 
 **Virussen:**
+
 - Virussen zijn schadelijke softwareprogramma's die zich kunnen verspreiden door menselijke actie, zoals het klikken op een besmette link of het openen van een geïnfecteerd bestand. Een virus kan zich hechten aan legitieme programma's of bestanden en deze beschadigen of verwijderen.
 
 **Wormen:**
+
 - Wormen zijn zelfstandige malwareprogramma's die zich verspreiden zonder tussenkomst van de gebruiker. Ze maken gebruik van kwetsbaarheden in software om zich automatisch over netwerken te verspreiden. Wormen kunnen systemen verstoren en netwerken overbelasten door hun snelle verspreiding.
 
 ## Gevaren van Malware
 
 **Spyware:**
+
 - Spyware is een type malware dat gegevens van de gebruiker verzamelt zonder hun medeweten. Dit kan variëren van het bijhouden van bezochte websites tot het vastleggen van toetsaanslagen, inclusief wachtwoorden en persoonlijke informatie. Deze gegevens worden vervolgens naar een externe partij gestuurd.
 
 **Ransomware:**
+
 - Ransomware versleutelt bestanden op de geïnfecteerde computer en eist losgeld, vaak in cryptocurrency zoals Bitcoin, in ruil voor de decryptiesleutel. Bekende incidenten, zoals de ransomware-aanval op de Universiteit Maastricht, tonen de ernstige gevolgen van dergelijke aanvallen.
 
 **Botnets:**
+
 - Een botnet bestaat uit een groot aantal met malware geïnfecteerde computers die worden bestuurd door een aanvaller. Deze geïnfecteerde computers, of "bots," kunnen worden gebruikt voor verschillende kwaadaardige activiteiten zoals het versturen van spam of het uitvoeren van DDoS-aanvallen.
 
 ## Distributed Denial-of-Service (DDoS) Aanvallen

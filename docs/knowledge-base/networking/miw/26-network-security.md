@@ -103,6 +103,7 @@ Als tegenmaatregel werd DES een stuk veiliger gemaakt, wat we Triple DES noemen.
 ## Sleuteluitwisseling en Asymmetrische Encryptie
 
 Symmetrische encryptie is een mooie techniek, maar er is een groot probleem: hoe delen we de sleutel op een veilige manier?
+
 ## Oplossing met Asymmetrische Encryptie
 
 Een probleem is opgelost door een andere benadering van cryptografie, bedacht door Diffie en Hellman. In plaats van één sleutel te hebben, werken we hier met een sleutelpaar: een publieke sleutel (public key) en een private sleutel (private key). Deze twee worden tegelijkertijd aangemaakt. De publieke sleutel mag met iedereen gedeeld worden, maar de private sleutel moet zorgvuldig geheim gehouden worden.

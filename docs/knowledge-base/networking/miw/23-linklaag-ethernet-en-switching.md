@@ -1,4 +1,5 @@
 # Linklaag: Ethernet & Switching
+
 ## Verdergaan bij de Linklaag
 
 We gaan precies verder waar we in het vorige filmpje zijn gebleven, namelijk bij de linklaag. We hebben geleerd hoe hosts en routers op de linklaag frames kunnen versturen. Vandaag gaan we andere aspecten bekijken die een rol spelen, zoals het Ethernet protocol en switches.
@@ -51,13 +52,13 @@ stuur## Switches versus Routers: Overeenkomsten en Verschillen
 
 Switches en routers zijn beide apparaten die pakketjes ontvangen en doorsturen. Ze fungeren als tussenpersonen en streven ernaar om pakketjes zo snel mogelijk door te sturen, hoewel er soms wachttijden kunnen zijn voordat een pakketje wordt doorgestuurd.
 
-### Overeenkomsten:
+### Overeenkomsten
 
 - Beide zijn store-and-forward apparaten.
 - Ze kunnen pakketjes in een wachtrij plaatsen totdat ze gereed zijn om doorgestuurd te worden.
 - Ze maken gebruik van interne tabellen om te bepalen waar pakketjes naartoe moeten worden doorgestuurd.
 
-### Verschillen:
+### Verschillen
 
 - Routers opereren op de netwerklaag en kijken naar IP-adressen om te bepalen waar pakketjes naartoe moeten worden gestuurd. Ze kunnen verschillende subnetten met elkaar verbinden.
 - Switches opereren op de linklaag en kijken naar MAC-adressen om te bepalen waar pakketjes naartoe moeten worden gestuurd. Ze zijn alleen geschikt voor het verbinden van apparaten binnen hetzelfde segment.

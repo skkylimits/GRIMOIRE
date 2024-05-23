@@ -32,7 +32,7 @@
 1. **Belang van de ISO 7-laags/IP-laag 5 referentiemodellen:**
    ::: details antwoord
    De ISO 7-laags en het TCP/IP-model (vaak gezien als een 5-laags model) zijn referentiemodellen die dienen als richtlijnen voor de architectuur en het ontwerp van computernetwerken. Deze modellen helpen bij het begrijpen van de verschillende protocollen, hun functionaliteiten en hoe ze met elkaar communiceren. Ze bieden een gestructureerd kader voor het begrijpen en oplossen van netwerkproblemen.
-   :::
+
    -
 
 2. **Belangrijke kwesties voor de realisatie van LAN/WAN/MAN-netwerkarchitecturen:**
@@ -70,19 +70,23 @@
 Overzicht van de hoofdstukken die bestudeerd moeten worden voor aanvang van de les.
 
 **Les 1a: Network architecture & physical layer**
+
 - K&R 1.1 - 1.6: Bestudeer met uitzondering van paragraaf 1.3.2
 - K&R 1.7: Lees dit hoofdstuk om een algemeen beeld te krijgen van de geschiedenis. Je hoeft de genoemde datums, gebeurtenissen of genoemde personen niet te onthouden.
 
 **Les 1b: Application layer & application protocols**
+
 - K&R 2.1, 2.2, 2.3: Paragraaf 2.2.6 is optioneel.
 - K&R 2.5: Bestudeer met de volgende uitzondering:
   - Je hoeft de berekeningen in de sectie “Scalability of P2P Architectures” niet te onthouden. Wel moet je de distributietijd voor een P2P-architectuur moeten kunnen vergelijken met een client-server-architectuur, zoals weergegeven in figuur 2.23.
 
 **Les 2a: DNS & transport layer**
+
 - K&R 2.4
 - K&R 3.1, 3.2, 3.3, 3.5.1, 3.5.2, 3.5.6
 
 **Les 2b: Network layer**
+
 - K&R 4.1
 - K&R 4.2 - 4.2.4: Bestudeer met de volgende uitzonderingen:
   - Voor 4.2.2 moet je de rol van het switching fabric in een router begrijpen, maar je hoeft de specifieke eigenschappen van de verschillende technologieën die worden beschreven (geheugen, bus, interconnectienetwerk) niet te onthouden.
@@ -90,12 +94,14 @@ Overzicht van de hoofdstukken die bestudeerd moeten worden voor aanvang van de l
 - K&R 4.3, 5.6
 
 **Les 3a: Subnetting & link layer**
+
 - Bestudeer de materialen die beschikbaar zijn op de DLO over subnetten.
 - K&R 6.1
 - K&R 6.2: Bestudeer met de volgende uitzondering:
   - Je moet kunnen beschrijven wat CRC is en hoe het wordt gebruikt, maar je hoeft de berekeningen die in dit hoofdstuk worden beschreven niet te kunnen doen.
 
 **Les 3b: Network security**
+
 - K&R 8.1
 - K&R 8.2 - 8.2.1: Bestudeer het eerste deel tot (maar niet inclusief) ‘block ciphers’
 - K&R 8.2.2: Bestudeer het eerste deel tot (maar niet inclusief) ‘RSA’
@@ -105,31 +111,38 @@ Overzicht van de hoofdstukken die bestudeerd moeten worden voor aanvang van de l
 - K&R 8.9
 
 **Les 4a: TCP**
+
 - K&R 3.5: bestudeer geheel. Deze stof is deels al behandeld tijdens Infrastructure, maar we gaan nu dieper in op de details.
 - K&R 3.7: bestudeer tot (niet tot en met) de sectie: Macroscopic description of TCP Cubic
 - The Internet Protocol Journal, december 2006: SYN Flooding Attacks (zie DLO)
 
 **Les 4b: DNS**
+
 - K&R 2.4
 - Tweakers.net, 14-10-2019: Dns-over-https: vloek of zegen? (zie DLO)
 
 **Routing algorithms & protocols**
+
 - K&R 5.2: zorg dat je bekend bent met de eigenschappen van link state en distance vector algoritmes. Je hoeft niet zelf met deze algoritmes routing tabellen te kunnen bepalen.
 - K&R 5.3 - 5.4: bestudeer geheel.
 - Tweakers.net, 22-8-2015: De achilleshiel van het internet (zie DLO
 
 **Les 5a: Network management: SDN & SNMP**
+
 - K&R 4.4, 5.1, 5.5, 5.8 (5.7 in 7th edition): bestudeer geheel
 
 **Link layer: ARP**
+
 - K&R 6.4 - 6.4.1: bestudeer geheel
 
 **Les 5b: Link layer: Ethernet en switches**
+
 - K&R 6.4 vanaf 6.4.2: bestudeer geheel
 - K&R 6.6: bestudeer geheel
 - K&R 6.7: bestudeer geheel
 
 **Draadloze netwerken**
+
 - K&R 7 - 7.1: bestudeer geheel
 - K&R 7.2: bestudeer tot 7.2.1, dus niet het hoofdstuk over CDMA
 - K&R 7.3: bestudeer met de volgende uitzonderingen:
@@ -138,6 +151,7 @@ Overzicht van de hoofdstukken die bestudeerd moeten worden voor aanvang van de l
 - K&R 8.8: bestudeer geheel
 
 **Les 6a: Network security**
+
 - Een deel van dit materiaal is eerder behandeld tijdens dag 1 t/m 3.
 - K&R 8.1: bestudeer geheel
 - K&R 8.2: bestudeer met de volgende uitzonderingen:
@@ -145,9 +159,10 @@ Overzicht van de hoofdstukken die bestudeerd moeten worden voor aanvang van de l
 - K&R 8.3, 8.4, 8.6: bestudeer geheel
 - Acunetix, 31-3-2019, Examples of TLS Vulnerabilities and Attacks (zie DLO)
 
-## Life Of A Packet.
+## Life Of A Packet
 
 ## Chapter 1
+
 ### Computer Networks and the Internet
 
 - **1.1** What Is the Internet?
@@ -161,12 +176,12 @@ Paul Baran probeerde uit te vogelen hoe hij een communicatiesysteem kon bouwen d
 Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren en kennis te delen.
 :::
 
-  - **1.1.1** A Nuts-and-Bolts Description
+- **1.1.1** A Nuts-and-Bolts Description
     ::: details Antwoord
     Het internet is een computer netwerk die miljarden computer apparaturen[HOSTS] met elkaar verbindt.
     :::
 
-  - **1.1.2** A Services Description
+- **1.1.2** A Services Description
     ::: details Antwoord
     Het internet wordt beschreven als een infrastructuur die diensten levert aan applicaties.
 
@@ -175,7 +190,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     Iedereen kan deze applicaties bouwen en informatie delen met de wereld.
     :::
 
-  - **1.1.3** What Is a Protocol?
+- **1.1.3** What Is a Protocol?
     ::: details Antwoord
     Een protocol is een set regels die de format en volgorde van berichten tussen communicerende entiteiten bepaalt
 
@@ -186,7 +201,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     **For different systems to be able to communicate over the Internet, protocols are very important. Standards and protocols for the Internet are developed by the Internet Engineering Task Force (IETF) and written in specific documents. What is the name of these documents that define Internet protocols?**
 
     ::: details Antwoord
-    Answer:	RFC
+    Answer: RFC
     :::
 
 - **1.2** The Network Edge
@@ -309,9 +324,9 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
 - **1.6** Networks Under Attack
     ::: details Antwoord
-    - Vulnerability Attack
-    - Bandwidth flooding
-    - Connection Flooding
+  - Vulnerability Attack
+  - Bandwidth flooding
+  - Connection Flooding
     :::
 
 - **1.7** History of Computer Networking and the Internet
@@ -341,57 +356,57 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     Sure, here's a brief summary:
 
     1. **What is the Internet?**
-    - A network of networks, enabling communication and sharing of information globally.
+  - A network of networks, enabling communication and sharing of information globally.
 
     1. **What is a protocol?**
-    - A set of rules governing communication between devices, ensuring effective data exchange.
+  - A set of rules governing communication between devices, ensuring effective data exchange.
 
     1. **What is the network edge?**
-    - The outermost part of a network, where end-user devices connect to the internet.
+  - The outermost part of a network, where end-user devices connect to the internet.
 
     1. **What are access networks?**
-    - Infrastructure connecting end-user devices to the internet.
+  - Infrastructure connecting end-user devices to the internet.
 
     1. **What is the network core?**
-    - The central part of a network, responsible for routing data between different networks.
+  - The central part of a network, responsible for routing data between different networks.
 
     1. **What is packet switching?**
-    - A method of data transmission where data is divided into packets for efficient routing over a network.
+  - A method of data transmission where data is divided into packets for efficient routing over a network.
 
     1. **What is circuit switching?**
-    - A method of data transmission establishing a dedicated communication path before data transfer.
+  - A method of data transmission establishing a dedicated communication path before data transfer.
 
     1. **What is a "Network of Networks"?**
-    - An interconnected system of multiple individual networks forming a larger network.
+  - An interconnected system of multiple individual networks forming a larger network.
 
     1. **Overview of Delay in Packet-Switched Networks**
-    - Delay refers to the time taken for data to travel across a network, affected by factors like queuing delay and end-to-end delay.
+  - Delay refers to the time taken for data to travel across a network, affected by factors like queuing delay and end-to-end delay.
 
-    1.  **Queuing Delay and Packet Loss**
+    1. **Queuing Delay and Packet Loss**
         - Delay caused by packets waiting in queues at network routers, leading to potential packet loss during congestion.
 
-    2.  **End-to-End Delay**
+    2. **End-to-End Delay**
         - Total time taken for data to travel from source to destination, including processing and transmission delays.
 
-    3.  **Throughput in Computer Networks**
+    3. **Throughput in Computer Networks**
         - The rate at which data is successfully transmitted over a network, measured in bits per second.
 
-    4.  **Protocol Layers and Their Service Models**
+    4. **Protocol Layers and Their Service Models**
         - Protocols are organized into layers, each providing specific services for communication between devices.
 
-    5.  **Layered Architecture**
+    5. **Layered Architecture**
         - A hierarchical structure of protocols, enabling modular and efficient communication between network components.
 
-    6.  **Encapsulation**
+    6. **Encapsulation**
         - The process of wrapping data in protocol headers and possibly a body for transmission over a network.
 
-    7.  **Networks Under Attack**
+    7. **Networks Under Attack**
         - Networks face various threats such as malware, DDoS attacks, and intrusion attempts, requiring robust security measures.
 
-    8.  **The Development of Packet Switching: 1961–1972**
+    8. **The Development of Packet Switching: 1961–1972**
         - The early stages of packet switching technology, leading to the creation of ARPANET and the foundation of the internet.
 
-    9.  **Proprietary Networks and Internetworking: 1972–1980**
+    9. **Proprietary Networks and Internetworking: 1972–1980**
         - Expansion of packet-switched networks and the development of internetworking protocols, paving the way for global connectivity.
 
     10. **A Proliferation of Networks: 1980–1990**
@@ -429,32 +444,34 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     :::
 
 ## Chapter 2
+
 ### Application Layer
+
 - **2.1** Principles of Network Applications
     ::: details Antwoord
     **Idee naar Toepassing:**
 
     *Startpunt van Ontwikkeling:*
-    - Het proces begint met het hebben van een idee voor een nieuwe netwerktoepassing, dat kan variëren van dienstbaarheid aan de mensheid tot persoonlijke belangen.
+  - Het proces begint met het hebben van een idee voor een nieuwe netwerktoepassing, dat kan variëren van dienstbaarheid aan de mensheid tot persoonlijke belangen.
 
     **Ontwikkeling van Toepassingen:**
 
     *Programma's voor Communicatie:*
-    - Netwerktoepassingen worden ontwikkeld door programma's te schrijven die op verschillende eindsystemen draaien en met elkaar communiceren over het netwerk.
+  - Netwerktoepassingen worden ontwikkeld door programma's te schrijven die op verschillende eindsystemen draaien en met elkaar communiceren over het netwerk.
 
     *Toepassingsvoorbeelden:*
-    - Bijv., in een Web-toepassing communiceren de browser en de Web-server programma's met elkaar, elk op hun respectievelijke hosts.
-    - Evenzo, in een Video on Demand-toepassing zoals Netflix, draaien de client- en serverprogramma's op respectievelijk de gebruikersapparaten en de Netflix-serverhost.
+  - Bijv., in een Web-toepassing communiceren de browser en de Web-server programma's met elkaar, elk op hun respectievelijke hosts.
+  - Evenzo, in een Video on Demand-toepassing zoals Netflix, draaien de client- en serverprogramma's op respectievelijk de gebruikersapparaten en de Netflix-serverhost.
 
     **Softwareontwikkeling:**
 
     *Software Schrijven:*
-    - Bij het ontwikkelen van een nieuwe toepassing is het belangrijk software te schrijven die op meerdere eindsystemen kan draaien, zoals desktops, laptops, smartphones, etc.
-    - Deze software kan worden geschreven in talen zoals C, Java of Python, gericht op eindsystemen, niet op netwerkkernapparaten.
+  - Bij het ontwikkelen van een nieuwe toepassing is het belangrijk software te schrijven die op meerdere eindsystemen kan draaien, zoals desktops, laptops, smartphones, etc.
+  - Deze software kan worden geschreven in talen zoals C, Java of Python, gericht op eindsystemen, niet op netwerkkernapparaten.
 
     *Beperkingen in Ontwikkeling:*
-    - Het is niet nodig software te schrijven voor netwerkkernapparaten zoals routers of link-layer switches; deze werken op lagere lagen en niet op de toepassingslaag.
-    - Deze aanpak heeft geleid tot snelle ontwikkeling en implementatie van een breed scala aan netwerktoepassingen.
+  - Het is niet nodig software te schrijven voor netwerkkernapparaten zoals routers of link-layer switches; deze werken op lagere lagen en niet op de toepassingslaag.
+  - Deze aanpak heeft geleid tot snelle ontwikkeling en implementatie van een breed scala aan netwerktoepassingen.
     :::
 
   - **2.1.1** Network Application Architectures
@@ -568,6 +585,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - **2.2.3** HTTP Message Format
     ::: details Antwoord
     Request:
+
     ```html
     GET /somedir/page.html
     HTTP/1.1 Host: www.someschool.edu
@@ -577,6 +595,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     ```
 
     Response:
+
     ```html
     HTTP/1.1 200 OK
     Connection: close
@@ -694,6 +713,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     :::
   - **2.3.2** Mail Message Formats
     ::: details Antwoord
+
     ```text
     MAIL FROM: <alice@example.com>
     RCPT TO: <bob@example.net>
@@ -704,6 +724,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     .
     QUIT
     ```
+
     :::
 
   - **2.3.3** Mail Access Protocols
@@ -728,7 +749,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
         - Behoudt de gebruikersstatus tussen sessies, inclusief de namen van mappen en mappings tussen opgeslagen berichten op de server.
 
       - **HTTP**:
-        -  Wordt ook gebruikt voor toegang tot e-mail, bijvoorbeeld via webmailservices zoals Gmail, Hotmail en Yahoo! Mail.
+        - Wordt ook gebruikt voor toegang tot e-mail, bijvoorbeeld via webmailservices zoals Gmail, Hotmail en Yahoo! Mail.
     :::
 
 - **2.4** DNS—The Internet’s Directory Service
@@ -828,9 +849,9 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - DNS is niet versleuteld: iedereen kan meeluisteren (provider, hacker, iedereen).
     - Oplossing?
     - DNS over HTTPS/SSL:
-        - Browsermakers (Google, Mozilla) implementeren dit.
+      - Browsermakers (Google, Mozilla) implementeren dit.
     - Maar...
-        - In plaats van dat iedereen toegang heeft tot je gegevens, worden ze nu verzameld door één specifieke DNS-provider.
+      - In plaats van dat iedereen toegang heeft tot je gegevens, worden ze nu verzameld door één specifieke DNS-provider.
 
     **DNSSec**
 
@@ -895,7 +916,9 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     :::
 
 ## Chapter 3
+
 ### Transport Layer
+
 - **3.1** Introduction and Transport-Layer Services
     ::: details Antwoord
 
@@ -966,7 +989,9 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     :::
 
 ## Chapter 4
+
 ### The Network Layer: Data Plane
+
 - **4.1** Overview of Network Layer
   - **4.1.1** Forwarding and Routing: The Data and Control Planes
   - **4.1.2** Network Service Model
@@ -986,7 +1011,9 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 - **4.6** Summary
 
 ## Chapter 5
+
 ### The Network Layer: Control Plane
+
 - **5.1** Introduction
 - **5.2** Routing Algorithms
   - **5.2.1** The Link-State (LS) Routing Algorithm
@@ -1012,7 +1039,9 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 - **5.8** Summary
 
 ## Chapter 6
+
 ### The Link Layer and LANs
+
 - **6.1** Introduction to the Link Layer
   - **6.1.1** The Services Provided by the Link Layer
   - **6.1.2** Where Is the Link Layer Implemented?
@@ -1043,7 +1072,9 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 - **6.9** Summary
 
 ## Chapter 7
+
 ### Wireless and Mobile Networks
+
 - **7.1** Introduction
 - **7.2** Wireless Links and Network Characteristics
   - **7.2.1** CDMA

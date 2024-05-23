@@ -34,7 +34,7 @@ Als je pech hebt, kan jouw computer worden opgenomen in een botnet, een leger va
 
 Het uitwisselen van informatie over het internet kan riskant zijn, omdat het kanaal vaak onveilig is. Zelfs als zenders en ontvangers veilig zijn, kan de communicatie worden onderschept door derden die toegang hebben tot hetzelfde netwerk.
 
-## Bad Guys/Girls Kunnen:
+## Bad Guys/Girls Kunnen
 
 Bad guys en girls kunnen verschillende aanvallen uitvoeren:
 

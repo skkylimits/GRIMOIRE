@@ -51,6 +51,7 @@ De informatie die centraal wordt berekend, wordt verspreid in de vorm van een fl
 ## Voordelen van SDN
 
 Met SDN kunnen netwerkapparaten meer dan alleen naar IP-adressen kijken. Ze kunnen verschillende soorten controle uitvoeren op basis van informatie in de flow table, waardoor het netwerk flexibeler en intelligenter wordt.
+
 ## Uitbreiding van Beslissingsvariabelen
 
 Bij SDN kunnen we niet alleen naar IP-adressen kijken, maar ook naar MAC-adressen, protocollen en zelfs naar specifieke patronen in het verkeer. Op basis van deze variabelen kunnen we beslissen wat we met een pakketje gaan doen.
@@ -96,6 +97,7 @@ Een van de grote voordelen van SDN is dat het netwerkbeheer eenvoudiger wordt do
 ## Structuur van een SDN
 
 In een SDN-architectuur zien we geen aparte apparaten meer voor routers, firewalls en switches. In plaats daarvan zijn er generieke netwerkapparaten die worden aangestuurd door een centrale controle. Deze apparaten kunnen acties uitvoeren op basis van de informatie in de flow table, die wordt berekend door de centrale controle.
+
 ## Rol van de SDN Controller
 
 Een cruciaal onderdeel van het SDN-ecosysteem is de SDN-controller. Deze controller staat in directe communicatie met de switches in het netwerk en fungeert als het brein van het netwerk, waarbij het de routing, load balancing en toegangscontrole beheert.

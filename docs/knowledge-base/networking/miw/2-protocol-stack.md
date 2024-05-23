@@ -34,6 +34,7 @@ In plaats van te proberen het hele netwerk in één keer te begrijpen, kunnen we
 ## Toepassing in de Praktijk
 
 Een gelaagd model maakt het ook gemakkelijker om nieuwe technologieën en protocollen te implementeren. Stel je voor dat er een nieuwe, snellere Wi-Fi-standaard wordt geïntroduceerd. Alleen de hardware en de software die direct met de Wi-Fi-verbinding te maken hebben, moeten worden geüpdatet. De applicaties en andere softwarelagen kunnen blijven werken zoals ze zijn.
+
 ## Uitdagingen in Software Ontwikkeling
 
 Wanneer je bijvoorbeeld een stukje software wilt ontwikkelen, is het een geweldig idee om een nieuwe netwerkapplicatie te creëren. Dat is echter een uitdaging om goede code voor te schrijven. Het is belangrijk dat de software goed en stabiel werkt en gebruiksvriendelijk is. Je wilt je geen zorgen hoeven maken over hoe de rest zal werken.
@@ -113,6 +114,7 @@ Uiteindelijk moet het datagram dat klaar is, naar een bepaalde verbinding worden
 ## Framing op de Linklaag
 
 De linklaag ontvangt het datagram en pakt het in in een zogenaamd 'frame'. Een frame is dus de hoeveelheid informatie die we op de linklaag doorsturen. Wat zit er dan in zo'n frame? Eigenlijk nog steeds het oorspronkelijke bericht van de applicatie, en ook de linklaag zal er eigen informatie aan toevoegen.
+
 ## Vergelijking met Russische Matroesjka Poppen
 
 Het is alsof ik me een reeks Russische matroesjka-poppen voorstel, waarbij elk kleinere popje in een grotere past, en die grotere in een nog grotere. En dat geheel gaan we versturen. Dit is de verscheidenheid die terugkomt wanneer we terugkomen bij het frame.

@@ -63,6 +63,7 @@ Als we inzoomen op het netwerk, zien we een lappendeken van netwerken die aan el
 ## Route van Berichtjes over het Internet
 
 Een berichtje dat bijvoorbeeld vanuit Nederland naar Amerika wordt gestuurd, volgt een route door verschillende netwerken, via switches en routers, voordat het zijn bestemming bereikt. Zo reist het pakketje door een lappendeken van netwerken voordat het aankomt bij het netwerk van de ontvanger.
+
 ## Afspraken en Protocollen
 
 Maar ze hebben nog wel wat meer nodig als alle apparaten met elkaar willen communiceren. Dus moeten ze van elkaar diensten kunnen gaan afnemen, en daarvoor zullen ze afspraken moeten maken over hoe ze dat precies gaan doen. Afspraken zijn heel belangrijk voor het internet; ze rollen vast die wat anders zijn vastgelegd in internetstandaarden. Maar wat is een protocol eigenlijk? Het is niets meer of minder dan een afspraak over hoe we met elkaar gaan communiceren: wat voor berichtjes we gaan sturen, hoe ze zijn gecodeerd, waar ze worden verzonden, en wat er gebeurt als er iets fout gaat.

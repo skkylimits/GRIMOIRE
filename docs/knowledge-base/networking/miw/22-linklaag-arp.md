@@ -21,6 +21,7 @@ Om het MAC-adres van een specifieke computer in het netwerk te achterhalen, word
 ## Verhouding tussen MAC-adressen en IP-adressen
 
 MAC-adressen worden gebruikt op de linklaag voor adresresolutie, terwijl IP-adressen worden gebruikt voor routering op de netwerklaag. De samenwerking tussen MAC-adressen en IP-adressen is cruciaal voor het correct routeren van pakketjes naar hun bestemmingen.
+
 ## Het belang van MAC-adressen
 
 Het MAC-adres is uniek gekoppeld aan de hardware van een apparaat en verandert niet wanneer je van het ene naar het andere netwerk gaat. Het wordt centraal beheerd door de International Engineering Consortium.
@@ -48,6 +49,7 @@ De ontvangen ARP-respons wordt opgeslagen in de ARP-tabel van het verzendende ap
 ## Periodiek bijwerken van de ARP-tabel
 
 Apparaten in het netwerk houden hun ARP-tabellen up-to-date door periodiek ARP-verzoeken te verzenden en te ontvangen. Op deze manier blijven de ARP-tabellen actueel zonder dat handmatige interventie van de netwerkbeheerder nodig is.
+
 ## Verbindingen en adressen in de netwerktopologie
 
 In dit netwerkschema zien we een router met twee interfaces, één aan de linkerkant en één aan de rechterkant. Elke interface heeft zowel een IP-adres als een MAC-adres. IP-adressen helpen bij het identificeren van de locatie van een interface in het netwerk, terwijl MAC-adressen unieke hardwareadressen zijn.
@@ -71,6 +73,7 @@ Het bericht van Host A wordt ingepakt in een TCP-segment en vervolgens in een IP
 ## Rol van de router
 
 De router gebruikt het IP-adres van Host B om het bericht naar het juiste subnet te routeren, maar het gebruikt zijn eigen MAC-adres om het datagram door te sturen. Dit proces van routeren tussen verschillende subnets maakt het mogelijk voor Host A om te communiceren met Host B, zelfs als ze zich op verschillende subnetten bevinden.
+
 ## DHCP en Address Resolution Protocol (ARP)
 
 Een belangrijke vraag is hoe hosts het MAC-adres van routers achterhalen. Dit wordt vaak gedaan via het Address Resolution Protocol (ARP). Dit protocol zorgt ervoor dat hosts niet alleen het IP-adres, maar ook het MAC-adres van een router kunnen achterhalen, wat essentieel is voor het correct adresseren van gegevens op de linklaag.

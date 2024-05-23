@@ -67,6 +67,7 @@ DHCP werkt met behulp van een client-servermodel. Jouw computer, of een ander ap
 ## Stappen van DHCP
 
 Het DHCP-proces omvat vier hoofdstappen: Discover, Offer, Request en Acknowledge (DORA).
+
 1. Discover: De client stuurt een Discover-bericht om contact te maken met een DHCP-server.
 2. Offer: De server reageert met een Offer-bericht, waarin het een IP-adres aanbiedt aan de client.
 3. Request: De client stuurt een Request-bericht om het aangeboden IP-adres te accepteren.

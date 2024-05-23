@@ -59,6 +59,7 @@ Ondanks de noodzaak en de lange beschikbaarheid van IPv6, is de adoptie ervan no
 ## Voordelen van IPv6
 
 De overgang naar IPv6 biedt veel meer IP-adressen dan IPv4. Dit is noodzakelijk om de groei van het internet en het aantal verbonden apparaten bij te houden. IPv6 zorgt ervoor dat er voldoende adressen zijn om aan de toekomstige vraag te voldoen, waardoor het internet kan blijven groeien en innoveren.
+
 ## IPv6: Ongekende Schaal
 
 IPv6 heeft 128 bits gereserveerd, wat resulteert in een enorm groot aantal adressen. Het is geschat dat we zelfs elke zandkorrel op aarde van een uniek adres zouden kunnen voorzien. Dit biedt een schier eindeloze mogelijkheid voor toekomstige netwerkgroei.

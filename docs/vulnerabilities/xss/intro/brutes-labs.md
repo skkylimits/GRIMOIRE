@@ -9,4 +9,5 @@
 The [7](https://brutelogic.com.br/blog/the-7-main-xss-cases-everyone-should-know/) Main XSS Cases Everyone Should Know!
 
 ## Train
+
 After the 7. Don't forget to go to the [gym](https://brutelogic.com.br/blog/training-xss-muscles/) regularly every so often to train the xss muscles!

@@ -63,9 +63,9 @@ What is an example of the CIA triad?
 
 Think of logging into an e-commerce site to check your orders and make an additional purpose. The e-commerce site uses the three principles of the CIA triad in the following ways:
 
--   **Confidentiality**: When you log in, you're asked for a password. If it's been a while since your last log-in, you may be asked to input a code that's been sent to you or some other form of [two-factor authentication](https://securityscorecard.com/blog/whats-wrong-with-two-factor-authentication).
--   **Integrity:** Data integrity is provided by making sure your purchases are reflected in your account and allowing you to contact a representative if there's a discrepancy.
--   **Availability:** You can log into your account whenever you want, and you may even be able to contact customer support at any time of the day or night.
+- **Confidentiality**: When you log in, you're asked for a password. If it's been a while since your last log-in, you may be asked to input a code that's been sent to you or some other form of [two-factor authentication](https://securityscorecard.com/blog/whats-wrong-with-two-factor-authentication).
+- **Integrity:** Data integrity is provided by making sure your purchases are reflected in your account and allowing you to contact a representative if there's a discrepancy.
+- **Availability:** You can log into your account whenever you want, and you may even be able to contact customer support at any time of the day or night.
 
 This is just one example of how the triad can be practically applied. There are several, more specific examples for each leg of the CIA stool.
 

@@ -2,7 +2,7 @@
 
 > Remember if any scans show too much output to fit the screen, you can always use linux output redirection.
 
-> Use `nmap | more ` to see the result per page or `nmap | filename` to store it in a file
+> Use `nmap | more` to see the result per page or `nmap | filename` to store it in a file
 
 ## Scan Available Host
 

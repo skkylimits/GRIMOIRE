@@ -5,18 +5,18 @@ TODO: Add how to do a pentest (sales pitch)
 TODO: Get familiar with devslide for powerpoints
 TODO: hotreload doesnt work anymore
 TODO: clean up risk rating methodogology
-TODO: https://dlo.mijnhva.nl/d2l/le/content/545914/viewContent/1816603/View
-TODO: https://dlo.mijnhva.nl/d2l/le/content/545914/viewContent/1816591/View
+TODO: <https://dlo.mijnhva.nl/d2l/le/content/545914/viewContent/1816603/View>
+TODO: <https://dlo.mijnhva.nl/d2l/le/content/545914/viewContent/1816591/View>
 
-ADD: https://tweakers.net/reviews/7406/dns-over-https-meningen-verdeeld-over-encryptie-dns-queries.html
-ADD: https://tweakers.net/reviews/4155/border-gateway-protocol-de-achilleshiel-van-internet.html
-ADD: https://www.acunetix.com/blog/articles/tls-vulnerabilities-attacks-final-part/
+ADD: <https://tweakers.net/reviews/7406/dns-over-https-meningen-verdeeld-over-encryptie-dns-queries.html>
+ADD: <https://tweakers.net/reviews/4155/border-gateway-protocol-de-achilleshiel-van-internet.html>
+ADD: <https://www.acunetix.com/blog/articles/tls-vulnerabilities-attacks-final-part/>
 
-ADD: https://gaia.cs.umass.edu/kurose_ross/index.php
+ADD: <https://gaia.cs.umass.edu/kurose_ross/index.php>
 
 ## add python/javascript/bash/sql?
 
-## https://remarkable.com/store/remarkable-2 or iPad?
+## <https://remarkable.com/store/remarkable-2> or iPad?
 
 ## Isreali Defense Force
 

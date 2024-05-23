@@ -34,7 +34,7 @@ Je kunt je wel voorstellen dat er heel andere technieken nodig zijn voor een dra
 
 ## Gemeenschappelijke service
 
-Alle `linklaagprotocollen` bieden dezelfde service aan de lagen erboven: ze zorgen ervoor dat een stukje data over een verbinding wordt doorgestuurd naar de volgende laag. Dit betekent dat de `linklaag `de data doorgeeft, eventueel opnieuw verpakt en klaar maakt voor verzending over de volgende verbinding.
+Alle `linklaagprotocollen` bieden dezelfde service aan de lagen erboven: ze zorgen ervoor dat een stukje data over een verbinding wordt doorgestuurd naar de volgende laag. Dit betekent dat de `linklaag`de data doorgeeft, eventueel opnieuw verpakt en klaar maakt voor verzending over de volgende verbinding.
 
 ## Verschillende technieken en protocollen
 
@@ -71,15 +71,19 @@ Het frame wordt verstuurd over een bepaalde verbinding. De linklaag zorgt ervoor
 ## Diensten van de linklaag
 
 ### 1. **Flow Control**
+
 Flow control zorgt ervoor dat de zender en ontvanger gegevens op een efficiënte manier kunnen overdragen zonder overbelasting. Dit mechanisme reguleert de snelheid van dataoverdracht, zodat de ontvanger niet overweldigd wordt door te veel data in korte tijd. Hierdoor wordt dataverlies voorkomen en blijft de communicatie stabiel.
 
 ### 2. **Error Detection**
+
 Error detection houdt in dat fouten in de dataoverdracht worden geïdentificeerd. De linklaag voegt controle-informatie, zoals checksums of cyclic redundancy checks (CRC), toe aan de data. Bij ontvangst wordt de data opnieuw gecontroleerd met deze informatie. Als er een fout wordt gedetecteerd, kan de data opnieuw worden verzonden, wat de betrouwbaarheid van de communicatie verhoogt.
 
 ### 3. **Error Correction**
+
 Error correction gaat een stap verder dan foutdetectie door niet alleen fouten te identificeren, maar ook te corrigeren. Mechanismen zoals Hamming-codes of andere foutcorrigerende codes worden gebruikt om de fouten direct te herstellen zonder dat de data opnieuw verzonden hoeft te worden. Dit zorgt voor een efficiëntere en betrouwbaardere dataoverdracht.
 
 ### 4. **Full/Half Duplex**
+
 Full duplex en half duplex bepalen hoe communicatie tussen twee apparaten plaatsvindt. In een full duplex-systeem kunnen beide apparaten gelijktijdig gegevens verzenden en ontvangen, zoals bij een telefoongesprek. In een half duplex-systeem kan slechts één apparaat tegelijk verzenden of ontvangen, zoals bij een walkietalkie. Full duplex zorgt voor snellere en meer natuurlijke communicatie, terwijl half duplex eenvoudiger en minder kostbaar is om te implementeren.
 
 ## Parity Checking
@@ -100,33 +104,37 @@ Parity checking wordt gebruikt om fouten in dataoverdracht te detecteren. Het is
    - Hier wordt een pariteitsbit toegevoegd zodat het totale aantal '1'-bits in de data, inclusief het pariteitsbit, oneven is.
    - Voorbeeld: Stel dat we de data bits `1101` hebben. Dit zijn drie '1'-bits (oneven). Om het totaal oneven te houden, voegen we een pariteitsbit `0` toe, waardoor de reeks `11010` wordt.
 
-### Voorbeeld van Even Pariteit:
+### Voorbeeld van Even Pariteit
 
 Stel dat we de data bits `1011` willen verzenden:
+
 - Het aantal '1'-bits in `1011` is drie (oneven).
 - Voor even pariteit voegen we een `1` toe: `10111`.
 
 Bij ontvangst controleert de ontvanger of het aantal '1'-bits nog steeds even is:
+
 - Ontvangen bits: `10111`.
 - Het aantal '1'-bits is vier (even), dus de data is waarschijnlijk correct ontvangen.
 
-### Voorbeeld van Oneven Pariteit:
+### Voorbeeld van Oneven Pariteit
 
 Stel dat we de data bits `1010` willen verzenden:
+
 - Het aantal '1'-bits in `1010` is twee (even).
 - Voor oneven pariteit voegen we een `1` toe: `10101`.
 
 Bij ontvangst controleert de ontvanger of het aantal '1'-bits nog steeds oneven is:
+
 - Ontvangen bits: `10101`.
 - Het aantal '1'-bits is drie (oneven), dus de data is waarschijnlijk correct ontvangen.
 
-### Beperkingen:
+### Beperkingen
 
 - Parity checking kan alleen enkelvoudige bitfouten detecteren (als slechts één bit is gewijzigd).
 - Het kan geen dubbele bitfouten detecteren (als twee bits zijn gewijzigd, blijft de pariteit hetzelfde).
 - Parity checking biedt geen foutcorrectie, alleen foutdetectie.
 
-#### Gebruik:
+#### Gebruik
 
 Parity checking wordt vaak gebruikt in situaties waar eenvoudige foutdetectie voldoende is, zoals in bepaalde communicatieprotocollen en geheugenopslag, om een basisniveau van gegevensintegriteit te waarborgen.
 
@@ -210,6 +218,7 @@ De volledige matrix inclusief rij- en kolompariteitsbits is nu:
 **Stap 3: Verzenden en ontvangen van de matrix**.
 
 **Stap 4: Foutdetectie en -correctie**:
+
 - Bij de ontvanger worden de pariteitsbits opnieuw berekend en vergeleken met de ontvangen pariteitsbits.
 - Als er een fout wordt gedetecteerd in bijvoorbeeld de derde rij en de tweede kolom (door afwijkende pariteitsbits), kan de fout worden gecorrigeerd door de bitwaarde op de kruising van die rij en kolom om te draaien.
 
