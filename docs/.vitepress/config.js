@@ -250,6 +250,13 @@ export default {
             { text: 'Linklaag', link: '/knowledge-base/networking/miw/12-linklaag.md' },
             { text: 'Beveiliging', link: '/knowledge-base/networking/miw/13-beveiliging.md' },
             { text: 'Beveiligingsmaatregelen', link: '/knowledge-base/networking/miw/14-beveiligingsmaatregelen.md' },
+            { text: 'Netwerkbeheer', link: '/knowledge-base/networking/miw/21-netwerkbeheer.md' },
+            { text: 'Linklaag: ARP', link: '/knowledge-base/networking/miw/22-linklaag-arp.md' },
+            { text: 'Linklaag: Ethernet & Switching', link: '/knowledge-base/networking/miw/23-linklaag-ethernet-en-switching.md' },
+            { text: 'Draadloze Netwerken', link: '/knowledge-base/networking/miw/24-draadloze-netwerken.md' },
+            { text: 'Wifi Security', link: '/knowledge-base/networking/miw/25-wifi-security' },
+            { text: 'Network Security', link: '/knowledge-base/networking/miw/26-network-security' },
+            { text: 'TLS', link: '/knowledge-base/networking/miw/27-tls' },
           ],
         },
         {

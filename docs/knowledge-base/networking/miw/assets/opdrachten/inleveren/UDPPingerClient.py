@@ -26,17 +26,22 @@ def udp_ping(target_host, target_port, timeout=1):
             message = f'Ping {sequence_number}'.encode()
             start_time = time.time()
 
-            # Send the UDP packet to the target
+            # Send the UDP packet with our message to the target.
             client_socket.sendto(message, (target_host, target_port))
 
             try:
                 # Wait for the response from the target
-                response, _ = client_socket.recvfrom(1024)
+                response, address = client_socket.recvfrom(1024) # If you only use one variable to capture the result of recvfrom, you would get a tuple containing both the data and the sender's address.
                 end_time = time.time()
+
+                #  Calculate and print the round trip time (RTT), in seconds, of each packet, if server responses
                 round_trip_time = end_time - start_time
-                print(f"Received response: {response.decode()}")
+                
+                # Print a response message from the server
+                print(f"Received response: {address} {response.decode()}")
                 print(f"Round-trip time: {round_trip_time:.6f} seconds")
             except socket.timeout:
+                # otherwise, print “Request timed out”
                 print(f"Request {sequence_number} timed out")
             finally:
                 sequence_number += 1
@@ -56,14 +61,7 @@ if __name__ == "__main__":
     udp_ping(target_host, target_port)
 
 
-# first part done
-# first, since UDP is a connectionless protocol.)
-# (1) send the ping message using UDP (Note: Unlike TCP, you do not need to establish a connection
-# (2) print the response message from server, if any
-# (3) calculate and print the round trip time (RTT), in seconds, of each packet, if server responses
-# (4) otherwise, print “Request timed out”
-
-# Optional Exercises
+# TODO Optional Exercises
 # 1. Currently, the program calculates the round-trip time for each packet and prints it out individually.
 # Modify this to correspond to the way the standard ping program works. You will need to report the
 # minimum, maximum, and average RTTs at the end of all pings from the client. In addition, calculate

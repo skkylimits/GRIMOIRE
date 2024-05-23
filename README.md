@@ -8,9 +8,19 @@ TODO: clean up risk rating methodogology
 TODO: https://dlo.mijnhva.nl/d2l/le/content/545914/viewContent/1816603/View
 TODO: https://dlo.mijnhva.nl/d2l/le/content/545914/viewContent/1816591/View
 
+ADD: https://tweakers.net/reviews/7406/dns-over-https-meningen-verdeeld-over-encryptie-dns-queries.html
+ADD: https://tweakers.net/reviews/4155/border-gateway-protocol-de-achilleshiel-van-internet.html
+ADD: https://www.acunetix.com/blog/articles/tls-vulnerabilities-attacks-final-part/
+
+ADD: https://gaia.cs.umass.edu/kurose_ross/index.php
+
 ## add python/javascript/bash/sql?
 
 ## https://remarkable.com/store/remarkable-2 or iPad?
+
+## Isreali Defense Force
+
+<https://www.youtube.com/watch?v=IluKcbamqfk>
 
 ## GPT Markdown Formatter & Transcription Transformer
 
@@ -23,3 +33,56 @@ Geef de alineas een title met ## ervoor.
 
 Zorg ervoor dat na de titel met ## een lege regel is voor leesbaarheid.
 `
+
+## VIDEO COLLEGE
+
+[Netwerk Architektuur](https://youtu.be/6CAkgSzge64)
+[Protocoll Stack](https://youtu.be/agCwFOrKbaA)
+[Intro Security](https://youtu.be/YeaREe_FLDQ)
+[Applicatielaag](https://youtu.be/SCHo8pdPOWo)
+[Applicatieprotoclooen](https://youtu.be/Pt6d8D9iSDQ)
+[Transportlaag](https://youtu.be/OFjEO5VLay8)
+[UDP & TCP](https://www.youtube.com/watch?v=Vdc8TCESIg8)
+[DNS](https://www.youtube.com/watch?v=GlZC4Jwf3xQ)
+[DNS II](https://www.youtube.com/watch?v=kVtm4oWqT_I)
+[Automatic IP Address Assignment](https://www.youtube.com/watch?v=RUZohsAxPxQ)
+[Netwerk Protocollen](https://youtu.be/5aCPb6IuI80)
+[Routing & Forwarding](https://youtu.be/qn2s07cciD0)
+[DHCP](https://youtu.be/wL-QUHGwGAk)
+[Subnets](https://www.youtube.com/watch?v=yK__SdS2meo)
+[Linklaag](https://www.youtube.com/watch?v=kqhq_CGiSn4)
+[Risico's en bedreigingen bij netwerkbeveiliging](https://www.youtube.com/watch?v=qNK13asJbMw)
+[Beveiligingsmaatregelen](https://www.youtube.com/watch?v=7LCFZhdo0d4)
+
+Vervolgvak op Netwerk Architektuur + Beveiliging
+[De TCP verbinding](https://www.youtube.com/watch?v=NtvtyEKK9s0)
+[Beveiliging van de TCP verbinding](https://www.youtube.com/watch?v=7pp-TVlZ_0E)
+[DNS security](https://www.youtube.com/watch?v=Ag7wUjSs-TI)
+[Routing Algoritmes](https://www.youtube.com/watch?v=btbxQ-pN-q4)
+[Routing Protocollen](https://www.youtube.com/watch?v=m2TqaT3J-Ck&t=1s)
+[Netwerk Management](https://www.youtube.com/watch?v=2ssbdSntFEM&t=484s)
+[Linklaag ARP](https://www.youtube.com/watch?v=6li8DcrCWZM)
+[De linklaag: ethernet en switching](https://www.youtube.com/watch?v=kEbguBJWYC4)
+[Draadlozen netwerken](https://www.youtube.com/watch?v=NTwhQ4-AlkA)
+[WiFi security](https://www.youtube.com/watch?v=PY5X_vUAWR4)
+[Network security](https://www.youtube.com/watch?v=UsTLladBlhk&t=1s)
+[Authenticatie](https://www.youtube.com/watch?v=rsbIKr5x_CI)
+[TLS](https://www.youtube.com/watch?v=YmYqKL7SNYU)
+
+## Opdrachten
+
+[ ] Droom thuisnetwerk
+[x] Lab preparatie. VMware/Docker/Virtual Machine
+[x] nmap
+[x] python udppinger
+[x] Wireshark BGP
+[x] Wireshark DNSsec
+[ ] Wireshark Ethernet
+[ ] ARP Spoofing
+[ ] Lab SNMP
+[ ] Lab Wifi Security
+[ ] Lab Wireshark 802
+[ ] Lab Snort
+[ ] Lab Hashes
+[ ] Wireshark oefening dag 1 tot 3
+[ ] Eindopdracht dag 4 tot 6
