@@ -32,7 +32,7 @@ Alternatively, malware could use DNS as a c2 mechanism, but if an organization i
 
 Another example of a Forward Proxy is Burp Suite, as most people utilize it to forward HTTP Requests. However, this application is the swiss army knife of HTTP Proxies and can be configured to be a reverse proxy or transparent!
 
-#### Forward Proxy
+### Forward Proxy
 
 ![image](./assets/3-proxies/forward_proxy.webp)
 
@@ -46,7 +46,7 @@ Penetration Testers will configure reverse proxies on infected endpoints. The in
 
 Another common Reverse Proxy is `ModSecurity`, a `Web Application Firewall` (`WAF`). Web Application Firewalls inspect web requests for malicious content and block the request if it is malicious. If you want to learn more about this, we recommend reading into the [ModSecurity Core Rule Set](https://owasp.org/www-project-modsecurity-core-rule-set/), as its a great starting point. Cloudflare, also can act as a WAF but doing so requires letting them decrypt HTTPS Traffic, which some organizations may not want.
 
-#### Reverse Proxy
+### Reverse Proxy
 
 ![image](./assets/3-proxies/reverse_proxy.webp)
 

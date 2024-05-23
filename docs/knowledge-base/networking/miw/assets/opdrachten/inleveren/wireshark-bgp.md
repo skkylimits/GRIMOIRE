@@ -41,9 +41,9 @@ Both of them are in the same AS systems.
 
 ## 3. The capture contains two update messages?. Containing route updates. For each update message, answer the following
 
-    - The update gives information about a route to reach which subnet?
-    - What is the advertised NEXT_HOP router to reach this subnet?
-    - What Autonomous Systems are contained in the AS_PATH attribute?
+- The update gives information about a route to reach which subnet?
+- What is the advertised NEXT_HOP router to reach this subnet?
+- What Autonomous Systems are contained in the AS_PATH attribute?
 
 2: `16 8.544149 192.168.0.15 192.168.0.33 BGP 270 KEEPALIVE Message, UPDATE Message, UPDATE Message`
 

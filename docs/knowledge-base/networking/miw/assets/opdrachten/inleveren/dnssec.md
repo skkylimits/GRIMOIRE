@@ -249,15 +249,15 @@ We can see this server has no DNSSec by:
   - `; EDNS: version: 0, flags:; udp: 512`
 
 - No `DNSSEC Records`: There are `no RRSIG record`s present in the ANSWER section of the second response for the domain <www.nos.nl>. The absence of RRSIG records indicates that DNSSEC is not configured for this domain.
-  - ```
 
-  ;; ANSWER SECTION:
-  <www.nos.nl>.  60 IN CNAME d2smx6wmggkqjx.cloudfront.net.
-  d2smx6wmggkqjx.cloudfront.net. 60 IN A 18.239.18.74
-  d2smx6wmggkqjx.cloudfront.net. 60 IN A 18.239.18.102
-  d2smx6wmggkqjx.cloudfront.net. 60 IN A 18.239.18.12
-  d2smx6wmggkqjx.cloudfront.net. 60 IN A 18.239.18.80
-    ```
+    ```txt
+    ;; ANSWER SECTION:
+    <www.nos.nl>.  60 IN CNAME d2smx6wmggkqjx.cloudfront.net.
+    d2smx6wmggkqjx.cloudfront.net. 60 IN A 18.239.18.74
+    d2smx6wmggkqjx.cloudfront.net. 60 IN A 18.239.18.102
+    d2smx6wmggkqjx.cloudfront.net. 60 IN A 18.239.18.12
+    d2smx6wmggkqjx.cloudfront.net. 60 IN A 18.239.18.80
+      ```
 
 ## Inccorrect DNSSec
 
@@ -290,7 +290,7 @@ We can see this server has misconfigured DNSSec settings by:
 - Missing `ad` Flag: The absence of the ad flag means the DNSSEC validation did not succeed.
   - `;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1`
 - `RRSIG Records`: The presence of RRSIG records means that the domain has DNSSEC records configured.
-  - `dnssec-failed.org. 300 IN RRSIG A 5 2 300 20240604145115 20240518144615 44973 dnssec-failed.org. `
+  - `dnssec-failed.org. 300 IN RRSIG A 5 2 300 20240604145115 20240518144615 44973 dnssec-failed.org.`
 
 ## 6 What’s the IP address for dnssec-failed.org?
 

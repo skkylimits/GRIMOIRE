@@ -482,7 +482,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
               - Altijd beschikbare host.
               - Permanent IP-adres.
               - Gebruik van datacenters voor schaalbaarheid.
-          - **Clients:**
+        - **Clients:**
               - Communiceren met de server.
               - Kunnen intermitterend verbonden zijn.
               - Kunnen dynamische IP-adressen hebben.

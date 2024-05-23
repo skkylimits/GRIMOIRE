@@ -178,7 +178,7 @@ We kunnen meer controle-informatie toevoegen, zoals tweedimensionale pariteitsco
 
 Stel dat je de volgende 4x4 matrix van gegevens hebt:
 
-```
+```bash
 1 0 1 1
 0 1 0 0
 1 1 1 0
@@ -187,7 +187,7 @@ Stel dat je de volgende 4x4 matrix van gegevens hebt:
 
 **Stap 1: Berekenen van rijpariteit en toevoegen aan het einde van elke rij**:
 
-```
+```bash
 1 0 1 1 1
 0 1 0 0 1
 1 1 1 0 1
@@ -196,7 +196,7 @@ Stel dat je de volgende 4x4 matrix van gegevens hebt:
 
 **Stap 2: Berekenen van kolompariteit en toevoegen aan het einde van elke kolom**:
 
-```
+```bash
 1 0 1 1 1
 0 1 0 0 1
 1 1 1 0 1
@@ -207,7 +207,7 @@ Stel dat je de volgende 4x4 matrix van gegevens hebt:
 
 De volledige matrix inclusief rij- en kolompariteitsbits is nu:
 
-```
+```bash
 1 0 1 1 1
 0 1 0 0 1
 1 1 1 0 1
