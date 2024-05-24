@@ -8,6 +8,8 @@ TODO: clean up risk rating methodogology
 TODO: <https://dlo.mijnhva.nl/d2l/le/content/545914/viewContent/1816603/View>
 TODO: <https://dlo.mijnhva.nl/d2l/le/content/545914/viewContent/1816591/View>
 
+TODO: markdownlint.json fix errors
+
 ADD: <https://tweakers.net/reviews/7406/dns-over-https-meningen-verdeeld-over-encryptie-dns-queries.html>
 ADD: <https://tweakers.net/reviews/4155/border-gateway-protocol-de-achilleshiel-van-internet.html>
 ADD: <https://www.acunetix.com/blog/articles/tls-vulnerabilities-attacks-final-part/>

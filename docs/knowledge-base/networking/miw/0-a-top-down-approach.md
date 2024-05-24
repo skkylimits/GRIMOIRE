@@ -217,9 +217,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     :::
   - **1.2.2** Physical Media
     ::: details Antwoord
-    Access networks zijn de fysieke infrastructuren waarmee eindgebruikers toegang krijgen tot een bredere netwerkinfrastructuur, zoals het internet.
-
-    Dit omvat verschillende technologieën zoals DSL, kabelmodems, glasvezel, draadloze netwerken en satellietverbindingen.
+    Fysieke media verwijst naar de feitelijke middelen die worden gebruikt om gegevens fysiek te verzenden, zoals koperen kabels, glasvezelkabels en draadloze signalen.
     :::
 
 - **1.3** The Network Core
@@ -247,7 +245,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
   - **1.3.3** A Network of Networks
     ::: details Antwoord
-    Een "Network of Networks" is het internet, bestaande uit vele verbonden kleinere netwerken zoals ISPs en Thuis/Bedrijfsnetwerken die samenwerken om data wereldwijd te verzenden en ontvangen.
+    Een "Network of Networks" is het internet, bestaande uit vele verbonden kleinere en grotere netwerken zoals ISPs en Thuis/Bedrijfsnetwerken die samenwerken om data wereldwijd te verzenden en ontvangen.
 
     Wat resulteert in een complexe infrastructuur.
     :::
@@ -419,29 +417,23 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
         - Continued growth of the internet, expansion of broadband connections, rise of social media, and mobile technologies.
     :::
 
-  - **1.9** Netwerk Security
-    ::: details Antwoord
+- **1.9 Netwerk Security**
+  ::: details Antwoord
     1. **Aanval en verdediging:**
-    - Begrip van aanvalstechnieken en implementatie van verdedigingsmaatregelen.
-
-    1. **Ontwerp van veilige netwerken:**
-    - Netwerken ontwerpen die bestand zijn tegen aanvallen, gezien het internet oorspronkelijk niet met veiligheid als prioriteit is ontwikkeld.
-
-    1. **Cybersecurity:**
-    - Beveiligen van gegevens en infrastructuur tegen externe en interne bedreigingen, zowel preventief als reactief.
-
-    1. **Bedreigingen:**
-    - Externe bedreigingen van hackers, overheden, of cybercriminelen, en interne bedreigingen van goedbedoelende gebruikers of kwaadwillende werknemers.
-
-    1. **CIA Triad:**
-    - Basisprincipes van informatiebeveiliging: Vertrouwelijkheid, Integriteit en Beschikbaarheid.
-
-    1. **Uitdagingen voor de infrastructuur:**
-    - Sociale technieken zoals social engineering, ransomware-aanvallen, DDoS-aanvallen, kwetsbaarheden in software van derden en cloud computing kwetsbaarheden.
-
-    1. **Malware:**
-    - Verschillende vormen van malware, zoals virussen, wormen, spyware en ransomware, vormen een voortdurende bedreiging voor netwerkbeveiliging.
-    :::
+       - Begrip van aanvalstechnieken en implementatie van verdedigingsmaatregelen.
+    2. **Ontwerp van veilige netwerken:**
+       - Netwerken ontwerpen die bestand zijn tegen aanvallen, gezien het internet oorspronkelijk niet met veiligheid als prioriteit is ontwikkeld.
+    3. **Cybersecurity:**
+       - Beveiligen van gegevens en infrastructuur tegen externe en interne bedreigingen, zowel preventief als reactief.
+    4. **Bedreigingen:**
+       - Externe bedreigingen van hackers, overheden, of cybercriminelen, en interne bedreigingen van goedbedoelende gebruikers of kwaadwillende werknemers.
+    5. **CIA Triad:**
+       - Basisprincipes van informatiebeveiliging: Vertrouwelijkheid, Integriteit en Beschikbaarheid.
+    6. **Uitdagingen voor de infrastructuur:**
+       - Sociale technieken zoals social engineering, ransomware-aanvallen, DDoS-aanvallen, kwetsbaarheden in software van derden en cloud computing kwetsbaarheden.
+    7. **Malware:**
+       - Verschillende vormen van malware, zoals virussen, wormen, spyware en ransomware, vormen een voortdurende bedreiging voor netwerkbeveiliging.
+  :::
 
 ## Chapter 2
 
@@ -449,54 +441,59 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
 - **2.1** Principles of Network Applications
     ::: details Antwoord
-    **Idee naar Toepassing:**
+    1. **Idee naar Toepassing:**
 
-    *Startpunt van Ontwikkeling:*
-  - Het proces begint met het hebben van een idee voor een nieuwe netwerktoepassing, dat kan variëren van dienstbaarheid aan de mensheid tot persoonlijke belangen.
+       - Het proces begint met het hebben van een idee voor een nieuwe netwerktoepassing, dat kan variëren van dienstbaarheid aan de mensheid tot persoonlijke belangen.
 
-    **Ontwikkeling van Toepassingen:**
+    2. **Ontwikkeling van Toepassingen:**
 
-    *Programma's voor Communicatie:*
-  - Netwerktoepassingen worden ontwikkeld door programma's te schrijven die op verschillende eindsystemen draaien en met elkaar communiceren over het netwerk.
+        - Netwerktoepassingen worden ontwikkeld door programma's te schrijven die op verschillende eindsystemen draaien en met elkaar communiceren over het netwerk.
 
-    *Toepassingsvoorbeelden:*
-  - Bijv., in een Web-toepassing communiceren de browser en de Web-server programma's met elkaar, elk op hun respectievelijke hosts.
-  - Evenzo, in een Video on Demand-toepassing zoals Netflix, draaien de client- en serverprogramma's op respectievelijk de gebruikersapparaten en de Netflix-serverhost.
+    3. **Programma's voor Communicatie:**
 
-    **Softwareontwikkeling:**
+        - Voorbeeld: In een Web-toepassing communiceren de browser en de Web-server programma's met elkaar, elk op hun respectievelijke hosts.
 
-    *Software Schrijven:*
-  - Bij het ontwikkelen van een nieuwe toepassing is het belangrijk software te schrijven die op meerdere eindsystemen kan draaien, zoals desktops, laptops, smartphones, etc.
-  - Deze software kan worden geschreven in talen zoals C, Java of Python, gericht op eindsystemen, niet op netwerkkernapparaten.
+        - Voorbeeld: In een Video on Demand-toepassing zoals Netflix, draaien de client- en serverprogramma's op respectievelijk de gebruikersapparaten en de Netflix-serverhost.
 
-    *Beperkingen in Ontwikkeling:*
-  - Het is niet nodig software te schrijven voor netwerkkernapparaten zoals routers of link-layer switches; deze werken op lagere lagen en niet op de toepassingslaag.
-  - Deze aanpak heeft geleid tot snelle ontwikkeling en implementatie van een breed scala aan netwerktoepassingen.
+    4. **Softwareontwikkeling:**
+
+        - Bij het ontwikkelen van een nieuwe toepassing is het belangrijk software te schrijven die op meerdere eindsystemen kan draaien, zoals desktops, laptops, smartphones, etc.
+
+        - Deze software kan worden geschreven in talen zoals C, Java of Python, gericht op eindsystemen, niet op netwerkkernapparaten.
+
+    5. **Beperkingen in Ontwikkeling:**
+
+        - Het is niet nodig software te schrijven voor netwerkkernapparaten zoals routers of link-layer switches; deze werken op lagere lagen en niet op de toepassingslaag.
+
+    6. **Snelle Ontwikkeling:**
+
+        - Deze aanpak heeft geleid tot snelle ontwikkeling en implementatie van een breed scala aan netwerktoepassingen.
     :::
 
   - **2.1.1** Network Application Architectures
     ::: details Antwoord
     1. **Client-Server Architectuur:**
         - Centrale server die verzoeken verwerkt van meerdere clients, zoals bij webtoepassingen.
-            - **Server:**
-              - Altijd beschikbare host.
-              - Permanent IP-adres.
-              - Gebruik van datacenters voor schaalbaarheid.
+
+        - **Server:**
+          - Altijd beschikbare host.
+          - Permanent IP-adres.
+          - Gebruik van datacenters voor schaalbaarheid.
+
         - **Clients:**
-              - Communiceren met de server.
-              - Kunnen intermitterend verbonden zijn.
-              - Kunnen dynamische IP-adressen hebben.
-              - Communiceren niet rechtstreeks met elkaar.
+          - Communiceren met de server.
+          - Kunnen intermitterend verbonden zijn.  
+          - Kunnen dynamische IP-adressen hebben.  
+          - Communiceren niet rechtstreeks met elkaar.
 
     2. **Peer-to-Peer (P2P) Architectuur:**
         - Directe communicatie tussen peers zonder centrale server, zoals bij BitTorrent.
-            - **Geen Always-on Server:**
-                - Geen altijd beschikbare server.
-                - Arbitraire eindsystemen communiceren rechtstreeks.
-                - Peers vragen service aan andere peers en bieden op hun beurt service aan andere peers.
-                - Zelfschaalbaarheid: nieuwe peers brengen nieuwe servicecapaciteit en nieuwe service-eisen met zich mee.
-                - Peers zijn intermitterend verbonden en veranderen van IP-adressen.
-                - Complex beheer.
+        - Server niet altijd beschikaar
+        - Eindsystemen communiceren rechtstreeks.
+        - Peers vragen service aan andere peers en bieden op hun beurt service aan andere peers.
+        - Zelfschaalbaarheid: nieuwe peers brengen nieuwe servicecapaciteit en nieuwe service-eisen met zich mee.
+        - Peers zijn intermitterend verbonden en veranderen van IP-adressen.
+        - Complex beheer.
 
     3. **Hybride Architectuur:**
         - Combineert client-server en peer-to-peer, waarbij taken verdeeld zijn tussen een centrale server en peers, bijvoorbeeld bij online multiplayer games.
@@ -528,6 +525,8 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     SMTP
 
     DNS
+
+    DHCP
     :::
   - **2.1.6** Network Applications Covered in This Book
     ::: details Antwoord
@@ -576,10 +575,6 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     **Standaardgebruik van persistente verbindingen in HTTP/1.1**
 
     HTTP/1.1 maakt standaard gebruik van persistente verbindingen met pipelining, waardoor meerdere verzoeken zonder onderbreking kunnen worden verzonden.
-
-    **Prestaties van niet-persistente en persistente verbindingen**
-
-    De prestaties van niet-persistente en persistente verbindingen worden verder besproken in de huiswerkopdrachten van de hoofdstukken 2 en 3.
     :::
 
   - **2.2.3** HTTP Message Format
@@ -624,19 +619,20 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     Cookies, zoals gedefinieerd in [RFC 6265], stellen websites in staat om gebruikers te volgen en te identificeren. Ze bestaan uit vier componenten: een cookie headerlijn in het HTTP-antwoordbericht, een cookie headerlijn in het HTTP-verzoekbericht, een cookiebestand op het systeem van de gebruiker en een back-end database op de website.
 
-    **Creëren en Versturen van Cookies**
+    1. **Creëren van Cookie bij Eerste Bezoek:**
+    - Wanneer een gebruiker voor het eerst een website bezoekt, zoals Amazon, creëert de server een uniek identificatienummer en slaat dit op in de database.
+    - Dit nummer wordt vervolgens in een cookie ingesteld en naar de browser van de gebruiker gestuurd.
 
-    Wanneer een gebruiker voor het eerst een website bezoekt, zoals Amazon, creëert de server een uniek identificatienummer en slaat dit op in de database. Dit nummer wordt vervolgens in een cookie ingesteld en naar de browser van de gebruiker gestuurd.
-
-    **Gebruik van Cookies bij Gebruikersinteractie**
-
-    Telkens wanneer de gebruiker de website bezoekt, wordt het identificatienummer uit de cookie gehaald en meegestuurd in de HTTP-verzoeken. Hierdoor kan de server de activiteit van de gebruiker bijhouden en gepersonaliseerde diensten aanbieden, zoals een winkelwagentje op Amazon.
+    2. **Gebruik van Cookies bij Subsequent Bezoeken:**
+    - Telkens wanneer de gebruiker de website bezoekt, wordt het identificatienummer uit de cookie gehaald en meegestuurd in de HTTP-verzoeken.
+    - Hierdoor kan de server de activiteit van de gebruiker bijhouden en gepersonaliseerde diensten aanbieden, zoals een winkelwagentje op Amazon.
 
     **Privacyoverwegingen bij Cookies**
 
     Hoewel cookies het browsen vergemakkelijken, zijn ze controversieel vanwege privacykwesties. Door het gebruik van cookies kunnen websites veel informatie over een gebruiker verzamelen en mogelijk verkopen aan derden.
     :::
-  - **2.2.5** Web Caching
+
+- **2.2.5** Web Caching
     ::: details Antwoord
     **Web Cache Overview**
 
@@ -665,7 +661,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     Door veelgevraagde inhoud lokaal op te slaan, kunnen caches het verkeer op internet verminderen en de prestaties voor alle gebruikers verbeteren.
     :::
 
-  - **2.2.6** HTTP/2
+- **2.2.6** HTTP/2
     ::: details Antwoord
     **Introductie van HTTP/2**
 
@@ -766,39 +762,41 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
   - **2.4.1** Services Provided by DNS
     ::: details Antwoord
-    **Identificatie van Hosts**
-
-    Hosts kunnen worden geïdentificeerd aan de hand van hostnamen of IP-adressen. Mensen geven de voorkeur aan de meer mnemonische hostnaam, terwijl routers de gestructureerde IP-adressen verkiezen.
-
-    **DNS: Het Internet's Domeinnaamsysteem**
-
-    Het domeinnaamsysteem (DNS) vertaalt hostnamen naar IP-adressen, waardoor het mogelijk is om mnemonische hostnamen te gebruiken in plaats van IP-adressen. DNS is een gedistribueerde database geïmplementeerd in een hiërarchie van DNS-servers en maakt gebruik van het DNS-protocol via UDP op poort 53.
-
-    **DNS in Actie**
-
-    DNS wordt gebruikt door toepassingslaagprotocollen zoals HTTP en SMTP om gebruikersopgegeven hostnamen naar IP-adressen te vertalen. Een browser, bijvoorbeeld, moet eerst het IP-adres van een host verkrijgen voordat het een HTTP-verzoek kan initiëren.
-
     **DNS-services**
 
-    - Hostname naar IP-adres vertaling
+    - Hostname naar IP-adres vertaling (identificatie van hosts)
     - Host aliasing
     - Mailserver aliasing
     - Load distribution
-
-    **DNS in de Praktijk**
-
-    DNS speelt een cruciale rol in het vertalen van hostnamen naar IP-adressen voor internettoepassingen en andere software. Het maakt gebruik van het client-server-paradigma en vertrouwt op onderliggende end-to-end-transportprotocollen voor het overbrengen van DNS-berichten.
     :::
 
   - **2.4.3** Overview of How DNS Works
     ::: details Antwoord
-    **Overzicht van Hoe DNS Werkt**
-
     DNS zorgt voor de vertaling van hostnamen naar IP-adressen en werkt als volgt:
 
-    1. Een toepassing op een gebruikershost, zoals een webbrowser of een mailclient, moet een hostname naar een IP-adres vertalen. De toepassing roept de clientkant van DNS aan en geeft de te vertalen hostname op.
-    2. DNS in de gebruikershost stuurt vervolgens een querybericht naar het netwerk. Alle DNS-query- en antwoordberichten worden verzonden via UDP-datagrammen naar poort 53.
-    3. Na verloop van tijd ontvangt DNS in de gebruikershost een antwoordbericht met de gewenste vertaling en geeft deze door aan de toepassing. Hierbij is DNS voor de toepassing een "black box" die een eenvoudige vertaaldienst levert.
+    Natuurlijk, hier zijn alle stukjes tekst waarin "Antwoordbericht" vetgedrukt zijn:
+
+    1. **Toepassing op Gebruikershost**: Een toepassing zoals een webbrowser of mailclient moet een hostname naar een IP-adres vertalen. De toepassing roept de clientkant van DNS aan en geeft de te vertalen hostname op.
+
+    2. **DNS Query Bericht**: DNS in de gebruikershost stuurt een querybericht naar het netwerk. Alle DNS-query- en antwoordberichten worden verzonden via UDP-datagrammen naar poort 53.
+
+    3. **Lokale Cache Controle**: De gebruikershost controleert eerst zijn lokale DNS-cache om te zien of de hostname recentelijk is vertaald naar een IP-adres. Als dit het geval is, wordt het gecachte adres gebruikt.
+
+    4. **Recursieve Resolver**: Als het adres niet in de lokale cache staat, stuurt de gebruikershost de query naar de recursieve DNS-resolver van de ISP.
+
+    5. **Root DNS Server**: De recursieve resolver controleert zijn eigen cache. Als het antwoord niet in de cache staat, vraagt hij een van de root DNS-servers om de juiste top-level domein (TLD) server.
+
+    6. **TLD DNS Server**: De root server verwijst de recursieve resolver naar de juiste TLD DNS-server voor het .com-domein.
+
+    7. **Authoritative DNS Server**: De TLD server verwijst de recursieve resolver naar de authoritative DNS-servers die verantwoordelijk zijn voor google.com.
+
+    8. **Eindresolutie**: De authoritative DNS-server geeft het IP-adres voor google.com.
+
+    9. **Terug naar de Client**: De recursieve resolver geeft het IP-adres terug aan de gebruikershost.
+
+    10. **Verbindingsopbouw**: De gebruikershost gebruikt dit IP-adres om een verbinding te maken met google.com.
+
+    11. **Antwoordbericht**: De DNS-service fungeert hierbij als een "black box" voor de toepassing, die de vertaalde IP-adresinformatie ontvangt en gebruikt om de gewenste communicatie tot stand te brengen.
 
     **Problemen met Centralisatie**
 
@@ -811,10 +809,6 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     **Distributie van DNS**
 
     Vanwege de schaal van het internet is DNS gedistribueerd. Het bestaat uit drie klassen van DNS-servers: root DNS-servers, TLD DNS-servers en autoritaire DNS-servers. Deze servers zijn georganiseerd in een hiërarchie en verspreid over de wereld.
-
-    **Interactie tussen DNS-servers**
-
-    Bij het vertalen van een hostname naar een IP-adres, contacteert een DNS-client achtereenvolgens root DNS-servers, TLD DNS-servers en uiteindelijk autoritaire DNS-servers om de gewenste mapping te verkrijgen.
 
     **Lokale DNS-server**
 
@@ -863,8 +857,11 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
 - **2.5** Peer-to-Peer File Distribution
     ::: details Antwoord
+    Peer-to-peer (P2P) bestandsdistributie is een gedecentraliseerde methode om bestanden te delen tussen een groep computers (peers) via een netwerk.
 
+    In plaats van een bestand van een enkele centrale server te downloaden, kan elke peer stukjes van het bestand downloaden en uploaden naar en van andere peers, waardoor het distributieproces efficiënter en veerkrachtiger wordt. Hier is een kort overzicht van hoe het werkt:
     :::
+
 - **2.6** Video Streaming and Content Distribution Networks
   - **2.6.1** Internet Video
     ::: details Antwoord
@@ -872,18 +869,22 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     Platforms zoals YouTube, Netflix en Hulu bieden een breed scala aan inhoud aan gebruikers over de hele wereld.
     :::
+
   - **2.6.2** HTTP Streaming and DASH
     ::: details Antwoord
     HTTP-streaming, zoals DASH, past automatisch de videokwaliteit aan op basis van netwerkcondities en gebruikt manifestbestanden om beschikbare video's en kwaliteitsniveaus te beschrijven, wat de kijkervaring verbetert door adaptieve streaming en efficiënt bandbreedtebeheer.
     :::
+
   - **2.6.3** Content Distribution Networks
   - ::: details Antwoord
     Content Distribution Networks (CDN's) distribueren inhoud over meerdere servers wereldwijd om de toegangssnelheid voor gebruikers te verbeteren door de afstand tot de inhoud te verkleinen.
     :::
+
   - **2.6.4** Case Studies: Netflix and YouTube
     ::: details Antwoord
     Netflix en YouTube maken beide gebruik van content delivery networks (CDN's) om video's efficiënt te leveren aan gebruikers over de hele wereld, waardoor ze een naadloze streamingervaring kunnen bieden met minimale buffering en hoge kwaliteit.
     :::
+
 - **2.7** Socket Programming: Creating Network Applications
     ::: details Antwoord
     Het ontwikkelen van netwerktoepassingen omvat het schrijven van code voor zowel client- als serverprogramma's, die communiceren via sockets.
@@ -892,6 +893,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     Ontwikkelaars moeten beslissen of hun toepassing over TCP of UDP draait en moeten zich bewust zijn van het gebruik van poortnummers, vooral bij het ontwikkelen van niet-openbare toepassingen.
     :::
+
   - **2.7.1** Socket Programming with UDP
     ::: details Antwoord
     **UDP-client/server-interactie**
@@ -902,14 +904,17 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     Voordat het verzendende proces een gegevenspakket via UDP naar buiten kan duwen, moet het eerst een bestemmingsadres aan het pakket koppelen, bestaande uit het IP-adres van de bestemmingshost en het poortnummer van de bestemmingssocket.
 
-    **Client-serverapplicatie**
-
-    Een eenvoudige client-serverapplicatie wordt gebruikt om de socket-programmering voor zowel UDP als TCP te demonstreren, waarbij de client een regel tekens vanaf het toetsenbord leest, deze naar de server stuurt, de server de tekens naar hoofdletters omzet en deze vervolgens terugstuurt naar de client, die ze op het scherm weergeeft.
     :::
+
   - **2.7.2** Socket Programming with TCP
     ::: details Antwoord
+    Socket-programmering met TCP omvat het opzetten van een betrouwbare verbinding tussen een client en een server voor gegevensoverdracht.
 
+    De server luistert naar inkomende verbindingen op een specifieke poort, terwijl de client verbinding maakt met de server en gegevens uitwisselt.
+
+    Dit zorgt voor een betrouwbare, geordende en foutvrije communicatie tussen beide partijen.
     :::
+
 - **2.8** Summary
     ::: details Antwoord
 
@@ -921,71 +926,336 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
 - **3.1** Introduction and Transport-Layer Services
     ::: details Antwoord
+    **Logische Communicatie tussen Hosts:**
 
+    De transportlaag zorgt voor logische communicatie tussen applicatieprocessen die draaien op verschillende hosts. Het lijkt alsof de hosts rechtstreeks met elkaar verbonden zijn, zelfs als ze zich aan tegenovergestelde kanten van de wereld bevinden, dankzij transportlaagprotocollen.
+
+    **Transportprotocollen draaien in eindsystemen:**
+
+    1. - **Sending Side:** Deelt applicatieberichten op in segmenten en geeft ze door aan de network layer.
+
+    2.- **Receiving Side:** Herschikt segmenten tot berichten en geeft ze door aan de application layer.
+
+    **Implementatie van Transportlaagprotocollen:**
+
+    Transportlaagprotocollen worden geïmplementeerd in eindsystemen maar niet in netwerkrouters. Op de verzendende kant zet de transportlaag applicatiemessages om in transportlaagsegmenten, bekend als transportlaagpakketten.
+
+    **Beschikbaarheid van Meerdere Transportlaagprotocollen:**
+
+    Meer dan één transportlaagprotocol kan beschikbaar zijn voor netwerktoepassingen. Bijvoorbeeld, het internet heeft twee protocollen - TCP en UDP. Elk van deze protocollen biedt een andere set transportlaagdiensten aan de aanroepende toepassing.
     :::
+
   - **3.1.1** Relationship Between Transport and Network Layers
     ::: details Antwoord
-
+    - **Relatie tussen Transport- en Netwerklaag:**
+      - De transportlaag ligt net boven de netwerklaag in het protocolstack.
+        **Netwerklaag:**
+        - Logische communicatie tussen hosts.
+        **Transportlaag:**
+        - Logische communicatie tussen processen.
+      - Maakt gebruik van en verbetert de diensten van de netwerklaag.
+        - **Voorbeeld van Huiselijke Analogie:**
+          - You send a letter to your teacher, addressed to Theo Thijssenhuis, Amsterdam
+          - There are many teachers in this building!
+          - So each teacher has their own pigeon hole
+          - host = building
+          - processes = teachers
+          - mailbox = socket with port number
+          - network-layer protocol = postal service
+          - transport protocol = faculty staff that sorts the letters
+        - **Beperkingen van Transportprotocollen:**
+          - Transportprotocollen, de faculty staff, zijn alleen verantwoordelijk voor het verzenden en ontvangen van berichten binnen de eindsystemen.
+        - **Mogelijkheden van Verschillende Diensten:**
+          - Verschillende transportprotocollen kunnen verschillende diensten aan applicaties bieden.
+        - **Overeenkomsten en Verschillen in Dienstverlening:**
+          - Sommige diensten kunnen worden aangeboden door een transportprotocol, zelfs als het onderliggende netwerkprotocol deze diensten niet biedt.
     :::
+
   - **3.1.2** Overview of the Transport Layer in the Internet
     ::: details Antwoord
-
+    - **UDP (User Datagram Protocol):**
+      - Biedt een onbetrouwbare, maar snelle gegevensoverdracht.
+      - Delay guarantees
+      - Bandwidth guarentees
+    - **TCP (Transmission Control Protocol):**
+      - Biedt betrouwbare gegevensoverdracht. Reliable.
+      - Congestion control
+      - Flow control
+      - Connection Setup
+    - **Multiplexing en Demultiplexing:**
+      - UDP en TCP faciliteren multiplexing en demultiplexing om host-naar-host levering uit te breiden naar proces-naar-proces levering.
     :::
+
 - **3.2** Multiplexing and Demultiplexing
     ::: details Antwoord
+    ***Multiplexing:*** Dit is het proces waarbij meerdere gegevensstromen worden gecombineerd tot één enkele gegevensstroom voor verzending over een gedeeld medium, zoals een netwerkverbinding.
 
+    **Voorbeeld:** Time-division multiplexing (TDM) in telecommunicatienetwerken is een voorbeeld, waarbij verschillende telefoongesprekken worden gecombineerd tot één signaal dat over een enkele fysieke verbinding wordt verzonden.
+
+    ***Demultiplexing:*** Dit is het omgekeerde proces, waarbij de enkele gegevensstroom wordt opgesplitst in afzonderlijke gegevensstromen en naar de juiste ontvangers wordt gestuurd.
+
+    **Voorbeeld:** Een router ontvangt gecombineerde datapakketten via multiplexing en splitst deze op basis van hun bestemming (bijvoorbeeld verschillende IP-adressen) om ze door te sturen naar de juiste eindapparaten.
     :::
+
 - **3.3** Connectionless Transport: UDP
     ::: details Antwoord
+    **UDP: User Datagram Protocol [RFC 768]**
 
+    1. Een "no frills," "bare bones" internet transportprotocol.
+    2. Biedt een "best effort" service, waarbij UDP-segmenten verloren kunnen gaan of in willekeurige volgorde bij de toepassing kunnen aankomen.
+    3. Connectionless: geen handshaking tussen UDP-zender en -ontvanger.
+    4. Elk UDP-segment wordt onafhankelijk van de anderen behandeld.
+    5. UDP wordt gebruikt voor streaming multimedia-apps (tolerantie voor verlies, gevoelig voor snelheid), DNS en SNMP.
+
+    **UDP's Simplicity**
+
+    UDP operates with minimal overhead, adding only source and destination port numbers to segments before passing them to the network layer.
+
+    <img src="./assets/afbeeldingen/udp-segement.png">
+
+    **UDP Checksum:**
+
+    De UDP-checksum biedt error detection door te controleren of de bits binnen het UDP-segment zijn gewijzigd tijdens de overdracht van bron naar bestemming, bijvoorbeeld door ruis in de verbindingen of tijdens opslag in een router.
+
+    **Reden voor UDP Checksum:**
+
+    Hoewel veel link-laagprotocollen (inclusief het populaire Ethernet-protocol) error detection bieden, garandeert UDP toch een checksum op transportniveau vanwege de mogelijkheid dat niet alle links tussen bron en bestemming foutcontrole bieden en de kans op fouten bij het opslaan van segmenten in het geheugen van een router.
+
+    **Voorbeeld van Checksum Berekening:**
+
+    Stel dat we de volgende drie 16-bits woorden hebben:
+
+  - 0110011001100000
+  - 0101010101010101
+  - 1000111100001100
+
+    De som van de eerste twee 16-bits woorden is:
+
+  - 0110011001100000
+  - 0101010101010101
+  - 1011101110110101
+
+    Toevoeging van het derde woord aan de bovenstaande som geeft:
+
+  - 1011101110110101
+  - 1000111100001100
+  - 0100101011000010
+
+    Merk op dat deze laatste toevoeging een overloop had, die werd omgedraaid. De checksum wordt verkregen door alle 0-bits naar 1 te converteren en alle 1-bits naar 0 te converteren. Daarom is de checksum van de som 0100101011000010 gelijk aan 1011010100111101.
     :::
+
 - **3.4** Principles of Reliable Data Transfer
     ::: details Antwoord
+    De principes van betrouwbare gegevensoverdracht omvatten:
 
-    :::
+    1. **Acknowledgment**: De ontvanger stuurt bevestigingen (ACK's) naar de verzender om de ontvangst van gegevenspakketten te bevestigen. Als de verzender binnen een bepaald tijdsbestek geen ACK ontvangt, wordt het gegevenspakket opnieuw verzonden.
+
+    2. **Sequence Numbers**: Gegevenspakketten worden sequentieel genummerd om ervoor te zorgen dat ze in de juiste volgorde aan de ontvanger worden afgeleverd. De ontvanger gebruikt deze volgnummers om pakketten opnieuw te ordenen die buiten de volgorde zijn ontvangen.
+
+    3. **Checksums**: Foutdetectiecodes, zoals controlesommen, worden gebruikt om fouten in gegevenspakketten op te sporen. Als een fout wordt gedetecteerd, wordt het pakket verworpen en wordt een verzoek tot opnieuw verzenden verzonden.
+
+    4. **Flow Control**: Mechanismen worden gebruikt om te voorkomen dat de verzender de ontvanger overspoelt met gegevens. Stroombeheer zorgt ervoor dat gegevens worden verzonden met een snelheid die de ontvanger aankan.
+
+    5. **Timeouts and Retransmissions**: Als een verzender binnen een bepaalde periode geen bevestiging ontvangt, gaat deze ervan uit dat het pakket verloren is gegaan en wordt het opnieuw verzonden. Dit zorgt ervoor dat verloren pakketten uiteindelijk worden afgeleverd.
+
+    Deze principes werken samen om ervoor te zorgen dat gegevens betrouwbaar worden overgedragen van de verzender naar de ontvanger, zelfs in het geval van fouten en netwerkcongestie.
+        :::
+
 - **3.5** Connection-Oriented Transport: TCP
     ::: details Antwoord
+    **TCP Overview**
 
+    TCP, het betrouwbare transportprotocol van het internet, is een verbinding-georiënteerd protocol dat betrouwbaar datatransport biedt.
+
+    **De TCP-verbinding**
+
+    Een TCP-verbinding wordt "verbinding-georiënteerd" genoemd omdat de twee communicerende processen eerst "handshakes" moeten uitwisselen om parameters vast te stellen voordat de gegevensoverdracht begint.
+
+    **Het opzetten van een TCP-verbinding**
+
+    Om een TCP-verbinding tot stand te brengen, initieert een clientproces een verbinding met een serverproces door een speciale reeks TCP-segmenten uit te wisselen, bekend als een "three-way handshake".
+
+    **De Full-Duplex en Punt-naar-Punt Aard van TCP**
+
+    Een TCP-verbinding biedt een full-duplex service, wat betekent dat gegevens gelijktijdig in beide richtingen kunnen stromen.
+
+    **VINTON CERF, ROBERT KAHN, EN TCP/IP**
+
+    Vinton Cerf en Robert Kahn waren de pioniers achter het TCP/IP-protocol, dat werd ontwikkeld om verschillende netwerken met elkaar te verbinden.
+
+    **Gegevensoverdracht in een TCP-verbinding**
+
+    Nadat een TCP-verbinding is vastgesteld, kunnen de toepassingsprocessen gegevens naar elkaar verzenden. TCP vormt gegevensstromen om tot segmenten en plaatst deze in de respectieve verzend- en ontvangsbuffers van de verbinding.
     :::
+
   - **3.5.1** The TCP Connection
     ::: details Antwoord
+    **RFC**
 
+    RFCs: 793, 1122, 1323, 2018, 2581
+
+    - **Pipelined**:
+      - TCP congestion and flow control set window size
+
+    - **Full Duplex Data**:
+      - Bi-directional data flow in the same connection
+
+    - **Point-to-Point**:
+      - One sender, one receiver
+
+    - **Connection-Oriented**:
+      - Handshaking (exchange of control msgs) inits sender, receiver state before data exchange
+
+    - **Reliable, In-Order Byte Stream**:
+      - No “message boundaries”
+
+    - **Flow Control**:
+      - Sender will not overwhelm receiver
+
+    - **Congestion Control**:
     :::
+
   - **3.5.2** TCP Segment Structure
     ::: details Antwoord
-
+    <img src="./assets/afbeeldingen/tcp-segment.png">
     :::
+
   - **3.5.3** Round-Trip Time Estimation and Timeout
     ::: details Antwoord
+    **Round-Trip Time (RTT) Estimation**
 
+    Ronde-Trip Tijd (RTT) is de tijd die een pakketje nodig heeft om vanaf de verzender naar de ontvanger te reizen en vervolgens weer terug naar de verzender.
+
+    **Time-out Mechanisme**
+
+    Time-out is een mechanisme dat wordt gebruikt in netwerkcommunicatie om te bepalen hoe lang een zender moet wachten voordat het een hertransmissie van een pakketje initieert.
+
+    **Time-out Waarde Bepaling**
+
+    De time-out waarde wordt vaak dynamisch bepaald op basis van de gemeten RTT-waarden. Deze waarde wordt gewoonlijk ingesteld op een veelvoud van de gemiddelde RTT, om ervoor te zorgen dat het niet te snel is om valse time-outs te voorkomen, maar ook niet te langzaam om een efficiënte reactie op vertragingen te waarborgen.
     :::
+
   - **3.5.4** Reliable Data Transfer
     ::: details Antwoord
+    **Hoe TCP Betrouwbare Gegevensoverdracht Bereikt**
 
+    **Bevestigingsmechanisme:** TCP maakt gebruik van een bevestigingsmechanisme waarbij voor elk datapakket dat wordt verzonden, wordt verwacht dat er een bevestiging van de ontvanger wordt ontvangen.
+
+    **Hertransmissie:** Als er binnen een bepaalde tijdsperiode geen bevestiging wordt ontvangen, hertransmiteert TCP het datapakket.
+
+    Echter, dit bevestigingsproces kan vertragingen introduceren omdat TCP wacht tot elk pakket is bevestigd voordat het het volgende verzendt.
     :::
-  - **3.5.5** Flow Control
+
+- **3.5.5** Flow Control
     ::: details Antwoord
+    **Flow Control**
 
+    **Doel van Flow Control:** Flow control wordt gebruikt om te voorkomen dat een snelle zender een langzamere ontvanger overspoelt met gegevens.
+
+    **Mechanismen voor Flow Control:** TCP maakt gebruik van verschillende mechanismen, zoals venstergrootteaanpassingen en advertentievensters, om de gegevensoverdrachtssnelheid te regelen en de bufferoverloop bij de ontvanger te voorkomen.
     :::
-  - **3.5.6** TCP Connection Management
+
+- **3.5.6** TCP Connection Management
     ::: details Antwoord
+    **TCP-verbindingbeheer**
 
+    **Handshaking**: Voordat gegevens worden uitgewisseld, moeten de communicerende processen eerst een handshake uitvoeren om de parameters van de verbinding vast te stellen.
+
+    **Locical Connection**: Een TCP-verbinding is een logische verbinding tussen de TCP's van de twee communicerende eindsystemen, met gedeelde status alleen in deze systemen.
+
+    **Full-duplex en point-to-point**: TCP biedt een volledig-duplex service, waarbij gegevens gelijktijdig in beide richtingen kunnen stromen tussen een enkele zender en ontvanger.
+
+    **Three-way handshake**: De verbinding wordt tot stand gebracht door een drie-weg handshake, waarbij drie speciale TCP-segmenten worden uitgewisseld tussen de client en server.
+
+    <img src="./assets/afbeeldingen/tcp-3-way-handshake.png">
+
+    **Confirmation of the connection**: Eenmaal tot stand gebracht, kunnen de applicatieprocessen gegevens uitwisselen via de TCP-verbinding.
     :::
+
 - **3.6** Principles of Congestion Control
     ::: details Antwoord
+    Principes van Congestiecontrole
 
+    Congestiecontrole is een fundamenteel concept in netwerkprotocollen, met name in TCP, om ervoor te zorgen dat het netwerk niet overbelast raakt en om een ​​efficiënt gebruik van de beschikbare bandbreedte te garanderen. Hier zijn de belangrijkste principes van congestiecontrole:
+
+    1. **Avoidance of Overload**: Het doel van congestiecontrole is om te voorkomen dat het netwerk overbelast raakt door ervoor te zorgen dat de totale hoeveelheid verzonden gegevens het capaciteitslimiet van het netwerk niet overschrijdt.
+
+    2. **Responsiveness**: Congestiecontrolemechanismen moeten snel reageren op veranderingen in netwerkcondities, zoals congestie, om de prestaties van het netwerk te handhaven en de gebruikerservaring te verbeteren.
+
+    3. **Fairness**: Congestiecontrole moet eerlijk zijn voor alle gebruikers en verkeersstromen op het netwerk, zodat geen enkele gebruiker onevenredig veel bandbreedte kan gebruiken ten koste van anderen.
+
+    4. **Transparency**: Congestiecontrolemechanismen moeten transparant zijn voor eindgebruikers en applicaties, zodat ze geen ingrijpende impact hebben op de gebruikerservaring of de werking van de toepassingen.
+
+    5. **Efficiency**: Congestiecontrole moet efficiënt gebruik maken van de beschikbare netwerkresources, zoals bandbreedte en buffergeheugen, om maximale doorvoer en minimale vertraging te bereiken.
+
+    Door deze principes toe te passen, kan congestiecontrole effectief worden geïmplementeerd om de algehele prestaties en stabiliteit van computernetwerken te verbeteren.
     :::
+
 - **3.7** TCP Congestion Control
     ::: details Antwoord
+    **TCP Congestiebeheersing**
 
+    TCP's congestiebeheersingsmechanismen beheren netwerkcongestie en waarborgen efficiënte gegevensoverdracht.
+
+    **Slow Start**
+
+    Slow start verhoogt de congestievenstergrootte exponentieel tot congestie wordt gedetecteerd.
+
+    **Congestion Avoidance**
+
+    Congestion avoidance vergroot de congestievenstergrootte lineair om congestie te voorkomen.
+
+    **Fast Retransmit**
+
+    Fast retransmit detecteert snel verloren pakketten door dubbele bevestigingen te gebruiken.
+
+    **Fast Recovery**
+
+    Fast recovery beheert pakketverlies door de congestievenstergrootte te verminderen en verloren pakketten snel opnieuw te verzenden.
+
+    Deze mechanismen zorgen ervoor dat TCP zich aanpast aan netwerkcondities en efficiëntie behoudt.
     :::
+
 - **3.8** Evolution of Transport-Layer Functionality
     ::: details Antwoord
+    **Evolutie van Transportlaagfunctionaliteit**
 
+    **Inleiding tot de Evolutie van Transportlaagprotocollen**
+
+    De transportlaag is aanzienlijk geëvolueerd om te voldoen aan de groeiende eisen van netwerkcommunicatie. Oorspronkelijk ontworpen voor eenvoudige gegevensoverdracht, omvat het nu geavanceerde functionaliteiten om de betrouwbaarheid, efficiëntie en beveiliging te verbeteren.
+
+    **Vroege Transportprotocollen**
+
+    In de beginjaren waren transportprotocollen rudimentair en gericht op de basisgegevensoverdracht tussen hosts. Het hoofddoel was om een betrouwbare verbinding tot stand te brengen en de gegevensintegriteit te waarborgen.
+
+    **Invoering van TCP**
+
+    Met de ontwikkeling van het Transmission Control Protocol (TCP) kreeg de transportlaag robuuste functies zoals foutdetectie, hertransmissie en stroomregeling. De introductie van TCP markeerde een belangrijke mijlpaal, waardoor betrouwbare en geordende gegevensoverdracht via het internet mogelijk werd.
+
+    **Mechanismen voor Congestiebeheersing**
+
+    Naarmate het netwerkverkeer toenam, werd congestiebeheersing essentieel. TCP integreerde algoritmen zoals slow start, congestion avoidance, fast retransmit en fast recovery om netwerkcongestie te beheren en de efficiëntie van de gegevensstroom te behouden.
+
+    **Verbeterde Beveiligingsfuncties**
+
+    Met de opkomst van cyberdreigingen werd beveiliging een prioriteit. Transport Layer Security (TLS) werd geïntroduceerd om encryptie en veilige gegevensoverdracht te bieden, waardoor informatie beschermd wordt tegen ongeautoriseerde toegang en manipulatie.
+
+    **Aanpassing aan Hogesnelheidsnetwerken**
+
+    Moderne transportprotocollen zijn ontworpen om hogesnelheidsnetwerken en grote hoeveelheden gegevens aan te kunnen. Verbeteringen zoals TCP-extensies en nieuwe protocollen zoals QUIC pakken de beperkingen van traditioneel TCP aan en bieden betere prestaties en lagere latentie.
+
+    **Integratie met Moderne Technologieën**
+
+    De transportlaag integreert nu met verschillende technologieën, waaronder cloud computing, mobiele netwerken en het Internet of Things (IoT). Deze integratie zorgt voor naadloze communicatie en gegevensoverdracht over diverse platforms en apparaten.
+
+    **Conclusie**
+
+    De evolutie van transportlaagfunctionaliteit weerspiegelt de dynamische aard van netwerkcommunicatie. Van basisgegevensoverdracht tot geavanceerde protocollen die zorgen voor betrouwbaarheid, efficiëntie en beveiliging, blijft de transportlaag zich aanpassen aan de voortdurend veranderende eisen van de digitale wereld.
     :::
-- **3.9** Summary
-    ::: details Antwoord
 
+- **3.9** 26 TCP loss scenario
+    ::: details Antwoord
+    Als de correcte ontvangst niet op tijd wordt bevestigd, worden de gegevens opnieuw verzonden.
     :::
 
 ## Chapter 4
