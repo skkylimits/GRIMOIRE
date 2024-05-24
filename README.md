@@ -88,3 +88,10 @@ Vervolgvak op Netwerk Architektuur + Beveiliging
 [ ] Lab Hashes
 [ ] Wireshark oefening dag 1 tot 3
 [ ] Eindopdracht dag 4 tot 6
+
+to brush up:
+
+NAT
+subnetting
+parity checkings
+network security cryptography
