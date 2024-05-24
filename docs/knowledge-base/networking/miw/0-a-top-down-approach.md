@@ -482,8 +482,8 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
         - **Clients:**
           - Communiceren met de server.
-          - Kunnen intermitterend verbonden zijn.  
-          - Kunnen dynamische IP-adressen hebben.  
+          - Kunnen intermitterend verbonden zijn.
+          - Kunnen dynamische IP-adressen hebben.
           - Communiceren niet rechtstreeks met elkaar.
 
     2. **Peer-to-Peer (P2P) Architectuur:**
@@ -1176,7 +1176,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     ::: details Antwoord
     Principes van Congestiecontrole
 
-    Congestiecontrole is een fundamenteel concept in netwerkprotocollen, met name in TCP, om ervoor te zorgen dat het netwerk niet overbelast raakt en om een ​​efficiënt gebruik van de beschikbare bandbreedte te garanderen. Hier zijn de belangrijkste principes van congestiecontrole:
+    Congestiecontrole is een fundamenteel concept in netwerkprotocollen, met name in TCP, om ervoor te zorgen dat het netwerk niet overbelast raakt enen om e​en efficiënt gebruik van de beschikbare bandbreedte te garanderen. Hier zijn de belangrijkste principes van congestiecontrole:
 
     1. **Avoidance of Overload**: Het doel van congestiecontrole is om te voorkomen dat het netwerk overbelast raakt door ervoor te zorgen dat de totale hoeveelheid verzonden gegevens het capaciteitslimiet van het netwerk niet overschrijdt.
 
@@ -1263,49 +1263,536 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 ### The Network Layer: Data Plane
 
 - **4.1** Overview of Network Layer
-  - **4.1.1** Forwarding and Routing: The Data and Control Planes
+  ::: details Antwoord
+  **Network layer**
+
+  - **Segmentvervoer:** Transporteert een segment van de zender naar de ontvanger.
+  - **Segmentstopping:** Stopt segmenten in IP-datagrams bij de zender.
+  - **Routerinspectie:** Router bekijkt header velden in alle IP-datagrams die passeren.
+  - **Segmentlevering:** Levert segmenten af aan de transportlaag van de ontvanger.
+  - **Network Functies:** Verzorgt verschillende functies zoals routing en forwarding.
+  - **Routing:** Bepaalt de beste weg voor datatransport in een netwerk.
+  - **Forwarding:** Verplaatst dataverkeer van de ene interface naar de andere binnen een router.
+  - **Binnen de Router:** Alle netwerklaagoperaties vinden plaats binnen de router.
+  - **Software-defined Networking (SDN):** Scheidt de controle- en datavlakken van netwerkapparaten.
+  - **Netwerklaagprotocollen:** Inclusief IPv4, IPv6, ICMP en Network Address Translation (NAT).
+
+  <img src="./assets/afbeeldingen/network-layer.png">
+
+  **Data- en Controlevlak**
+  De netwerklaag bestaat uit twee delen: het gegevensvlak en het controlevlak.
+  Het onderscheid tussen gegevensvlak- en controlevlakfuncties is cruciaal om te begrijpen. Dit moderne perspectief helpt bij het structureren van je begrip van de netwerklaag.
+  :::
+
+  - **4.1.1** Forwarding and Routing: The Data anpmnd Control Planes
+    ::: details Antwoord
+    **Routing en Forwarding**
+
+    - **Routing:**
+      - Bepaal het "beste" pad naar het eindpunt.
+    - **Forwarding:**
+      - Stuur een inkomend packet naar de juiste link, op basis van dat 'beste' pad.
+
+    **Twee belangrijke network-layer functies**
+
+    - **Forwarding:**
+      - Verplaats packets van een input-poort naar de juiste output-poort.
+    - **Routing:**
+      - Bepaal de route die pakketjes nemen van begin tot eindpunt, dmv routing algorithms.
+
+    **Analogy:**
+
+    - Routing: Proces van een hele trip plannen.
+    - Forwarding: Het doorkruisen van een enkel kruispunt.
+
+    <img src="./assets/afbeeldingen/datagram-routing-en-forwarding.png">
+    :::
+
   - **4.1.2** Network Service Model
+    ::: details Antwoord
+    - **Guaranteed delivery:** Deze service garandeert dat een pakket verzonden door een bronhost uiteindelijk bij de bestemmingshost zal aankomen.
+    - **Guaranteed delivery with bounded delay.:** Deze service garandeert niet alleen de levering van het pakket, maar ook de levering binnen een gespecificeerde host-naar-host vertraging (bijvoorbeeld binnen 100 ms).
+    - **In-order packet delivery:** Deze service garandeert dat pakketten op de bestemming aankomen in de volgorde waarin ze zijn verzonden.
+    - **Guaranteed minimal bandwidth:** Deze netwerklaagservice bootst het gedrag na van een transmissielink met een gespecificeerde bitsnelheid (bijvoorbeeld 1 Mbps) tussen verzendende en ontvangende hosts.
+
+    **Best-effort Dienst van het Internet**
+
+    Het netwerk van het internet biedt een enkele dienst, bekend als best-effort service. Met best-effort service worden pakketten noch gegarandeerd ontvangen in de volgorde waarin ze zijn verzonden, noch wordt hun uiteindelijke levering gegarandeerd.
+
+    **Alternatieven en Uitbreidingen**
+
+    Hoewel het internetbest-effort service model de standaard is, hebben andere netwerkarchitecturen gedefinieerde en geïmplementeerde servicemodellen die verder gaan dan deze. Bijvoorbeeld, het ATM-netwerkarchitectuur biedt gegarandeerde in-order vertraging, begrensde vertraging en gegarandeerde minimale bandbreedte.
+        :::
+
 - **4.2** What’s Inside a Router?
-  - **4.2.1** Input Port Processing and Destination-Based Forwarding
+    ::: details Antwoord
+    **Componenten van Een Router**
+
+    Een router bestaat uit vier componenten:
+
+  - **Input ports:** Een invoerpoort voert verschillende belangrijke functies uit, waaronder het fysieke laag- en koppelingslaagfuncties en het uitvoeren van een zoekfunctie om te bepalen naar welke uitvoerpoort een binnenkomend pakket zal worden doorgestuurd via het schakelmechanisme.
+  - **Switching fabric:** Het schakelmechanisme verbindt de invoer- en uitvoerpoorten van de router.
+  - **Output port:** Een uitvoerpoort slaat pakketten op die zijn ontvangen van het schakelmechanisme en verzendt deze pakketten via de juiste uitgaande link door de nodige koppelingslaag- en fysieke laagfuncties uit te voeren.
+  - **Routing processo:** De routerprocessor voert besturingsvlakfuncties uit, zoals het uitvoeren van de routeringsprotocollen, het bijhouden van routeringstabellen en het berekenen van de doorstuurtafel voor de router.
+
+    <img src="./assets/afbeeldingen/componenten-van-een-router.png">
+
+    **Werking van Een Router**
+
+    Een router's invoerpoorten, uitvoerpoorten en schakelmechanisme worden vrijwel altijd geïmplementeerd in hardware. De verwerking van datagegevens vindt plaats op nanoseconde-schaal, terwijl de besturingsfuncties van de router op milliseconde- of secondenschaal werken en meestal in software worden geïmplementeerd op de routerprocessor.
+
+    **Analogie van Routerfuncties**
+
+    Het is nuttig om de routerfuncties te vergelijken met auto's die een rotonde binnenrijden en verlaten. Dit kan helpen om mogelijke knelpunten te identificeren en vragen te stellen die vergelijkbaar zijn met uitdagingen waar router- en switchontwerpers voor staan.
+    :::
+
+  - **4.2.1** Input/Output Port Processing and Destination-Based Forwarding
+    ::: details Antwoord
+    **Input Port Processing:** Dit verwijst naar de verwerking van taken die plaatsvindt wanneer een pakket de invoerpoort van een router binnenkomt, zoals fysieke en linklaagverwerking, raadplegen van de doorstuurtabel en bijwerken van netwerkbeheerstatistieken.
+
+    **Destination-Based Forwarding:** Dit is het proces waarbij een router een pakket naar de juiste uitvoerpoort stuurt op basis van de bestemmingsadressen in het pakket, zoals vastgelegd in de doorstuurtabel.
+
+    <img src="./assets/afbeeldingen/input-port-functions.png">
+    :::
+
   - **4.2.2** Switching
+    ::: details Antwoord
+    Switching: Het proces waarbij pakketten worden doorgestuurd van een invoerpoort naar een uitvoerpoort via de schakelfabricus, uitgevoerd op verschillende manieren, waaronder schakelen via geheugen, een bus of een crossbar.
+
+    <img src="./assets/afbeeldingen/switching.png">
+    :::
+
+  - **4.2.3** Output Port Processing
+    ::: details Antwoord
+    **Uitvoerpoorten:** Het verzenden van opgeslagen datagrammen via de uitgaande link, inclusief protocolverwerking en wachtrijbeheer voor het reguleren van de verzendingssnelheid.
+
+    **Output Functions**
+    <img src="./assets/afbeeldingen/output-port-functions.png">
+    :::
+
+  - **4.2.4** Where Does Queuing Occur?
+    ::: details Antwoord
+    **queuing**: als datagrams sneller arriveren dan ze verwerkt kunnen worden.
+    :::
+
 - **4.3** The Internet Protocol (IP): IPv4, Addressing, IPv6, and More
+  ::: details Antwoord
+  **IPv4 vs IPv6**
+
+  - **32 bits voor IP-adressen**: Er zijn 2^32, oftewel 4.294.967.296 mogelijke IP-adressen.
+  - **Tekort aan IPv4-adressen**: Het internet heeft steeds minder IPv4-adressen te vergeven.
+  - **Introductie van IPv6**: Een nieuwe versie, IPv6, wordt ontwikkeld sinds de jaren '90.
+  - **Migratie naar IPv6**: Migratie naar IPv6 is een werk in uitvoering.
+
+    <img src="./assets/afbeeldingen/ipv4-vs-ipv6.png">
+  :::
+
   - **4.3.1** IPv4 Datagram Format
+    ::: details Antwoord
+    <img src="./assets/afbeeldingen/ipv4-datagram.png">
+    :::
+
   - **4.3.2** IPv4 Addressing
+    ::: details Antwoord
+    **IPv4 Addressing**
+
+    **32-bit Address Space**
+
+    - **Aantal Adressen**: IPv4-adressen bestaan uit 32 bits, wat resulteert in 2^32, oftewel 4.294.967.296 mogelijke adressen.
+    - **Uitputting van Adressen**: Ondanks het grote aantal, raken de beschikbare IPv4-adressen snel op.
+    :::
+
   - **4.3.3** Network Address Translation (NAT)
+    ::: details Antwoord
+
+    :::
+
   - **4.3.4** IPv6
+    ::: details Antwoord
+    **IPv6**
+    - **128 bits voor IP-adressen**: Genoeg adressen voor elk zandkorreltje op aarde.
+    - **Geoptimaliseerde header en performance**: Verbeterde efficiëntie en snelheid.
+    - **Ondersteuning voor Quality of Service**: Bijvoorbeeld, een videostream kan prioriteit krijgen.
+    <img src="./assets/afbeeldingen/ipv6-datagram.png">
+    :::
+
 - **4.4** Generalized Forwarding and SDN
+  ::: details Antwoord
+  **Generalized Forwarding and SDN**
+  - Het routeren van pakketten gebaseerd op meerdere factoren dan alleen het bestemmingsadres, zoals de bron, het type of andere kenmerken van het pakket.
+
+  **Software-defined Networking (SDN):**
+  - In plaats van de forwarding table in iedere router te onderhouden.
+  - Een netwerkarchitectuur waarbij de controle van het netwerk wordt gescheiden van de doorsturing van het dataverkeer.
+  - Een centrale controller beheert en programmeert de netwerkapparaten op afstand, waardoor de configuratie dynamisch en flexibel kan worden aangepast.
+  - Een server op afstand bepaalt de forwarding table van iedere router.
+
+  <img src="./assets/afbeeldingen/sdn.png">
+  :::
+
   - **4.4.1** Match
+  ::: details Antwoord
+
+  In netwerken verwijst "match" naar het proces waarbij een netwerkapparaat een binnenkomend pakket vergelijkt met bepaalde criteria of regels om te bepalen hoe het pakket moet worden verwerkt of doorgestuurd.
+  
+  Dit proces omvat het controleren van specifieke velden in de header van het pakket, zoals het bron- en doel-IP-adres, het protocol, de poortnummers en andere relevante informatie, om te bepalen welke actie er op het pakket moet worden toegepast.
+
+  <img src="./assets/afbeeldingen/match.png">
+  :::
+
   - **4.4.2** Action
+  ::: details Antwoord
+  In een netwerkcontext verwijst "action" naar de actie die moet worden uitgevoerd op een pakket dat overeenkomt met een bepaalde regel in een flowtabel. Elke vermelding in de flowtabel bevat een lijst van één of meer acties die bepalen welke verwerking moet worden toegepast op een overeenkomend pakket.
+
+  Onder de belangrijkste mogelijke acties vallen:
+
+  - **Forwarding**: Een binnenkomend pakket kan worden doorgestuurd naar een specifieke fysieke uitgangspoort, uitgezonden over alle poorten (behalve de poort waarop het is ontvangen), of multicast worden verzonden over een geselecteerde set poorten. Het pakket kan ook worden ingekapseld en naar de externe controller voor dit apparaat worden verzonden. Deze controller kan vervolgens actie ondernemen op het pakket, zoals het installeren van nieuwe regels in de flowtabel, en het pakket terugsturen naar het apparaat voor doorsturen onder de bijgewerkte set regels in de flowtabel.
+
+  - **Dropping**: Een flowtabelvermelding zonder actie geeft aan dat een overeenkomend pakket moet worden verworpen.
+
+  - **Modify-field**: De waarden in 10 velden van het pakketheader (alle laag 2, 3 en 4 velden zoals weergegeven in Figuur 4.29, behalve het IP-protocolveld) kunnen worden herschreven voordat het pakket wordt doorgestuurd naar de gekozen uitgangspoort.
+  :::
+
   - **4.4.3** OpenFlow Examples of Match-plus-action in Action
+  ::: details Antwoord
+  **OpenFlow Examples of Match-plus-action in Action**
+
+  In de context van OpenFlow verwijst "match-plus-action" naar de functionaliteit waarbij pakketten worden gematcht met specifieke criteria in een flowtabel en vervolgens een reeks acties worden toegepast op de overeenkomende pakketten. Hier zijn enkele voorbeelden van hoe match-plus-action in OpenFlow wordt toegepast:
+
+  - **Forwarding naar een specifieke poort**: Een match-plus-action-regel kan worden ingesteld om pakketten met bepaalde kenmerken door te sturen naar een specifieke fysieke uitgangspoort van het OpenFlow-switch.
+
+  - **Broadcast of Multicast**: Pakketten kunnen worden uitgezonden naar alle poorten (broadcast) behalve de poort waarop het pakket is ontvangen, of naar een geselecteerde set poorten (multicast), afhankelijk van de overeenkomende criteria.
+
+  - **Inkapseling en verzending naar de controller**: Een match-plus-action-regel kan worden geconfigureerd om bepaalde pakketten te encapsuleren en naar de externe controller te sturen voor verdere verwerking. De controller kan vervolgens acties ondernemen, zoals het installeren van nieuwe flowtabelregels.
+
+  - **Dropping van pakketten**: Als een pakket overeenkomt met een bepaalde regel zonder verdere actie, kan het worden verwijderd (gedropt), wat betekent dat het niet verder wordt doorgestuurd.
+
+  - **Aanpassen van veldwaarden**: De waarden in verschillende velden van het pakketheader kunnen worden gewijzigd voordat het pakket wordt doorgestuurd naar de geselecteerde uitgangspoort.
+
+  Deze voorbeelden illustreren hoe match-plus-action in OpenFlow wordt gebruikt om pakketten te verwerken op basis van specifieke criteria en de gewenste acties uit te voeren voor elke overeenkomstige pakketstroom.
+
+  <img src="./assets/afbeeldingen/match.png">
+  :::
+
 - **4.5** Middleboxes
-- **4.6** Summary
+  ::: details Antwoord
+  **Middleboxes: Inleiding tot Netwerkfunctionaliteit**
+
+  Middleboxes zijn netwerkapparaten die zich tussen de bron en bestemming van gegevensstromen bevinden en specifieke functies uitvoeren om de gegevens te verwerken. Hier zijn enkele belangrijke typen middleboxes en hun functies:
+
+  - **Firewalls**: Deze middleboxes controleren en reguleren het verkeer tussen netwerken op basis van vooraf gedefinieerde regels. Ze bieden beveiliging tegen ongeautoriseerde toegang en kunnen bepaalde soorten verkeer blokkeren.
+
+  - **Intrusion Detection Systems (IDS)**: IDS-systemen analyseren netwerkverkeer op verdachte patronen of gedragingen die kunnen wijzen op een aanval of inbraakpoging. Ze waarschuwen beheerders voor potentiële bedreigingen.
+
+  - **Load Balancers**: Deze middleboxes distribueren het netwerkverkeer over meerdere servers om de belasting te verdelen en de prestaties te verbeteren. Ze optimaliseren de beschikbaarheid en schaalbaarheid van services.
+
+  - **Proxy-servers**: Proxies fungeren als tussenpersoon tussen clients en servers en kunnen gegevens filteren, cachen of omleiden. Ze bieden anonimiteit, beveiliging en controle over het netwerkverkeer.
+
+  - **Content Delivery Networks (CDN)**: CDN's gebruiken middlebox-technologieën om inhoud efficiënt te leveren door deze te cachen op locaties die dichter bij de eindgebruikers liggen. Dit vermindert de latentie en verbetert de algehele gebruikerservaring.
+
+  - **Network Address Translation (NAT)**: NAT-middleboxes wijzigen IP-adressen en poortnummers in netwerkverkeer om compatibiliteit te garanderen tussen verschillende netwerken en om IP-adressen te conserveren.
+
+  - **WAN-optimalisatiesystemen**: Deze middleboxes optimaliseren de prestaties van WAN-verbindingen door technieken zoals compressie, caching en verkeersprioritering toe te passen.
+
+  - **Deep Packet Inspection (DPI)**: DPI-middelware analyseert pakketinhoud op zoek naar specifieke patronen of protocollen. Het wordt gebruikt voor verkeersanalyse, kwaliteitsborging en het implementeren van beleid voor netwerkbeheer.
+
+  - **Network Function Virtualization (NFV)**: NFV is een concept waarbij traditionele middlebox-functionaliteiten worden gevirtualiseerd en uitgevoerd als softwaretoepassingen op algemene hardware.
+
+  Deze diversiteit aan middleboxes biedt verschillende functies voor het beheer, de beveiliging, de optimalisatie en de analyse van netwerkverkeer in moderne netwerkinfrastructuren.
+  :::
+
+- **4.6** DHCP: Dynamic Host Configuration Protocol
+  ::: details Antwoord
+  **DHCP: Dynamic Host Configuration Protocol**
+
+  - Elke host heeft een network address nodig: een IP address. Hoe werkt dat?
+
+  - Doel:
+    - Sta een host toe om dynamisch een IP-adres op te vragen zodra het onderdeel wordt van een netwerk.
+    - Adressen in gebruik worden na verloop van tijd ‘vernieuwd’.
+    - Sta hergebruik van adressen toe.
+    - De dynamische opzet zorgt ervoor dat verplaatsbare hosts (mobiele telefoon, laptop) ook mee kunnen doen.
+
+  - DHCP is een application layer protocol
+  :::
+
+  - **4.6.1** DHCP DORA
+    ::: details Antwoord
+    **DHCP - DORA**
+
+    - Client stuurt een pakketje naar het netwerk (Discover):
+      - Op het broadcast-kanaal.
+      - Om de DHCP-server te vinden.
+
+    - DHCP-server reageert (Offer):
+      - De DHCP-server laat weten op welk IP-adres het te bereiken is.
+
+    - Client verzoekt een IP-adres (Request) van de DHCP-server.
+
+    - DHCP-server reageert (Acknowledge):
+      - De DHCP-server geeft het IP-adres uit.
+
+    <img src="./assets/afbeeldingen/dhcp-dora.png">
+    :::
+
+  - **4.6.2** DHCP client-server scenario
+    ::: details Antwoord
+    **DHCP Client-Server Scenario**
+
+    1. **Discover:** De DHCP-client stuurt een broadcastpakket naar het netwerk om een DHCP-server te vinden.
+
+    2. **Offer:** De DHCP-server reageert met een aanbod van een IP-adres, samen met andere configuratiegegevens.
+
+    3. **Request:** De DHCP-client verzoekt het aangeboden IP-adres van de DHCP-server.
+
+    4. **Acknowledge:** De DHCP-server bevestigt de toekenning van het IP-adres aan de client.
+
+    5. **Configuration:** De DHCP-client configureert zijn netwerkinterface met het toegewezen IP-adres en andere ontvangen instellingen.
+
+    <img src="./assets/afbeeldingen/dhcp-client-server.png">
+    :::
+
+- **4.6.3** DHCP more than IP addresses
+    ::: details Antwoord
+    **DHCP: Meer dan alleen IP-adressen**
+
+  - DHCP kan meer informatie verstrekken dan alleen het IP-adres van de host:
+    - Adres van de first-hop router ("default gateway")
+    - Naam en IP-adres van de DNS-server
+    - Netwerkmasker (dit wordt nog behandeld)
+    :::
+
+- **4.7** Subnetting
+  ::: details Antwoord
+
+  :::
 
 ## Chapter 5
 
 ### The Network Layer: Control Plane
 
 - **5.1** Introduction
+  ::: details Antwoord
+  **The Network Layer: Control Plane**
+
+  Het controle-vlak van de netwerklaag omvat processen en protocollen die verantwoordelijk zijn voor het beheer en de controle van de routers en switches in het netwerk. Hier zijn enkele belangrijke aspecten van het controle-vlak:
+
+  - **Routing Protocols**: Routingprotocollen worden gebruikt om informatie uit te wisselen tussen routers, zodat ze de beste paden naar bestemmingen kunnen bepalen. Voorbeelden van routingprotocollen zijn OSPF (Open Shortest Path First), BGP (Border Gateway Protocol) en RIP (Routing Information Protocol).
+
+  - **Route Calculation**: In het controle-vlak worden routes berekend op basis van informatie zoals netwerkstatus, topologie en beleidsregels. Dit omvat het nemen van beslissingen over de beste routes voor het doorsturen van gegevenspakketten door het netwerk.
+
+  - **Router Configuration and Management**: Het controle-vlak omvat ook processen voor het configureren, beheren en monitoren van routers en switches in het netwerk. Dit kan het instellen van parameters, het updaten van firmware en het controleren van prestaties omvatten.
+
+  - **Security and Authentication**: Het controle-vlak kan ook mechanismen omvatten voor het implementeren van beveiligingsmaatregelen en authenticatieprotocollen om ongeautoriseerde toegang tot het netwerk te voorkomen.
+
+  - **Quality of Service (QoS)**: QoS-beleid wordt in het controle-vlak geïmplementeerd om de prestaties van het netwerk te verbeteren door prioriteit te geven aan bepaalde soorten verkeer, zoals spraak- of videogegevens, boven ander verkeer.
+
+  - **Software Defined Networking (SDN)**: SDN is een opkomende benadering waarbij het controle-vlak wordt gescheiden van het doorstuur-vlak, waardoor een centrale controller de netwerkconfiguratie en -beheer kan afhandelen via een programmeerbaar en geautomatiseerd platform.
+
+  - **Network Automation:**: Het controle-vlak kan ook geautomatiseerde processen omvatten voor het beheer van netwerkbronnen, configuratiedeployments en foutopsporing om de operationele efficiëntie te verbeteren.
+
+  In essentie omvat het controle-vlak van de netwerklaag de mechanismen en processen die verantwoordelijk zijn voor het beheren, configureren, beveiligen en optimaliseren van het netwerk om een efficiënte en betrouwbare gegevensdoorvoer te garanderen.
+  :::
+
 - **5.2** Routing Algorithms
+  ::: details Antwoord
+  Routingalgoritmen berekenen de beste paden voor datapakketten in een netwerk. Ze bepalen efficiënte routes op basis van factoren zoals netwerkstatus en beleidsregels. Voorbeelden zijn OSPF, BGP en RIP.
+
+  **Waarom verschillende routingprotocollen?**
+
+  **Beleid:**
+  - **Inter-AS:** Beheerders willen controle over hoe hun verkeer wordt gerouteerd en wie er door hun netwerk routeert.
+  - **Intra-AS:** Eén beheerder, dus geen beleidsbeslissingen nodig.
+
+  **Schaalbaarheid:**
+  - Hiërarchische routing verkleint de tabelgrootte en vermindert update-verkeer.
+
+  **Prestaties:**
+  - **Intra-AS:** Kan zich richten op prestaties.
+  - **Inter-AS:** Beleid kan de prestaties overheersen.
+
+  **Routing Algorithm Classification**
+
+  **Global:**
+
+  - All routers possess complete information about the network topology and link cost.
+  - These algorithms, known as "link state" algorithms, utilize this global knowledge for routing decisions.
+
+  **Decentralized:**
+
+  - Each router has information only about its physically-connected neighbors and their link costs.
+  - Routing decisions are made through an iterative process involving computation and exchange of information with neighboring routers.
+  :::
+  
   - **5.2.1** The Link-State (LS) Routing Algorithm
+    ::: details Antwoord
+    **A Link-State Routing Algorithm: Dijkstra's Algorithm**
+    - Dijkstra's algoritme wordt gebruikt wanneer de netwerktopologie en de verbindingskosten bekend zijn bij alle knooppunten.
+    - Deze informatie wordt verspreid via "link state broadcast", waardoor alle knooppunten identieke informatie hebben.
+    - Het algoritme berekent de minst-kostbare paden vanuit één knooppunt (aangeduid als de 'bron') naar alle andere knooppunten.
+    - Het resultaat is een doorstuurtafel specifiek voor het bronknooppunt.
+    - Het werkt iteratief: na k iteraties bepaalt het algoritme met zekerheid het minst-kostbare pad naar k bestemmingen.
+
+    <img src="./assets/afbeeldingen/dijkstra-algoritme.png">
+    :::
+  
   - **5.2.2** The Distance-Vector (DV) Routing Algorithm
+    ::: details Antwoord
+
+    - Iterative and asynchronou: Elke lokale iteratie wordt veroorzaakt door een verandering in lokale verbindingskosten of een updatebericht van een naburige afstandsvector (DV).
+    - Distributed: Elke node informeert alleen zijn buren wanneer zijn DV verandert. Vervolgens informeren buren hun buren indien nodig.
+    - Decentralized: Routers zijn op de hoogte van hun fysiek verbonden buren, maar hebben alleen schattingen van de beste routes naar andere bestemmingen.
+    - Werking:
+      - Wacht op een verandering in lokale verbindingskosten of een bericht van een buur.
+      - Herschatting van schattingen.
+      - Als de DV naar een bestemming is gewijzigd, informeer buren.
+    :::
+
+  - **5.2.2** Autonomous Systems
+    ::: details Antwoord
+    - Een verzameling routers onder hetzelfde administratieve beheer.
+    - Doorgaans geassocieerd met een enkel bedrijf of internet serviceprovider (ISP).
+
+    - Intra-AS-routing:
+      - Routing binnen een AS, zoals OSPF, RIP of IGRP.
+    - Inter-AS-routing:
+      - Routing tussen AS'en, bijvoorbeeld via BGP (Border Gateway Protocol).
+    :::
+  
 - **5.3** Intra-AS Routing in the Internet: OSPF
+  ::: details Antwoord
+  - **Open**: Openbaar beschikbaar en veel gebruikt.
+  - Maakt gebruik van het link-state algoritme.
+  - OSPF-advertenties:
+    - Routeradvertenties worden verspreid naar het gehele autonome systeem (AS).
+    - Worden rechtstreeks over IP in OSPF-berichten verzonden, in plaats van via TCP of UDP.
+  - **Hiërarchisch OSPF** wordt toegepast in grote domeinen voor schaalbaarheid.
+  - Hierarchical:
+    - Alle OSPF-berichten zijn geauthenticeerd om kwaadwillige indringing te voorkomen.
+  :::
+  
 - **5.4** Routing Among the ISPs: BGP
+  ::: details Antwoord
+  **BGP Basis: Het Internet als een Netwerk van Snelwegen**
+
+  - **Autonome Systemen (AS)**: Stel je het internet voor als een uitgestrekt netwerk van snelwegen, waarbij elk Autonoom Systeem (AS) een andere stad vertegenwoordigt. De gateway-routers van elk AS fungeren als de hoofdingangen van deze steden, waar al het verkeer binnenkomt en vertrekt.
+
+  - **BGP-sessies: Communicatie tussen Steden**: Binnen elke stad (AS) worden beloften gedaan over hoe het verkeer zal worden afgehandeld. Wanneer bijvoorbeeld een stad, laten we zeggen AS3, aan een andere stad, AS2, belooft het verkeer naar een specifieke bestemming, zoals X, door te sturen, doen ze dit via een virtuele verbinding genaamd een BGP-sessie.
+
+  - **BGP-sessies: Communicatie tussen Steden**: De BGP-sessie fungeert als een communicatielijn tussen de poortwachters van de steden, waarlangs ze informatie uitwisselen over beschikbare routes en beloftes doen om het verkeer door te sturen. Dit proces helpt AS2 te beslissen welke route ze moeten nemen om het verkeer naar bestemming X te leiden.
+
+  - **Begrip van BGP Via Stadsanalogie**: Met deze analogie kun je je voorstellen dat elk AS beloftes maakt en ontvangt via BGP-sessies, net zoals steden communiceren over hoe ze het verkeer tussen elkaar willen reguleren via verschillende toegangspunten. Dit maakt het gemakkelijker om de basisprincipes van BGP te onthouden en te begrijpen.
+  :::
+  
   - **5.4.1** The Role of BGP
+    ::: details Antwoord
+    **Internetroutes als Verkeersroutes**: Stel je het internet voor als een complex wegennetwerk, waarbij elk netwerk autonoom is, vergelijkbaar met verschillende steden of landen. BGP bepaalt hoe het verkeer tussen deze netwerken wordt gerouteerd, zoals wegwijzers en verkeersregels bepalen hoe auto's tussen steden reizen.
+
+    **Wat is het BGP als Navigatiesysteem van het Internet**: Deze analogie helpt om de rol van BGP te begrijpen als het navigatiesysteem van het internet. Gateway-routers fungeren als wegwijzers en BGP-sessies dienen als communicatielijnen tussen verschillende netwerken.
+
+    **De Hoofdpoortwachters**: Gateway Routers: Gateway-routers van elk autonoom netwerk fungeren als de hoofdpoortwachters. Ze wisselen informatie uit over beschikbare routes en nemen beslissingen over hoe het verkeer moet worden doorgestuurd.
+    :::
+  
   - **5.4.2** Advertising BGP Route Information
+    ::: details Antwoord
+    **Adverteren van BGP Route-Informatie**
+
+    - **Uitwisselen van Route-Informatie**: BGP stelt routers in staat om route-informatie uit te wisselen tussen verschillende autonome systemen (AS'en).
+
+    - **Beloften tussen Autonome Systemen**: Wanneer een router een route adverteert, belooft het AS dat het dataverkeer naar die bestemming zal doorsturen.
+
+    - **Besluitvorming op Basis van Geadverteerde Routes**: Routers nemen beslissingen over de route van het verkeer op basis van de ontvangen geadverteerde routes van naburige AS'en.
+
+    - **Continu Bewaking en Bijwerking**: Route-informatie wordt voortdurend bijgewerkt en aangepast aan veranderende omstandigheden in het netwerk.
+
+    - **Rol van BGP-advertenties**: BGP-advertenties fungeren als de wegwijzers van het internet, waarbij routers beloften doen over hoe ze dataverkeer zullen routeren.
+    :::
+  
   - **5.4.3** Determining the Best Routes
+    ::: details Antwoord
+    - **AS-PATH**: Dit is een lijst van AS'en die de prefixadvertentie hebben doorlopen. Het geeft de route aan die de advertentie heeft gevolgd en helpt bij het voorkomen van routing loops.
+
+    - **NEXT-HOP**: Dit geeft aan welke specifieke interne-AS-router de volgende hop is naar de bestemming. Het bepaalt de feitelijke router die moet worden gebruikt om het verkeer naar de aangegeven bestemming te routeren.
+
+    - **Beleidsgebaseerde routering**: Beleidsregels worden toegepast om te bepalen of een pad wordt geadverteerd en of een geadverteerd pad wordt geaccepteerd. Dit kan worden gebruikt om bijvoorbeeld routes via specifieke AS'en te blokkeren.
+
+    - **Route-selectie**: Wanneer een router meerdere routes naar een bestemmings-AS leert, selecteert hij de route op basis van verschillende criteria:
+      1. **Lokale voorkeurswaarde-attribuut**: Dit is een beleidsbeslissing die door de lokale router wordt genomen en kan worden gebruikt om de voorkeur te geven aan bepaalde routes.
+      2. **Kortste AS-PATH**: Routes met de kortste AS-PATH worden vaak als de beste beschouwd omdat ze minder tussenstops hebben.
+      3. **Dichtstbijzijnde NEXT-HOP-router**: Dit wordt gebruikt in "hot potato" routing, waarbij het verkeer zo snel mogelijk wordt doorgestuurd naar het dichtstbijzijnde punt van de bestemming.
+      4. **Aanvullende criteria**: Andere factoren kunnen ook worden overwogen, afhankelijk van de configuratie en beleidsregels van de router.
+    :::
+
+  - **5.4.4** BGP hijacking
+    ::: details Antwoord
+
+    :::
+  
   - **5.4.4** IP-Anycast
+    ::: details Antwoord
+
+    :::
+  
   - **5.4.5** Routing Policy
+    ::: details Antwoord
+
+    :::
+  
   - **5.4.6** Putting the Pieces Together: Obtaining Internet Presence
+    ::: details Antwoord
+
+    :::
+  
 - **5.5** The SDN Control Plane
+  ::: details Antwoord
+
+  :::
+  
   - **5.5.1** The SDN Control Plane: SDN Controller and SDN Network-control Applications
+    ::: details Antwoord
+
+    :::
+  
   - **5.5.2** OpenFlow Protocol
+    ::: details Antwoord
+
+    :::
+  
   - **5.5.3** Data and Control Plane Interaction: An Example
+    ::: details Antwoord
+
+    :::
+  
   - **5.5.4** SDN: Past and Future
+    ::: details Antwoord
+
+    :::
+  
 - **5.6** ICMP: The Internet Control Message Protocol
+  ::: details Antwoord
+
+  :::
+  
 - **5.7** Network Management and SNMP, NETCONF/YANG
+  ::: details Antwoord
+
+  :::
+  
   - **5.7.1** The Network Management Framework
+    ::: details Antwoord
+
+    :::
+  
   - **5.7.2** The Simple Network Management Protocol (SNMP) and the Management Information Base (MIB)
+    ::: details Antwoord
+
+    :::
+  
   - **5.7.3** The Network Configuration Protocol (NETCONF) and YANG
+    ::: details Antwoord
+
+    :::
+  
 - **5.8** Summary
 
 ## Chapter 6
