@@ -60,6 +60,8 @@ export default {
             { text: 'Bare Metal', link: '/the-lab/the-lab/bare-metal' },
             { text: 'Virtual Machines', link: '/the-lab/the-lab/virtual-machines' },
             { text: 'Hypervisor', link: '/the-lab/the-lab/hypervisor' },
+            { text: 'WSL', link: '/the-lab/the-lab/wsl' },
+            { text: 'Win-Kex', link: '/the-lab/the-lab/win-kex' },
             { text: 'Docker', link: '/the-lab/the-lab/docker' },
             { text: 'Terminal', link: '/the-lab/the-lab/terminal' },
             { text: 'GUI', link: '/the-lab/the-lab/gui' },

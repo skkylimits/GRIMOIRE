@@ -185,3 +185,5 @@ Sure! Here is the step-by-step guide to setting up a brand `new` Ubuntu virtual 
    - Follow the prompts to install Guest Additions, which improves performance and provides additional features like shared folders and better video support.
 
 Your Ubuntu VM should now be ready to use!
+
+To get VirtualBox to display a virtual machine in full-screen mode, you need to install the VirtualBox Guest Additions in your virtual machine. Here’s how you can do it:

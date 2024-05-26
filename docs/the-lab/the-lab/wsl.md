@@ -1,0 +1,217 @@
+# WSL
+
+## Installing WSL
+
+### Step 1: Enable the Windows Subsystem for Linux
+
+1. **Open PowerShell as Administrator**:
+   - Press `Win + X` and select "Windows PowerShell (Admin)".
+
+2. **Run the following command to enable WSL**:
+
+   ```powershell
+   dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+   ```
+
+### Step 2: Enable Virtual Machine Platform
+
+1. **In the same PowerShell window, run the following command to enable the Virtual Machine Platform**:
+
+   ```powershell
+   dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+   ```
+
+### Step 3: Restart Your Computer
+
+1. **Restart your computer to apply the changes**:
+   - You can do this via the Start menu or by running the following command in PowerShell:
+
+     ```powershell
+     Restart-Computer
+     ```
+
+### Step 4: Install WSL 2 Kernel Update (if necessary)
+
+1. **Download the WSL 2 Linux kernel update package**:
+   - Visit the [WSL 2 Linux kernel update package for x64 machines](https://aka.ms/wsl2kernel) and download the package.
+
+2. **Run the downloaded installer** and follow the instructions.
+
+### Step 5: Set WSL 2 as the Default Version
+
+1. **Open PowerShell as Administrator** and run the following command:
+
+   ```powershell
+   wsl --set-default-version 2
+   ```
+
+## Installing Windows Terminal
+
+To install Windows Terminal on your system, follow these steps
+
+### Method 1: Install via Microsoft Store
+
+1. **Open Microsoft Store:**
+   - Click on the **Start** menu and type "Microsoft Store".
+   - Open the Microsoft Store application.
+
+2. **Search for Windows Terminal:**
+   - In the Microsoft Store, use the search bar at the top to search for "Windows Terminal".
+
+3. **Install Windows Terminal:**
+   - Click on the "Windows Terminal" app from the search results.
+   - Click the "Install" button to download and install Windows Terminal on your system.
+
+### Method 2: Install via PowerShell
+
+1. **Open PowerShell as Administrator:**
+   - Right-click on the **Start** menu and select "Windows PowerShell (Admin)".
+
+2. **Install Windows Terminal using winget:**
+   - Run the following command:
+
+     ```powershell
+     winget install --id Microsoft.WindowsTerminal -e
+     ```
+
+   This command uses the Windows Package Manager (`winget`) to download and install Windows Terminal.
+
+### Method 3: Install via GitHub Releases
+
+1. **Go to Windows Terminal GitHub Releases:**
+   - Open your web browser and go to the [Windows Terminal GitHub Releases page](https://github.com/microsoft/terminal/releases).
+
+2. **Download the Latest Release:**
+   - Find the latest stable release and download the `.msixbundle` file.
+
+3. **Install the Downloaded Package:**
+   - Double-click the downloaded `.msixbundle` file to start the installation process.
+   - Follow the on-screen instructions to complete the installation.
+
+### Verify Installation
+
+After installation, you can launch Windows Terminal by searching for "Windows Terminal" in the Start menu or by pressing `Win + X` and selecting "Windows Terminal" from the menu.
+
+By following any of these methods, you should have Windows Terminal successfully installed on your system.
+
+## Install a Linux Distribution
+
+1. **Open Microsoft Store**:
+   - Search for "Linux" to see available distributions like Ubuntu, Debian, Kali Linux, openSUSE, etc.
+
+2. **Select the distribution you want to install** and click "Get" to install it.
+
+### Step 1: Launch and Set Up the Linux Distribution
+
+Once you have installed your preferred Linux distribution, you can launch it using the following methods:
+
+#### Method 1: Using PowerShell
+
+1. Open **PowerShell**:
+   - Press `Win + X` and select **Windows PowerShell**.
+   - Alternatively, you can search for "PowerShell" in the Start menu.
+
+2. Run the following command to launch WSL:
+
+   ```powershell
+   wsl
+   ```
+
+#### Method 2: Using Windows Terminal (Recommended)
+
+1. **Open Windows Terminal**:
+   - Press the **Windows** button and type "Windows Terminal".
+   - Click on **Windows Terminal** from the search results.
+
+2. **Launch your Linux Distribution**:
+   - In Windows Terminal, click the down-arrow button next to the tab bar.
+   - Select your installed Linux distribution (e.g., Ubuntu, Debian, Kali) from the dropdown menu.
+
+By using Windows Terminal, you can easily manage multiple tabs and different shell environments, providing a more efficient and organized way to work with WSL.
+
+3. **Follow the on-screen instructions** to set up your new Linux distribution, which typically involves creating a user account.
+
+### Step 2: Update and Upgrade the Distribution
+
+1. **Open the Linux terminal** (you can do this by launching your distribution from the Start menu).
+
+2. **Update the package lists and upgrade the installed packages**:
+
+   ```bash
+   sudo apt update
+   sudo apt upgrade
+   ```
+
+### Optional: Install Additional Tools and Software
+
+1. **Install your preferred development tools, software, and packages** using the distribution's package manager (e.g., `apt` for Ubuntu/Debian).
+
+By following these steps, you will have WSL set up and running on your Windows machine, allowing you to run a Linux environment alongside your Windows OS.
+
+## Uninstall a Linux Distribution
+
+To completely remove Kali Linux from Windows Subsystem for Linux (WSL), follow these steps:
+
+### 1. Unregister the Distribution
+
+   Ensure that Kali Linux is unregistered by running the following command in PowerShell as an administrator:
+
+   ```powershell
+   wsl --unregister kali-linux
+   ```
+
+### 2. Check for Residual Files
+
+   Navigate to the following directory to check for any remaining files:
+
+   ```text
+   %userprofile%\AppData\Local\Packages
+   ```
+
+   Look for any folders related to `kali-linux` and delete them.
+
+### 3. Uninstall via Settings
+
+- **Open Settings:**
+  - Press `Win + I` to open Settings.
+- **Go to Apps:**
+  - Navigate to **Apps** > **Apps & features**.
+- **Find and Uninstall Kali Linux:**
+  - Scroll through the list to find `Kali Linux`.
+  - Click on it and select **Uninstall**.
+
+### 4. Uninstall via Control Panel
+
+- **Open Control Panel:**
+  - Press `Win + R` to open the Run dialog.
+  - Type `appwiz.cpl` and press Enter.
+- **Uninstall a Program:**
+  - Find `Kali Linux` in the list.
+  - Right-click on it and select **Uninstall**.
+
+### 5. Clear Microsoft Store Cache
+
+   Sometimes the Microsoft Store cache can cause issues. If Kali Linux still shows as "Open" in the Microsoft Store instead of "Get," it indicates that the distribution might not have been completely removed. Resetting it might help. Here's how you can ensure that Kali Linux is fully uninstalled:
+
+- **Reset the Microsoft Store:**
+  - Press `Win + R` to open the Run dialog.
+  - Type `wsreset.exe` and press Enter.
+  - This will reset the Microsoft Store cache. The store will open automatically after the reset.
+
+### 6. Clear Microsoft Store Cache
+
+   After following the above steps, open the Microsoft Store again and search for Kali Linux. It should now show the "Get" button instead of "Open."
+
+### 7. Optional - Remove WSL (if you no longer need WSL at all)
+
+   If you want to remove WSL entirely, including other distributions, you can disable the WSL feature. Open PowerShell as an administrator and run:
+
+   ```powershell
+   dism.exe /online /disable-feature /featurename:Microsoft-Windows-Subsystem-Linux
+   ```
+
+### 8. Reboot Your System
+
+   After unregistering the distribution and optionally disabling WSL, it’s a good idea to reboot your system to ensure all changes are applied properly.
+
+Following these steps will completely remove Kali Linux from your WSL environment.

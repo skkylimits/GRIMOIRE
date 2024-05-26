@@ -1886,7 +1886,41 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   
 - **5.6** ICMP: The Internet Control Message Protocol
   ::: details Antwoord
+  ICMP, of Internet Control Message Protocol, is een netwerklaagprotocol dat wordt gebruikt voor netwerkdiagnostiek en foutrapportage. Het wordt voornamelijk gebruikt door netwerkapparaten, zoals routers, om foutmeldingen en operationele informatie te verzenden die aangeven dat een gevraagde dienst niet beschikbaar is of dat een host of router niet kon worden bereikt.
 
+  **Belangrijke Functies van ICMP**
+
+  **ICMP: Internet Control Message Protocol**
+
+  ICMP, of Internet Control Message Protocol, is een netwerklaagprotocol dat wordt gebruikt voor netwerkdiagnostiek en foutrapportage. Het wordt voornamelijk gebruikt door netwerkapparaten, zoals routers, om foutmeldingen en operationele informatie te verzenden die aangeven dat een gevraagde dienst niet beschikbaar is of dat een host of router niet kon worden bereikt.
+
+   **Belangrijke Functies van ICMP**
+
+    1. **Foutrapportage**: ICMP kan fouten rapporteren die optreden tijdens gegevensoverdracht. Veelvoorkomende foutmeldingen zijn:
+  - **Destination Unreachable (Bestemming Onbereikbaar)**: Geeft aan dat een bestemming om een of andere reden onbereikbaar is (bijvoorbeeld netwerk of host onbereikbaar, poort onbereikbaar).
+  - **Time Exceeded (Tijd Verstreken)**: Geeft aan dat de Time-to-Live (TTL) van een pakket is verlopen, meestal omdat het pakket te veel routers heeft gepasseerd.
+  - **Source Quench (Bron Afremmen)**: Wordt gebruikt om de zender te verzoeken de transmissiesnelheid te verlagen vanwege netwerkcongestie (hoewel dit berichttype nu verouderd is).
+
+    2. **Netwerkdiagnostiek**: ICMP wordt gebruikt voor diagnostische hulpmiddelen zoals:
+  - **Ping**: Gebruikt ICMP Echo Request en Echo Reply berichten om de bereikbaarheid van een host op een IP-netwerk te testen.
+  - **Traceroute**: Gebruikt ICMP Time Exceeded berichten om het pad te traceren dat pakketten nemen naar een bestemming.
+
+  **ICMP Berichttypes**
+
+    Enkele veelvoorkomende ICMP berichttypes zijn:
+
+  - **Echo Request (Type 8) en Echo Reply (Type 0)**: Gebruikt door het ping-commando.
+  - **Destination Unreachable (Type 3)**: Verschillende codes onder dit type geven verschillende redenen aan waarom de bestemming onbereikbaar is.
+  - **Time Exceeded (Type 11)**: Gebruikt door traceroute om het pad naar een bestemming te bepalen.
+
+  ***Veiligheidsoverwegingen***
+
+    Hoewel ICMP essentieel is voor netwerkbeheer, kan het ook worden misbruikt voor kwaadaardige doeleinden, zoals:
+
+  - **ICMP Flood Attack**: Overweldigt een doelwit met ICMP Echo Requests, wat leidt tot een denial of service.
+  - **Smurf Attack**: Gebruikt vervalste ICMP Echo Requests om een netwerk te overspoelen met verkeer.
+
+    Vanwege deze potentiële risico's implementeren veel netwerkbeheerders beleid om ICMP-verkeer te beperken of te monitoren.
   :::
   
 - **5.7** Network Management and SNMP, NETCONF/YANG
@@ -1967,7 +2001,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
   - **6.1.2** Link Frames
     ::: details Antwoord
-    <img src="./assets/afbeeldingen/frames.png">
+    <img src="./assets/afbeeldingen/link-frames.png">
     :::
 
   - **6.1.3** Where Is the Link Layer Implemented?
@@ -2445,7 +2479,7 @@ Comply with laws, rules, and regulations:
 - **7.12** Message digests
 ::: details Antwoord
 
-<img src="./assets/afbeeldingen/message-disgest.png">
+<img src="./assets/afbeeldingen/message-digest.png">
 :::
 
 - **7.13** SSL TCP/IP
@@ -2469,9 +2503,9 @@ Comply with laws, rules, and regulations:
 - **7.16** IDS
 ::: details Antwoord
 
-<img src="./assets/ids.png">
+<img src="./assets/afbeeldingen/ids.png">
 
-<img src="./assets/ids-sensors.png">
+<img src="./assets/afbeeldingen/ids-sensors.png">
 :::
 
 - **7.17** Demilitarized Zone (DMZ)
@@ -2484,4 +2518,10 @@ Comply with laws, rules, and regulations:
 ::: details Antwoord
 
 <img src="./assets/afbeeldingen/vpn.png">
+:::
+
+- **7.19** Downgrade Attack
+::: details Antwoord
+
+<img src="./assets/afbeeldingen/downgrade-attack.png">
 :::

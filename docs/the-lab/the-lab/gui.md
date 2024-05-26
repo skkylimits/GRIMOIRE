@@ -1,8 +1,14 @@
 # GUI LAB
 
-Once you have kali/ubuntu installed, wheter it's on `bare metal`, in a `virtual machine` or using a `hypervisor`.
+Once you have kali/ubuntu installed, wheter it's on `bare metal`, in a `virtual machine`, using a `hypervisor`, in windows with `WSL` by installing `win-kex` to pull up a GUI.
 
 The general configuration is all the same.
+
+## Lab Setup
+
+The tools that we will be using are all free, but because of this benefit, there are some limitations. For example, the free community edition of Burp Suite throttles scans to the point where it becomes unrealistic to use in a professional setting.
+
+So, I do advise you to upgrade to professional/enterprise versions of applications when you move into that setting. For the purpose of this course, you will be able to learn the tools and techniques without paying for software upgrades.
 
 ## Update Kali
 
