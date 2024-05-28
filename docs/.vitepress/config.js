@@ -239,6 +239,7 @@ export default {
           text: 'MIW',
           items: [
             { text: 'A Top Down Approach', link: '/knowledge-base/networking/miw/0-a-top-down-approach.md' },
+            { text: 'Droom Thuisnetwerk', link: '/knowledge-base/networking/miw/00-droom-thuisnetwerk.md' },
             { text: 'Netwerk Architektuur', link: '/knowledge-base/networking/miw/1-netwerk-architektuur.md' },
             { text: 'Protocol Stack', link: '/knowledge-base/networking/miw/2-protocol-stack.md' },
             { text: 'Intro Beveiliging', link: '/knowledge-base/networking/miw/3-intro-beveiliging.md' },
