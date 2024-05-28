@@ -8,7 +8,9 @@
 
 This should return a list of available hosts.
 
-`sudo nmap -sn -PS 192.168.178.98`
+```bash
+sudo nmap -sn -PS 192.168.178.98
+```
 
 The command `sudo nmap -sn -PS 192.168.178.98` performs a specific type of network scan using `nmap`, a powerful network scanning tool. Here is a breakdown of what each part of the command does:
 
@@ -26,7 +28,9 @@ In summary, the command `sudo nmap -sn -PS 192.168.178.98` sends a TCP SYN ping 
 
 ## Scanning The OS
 
-`sudo nmap -O 192.168.178.98`
+```bash
+sudo nmap -O 192.168.178.98
+```
 
 The command sudo nmap -O 192.168.178.98 uses Nmap to perform an operating system detection scan on the target host. Here is a detailed breakdown of the command:
 
@@ -40,7 +44,9 @@ The command sudo nmap -O 192.168.178.98 uses Nmap to perform an operating system
 
 ## Port Scan -A
 
-`sudo nmap -A 192.168.178.98`
+```bash
+sudo nmap -A 192.168.178.98
+```
 
 `sudo`: Runs the command with superuser (root) privileges. This is necessary for certain network operations that require higher permissions.
 
@@ -60,7 +66,9 @@ The command sudo nmap -O 192.168.178.98 uses Nmap to perform an operating system
 
 ## Port Scan -sV
 
-`sudo nmap -sV 192.168.178.98`
+```bash
+sudo nmap -sV 192.168.178.98
+```
 
 `sudo`: Runs the command with superuser (root) privileges. This is often necessary for certain network operations that require higher permissions.
 
@@ -70,9 +78,19 @@ The command sudo nmap -O 192.168.178.98 uses Nmap to perform an operating system
 
 `192.168.178.98`: This is the IP address of the target host that you want to scan.
 
+## Port Scan Them All -p-
+
+Use Nmap to run a port scan scanning all ports with -p-. This can be really slow, so consider adding --min-rate 5000 or -T4 to speed it up.
+
+```bash
+sudo nmap -p- 192.168.178.98
+```
+
 ## Vulnerability Detection
 
-`sudo nmap -Pn --script vuln 192.168.178.98`
+```bash
+sudo nmap -Pn --script vuln 192.168.178.98
+```
 
 `sudo`: Runs the command with superuser (root) privileges. This is often necessary for certain network operations that require higher permissions.
 

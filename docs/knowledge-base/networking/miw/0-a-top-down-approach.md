@@ -2013,7 +2013,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - Gevestigd op de systeembus.
     - Een combinatie van hardware, software en firmware.
 
-    <img src="./assets/afbeeldingen/waar-is-de-linklaag.png.png">
+    <img src="./assets/afbeeldingen/waar-is-de-linklaag.png">
     :::
 
   - **6.1.3** How do adapters communicate?
