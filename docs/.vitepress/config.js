@@ -136,7 +136,7 @@ export default {
           collapsible: true,
           collapsed: true,
           items: [
-            { text: 'Start', link: '/' },
+            { text: 'Design A DB', link: '/scripting/sql/db/design-a-sql-database' },
 
           ],
         },
