@@ -2461,7 +2461,7 @@ Comply with laws, rules, and regulations:
 
 <img src="./assets/afbeeldingen/public-key-crypto.png">
 
-<img src="./assets/afbeeldingen/public-key-cryptography.png.png">
+<img src="./assets/afbeeldingen/public-key-cryptography.png">
 :::
 
 - **7.10** Certificate Authority
