@@ -7,12 +7,14 @@ Laten we de initiële opzet van ons droomthuisnetwerk verder verbeteren door een
 **Schema:**
 
 **Access Layer:**
+
 - Draadloze routers (2, voor dekkingsgebied)
 - Draadloze access points (meerdere, voor volledige dekking)
 - Smart TV's, smartphones, tablets, laptops, slimme speakers (draadloos verbonden)
 - Draadloze printers (verbonden via wifi)
 
 **Distribution Layer:**
+
 - Router/firewall (centraal punt voor internetverbinding en netwerkbeveiliging)
 - DHCP-server (voor het toewijzen van IP-adressen)
 - DNS-server (voor het vertalen van domeinnamen naar IP-adressen)
@@ -60,9 +62,11 @@ AlBij het ontwerpen van een thuisnetwerk voor een groot huis met meerdere verdie
 ### 1. **Planning en Plaatsing van Access Points**
 
 #### **Site Survey**
+
 - Voer een site survey uit om de optimale locaties voor de access points te bepalen. Dit kan gedaan worden met behulp van speciale softwaretools die de signaalsterkte en mogelijke storingsbronnen meten.
 
 #### **Strategische Plaatsing**
+
 - Plaats de access points op centrale locaties binnen elke verdieping en zorg ervoor dat ze voldoende overlap hebben voor naadloze roaming.
 - Houd rekening met fysieke obstakels zoals muren, vloeren en meubels die het signaal kunnen verzwakken. Plaats WAPs op hogere posities, zoals aan het plafond, voor een betere signaalverspreiding.
 - Zorg ervoor dat er voldoende dekking is in de belangrijkste gebruiksruimten, zoals woonkamers, slaapkamers, kantoren en keukens.
@@ -70,27 +74,32 @@ AlBij het ontwerpen van een thuisnetwerk voor een groot huis met meerdere verdie
 ### 2. **Gebruik van Mesh-netwerken**
 
 #### **Mesh Access Points**
+
 - Overweeg het gebruik van een mesh-netwerksysteem. Mesh access points werken samen om één groot netwerk te vormen, waardoor de dekking in een groot huis eenvoudiger en effectiever kan worden uitgebreid.
 - Mesh-netwerken maken gebruik van meerdere nodes die draadloos met elkaar communiceren, wat zorgt voor betere dekking zonder dat er bekabeling tussen de nodes nodig is.
 
 ### 3. **Bekabelde Backbone voor Access Points**
 
 #### **Ethernet Backhaul**
+
 - Als het mogelijk is, verbind de access points via ethernetkabels met een centrale switch of router. Dit wordt ethernet backhaul genoemd en zorgt voor een stabiele en snelle verbinding tussen de WAPs en het kernnetwerk.
 - Plaats ethernetkabels naar strategische locaties op elke verdieping waar de access points geplaatst zullen worden.
 
 ### 4. **Configuratie en Beheer**
 
 #### **Netwerk Segmentatie**
+
 - Segmenteer het netwerk in verschillende SSIDs voor verschillende gebruiksscenario's, zoals een apart gastnetwerk en een netwerk voor IoT-apparaten.
 - Gebruik VLANs (Virtual LANs) om verkeer te scheiden en de beveiliging te verbeteren.
 
 #### **Roaming en Band Steering**
+
 - Zorg ervoor dat de access points zijn geconfigureerd voor naadloze roaming, zodat gebruikers zich vrij kunnen verplaatsen tussen de verdiepingen zonder hun verbinding te verliezen.
 - Gebruik band steering om apparaten automatisch te verplaatsen naar de 5 GHz-band voor hogere snelheden en minder congestie, terwijl de 2.4 GHz-band gebruikt wordt voor apparaten die verder weg zijn.
 
 ### 5. **Beveiliging**
 
 #### **Sterke Encryptie**
+
 - Gebruik WPA3-encryptie voor het draadloze netwerk om de best mogelijke beveiliging te bieden.
 - Zorg voor regelmatige firmware-updates en beveiligingspatches voor alle netwerkapparaten.

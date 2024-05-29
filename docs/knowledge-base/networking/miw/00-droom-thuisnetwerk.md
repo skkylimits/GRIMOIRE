@@ -9,12 +9,14 @@ Laten we de initiële opzet van ons droomthuisnetwerk verder verbeteren door een
 **Schema:**
 
 **Access Layer:**
+
 - Draadloze routers (2, voor dekkingsgebied)
 - Draadloze access points (meerdere, voor volledige dekking)
 - Smart TV's, smartphones, tablets, laptops, slimme speakers (draadloos verbonden)
 - Draadloze printers (verbonden via wifi)
 
 **Distribution Layer:**
+
 - Router/firewall (centraal punt voor internetverbinding en netwerkbeveiliging)
 - DHCP-server (voor het toewijzen van IP-adressen)
 - DNS-server (voor het vertalen van domeinnamen naar IP-adressen)
@@ -59,33 +61,37 @@ In een tweelaags netwerkarchitectuur is er een duidelijke scheiding van taken en
 
 Natuurlijk, we kunnen een extra subnet toevoegen voor IoT-apparaten. Dit helpt om de IoT-apparaten te scheiden van het interne netwerk, gastnetwerk en beheernetwerk, wat de veiligheid en het beheer van het netwerk ten goede komt. Hieronder zie je de aangepaste indeling met een extra subnet voor IoT-apparaten:
 
-### Subnetten & IP Adressen:
+### Subnetten & IP Adressen
 
 **1. Intern netwerk (LAN):**
+
 - **Subnet:** 192.168.1.0/24
 - **IP-bereik:** 192.168.1.1 - 192.168.1.254
 - **Gateway:** 192.168.1.1 (router/firewall)
 - **DHCP-server:** 192.168.1.100 - 192.168.1.200
 
 **2. Gastnetwerk (Wireless LAN):**
+
 - **Subnet:** 192.168.2.0/24
 - **IP-bereik:** 192.168.2.1 - 192.168.2.254
 - **Gateway:** 192.168.2.1 (router/firewall)
 - **DHCP-server:** 192.168.2.100 - 192.168.2.200
 
 **3. Beheernetwerk (Voor netwerkapparaten):**
+
 - **Subnet:** 192.168.3.0/24
 - **IP-bereik:** 192.168.3.1 - 192.168.3.254
 - **Gateway:** 192.168.3.1 (router/firewall)
 - **DHCP-server:** 192.168.3.100 - 192.168.3.200
 
 **4. IoT-netwerk:**
+
 - **Subnet:** 192.168.4.0/24
 - **IP-bereik:** 192.168.4.1 - 192.168.4.254
 - **Gateway:** 192.168.4.1 (router/firewall)
 - **DHCP-server:** 192.168.4.100 - 192.168.4.200
 
-### Overzicht Subnetten:
+### Overzicht Subnetten
 
 | Netwerk       | Subnet         | IP-bereik               | Gateway      | DHCP-server                   |
 |---------------|----------------|-------------------------|--------------|-------------------------------|
@@ -94,18 +100,21 @@ Natuurlijk, we kunnen een extra subnet toevoegen voor IoT-apparaten. Dit helpt o
 | Beheernetwerk | 192.168.3.0/24 | 192.168.3.1 - 192.168.3.254 | 192.168.3.1 | 192.168.3.100 - 192.168.3.200 |
 | IoT-netwerk   | 192.168.4.0/24 | 192.168.4.1 - 192.168.4.254 | 192.168.4.1 | 192.168.4.100 - 192.168.4.200 |
 
-### Toelichting op de IoT-netwerkkeuze:
+### Toelichting op de IoT-netwerkkeuze
 
 **Veiligheid:**
+
 - Het IoT-netwerk is gescheiden van andere netwerken, waardoor de beveiliging wordt verbeterd. Eventuele kwetsbaarheden in IoT-apparaten hebben minder kans om invloed te hebben op andere delen van het netwerk.
 
 **Beheer:**
+
 - Door IoT-apparaten in een eigen subnet te plaatsen, kun je makkelijker beleid en toegangscontrole toepassen specifiek voor deze apparaten.
 
 **Performance:**
+
 - Het scheiden van verkeer kan de prestaties van het netwerk verbeteren door congestie te verminderen en beter beheer mogelijk te maken.
 
-### Implementatie:
+### Implementatie
 
 1. **Router/firewall Configuratie:**
    - Configureer de router/firewall om het nieuwe subnet te ondersteunen. Stel de gateway- en DHCP-instellingen in zoals hierboven beschreven.
@@ -126,26 +135,32 @@ Het gebruik van een beperkt IP-bereik binnen een subnet voor DHCP-toewijzing is 
 ### Wat gebeurt er met de andere IP-adressen?
 
 **IP-adressen buiten het DHCP-bereik:**
+
 - De IP-adressen van 192.168.4.1 tot 192.168.4.99 en van 192.168.4.201 tot 192.168.4.254 worden niet door de DHCP-server automatisch toegewezen. Deze IP-adressen blijven beschikbaar voor handmatige toewijzing.
 
 **Handmatige (statische) IP-adressen:**
+
 - Adressen buiten het DHCP-bereik kunnen handmatig worden toegewezen aan apparaten die vaste IP-adressen nodig hebben. Dit zijn vaak netwerkapparaten zoals routers, switches, access points, printers, servers en IoT-apparaten die stabiele en voorspelbare netwerkconfiguraties vereisen.
 
 **Gateway- en netwerkapparaten:**
+
 - Het eerste IP-adres in het subnet (192.168.4.1) wordt meestal gebruikt als de gateway (router/firewall). Dit maakt het beheer eenvoudiger omdat het een vast, voorspelbaar adres is voor netwerkbeheer.
 
-### Voordelen van een beperkt DHCP-bereik:
+### Voordelen van een beperkt DHCP-bereik
 
 **1. Beheerbaarheid:**
+
 - Door een beperkt bereik voor DHCP-toewijzing te gebruiken, behoud je controle over welke apparaten specifieke IP-adressen krijgen en welke apparaten dynamische adressen kunnen krijgen. Dit maakt netwerkbeheer eenvoudiger en overzichtelijker.
 
 **2. Stabiliteit voor kritieke apparaten:**
+
 - Door kritieke apparaten handmatig een vast IP-adres buiten het DHCP-bereik toe te wijzen, voorkom je IP-conflicten en zorg je ervoor dat deze apparaten altijd hetzelfde adres hebben. Dit is essentieel voor apparaten die afhankelijk zijn van stabiele netwerkinstellingen, zoals servers en netwerkapparaten.
 
 **3. Netwerksegmentatie en beveiliging:**
+
 - Een beperkt DHCP-bereik kan helpen bij het organiseren van het netwerk en het implementeren van beveiligingsmaatregelen. Door bepaalde IP-reeksen te reserveren, kun je specifieke apparaten of groepen van apparaten gemakkelijker beheren en beveiligen.
 
-### Voorbeeldconfiguratie van de DHCP-server voor IoT-netwerk:
+### Voorbeeldconfiguratie van de DHCP-server voor IoT-netwerk
 
 1. **Subnet:** 192.168.4.0/24
 2. **Gateway:** 192.168.4.1
@@ -157,7 +172,7 @@ Het gebruik van een beperkt IP-bereik binnen een subnet voor DHCP-toewijzing is 
    - **192.168.4.5:** Beveiligingscamera 1
    - **192.168.4.6:** Beveiligingscamera 2
 
-### Stappen om de DHCP-server te configureren:
+### Stappen om de DHCP-server te configureren
 
 1. **Open de router- of DHCP-serverinterface:**
    - Log in op de beheerinterface van je router of DHCP-server.
@@ -186,25 +201,30 @@ Je hebt niet per se een apart apparaat nodig om een DNS-server te draaien. Een D
 
 ### 1. DNS-server op een bestaande computer
 
-#### Voordelen:
+#### Voordelen
+
 - **Kostenbesparend:** Je hoeft geen extra hardware aan te schaffen.
 - **Flexibiliteit:** Je kunt gemakkelijk software installeren en configureren.
 
-#### Nadelen:
+#### Nadelen
+
 - **Betrouwbaarheid:** Als de computer waarop de DNS-server draait, uitgeschakeld of opnieuw opgestart wordt, werkt de DNS-server niet meer.
 - **Prestatie-impact:** Het draaien van een DNS-server kan de prestaties van andere taken op de computer beïnvloeden.
 
 ### 2. DNS-server op een dedicated apparaat
 
-#### Voordelen:
+#### Voordelen
+
 - **Betrouwbaarheid:** Een dedicated apparaat kan continu beschikbaar zijn, wat de betrouwbaarheid verhoogt.
 - **Prestatie:** Geen prestatieverlies voor andere toepassingen.
 
-#### Nadelen:
+#### Nadelen
+
 - **Kosten:** Extra hardware aanschaffen en onderhouden.
 - **Beheer:** Extra apparaat betekent meer beheerwerk.
 
-#### Implementatie:
+#### Implementatie
+
 - Gebruik een apparaat zoals een Raspberry Pi voor een kleine, energiezuinige DNS-server.
 - Of gebruik een speciale server voor grotere netwerken.
 
@@ -212,29 +232,35 @@ Je hebt niet per se een apart apparaat nodig om een DNS-server te draaien. Een D
 
 ### 3. DNS-server op een virtuele machine (VM)
 
-#### Voordelen:
+#### Voordelen
+
 - **Flexibiliteit:** Makkelijk te schalen en te beheren binnen een bestaande infrastructuur.
 - **Isolatie:** De DNS-server draait geïsoleerd van andere applicaties.
 
-#### Nadelen:
+#### Nadelen
+
 - **Complexiteit:** Vereist kennis van virtualisatie.
 - **Prestatie-overhead:** Sommige prestatie-overhead door virtualisatie.
 
-#### Implementatie:
+#### Implementatie
+
 - Gebruik een virtualisatieplatform zoals VMware, VirtualBox of Hyper-V.
 - Installeer een OS en configureer de DNS-server zoals op een fysieke machine.
 
 ### 4. Cloud DNS-service
 
-#### Voordelen:
+#### Voordelen
+
 - **Beheer gemak:** Geen hardware-onderhoud, automatische updates en hoge beschikbaarheid.
 - **Schaalbaarheid:** Makkelijk te schalen naar behoefte.
 
-#### Nadelen:
+#### Nadelen
+
 - **Kosten:** Abonnementskosten kunnen oplopen afhankelijk van het gebruik.
 - **Afhankelijkheid:** Afhankelijk van de internetverbinding en de serviceprovider.
 
-#### Implementatie:
+#### Implementatie
+
 - Gebruik een cloud DNS-service zoals Google Cloud DNS, AWS Route 53 of Azure DNS.
 - Configureer de service via de cloudprovider interface.
 
@@ -248,20 +274,25 @@ Een Intrusion Detection System (IDS) is een cruciaal onderdeel van de netwerkbev
 
 ### 1. IDS op een bestaande computer
 
-#### Voordelen:
+#### Voordelen
+
 - **Kostenbesparend:** Geen extra hardware nodig.
 - **Flexibiliteit:** Gemakkelijk te installeren en configureren.
 
-#### Nadelen:
+#### Nadelen
+
 - **Betrouwbaarheid:** Als de computer waarop het IDS draait wordt uitgeschakeld of opnieuw wordt opgestart, werkt het IDS niet meer.
 - **Prestatie-impact:** Het draaien van een IDS kan de prestaties van andere taken op de computer beïnvloeden.
 
-#### Implementatie:
+#### Implementatie
+
 - **Snort:** Een populaire open-source IDS.
 - **Suricata:** Een krachtige open-source IDS/IPS/NSM-engine.
 
 **Voorbeeld met Snort op Linux:**
+
 1. **Installatie:**
+
    ```sh
    sudo apt-get update
    sudo apt-get install snort
@@ -269,35 +300,43 @@ Een Intrusion Detection System (IDS) is een cruciaal onderdeel van de netwerkbev
 
 2. **Configuratie:**
    - Configuratiebestand bewerken:
+
      ```sh
      sudo nano /etc/snort/snort.conf
      ```
+
    - Netwerkinterfaces en regels instellen.
 
 3. **Service starten:**
+
    ```sh
    sudo systemctl start snort
    ```
 
 ### 2. Dedicated IDS-apparaat
 
-#### Voordelen:
+#### Voordelen
+
 - **Betrouwbaarheid:** Continu beschikbaar en specifiek voor beveiligingstaken.
 - **Prestatie:** Geen invloed op andere netwerkactiviteiten.
 
-#### Nadelen:
+#### Nadelen
+
 - **Kosten:** Extra hardware vereist.
 - **Beheer:** Meer onderhoud en configuratie nodig.
 
-#### Implementatie:
+#### Implementatie
+
 - **Dedicated IDS-appliances:** Commerciële apparaten zoals die van Cisco, Palo Alto Networks, of andere beveiligingsleveranciers.
 - **Raspberry Pi of andere goedkope hardware:** Voor kleinere netwerken.
 
 **Voorbeeld met een Raspberry Pi:**
+
 1. **Raspberry Pi voorbereiden:**
    - Installeer Raspbian OS en update het systeem.
 
 2. **Snort installeren:**
+
    ```sh
    sudo apt-get update
    sudo apt-get install snort
@@ -307,32 +346,39 @@ Een Intrusion Detection System (IDS) is een cruciaal onderdeel van de netwerkbev
 
 ### 3. IDS op een virtuele machine (VM)
 
-#### Voordelen:
+#### Voordelen
+
 - **Flexibiliteit:** Eenvoudig te schalen en te beheren.
 - **Isolatie:** IDS draait geïsoleerd van andere applicaties.
 
-#### Nadelen:
+#### Nadelen
+
 - **Complexiteit:** Vereist kennis van virtualisatie.
 - **Prestatie-overhead:** Sommige prestatie-overhead door virtualisatie.
 
-#### Implementatie:
+#### Implementatie
+
 - Gebruik een virtualisatieplatform zoals VMware, VirtualBox of Hyper-V.
 - Installeer een OS en configureer het IDS zoals op een fysieke machine.
 
 ### 4. IDS als onderdeel van een router/firewall
 
-#### Voordelen:
+#### Voordelen
+
 - **Integratie:** Geen extra hardware nodig, geïntegreerd met netwerkbeheer.
 - **Gemak:** Eenvoudiger te beheren als onderdeel van de netwerkapparatuur.
 
-#### Nadelen:
+#### Nadelen
+
 - **Prestatie:** Kan de prestaties van de router beïnvloeden.
 - **Beperkte functionaliteit:** Mogelijk niet zo krachtig als dedicated IDS-oplossingen.
 
-#### Implementatie:
+#### Implementatie
+
 - **Router/firewall met IDS-functionaliteit:** Veel moderne routers en firewalls hebben ingebouwde IDS/IPS-functionaliteiten, zoals pfSense, OPNsense, en commerciële oplossingen van bedrijven zoals Cisco, Fortinet, en Palo Alto Networks.
 
 **Voorbeeld met pfSense:**
+
 1. **pfSense installeren:**
    - Download pfSense en installeer het op een geschikte hardware of VM.
 
@@ -352,9 +398,11 @@ AlBij het ontwerpen van een thuisnetwerk voor een groot huis met meerdere verdie
 ### 1. **Planning en Plaatsing van Access Points**
 
 #### **Site Survey**
+
 - Voer een site survey uit om de optimale locaties voor de access points te bepalen. Dit kan gedaan worden met behulp van speciale softwaretools die de signaalsterkte en mogelijke storingsbronnen meten.
 
 #### **Strategische Plaatsing**
+
 - Plaats de access points op centrale locaties binnen elke verdieping en zorg ervoor dat ze voldoende overlap hebben voor naadloze roaming.
 - Houd rekening met fysieke obstakels zoals muren, vloeren en meubels die het signaal kunnen verzwakken. Plaats WAPs op hogere posities, zoals aan het plafond, voor een betere signaalverspreiding.
 - Zorg ervoor dat er voldoende dekking is in de belangrijkste gebruiksruimten, zoals woonkamers, slaapkamers, kantoren en keukens.
@@ -362,28 +410,33 @@ AlBij het ontwerpen van een thuisnetwerk voor een groot huis met meerdere verdie
 ### 2. **Gebruik van Mesh-netwerken**
 
 #### **Mesh Access Points**
+
 - Overweeg het gebruik van een mesh-netwerksysteem. Mesh access points werken samen om één groot netwerk te vormen, waardoor de dekking in een groot huis eenvoudiger en effectiever kan worden uitgebreid.
 - Mesh-netwerken maken gebruik van meerdere nodes die draadloos met elkaar communiceren, wat zorgt voor betere dekking zonder dat er bekabeling tussen de nodes nodig is.
 
 ### 3. **Bekabelde Backbone voor Access Points**
 
 #### **Ethernet Backhaul**
+
 - Als het mogelijk is, verbind de access points via ethernetkabels met een centrale switch of router. Dit wordt ethernet backhaul genoemd en zorgt voor een stabiele en snelle verbinding tussen de WAPs en het kernnetwerk.
 - Plaats ethernetkabels naar strategische locaties op elke verdieping waar de access points geplaatst zullen worden.
 
 ### 4. **Configuratie en Beheer**
 
 #### **Netwerk Segmentatie**
+
 - Segmenteer het netwerk in verschillende SSIDs voor verschillende gebruiksscenario's, zoals een apart gastnetwerk en een netwerk voor IoT-apparaten.
 - Gebruik VLANs (Virtual LANs) om verkeer te scheiden en de beveiliging te verbeteren.
 
 #### **Roaming en Band Steering**
+
 - Zorg ervoor dat de access points zijn geconfigureerd voor naadloze roaming, zodat gebruikers zich vrij kunnen verplaatsen tussen de verdiepingen zonder hun verbinding te verliezen.
 - Gebruik band steering om apparaten automatisch te verplaatsen naar de 5 GHz-band voor hogere snelheden en minder congestie, terwijl de 2.4 GHz-band gebruikt wordt voor apparaten die verder weg zijn.
 
 ### 5. **Beveiliging**
 
 #### **Sterke Encryptie**
+
 - Gebruik WPA3-encryptie voor het draadloze netwerk om de best mogelijke beveiliging te bieden.
 - Zorg voor regelmatige firmware-updates en beveiligingspatches voor alle netwerkapparaten.
 
@@ -393,55 +446,67 @@ Firewalls zijn een essentieel onderdeel van netwerkbeveiliging, en er zijn versc
 
 ### 1. Firewalls op een Router
 
-#### Voordelen:
+#### Voordelen
+
 - **Gemak:** Eenvoudig te configureren en te beheren, vooral voor thuisgebruikers en kleine bedrijven.
 - **Kostenbesparend:** Geen extra hardware nodig als je al een geschikte router hebt.
 
-#### Nadelen:
+#### Nadelen
+
 - **Beperkte functionaliteit:** Meestal minder krachtig en configureerbaar dan dedicated firewalls.
 - **Prestatie:** Kan de prestaties van de router beïnvloeden als er veel verkeer of complexe regels zijn.
 
-#### Implementatie:
+#### Implementatie
+
 - Veel moderne routers hebben ingebouwde firewall-functionaliteiten die basis firewall-instellingen en NAT (Network Address Translation) bieden.
 - Sommige geavanceerde routers bieden meer configuratiemogelijkheden, zoals deep packet inspection en intrusion prevention systems (IPS).
 
 **Voorbeeld met een standaard thuisrouter:**
+
 - Inloggen op de webinterface van de router.
 - Navigeren naar het beveiligings- of firewall-tabblad.
 - Basisregels instellen voor het toestaan of blokkeren van verkeer op basis van IP-adres, poortnummers en protocollen.
 
 ### 2. Dedicated Firewall Appliances
 
-#### Voordelen:
+#### Voordelen
+
 - **Krachtig en schaalbaar:** Speciaal ontworpen voor netwerkbeveiliging, met meer rekenkracht en gespecialiseerde functies.
 - **Betrouwbaarheid:** Meestal zeer betrouwbaar en robuust.
 
-#### Nadelen:
+#### Nadelen
+
 - **Kosten:** Hogere kosten door de aanschaf van dedicated hardware.
 - **Beheer:** Vereist meer expertise voor installatie en beheer.
 
-#### Implementatie:
+#### Implementatie
+
 - Commerciële oplossingen zoals die van Cisco, Fortinet, Palo Alto Networks, en Check Point bieden krachtige firewall-appliances met uitgebreide beveiligingsfuncties.
 
 **Voorbeeld met een Cisco ASA Appliance:**
+
 - Configuratie via de CLI (Command Line Interface) of een GUI-tool zoals Cisco ASDM (Adaptive Security Device Manager).
 - Regels configureren voor toegangscontrole, VPN-instellingen, en IPS/IDS-functies.
 
 ### 3. Firewall Software op een Dedicated Machine of Server
 
-#### Voordelen:
+#### Voordelen
+
 - **Flexibiliteit:** Zeer configureerbaar en aanpasbaar aan specifieke behoeften.
 - **Krachtig:** Kan uitgebreide beveiligingsfuncties bieden, afhankelijk van de gebruikte software.
 
-#### Nadelen:
+#### Nadelen
+
 - **Beheer:** Vereist meer expertise voor installatie en onderhoud.
 - **Betrouwbaarheid:** De beschikbaarheid is afhankelijk van de betrouwbaarheid van de hardware waarop het draait.
 
-#### Implementatie:
+#### Implementatie
+
 - **pfSense:** Een populaire open-source firewall die zeer configureerbaar is en op standaard hardware kan draaien.
 - **OPNsense:** Een andere krachtige open-source firewall, gebaseerd op FreeBSD, met een gebruiksvriendelijke interface.
 
 **Voorbeeld met pfSense:**
+
 1. **Installatie:**
    - Download pfSense en installeer het op een geschikte hardware of VM.
 2. **Basisconfiguratie:**
@@ -453,18 +518,22 @@ Firewalls zijn een essentieel onderdeel van netwerkbeveiliging, en er zijn versc
 
 ### 4. Cloud-gebaseerde Firewalls
 
-#### Voordelen:
+#### Voordelen
+
 - **Beheer gemak:** Geen fysieke hardware om te onderhouden, automatische updates, en schalen naar behoefte.
 - **Flexibiliteit:** Geschikt voor hybride en cloud-native omgevingen.
 
-#### Nadelen:
+#### Nadelen
+
 - **Kosten:** Mogelijk hogere operationele kosten afhankelijk van het gebruik.
 - **Afhankelijkheid:** Afhankelijk van de internetverbinding en de serviceprovider.
 
-#### Implementatie:
+#### Implementatie
+
 - Cloud-leveranciers zoals AWS (AWS WAF), Microsoft Azure (Azure Firewall), en Google Cloud (Google Cloud Armor) bieden cloud-gebaseerde firewalloplossingen.
 
 **Voorbeeld met AWS WAF:**
+
 - Configuratie via de AWS Management Console.
 - Web ACL’s (Access Control Lists) maken om specifieke regels voor verkeer naar je AWS-resources in te stellen.
 
