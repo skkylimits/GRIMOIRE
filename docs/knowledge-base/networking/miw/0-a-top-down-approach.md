@@ -1225,7 +1225,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     ::: details Antwoord
     Principes van Congestiecontrole
 
-    Congestiecontrole is een fundamenteel concept in netwerkprotocollen, met name in TCP, om ervoor te zorgen dat het netwerk niet overbelast raakt enen om e​en efficiënt gebruik van de beschikbare bandbreedte te garanderen. Hier zijn de belangrijkste principes van congestiecontrole:
+    Congestiecontrole is een fundamenteel concept in netwerkprotocollen, met name in TCP, om ervoor te zorgen dat het netwerk niet overbelast raakt enen om een efficiënt gebruik van de beschikbare bandbreedte te garanderen. Hier zijn de belangrijkste principes van congestiecontrole:
 
     1. **Avoidance of Overload**: Het doel van congestiecontrole is om te voorkomen dat het netwerk overbelast raakt door ervoor te zorgen dat de totale hoeveelheid verzonden gegevens het capaciteitslimiet van het netwerk niet overschrijdt.
 
@@ -1550,7 +1550,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   ::: details Antwoord
 
   In netwerken verwijst "match" naar het proces waarbij een netwerkapparaat een binnenkomend pakket vergelijkt met bepaalde criteria of regels om te bepalen hoe het pakket moet worden verwerkt of doorgestuurd.
-  
+
   Dit proces omvat het controleren van specifieke velden in de header van het pakket, zoals het bron- en doel-IP-adres, het protocol, de poortnummers en andere relevante informatie, om te bepalen welke actie er op het pakket moet worden toegepast.
 
   <img src="./assets/afbeeldingen/match.png">
@@ -1739,7 +1739,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - Each router has information only about its physically-connected neighbors and their link costs.
   - Routing decisions are made through an iterative process involving computation and exchange of information with neighboring routers.
   :::
-  
+
   - **5.2.1** The Link-State (LS) Routing Algorithm
     ::: details Antwoord
     **A Link-State Routing Algorithm: Dijkstra's Algorithm**
@@ -1751,7 +1751,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     <img src="./assets/afbeeldingen/dijkstra-algoritme.png">
     :::
-  
+
   - **5.2.2** The Distance-Vector (DV) Routing Algorithm
     ::: details Antwoord
 
@@ -1774,7 +1774,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - Inter-AS-routing:
       - Routing tussen AS'en, bijvoorbeeld via BGP (Border Gateway Protocol).
     :::
-  
+
 - **5.3** Intra-AS Routing in the Internet: OSPF
   ::: details Antwoord
   - **Open**: Openbaar beschikbaar en veel gebruikt.
@@ -1786,7 +1786,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - Hierarchical:
     - Alle OSPF-berichten zijn geauthenticeerd om kwaadwillige indringing te voorkomen.
   :::
-  
+
 - **5.4** Routing Among the ISPs: BGP
   ::: details Antwoord
   **BGP Basis: Het Internet als een Netwerk van Snelwegen**
@@ -1799,7 +1799,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
   - **Begrip van BGP Via Stadsanalogie**: Met deze analogie kun je je voorstellen dat elk AS beloftes maakt en ontvangt via BGP-sessies, net zoals steden communiceren over hoe ze het verkeer tussen elkaar willen reguleren via verschillende toegangspunten. Dit maakt het gemakkelijker om de basisprincipes van BGP te onthouden en te begrijpen.
   :::
-  
+
   - **5.4.1** The Role of BGP
     ::: details Antwoord
     **Internetroutes als Verkeersroutes**: Stel je het internet voor als een complex wegennetwerk, waarbij elk netwerk autonoom is, vergelijkbaar met verschillende steden of landen. BGP bepaalt hoe het verkeer tussen deze netwerken wordt gerouteerd, zoals wegwijzers en verkeersregels bepalen hoe auto's tussen steden reizen.
@@ -1808,7 +1808,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     **De Hoofdpoortwachters**: Gateway Routers: Gateway-routers van elk autonoom netwerk fungeren als de hoofdpoortwachters. Ze wisselen informatie uit over beschikbare routes en nemen beslissingen over hoe het verkeer moet worden doorgestuurd.
     :::
-  
+
   - **5.4.2** Advertising BGP Route Information
     ::: details Antwoord
     **Adverteren van BGP Route-Informatie**
@@ -1823,7 +1823,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     - **Rol van BGP-advertenties**: BGP-advertenties fungeren als de wegwijzers van het internet, waarbij routers beloften doen over hoe ze dataverkeer zullen routeren.
     :::
-  
+
   - **5.4.3** Determining the Best Routes
     ::: details Antwoord
     - **AS-PATH**: Dit is een lijst van AS'en die de prefixadvertentie hebben doorlopen. Het geeft de route aan die de advertentie heeft gevolgd en helpt bij het voorkomen van routing loops.
@@ -1843,47 +1843,47 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     ::: details Antwoord
 
     :::
-  
+
   - **5.4.4** IP-Anycast
     ::: details Antwoord
 
     :::
-  
+
   - **5.4.5** Routing Policy
     ::: details Antwoord
 
     :::
-  
+
   - **5.4.6** Putting the Pieces Together: Obtaining Internet Presence
     ::: details Antwoord
 
     :::
-  
+
 - **5.5** The SDN Control Plane
   ::: details Antwoord
 
   :::
-  
+
   - **5.5.1** The SDN Control Plane: SDN Controller and SDN Network-control Applications
     ::: details Antwoord
 
     :::
-  
+
   - **5.5.2** OpenFlow Protocol
     ::: details Antwoord
 
     :::
-  
+
   - **5.5.3** Data and Control Plane Interaction: An Example
     ::: details Antwoord
 
     :::
-  
+
   - **5.5.4** SDN: Past and Future
     ::: details Antwoord
 
     :::
-  
+
 - **5.6** ICMP: The Internet Control Message Protocol
   ::: details Antwoord
   ICMP, of Internet Control Message Protocol, is een netwerklaagprotocol dat wordt gebruikt voor netwerkdiagnostiek en foutrapportage. Het wordt voornamelijk gebruikt door netwerkapparaten, zoals routers, om foutmeldingen en operationele informatie te verzenden die aangeven dat een gevraagde dienst niet beschikbaar is of dat een host of router niet kon worden bereikt.
@@ -1922,27 +1922,27 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     Vanwege deze potentiële risico's implementeren veel netwerkbeheerders beleid om ICMP-verkeer te beperken of te monitoren.
   :::
-  
+
 - **5.7** Network Management and SNMP, NETCONF/YANG
   ::: details Antwoord
 
   :::
-  
+
   - **5.7.1** The Network Management Framework
     ::: details Antwoord
 
     :::
-  
+
   - **5.7.2** The Simple Network Management Protocol (SNMP) and the Management Information Base (MIB)
     ::: details Antwoord
 
     :::
-  
+
   - **5.7.3** The Network Configuration Protocol (NETCONF) and YANG
     ::: details Antwoord
 
     :::
-  
+
 - **5.8** Summary
 
 ## `Chapter 6`
@@ -2345,7 +2345,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   ::: details Antwoord
   **There are Bad Guys (and Girls) Out There!**
 
-    Q: What can a "bad guy" do?  
+    Q: What can a "bad guy" do?
     A: A lot! See section 1.6.
 
   - Eavesdrop: Intercept messages.
@@ -2363,7 +2363,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
         2. Break into hosts around the network (see botnet).
         3. Send packets to target from compromised host.
   :::
-  
+
 - **7.3** Security Policy
 ::: details Antwoord
 **Security Policy**
@@ -2395,13 +2395,13 @@ Comply with laws, rules, and regulations:
 *Example: A Website*
 
 - **Risk:** The website may be hacked.
-  
+
 - **Chances:** Once every 5 years.
-  
+
 - **Damage:** Estimated at €80,000.
-  
+
 - **Therefore:** The calculated risk is €16,000 per year.
-  
+
 - **Solution:** Implementing a firewall, with associated costs of €10,000 per year.
 :::
 
@@ -2410,21 +2410,21 @@ Comply with laws, rules, and regulations:
 **Technical Protection**
 
 - **Firewall:** Acts as a barrier between a trusted internal network and untrusted external networks, controlling incoming and outgoing network traffic based on predetermined security rules.
-  
+
 - **Routers, Modems, etc. with a Packet Filter:** Devices that inspect packets of data as they pass through and make decisions based on predefined rules, allowing or blocking packets accordingly.
-  
+
 - **Antivirus:** Software designed to detect, prevent, and remove malicious software (malware) such as viruses, worms, and trojans from computers and networks.
-  
+
 - **IDS (Intruder Detection System):** Monitors network or system activities for malicious activities or policy violations and alerts system administrators or security personnel when suspicious behavior is detected.
-  
+
 - **IPS (Intruder Prevention System):** Goes beyond IDS by actively blocking or preventing detected malicious activities from being executed on a network or system.
-  
+
 - **IDP (Identity Provider):** Manages user identities and authentication processes, ensuring that only authorized users gain access to resources and services.
-  
+
 - **Data Protection (e.g., BitLocker):** Ensures the confidentiality and integrity of data by implementing measures such as encryption, access controls, and backup procedures.
-  
+
 - **Data Encryption:** Converts plaintext data into ciphertext to protect it from unauthorized access or interception during transmission or while stored on a device or network.
-  
+
 - **Security Awareness:** Educating users and personnel about security best practices, policies, and procedures to help them recognize and mitigate potential security risks and threats.
 :::
 
