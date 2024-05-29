@@ -105,6 +105,7 @@ Channel flags: 0x00a0, Complementary Code Keying (CCK), 2 GHz spectrum
 Dat weten we omdat 2 GHz true is.
 
 `.... .... 1... .... = 2 GHz spectrum: True`
+
 `.... ...0 .... .... = 5 GHz spectrum: False`
 
 ## 5 Er wordt in de pcap ook het bestand alice.txt verstuurd met het HTTP protocol.  Dat is niet encrypt.  Dit bestand is de tekst van het verhaal Alice’s adventures in wonderland van Lewis Caroll
@@ -153,6 +154,17 @@ Dit is wat er gebeurd:
 Deze drie stappen vormen de kern van het opzetten van een TCP-verbinding tussen de client en de server.
 
 ## 7 Een connectie wordt niet alleen opgezet maar ook afgesloten. Geef een voorbeeld hoe het afgesloten wordt
+
+Normaal gesproken wordt een TCP-verbinding afgesloten met een "3-way handshake" voor het sluiten van de verbinding, gevolgd door een "4-way handshake" om de verbinding volledig te sluiten:
+
+1. De afzender stuurt een FIN-pakket (SYN) naar de ontvanger om aan te geven dat hij klaar is met verzenden.
+2. De ontvanger antwoordt met een ACK-pakket (SYN, ACK) om te bevestigen dat hij het FIN-pakket heeft ontvangen.
+3. De ontvanger stuurt ook een FIN-pakket naar de afzender om aan te geven dat hij ook klaar is met verzenden.
+4. De afzender antwoordt met een ACK-pakket om te bevestigen dat hij het FIN-pakket heeft ontvangen.
+
+Dit resulteert in een "4-way handshake" voor het volledig afsluiten van de verbinding, waarbij elk van de vier stappen wordt weergegeven door een SYN, SYN-ACK, FIN en FIN-ACK.
+
+In dit geval kan ik dat helaas niet terugvinden. Ik kom alleen [FIN, ACK] pakketen tegen. Zelfs als ik filter met `tcp.flags.fin == 1`
 
 ## 8 Welk MAC adres hoort bij IP adres 192.168.1.109?
 
@@ -230,6 +242,142 @@ Transmission Control Protocol, Src Port: 2542, Dst Port: 80, Seq: 383, Ack: 4864
 
 Het MAC-adres is dus: `00:13:02:d1:b6:4f`.
 
+Nog een manier om dit te dubbelcheck is  door gebruik te maken va het `ARP` protocol.
+
+Voer de volgende stappen uit:
+
+1. Type arp in het filter
+2. Zoek een destination addres to overeenkomt met het ip adres
+3. Open het kopje Address Resolution Protocol
+4. Bekijk de gekoppelde MAC & IP Adres
+
+```bash
+Frame 500: 88 bytes on wire (704 bits), 88 bytes captured (704 bits)
+Radiotap Header v0, Length 24
+802.11 radio information
+IEEE 802.11 Data, Flags: ......F.C
+Logical-Link Control
+Address Resolution Protocol (request)
+    Hardware type: Ethernet (1)
+    Protocol type: IPv4 (0x0800)
+    Hardware size: 6
+    Protocol size: 4
+    Opcode: request (1)
+    Sender MAC address: Intel_d1:b6:4f (00:13:02:d1:b6:4f)
+    Sender IP address: 192.168.1.109
+    Target MAC address: 00:00:00_00:00:00 (00:00:00:00:00:00)
+    Target IP address: 192.168.1.1
+```
+
+Zoals te zijn zijn deze twee addressen gekoppeld.
+
+```bash
+Sender MAC address: Intel_d1:b6:4f (00:13:02:d1:b6:4f)
+Sender IP address:` 192.168.1.109`
+```
+
+Daaruit kunnen we opmaken dat `00:13:02:d1:b6:4f` dus het MAC-adres met `192.168.1.109` als IP adres
+
 ## 9  Als het goed is weet je hoe een device weet welk IP adres hoort bij welk MAC adres. Zo niet, kijk dan in hoofdstuk 6 van het boek.  Geef de regel waar het device met IP adres 192.168.1.109 probeert te achterhalen wat het MAC adres is van device 192.168.1.1
 
-## Het TCP pakketje o regel 1079 heeft sequence nummer 252 en ACK nummer 383 Het volgende TCP pakketje in deze uitwisseling is 1081.  Hier is sequence nummer 383 en ACK = 1712. Leg uit waarom hier ACK 1712 is
+Filter  op `arp`
+
+```bash
+500 24.865752 Intel_d1:b6:4f Broadcast ARP 88 Who has 192.168.1.1? Tell 192.168.1.109
+```
+
+```bash
+Frame 500: 88 bytes on wire (704 bits), 88 bytes captured (704 bits)
+Radiotap Header v0, Length 24
+802.11 radio information
+IEEE 802.11 Data, Flags: ......F.C
+Logical-Link Control
+Address Resolution Protocol (request)
+    Hardware type: Ethernet (1)
+    Protocol type: IPv4 (0x0800)
+    Hardware size: 6
+    Protocol size: 4
+    Opcode: request (1)
+    Sender MAC address: Intel_d1:b6:4f (00:13:02:d1:b6:4f)
+    Sender IP address: 192.168.1.109
+    Target MAC address: 00:00:00_00:00:00 (00:00:00:00:00:00)
+    Target IP address: 192.168.1.1
+```
+
+## 10 Het TCP pakketje op regel 1079 heeft sequence nummer 252 en ACK nummer 383 Het volgende TCP pakketje in deze uitwisseling is 1081.  Hier is sequence nummer 383 en ACK = 1712. Leg uit waarom hier ACK 1712 is
+
+```bash
+1079 32.917552 128.119.240.19 192.168.1.109 TCP 1562 80 → 2542 [ACK] Seq=252 Ack=383 Win=6432 Len=1460 [TCP segment of a reassembled PDU]
+```
+
+```bash
+1081 32.917767 192.168.1.109 128.119.240.19 TCP 102 2542 → 80 [ACK] Seq=383 Ack=1712 Win=17520 Len=0
+```
+
+Laten we frame 1079 inspecteren om het antwoord te geven:
+
+```bash
+Frame 1079: 1562 bytes on wire (12496 bits), 1562 bytes captured (12496 bits)
+Radiotap Header v0, Length 24
+802.11 radio information
+IEEE 802.11 QoS Data, Flags: ......F.C
+Logical-Link Control
+Internet Protocol Version 4, Src: 128.119.240.19, Dst: 192.168.1.109
+    0100 .... = Version: 4
+    .... 0101 = Header Length: 20 bytes (5)
+    Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)
+    Total Length: 1500
+    Identification: 0x5fcd (24525)
+    010. .... = Flags: 0x2, Don't fragment
+    ...0 0000 0000 0000 = Fragment Offset: 0
+    Time to Live: 49
+    Protocol: TCP (6)
+    Header Checksum: 0xb1ae [validation disabled]
+    [Header checksum status: Unverified]
+    Source Address: 128.119.240.19
+    Destination Address: 192.168.1.109
+Transmission Control Protocol, Src Port: 80, Dst Port: 2542, Seq: 252, Ack: 383, Len: 1460
+    Source Port: 80
+    Destination Port: 2542
+    [Stream index: 3]
+    [Conversation completeness: Complete, WITH_DATA (31)]
+    [TCP Segment Len: 1460]
+    Sequence Number: 252    (relative sequence number)
+    Sequence Number (raw): 688579653
+    [Next Sequence Number: 1712    (relative sequence number)]
+    Acknowledgment Number: 383    (relative ack number)
+    Acknowledgment number (raw): 564646823
+    0101 .... = Header Length: 20 bytes (5)
+    Flags: 0x010 (ACK)
+    Window: 6432
+    [Calculated window size: 6432]
+    [Window size scaling factor: -2 (no window scaling used)]
+    Checksum: 0x3506 [unverified]
+    [Checksum Status: Unverified]
+    Urgent Pointer: 0
+    [Timestamps]
+    [SEQ/ACK analysis]
+    TCP payload (1460 bytes)
+    [Reassembled PDU in frame: 1098]
+    TCP segment data (1460 bytes)
+```
+
+Om het volgende sequentienummer te berekenen, voegen we het huidige `sequentienummer (252)` samen met de `lengte`van de gegevens in het huidige TCP-segment (`1460 bytes`). Het resulterende volgende sequentienummer is dus:
+
+`252` (huidig sequentienummer) + `1460` (lengte van gegevens) = `1712`
+
+```bash
+[TCP Segment Len: 1460]
+
+Sequence Number: 252    (relative sequence number)
+```
+
+Dit wordt nog eens bevestigd in het TCP-pakket zelf, waar het veld "Next Sequence Number" is aangegeven als 1712
+
+```bash
+[Next Sequence Number: 1712    (relative sequence number)]
+```
+
+Het ACK-nummer 1712 in de TCP-communicatie geeft aan dat de ontvanger bevestigt dat hij alle gegevens tot en met sequentienummer 1711 heeft ontvangen en klaar is om gegevens vanaf sequentienummer 1712 te ontvangen.
+
+Dat is dus de reden waarom het pakketje met nummer `1081`: `Ack=1712` heeft
