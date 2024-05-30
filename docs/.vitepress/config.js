@@ -37,14 +37,21 @@ export default {
         ],
       },
       {
-        text: 'Knowledge Base',
+        text: 'Certifize',
         items: [
           { text: 'ISTQB', link: '/knowledge-base/istqb/' },
           { text: 'CISSP', link: '/knowledge-base/cissp/' },
           { text: 'CNWPP', link: '/knowledge-base/cnwpp/' },
+        ],
+      },
+      {
+        text: 'Knowledge Base',
+        items: [
+          { text: 'System Engineering', link: '/knowledge-base/system-engineering/' },
           { text: 'Networking', link: '/knowledge-base/networking/' },
-          { text: 'System Administration', link: '/knowledge-base/sysadmin/' },
           { text: 'Operating Systems', link: '/knowledge-base/os/' },
+          { text: 'Virtualization', link: '/knowledge-base/virtualization/' },
+          { text: 'System Administration', link: '/knowledge-base/sysadmin/' },
           { text: 'Cyber Crusades', link: '/knowledge-base/cyber-crusades/' },
           { text: 'The Pentest 101', link: '/knowledge-base/thepentest101/' },
         ],
@@ -341,6 +348,22 @@ export default {
           text: 'Operating Systems',
           items: [
             { text: 'Index', link: '/os/' },
+          ],
+        },
+      ],
+      '/knowledge-base/system-engineering/': [
+        {
+          text: 'System Engineering',
+          items: [
+            { text: '', link: '/system-engineering/' },
+          ],
+        },
+      ],
+      '/knowledge-base/virtualization/': [
+        {
+          text: 'Virtualization',
+          items: [
+            { text: '', link: '/virtualization/' },
           ],
         },
       ],

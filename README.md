@@ -95,3 +95,15 @@ NAT
 subnetting
 parity checkings
 network security cryptography
+
+## GPT Magic
+
+```text
+Vertaal naar het nederlands maak het korter geef elke alinea een bold titel.
+
+Behoud de engelse titels
+
+Houd kort alsjeblieft.
+
+Een zin per alinea.
+```
