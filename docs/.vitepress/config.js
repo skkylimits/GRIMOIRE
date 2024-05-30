@@ -39,9 +39,10 @@ export default {
       {
         text: 'Certifize',
         items: [
-          { text: 'ISTQB', link: '/knowledge-base/istqb/' },
-          { text: 'CISSP', link: '/knowledge-base/cissp/' },
-          { text: 'CNWPP', link: '/knowledge-base/cnwpp/' },
+          { text: 'CCNA', link: '/certifize/ccna/' },
+          { text: 'ISTQB', link: '/certifize/istqb/' },
+          { text: 'CISSP', link: '/certifize/cissp/' },
+          { text: 'CNWPP', link: '/certifize/cnwpp/' },
         ],
       },
       {
@@ -99,6 +100,7 @@ export default {
           collapsible: true,
           items: [
             { text: 'Cyber kill chain', link: '/methodologies/cyber-kill-chain/cyber-kill-chain' },
+            { text: 'Lockheed Martin\'s CBK', link: '/methodologies/cyber-kill-chain/lockheed-martins-cbk' },
 
           ],
         },
@@ -107,7 +109,6 @@ export default {
           collapsible: true,
           items: [
             { text: 'OWASP Risk Rating Methodology', link: '/methodologies/owasp/owasp-risk-rating-methodology' },
-            { text: 'Risk Rating Opdracht', link: '/methodologies/owasp/risk-rating-opdracht' },
 
           ],
         },
@@ -213,19 +214,41 @@ export default {
         },
       ],
 
-      // Knowledge Base
-      // This sidebar gets displayed when user is
-      // under `istqb` directory.
-      '/knowledge-base/istqb/': [
+      // certifize
+
+
+      '/instruments/git': [
         {
-          text: 'ISTQB',
+          text: 'git',
           items: [
-            // This shows `/istqb/index.md` page.
-            { text: 'Index', link: '/istqb/' }, // /istqb/index.md
+            { text: 'Git Started', link: '/instruments/git/git-and-github/1-git-started' },
+            { text: 'Remote', link: '/instruments/git/git-and-github/2-remote' },
+            { text: 'Collaboration', link: '/instruments/git/git-and-github/3-collaboration' },
+            { text: 'Advanced', link: '/instruments/git/git-and-github/4-advanced' },
           ],
         },
       ],
-      '/knowledge-base/cissp/': [
+      // Certifize
+      '/certifize/ccna': [
+        {
+          text: 'CCNA',
+          collapsible: true,
+          items: [
+            { text: 'CCNA', link: '/certifize/ccna' },
+          ],
+        },
+      ],
+
+      '/certifize/istqb/': [
+        {
+          text: 'ISTQB',
+          items: [
+            { text: 'Index', link: '/istqb/' },
+          ],
+        },
+      ],
+
+      '/certifize/cissp/': [
         {
           text: 'CISSP',
           items: [
@@ -233,11 +256,23 @@ export default {
           ],
         },
       ],
-      '/knowledge-base/cnwpp/': [
+      '/certifize/cnwpp/': [
         {
           text: 'CNWP',
           items: [
             { text: 'Index', link: '/cnwpp/' },
+          ],
+        },
+      ],
+
+      // Knowledge Base
+      // This sidebar gets displayed when user is
+      // under `istqb` directory.
+      '/knowledge-base/system-engineering/': [
+        {
+          text: 'System Engineering',
+          items: [
+            { text: '', link: '/system-engineering/' },
           ],
         },
       ],
@@ -335,27 +370,13 @@ export default {
           ],
         },
       ],
-      '/knowledge-base/sysadmin/': [
-        {
-          text: 'System Administration',
-          items: [
-            { text: 'Index', link: '/sysadmin/' },
-          ],
-        },
-      ],
       '/knowledge-base/os/': [
         {
           text: 'Operating Systems',
           items: [
-            { text: 'Index', link: '/os/' },
-          ],
-        },
-      ],
-      '/knowledge-base/system-engineering/': [
-        {
-          text: 'System Engineering',
-          items: [
-            { text: '', link: '/system-engineering/' },
+            { text: 'iMac', link: '/os/' },
+            { text: 'Windows', link: '/os/' },
+            { text: 'Linux', link: '/os/' },
           ],
         },
       ],
@@ -364,6 +385,37 @@ export default {
           text: 'Virtualization',
           items: [
             { text: '', link: '/virtualization/' },
+          ],
+        },
+      ],
+      '/knowledge-base/sysadmin/': [
+        {
+          text: 'System Administration',
+          items: [
+            { text: '', link: '/sysadmin/' },
+          ],
+        },
+      ],
+      '/knowledge-base/cyber-crusades/': [
+        {
+          text: 'Web 1',
+          collapsible: true,
+          items: [
+            { text: 'What Is Web?', link: '/knowledge-base/cyber-crusades/web-1/1-what-is-web' },
+          ],
+        },
+        {
+          text: 'Web 2',
+          collapsible: true,
+          items: [
+            { text: 'Intro', link: '/' },
+          ],
+        },
+        {
+          text: 'Networking',
+          collapsible: true,
+          items: [
+            { text: 'Intro', link: '/' },
           ],
         },
       ],
@@ -403,29 +455,6 @@ export default {
           items: [
             { text: 'The test report', link: '/knowledge-base/thepentest101/the-test-report/the-test-report' },
             { text: 'Test report template', link: '/knowledge-base/thepentest101/the-test-report/test-report-template' },
-          ],
-        },
-      ],
-      '/knowledge-base/cyber-crusades/': [
-        {
-          text: 'Web 1',
-          collapsible: true,
-          items: [
-            { text: 'What Is Web?', link: '/knowledge-base/cyber-crusades/web-1/1-what-is-web' },
-          ],
-        },
-        {
-          text: 'Web 2',
-          collapsible: true,
-          items: [
-            { text: 'Intro', link: '/' },
-          ],
-        },
-        {
-          text: 'Networking',
-          collapsible: true,
-          items: [
-            { text: 'Intro', link: '/' },
           ],
         },
       ],

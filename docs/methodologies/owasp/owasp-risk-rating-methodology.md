@@ -1,390 +1,312 @@
 # [OWASP Risk Rating Methodology](https://owasp.org/www-community/OWASP_Risk_Rating_Methodology)
-<!--
-## DISCLAIMER
 
-Over the years there has be lots of [debate]({{ site.baseurl }}/misc/rrm_debate) about the OWASP Risk Rating Methodology and the weighting of Threat Actor Skill levels.
-There are other more mature, popular, or well established Risk Rating Methodologies that can be followed:
+<p>
+    Open de
+    <a href="../../knowledge-base/networking/miw/assets/opdrachten/opdracht-risk-assessment-21-05.pdf#page=1&zoom=75" target=”_blank”>opdracht risk assesment</a>
+    in a new tab window fullscreen.
+</p>
 
-- [NIST 800-30 - Guide for Conducting Risk Assessments](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final)
-- [Government of Canada - Harmonized TRA Methodology](https://cyber.gc.ca/en/guidance/harmonized-tra-methodology-tra-1)
-- Mozilla resources:
-    - [Risk Assessment Summary](https://infosec.mozilla.org/guidelines/assessing_security_risk)
-    - [Rapid Risk Assessment (RRA)](https://infosec.mozilla.org/guidelines/risk/rapid_risk_assessment.html)
+## Stap 1: Identifying a Risk
 
-Alternatively you may with the review information about Threat Modeling, as that may be a better fit for your app or organization:
+1. **Externe aanvaller verkrijgt toegang tot bestelpagina**
+   - Een aanvaller van buitenaf kan proberen toegang te krijgen tot de bestelpagina door middel van een onbekend apparaat.
 
-- <https://owasp.org/www-community/Threat_Modeling>
-- <https://owasp.org/www-community/Application_Threat_Modeling>
-- [OWASP pytm](https://owasp.org/www-project-pytm/) Pythonic framework for threat modeling
-- [OWASP Threat Dragon](https://owasp.org/www-project-threat-dragon/) threat modeling tool
+   **Enkele voorbeelden:**
 
-Lastly you might want to refer to the [references](#references) below.
+   - 1. **Phishing-aanvallen**
+        - De aanvaller kan phishing-e-mails versturen naar medewerkers van Hamerslag. In deze e-mails probeert de aanvaller de medewerkers te verleiden om inloggegevens of andere gevoelige informatie prijs te geven. Dit kan leiden tot toegang tot de interne systemen en uiteindelijk de bestelpagina.
+     1. **Brute force aanvallen**
+         - Een aanvaller kan proberen toegang te krijgen door brute force aanvallen op de inlogpagina van de bestelpagina uit te voeren. Hierbij probeert de aanvaller verschillende combinaties van gebruikersnamen en wachtwoorden totdat hij toegang verkrijgt.
+     2. **Kwetsbaarheden in de webapplicatie**
+         - De aanvaller kan gebruik maken van bekende of onbekende kwetsbaarheden (zero-day exploits) in de webapplicatie die de bestelpagina host. Dit kan SQL-injecties, cross-site scripting (XSS), of andere kwetsbaarheden omvatten die ongeautoriseerde toegang mogelijk maken.
+     3. **Onbeveiligde netwerken**
+         - Als medewerkers van Hamerslag toegang krijgen tot de bestelpagina via onbeveiligde netwerken, zoals openbare Wi-Fi, kan een aanvaller netwerkverkeer onderscheppen (man-in-the-middle-aanval) en inloggegevens stelen.
+     4. **Gestolen of gelekte inloggegevens**
+         - Een aanvaller kan toegang verkrijgen door gebruik te maken van gestolen of gelekte inloggegevens. Dit kan gebeuren door eerdere datalekken bij Hamerslag of andere bedrijven waar medewerkers mogelijk dezelfde wachtwoorden hebben gebruikt.
+     5. **Social engineering**
+         - De aanvaller kan medewerkers misleiden via social engineering-technieken, zoals zich voordoen als een systeembeheerder en hen vragen om gevoelige informatie te delen, zoals inloggegevens.
+     6. **Onbeveiligde lokale servers**
+         - Als de lokale servers waarop de website draait niet goed zijn beveiligd, kan een aanvaller toegang verkrijgen via slecht geconfigureerde firewall-instellingen, ongepatchte systemen of zwakke wachtwoorden.
+     7. **Malware-infecties**
+         - De aanvaller kan malware installeren op de computers van medewerkers door middel van geïnfecteerde bijlagen of schadelijke downloads. Deze malware kan vervolgens inloggegevens verzamelen en doorsturen naar de aanvaller.
 
-**Note**: Edits/Pull Requests to the content below that deal with changes to Threat Actor Skill will not be accepted.
+2. **Interne medewerker met kwade bedoelingen**
+   - Een medewerker in het magazijn kan proberen ongeautoriseerde wijzigingen aan te brengen in de bestellingen of klantgegevens.
 
-----
+   **Enkele voorbeelden:**
 
-## Introduction
+   - 1. **Misbruik van Bevoegdheden**
+        - Een medewerker met toegangsrechten tot gevoelige delen van het netwerk of de systemen kan deze rechten misbruiken om ongeautoriseerde toegang te verkrijgen tot de bestelpagina en andere kritieke systemen.
+     1. **Kopiëren van Gevoelige Gegevens**
+         - De medewerker kan gevoelige gegevens, zoals klantinformatie of bestellingsdetails, kopiëren naar een extern opslagapparaat zoals een USB-stick of een externe harde schijf, en deze vervolgens buiten het bedrijf gebruiken of verkopen.
+     2. **Manipulatie van Bestellingen**
+         - De medewerker kan bestellingen manipuleren door ze te wijzigen, annuleren of door valse bestellingen te plaatsen, wat kan leiden tot financiële verliezen en logistieke problemen.
+     3. **Toegang Delen met Externe Partijen**
+         - De medewerker kan zijn toegangsgegevens delen met externe aanvallers, waardoor deze toegang krijgen tot de interne systemen zonder dat dit direct opvalt.
+     4. **Installeren van Schadelijke Software**
+         - De medewerker kan malware installeren op bedrijfscomputers om toegang te krijgen tot gevoelige informatie of om systemen te saboteren.
 
-Discovering vulnerabilities is important, but being able to estimate the associated risk to the business
-is just as important. Early in the life cycle, one may identify security concerns in the architecture or
-design by using [threat modeling](Threat_Modeling).  Later, one may find
-security issues using [code review](https://wiki.owasp.org/index.php/Category:OWASP_Code_Review_Project)
-or [penetration testing](https://owasp.org/www-project-web-security-testing-guide/). Or problems may not
-be discovered until the application is in production and is actually compromised.
+3. **Gegevensverlies door interne fout**
+   - Een medewerker kan per ongeluk klantgegevens of bestelgegevens verwijderen of veranderen.
 
-By following the approach here, it is possible to estimate the severity of all of these risks to the
-business and make an informed decision about what to do about those risks. Having a system in place
-for rating risks will save time and eliminate arguing about priorities. This system will help to ensure
-that the business doesn't get distracted by minor risks while ignoring more serious risks that are less
-well understood.
+   **Enkele voorbeelden:**
 
-Ideally, there would be a universal risk rating system that would accurately estimate all risks for all
-organizations. But a vulnerability that is critical to one organization may not be very important to
-another. So a basic framework is presented here that should be ''customized'' for the particular
-organization.
+   - 1. **Onopzettelijke Gegevenswissing**
+        - Fouten bij het configureren van systeeminstellingen, zoals toegangsrechten, firewallregels, of back-upschema's, kunnen leiden tot onbedoelde toegang, blokkering van legitiem verkeer, of ontoereikende bescherming van gegevens.
+     1. **Onjuiste Configuratie van Systeeminstellingen**
+         - De medewerker kan gevoelige gegevens, zoals klantinformatie of bestellingsdetails, kopiëren naar een extern opslagapparaat zoals een USB-stick of een externe harde schijf, en deze vervolgens buiten het bedrijf gebruiken of verkopen.
+     2. **Menselijke Fouten bij Gegevensinvoer**
+         - Fouten bij het invoeren van gegevens door medewerkers kunnen leiden tot het verlies van nauwkeurigheid en integriteit van de gegevens, waardoor onjuiste besluitvorming en operationele problemen kunnen ontstaan.
+     3. **Onvoldoende Training en Bewustzijn**
+         - Een gebrek aan training en bewustzijn over gegevensbeveiliging onder medewerkers kan leiden tot het onbedoeld delen van vertrouwelijke informatie, het openen van kwaadaardige bijlagen in e-mails, of het negeren van beveiligingswaarschuwingen.
+     4. **Slechte Gegevensback-up Procedures**
+         - Onvoldoende of onjuiste gegevensback-upprocedures kunnen leiden tot het verlies van belangrijke gegevens in geval van systeemstoringen, ransomware-aanvallen, of andere noodsituaties.
 
-The authors have tried hard to make this model simple to use, while keeping enough detail for accurate
-risk estimates to be made. Please reference the section below on customization for more information about
-tailoring the model for use in a specific organization.
+## Stap 2: Factors for Estimating Likelihood
 
-## Approach
-
-There are many different approaches to risk analysis. See the reference section below for some of the
-most common ones. The OWASP approach presented here is based on these standard methodologies and is
-customized for application security.
-
-Let's start with the standard risk model:
-
-  - **Risk = Likelihood * Impact**
-
-In the sections below, the factors that make up "likelihood" and "impact" for application security are
-broken down. The tester is shown how to combine them to determine the overall severity for the risk.
-
-```
-  Step 1: Identifying a Risk
-  Step 2: Factors for Estimating Likelihood
-  Step 3: Factors for Estimating Impact
-  Step 4: Determining Severity of the Risk
-  Step 5: Deciding What to Fix
-  Step 6: Customizing Your Risk Rating Model
-```
-
-### Step 1: Identifying a Risk
-
-The first step is to identify a security risk that needs to be rated. The tester needs to gather
-information about the threat agent involved, the attack that will be used, the vulnerability
-involved, and the impact of a successful exploit on the business. There may be multiple possible
-groups of attackers, or even multiple possible business impacts.  In general, it's best to err on the
-side of caution by using the worst-case option, as that will result in the highest overall risk.
-
-### Step 2: Factors for Estimating Likelihood
-
-Once the tester has identified a potential risk and wants to figure out how serious it is, the first
-step is to estimate the "likelihood". At the highest level, this is a rough measure of how likely this
-particular vulnerability is to be uncovered and exploited by an attacker. It is not necessary to be
-over-precise in this estimate. Generally, identifying whether the likelihood is low, medium, or high
-is sufficient.
-
-There are a number of factors that can help determine the likelihood. The first set of factors are
-related to the threat agent involved. The goal is to estimate the likelihood of a successful attack
-from a group of possible attackers. Note that there may be multiple threat agents that can exploit a
-particular vulnerability, so it's usually best to use the worst-case scenario. For example, an insider
-may be a much more likely attacker than an anonymous outsider, but it depends on a number of factors.
-
-Note that each factor has a set of options, and each option has a likelihood rating from 0 to 9
-associated with it. These numbers will be used later to estimate the overall likelihood.
+### 1. **Externe aanvaller verkrijgt toegang tot bestelpagina**
 
 #### Threat Agent Factors
 
-The first set of factors are related to the threat agent involved. The goal here is to estimate
-the likelihood of a successful attack by this group of threat agents. Use the worst-case threat agent.
-
-  - **Skill Level** - How technically skilled is this group of threat agents? No technical skills (1), some technical skills (3), advanced computer user (5), network and programming skills (6), security penetration skills (9)
-
-  - **Motive** - How motivated is this group of threat agents to find and exploit this vulnerability? Low or no reward (1), possible reward (4), high reward (9)
-
-  - **Opportunity** - What resources and opportunities are required for this group of threat agents to find and exploit this vulnerability? Full access or expensive resources required (0), special access or resources required (4), some access or resources required (7), no access or resources required (9)
-
-  - **Size** - How large is this group of threat agents? Developers (2), system administrators (2), intranet users (4), partners (5), authenticated users (6), anonymous Internet users (9)
+- **Skill Level**: 9 (security penetration skills)
+  - Aanvallers hebben geavanceerde technische vaardigheden nodig om in te breken in beveiligde systemen.
+- **Motive**: 7 (high reward - access to sensitive data)
+  - De toegang tot gevoelige klantgegevens biedt een hoge beloning.
+- **Opportunity**: 9 (no access or resources required - can attempt from anywhere)
+  - Aanvallers kunnen overal vandaan proberen toegang te krijgen zonder fysieke beperkingen.
+- **Size**: 9 (anonymous Internet users)
+  - Het potentiële aantal aanvallers is zeer groot vanwege de anonimiteit van internetgebruikers.
 
 #### Vulnerability Factors
 
-The next set of factors are related to the vulnerability involved. The goal here is to estimate the
-likelihood of the particular vulnerability involved being discovered and exploited. Assume the threat
-agent selected above.
+- **Ease of Discovery**: 7 (easy)
+  - Aanvallers met geavanceerde vaardigheden kunnen relatief gemakkelijk kwetsbaarheden ontdekken via geautomatiseerde tools en scripts.
+- **Ease of Exploit**: 9 (automated tools available)
+  - Exploits voor veelvoorkomende kwetsbaarheden kunnen met behulp van geautomatiseerde tools uitgevoerd worden.
+- **Awareness**: 9 (public knowledge)
+  - Veelvoorkomende kwetsbaarheden in webapplicaties zijn algemeen bekend binnen de hacker community.
+- **Intrusion Detection**: 8 (logged without review)
+  - Exploitaties worden mogelijk gelogd maar niet actief gecontroleerd, waardoor detectie vertraagd wordt.
 
-  - **Ease of Discovery** - How easy is it for this group of threat agents to discover this vulnerability? Practically impossible (1), difficult (3), easy (7), automated tools available (9)
+### 2. **Interne medewerker met kwade bedoelingen**
 
-  - **Ease of Exploit** - How easy is it for this group of threat agents to actually exploit this vulnerability? Theoretical (1), difficult (3), easy (5), automated tools available (9)
+#### Threat Agent Factors
 
-  - **Awareness** - How well known is this vulnerability to this group of threat agents? Unknown (1), hidden (4), obvious (6), public knowledge (9)
+- **Skill Level**: 3 (some technical skills)
+  - Medewerkers hebben enige technische vaardigheden nodig om kwaadwillende acties uit te voeren.
+- **Motive**: 5 (possible reward)
+  - Medewerkers kunnen gemotiveerd zijn door persoonlijke of financiële voordelen.
+- **Opportunity**: 0 (full access)
+  - Medewerkers hebben volledige toegang tot systemen, waardoor kansen overvloedig zijn.
+- **Size**: 6 (authenticated users)
+  - Het aantal potentiële kwaadwillende medewerkers is beperkt tot geautoriseerde gebruikers.
 
-  - **Intrusion Detection** - How likely is an exploit to be detected? Active detection in application (1), logged and reviewed (3), logged without review (8), not logged (9)
+#### Vulnerability Factors
 
-### Step 3: Factors for Estimating Impact
+- **Ease of Discovery**: 9 (automated tools available)
+  - Medewerkers met toegang tot interne systemen kunnen gemakkelijk kwetsbaarheden ontdekken met behulp van geautomatiseerde tools.
+- **Ease of Exploit**: 5 (easy)
+  - Met enige technische kennis en interne toegang kunnen medewerkers gemakkelijk kwetsbaarheden exploiteren.
+- **Awareness**: 6 (obvious)
+  - Medewerkers met toegang tot systemen hebben vaak voldoende kennis van potentiële kwetsbaarheden.
+- **Intrusion Detection**: 3 (logged and reviewed)
+  - Binnenkomende activiteiten worden gelogd en regelmatig gecontroleerd, waardoor detectie waarschijnlijk is.
 
-When considering the impact of a successful attack, it's important to realize that there are
-two kinds of impacts. The first is the "technical impact" on the application, the data it uses,
-and the functions it provides.  The other is the "business impact" on the business and company
-operating the application.
+### 3. **Gegevensverlies door interne fout**
 
-Ultimately, the business impact is more important. However, you may not have access to all the
-information required to figure out the business consequences of a successful exploit. In this
-case, providing as much detail about the technical risk will enable the appropriate business
-representative to make a decision about the business risk.
+#### Threat Agent Factors
 
-Again, each factor has a set of options, and each option has an impact rating from 0 to 9 associated with it. We'll use these numbers later to estimate the overall impact.
+- **Skill Level**: 3 (some technical skills)
+  - Medewerkers hebben enige technische vaardigheden nodig om per ongeluk gegevens te verliezen.
+- **Motive**: 1 (low or no reward)
+  - Er is geen motivatie voor gegevensverlies omdat het per ongeluk gebeurt.
+- **Opportunity**: 9 (full access)
+  - Medewerkers hebben volledige toegang tot systemen, wat de kans op fouten vergroot.
+- **Size**: 6 (authenticated users)
+  - Het aantal potentiële bronnen van fouten is beperkt tot geautoriseerde gebruikers.
+
+#### Vulnerability Factors
+
+- **Ease of Discovery**: 7 (easy)
+  - Medewerkers kunnen kwetsbaarheden of fouten gemakkelijk ontdekken door hun dagelijkse werkzaamheden en toegang tot systemen.
+- **Ease of Exploit**: 3 (difficult)
+  - Hoewel fouten vaak onbedoeld zijn, vereist exploitatie van een fout enige technische kennis en mogelijkheid.
+- **Awareness**: 4 (hidden)
+  - De meeste medewerkers zijn zich niet volledig bewust van de kwetsbaarheden die kunnen leiden tot gegevensverlies.
+- **Intrusion Detection**: 8 (logged without review)
+  - Fouten worden vaak gelogd maar niet actief gecontroleerd, waardoor problemen onopgemerkt kunnen blijven.
+
+## Stap 3: Factors for Estimating Impact
+
+### 1. **Externe aanvaller verkrijgt toegang tot bestelpagina**
 
 #### Technical Impact Factors
 
-Technical impact can be broken down into factors aligned with the traditional security areas
-of concern: confidentiality, integrity, availability, and accountability. The goal is to estimate
-the magnitude of the impact on the system if the vulnerability were to be exploited.
-
-  - **Loss of Confidentiality** - How much data could be disclosed and how sensitive is it? Minimal non-sensitive data disclosed (2), minimal critical data disclosed (6), extensive non-sensitive data disclosed (6), extensive critical data disclosed (7), all data disclosed (9)
-
-  - **Loss of Integrity** - How much data could be corrupted and how damaged is it? Minimal slightly corrupt data (1), minimal seriously corrupt data (3), extensive slightly corrupt data (5), extensive seriously corrupt data (7), all data totally corrupt (9)
-
-  - **Loss of Availability** - How much service could be lost and how vital is it? Minimal secondary services interrupted (1), minimal primary services interrupted (5), extensive secondary services interrupted (5), extensive primary services interrupted (7), all services completely lost (9)
-
-  - **Loss of Accountability** - Are the threat agents' actions traceable to an individual? Fully traceable (1), possibly traceable (7), completely anonymous (9)
+- **Loss of Confidentiality**: 7 (extensive critical data disclosed)
+  - Een aanvaller kan toegang krijgen tot gevoelige klantgegevens en bedrijfsinformatie.
+- **Loss of Integrity**: 5 (extensive slightly corrupt data)
+  - De aanvaller kan gegevens licht beschadigen zonder de totale werking te verstoren.
+- **Loss of Availability**: 5 (uitgebreide primaire diensten onderbroken)
+  - De aanval kan belangrijke diensten onderbreken, wat leidt tot operationele vertragingen.
+- **Loss of Accountability**: 9 (completely anonymous)
+  - De aanvaller kan volledig anoniem blijven, waardoor opsporing moeilijk is.
 
 #### Business Impact Factors
 
-The business impact stems from the technical impact, but requires a deep understanding of what is
-important to the company running the application. In general, you should be aiming to support your
-risks with business impact, particularly if your audience is executive level. The business risk is
-what justifies investment in fixing security problems.
+- **Financial damage**: 7 (significant effect on annual profit)
+  - Het bedrijf kan aanzienlijke financiële verliezen lijden door de aanval.
+- **Reputation damage**: 9 (brand damage)
+  - De aanval kan ernstige schade toebrengen aan de reputatie van het merk.
+- **Non-compliance**: 7 (high profile violation)
+  - De aanval kan resulteren in hoge boetes en juridische gevolgen door niet-naleving van regelgeving.
+- **Privacy violation**: 7 (thousands of people)
+  - Gevoelige gegevens van duizenden klanten kunnen worden blootgesteld.
 
-Many companies have an asset classification guide and/or a business impact reference to help formalize
-what is important to their business. These standards can help you focus on what's truly important for
-security. If these aren't available, then it is necessary to talk with people who understand the
-business to get their take on what's important.
+### 2. **Interne medewerker met kwade bedoelingen**
 
-The factors below are common areas for many businesses, but this area is even more unique to a company
-than the factors related to threat agent, vulnerability, and technical impact.
+#### Technical Impact Factors
 
-  - **Financial damage** - How much financial damage will result from an exploit? Less than the cost to fix the vulnerability (1), minor effect on annual profit (3), significant effect on annual profit (7), bankruptcy (9)
+- **Loss of Confidentiality**: 7 (extensive critical data disclosed)
+  - Een kwaadwillende medewerker kan toegang krijgen tot en het lekken van grote hoeveelheden interne gevoelige gegevens.
+- **Loss of Integrity**: 7 (extensive seriously corrupt data)
+  - De medewerker kan opzettelijk kritieke data ernstig beschadigen.
+- **Loss of Availability**: 5 (minimal primary services interrupted)
+  - De medewerker kan belangrijke diensten verstoren, wat leidt tot operationele problemen.
+- **Loss of Accountability**: 7 (possibly traceable)
+  - De acties van de medewerker kunnen met enige moeite worden getraceerd.
 
-  - **Reputation damage** - Would an exploit result in reputation damage that would harm the business? Minimal damage (1), Loss of major accounts (4), loss of goodwill (5), brand damage (9)
+#### Business Impact Factors
 
-  - **Non-compliance** - How much exposure does non-compliance introduce? Minor violation (2), clear violation (5), high profile violation (7)
+- **Financial damage**: 3 (minor effect on annual profit)
+  - De kwaadwillige acties kunnen leiden tot beperkte financiële verliezen.
+- **Reputation damage**: 5 ( loss of goodwill)
+  - Het incident kan resulteren in een matig verlies van klantvertrouwen en goodwill.
+- **Non-compliance**: 5 (clear violation)
+  - De acties van de medewerker kunnen resulteren in duidelijke overtredingen van interne regels en regelgeving.
+- **Privacy violation**: 7 (thousands of people)
+  - De privacyschending kan duizenden klanten treffen.
 
-  - **Privacy violation** - How much personally identifiable information could be disclosed? One individual (3), hundreds of people (5), thousands of people (7), millions of people (9)
+### 3. **Gegevensverlies door interne fout**
 
-### Step 4: Determining the Severity of the Risk
+#### Technical Impact Factors
 
-In this step, the likelihood estimate and the impact estimate are put together to calculate an overall
-severity for this risk.  This is done by figuring out whether the likelihood is low, medium, or high
-and then do the same for impact. The 0 to 9 scale is split into three parts:
+- **Loss of Confidentiality**: 6 (extensive non-sensitive data disclosed)
+  - Een interne fout kan leiden tot het onbedoeld onthullen van grote hoeveelheden niet-gevoelige gegevens.
+- **Loss of Integrity**: 7 (extensive seriously corrupt data)
+  - Een fout kan resulteren in ernstige schade aan kritieke data.
+- **Loss of Availability**: 5 (minimal primary services interrupted)
+  - De fout kan belangrijke diensten verstoren, wat leidt tot aanzienlijke operationele onderbrekingen.
+- **Loss of Accountability**: 5 ( possibly traceable)
+  - De oorzaak van de fout kan met enige moeite worden geïdentificeerd en getraceerd.
 
-<table width="40%" cellspacing="0" cellpadding="5" border="1" align="center">
-<tr>
-<th colspan="2" align="center">Likelihood and Impact Levels</th>
-</tr>
-<tr>
-<td width="50%" align="center">0 to &lt;3</td>
-<td width="50%" bgcolor="lightgreen" align="center">LOW</td>
-</tr>
-<tr>
-<td align="center">3 to &lt;6</td>
-<td bgcolor="yellow" align="center">MEDIUM</td>
-</tr>
-<tr>
-<td align="center">6 to 9</td>
-<td bgcolor="red" align="center">HIGH</td>
-</tr>
-</table>
+#### Business Impact Factors
 
-#### Informal Method
+- **Financial damage**: 5 (minor effect on annual profit)
+  - De fout kan leiden tot beperkte financiële verliezen voor het bedrijf.
+- **Reputation damage**: 5 (loss of goodwill )
+  - Het incident kan resulteren in een matig verlies van klantvertrouwen en goodwill.
+- **Non-compliance**: 5 (clear violation)
+  - De gegevensverliesincident kan resulteren in duidelijke overtredingen van regelgeving.
+- **Privacy violation**: 7 (thousands of people)
+  - Het gegevensverlies kan de privacy van honderden klanten aantasten.
 
-In many environments, there is nothing wrong with reviewing the factors and simply capturing the answers.
-The tester should think through the factors and identify the key "driving" factors that are controlling
-the result. The tester may discover that their initial impression was wrong by considering aspects of the
-risk that weren't obvious.
+## Stap 4: Determining Severity of the Risk
 
-#### Repeatable Method
+1. **Externe aanvaller verkrijgt toegang tot bestelpagina**
+   - **Likelihood**: 8.375 (High)
+   - **Impact**: 6.5 | 7.5 (High)
+   - **Severity**: Critical
 
-If it is necessary to defend the ratings or make them repeatable, then it is necessary to go through a
-more formal process of rating the factors and calculating the result. Remember that there is quite a
-lot of uncertainty in these estimates and that these factors are intended to help the tester arrive
-at a sensible result. This process can be supported by automated tools to make the calculation easier.
+2. **Interne medewerker met kwade bedoelingen**
+   - **Likelihood**: 6 (Medium)
+   - **Impact**: 6.5 | 5 (Medium)
+   - **Severity**: Medium
 
-The first step is to select one of the options associated with each factor and enter the associated
-number in the table. Then simply take the average of the scores to calculate the overall likelihood.
-For example:
+3. **Gegevensverlies door interne fout**
+   - **Likelihood**: 6 (Medium)
+   - **Impact**: 5.75 | 5.5 (Medium)
+   - **Severity**: Medium
 
-<table cellspacing="0" cellpadding="5" border="1" align="center">
-<tr>
-<td colspan="4" align="center">'''Threat agent factors'''</td>
-<td></td>
-<td colspan="4" align="center">'''Vulnerability factors'''</td>
-</tr>
-<tr>
-<td width="10%" align="center">Skill level</td>
-<td width="10%" align="center">Motive</td>
-<td width="10%" align="center">Opportunity</td>
-<td width="10%" align="center">Size</td>
-<td width="2%" align="center"></td>
-<td width="10%" align="center">Ease of discovery</td>
-<td width="10%" align="center">Ease of exploit</td>
-<td width="10%" align="center">Awareness</td>
-<td width="10%" align="center">Intrusion detection</td>
-</tr>
-<tr>
-<td align="center">5</td>
-<td align="center">2</td>
-<td align="center">7</td>
-<td align="center">1</td>
-<td align="center"></td>
-<td align="center">3</td>
-<td align="center">6</td>
-<td align="center">9</td>
-<td align="center">2</td>
-</tr>
-<tr>
-<td colspan="9" bgcolor="lightblue" align="center">Overall likelihood=4.375 (MEDIUM)</td>
-</tr>
-</table>
-<br/>
-Next, the tester needs to figure out the overall impact. The process is similar here. In many cases the
-answer will be obvious, but the tester can make an estimate based on the factors, or they can average
-the scores for each of the factors. Again, less than 3 is low, 3 to less than 6 is medium, and 6 to 9
-is high.  For example:
+## Stap 5: Deciding What to Fix
 
-<table cellspacing="0" cellpadding="5" border="1" align="center">
-<tr>
-<th colspan="4" align="center">Technical Impact</th>
-<td></td>
-<th colspan="4" align="center">Business Impact</th>
-</tr>
-<tr>
-<td width="10%" align="center">Loss of confidentiality</td>
-<td width="10%" align="center">Loss of integrity</td>
-<td width="10%" align="center">Loss of availability</td>
-<td width="10%" align="center">Loss of accountability</td>
-<td width="2%" align="center"></td>
-<td width="10%" align="center">Financial damage</td>
-<td width="10%" align="center">Reputation damage</td>
-<td width="10%" align="center">Non-compliance</td>
-<td width="10%" align="center">Privacy violation</td>
-</tr>
-<tr>
-<td align="center">9</td>
-<td align="center">7</td>
-<td align="center">5</td>
-<td align="center">8</td>
-<td align="center"></td>
-<td align="center">1</td>
-<td align="center">2</td>
-<td align="center">1</td>
-<td align="center">5</td>
-</tr>
-<tr>
-<td colspan="4" bgcolor="lightblue" align="center">Overall technical impact=7.25 (HIGH)</td>
-<td></td>
-<td colspan="4" bgcolor="lightblue" align="center">Overall business impact=2.25 (LOW)</td>
-</tr>
-</table>
-<br/>
+1. **Critical Severity Risks**
+   - **Externe aanvaller verkrijgt toegang tot bestelpagina**
 
-#### Determining Severity
+2. **Medium Severity Risks**
+   - **Interne medewerker met kwade bedoelingen**
+   - **Gegevensverlies door interne fout**
 
-However the tester arrives at the likelihood and impact estimates, they can now combine them to get
-a final severity rating for this risk. Note that if they have good business impact information, they
-should use that instead of the technical impact information.  But if they have no information about
-the business, then technical impact is the next best thing.
+### Stap 6: Customizing Your Risk Rating Model
 
-<table cellspacing="0" cellpadding="5" border="1" align="center">
-<tr>
-<th colspan="5" align="center">Overall Risk Severity</th>
-</tr>
-<tr>
-<th rowspan="4" width="15%" align="center">Impact</th>
-<td width="15%" align="center">HIGH</td>
-<td width="15%" bgcolor="orange" align="center">Medium</td>
-<td width="15%" bgcolor="red" align="center">High</td>
-<td width="15%" bgcolor="pink" align="center">Critical</td>
-</tr>
-<tr>
-<td align="center">MEDIUM</td>
-<td bgcolor="yellow" align="center">Low</td>
-<td bgcolor="orange" align="center">Medium</td>
-<td bgcolor="red" align="center">High</td>
-</tr>
-<tr>
-<td align="center">LOW</td>
-<td bgcolor="lightgreen" align="center">Note</td>
-<td bgcolor="yellow" align="center">Low</td>
-<td bgcolor="orange" align="center">Medium</td>
-</tr>
-<tr>
-<td align="center">&nbsp;</td>
-<td align="center">LOW</td>
-<td align="center">MEDIUM</td>
-<td align="center">HIGH</td>
-</tr>
-<tr>
-<td align="center">&nbsp;</td>
-<th colspan="4" align="center">Likelihood</th>
-</tr>
-</table>
-<br/>
-In the example above, the likelihood is medium and the technical impact is high, so from a purely
-technical perspective it appears that the overall severity is high.  However, note that the business
-impact is actually low, so the overall severity is best described as low as well. This is why
-understanding the business context of the vulnerabilities you are evaluating is so critical to making
-good risk decisions. Failure to understand this context can lead to the lack of trust between the
-business and security teams that is present in many organizations.
+### 1. Adding Factors
 
-### Step 5: Deciding What to Fix
+- **Factor toevoegen: Verlies van Gevoelige Gegevens**
+  - **Impact**: Dit houdt rekening met het risico van verlies van gevoelige bedrijfsgegevens.
+  - **Specificatie**: Bij een bedrijf in de gezondheidszorg kan deze factor rekening houden met de impact van het verlies van patiëntgegevens.
+  - **Score**: Laag (1), Gemiddeld (5), Hoog (9)
 
-After the risks to the application have been classified, there will be a prioritized list of what to
-fix. As a general rule, the most severe risks should be fixed first. It simply doesn't help the overall
-risk profile to fix less important risks, even if they're easy or cheap to fix.
+- **Factor toevoegen: Kosten van Incidentrespons**
+  - **Impact**: Dit houdt rekening met de kosten voor het reageren op en herstellen van een inbreuk.
+  - **Specificatie**: Bij een bedrijf in de financiële sector kan deze factor de financiële impact van het incident benadrukken, inclusief kosten voor forensisch onderzoek, herstel van systemen en juridische procedures.
+  - **Score**: Laag (1), Gemiddeld (5), Hoog (9)
 
-Remember that not all risks are worth fixing, and some loss is not only expected, but justifiable based
-upon the cost of fixing the issue. For example, if it would cost $100,000 to implement controls to stem
-$2,000 of fraud per year, it would take 50 years return on investment to stamp out the loss. But
-remember there may be reputation damage from the fraud that could cost the organization much more.
+- **Factor toevoegen: Compliance Impact**
+  - **Impact**: Dit houdt rekening met de invloed van de inbreuk op de naleving van wettelijke en regelgevende vereisten.
+  - **Specificatie**: Bij een bedrijf dat persoonsgegevens verwerkt, zoals een online retailer, kan deze factor rekening houden met de impact op GDPR-compliance en de mogelijke boetes.
+  - **Score**: Verwaarloosbaar (1), Enige Overtredingen (5), Grote Overtredingen (9)
 
-### Step 6: Customizing the Risk Rating Model
+- **Factor toevoegen: Bedrijfscontinuïteit**
+  - **Impact**: Dit houdt rekening met de impact van de inbreuk op de continuïteit van het bedrijf.
+  - **Specificatie**: Bij een bedrijf met een online dienst, zoals een cloudprovider, kan deze factor rekening houden met de mogelijke downtime en het verlies van inkomsten als gevolg van de inbreuk.
+  - **Score**: Verwaarloosbaar (1), Enige Onderbreking (5), Grote Onderbreking (9)
 
-Having a risk ranking framework that is customizable for a business is critical for adoption.  A tailored
-model is much more likely to produce results that match people's perceptions about what is a serious risk.
-A lot of time can be wasted arguing about the risk ratings if they are not supported by a model like this.
-There are several ways to tailor this model for the organization.
+- **Factor toevoegen: Operationele Impact**
+  - **Impact**: Dit houdt rekening met de mate waarin de inbreuk dagelijkse operaties zal verstoren.
+  - **Specificatie**: Bij een bedrijf dat afhankelijk is van dagelijkse operationele processen, zoals een productiebedrijf, kan deze factor rekening houden met de mate van verstoring in de productie en distributie als gevolg van de inbreuk.
+  - **Score**: Verwaarloosbaar (1), Enige Verstoring (5), Grote Verstoring (9)
 
-#### Adding factors
+- **Factor toevoegen: Externe Aanvaller**
+  - **Impact**: Dit houdt rekening met de vaardigheidsniveaus van externe aanvallers die een bedreiging kunnen vormen voor het bedrijf.
+  - **Specificatie**: Pas de vaardigheidsniveaus aan om de bedreigingslandschap specifiek voor je bedrijf te weerspiegelen. Bijvoorbeeld, een techbedrijf kan te maken krijgen met aanvallers variërend van beginners tot staatsgesponsorde actoren.
+  - **Score**: Beginner (3), Bekwaam (5), Expert (7), Staatsgesponsord (9)
 
-The tester can choose different factors that better represent what's important for the specific organization.
-For example, a military application might add impact factors related to loss of human life or classified
-information. The tester might also add likelihood factors, such as the window of opportunity for an attacker
-or encryption algorithm strength.
+### 2. Customizing Options
 
-#### Customizing options
+- **Optie aanpassen: Skill Level van Bedreigingsactoren**
+  - **Origineel**: Beginner (3), Bekwaam (5), Expert (7), Staatsgesponsord (9)
+  - **Aangepast**: Junior Medewerker (2), Ervaren Medewerker (4), Senior Medewerker (6), Externe Specialist (8)
+  - **Context**: In een organisatie waar interne bedreigingen een groter risico vormen, kan het nuttig zijn om de skill levels aan te passen aan interne rollen.
 
-There are some sample options associated with each factor, but the model will be much more effective if the
-tester customizes these options to the business. For example, use the names of the different teams and the
-company names for different classifications of information. The tester can also change the scores associated
-with the options. The best way to identify the right scores is to compare the ratings produced by the model
-with ratings produced by a team of experts. You can tune the model by carefully adjusting the scores to match.
+### 3. Weighting Factors
 
-#### Weighting factors
+- **Factor gewicht: Operationele Impact**
+  - **Origineel**: Elke factor heeft een gelijke weging.
+  - **Gewicht**: Operationele Impact wordt zwaarder gewogen, bijvoorbeeld met een factor van 2.
+  - **Context**: In een productiebedrijf waar stilstand directe financiële verliezen veroorzaakt, kan de operationele impact zwaarder wegen dan andere factoren.
+  - **Score**: Bijvoorbeeld, als de operationele impact normaal 5 scoort, wordt deze nu 5 * 2 = 10.
 
-The model above assumes that all the factors are equally important. You can weight the factors to emphasize
-the factors that are more significant for the specific business. This makes the model a bit more complex, as
-the tester needs to use a weighted average. But otherwise everything works the same. Again it is possible to
-tune the model by matching it against risk ratings the business agrees are accurate.
+### Voorbeeld van Tabel met Nieuwe Toegevoegde Factoren
 
-## References
+| Risico                                               | Impact  | Kans             | Verlies van Klantvertrouwen | Operationele Impact | Kosten van Incidentrespons | Compliance Impact | Bedrijfscontinuïteit | Totaal |
+|------------------------------------------------------|---------|------------------|-----------------------------|---------------------|---------------------------|-------------------|----------------------|--------|
+| Externe aanvaller verkrijgt toegang tot bestelpagina | 7.5     | **8.375** (High) | 9                           | 7                   | 8                         | 7                 | 6                    | 44.875 |
+| Interne medewerker met kwade bedoelingen             | 5       | **6** (Medium)   | 5                           | 5                   | 6                         | 5                 | 5                    | 32      |
+| Gegevensverlies door interne fout                    | 5.5     | **6** (Medium)   | 5                           | 6                   | 5                         | 4                 | 5                    | 31.5    |
 
-* [Managing Information Security Risk: Organization, Mission, and Information System View](https://csrc.nist.gov/publications/detail/sp/800-39/final)
-* [Industry standard vulnerability severity and risk rankings (CVSS)](https://www.first.org/cvss/)
-* [Threat Modeling Web Applications](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/ff648006(v=pandp.10))
-* [Threat Modeling](Threat_Modeling)
-* [A Platform for Risk Analysis of Security Critical Systems](https://sourceforge.net/projects/coras/)
-* [Model-driven Development and Analysis of Secure Information Systems](http://heim.ifi.uio.no/~ketils/securis/)
-* [Value Driven Security Threat Modeling Based on Attack Path Analysis](https://ieeexplore.ieee.org/document/4076949)
-* [Risk Rating Template Example in MS Excel](https://wiki.owasp.org/index.php/File:OWASP_Risk_Rating_Template_Example.xlsx) -->
+Deze tabel dient uitsluitend als voorbeeld te worden gebruikt.
+
+### Tabel met Risico's
+
+| Risico                                               | Impact | Kans             | Mitigatie                                                      | CIA-aanval      |
+|------------------------------------------------------|--------|------------------|----------------------------------------------------------------|-----------------|
+| Externe aanvaller verkrijgt toegang tot bestelpagina | High   | **8.375** (High) | - Implementeren van sterke authenticatiemethoden (2FA)         | CIA             |
+| Interne medewerker met kwade bedoelingen             | Medium | **6** (Medium)   | - Strikte toegangscontrole en periodieke toegangsbeoordelingen | CIA             |
+| Gegevensverlies door interne fout                    | Medium | **6** (Medium)   | - Implementeren van geautomatiseerde back-upsystemen           | Beschikbaarheid |
+
+## Conclusie
+
+De firma Hamerslag moet zich richten op het verminderen van risico's die de grootste impact kunnen hebben op hun bedrijfsvoering en reputatie.
+
+Het is van cruciaal belang om maatregelen te nemen tegen externe aanvallen en ervoor te zorgen dat het systeem niet alleen effectief ongeautoriseerde toegang detecteert en rapporteert, maar ook blokkeert.
+
+Tegelijkertijd moeten interne risico's en menselijke fouten ook worden beheerd door middel van training en bewustwording onder de medewerkers.
