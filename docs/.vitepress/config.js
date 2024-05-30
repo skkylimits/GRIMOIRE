@@ -214,20 +214,6 @@ export default {
         },
       ],
 
-      // certifize
-
-
-      '/instruments/git': [
-        {
-          text: 'git',
-          items: [
-            { text: 'Git Started', link: '/instruments/git/git-and-github/1-git-started' },
-            { text: 'Remote', link: '/instruments/git/git-and-github/2-remote' },
-            { text: 'Collaboration', link: '/instruments/git/git-and-github/3-collaboration' },
-            { text: 'Advanced', link: '/instruments/git/git-and-github/4-advanced' },
-          ],
-        },
-      ],
       // Certifize
       '/certifize/ccna': [
         {
