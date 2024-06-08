@@ -2,7 +2,7 @@
 
 <p>
     Open de
-    <a href="../../knowledge-base/networking/miw/assets/opdrachten/opdracht-risk-assessment-21-05.pdf#page=1&zoom=75" target=”_blank”>opdracht risk assesment</a>
+    <a href="../../knowledge-base/networking/miw/assets/opdrachten/assesments/opdracht-risk-assessment-21-05.pdf" target=”_blank”>opdracht risk assesment</a>
     in a new tab window fullscreen.
 </p>
 

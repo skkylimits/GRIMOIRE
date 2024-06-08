@@ -6,6 +6,8 @@ Each step in the CKC represents a point in the attack process where defensive me
 
 Ultimately, the goal of using the CKC is to enhance an organization's cybersecurity posture by improving its ability to detect and respond to cyber threats in a timely and effective manner, thereby reducing the risk of successful attacks and minimizing the potential impact on operations, data, and reputation.
 
+<img src="./assets/cyber-kill-chain.png">
+
 ## 1 Reconnaissance
 
 Gathering information about the target, such as IP addresses, server locations, and potential vulnerabilities.

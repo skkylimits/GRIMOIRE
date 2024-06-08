@@ -393,7 +393,7 @@ Of je een IDS installeert op een bestaande computer, een dedicated apparaat, een
 
 ## WiFi Oplossing
 
-AlBij het ontwerpen van een thuisnetwerk voor een groot huis met meerdere verdiepingen en kamers, is het belangrijk om goed na te denken over de plaatsing en configuratie van wireless access points (WAPs) om een naadloze en betrouwbare wifi-dekking te garanderen. Hier zijn enkele belangrijke overwegingen en stappen om dit te realiseren:
+Bij het ontwerpen van een thuisnetwerk voor een groot huis met meerdere verdiepingen en kamers, is het belangrijk om goed na te denken over de plaatsing en configuratie van wireless access points (WAPs) om een naadloze en betrouwbare wifi-dekking te garanderen. Hier zijn enkele belangrijke overwegingen en stappen om dit te realiseren:
 
 ### 1. **Planning en Plaatsing van Access Points**
 

@@ -238,6 +238,10 @@
     **Truth Tables**  
     Een waarheidstabel is een techniek om de waarde van Booleaanse expressies te berekenen. In een waarheidstabel worden alle mogelijke waarden van alle variabelen samen met de waarde van de expressie (of de subexpressies als de expressie complex is) vermeld.
 
+    [Truth Tables - AQA GCSE Computer Science](https://www.youtube.com/watch?v=J77FS5o__j0&t=37s)
+
+    <img src="./assets/truth-tables.png" />
+
     **Voorbeelden**  
     De waarheidstabellen van NOT en AND zijn:
     :::
@@ -2105,7 +2109,7 @@ The operating system (OS) oversees various facets, including:
 
 - **18.3.1 Thread Uses**
     ::: details Antwoord
-      **Threadgebruik**
+    **Threadgebruik**
 
   - Voorgrond (UI) / Achtergrond (Logica, Gegevens)
   - Asynchroon
