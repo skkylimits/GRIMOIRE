@@ -1,6 +1,6 @@
 # Virtual Machine Setup
 
-## Install Virtual Box
+## OVA
 
 ### 1: Download VirtualBox
 
@@ -22,31 +22,12 @@
 1. **Finish the installation**
    - Click "Finish" and optionally start VirtualBox.
 
-### 4: Set Up a Virtual Machine
-
-1. **Open VirtualBox**
-   - Launch VirtualBox from your desktop or start menu.
-2. **Create a new VM**
-   - Click "New" and enter the details: Name, OS type, and version.
-   - Allocate memory and create a virtual hard disk with default settings.
-
-### 5: Install an Operating System
-
-1. **Start the VM**
-   - Select your VM and click "Start".
-2. **Select startup disk**
-   - Choose your OS installation media (ISO file or physical disk).
-3. **Install the OS**
-   - Follow the installation instructions for your chosen OS.
-
-You're all set! VirtualBox is now ready with a new virtual machine.
-
-### 6: Open an OVA File
+### 4: Open an OVA File
 
 1. **Open VirtualBox**
    - Launch VirtualBox from your desktop or start menu.
 
-### 7: Import the OVA File
+### 5: Import the OVA File
 
 1. **Open the Import Appliance Wizard**
    - In the VirtualBox Manager, click on "File" in the menu bar.
@@ -63,7 +44,7 @@ You're all set! VirtualBox is now ready with a new virtual machine.
 4. **Import the Appliance**
    - Click "Import" to start the import process. This may take a few minutes depending on the size of the OVA file and your system's performance.
 
-### 8: Start the Imported Virtual Machine
+### 6: Start the Imported Virtual Machine
 
 1. **Start the VM**
    - Once the import is complete, the new virtual machine will appear in your VirtualBox Manager.
@@ -77,9 +58,57 @@ You're all set! VirtualBox is now ready with a new virtual machine.
 
 That's it! Your `existing` OVA file has been successfully added and imported into VirtualBox. You can now start and use the virtual machine.
 
-## Create Ubuntu Machine
+## VMDK
 
-Sure! Here is the step-by-step guide to setting up a brand `new` Ubuntu virtual machine in VirtualBox:
+To get VirtualBox to display a virtual machine in full-screen mode, you need to install the VirtualBox Guest Additions in your virtual machine. Here’s how you can do it:
+
+### Step 1: Install VirtualBox
+
+1. **Download VirtualBox**: Go to the [VirtualBox website](https://www.virtualbox.org/) and download the latest version for your operating system.
+2. **Install VirtualBox**: Run the installer and follow the on-screen instructions to complete the installation.
+
+### Step 2: Create a New Virtual Machine
+
+1. **Open VirtualBox**: Launch the VirtualBox application.
+2. **Create a New VM**:
+   - Click on the “New” button.
+   - Name your VM and choose the type and version of the operating system you will be installing.
+   - Allocate memory (RAM) for your VM. The recommended amount will be suggested based on the OS type you selected.
+   - When you reach the "Hard disk" section, select “Use an existing virtual hard disk file” and click on the folder icon to browse and select your VMDK file.
+
+### Step 3: Configure the Virtual Machine
+
+1. **General Settings**:
+   - Click on “Settings” for your VM.
+   - Under the “System” tab, you can adjust the boot order, CPU allocation, and other hardware settings.
+2. **Storage Settings**:
+   - Go to the “Storage” tab.
+   - Ensure your VMDK file is attached to the SATA controller.
+3. **Network Settings**:
+   - Under the “Network” tab, you can configure the network settings. The default NAT setting usually works fine for most users, but you can choose Bridged Adapter for more advanced networking options.
+
+### Step 4: Start the Virtual Machine
+
+1. **Start the VM**: Select your VM and click on the “Start” button.
+2. **Boot from VMDK**: The VM should now boot from the VMDK file you selected. Follow the on-screen instructions to complete any remaining setup required by the operating system.
+
+### Additional Tips
+
+- **Guest Additions**: After the OS is installed and running, it’s a good idea to install VirtualBox Guest Additions. This adds extra functionality, such as improved video performance, shared folders, and clipboard integration. You can do this by going to the "Devices" menu and selecting "Insert Guest Additions CD image" while the VM is running.
+- **Snapshots**: Use snapshots to save the current state of your VM. This allows you to revert back to a previous state if something goes wrong.
+
+### Troubleshooting
+
+- **Boot Issues**: If the VM does not boot, double-check that the VMDK file is correctly attached and recognized by VirtualBox.
+- **Performance**: Adjust the VM’s allocated resources (CPU, RAM) in the settings if you experience performance issues.
+
+By following these steps, you should be able to successfully install and run a virtual machine using a VMDK file in VirtualBox. If you encounter any specific issues, feel free to ask for further assistance!
+
+## ISO
+
+Create an Ubuntu machine.
+
+Here is the step-by-step guide to setting up a brand `new` Ubuntu virtual machine in VirtualBox:
 
 ### Step 1: Download and Install VirtualBox
 
@@ -185,5 +214,3 @@ Sure! Here is the step-by-step guide to setting up a brand `new` Ubuntu virtual 
    - Follow the prompts to install Guest Additions, which improves performance and provides additional features like shared folders and better video support.
 
 Your Ubuntu VM should now be ready to use!
-
-To get VirtualBox to display a virtual machine in full-screen mode, you need to install the VirtualBox Guest Additions in your virtual machine. Here’s how you can do it:

@@ -276,7 +276,7 @@ export default {
             { text: 'Network Types', link: '/knowledge-base/networking/1-fundamentals/1-network-types' },
             { text: 'Networking Topologies', link: '/knowledge-base/networking/1-fundamentals/2-networking-topologies' },
             { text: 'Proxies', link: '/knowledge-base/networking/1-fundamentals/3-proxies' },
-            { text: 'Droom Thuisnetwerk', link: '/knowledge-base/networking/1-fundamentals/4-droom-thuisnetwerk' },
+            { text: 'Thuisnetwerk', link: '/knowledge-base/networking/1-fundamentals/4-thuisnetwerk' },
             { text: 'Recources', link: '/knowledge-base/networking/1-fundamentals/5-recources' },
           ],
         },
