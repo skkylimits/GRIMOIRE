@@ -264,58 +264,20 @@ export default {
       ],
       '/knowledge-base/networking/': [
         {
-          text: 'MIW',
-          items: [
-            { text: 'A Top Down Approach', link: '/knowledge-base/networking/miw/0-a-top-down-approach.md' },
-            { text: 'Droom Thuisnetwerk', link: '/knowledge-base/networking/miw/00-droom-thuisnetwerk.md' },
-            { text: 'Netwerk Architektuur', link: '/knowledge-base/networking/miw/1-netwerk-architektuur.md' },
-            { text: 'Protocol Stack', link: '/knowledge-base/networking/miw/2-protocol-stack.md' },
-            { text: 'Intro Beveiliging', link: '/knowledge-base/networking/miw/3-intro-beveiliging.md' },
-            { text: 'Applicatielaag', link: '/knowledge-base/networking/miw/4-applicatie-laag.md' },
-            { text: 'Applicatieprotocollen', link: '/knowledge-base/networking/miw/5-applicatieprotocollen.md' },
-            { text: 'DNS', link: '/knowledge-base/networking/miw/6-dns.md' },
-            { text: 'Transportlaag', link: '/knowledge-base/networking/miw/7-transportlaag.md' },
-            { text: 'Netwerklaag', link: '/knowledge-base/networking/miw/8-netwerklaag.md' },
-            { text: 'Routing & Forwarding', link: '/knowledge-base/networking/miw/9-routing-en-forwarding.md' },
-            { text: 'Netwerklaagprotocollen', link: '/knowledge-base/networking/miw/10-netwerklaagprotocollen.md' },
-            { text: 'Subnetting', link: '/knowledge-base/networking/miw/11-subnetting.md' },
-            { text: 'Linklaag', link: '/knowledge-base/networking/miw/12-linklaag.md' },
-            { text: 'Beveiliging', link: '/knowledge-base/networking/miw/13-beveiliging.md' },
-            { text: 'Beveiligingsmaatregelen', link: '/knowledge-base/networking/miw/14-beveiligingsmaatregelen.md' },
-            { text: 'Netwerkbeheer', link: '/knowledge-base/networking/miw/21-netwerkbeheer.md' },
-            { text: 'Linklaag: ARP', link: '/knowledge-base/networking/miw/22-linklaag-arp.md' },
-            { text: 'Linklaag: Ethernet & Switching', link: '/knowledge-base/networking/miw/23-linklaag-ethernet-en-switching.md' },
-            { text: 'Draadloze Netwerken', link: '/knowledge-base/networking/miw/24-draadloze-netwerken.md' },
-            { text: 'Wifi Security', link: '/knowledge-base/networking/miw/25-wifi-security' },
-            { text: 'Network Security', link: '/knowledge-base/networking/miw/26-network-security' },
-            { text: 'TLS', link: '/knowledge-base/networking/miw/27-tls' },
-          ],
-        },
-        {
-          text: 'Wireshark',
-          items: [
-            { text: 'HTTP', link: '/knowledge-base/networking/miw/wireshark/1-http-wireshark' },
-            { text: 'DNS', link: '/knowledge-base/networking/miw/wireshark/2-dns-wireshark' },
-          ],
-        },
-        {
           text: 'The Internet',
           items: [
             { text: 'What Is The Internet?', link: '/knowledge-base/networking/0-the-internet/the-internet.md' },
           ],
         },
         {
-          text: 'Introduction',
+          text: 'Fundamentals',
           items: [
-            { text: 'Networking Overview', link: '/knowledge-base/networking/1-introduction/networking-overview' },
-          ],
-        },
-        {
-          text: 'Networking Structure',
-          items: [
-            { text: 'Network Types', link: '/knowledge-base/networking/2-networking-structure/1-network-types' },
-            { text: 'Networking Topologies', link: '/knowledge-base/networking/2-networking-structure/2-networking-topologies' },
-            { text: 'Proxies', link: '/knowledge-base/networking/2-networking-structure/3-proxies' },
+            { text: 'Networking Overview', link: '/knowledge-base/networking/1-fundamentals/0-networking-overview' },
+            { text: 'Network Types', link: '/knowledge-base/networking/1-fundamentals/1-network-types' },
+            { text: 'Networking Topologies', link: '/knowledge-base/networking/1-fundamentals/2-networking-topologies' },
+            { text: 'Proxies', link: '/knowledge-base/networking/1-fundamentals/3-proxies' },
+            { text: 'Droom Thuisnetwerk', link: '/knowledge-base/networking/1-fundamentals/4-droom-thuisnetwerk' },
+            { text: 'A Top Down Approach', link: '/knowledge-base/networking/1-fundamentals/5-a-top-down-approach' },
           ],
         },
         {
@@ -327,34 +289,15 @@ export default {
           ],
         },
         {
-          text: 'Addressing',
+          text: 'Wireshark',
+          collapsed: true,
+          collapsible: true,
           items: [
-            { text: 'Networking Layer', link: '/knowledge-base/networking/4-networking-addressing/1-network-layer' },
-            { text: 'IPv4 Addresses', link: '/knowledge-base/networking/4-networking-addressing/2-ipv4-addresses' },
-            { text: 'Subnetting', link: '/knowledge-base/networking/4-networking-addressing/3-subnetting' },
-            { text: 'MAC Addresses', link: '/knowledge-base/networking/4-networking-addressing/4-mac-addresses' },
-            { text: 'IPv6 Addresses', link: '/knowledge-base/networking/4-networking-addressing/5-ipv6-addresses' },
+            { text: 'HTTP', link: '/knowledge-base/networking/miw/wireshark/1-http-wireshark' },
+            { text: 'DNS', link: '/knowledge-base/networking/miw/wireshark/2-dns-wireshark' },
           ],
         },
-        {
-          text: 'Protocols & Terminology',
-          items: [
-            { text: 'Networking Key Terminology', link: '/knowledge-base/networking/5-protocols-and-terminology/1-protocols-and-terminology' },
-            { text: 'Common Protocols', link: '/knowledge-base/networking/5-protocols-and-terminology/2-common-protocols' },
-            { text: 'Wireless Networks', link: '/knowledge-base/networking/5-protocols-and-terminology/3-wireless-networks' },
-            { text: 'Virtual Private Networks', link: '/knowledge-base/networking/5-protocols-and-terminology/4-virtual-private-networks' },
-            { text: 'Vendor Specific Information', link: '/knowledge-base/networking/5-protocols-and-terminology/5-vendor-specific-information' },
-          ],
-        },
-        {
-          text: 'Connection Establishment',
-          items: [
-            { text: 'Key Exchange Mechanisms', link: '/knowledge-base/networking/6-connection-establishment/1-key-exchange-mechanisms' },
-            { text: 'Authentication Protocols', link: '/knowledge-base/networking/6-connection-establishment/2-authentication-protocols' },
-            { text: 'TCP/UDP Connections', link: '/knowledge-base/networking/6-connection-establishment/3-tcp-udp-connections' },
-            { text: 'Cryptograhy', link: '/knowledge-base/networking/6-connection-establishment/4-cryptography' },
-          ],
-        },
+
       ],
       '/knowledge-base/os/': [
         {

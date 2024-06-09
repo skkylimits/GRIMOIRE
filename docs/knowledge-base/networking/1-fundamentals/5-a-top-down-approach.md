@@ -1,163 +1,6 @@
 # A Top Down Approach
 
-## Leerdoelen
-
-### Dag 1 t/m 3
-
-- [ ] Basisconcepten voor netwerkarchitectuur begrijpen
-- [ ] Begrijp de TCP/IP-protocolstack en de functies van elke laag
-- [ ] Begrijp belangrijke internetprotocollen zoals HTTP, SMTP, DHCP, DNS, TCP, UDP en IP
-- [ ] Begrijp transport layer services en hoe applicaties deze kunnen gebruiken
-- [ ] Begrijp netwerk layer functies zoals routering en doorsturen
-- [ ] Begrijp subnetten en het verdelen van een netwerk in subnetten van de juiste grootte
-- [ ] Basisbedreigingen en beperking van netwerkbeveiliging begrijpen
-
-### Dag 4 t/m 6
-
-- [ ] Begrijpen van de werking en beveiligingsaspecten van de TCP verbinding.
-- [ ] Begrijpen van de werking en beveiligingsaspecten van protocollen voor routing en name resolution.
-- [ ] Begrijpen van basisconcepten van het beheer van netwerken en SDN (Software Defined Networking).
-- [ ] Begrijpen van de werking en beveiligingsaspecten van adressering en switching op de linklaag.
-- [ ] Begrijpen van de werking en beveiligingsaspecten van draadloze en mobiele netwerkverbindingen.
-- [ ] Begrijpen van bedreigingen en bijbehorende tegenmaatregelen op het gebied van netwerkbeveiliging.
-- [ ] Begrijpen van basisconcepten van forensisch onderzoek en het verzamelen van bewijs in netwerken.
-
-**On completion of the course, students should be able to:**
-
-1. **Terminology associated with computer networks:**
-    ::: details Antwoord
-    Termonologie die verband houdt met computernetwerken omvat begrippen zoals IP-adressen, subnetmaskers, gateways, routers, switches, firewalls, DNS (Domain Name System), DHCP (Dynamic Host Configuration Protocol), LAN (Local Area Network), WAN (Wide Area Network), MAN (Metropolitan Area Network), TCP/IP (Transmission Control Protocol/Internet Protocol), OSI-model (Open Systems Interconnection model), enzovoort.
-    :::
-
-1. **Belang van de ISO 7-laags/IP-laag 5 referentiemodellen:**
-   ::: details antwoord
-   De ISO 7-laags en het TCP/IP-model (vaak gezien als een 5-laags model) zijn referentiemodellen die dienen als richtlijnen voor de architectuur en het ontwerp van computernetwerken. Deze modellen helpen bij het begrijpen van de verschillende protocollen, hun functionaliteiten en hoe ze met elkaar communiceren. Ze bieden een gestructureerd kader voor het begrijpen en oplossen van netwerkproblemen.
-
-   -
-
-2. **Belangrijke kwesties voor de realisatie van LAN/WAN/MAN-netwerkarchitecturen:**
-   ::: details Antwoord
-   Voor LAN (Local Area Network), WAN (Wide Area Network) en MAN (Metropolitan Area Network) zijn enkele van de belangrijkste kwesties onder andere bandbreedtebeheer, netwerkbeveiliging, schaalbaarheid, betrouwbaarheid, kosten, interoperabiliteit, netwerkbeheer en -onderhoud.
-   :::
-
-3. **Hybride netwerkarchitecturen in de bedrijfsomgeving:**
-   ::: details Antwoord
-   In de bedrijfsomgeving worden vaak hybride netwerkarchitecturen gebruikt, waarbij LAN, WAN en MAN worden gecombineerd met cloudservices, virtualisatie en softwaregedefinieerde netwerken (SDN). Dit helpt bij het optimaliseren van prestaties, schaalbaarheid en kostenbesparing.
-   :::
-
-4. **Ontwerpprincipes van bekabelde en draadloze communicatienetwerken:**
-   ::: details Antwoord
-   De ontwerpprincipes van bekabelde en draadloze communicatienetwerken omvatten aspecten zoals de selectie van geschikte bekabeling en draadloze technologieën, RF-interferentiebeheer, dekking en capaciteitsplanning, beveiliging, redundantie, schaalbaarheid en naleving van industriestandaarden.
-   :::
-
-5. **Cyber Risk Management Concepts & Threat Modelling:**
-   ::: details Antwoord
-   Cyber Risk Management omvat het identificeren, beoordelen en beheren van cyberbeveiligingsrisico's binnen een organisatie. Threat Modelling is een methodologie die wordt gebruikt om potentiële bedreigingen en kwetsbaarheden in een systeem of netwerk te identificeren en te beoordelen, zodat passende beveiligingsmaatregelen kunnen worden genomen.
-   :::
-
-6. **Huidige netwerkauthenticatietoepassingen, PKI, web- en netwerkbeveiliging en hun kwetsbaarheden:**
-    ::: details Antwoord
-    Netwerkauthenticatietoepassingen omvatten protocollen zoals RADIUS (Remote Authentication Dial-In User Service), TACACS+ (Terminal Access Controller Access Control System Plus), 802.1X, enz. PKI (Public Key Infrastructure) wordt gebruikt voor het beheren van digitale certificaten en sleuteluitwisseling. Web- en netwerkbeveiligingskwetsbaarheden omvatten onder andere XSS (Cross-Site Scripting), SQL-injectie, CSRF (Cross-Site Request Forgery), phishing, DDoS-aanvallen (Distributed Denial of Service), enz.
-    :::
-
-7. **Netwerkaanvallen en basisnetwerkverdedigingstools:**
-   ::: details Antwoord
-   Netwerkaanvallen kunnen verschillende vormen aannemen, waaronder malware-infecties, DDoS-aanvallen, phishing-aanvallen, man-in-the-middle-aanvallen, enz. Basisnetwerkverdedigingstools omvatten firewalls, intrusion detection/prevention systems (IDPS), antivirussoftware, VPN's (Virtual Private Networks), encryptieprotocollen, beveiligde authenticatieprotocollen, enz.
-   :::
-
-### Leeswijzer
-
-Overzicht van de hoofdstukken die bestudeerd moeten worden voor aanvang van de les.
-
-**Les 1a: Network architecture & physical layer**
-
-- K&R 1.1 - 1.6: Bestudeer met uitzondering van paragraaf 1.3.2
-- K&R 1.7: Lees dit hoofdstuk om een algemeen beeld te krijgen van de geschiedenis. Je hoeft de genoemde datums, gebeurtenissen of genoemde personen niet te onthouden.
-
-**Les 1b: Application layer & application protocols**
-
-- K&R 2.1, 2.2, 2.3: Paragraaf 2.2.6 is optioneel.
-- K&R 2.5: Bestudeer met de volgende uitzondering:
-  - Je hoeft de berekeningen in de sectie “Scalability of P2P Architectures” niet te onthouden. Wel moet je de distributietijd voor een P2P-architectuur moeten kunnen vergelijken met een client-server-architectuur, zoals weergegeven in figuur 2.23.
-
-**Les 2a: DNS & transport layer**
-
-- K&R 2.4
-- K&R 3.1, 3.2, 3.3, 3.5.1, 3.5.2, 3.5.6
-
-**Les 2b: Network layer**
-
-- K&R 4.1
-- K&R 4.2 - 4.2.4: Bestudeer met de volgende uitzonderingen:
-  - Voor 4.2.2 moet je de rol van het switching fabric in een router begrijpen, maar je hoeft de specifieke eigenschappen van de verschillende technologieën die worden beschreven (geheugen, bus, interconnectienetwerk) niet te onthouden.
-  - Bestudeer voor 4.2.4 alleen het eerste deel (tot 'input wachtrijen') dat beschrijft waar pakketverlies kan optreden in een router.
-- K&R 4.3, 5.6
-
-**Les 3a: Subnetting & link layer**
-
-- Bestudeer de materialen die beschikbaar zijn op de DLO over subnetten.
-- K&R 6.1
-- K&R 6.2: Bestudeer met de volgende uitzondering:
-  - Je moet kunnen beschrijven wat CRC is en hoe het wordt gebruikt, maar je hoeft de berekeningen die in dit hoofdstuk worden beschreven niet te kunnen doen.
-
-**Les 3b: Network security**
-
-- K&R 8.1
-- K&R 8.2 - 8.2.1: Bestudeer het eerste deel tot (maar niet inclusief) ‘block ciphers’
-- K&R 8.2.2: Bestudeer het eerste deel tot (maar niet inclusief) ‘RSA’
-- K&R 8.3
-- K&R 8.6
-- K&R 8.7 - 8.7.2
-- K&R 8.9
-
-**Les 4a: TCP**
-
-- K&R 3.5: bestudeer geheel. Deze stof is deels al behandeld tijdens Infrastructure, maar we gaan nu dieper in op de details.
-- K&R 3.7: bestudeer tot (niet tot en met) de sectie: Macroscopic description of TCP Cubic
-- The Internet Protocol Journal, december 2006: SYN Flooding Attacks (zie DLO)
-
-**Les 4b: DNS**
-
-- K&R 2.4
-- Tweakers.net, 14-10-2019: Dns-over-https: vloek of zegen? (zie DLO)
-
-**Routing algorithms & protocols**
-
-- K&R 5.2: zorg dat je bekend bent met de eigenschappen van link state en distance vector algoritmes. Je hoeft niet zelf met deze algoritmes routing tabellen te kunnen bepalen.
-- K&R 5.3 - 5.4: bestudeer geheel.
-- Tweakers.net, 22-8-2015: De achilleshiel van het internet (zie DLO
-
-**Les 5a: Network management: SDN & SNMP**
-
-- K&R 4.4, 5.1, 5.5, 5.8 (5.7 in 7th edition): bestudeer geheel
-
-**Link layer: ARP**
-
-- K&R 6.4 - 6.4.1: bestudeer geheel
-
-**Les 5b: Link layer: Ethernet en switches**
-
-- K&R 6.4 vanaf 6.4.2: bestudeer geheel
-- K&R 6.6: bestudeer geheel
-- K&R 6.7: bestudeer geheel
-
-**Draadloze netwerken**
-
-- K&R 7 - 7.1: bestudeer geheel
-- K&R 7.2: bestudeer tot 7.2.1, dus niet het hoofdstuk over CDMA
-- K&R 7.3: bestudeer met de volgende uitzonderingen:
-  - Hoofdstuk 7.3.2 over het 802.11 MAC protocol hoort niet tot de stof
-  - Hoofdstuk 7.3.6 gaat over Bluetooth. Zorg dat je weet wat deze protocollen zijn en in welke situaties ze gebruikt worden. Je hoeft niet bekend te zijn met de details over hoe deze protocollen werken.
-- K&R 8.8: bestudeer geheel
-
-**Les 6a: Network security**
-
-- Een deel van dit materiaal is eerder behandeld tijdens dag 1 t/m 3.
-- K&R 8.1: bestudeer geheel
-- K&R 8.2: bestudeer met de volgende uitzonderingen:
-  - De gebruikte wiskunde hoef je niet te kunnen reproduceren. Dat geldt ook voor de sectie “Why Does RSA work?”.
-- K&R 8.3, 8.4, 8.6: bestudeer geheel
-- Acunetix, 31-3-2019, Examples of TLS Vulnerabilities and Attacks (zie DLO)
+[[toc]]
 
 ## Life Of A Packet
 
@@ -1060,7 +903,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     UDP operates with minimal overhead, adding only source and destination port numbers to segments before passing them to the network layer.
 
-    <img src="./assets/afbeeldingen/udp-segement.png">
+    <img src="./assets/5-a-top-down-approach/udp-segement.png">
 
     **UDP Checksum:**
 
@@ -1166,7 +1009,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
   - **3.5.2** TCP Segment Structure
     ::: details Antwoord
-    <img src="./assets/afbeeldingen/tcp-segment.png">
+    <img src="./assets/5-a-top-down-approach/tcp-segment.png">
     :::
 
   - **3.5.3** Round-Trip Time Estimation and Timeout
@@ -1216,7 +1059,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     **Three-way handshake**: De verbinding wordt tot stand gebracht door een drie-weg handshake, waarbij drie speciale TCP-segmenten worden uitgewisseld tussen de client en server.
 
-    <img src="./assets/afbeeldingen/tcp-3-way-handshake.png">
+    <img src="./assets/5-a-top-down-approach/tcp-3-way-handshake.png">
 
     **Confirmation of the connection**: Eenmaal tot stand gebracht, kunnen de applicatieprocessen gegevens uitwisselen via de TCP-verbinding.
     :::
@@ -1320,7 +1163,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     **Timeout en Herverzending**
 
     Wanneer een zender geen bevestiging (ACK) ontvangt binnen een bepaalde tijd, wordt het pakket als verloren beschouwd en opnieuw verzonden, waardoor eventuele vertragingen of fouten in het netwerk worden gecompenseerd.
-    <img src="./assets/afbeeldingen/tcp-retransmission.png">
+    <img src="./assets/5-a-top-down-approach/tcp-retransmission.png">
     :::
 
 - **3.10** TCP Hijacking
@@ -1400,7 +1243,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - **Software-defined Networking (SDN):** Scheidt de controle- en datavlakken van netwerkapparaten.
   - **Netwerklaagprotocollen:** Inclusief IPv4, IPv6, ICMP en Network Address Translation (NAT).
 
-  <img src="./assets/afbeeldingen/network-layer.png">
+  <img src="./assets/5-a-top-down-approach/network-layer.png">
 
   **Data- en Controlevlak**
   De netwerklaag bestaat uit twee delen: het gegevensvlak en het controlevlak.
@@ -1421,7 +1264,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - Routing: Proces van een hele trip plannen.
     - Forwarding: Het doorkruisen van een enkel kruispunt.
 
-    <img src="./assets/afbeeldingen/datagram-routing-en-forwarding.png">
+    <img src="./assets/5-a-top-down-approach/datagram-routing-en-forwarding.png">
     :::
 
   - **4.1.2** Network Service Model
@@ -1451,7 +1294,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - **Output port:** Een uitvoerpoort slaat pakketten op die zijn ontvangen van het schakelmechanisme en verzendt deze pakketten via de juiste uitgaande link door de nodige koppelingslaag- en fysieke laagfuncties uit te voeren.
   - **Routing processo:** De routerprocessor voert besturingsvlakfuncties uit, zoals het uitvoeren van de routeringsprotocollen, het bijhouden van routeringstabellen en het berekenen van de doorstuurtafel voor de router.
 
-    <img src="./assets/afbeeldingen/componenten-van-een-router.png">
+    <img src="./assets/5-a-top-down-approach/componenten-van-een-router.png">
 
     **Werking van Een Router**
 
@@ -1468,14 +1311,14 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     **Destination-Based Forwarding:** Dit is het proces waarbij een router een pakket naar de juiste uitvoerpoort stuurt op basis van de bestemmingsadressen in het pakket, zoals vastgelegd in de doorstuurtabel.
 
-    <img src="./assets/afbeeldingen/input-port-functions.png">
+    <img src="./assets/5-a-top-down-approach/input-port-functions.png">
     :::
 
   - **4.2.2** Switching
     ::: details Antwoord
     Switching: Het proces waarbij pakketten worden doorgestuurd van een invoerpoort naar een uitvoerpoort via de schakelfabricus, uitgevoerd op verschillende manieren, waaronder schakelen via geheugen, een bus of een crossbar.
 
-    <img src="./assets/afbeeldingen/switching.png">
+    <img src="./assets/5-a-top-down-approach/switching.png">
     :::
 
   - **4.2.3** Output Port Processing
@@ -1483,7 +1326,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     **Uitvoerpoorten:** Het verzenden van opgeslagen datagrammen via de uitgaande link, inclusief protocolverwerking en wachtrijbeheer voor het reguleren van de verzendingssnelheid.
 
     **Output Functions**
-    <img src="./assets/afbeeldingen/output-port-functions.png">
+    <img src="./assets/5-a-top-down-approach/output-port-functions.png">
     :::
 
   - **4.2.4** Where Does Queuing Occur?
@@ -1500,12 +1343,12 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - **Introductie van IPv6**: Een nieuwe versie, IPv6, wordt ontwikkeld sinds de jaren '90.
   - **Migratie naar IPv6**: Migratie naar IPv6 is een werk in uitvoering.
 
-    <img src="./assets/afbeeldingen/ipv4-vs-ipv6.png">
+    <img src="./assets/5-a-top-down-approach/ipv4-vs-ipv6.png">
   :::
 
   - **4.3.1** IPv4 Datagram Format
     ::: details Antwoord
-    <img src="./assets/afbeeldingen/ipv4-datagram.png">
+    <img src="./assets/5-a-top-down-approach/ipv4-datagram.png">
     :::
 
   - **4.3.2** IPv4 Addressing
@@ -1529,7 +1372,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - **128 bits voor IP-adressen**: Genoeg adressen voor elk zandkorreltje op aarde.
     - **Geoptimaliseerde header en performance**: Verbeterde efficiëntie en snelheid.
     - **Ondersteuning voor Quality of Service**: Bijvoorbeeld, een videostream kan prioriteit krijgen.
-    <img src="./assets/afbeeldingen/ipv6-datagram.png">
+    <img src="./assets/5-a-top-down-approach/ipv6-datagram.png">
     :::
 
 - **4.4** Generalized Forwarding and SDN
@@ -1543,7 +1386,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - Een centrale controller beheert en programmeert de netwerkapparaten op afstand, waardoor de configuratie dynamisch en flexibel kan worden aangepast.
   - Een server op afstand bepaalt de forwarding table van iedere router.
 
-  <img src="./assets/afbeeldingen/sdn.png">
+  <img src="./assets/5-a-top-down-approach/sdn.png">
   :::
 
   - **4.4.1** Match
@@ -1553,7 +1396,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
   Dit proces omvat het controleren van specifieke velden in de header van het pakket, zoals het bron- en doel-IP-adres, het protocol, de poortnummers en andere relevante informatie, om te bepalen welke actie er op het pakket moet worden toegepast.
 
-  <img src="./assets/afbeeldingen/match.png">
+  <img src="./assets/5-a-top-down-approach/match.png">
   :::
 
   - **4.4.2** Action
@@ -1587,7 +1430,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
   Deze voorbeelden illustreren hoe match-plus-action in OpenFlow wordt gebruikt om pakketten te verwerken op basis van specifieke criteria en de gewenste acties uit te voeren voor elke overeenkomstige pakketstroom.
 
-  <img src="./assets/afbeeldingen/match.png">
+  <img src="./assets/5-a-top-down-approach/match.png">
   :::
 
 - **4.5** Middleboxes
@@ -1648,7 +1491,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - DHCP-server reageert (Acknowledge):
       - De DHCP-server geeft het IP-adres uit.
 
-    <img src="./assets/afbeeldingen/dhcp-dora.png">
+    <img src="./assets/5-a-top-down-approach/dhcp-dora.png">
     :::
 
   - **4.6.2** DHCP client-server scenario
@@ -1665,7 +1508,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     5. **Configuration:** De DHCP-client configureert zijn netwerkinterface met het toegewezen IP-adres en andere ontvangen instellingen.
 
-    <img src="./assets/afbeeldingen/dhcp-client-server.png">
+    <img src="./assets/5-a-top-down-approach/dhcp-client-server.png">
     :::
 
 - **4.6.3** DHCP more than IP addresses
@@ -1749,7 +1592,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - Het resultaat is een doorstuurtafel specifiek voor het bronknooppunt.
     - Het werkt iteratief: na k iteraties bepaalt het algoritme met zekerheid het minst-kostbare pad naar k bestemmingen.
 
-    <img src="./assets/afbeeldingen/dijkstra-algoritme.png">
+    <img src="./assets/5-a-top-down-approach/dijkstra-algoritme.png">
     :::
 
   - **5.2.2** The Distance-Vector (DV) Routing Algorithm
@@ -1996,12 +1839,12 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - **MAC** staat voor Media Access Control, het unieke hardwareadres van een apparaat.
     - Een apparaat kan meerdere MAC- en IP-adressen hebben, maar één voor elke verbindingstype.
 
-    <img src="./assets/afbeeldingen/mac-address.png">
+    <img src="./assets/5-a-top-down-approach/mac-address.png">
    :::
 
   - **6.1.2** Link Frames
     ::: details Antwoord
-    <img src="./assets/afbeeldingen/link-frames.png">
+    <img src="./assets/5-a-top-down-approach/link-frames.png">
     :::
 
   - **6.1.3** Where Is the Link Layer Implemented?
@@ -2013,7 +1856,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - Gevestigd op de systeembus.
     - Een combinatie van hardware, software en firmware.
 
-    <img src="./assets/afbeeldingen/waar-is-de-linklaag.png">
+    <img src="./assets/5-a-top-down-approach/waar-is-de-linklaag.png">
     :::
 
   - **6.1.3** How do adapters communicate?
@@ -2022,7 +1865,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     ontvanger zoek naar errors en pakt datagram uit de frame
 
-    <img src="./assets/afbeeldingen/hoe-communiceren-adapters.png">
+    <img src="./assets/5-a-top-down-approach/hoe-communiceren-adapters.png">
     :::
 
 - **6.2** Error-Detection and -Correction Techniques
@@ -2033,7 +1876,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - Protocol kan sommige fouten niet opsporen.
     - Groter EDC-veld zorgt voor meer kans op opsporen van fouten.
 
-    <img src="./assets/afbeeldingen/error-detection.png">
+    <img src="./assets/5-a-top-down-approach/error-detection.png">
   :::
 
   - **6.2.1** Parity Checks
@@ -2043,7 +1886,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - Bij ontvangst wordt de pariteit opnieuw berekend en vergeleken met de ontvangen waarde om fouten te detecteren.
   - Eenvoudig en effectief voor het dFetecteren van enkele bitfouten, maar niet voor het corrigeren ervan.
 
-  <img src="./assets/afbeeldingen/parity-checking.png">
+  <img src="./assets/5-a-top-down-approach/parity-checking.png">
   :::
 
   - **6.2.1.5** Two Dimensional Parity
@@ -2055,7 +1898,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - Bij ontvangst worden de pariteitsbits opnieuw berekend voor elke rij en elke kolom. Als een fout wordt gedetecteerd, kan de rij en/of kolom waarin de fout is opgetreden, worden geïdentificeerd.
   - Hierdoor kunnen niet alleen enkelvoudige bitfouten, maar ook sommige meervoudige bitfouten worden gedetecteerd.
 
-  <img src="./assets/afbeeldingen/two-dimensional-parity-checking.png">
+  <img src="./assets/5-a-top-down-approach/two-dimensional-parity-checking.png">
   :::
 
   - **6.2.2** Checksumming Methods
@@ -2445,7 +2288,7 @@ Comply with laws, rules, and regulations:
 - Veel rekenkracht nodig om te berekenen.
 - Voorbeelden zijn DES, 3DES, AES.
 
-<img src="./assets/afbeeldingen/symmetric-crytpography.png">
+<img src="./assets/5-a-top-down-approach/symmetric-crytpography.png">
 
 :::
 
@@ -2457,71 +2300,115 @@ Comply with laws, rules, and regulations:
 - Wordt gebruikt voor digitale handtekeningen en veilige communicatie.
 - RSA is een veelgebruikte asymmetrische cryptografische methode.
 
-<img src="./assets/afbeeldingen/simple-encryption-scheme.png">
+<img src="./assets/5-a-top-down-approach/simple-encryption-scheme.png">
 
-<img src="./assets/afbeeldingen/public-key-crypto.png">
+<img src="./assets/5-a-top-down-approach/public-key-crypto.png">
 
-<img src="./assets/afbeeldingen/public-key-cryptography.png">
+<img src="./assets/5-a-top-down-approach/public-key-cryptography.png">
 :::
 
 - **7.10** Certificate Authority
 ::: details Antwoord
 
-<img src="./assets/afbeeldingen/certificate-authorities.png">
+<img src="./assets/5-a-top-down-approach/certificate-authorities.png">
 :::
 
 - **7.11** Digital Signatures
 ::: details Antwoord
 
-<img src="./assets/afbeeldingen/digital-signatures.png">
+<img src="./assets/5-a-top-down-approach/digital-signatures.png">
 :::
 
 - **7.12** Message digests
 ::: details Antwoord
 
-<img src="./assets/afbeeldingen/message-digest.png">
+<img src="./assets/5-a-top-down-approach/message-digest.png">
 :::
 
 - **7.13** SSL TCP/IP
 ::: details Antwoord
 
-<img src="./assets/afbeeldingen/ssl-tcip.png">
+<img src="./assets/5-a-top-down-approach/ssl-tcip.png">
 :::
 
 - **7.14** Firewall
 ::: details Antwoord
 
-<img src="./assets/afbeeldingen/firewall.png">
+<img src="./assets/5-a-top-down-approach/firewall.png">
 :::
 
 - **7.15** Packet Filtering
 ::: details Antwoord
 
-<img src="./assets/afbeeldingen/packet-filtering.png">
+<img src="./assets/5-a-top-down-approach/packet-filtering.png">
 :::
 
 - **7.16** IDS
 ::: details Antwoord
 
-<img src="./assets/afbeeldingen/ids.png">
+<img src="./assets/5-a-top-down-approach/ids.png">
 
-<img src="./assets/afbeeldingen/ids-sensors.png">
+<img src="./assets/5-a-top-down-approach/ids-sensors.png">
 :::
 
 - **7.17** Demilitarized Zone (DMZ)
 ::: details Antwoord
 
-<img src="./assets/afbeeldingen/dimilitarized-zone.png">
+<img src="./assets/5-a-top-down-approach/dimilitarized-zone.png">
 :::
 
 - **7.18** VPN
 ::: details Antwoord
 
-<img src="./assets/afbeeldingen/vpn.png">
+<img src="./assets/5-a-top-down-approach/vpn.png">
 :::
 
 - **7.19** Downgrade Attack
 ::: details Antwoord
 
-<img src="./assets/afbeeldingen/downgrade-attack.png">
+<img src="./assets/5-a-top-down-approach/downgrade-attack.png">
 :::
+
+## Leerdoelen
+
+**Na voltooiing van de cursus moeten de studenten dit kunnen:**
+
+1. **Terminologie geassocieerd met computernetwerken:**
+    ::: details Antwoord
+    Termonologie die verband houdt met computernetwerken omvat begrippen zoals IP-adressen, subnetmaskers, gateways, routers, switches, firewalls, DNS (Domain Name System), DHCP (Dynamic Host Configuration Protocol), LAN (Local Area Network), WAN (Wide Area Network), MAN (Metropolitan Area Network), TCP/IP (Transmission Control Protocol/Internet Protocol), OSI-model (Open Systems Interconnection model), enzovoort.
+    :::
+
+1. **Belang van de ISO 7-laags/IP-laag 5 referentiemodellen:**
+   ::: details antwoord
+   De ISO 7-laags en het TCP/IP-model (vaak gezien als een 5-laags model) zijn referentiemodellen die dienen als richtlijnen voor de architectuur en het ontwerp van computernetwerken. Deze modellen helpen bij het begrijpen van de verschillende protocollen, hun functionaliteiten en hoe ze met elkaar communiceren. Ze bieden een gestructureerd kader voor het begrijpen en oplossen van netwerkproblemen.
+   :::
+
+2. **Belangrijke kwesties voor de realisatie van LAN/WAN/MAN-netwerkarchitecturen:**
+   ::: details Antwoord
+   Voor LAN (Local Area Network), WAN (Wide Area Network) en MAN (Metropolitan Area Network) zijn enkele van de belangrijkste kwesties onder andere bandbreedtebeheer, netwerkbeveiliging, schaalbaarheid, betrouwbaarheid, kosten, interoperabiliteit, netwerkbeheer en -onderhoud.
+   :::
+
+3. **Hybride netwerkarchitecturen in de bedrijfsomgeving:**
+   ::: details Antwoord
+   In de bedrijfsomgeving worden vaak hybride netwerkarchitecturen gebruikt, waarbij LAN, WAN en MAN worden gecombineerd met cloudservices, virtualisatie en softwaregedefinieerde netwerken (SDN). Dit helpt bij het optimaliseren van prestaties, schaalbaarheid en kostenbesparing.
+   :::
+
+4. **Ontwerpprincipes van bekabelde en draadloze communicatienetwerken:**
+   ::: details Antwoord
+   De ontwerpprincipes van bekabelde en draadloze communicatienetwerken omvatten aspecten zoals de selectie van geschikte bekabeling en draadloze technologieën, RF-interferentiebeheer, dekking en capaciteitsplanning, beveiliging, redundantie, schaalbaarheid en naleving van industriestandaarden.
+   :::
+
+5. **Cyber Risk Management Concepts & Threat Modelling:**
+   ::: details Antwoord
+   Cyber Risk Management omvat het identificeren, beoordelen en beheren van cyberbeveiligingsrisico's binnen een organisatie. Threat Modelling is een methodologie die wordt gebruikt om potentiële bedreigingen en kwetsbaarheden in een systeem of netwerk te identificeren en te beoordelen, zodat passende beveiligingsmaatregelen kunnen worden genomen.
+   :::
+
+6. **Huidige netwerkauthenticatietoepassingen, PKI, web- en netwerkbeveiliging en hun kwetsbaarheden:**
+    ::: details Antwoord
+    Netwerkauthenticatietoepassingen omvatten protocollen zoals RADIUS (Remote Authentication Dial-In User Service), TACACS+ (Terminal Access Controller Access Control System Plus), 802.1X, enz. PKI (Public Key Infrastructure) wordt gebruikt voor het beheren van digitale certificaten en sleuteluitwisseling. Web- en netwerkbeveiligingskwetsbaarheden omvatten onder andere XSS (Cross-Site Scripting), SQL-injectie, CSRF (Cross-Site Request Forgery), phishing, DDoS-aanvallen (Distributed Denial of Service), enz.
+    :::
+
+7. **Netwerkaanvallen en basisnetwerkverdedigingstools:**
+   ::: details Antwoord
+   Netwerkaanvallen kunnen verschillende vormen aannemen, waaronder malware-infecties, DDoS-aanvallen, phishing-aanvallen, man-in-the-middle-aanvallen, enz. Basisnetwerkverdedigingstools omvatten firewalls, intrusion detection/prevention systems (IDPS), antivirussoftware, VPN's (Virtual Private Networks), encryptieprotocollen, beveiligde authenticatieprotocollen, enz.
+   :::
