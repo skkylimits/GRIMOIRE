@@ -223,5 +223,5 @@ Other RDP clients exist, such as [Remmina](https://remmina.org/) and [rdesktop](
 **Command**
 
 ```bash
-xfreerdp /v:<targetIp> /u:htb-student /p:Password
+xfreerdp /v:<targetIp> /u:username /p:password
 ```

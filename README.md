@@ -148,3 +148,7 @@ These topics cover a wide range of security domains and can provide a solid foun
 ## Secure kubernetes at the edge whitepaper
 
 <https://ubuntu.com/engage/secure-kubernetes-at-the-edge>
+
+## Microsoft Learn Challenge: Build Edition
+
+<https://www.microsoft.com/en-us/cloudskillschallenge/build/registration/2024?ocid=build24_csc_learnpromo_T1_cnl>

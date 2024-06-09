@@ -360,6 +360,7 @@ export default {
         {
           text: 'Windows',
           collapsible: true,
+          collapsed: false,
           items: [
             {
               text: 'Introduction',
@@ -371,57 +372,137 @@ export default {
             {
               text: 'Core of the Operating System',
               items: [
-                { text: 'Operating System Structure', link: '/knowledge-base/os/windows/2-core-of-the-operating-system/operating-system-structure' },
+                { text: 'OS Structure', link: '/knowledge-base/os/windows/2-core-of-the-operating-system/operating-system-structure' },
                 { text: 'File System', link: '/knowledge-base/os/windows/2-core-of-the-operating-system/file-system' },
                 { text: 'NTFS vs. Share Permissions', link: '/knowledge-base/os/windows/2-core-of-the-operating-system/ntfs-vs-share-permissions' },
               ],
             },
             {
-              text: 'Working with Services & Processes',
+              text: 'Services & Processes',
               items: [
-                { text: 'Windows Services & Processes', link: '/knowledge-base/os/windows/' },
-                { text: 'Service Permissions', link: '/knowledge-base/os/windows/' },
+                { text: 'Windows Services & Processes', link: '/knowledge-base/os/windows/3-working-with-services-and-processes/windows-services-and-processes' },
+                { text: 'Service Permissions', link: '/knowledge-base/os/windows/3-working-with-services-and-processes/service-permissions' },
               ],
             },
             {
               text: 'Interacting with Windows',
               items: [
-                { text: 'Widow Sessions', link: '/knowledge-base/os/windows/' },
-                { text: 'Interacting With the Windows OS', link: '/knowledge-base/os/windows/' },
-                { text: 'Windows Management Instrumentation (WMI)', link: '/knowledge-base/os/windows/' },
+                { text: 'Widow Sessions', link: '/knowledge-base/os/windows/4-interacting-with-windows/windows-sessions' },
+                { text: 'Interacting the Windows OS', link: '/knowledge-base/os/windows/4-interacting-with-windows/interacting-with-the-windows-operating-system.md' },
+                { text: 'WMI', link: '/knowledge-base/os/windows/4-interacting-with-windows/windows-management-instrumentation' },
               ],
             },
             {
               text: 'Further Windows Usage',
               items: [
-                { text: 'Microsoft Manamgement Console (MMC)', link: '/knowledge-base/os/windows/' },
-                { text: 'Windows Subsystem for Linux (WSL)', link: '/knowledge-base/os/windows/' },
+                { text: 'MMC', link: '/knowledge-base/os/windows/5-further-windows-usage/microsoft-management-console' },
+                { text: 'WSL', link: '/knowledge-base/os/windows/5-further-windows-usage/windows-linux-subsystem' },
               ],
             },
             {
               text: 'Diving Deeper & Close Out',
               items: [
-                { text: 'Desktop Experience vs. Server Core', link: '/knowledge-base/os/windows/' },
-                { text: 'Windows Security', link: '/knowledge-base/os/windows/' },
-                { text: 'Skills Assesment - Windows Fundamentals', link: '/knowledge-base/os/windows/' },
+                { text: 'DE vs. SC', link: '/knowledge-base/os/windows/6-diving-deeper-and-close-out/desktop-experience-vs-server-core' },
+                { text: 'Windows Security', link: '/knowledge-base/os/windows/6-diving-deeper-and-close-out/windows-security' },
+                { text: 'Skills Assesment', link: '/knowledge-base/os/windows/6-diving-deeper-and-close-out/skill-assesment' },
               ],
             },
           ],
         },
         {
           text: 'Linux',
+          collapsible: true,
+          collapsed: true,
           items: [
-            { text: 'iMac', link: '/os/' },
-            { text: 'Windows', link: '/knowledge-base/os/windows/' },
-            { text: 'Linux', link: '/os/' },
+            {
+              text: 'Introduction',
+              items: [
+                { text: 'Linux Structure', link: '/knowledge-base/os/linux/1-introduction/linux-structure' },
+                { text: 'Linux Distributions', link: '/knowledge-base/os/linux/1-introduction/linux-distributions' },
+                { text: 'Solaris vs. Linux', link: '/knowledge-base/os/linux/1-introduction/solaris-vs-linux' },
+                { text: 'Introduction To The Shell', link: '/knowledge-base/os/linux/1-introduction/introduction-to-shell' },
+                { text: 'Shortcuts', link: '/knowledge-base/os/linux/1-introduction/shortcuts' },
+                { text: 'Cheatsheet', link: '/knowledge-base/os/linux/1-introduction/cheatsheet' },
+              ],
+            },
+            {
+              text: 'The Shell',
+              items: [
+                { text: 'Prompt Description', link: '/knowledge-base/os/windows/2-core-of-the-operating-system/operating-system-structure' },
+                { text: 'Getting Help', link: '/knowledge-base/os/windows/2-core-of-the-operating-system/file-system' },
+                { text: 'System Information', link: '/knowledge-base/os/windows/2-core-of-the-operating-system/ntfs-vs-share-permissions' },
+              ],
+            },
+            {
+              text: 'Workflow',
+              items: [
+                { text: 'Navigation', link: '/knowledge-base/os/windows/3-working-with-services-and-processes/windows-services-and-processes' },
+                { text: 'Working with Files and Directories', link: '/knowledge-base/os/windows/3-working-with-services-and-processes/service-permissions' },
+                { text: 'Editing Files', link: '/knowledge-base/os/windows/3-working-with-services-and-processes/windows-services-and-processes' },
+                { text: 'Find Files and Directories', link: '/knowledge-base/os/windows/3-working-with-services-and-processes/windows-services-and-processes' },
+                { text: 'File Descriptors and Redirections', link: '/knowledge-base/os/windows/3-working-with-services-and-processes/windows-services-and-processes' },
+                { text: 'Filter Contents', link: '/knowledge-base/os/windows/3-working-with-services-and-processes/windows-services-and-processes' },
+                { text: 'Regular Expressions', link: '/knowledge-base/os/windows/3-working-with-services-and-processes/windows-services-and-processes' },
+                { text: 'Permission Management', link: '/knowledge-base/os/windows/3-working-with-services-and-processes/windows-services-and-processes' },
+              ],
+            },
+            {
+              text: 'System Management',
+              items: [
+                { text: 'User Management', link: '/knowledge-base/os/windows/4-interacting-with-windows/windows-sessions' },
+                { text: 'Package Management', link: '/knowledge-base/os/windows/4-interacting-with-windows/interacting-with-the-windows-operating-system.md' },
+                { text: 'Service and Process Management', link: '/knowledge-base/os/windows/4-interacting-with-windows/windows-management-instrumentation' },
+                { text: 'Task Scheduling', link: '/knowledge-base/os/windows/4-interacting-with-windows/windows-management-instrumentation' },
+                { text: 'Network Services', link: '/knowledge-base/os/windows/4-interacting-with-windows/windows-management-instrumentation' },
+                { text: 'Working with Web Services', link: '/knowledge-base/os/windows/4-interacting-with-windows/windows-management-instrumentation' },
+                { text: 'Backup and Restore', link: '/knowledge-base/os/windows/4-interacting-with-windows/windows-management-instrumentation' },
+                { text: 'File System Management', link: '/knowledge-base/os/windows/4-interacting-with-windows/windows-management-instrumentation' },
+                { text: 'Containerization', link: '/knowledge-base/os/windows/4-interacting-with-windows/windows-management-instrumentation' },
+              ],
+            },
+            {
+              text: 'Linux Networking',
+              items: [
+                { text: 'Network Configuration', link: '/knowledge-base/os/windows/5-further-windows-usage/microsoft-management-console' },
+                { text: 'Remote Desktop Protocols in Linux', link: '/knowledge-base/os/windows/5-further-windows-usage/windows-linux-subsystem' },
+              ],
+            },
+            {
+              text: 'Linux Hardening',
+              items: [
+                { text: 'Linux Security', link: '/knowledge-base/os/windows/6-diving-deeper-and-close-out/desktop-experience-vs-server-core' },
+                { text: 'Firewall Setup', link: '/knowledge-base/os/windows/6-diving-deeper-and-close-out/windows-security' },
+                { text: 'System Logs and Monitoring', link: '/knowledge-base/os/windows/6-diving-deeper-and-close-out/skill-assesment' },
+              ],
+            },
           ],
         },
         {
           text: 'macOS',
+          collapsible: true,
+          collapsed: true,
           items: [
-            { text: 'iMac', link: '/os/' },
-            { text: 'Windows', link: '/knowledge-base/os/windows/' },
-            { text: 'Linux', link: '/os/' },
+            {
+              text: 'MacOS Basic Usage',
+              items: [
+                { text: 'What is macOS', link: '/knowledge-base/os/macos/1-macos-basic-usage/what-is-macos' },
+                { text: 'Grahpical Around The OS', link: '/knowledge-base/os/macos/1-macos-basic-usage/graphical-user-interface' },
+                { text: 'Navigating Around The OS', link: '/knowledge-base/os/macos/1-macos-basic-usage/navigating-around-the-os' },
+                { text: 'System Hierarchy', link: '/knowledge-base/os/macos/1-macos-basic-usage/networking' },
+                { text: 'File and Directory Permissions', link: '/knowledge-base/os/macos/1-macos-basic-usage/system-hierarchy' },
+                { text: 'Networking', link: '/knowledge-base/os/macos/1-macos-basic-usage/what-is-macos' },
+              ],
+            },
+            {
+              text: 'Extending macOS',
+              items: [
+                { text: 'Application Management', link: '/knowledge-base/os/macos/2-extending-macos/operating-system-structure' },
+                { text: 'Security Tips', link: '/knowledge-base/os/macos/2-extending-macos/file-system' },
+                { text: 'MacOS Terminal', link: '/knowledge-base/os/macos/2-extending-macos/ntfs-vs-share-permissions' },
+                { text: 'Productivity Tips', link: '/knowledge-base/os/macos/2-extending-macos/ntfs-vs-share-permissions' },
+                { text: 'MacOS Automation', link: '/knowledge-base/os/macos/2-extending-macos/ntfs-vs-share-permissions' },
+              ],
+            },
           ],
         },
       ],
