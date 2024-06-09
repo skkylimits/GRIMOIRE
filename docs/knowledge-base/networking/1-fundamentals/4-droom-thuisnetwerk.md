@@ -2,7 +2,7 @@
 
 Laten we de initiële opzet van ons droomthuisnetwerk verder verbeteren door een firewall en multilayer switches toe te voegen.
 
-<iframe src="./assets/opdrachten/inleveren/droom-thuisnetwerk.pdf#page=1&zoom=75" width="100%" height="400px"></iframe>
+<iframe src="./assets/4-droom-thuisnetwerk/droom-thuisnetwerk.pdf#page=1&zoom=75" width="100%" height="400px"></iframe>
 
 ## Initiële Opzet
 

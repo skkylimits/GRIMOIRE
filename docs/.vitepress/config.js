@@ -277,7 +277,7 @@ export default {
             { text: 'Networking Topologies', link: '/knowledge-base/networking/1-fundamentals/2-networking-topologies' },
             { text: 'Proxies', link: '/knowledge-base/networking/1-fundamentals/3-proxies' },
             { text: 'Droom Thuisnetwerk', link: '/knowledge-base/networking/1-fundamentals/4-droom-thuisnetwerk' },
-            { text: 'A Top Down Approach', link: '/knowledge-base/networking/1-fundamentals/5-a-top-down-approach' },
+            { text: 'Recources', link: '/knowledge-base/networking/1-fundamentals/5-recources' },
           ],
         },
         {
