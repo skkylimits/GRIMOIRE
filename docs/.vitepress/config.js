@@ -358,10 +358,69 @@ export default {
       ],
       '/knowledge-base/os/': [
         {
-          text: 'Operating Systems',
+          text: 'Windows',
+          collapsible: true,
+          items: [
+            {
+              text: 'Introduction',
+              items: [
+                { text: 'Cheatsheet', link: '/knowledge-base/os/windows/1-introduction/cheatsheet' },
+                { text: 'Introduction to Windows', link: '/knowledge-base/os/windows/1-introduction/introduction-to-windows' },
+              ],
+            },
+            {
+              text: 'Core of the Operating System',
+              items: [
+                { text: 'Operating System Structure', link: '/knowledge-base/os/windows/2-core-of-the-operating-system/operating-system-structure' },
+                { text: 'File System', link: '/knowledge-base/os/windows/2-core-of-the-operating-system/file-system' },
+                { text: 'NTFS vs. Share Permissions', link: '/knowledge-base/os/windows/2-core-of-the-operating-system/ntfs-vs-share-permissions' },
+              ],
+            },
+            {
+              text: 'Working with Services & Processes',
+              items: [
+                { text: 'Windows Services & Processes', link: '/knowledge-base/os/windows/' },
+                { text: 'Service Permissions', link: '/knowledge-base/os/windows/' },
+              ],
+            },
+            {
+              text: 'Interacting with Windows',
+              items: [
+                { text: 'Widow Sessions', link: '/knowledge-base/os/windows/' },
+                { text: 'Interacting With the Windows OS', link: '/knowledge-base/os/windows/' },
+                { text: 'Windows Management Instrumentation (WMI)', link: '/knowledge-base/os/windows/' },
+              ],
+            },
+            {
+              text: 'Further Windows Usage',
+              items: [
+                { text: 'Microsoft Manamgement Console (MMC)', link: '/knowledge-base/os/windows/' },
+                { text: 'Windows Subsystem for Linux (WSL)', link: '/knowledge-base/os/windows/' },
+              ],
+            },
+            {
+              text: 'Diving Deeper & Close Out',
+              items: [
+                { text: 'Desktop Experience vs. Server Core', link: '/knowledge-base/os/windows/' },
+                { text: 'Windows Security', link: '/knowledge-base/os/windows/' },
+                { text: 'Skills Assesment - Windows Fundamentals', link: '/knowledge-base/os/windows/' },
+              ],
+            },
+          ],
+        },
+        {
+          text: 'Linux',
           items: [
             { text: 'iMac', link: '/os/' },
-            { text: 'Windows', link: '/os/' },
+            { text: 'Windows', link: '/knowledge-base/os/windows/' },
+            { text: 'Linux', link: '/os/' },
+          ],
+        },
+        {
+          text: 'macOS',
+          items: [
+            { text: 'iMac', link: '/os/' },
+            { text: 'Windows', link: '/knowledge-base/os/windows/' },
             { text: 'Linux', link: '/os/' },
           ],
         },

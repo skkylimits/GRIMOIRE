@@ -140,3 +140,11 @@ Certainly! Here are some additional security subjects:
 10. **Secure Software Development Lifecycle (SSDL)**: A set of practices and methodologies for building secure software from the initial design phase through to deployment and maintenance.
 
 These topics cover a wide range of security domains and can provide a solid foundation for understanding various aspects of cybersecurity beyond the CIA Triad and hacking modus operandi. Let me know if you need further information on any of these subjects!
+
+## Make Athlete Docs
+
+[Grease The Groove](https://www.youtube.com/watch?v=M3Dzu4DLhV4)
+
+## Secure kubernetes at the edge whitepaper
+
+<https://ubuntu.com/engage/secure-kubernetes-at-the-edge>
