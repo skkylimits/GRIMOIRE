@@ -83,3 +83,17 @@ The command sudo nmap -O 192.168.178.98 uses Nmap to perform an operating system
 `--script vuln`: This option specifies that Nmap should run a set of NSE (Nmap Scripting Engine) scripts that are designed to detect vulnerabilities. The vuln script category includes scripts that check for various known vulnerabilities on the target host.
 
 `192.168.178.98`: This is the IP address of the target host that you want to scan.
+
+## Recon
+
+Will tell you exactly what ports are running, don't do this in a red team env because it is very loud blue teams will dfefinielty see you running this command.
+
+```bash
+nmap -p- T5 >ip> -v
+```
+
+Target the specific ports that are open and use them in second nmap scan.
+
+```bash
+nmap -p [port] [port] [port] -A <ip> -v
+```
