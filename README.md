@@ -152,3 +152,28 @@ These topics cover a wide range of security domains and can provide a solid foun
 ## Microsoft Learn Challenge: Build Edition
 
 <https://www.microsoft.com/en-us/cloudskillschallenge/build/registration/2024?ocid=build24_csc_learnpromo_T1_cnl>
+
+
+## Doc Improvement
+
+- ChatGPT + HackTheBox style code
+- Gitbook styled warnings/alert
+- Obsidian style hint
+- Export as PDF
+- git diff view & shareble links & lock or request edit links
+- Admin center -> change font/themes/modes/styling
+- Auto url / no more .config file
+- wysiwyg editor for designers
+- github integration for engineers
+- add discuss for internal discussions
+- AI-powered search to let user ask questions in natural langauge and get answers based on your content.
+- Localize user interface -> translate the interface of your public documentation
+- Pagination. Show previous/Next navitatio butoons at the bottoms of each page
+- TOC with First & Second header
+- Homepage - obsidian style
+- Obsidian style features
+- Third party integration slike slack/vscode/ skky is the limits
+- take the side phew from logse
+- docs
+- fix the fileserver problem.
+- make a template out of it.
