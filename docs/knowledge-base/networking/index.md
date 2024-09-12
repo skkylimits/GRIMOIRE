@@ -903,7 +903,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     UDP operates with minimal overhead, adding only source and destination port numbers to segments before passing them to the network layer.
 
-    <img src="./assets/5-a-top-down-approach/udp-segement.png">
+    <img src="./assets/udp-segement.png">
 
     **UDP Checksum:**
 
@@ -1009,7 +1009,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
   - **3.5.2** TCP Segment Structure
     ::: details Antwoord
-    <img src="./assets/5-a-top-down-approach/tcp-segment.png">
+    <img src="./assets/tcp-segment.png">
     :::
 
   - **3.5.3** Round-Trip Time Estimation and Timeout
@@ -1059,7 +1059,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     **Three-way handshake**: De verbinding wordt tot stand gebracht door een drie-weg handshake, waarbij drie speciale TCP-segmenten worden uitgewisseld tussen de client en server.
 
-    <img src="./assets/5-a-top-down-approach/tcp-3-way-handshake.png">
+    <img src="./assets/tcp-3-way-handshake.png">
 
     **Confirmation of the connection**: Eenmaal tot stand gebracht, kunnen de applicatieprocessen gegevens uitwisselen via de TCP-verbinding.
     :::
@@ -1163,7 +1163,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     **Timeout en Herverzending**
 
     Wanneer een zender geen bevestiging (ACK) ontvangt binnen een bepaalde tijd, wordt het pakket als verloren beschouwd en opnieuw verzonden, waardoor eventuele vertragingen of fouten in het netwerk worden gecompenseerd.
-    <img src="./assets/5-a-top-down-approach/tcp-retransmission.png">
+    <img src="./assets/tcp-retransmission.png">
     :::
 
 - **3.10** TCP Hijacking
@@ -1243,7 +1243,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - **Software-defined Networking (SDN):** Scheidt de controle- en datavlakken van netwerkapparaten.
   - **Netwerklaagprotocollen:** Inclusief IPv4, IPv6, ICMP en Network Address Translation (NAT).
 
-  <img src="./assets/5-a-top-down-approach/network-layer.png">
+  <img src="./assets/network-layer.png">
 
   **Data- en Controlevlak**
   De netwerklaag bestaat uit twee delen: het gegevensvlak en het controlevlak.
@@ -1264,7 +1264,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - Routing: Proces van een hele trip plannen.
     - Forwarding: Het doorkruisen van een enkel kruispunt.
 
-    <img src="./assets/5-a-top-down-approach/datagram-routing-en-forwarding.png">
+    <img src="./assets/datagram-routing-en-forwarding.png">
     :::
 
   - **4.1.2** Network Service Model
@@ -1294,7 +1294,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - **Output port:** Een uitvoerpoort slaat pakketten op die zijn ontvangen van het schakelmechanisme en verzendt deze pakketten via de juiste uitgaande link door de nodige koppelingslaag- en fysieke laagfuncties uit te voeren.
   - **Routing processo:** De routerprocessor voert besturingsvlakfuncties uit, zoals het uitvoeren van de routeringsprotocollen, het bijhouden van routeringstabellen en het berekenen van de doorstuurtafel voor de router.
 
-    <img src="./assets/5-a-top-down-approach/componenten-van-een-router.png">
+    <img src="./assets/componenten-van-een-router.png">
 
     **Werking van Een Router**
 
@@ -1311,14 +1311,14 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     **Destination-Based Forwarding:** Dit is het proces waarbij een router een pakket naar de juiste uitvoerpoort stuurt op basis van de bestemmingsadressen in het pakket, zoals vastgelegd in de doorstuurtabel.
 
-    <img src="./assets/5-a-top-down-approach/input-port-functions.png">
+    <img src="./assets/input-port-functions.png">
     :::
 
   - **4.2.2** Switching
     ::: details Antwoord
     Switching: Het proces waarbij pakketten worden doorgestuurd van een invoerpoort naar een uitvoerpoort via de schakelfabricus, uitgevoerd op verschillende manieren, waaronder schakelen via geheugen, een bus of een crossbar.
 
-    <img src="./assets/5-a-top-down-approach/switching.png">
+    <img src="./assets/switching.png">
     :::
 
   - **4.2.3** Output Port Processing
@@ -1326,7 +1326,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     **Uitvoerpoorten:** Het verzenden van opgeslagen datagrammen via de uitgaande link, inclusief protocolverwerking en wachtrijbeheer voor het reguleren van de verzendingssnelheid.
 
     **Output Functions**
-    <img src="./assets/5-a-top-down-approach/output-port-functions.png">
+    <img src="./assets/output-port-functions.png">
     :::
 
   - **4.2.4** Where Does Queuing Occur?
@@ -1343,12 +1343,12 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - **Introductie van IPv6**: Een nieuwe versie, IPv6, wordt ontwikkeld sinds de jaren '90.
   - **Migratie naar IPv6**: Migratie naar IPv6 is een werk in uitvoering.
 
-    <img src="./assets/5-a-top-down-approach/ipv4-vs-ipv6.png">
+    <img src="./assets/ipv4-vs-ipv6.png">
   :::
 
   - **4.3.1** IPv4 Datagram Format
     ::: details Antwoord
-    <img src="./assets/5-a-top-down-approach/ipv4-datagram.png">
+    <img src="./assets/ipv4-datagram.png">
     :::
 
   - **4.3.2** IPv4 Addressing
@@ -1372,7 +1372,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - **128 bits voor IP-adressen**: Genoeg adressen voor elk zandkorreltje op aarde.
     - **Geoptimaliseerde header en performance**: Verbeterde efficiëntie en snelheid.
     - **Ondersteuning voor Quality of Service**: Bijvoorbeeld, een videostream kan prioriteit krijgen.
-    <img src="./assets/5-a-top-down-approach/ipv6-datagram.png">
+    <img src="./assets/ipv6-datagram.png">
     :::
 
 - **4.4** Generalized Forwarding and SDN
@@ -1386,7 +1386,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - Een centrale controller beheert en programmeert de netwerkapparaten op afstand, waardoor de configuratie dynamisch en flexibel kan worden aangepast.
   - Een server op afstand bepaalt de forwarding table van iedere router.
 
-  <img src="./assets/5-a-top-down-approach/sdn.png">
+  <img src="./assets/sdn.png">
   :::
 
   - **4.4.1** Match
@@ -1396,7 +1396,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
   Dit proces omvat het controleren van specifieke velden in de header van het pakket, zoals het bron- en doel-IP-adres, het protocol, de poortnummers en andere relevante informatie, om te bepalen welke actie er op het pakket moet worden toegepast.
 
-  <img src="./assets/5-a-top-down-approach/match.png">
+  <img src="./assets/match.png">
   :::
 
   - **4.4.2** Action
@@ -1430,7 +1430,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
   Deze voorbeelden illustreren hoe match-plus-action in OpenFlow wordt gebruikt om pakketten te verwerken op basis van specifieke criteria en de gewenste acties uit te voeren voor elke overeenkomstige pakketstroom.
 
-  <img src="./assets/5-a-top-down-approach/match.png">
+  <img src="./assets/match.png">
   :::
 
 - **4.5** Middleboxes
@@ -1491,7 +1491,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - DHCP-server reageert (Acknowledge):
       - De DHCP-server geeft het IP-adres uit.
 
-    <img src="./assets/5-a-top-down-approach/dhcp-dora.png">
+    <img src="./assets/dhcp-dora.png">
     :::
 
   - **4.6.2** DHCP client-server scenario
@@ -1508,7 +1508,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     5. **Configuration:** De DHCP-client configureert zijn netwerkinterface met het toegewezen IP-adres en andere ontvangen instellingen.
 
-    <img src="./assets/5-a-top-down-approach/dhcp-client-server.png">
+    <img src="./assets/dhcp-client-server.png">
     :::
 
 - **4.6.3** DHCP more than IP addresses
@@ -1592,7 +1592,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - Het resultaat is een doorstuurtafel specifiek voor het bronknooppunt.
     - Het werkt iteratief: na k iteraties bepaalt het algoritme met zekerheid het minst-kostbare pad naar k bestemmingen.
 
-    <img src="./assets/5-a-top-down-approach/dijkstra-algoritme.png">
+    <img src="./assets/dijkstra-algoritme.png">
     :::
 
   - **5.2.2** The Distance-Vector (DV) Routing Algorithm
@@ -1839,12 +1839,12 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - **MAC** staat voor Media Access Control, het unieke hardwareadres van een apparaat.
     - Een apparaat kan meerdere MAC- en IP-adressen hebben, maar één voor elke verbindingstype.
 
-    <img src="./assets/5-a-top-down-approach/mac-address.png">
+    <img src="./assets/mac-address.png">
    :::
 
   - **6.1.2** Link Frames
     ::: details Antwoord
-    <img src="./assets/5-a-top-down-approach/link-frames.png">
+    <img src="./assets/link-frames.png">
     :::
 
   - **6.1.3** Where Is the Link Layer Implemented?
@@ -1856,7 +1856,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - Gevestigd op de systeembus.
     - Een combinatie van hardware, software en firmware.
 
-    <img src="./assets/5-a-top-down-approach/waar-is-de-linklaag.png">
+    <img src="./assets/waar-is-de-linklaag.png">
     :::
 
   - **6.1.3** How do adapters communicate?
@@ -1865,7 +1865,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
 
     ontvanger zoek naar errors en pakt datagram uit de frame
 
-    <img src="./assets/5-a-top-down-approach/hoe-communiceren-adapters.png">
+    <img src="./assets/hoe-communiceren-adapters.png">
     :::
 
 - **6.2** Error-Detection and -Correction Techniques
@@ -1876,7 +1876,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
     - Protocol kan sommige fouten niet opsporen.
     - Groter EDC-veld zorgt voor meer kans op opsporen van fouten.
 
-    <img src="./assets/5-a-top-down-approach/error-detection.png">
+    <img src="./assets/error-detection.png">
   :::
 
   - **6.2.1** Parity Checks
@@ -1886,7 +1886,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - Bij ontvangst wordt de pariteit opnieuw berekend en vergeleken met de ontvangen waarde om fouten te detecteren.
   - Eenvoudig en effectief voor het dFetecteren van enkele bitfouten, maar niet voor het corrigeren ervan.
 
-  <img src="./assets/5-a-top-down-approach/parity-checking.png">
+  <img src="./assets/parity-checking.png">
   :::
 
   - **6.2.1.5** Two Dimensional Parity
@@ -1898,7 +1898,7 @@ Het oorspronkelijke doel van ARPANET was om universiteiten te laten communiceren
   - Bij ontvangst worden de pariteitsbits opnieuw berekend voor elke rij en elke kolom. Als een fout wordt gedetecteerd, kan de rij en/of kolom waarin de fout is opgetreden, worden geïdentificeerd.
   - Hierdoor kunnen niet alleen enkelvoudige bitfouten, maar ook sommige meervoudige bitfouten worden gedetecteerd.
 
-  <img src="./assets/5-a-top-down-approach/two-dimensional-parity-checking.png">
+  <img src="./assets/two-dimensional-parity-checking.png">
   :::
 
   - **6.2.2** Checksumming Methods
@@ -2288,7 +2288,7 @@ Comply with laws, rules, and regulations:
 - Veel rekenkracht nodig om te berekenen.
 - Voorbeelden zijn DES, 3DES, AES.
 
-<img src="./assets/5-a-top-down-approach/symmetric-crytpography.png">
+<img src="./assets/symmetric-crytpography.png">
 
 :::
 
@@ -2300,73 +2300,73 @@ Comply with laws, rules, and regulations:
 - Wordt gebruikt voor digitale handtekeningen en veilige communicatie.
 - RSA is een veelgebruikte asymmetrische cryptografische methode.
 
-<img src="./assets/5-a-top-down-approach/simple-encryption-scheme.png">
+<img src="./assets/simple-encryption-scheme.png">
 
-<img src="./assets/5-a-top-down-approach/public-key-crypto.png">
+<img src="./assets/public-key-crypto.png">
 
-<img src="./assets/5-a-top-down-approach/public-key-cryptography.png">
+<img src="./assets/public-key-cryptography.png">
 :::
 
 - **7.10** Certificate Authority
 ::: details Antwoord
 
-<img src="./assets/5-a-top-down-approach/certificate-authorities.png">
+<img src="./assets/certificate-authorities.png">
 :::
 
 - **7.11** Digital Signatures
 ::: details Antwoord
 
-<img src="./assets/5-a-top-down-approach/digital-signatures.png">
+<img src="./assets/digital-signatures.png">
 :::
 
 - **7.12** Message digests
 ::: details Antwoord
 
-<img src="./assets/5-a-top-down-approach/message-digest.png">
+<img src="./assets/message-digest.png">
 :::
 
 - **7.13** SSL TCP/IP
 ::: details Antwoord
 
-<img src="./assets/5-a-top-down-approach/ssl-tcip.png">
+<img src="./assets/ssl-tcip.png">
 :::
 
 - **7.14** Firewall
 ::: details Antwoord
 
-<img src="./assets/5-a-top-down-approach/firewall.png">
+<img src="./assets/firewall.png">
 :::
 
 - **7.15** Packet Filtering
 ::: details Antwoord
 
-<img src="./assets/5-a-top-down-approach/packet-filtering.png">
+<img src="./assets/packet-filtering.png">
 :::
 
 - **7.16** IDS
 ::: details Antwoord
 
-<img src="./assets/5-a-top-down-approach/ids.png">
+<img src="./assets/ids.png">
 
-<img src="./assets/5-a-top-down-approach/ids-sensors.png">
+<img src="./assets/ids-sensors.png">
 :::
 
 - **7.17** Demilitarized Zone (DMZ)
 ::: details Antwoord
 
-<img src="./assets/5-a-top-down-approach/dimilitarized-zone.png">
+<img src="./assets/dimilitarized-zone.png">
 :::
 
 - **7.18** VPN
 ::: details Antwoord
 
-<img src="./assets/5-a-top-down-approach/vpn.png">
+<img src="./assets/vpn.png">
 :::
 
 - **7.19** Downgrade Attack
 ::: details Antwoord
 
-<img src="./assets/5-a-top-down-approach/downgrade-attack.png">
+<img src="./assets/downgrade-attack.png">
 :::
 
 ## Leerdoelen
