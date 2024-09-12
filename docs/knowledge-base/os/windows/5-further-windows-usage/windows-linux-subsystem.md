@@ -22,4 +22,4 @@ Linux WS01 4.4.0-18362-Microsoft #476-Microsoft Frit Nov 01 16:53:00
 PST 2019 x86_64 x86 _64 x86_64 GNU/Linux
 ```
 
-Click [here](http://localhost:5173/the-lab/the-lab/wsl.html) for further reading about WSL
+Click [here](/the-lab/the-lab/wsl) for further reading about WSL
