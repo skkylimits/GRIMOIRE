@@ -144,7 +144,7 @@ Na het identificeren van risico's is het belangrijk om te kijken naar technische
 
 ## Defence In Depth
 
-<img src="./assets/afbeeldingen/defense-in-depth.png">
+<!-- <img src="./assets/afbeeldingen/defense-in-depth.png"> -->
 
 ## Preventie als Verdediging
 
