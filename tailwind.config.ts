@@ -29,12 +29,12 @@ export default <Partial<Config>>{
     }
   },
   content: [
-    './app/**/*.vue',            // Match all .vue files in the app directory
-    './app/**/*.js',             // Match all .js files in the app directory
-    './app/**/*.ts',             // Match all .ts files in the app directory
-    './app/components/**/*.{js,vue,ts}', // Ensure components are included
-    './app/layouts/**/*.vue',    // Ensure layouts are included
-    './app/pages/**/*.vue'       // Ensure pages are included
+    './app/**/*.vue',
+    './app/**/*.js',
+    './app/**/*.ts',
+    './app/components/**/*.{js,vue,ts}',
+    './app/layouts/**/*.vue',
+    './app/pages/**/*.vue'
     // './plugins/**/*.{js,ts}',
   ]
 }

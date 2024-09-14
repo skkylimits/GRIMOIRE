@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
+// import type { NavItem } from '@nuxt/content'
 
-import type { NavItem } from '@nuxt/content'
-
-const navigation = inject<Ref<NavItem[]>>('navigation', ref([]))
+// const navigation = inject<Ref<NavItem[]>>('navigation', ref([]))
+// const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation.value, page.value)))
 
 definePageMeta({
   layout: 'docs'
@@ -16,8 +16,6 @@ const { data: page } = await useAsyncData(route.path, () => queryContent(route.p
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
-
-// const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation.value, page.value)))
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => queryContent()
   .where({ _extension: 'md', navigation: { $ne: false } })
@@ -33,7 +31,7 @@ useSeoMeta({
 })
 
 defineOgImage({
-  component: 'Docs',
+  component: 'Docs'
   // title: page.value.title,
   // description: page.value.description
 })

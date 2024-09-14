@@ -3,6 +3,7 @@
 ## Linting
 
 - [ ] Markdown lint -> Integrate Prettier for CSS and markdown
+- [ ] Make sure lint doesnt make nuxt unreadable
 
 ## Bug
 

@@ -183,18 +183,28 @@ const links = [
       </template>
       <template v-else>
         Nameless
-        <UBadge label="Docs" variant="subtle" class="mb-0.5" />
+        <UBadge
+          label="Docs"
+          variant="subtle"
+          class="mb-0.5"
+        />
       </template>
     </template>
 
     <template #right>
-      <UContentSearchButton v-if="header?.search" :label="null" />
+      <UContentSearchButton
+        v-if="header?.search"
+        :label="null"
+      />
 
       <UColorModeButton v-if="header?.colorMode" />
 
       <template v-if="header?.links">
-        <UButton v-for="(link, index) of header.links" :key="index"
-          v-bind="{ color: 'gray', variant: 'ghost', ...link }" />
+        <UButton
+          v-for="(link, index) of header.links"
+          :key="index"
+          v-bind="{ color: 'gray', variant: 'ghost', ...link }"
+        />
       </template>
     </template>
 

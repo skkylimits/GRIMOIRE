@@ -1,12 +1,25 @@
 <template>
   <div>
     <!-- Conditionally render the <hr> above, but not for the first h2 -->
-    <hr v-if="!isFirstH2" class="my-4" />
+    <hr
+      v-if="!isFirstH2"
+      class="my-4"
+    >
 
-    <h2 :id="id" :class="ui.wrapper" ref="h2Element">
-      <NuxtLink :href="`#${id}`" class="group">
+    <h2
+      :id="id"
+      ref="h2Element"
+      :class="ui.wrapper"
+    >
+      <NuxtLink
+        :href="`#${id}`"
+        class="group"
+      >
         <div :class="ui.icon.wrapper">
-          <UIcon :name="ui.icon.name" :class="ui.icon.base" />
+          <UIcon
+            :name="ui.icon.name"
+            :class="ui.icon.base"
+          />
         </div>
         <slot />
       </NuxtLink>
@@ -16,6 +29,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue'
+
 const appConfig = useAppConfig()
 
 const config = computed(() => ({
@@ -34,6 +48,8 @@ const props = defineProps({
     required: true
   }
 })
+
+const { id } = props
 
 // Track if this is the first <h2> in the page
 const isFirstH2 = ref(false)
