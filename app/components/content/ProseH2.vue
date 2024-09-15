@@ -66,3 +66,9 @@ onMounted(async () => {
 
 const { ui } = useUI('content.prose.h2', undefined, config, undefined, true)
 </script>
+
+<style scoped>
+hr {
+  margin: 45px 0;
+}
+</style>

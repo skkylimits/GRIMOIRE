@@ -90,11 +90,7 @@
 - [ ] Setup Volta and backlog/github - https://www.conventionalcommits.org/en/v1.0.0/#specification / https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716
 - [ ] Setup Nuxt Studio
 - [ ] flashcard creation and question
-
-## Special
-
-- [ ] Make a [extension] in VS Code that lists all prose styling options?
-- [ ] Create a ChatGPT [app] mode for IT, Doc Writing, & Email Writing
+- [ ] add community option for discussions
 
 ## Config
 
@@ -106,6 +102,12 @@
 - [ ] https://destcert.com/cissp-mindmaps/
 - [ ] Update the threat landscape with security breaches. Add more types
 - [ ] Rework methodologies like you had before.
+
+## Special
+
+- [ ] Make a [extension] in VS Code that lists all prose styling options?
+- [ ] Create a ChatGPT [app] mode for IT, Doc Writing, & Email Writing
+
 
 ## When finished
 
