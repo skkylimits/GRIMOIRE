@@ -14,12 +14,25 @@ export default defineAppConfig({
     },
     search: true,
     colorMode: true,
-    links: [{
-      'icon': 'i-simple-icons-github',
-      'to': 'https://github.com/skkylimits/Zettelkasten',
-      'target': '_blank',
-      'aria-label': 'Nameless on GitHub'
-    }]
+    links: [
+      {
+        'icon': 'i-bi-activity',
+        'to': '/volta-board',
+        'aria-label': 'Volta board'
+      },
+      {
+        'icon': 'i-mdi-tag',
+        'to': '/the-lab',
+        'target': '_blank',
+        'aria-label': 'Changelog'
+      },
+      {
+        'icon': 'i-simple-icons-github',
+        'to': 'https://github.com/skkylimits/Nameless',
+        'target': '_blank',
+        'aria-label': 'Nameless on GitHub'
+      }
+    ]
   },
   toc: {
     title: 'Table of Contents',

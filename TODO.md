@@ -25,6 +25,8 @@
 - [ ] add a line above hr if it's not the first element below h1
 - [ ] Customize from desktop to mobile switch in Tailwind config -> https://tailwindcss.com/docs/screens
 - [x] RGB 32 33 36 // New black background? #202124 -> we're staying with zinc for now
+- [ ] make copy code from codeblock scrollable. Meaning when you scroll down and code block hasnt ended the copy code scrolls with you. like chatgpt
+- [ ] make changelog page with tag that scroll when in view. https://volta.net/changelog
 
 
 ## Prose Components
@@ -85,7 +87,7 @@
 - [ ] Translate language or i18?
 - [ ] Setup ZeroTier [with login and such]
 - [ ] Setup database like you did with Nameless HTTP server
-- [ ] Setup Volta and backlog/github
+- [ ] Setup Volta and backlog/github - https://www.conventionalcommits.org/en/v1.0.0/#specification / https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716
 - [ ] Setup Nuxt Studio
 - [ ] flashcard creation and question
 
