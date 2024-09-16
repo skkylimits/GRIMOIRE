@@ -80,6 +80,8 @@
 ## Automation
 
 - [ ] Renovate https://github.com/renovatebot/tutorial
+- [ ] CI pipeline
+- [ ] automated changelog
 
 ## Features
 
@@ -87,7 +89,7 @@
 - [ ] Translate language or i18?
 - [ ] Setup ZeroTier [with login and such]
 - [ ] Setup database like you did with Nameless HTTP server
-- [ ] Setup Volta and backlog/github - https://www.conventionalcommits.org/en/v1.0.0/#specification / https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716
+- [x] Setup Volta and backlog/github
 - [ ] Setup Nuxt Studio
 - [ ] flashcard creation and question
 - [ ] add community option for discussions
