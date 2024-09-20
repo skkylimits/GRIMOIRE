@@ -27,6 +27,8 @@
 - [x] RGB 32 33 36 // New black background? #202124 -> we're staying with zinc for now
 - [ ] make copy code from codeblock scrollable. Meaning when you scroll down and code block hasnt ended the copy code scrolls with you. like chatgpt
 - [ ] make changelog page with tag that scroll when in view. https://volta.net/changelog
+- [x] mobile menu fix links with no children direct link
+  - [ ] now customize the according to handle the logic instead of usink navLink & accordion. this is not modifyable how it is now
 
 
 ## Prose Components
