@@ -154,66 +154,55 @@ title: The Lab
 ```
 
 In this example, the directory or section will be labeled as "The Lab" in the navigation menu.
+Sure! Here’s the updated documentation that includes the initial directory structure:
 
-### Stripped
+## Features: Standalone and Stripped
 
-The `stripped` property indicates that the directory should be removed from the navigation hierarchy. Its contents will be displayed as if they are at the root level.
+We have implemented two powerful rendering features for our directory structure: **Standalone** and **Stripped**. These features enhance the way you can visualize and interact with your content.
 
-**How It Works:**
+### Initial Directory Structure
 
-- **Configuration:**
+Here’s the initial directory structure for reference:
 
-  ```yaml
-  title: Tutorials
-  stripped: true
-  ```
+```
+6.knowledge-base/
+└── networking/
+    ├── dhcp
+    └── dns
+```
 
-- **Effect:** The "Tutorials" directory itself will not appear in the navigation tree. Instead, its sub-items will be shown directly at the top level.
+### 1. Standalone
 
-### Standalone
+The **Standalone** feature renders the entire directory structure from the top-level root. This allows you to view all components and subcomponents under a specified category.
 
-The `standalone` property specifies that the directory should be treated as a separate item in the navigation tree, with its own sub-items listed underneath.
+**Example:**
 
-**How It Works:**
+For the directory path `6.knowledge-base/networking/`, the Standalone feature will display:
 
-- **Configuration:**
+```
+networking
+├── dhcp
+└── dns
+```
 
-  ```yaml
-  title: The Lab
-  standalone: true
-  ```
+In this view, you can see the top-level category "networking" along with all its child components.
 
-- **Effect:** "The Lab" will appear as a distinct item in the navigation menu. Its children will be displayed underneath it.
+---
 
-### Example Use Cases
+### 2. Stripped
 
-1. **Standalone Directory:**
+The **Stripped** feature simplifies the view by removing the top-level folder. It only displays the subfolders and their contents, making it easier to focus on specific components without the hierarchy of the parent directory.
 
-   ```yaml
-   title: The Lab
-   standalone: true
-   ```
+**Example:**
 
-   - "The Lab" will appear as a top-level item with its children listed below.
+For the same directory path `6.knowledge-base/networking/`, the Stripped feature will render:
 
-2. **Stripped Directory:**
+```
+├── dhcp
+└── dns
+```
 
-   ```yaml
-   title: Tutorials
-   stripped: true
-   ```
-
-   - The "Tutorials" directory will not be visible. Its contents will be shown directly in the navigation.
-
-3. **Standalone and Stripped Directory:**
-
-   ```yaml
-   title: Featured
-   standalone: true
-   stripped: true
-   ```
-
-   - "Featured" will not appear in the navigation tree. Its sub-items will be shown directly as top-level items.
+In this view, you can directly access "dhcp" and "dns" without the "networking" parent folder, providing a cleaner and more focused presentation.
 
 ## Icons [workaround]
 
