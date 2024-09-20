@@ -15,11 +15,13 @@ export default defineAppConfig({
     search: true,
     colorMode: true,
     links: [
-      {
-        'icon': 'i-bi-activity',
-        'to': '/volta-board',
-        'aria-label': 'Volta board'
-      },
+      // Uncomment volta-board & make git repo public to enable functionality
+
+      // {
+      //   'icon': 'i-bi-activity',
+      //   'to': '/volta-board',
+      //   'aria-label': 'Volta board'
+      // },
       {
         'icon': 'i-mdi-tag',
         'to': '/the-lab',
