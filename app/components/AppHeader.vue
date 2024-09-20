@@ -8,9 +8,8 @@ const { header } = useAppConfig()
 const links = [
   {
     label: 'The Lab',
-    icon: 'i-heroicons-book-open',
+    icon: 'i-mdi-test-tube',
     to: '/the-lab',
-    description: 'A space for experimentation and hands-on learning with various technologies.'
   },
   {
     label: 'Syntax',
@@ -114,6 +113,7 @@ const links = [
   },
   {
     label: 'Knowledge Base',
+    icon: 'i-raphael-book',
     description: 'A comprehensive resource for learning about various technologies and concepts.',
     children: [
       {
@@ -210,7 +210,8 @@ const links = [
 
     <template #panel>
       <!-- <UAsideLinks :links="links" /> -->
-      <UNavigationAccordion :links="links" />
+      <UNavigationLinks class="py-3" :links="[links[0]]" />
+      <UNavigationAccordion :links="links.slice(1)" />
       <!-- <UNavigationTree :links="mapContentNavigation(navigation)" /> -->
     </template>
   </UHeader>

@@ -69,6 +69,11 @@
 
         <!-- <embed src="/digital-fortress/blue-team/cyber-response-plan.pdf" width="600" height="800" type="application/pdf"> -->
 
+## Config
+
+- [ ] try to add a settings/config option. That certain behaviour can be enabled/disabled, like the hr below the h2. Catch my drift?
+- [ ] Make it so you can adjust the way certain prose types behave, like the h2 with standard --- hr at the end of the block
+
 
 ## DOC
 
@@ -83,6 +88,12 @@
 - [ ] CI pipeline
 - [ ] automated changelog
 
+## Nameless
+
+- [ ] https://destcert.com/cissp-mindmaps/
+- [ ] Update the threat landscape with security breaches. Add more types
+- [ ] Rework methodologies like you had before.
+
 ## Features
 
 - [ ] Integrate ChatGPT or create own gpt? free
@@ -94,16 +105,6 @@
 - [ ] flashcard creation and question
 - [ ] add community option for discussions
 
-## Config
-
-- [ ] try to add a settings/config option. That certain behaviour can be enabled/disabled, like the hr below the h2. Catch my drift?
-- [ ] Make it so you can adjust the way certain prose types behave, like the h2 with standard --- hr at the end of the block
-
-## Nameless
-
-- [ ] https://destcert.com/cissp-mindmaps/
-- [ ] Update the threat landscape with security breaches. Add more types
-- [ ] Rework methodologies like you had before.
 
 ## Special
 

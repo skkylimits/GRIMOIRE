@@ -32,6 +32,9 @@ importers:
       '@iconify-json/ph':
         specifier: ^1.2.0
         version: 1.2.0
+      '@iconify-json/raphael':
+        specifier: ^1.2.0
+        version: 1.2.0
       '@iconify-json/simple-icons':
         specifier: ^1.1.109
         version: 1.1.114
@@ -774,6 +777,9 @@ packages:
 
   '@iconify-json/ph@1.2.0':
     resolution: {integrity: sha512-013eLpgTmX1lACOuDnkuhC7gRHyYj9w/j8SyDmlyUYvsKQrwdRsv1otcXtwH3DevuDAzSkreeeRsCeez+gTyVA==}
+
+  '@iconify-json/raphael@1.2.0':
+    resolution: {integrity: sha512-Lfh7nso8dpfkgXcMPkfC0QqK355zRSSFvMykdbhscuY8sJufSQ6WZUVIr8Jf04GJEsWDy4qY6CtVrNbax0dwTQ==}
 
   '@iconify-json/simple-icons@1.1.114':
     resolution: {integrity: sha512-KADlAqTH3/vDTVpS+lwDF0pO/RHgaxf40Hata0QLhAPouygLmhQGPj3ojbpUDfoBGPw/WQ1sor38/2PixR2VRg==}
@@ -5957,6 +5963,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/ph@1.2.0':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/raphael@1.2.0':
     dependencies:
       '@iconify/types': 2.0.0
 
