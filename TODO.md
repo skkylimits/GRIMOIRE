@@ -29,6 +29,7 @@
 - [ ] make changelog page with tag that scroll when in view. https://volta.net/changelog
 - [x] mobile menu fix links with no children direct link
   - [ ] now customize the according to handle the logic instead of usink navLink & accordion. this is not modifyable how it is now
+- [ ] make header active based on wheter or not we're in that directory active: true in app header links is a good first step
 
 
 ## Prose Components

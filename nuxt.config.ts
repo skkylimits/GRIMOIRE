@@ -60,7 +60,7 @@ export default defineNuxtConfig({
 
   content: {
     navigation: {
-      fields: ['standalone', 'stripped']
+      fields: ['standalone', 'stripped', 'collapsed']
     },
     // https://shiki.style/
     highlight: {

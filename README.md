@@ -204,6 +204,29 @@ For the same directory path `6.knowledge-base/networking/`, the Stripped feature
 
 In this view, you can directly access "dhcp" and "dns" without the "networking" parent folder, providing a cleaner and more focused presentation.
 
+### Nuxt Configuration
+
+To enable these features, you need to add them to your nuxt.config.ts file:
+
+export default {
+  content: {
+    navigation: {
+      fields: ['standalone', 'stripped']
+    },
+    highlight: {
+      theme: {
+        default: 'github-dark'
+      },
+      langs: [
+        // other languages you might be using
+        'powershell',
+        'http'
+      ]
+    }
+  }
+}
+
+
 ## Icons [workaround]
 
 - [Iconify](https://iconify.design/) - Freedom to choose icons
@@ -232,3 +255,33 @@ If you want to download a new icon, place it in: `icon: 'i-simple-icons-gitkrake
 "@iconify-json/mdi": "^1.1.68",
 
 ---
+
+## Extending NavItem
+
+```
+interface ExtendedNavItem extends NavItem {
+  collapsed?: boolean; // Add collapsed here without changing NavItem globally
+}
+
+const navigationLinks = computed(() => {
+  const path = route.path
+  const validNav = findValidNavPath(path)
+
+  if (validNav) {
+    const children = validNav.node.children || []
+    
+    const mappedNav = mapContentNavigation(children).map(child => {
+      const extendedChild = child as ExtendedNavItem; // Use the local interface
+      return {
+        ...child,
+        defaultOpen: !extendedChild.collapsed // This will work
+      }
+    })
+
+    return mappedNav
+  }
+
+  return [] // If no valid directory is found, return an empty array
+})
+
+```

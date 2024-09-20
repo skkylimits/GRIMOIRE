@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { _disabled } from '#tailwind-config/theme/aria';
+
 // import type { NavItem } from '@nuxt/content'
 
 // const navigation = inject<NavItem[]>('navigation', [])
@@ -14,6 +16,7 @@ const links = [
   {
     label: 'Syntax',
     icon: 'i-heroicons-code-bracket',
+    active: false,
     description: 'Explore and master different scripting languages for automation and development.',
     children: [
       {

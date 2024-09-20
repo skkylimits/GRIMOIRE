@@ -30,7 +30,7 @@ features:
   items:
     - title: 'The Lab'
       description: 'Prepare for battle. Transform raw hardware into your digital fortress.'
-      icon: 'i-heroicons-beaker'
+      icon: 'i-mdi-test-tube'
       to: '/the-lab'
     - title: 'Syntax'
       description: 'Elevate your coding prowess in the Syntax zone. Unlocking your hidden potential.'
@@ -54,7 +54,7 @@ features:
       target: '_blank'
     - title: 'Knowledge Base'
       description: 'The secrets of the cyberverse, offering you the knowledge thrive in this ever-shifting landscape.'
-      icon: 'i-simple-icons-bookstack'
+      icon: 'i-raphael-book'
       to: 'https://ui.nuxt.com/pro/components/docs/docs-search'
       target: '_blank'
   # links:
