@@ -1,11 +1,21 @@
 <script setup lang="ts">
-import { _disabled } from '#tailwind-config/theme/aria';
-
 // import type { NavItem } from '@nuxt/content'
 
 // const navigation = inject<NavItem[]>('navigation', [])
 
+const route = useRoute();
+
 const { header } = useAppConfig()
+
+
+const isActiveLink = (link) => {
+  // Check if the current route matches the link or any of its children
+  if (link.to === route.path) return true; // Exact match
+  if (link.children) {
+    return link.children.some(child => child.to === route.path || route.path.startsWith(child.to));
+  }
+  return false;
+};
 
 const links = [
   {
@@ -175,7 +185,10 @@ const links = [
       }
     ]
   }
-]
+].map(link => ({
+  ...link,
+  active: isActiveLink(link),
+}));
 </script>
 
 <template>
