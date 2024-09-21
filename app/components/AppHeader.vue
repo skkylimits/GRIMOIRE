@@ -4,16 +4,22 @@
 // const navigation = inject<NavItem[]>('navigation', [])
 
 const route = useRoute();
+const { header } = useAppConfig();
 
-const { header } = useAppConfig()
-
-
+// Function to check if a link is active
 const isActiveLink = (link) => {
-  // Check if the current route matches the link or any of its children
-  if (link.to === route.path) return true; // Exact match
-  if (link.children) {
-    return link.children.some(child => child.to === route.path || route.path.startsWith(child.to));
+  // Check for an exact match or a nested match (starts with link's path)
+  if (link.to === route.path || route.path.startsWith(link.to)) {
+    return true;
   }
+
+  // Check if any child links are active
+  if (link.children) {
+    return link.children.some(child => 
+      child.to === route.path || route.path.startsWith(child.to)
+    );
+  }
+
   return false;
 };
 
@@ -185,14 +191,23 @@ const links = [
       }
     ]
   }
-].map(link => ({
-  ...link,
-  active: isActiveLink(link),
-}));
+]
+
+// Computed property to update the active state of links
+const activeLinks = computed(() => {
+  return links.map(link => ({
+    ...link,
+    active: isActiveLink(link),  // Set active state for parent
+    children: link.children ? link.children.map(child => ({
+      ...child,
+      active: isActiveLink(child) // Set active state for child links
+    })) : []  // Handle child links if they exist
+  }));
+});
 </script>
 
 <template>
-  <UHeader :links="links">
+  <UHeader :links="activeLinks">
     <template #logo>
       <template v-if="header?.logo?.dark || header?.logo?.light">
         <UColorModeImage v-bind="{ class: 'h-6 w-auto', ...header?.logo }" />
@@ -212,9 +227,7 @@ const links = [
         v-if="header?.search"
         :label="null"
       />
-
       <UColorModeButton v-if="header?.colorMode" />
-
       <template v-if="header?.links">
         <UButton
           v-for="(link, index) of header.links"
@@ -228,7 +241,6 @@ const links = [
       <!-- <UAsideLinks :links="links" /> -->
       <UNavigationLinks class="py-3" :links="[links[0]]" />
       <UNavigationAccordion :links="links.slice(1)" />
-      <!-- <UNavigationTree :links="mapContentNavigation(navigation)" /> -->
     </template>
   </UHeader>
 </template>

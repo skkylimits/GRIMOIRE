@@ -25,11 +25,13 @@
 - [ ] add a line above hr if it's not the first element below h1
 - [ ] Customize from desktop to mobile switch in Tailwind config -> https://tailwindcss.com/docs/screens
 - [x] RGB 32 33 36 // New black background? #202124 -> we're staying with zinc for now
-- [ ] make copy code from codeblock scrollable. Meaning when you scroll down and code block hasnt ended the copy code scrolls with you. like chatgpt
-- [ ] make changelog page with tag that scroll when in view. https://volta.net/changelog
+- [x] make header active based on wheter or not we're in that directory active: true in app header links is a good first step
 - [x] mobile menu fix links with no children direct link
   - [ ] now customize the according to handle the logic instead of usink navLink & accordion. this is not modifyable how it is now
-- [ ] make header active based on wheter or not we're in that directory active: true in app header links is a good first step
+
+
+- [ ] make copy code from codeblock scrollable. Meaning when you scroll down and code block hasnt ended the copy code scrolls with you. like chatgpt
+- [ ] make changelog page with tag that scroll when in view. https://volta.net/changelog
 
 
 ## Prose Components
