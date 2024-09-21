@@ -62,6 +62,12 @@ export default defineNuxtConfig({
     navigation: {
       fields: ['standalone', 'stripped', 'collapsed']
     },
+    markdown: {
+      toc: {
+        depth: 2, // Adjust to your liking
+        // searchDepth: 4,
+      },
+    },
     // https://shiki.style/
     highlight: {
       // https://content.nuxt.com/get-started/configuration#highlight

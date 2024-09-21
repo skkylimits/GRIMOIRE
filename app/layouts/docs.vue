@@ -53,36 +53,6 @@ const navigationLinks = computed(() => {
 
   return [] // If no valid directory is found, return an empty array
 })
-
-// Collapsed
-onMounted(() => {
-  // Get all button elements
-  const buttons = document.querySelectorAll('button');
-
-  // Convert the NodeList to an array and find the button containing 'The Lab'
-  const button = Array.from(buttons).find(btn => {
-    // Look for <span> elements inside the button and check their text content
-    return Array.from(btn.querySelectorAll('span'))
-      .some(span => span.textContent.trim() === 'The Lab');
-  });
-
-  // Check if the button is found
-  if (button) {
-    // Check the current state of aria-expanded
-    const isExpanded = button.getAttribute('aria-expanded') === 'true';
-
-    // Toggle the aria-expanded attribute
-    button.setAttribute('aria-expanded', (!isExpanded).toString());
-
-    // (Optional) Trigger a click event if needed
-    button.click();
-
-    // Log the updated state for confirmation
-    console.log('Updated aria-expanded:', button.getAttribute('aria-expanded'));
-  } else {
-    console.log('Button with text "The Lab" not found');
-  }
-})
 </script>
 
 <template>
