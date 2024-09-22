@@ -198,10 +198,12 @@ const activeLinks = computed(() => {
   return links.map(link => ({
     ...link,
     active: isActiveLink(link), // Set active state for parent
-    children: link.children ? link.children.map(child => ({
-      ...child,
-      active: isActiveLink(child) // Set active state for child links
-    })) : [] // Handle child links if they exist
+    children: link.children
+      ? link.children.map(child => ({
+        ...child,
+        active: isActiveLink(child) // Set active state for child links
+      }))
+      : [] // Handle child links if they exist
   }))
 })
 </script>
