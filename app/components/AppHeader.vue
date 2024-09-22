@@ -3,31 +3,31 @@
 
 // const navigation = inject<NavItem[]>('navigation', [])
 
-const route = useRoute();
-const { header } = useAppConfig();
+const route = useRoute()
+const { header } = useAppConfig()
 
 // Function to check if a link is active
 const isActiveLink = (link) => {
   // Check for an exact match or a nested match (starts with link's path)
   if (link.to === route.path || route.path.startsWith(link.to)) {
-    return true;
+    return true
   }
 
   // Check if any child links are active
   if (link.children) {
-    return link.children.some(child => 
+    return link.children.some(child =>
       child.to === route.path || route.path.startsWith(child.to)
-    );
+    )
   }
 
-  return false;
-};
+  return false
+}
 
 const links = [
   {
     label: 'The Lab',
     icon: 'i-mdi-test-tube',
-    to: '/the-lab',
+    to: '/the-lab'
   },
   {
     label: 'Syntax',
@@ -197,13 +197,13 @@ const links = [
 const activeLinks = computed(() => {
   return links.map(link => ({
     ...link,
-    active: isActiveLink(link),  // Set active state for parent
+    active: isActiveLink(link), // Set active state for parent
     children: link.children ? link.children.map(child => ({
       ...child,
       active: isActiveLink(child) // Set active state for child links
-    })) : []  // Handle child links if they exist
-  }));
-});
+    })) : [] // Handle child links if they exist
+  }))
+})
 </script>
 
 <template>
@@ -239,7 +239,10 @@ const activeLinks = computed(() => {
 
     <template #panel>
       <!-- <UAsideLinks :links="links" /> -->
-      <UNavigationLinks class="py-3" :links="[links[0]]" />
+      <UNavigationLinks
+        class="py-3"
+        :links="[links[0]]"
+      />
       <UNavigationAccordion :links="links.slice(1)" />
     </template>
   </UHeader>

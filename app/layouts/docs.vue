@@ -60,7 +60,11 @@ const navigationLinks = computed(() => {
     <UPage>
       <template #left>
         <UAside>
-          <UNavigationTree :links="navigationLinks" default-open :multiple="false" />
+          <UNavigationTree
+            :links="navigationLinks"
+            default-open
+            :multiple="false"
+          />
         </UAside>
       </template>
 
