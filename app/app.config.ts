@@ -6,6 +6,18 @@ export default defineAppConfig({
       // full-width: max-w-8xl
       // constrained: 'max-w-7xl' // default
     },
+    // page: {
+    //   grid: {
+    //     wrapper: 'lg:grid-cols-12 lg:gap-8',
+    //     left: 'lg:col-span-3', // Adjusted width for left column
+    //     center: {
+    //       narrow: 'lg:col-span-6',
+    //       base: 'lg:col-span-9', // Adjusted width for center column
+    //       full: 'lg:col-span-10'
+    //     },
+    //     right: 'lg:col-span-3' // Adjusted width for right column
+    //   }
+    // }
   },
   seo: {
     siteName: 'Nameless'
