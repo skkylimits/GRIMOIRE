@@ -1,7 +1,10 @@
 export default defineAppConfig({
   ui: {
     primary: 'red',
-    gray: 'zinc'
+    gray: 'zinc',
+    container: {
+      // constrained: 'max-w-30xl'
+    }
   },
   seo: {
     siteName: 'Nameless'

@@ -22,8 +22,9 @@
   - [ ] [Nuxt] [NuxtLink] You can't nest one <a> inside another <a>. This will cause a hydration error on client-side. You can pass the custom prop to take full control of the markup.
 - [x] Text between `` needs to get colored like the theme
 - [x] Add a line (hr) under headings
-- [ ] add a line above hr if it's not the first element below h1
-- [ ] Customize from desktop to mobile switch in Tailwind config -> https://tailwindcss.com/docs/screens
+- [x] add a line above hr if it's not the first element below h1
+  - [ ] feat: Add conditional rendering logic for <hr> above <h2> elements
+- [x] Customize from desktop to mobile switch in Tailwind config -> https://tailwindcss.com/docs/screens
 - [x] RGB 32 33 36 // New black background? #202124 -> we're staying with zinc for now
 - [x] make header active based on wheter or not we're in that directory active: true in app header links is a good first step
 - [x] mobile menu fix links with no children direct link
