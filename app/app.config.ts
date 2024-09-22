@@ -4,19 +4,18 @@ export default defineAppConfig({
     gray: 'zinc',
     container: {
       // full-width: max-w-8xl
-      // constrained: 'max-w-7xl' // default
+      constrained: 'max-w-7xl'
     },
+    // to be continued
     // page: {
-    //   grid: {
-    //     wrapper: 'lg:grid-cols-12 lg:gap-8',
-    //     left: 'lg:col-span-3', // Adjusted width for left column
-    //     center: {
-    //       narrow: 'lg:col-span-6',
-    //       base: 'lg:col-span-9', // Adjusted width for center column
-    //       full: 'lg:col-span-10'
-    //     },
-    //     right: 'lg:col-span-3' // Adjusted width for right column
-    //   }
+    //   wrapper: 'flex flex-col lg:grid lg:grid-cols-10 lg:gap-8', // Keep the 10-column grid
+    //   left: 'lg:col-span-2', // Left aside stays 2 columns
+    //   center: {
+    //     narrow: 'lg:col-span-6', // Keep narrow as 6 columns (for smaller viewports)
+    //     base: 'lg:col-span-7', // Center reduces slightly (7 columns)
+    //     full: 'lg:col-span-8', // Slight reduction (8 columns)
+    //   },
+    //   right: 'lg:col-span-2 lg:pl-2', // Add padding to the right column (2 columns wide)
     // }
   },
   seo: {
