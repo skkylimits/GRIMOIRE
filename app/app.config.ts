@@ -3,8 +3,9 @@ export default defineAppConfig({
     primary: 'red',
     gray: 'zinc',
     container: {
-      // constrained: 'max-w-30xl'
-    }
+      // full-width: max-w-8xl
+      // constrained: 'max-w-7xl' // default
+    },
   },
   seo: {
     siteName: 'Nameless'
