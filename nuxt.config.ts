@@ -72,8 +72,10 @@ export default defineNuxtConfig({
     highlight: {
       // https://content.nuxt.com/get-started/configuration#highlight
       theme: {
-        // Default theme (same as single string)
-        default: 'github-dark'
+        // Force 'github-dark' for both light and dark modes
+        default: 'github-dark', // Theme for dark mode or by default
+        dark: 'github-dark',    // Ensure that dark mode uses the same theme
+        light: 'github-dark'    // Force light mode to use the same theme as well
       },
       langs: [
         // other languages you might be using

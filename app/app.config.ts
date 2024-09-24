@@ -17,6 +17,17 @@ export default defineAppConfig({
     //   },
     //   right: 'lg:col-span-2 lg:pl-2', // Add padding to the right column (2 columns wide)
     // }
+    // proseCode: {
+    //   wrapper: '[&>pre]:!rounded-t-none [&>pre]:!my-0 my-5',
+    //   header: 'flex items-center gap-1.5 border dark:border-gray-700 border-b-0 relative rounded-t-md px-4 py-3 not-prose',
+    //   icon: {
+    //     base: ''
+    //   },
+    //   button: {
+    //     base: 'absolute top-2.5 right-2.5'
+    //   },
+    //   filename: 'dark:text-gray-200 text-sm/6'
+    // },
   },
   seo: {
     siteName: 'Nameless'

@@ -20,7 +20,15 @@ export default <Partial<Config>>{
           800: '#B10304',
           900: '#910b0C',
           950: '#500001'
-        }
+        },
+        prose: {
+          // Add your custom prose colors here
+          pre: {
+            bg: '#1e1e1e', // Background for <pre>
+            color: '#ffffff', // Text color for <pre>
+          },
+          // You can define more prose styles here as needed
+        },
       },
       maxWidth: {
         '7xl': '90rem', // overwriting the default for a wider <main>
