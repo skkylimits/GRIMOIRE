@@ -32,8 +32,9 @@ export default <Partial<Config>>{
       },
       maxWidth: {
         '7xl': '90rem', // overwriting the default for a wider <main>
-        // '8xl': defaullt // default width for 8xl; without specifying, makes app full-width
+        // '8xl': default // default width for 8xl; without specifying, makes app full-width
       },
+
       screens: {
         // Override the default breakpoints or add custom ones
         // 'xs': '475px',   // Extra small devices

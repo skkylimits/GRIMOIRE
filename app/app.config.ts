@@ -8,15 +8,15 @@ export default defineAppConfig({
     },
     // to be continued
     // page: {
-    //   wrapper: 'flex flex-col lg:grid lg:grid-cols-10 lg:gap-8', // Keep the 10-column grid
-    //   left: 'lg:col-span-2', // Left aside stays 2 columns
+    //   wrapper: 'flex flex-col lg:grid lg:grid-cols-12 lg:gap-8',
+    //   left: 'lg:col-span-3',
     //   center: {
-    //     narrow: 'lg:col-span-6', // Keep narrow as 6 columns (for smaller viewports)
-    //     base: 'lg:col-span-7', // Center reduces slightly (7 columns)
-    //     full: 'lg:col-span-8', // Slight reduction (8 columns)
+    //     narrow: 'lg:col-span-6',
+    //     base: 'lg:col-span-8',
+    //     full: 'lg:col-span-12'
     //   },
-    //   right: 'lg:col-span-2 lg:pl-2', // Add padding to the right column (2 columns wide)
-    // }
+    //   right: 'lg:col-span-3 order-first lg:order-last'
+    // },
     // proseCode: {
     //   wrapper: '[&>pre]:!rounded-t-none [&>pre]:!my-0 my-5',
     //   header: 'flex items-center gap-1.5 border dark:border-gray-700 border-b-0 relative rounded-t-md px-4 py-3 not-prose',

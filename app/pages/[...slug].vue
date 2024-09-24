@@ -45,6 +45,17 @@ const links = computed(() => [toc?.bottom?.edit && {
   to: `${toc.bottom.edit}/${editOnGithub}/${page?.value?._file}`,
   target: '_blank'
 }, ...(toc?.bottom?.links || [])].filter(Boolean))
+
+const layout = {
+  wrapper: 'flex flex-col lg:grid lg:grid-cols-10 lg:gap-8',
+  left: 'lg:col-span-2',
+  center: {
+    narrow: 'lg:col-span-6',
+    base: 'lg:col-span-7', // Set both narrow and base to 3
+    full: 'lg:col-span-10'
+  },
+  right: 'lg:col-span-2 order-first lg:order-last' // Right column is optional or hidden
+};
 </script>
 
 <template>
@@ -54,9 +65,10 @@ const links = computed(() => [toc?.bottom?.edit && {
       :description="page.description"
       :links="page.links"
       :headline="headline"
+      class="max-w-prose mx-auto"
     />
 
-    <UPageBody prose>
+    <UPageBody prose class="max-w-prose mx-auto">
       <ContentRenderer
         v-if="page.body"
         :value="page"
@@ -66,6 +78,7 @@ const links = computed(() => [toc?.bottom?.edit && {
 
       <UContentSurround :surround="surround" />
     </UPageBody>
+
 
     <template
       v-if="page.toc !== false"
