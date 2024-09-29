@@ -75,7 +75,7 @@ export default defineNuxtConfig({
         // Force 'github-dark' for both light and dark modes
         default: 'github-dark', // Theme for dark mode or by default
         dark: 'github-dark',    // Ensure that dark mode uses the same theme
-        light: 'github-dark'    // Force light mode to use the same theme as well
+        light: 'github-light'    // Force light mode to use the same theme as well
       },
       langs: [
         // other languages you might be using
