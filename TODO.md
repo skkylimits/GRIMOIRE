@@ -17,7 +17,6 @@
 - [x] Turn circles to square
 - [x] Specify if you want TOC depth 1 or 2 per markdown page. Make it configurable
 - [x] Can't render the TOC in the Nuxt file
-- [ ] Make own Shiki theme. Same theme for light and dark uses
 - [ ] Fix clickable header. Currently, you can't use a link in a header, which can be frustrating (what-is-web.md <https://chatgpt.com/share/67c92a28-dec0-4f6e-8374-16ddf11507d4>)
   - [ ] [Nuxt] [NuxtLink] You can't nest one <a> inside another <a>. This will cause a hydration error on client-side. You can pass the custom prop to take full control of the markup.
 - [x] Text between `` needs to get colored like the theme
@@ -30,7 +29,7 @@
 - [x] mobile menu fix links with no children direct link
   - [ ] now customize the according to handle the logic instead of usink navLink & accordion. this is not modifyable how it is now
 
-
+- [ ] Make own Shiki theme. Same theme for light and dark uses
 - [ ] make copy code from codeblock scrollable. Meaning when you scroll down and code block hasnt ended the copy code scrolls with you. like chatgpt
 - [ ] make changelog page with tag that scroll when in view. https://volta.net/changelog
 
