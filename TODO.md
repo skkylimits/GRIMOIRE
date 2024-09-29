@@ -76,13 +76,13 @@
 
 ## Config
 
-- [ ] try to add a settings/config option. That certain behaviour can be enabled/disabled, like the hr below the h2. Catch my drift?
+- [ ] try to add a settings/config option. That certain behaviour can be enabled/disabled, like the hr below the h2. Catch my drift? - kinda like discord has
 - [ ] Make it so you can adjust the way certain prose types behave, like the h2 with standard --- hr at the end of the block
 
 
 ## DOC
 
-- [ ] Make a `doc.nameless` where you explain how your app and files work
+- [ ] Make a `instructions.nameless` where you explain how your app and files work
 - [ ] Explain how your functions work (jsdoc)
 - [ ] One line scalar/openAPI docs https://www.youtube.com/shorts/BKmnBXsGwkM
 - [ ] And so on, make a list like <https://content.nuxt.com/components/prose>
