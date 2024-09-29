@@ -2,7 +2,7 @@
 
 ## Linting
 
-- [ ] Markdown lint -> Integrate Prettier for CSS and markdown
+- [ ] Markdown lint -> Integrate antufu/eslint for css & markdown
 - [ ] Make sure lint doesnt make nuxt unreadable
 
 ## Bug
@@ -37,7 +37,7 @@
 ## Prose Components
 
 - [ ] Make a list of all UI components you use in markdown like:
-  - [ ] # ## ### ####
+  - [] # ## ### ####
   - [ ] >
   - [ ] ```terminal [terminal]
     echo "Nameless"
