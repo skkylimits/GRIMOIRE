@@ -34,35 +34,37 @@ const config = {
   'nuxt.schema.ts': 'vscode-icons:file-type-nuxt',
   'tailwind.config.js': 'vscode-icons:file-type-tailwind',
   'tailwind.config.ts': 'vscode-icons:file-type-tailwind',
-  vue: 'vscode-icons:file-type-vue',
-  ts: 'vscode-icons:file-type-typescript',
-  tsx: 'vscode-icons:file-type-typescript',
-  mjs: 'vscode-icons:file-type-js',
-  cjs: 'vscode-icons:file-type-js',
-  js: 'vscode-icons:file-type-js',
-  jsx: 'vscode-icons:file-type-js',
-  md: 'vscode-icons:file-type-markdown',
-  py: 'vscode-icons:file-type-python',
-  ico: 'vscode-icons:file-type-favicon',
-  npm: 'vscode-icons:file-type-npm',
-  pnpm: 'vscode-icons:file-type-pnpm',
-  npx: 'vscode-icons:file-type-npm',
-  yarn: 'vscode-icons:file-type-yarn',
-  bun: 'vscode-icons:file-type-bun',
-  yml: 'vscode-icons:file-type-yaml',
-  terminal: 'i-heroicons-command-line',
-  csv: 'vscode-icons:file-type-text'
+  'vue': 'vscode-icons:file-type-vue',
+  'ts': 'vscode-icons:file-type-typescript',
+  'tsx': 'vscode-icons:file-type-typescript',
+  'mjs': 'vscode-icons:file-type-js',
+  'cjs': 'vscode-icons:file-type-js',
+  'js': 'vscode-icons:file-type-js',
+  'jsx': 'vscode-icons:file-type-js',
+  'md': 'vscode-icons:file-type-markdown',
+  'py': 'vscode-icons:file-type-python',
+  'ico': 'vscode-icons:file-type-favicon',
+  'npm': 'vscode-icons:file-type-npm',
+  'pnpm': 'vscode-icons:file-type-pnpm',
+  'npx': 'vscode-icons:file-type-npm',
+  'yarn': 'vscode-icons:file-type-yarn',
+  'bun': 'vscode-icons:file-type-bun',
+  'yml': 'vscode-icons:file-type-yaml',
+  'terminal': 'i-heroicons-command-line',
+  'csv': 'vscode-icons:file-type-text'
 }
 
 const { ui } = useUI('content.prose.code.icon', undefined, config, undefined, true)
 
 const extension = computed(() => (props.filename?.split('.').pop() || '').toLowerCase())
-// @ts-ignore
 const hasIcon = computed(() => props.icon || ui.value[extension.value] || props.filename.includes('.'))
-// @ts-ignore
 const icon = computed(() => props.icon ?? (props.filename && (ui.value[props.filename.split('/').pop()] ?? ui.value[extension.value] ?? `vscode-icons:file-type-${extension.value}`)))
 </script>
 
 <template>
-  <UIcon v-if="hasIcon" :name="icon.split(' ').pop()" dynamic />
+  <UIcon
+    v-if="hasIcon"
+    :name="icon.split(' ').pop()"
+    dynamic
+  />
 </template>

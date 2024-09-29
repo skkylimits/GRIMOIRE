@@ -55,7 +55,8 @@ const layout = {
     full: 'lg:col-span-10'
   },
   right: 'lg:col-span-2 order-first lg:order-last' // Right column is optional or hidden
-};
+}
+console.log(layout)
 </script>
 
 <template>
@@ -68,7 +69,10 @@ const layout = {
       class="max-w-prose mx-auto"
     />
 
-    <UPageBody prose class="max-w-prose mx-auto">
+    <UPageBody
+      prose
+      class="max-w-prose mx-auto"
+    >
       <ContentRenderer
         v-if="page.body"
         :value="page"
@@ -78,7 +82,6 @@ const layout = {
 
       <UContentSurround :surround="surround" />
     </UPageBody>
-
 
     <template
       v-if="page.toc !== false"

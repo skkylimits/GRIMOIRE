@@ -25,13 +25,13 @@ export default <Partial<Config>>{
           // Add your custom prose colors here
           pre: {
             bg: '#1e1e1e', // Background for <pre>
-            color: '#ffffff', // Text color for <pre>
-          },
+            color: '#ffffff' // Text color for <pre>
+          }
           // You can define more prose styles here as needed
-        },
+        }
       },
       maxWidth: {
-        '7xl': '90rem', // overwriting the default for a wider <main>
+        '7xl': '90rem' // overwriting the default for a wider <main>
         // '8xl': default // default width for 8xl; without specifying, makes app full-width
       },
 
@@ -40,7 +40,7 @@ export default <Partial<Config>>{
         // 'xs': '475px',   // Extra small devices
         // 'sm': '640px',   // Small devices (mobile)
         // 'md': '768px',   // Medium devices (tablet)
-        'lg': '1080px',  // Large devices (laptop)
+        lg: '1080px' // Large devices (laptop)
         // 'xl': '1280px',  // Extra large devices (desktop)
         // '2xl': '1536px', // Ultra large screens
 

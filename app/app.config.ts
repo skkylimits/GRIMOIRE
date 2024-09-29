@@ -5,7 +5,7 @@ export default defineAppConfig({
     container: {
       // full-width: max-w-8xl
       constrained: 'max-w-7xl'
-    },
+    }
     // to be continued
     // page: {
     //   wrapper: 'flex flex-col lg:grid lg:grid-cols-12 lg:gap-8',
