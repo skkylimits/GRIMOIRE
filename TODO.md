@@ -42,7 +42,7 @@
   - [ ] ```terminal [terminal]
     echo "Nameless"
     ```
-  - [ ] ::callout
+  - [ ] ::callout [used for linking websites or articles etc]
     ---
     icon: i-heroicons-light-bulb
     target: _blank
@@ -61,7 +61,7 @@
   - [ ] Try it for a list with steps that connect to each other from number 1 to 2 with a line. On work laptop, we have a photo of this
   - [ ] Make the list, make the alert, warning, tip components, etc.
   - [ ] Make a clear differentiator of when to use the alert, the blockquote, or the link
-  - [ ] Note like GitHub <https://github.com/renovatebot/renovate>
+  - [ ] Note like GitHub <https://github.com/orgs/community/discussions/16925>
   - [ ] Replace current table with old table from VitePress
   - [ ] pdf ::callout
         ---
