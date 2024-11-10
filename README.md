@@ -1,182 +1,287 @@
-# shadow-lab
+# Nameless
 
-> [!NOTE]  
-> Highlights information that users should take into account, even when skimming.
+[![Nuxt UI Pro](https://img.shields.io/badge/Made%20with-Nuxt%20UI%20Pro-00DC82?logo=nuxt.js&labelColor=020420)](https://ui.nuxt.com/pro)
+[![Nuxt Studio](https://img.shields.io/badge/Open%20in%20Nuxt%20Studio-18181B?&logo=nuxt.js&logoColor=3BB5EC)](https://nuxt.studio/themes/docs)
 
-TODO: Download attachment button to instantly download the templates and edit them in your preffered extension!
-TODO: Add how to do a pentest (sales pitch)
-TODO: Get familiar with devslide for powerpoints
-TODO: hotreload doesnt work anymore
-TODO: clean up risk rating methodogology
-TODO: <https://dlo.mijnhva.nl/d2l/le/content/545914/viewContent/1816603/View>
-TODO: <https://dlo.mijnhva.nl/d2l/le/content/545914/viewContent/1816591/View>
+- [Live demo](https://docs-template.nuxt.dev/)
+- [Play on Stackblitz](https://stackblitz.com/github/nuxt-ui-pro/docs)
+- [Documentation](https://ui.nuxt.com/pro/getting-started)
+- [Clone on Nuxt Studio](https://nuxt.studio/themes/docs)
 
-TODO: markdownlint.json fix errors
+## Quick Start
 
-ADD: <https://tweakers.net/reviews/7406/dns-over-https-meningen-verdeeld-over-encryptie-dns-queries.html>
-ADD: <https://tweakers.net/reviews/4155/border-gateway-protocol-de-achilleshiel-van-internet.html>
-ADD: <https://www.acunetix.com/blog/articles/tls-vulnerabilities-attacks-final-part/>
-
-ADD: <https://gaia.cs.umass.edu/kurose_ross/index.php>
-
-## add python/javascript/bash/sql?
-
-## <https://remarkable.com/store/remarkable-2> or iPad?
-
-## Isreali Defense Force
-
-<https://www.youtube.com/watch?v=IluKcbamqfk>
-
-## GPT Markdown Formatter & Transcription Transformer
-
-`
-Ik wil dat je de tekst commas, punten en vraagtekens geeft waar nodig.
-
-Maak er daarna alineas van.
-
-Geef de alineas een title met ## ervoor.
-
-Zorg ervoor dat na de titel met ## een lege regel is voor leesbaarheid.
-`
-
-## VIDEO COLLEGE
-
-[Netwerk Architektuur](https://youtu.be/6CAkgSzge64)
-[Protocoll Stack](https://youtu.be/agCwFOrKbaA)
-[Intro Security](https://youtu.be/YeaREe_FLDQ)
-[Applicatielaag](https://youtu.be/SCHo8pdPOWo)
-[Applicatieprotoclooen](https://youtu.be/Pt6d8D9iSDQ)
-[Transportlaag](https://youtu.be/OFjEO5VLay8)
-[UDP & TCP](https://www.youtube.com/watch?v=Vdc8TCESIg8)
-[DNS](https://www.youtube.com/watch?v=GlZC4Jwf3xQ)
-[DNS II](https://www.youtube.com/watch?v=kVtm4oWqT_I)
-[Automatic IP Address Assignment](https://www.youtube.com/watch?v=RUZohsAxPxQ)
-[Netwerk Protocollen](https://youtu.be/5aCPb6IuI80)
-[Routing & Forwarding](https://youtu.be/qn2s07cciD0)
-[DHCP](https://youtu.be/wL-QUHGwGAk)
-[Subnets](https://www.youtube.com/watch?v=yK__SdS2meo)
-[Linklaag](https://www.youtube.com/watch?v=kqhq_CGiSn4)
-[Risico's en bedreigingen bij netwerkbeveiliging](https://www.youtube.com/watch?v=qNK13asJbMw)
-[Beveiligingsmaatregelen](https://www.youtube.com/watch?v=7LCFZhdo0d4)
-
-Vervolgvak op Netwerk Architektuur + Beveiliging
-[De TCP verbinding](https://www.youtube.com/watch?v=NtvtyEKK9s0)
-[Beveiliging van de TCP verbinding](https://www.youtube.com/watch?v=7pp-TVlZ_0E)
-[DNS security](https://www.youtube.com/watch?v=Ag7wUjSs-TI)
-[Routing Algoritmes](https://www.youtube.com/watch?v=btbxQ-pN-q4)
-[Routing Protocollen](https://www.youtube.com/watch?v=m2TqaT3J-Ck&t=1s)
-[Netwerk Management](https://www.youtube.com/watch?v=2ssbdSntFEM&t=484s)
-[Linklaag ARP](https://www.youtube.com/watch?v=6li8DcrCWZM)
-[De linklaag: ethernet en switching](https://www.youtube.com/watch?v=kEbguBJWYC4)
-[Draadlozen netwerken](https://www.youtube.com/watch?v=NTwhQ4-AlkA)
-[WiFi security](https://www.youtube.com/watch?v=PY5X_vUAWR4)
-[Network security](https://www.youtube.com/watch?v=UsTLladBlhk&t=1s)
-[Authenticatie](https://www.youtube.com/watch?v=rsbIKr5x_CI)
-[TLS](https://www.youtube.com/watch?v=YmYqKL7SNYU)
-
-## Opdrachten
-
-[x] Droom thuisnetwerk
-[x] Lab preparatie. VMware/Docker/Virtual Machine
-[x] nmap
-[x] python udppinger
-[x] Wireshark BGP
-[x] Wireshark DNSsec
-[ ] Wireshark Ethernet
-[ ] ARP Spoofing
-[ ] Lab SNMP
-[ ] Lab Wifi Security
-[ ] Lab Wireshark 802
-[ ] Lab Snort
-[ ] Lab Hashes
-[ ] Wireshark oefening dag 1 tot 3
-[ ] Eindopdracht dag 4 tot 6
-
-to brush up:
-
-NAT
-subnetting
-parity checkings
-network security cryptography
-
-## GPT Magic
-
-```text
-Vertaal naar het nederlands maak het korter geef elke alinea een bold titel.
-
-Behoud de engelse titels
-
-Houd kort alsjeblieft.
-
-Een zin per alinea.
+```bash [Terminal]
+npx nuxi init -t github:nuxt-ui-pro/docs
 ```
 
-admin
+## Setup
 
-root
-Supersecretpassword1
-@BaASD&9032123sADS
-rKXM59ESxesUFHAd
+Make sure to install the dependencies:
 
-## TO ADD Security
+```bash
+# npm
+npm install
 
-Certainly! Here are some additional security subjects:
+# pnpm
+pnpm install
 
-1. **Zero Trust Architecture (ZTA)**: A security model that requires strict identity verification for every person and device trying to access resources on a private network, regardless of whether they are inside or outside the network perimeter.
+# yarn
+yarn install
 
-2. **Security Information and Event Management (SIEM)**: A technology that provides real-time analysis of security alerts generated by network hardware and applications.
+# bun
+bun install
+```
 
-3. **Penetration Testing (Pen Testing)**: The practice of testing a computer system, network, or web application to find security vulnerabilities that an attacker could exploit.
+## Development Server
 
-4. **Threat Intelligence**: Information about potential or current threats to an organization's assets, including information about attackers, their tactics, techniques, and procedures (TTPs), and indicators of compromise (IOCs).
+Start the development server on `http://localhost:3000`:
 
-5. **Incident Response**: The process of responding to and managing a security incident, including detecting, analyzing, containing, eradicating, and recovering from security breaches.
+```bash
+# npm
+npm run dev
 
-6. **Data Loss Prevention (DLP)**: A set of tools and processes used to prevent the unauthorized loss or theft of sensitive data.
+# pnpm
+pnpm run dev
 
-7. **Blockchain Security**: Security considerations specific to blockchain technology, including consensus mechanisms, cryptographic algorithms, smart contract vulnerabilities, and decentralization.
+# yarn
+yarn dev
 
-8. **Identity and Access Management (IAM)**: The process of managing digital identities and controlling access to resources based on identity, role, or other attributes.
+# bun
+bun run dev
+```
 
-9. **Cloud Security**: Security considerations specific to cloud computing environments, including data privacy, compliance, identity management, and secure configuration.
+## Production
 
-10. **Secure Software Development Lifecycle (SSDL)**: A set of practices and methodologies for building secure software from the initial design phase through to deployment and maintenance.
+Build the application for production:
 
-These topics cover a wide range of security domains and can provide a solid foundation for understanding various aspects of cybersecurity beyond the CIA Triad and hacking modus operandi. Let me know if you need further information on any of these subjects!
+```bash
+# npm
+npm run build
 
-## Make Athlete Docs
+# pnpm
+pnpm run build
 
-[Grease The Groove](https://www.youtube.com/watch?v=M3Dzu4DLhV4)
+# yarn
+yarn build
 
-## Secure kubernetes at the edge whitepaper
+# bun
+bun run build
+```
 
-<https://ubuntu.com/engage/secure-kubernetes-at-the-edge>
+Locally preview production build:
 
-## Microsoft Learn Challenge: Build Edition
+```bash
+# npm
+npm run preview
 
-<https://www.microsoft.com/en-us/cloudskillschallenge/build/registration/2024?ocid=build24_csc_learnpromo_T1_cnl>
+# pnpm
+pnpm run preview
+
+# yarn
+yarn preview
+
+# bun
+bun run preview
+```
+
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Nuxt Studio integration
+
+Add `@nuxthq/studio` dependency to your package.json:
+
+```bash
+# npm
+npm install --save-dev @nuxthq/studio
+
+# pnpm
+pnpm add -D @nuxthq/studio
+
+# yarn
+yarn add -D @nuxthq/studio
+
+# bun
+bun add -d @nuxthq/studio
+```
+
+Add this module to your `nuxt.config.ts`:
+
+```ts
+export default defineNuxtConfig({
+  ...
+  modules: [
+    ...
+    '@nuxthq/studio'
+  ]
+})
+```
+
+Read more on [Nuxt Studio docs](https://nuxt.studio/docs/get-started/setup).
+
+## Renovate integration
+
+Install [Renovate GitHub app](https://github.com/apps/renovate/installations/select_target) on your repository and you are good to go.
+
+## Nuxt Ecosystem
+
+There are already many websites based on this template:
+
+- [Nuxt](https://nuxt.com) - The Nuxt website
+- [Nuxt UI](https://ui.nuxt.com) - The documentation of `@nuxt/ui` and `@nuxt/ui-pro`
+- [Nuxt Image](https://image.nuxt.com) - The documentation of `@nuxt/image`
+- [Nuxt Content](https://content.nuxt.com) - The documentation of `@nuxt/content`
+- [Nuxt Devtools](https://devtools.nuxt.com) - The documentation of `@nuxt/devtools`
+- [Nuxt Studio](https://nuxt.studio) - The pro version of Nuxt Content
+
+## \_dir.yml
+
+## Overview
+
+The `_dir.yml` file is used to configure the rendering of navigation elements in your application. This file allows you to specify properties that influence how directories are displayed in the navigation tree. The configuration options include setting a `title`, defining whether the directory is `stripped`, and specifying if it is `standalone`.
+
+Here are the prompts that made [this](https://chatgpt.com/share/95a60589-504a-497d-821d-ac974407d556) happen.
+
+## Key Concepts
+
+### Title
+
+The `title` property specifies the display name of the directory or section in the navigation tree. This is the text that will be shown to users.
+
+**Example configuration:**
+
+```yaml
+title: The Lab
+```
+
+In this example, the directory or section will be labeled as "The Lab" in the navigation menu.
+Sure! Here’s the updated documentation that includes the initial directory structure:
+
+## Features: Standalone and Stripped
+
+We have implemented two powerful rendering features for our directory structure: **Standalone** and **Stripped**. These features enhance the way you can visualize and interact with your content.
+
+### Initial Directory Structure
+
+Here’s the initial directory structure for reference:
+
+```
+6.knowledge-base/
+└── networking/
+    ├── dhcp
+    └── dns
+```
+
+### 1. Standalone
+
+The **Standalone** feature renders the entire directory structure from the top-level root. This allows you to view all components and subcomponents under a specified category.
+
+**Example:**
+
+For the directory path `6.knowledge-base/networking/`, the Standalone feature will display:
+
+```
+networking
+├── dhcp
+└── dns
+```
+
+In this view, you can see the top-level category "networking" along with all its child components.
+
+---
+
+### 2. Stripped
+
+The **Stripped** feature simplifies the view by removing the top-level folder. It only displays the subfolders and their contents, making it easier to focus on specific components without the hierarchy of the parent directory.
+
+**Example:**
+
+For the same directory path `6.knowledge-base/networking/`, the Stripped feature will render:
+
+```
+├── dhcp
+└── dns
+```
+
+In this view, you can directly access "dhcp" and "dns" without the "networking" parent folder, providing a cleaner and more focused presentation.
+
+### Nuxt Configuration
+
+To enable these features, you need to add them to your nuxt.config.ts file:
+
+export default {
+  content: {
+    navigation: {
+      fields: ['standalone', 'stripped']
+    },
+    highlight: {
+      theme: {
+        default: 'github-dark'
+      },
+      langs: [
+        // other languages you might be using
+        'powershell',
+        'http'
+      ]
+    }
+  }
+}
 
 
-## Doc Improvement
+## Icons [workaround]
 
-- ChatGPT + HackTheBox style code
-- Gitbook styled warnings/alert
-- Obsidian style hint
-- Export as PDF
-- git diff view & shareble links & lock or request edit links
-- Admin center -> change font/themes/modes/styling
-- Auto url / no more .config file
-- wysiwyg editor for designers
-- github integration for engineers
-- add discuss for internal discussions
-- AI-powered search to let user ask questions in natural langauge and get answers based on your content.
-- Localize user interface -> translate the interface of your public documentation
-- Pagination. Show previous/Next navitatio butoons at the bottoms of each page
-- TOC with First & Second header
-- Homepage - obsidian style
-- Obsidian style features
-- Third party integration slike slack/vscode/ skky is the limits
-- take the side phew from logse
-- docs
-- fix the fileserver problem.
-- make a template out of it.
+- [Iconify](https://iconify.design/) - Freedom to choose icons
+
+If you want to download a new icon, place it in: `icon: 'i-simple-icons-gitkraken`. After that it will render everywhere in your site.
+
+// place this wherever between a <template></template> It might invoke a redownload
+<UIcon name="i-heroicons-js" class="w-5 h-5" />
+
+```appHeader.vue [javascript]
+{
+        label: 'Nmap',
+        to: '/kitt/nmap',
+        icon: 'i-simple-icons-gitkraken',
+        description: 'A network scanning tool used to discover hosts, services, and vulnerabilities in a network.'
+      }
+```
+
+
+## Icons
+
+"@iconify-json/heroicons": "^1.1.21",
+"@iconify-json/simple-icons": "^1.1.109",
+"@iconify-json/file-icons": "^1.1.10",
+"@iconify-json/game-icons": "^1.1.10",
+"@iconify-json/mdi": "^1.1.68",
+
+---
+
+## Extending NavItem
+
+```
+interface ExtendedNavItem extends NavItem {
+  collapsed?: boolean; // Add collapsed here without changing NavItem globally
+}
+
+const navigationLinks = computed(() => {
+  const path = route.path
+  const validNav = findValidNavPath(path)
+
+  if (validNav) {
+    const children = validNav.node.children || []
+    
+    const mappedNav = mapContentNavigation(children).map(child => {
+      const extendedChild = child as ExtendedNavItem; // Use the local interface
+      return {
+        ...child,
+        defaultOpen: !extendedChild.collapsed // This will work
+      }
+    })
+
+    return mappedNav
+  }
+
+  return [] // If no valid directory is found, return an empty array
+})
+
+```
