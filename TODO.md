@@ -123,3 +123,6 @@
 - [ ] create baby webshop
 - [ ] create cube site + lead automation
 - [ ] create own website
+
+
+- [ ] https://learn.microsoft.com/en-us/azure/architecture/solution-ideas/articles/azure-security-build-first-layer-defense zoom in on image like this website
