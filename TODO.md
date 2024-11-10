@@ -66,7 +66,7 @@
 
       <!-- <embed src="/digital-fortress/blue-team/cyber-response-plan.pdf" width="600" height="800" type="application/pdf"> -->
   - [ ] Collapsible
-  - [ ] GIT Alerts
+  - [ ] GIT Alerts (give it variaty of border and background int he spectrum of red color insteaf of diffrerent colors to adhere to the websitye theme)
   - [ ] Try it for a list with steps that connect to each other from number 1 to 2 with a line. On work laptop, we have a photo of this
   - [ ] Make a clear differentiator of when to use the alert, the blockquote, or the link
   - [ ] Replace current table with old table from VitePress
@@ -113,14 +113,17 @@
 
 - [ ] Make a [extension] in VS Code that lists all prose styling options?
 - [ ] Create a ChatGPT [app] mode for IT, Doc Writing, & Email Writing
+- [ ] Make a browser extension that captures important comments(and lets you organize them) Kinda like pocket
+- [ ] create a nuxt module(dont know what to code yet tho)
 
 
 ## When finished
 
-- [ ] create autoless website
+- [ ] create auto lessen website combi van theorie toppers mikey en altijdgeslaagd
 - [ ] create baby webshop
-- [ ] create cube site + lead automation
-- [ ] create own website
+- [ ] create cube site 
+- [ ] continue  own website
+- [ ] create ai automation website for AI solutions like (lead automation and such)[like theaiclubhouse on IG]
 
 
 - [ ] https://learn.microsoft.com/en-us/azure/architecture/solution-ideas/articles/azure-security-build-first-layer-defense zoom in on image like this website
