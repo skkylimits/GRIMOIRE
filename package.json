@@ -24,6 +24,8 @@
     "@iconify-json/raphael": "^1.2.0",
     "@iconify-json/simple-icons": "^1.1.109",
     "@iconify-json/vscode-icons": "^1.2.1",
+    "@iconify-json/lets-icons": "^1.2.1",
+    "@iconify-json/octicon": "^1.2.1",
     "@nuxt/content": "^2.13.1",
     "@nuxt/fonts": "^0.7.1",
     "@nuxt/image": "^1.7.0",
