@@ -11,4 +11,9 @@
         "source.fixAll.eslint": "explicit",
         "source.organizeImports": "never"
     },
+    // IntelliSense
+    "tailwindCSS.classAttributes": [
+      "active-class",
+      "inactive-class"
+    ]
 }
