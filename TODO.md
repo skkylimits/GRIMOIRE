@@ -36,13 +36,13 @@
 
 ## Prose Components
 
-- [ ] Make a list of all UI components you use in markdown like:
-  - [] # ## ### ####
-  - [ ] >
-  - [ ] ```terminal [terminal]
+- [x] Make a list of all UI components you use in markdown like:
+  - [x] # ## ### ####
+  - [x] >
+  - [x] ```terminal [terminal]
     echo "Nameless"
     ```
-  - [ ] ::callout [used for linking websites or articles etc]
+  - [x] ::callout [used for linking websites or articles etc]
     ---
     icon: i-heroicons-light-bulb
     target: _blank
@@ -50,29 +50,27 @@
     ---
     Learn more on [Microsoft Learn](https://learn.microsoft.com/)
     ::
-  - [ ] ![Propagation Mechanism](/core-principles/propagation-mechanisms.png)
-  - [ ] <video controls>
+  - [x] ![Propagation Mechanism](/core-principles/propagation-mechanisms.png)
+  - [x] <video controls>
       <source src="/core-principles/encryption.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
-  - [ ] Collapsible
-  - [ ] Alerts
-  - [ ] Find out more useful types
-  - [ ] Try it for a list with steps that connect to each other from number 1 to 2 with a line. On work laptop, we have a photo of this
-  - [ ] Make the list, make the alert, warning, tip components, etc.
-  - [ ] Make a clear differentiator of when to use the alert, the blockquote, or the link
-  - [ ] Note like GitHub <https://github.com/orgs/community/discussions/16925>
-  - [ ] Replace current table with old table from VitePress
-  - [ ] pdf ::callout
-        ---
-        icon: i-heroicons-light-bulb
-        target: _blank
-        to: digital-fortress/blue-team/cyber-response-plan.pdf
-        ---
-        Cyber Reponse Plan PDF by ABN AMRO
-        ::
+    - [x] pdf ::callout
+      ---
+      icon: i-heroicons-light-bulb
+      target: _blank
+      to: digital-fortress/blue-team/cyber-response-plan.pdf
+      ---
+      Cyber Reponse Plan PDF by ABN AMRO
+      ::
 
-        <!-- <embed src="/digital-fortress/blue-team/cyber-response-plan.pdf" width="600" height="800" type="application/pdf"> -->
+      <!-- <embed src="/digital-fortress/blue-team/cyber-response-plan.pdf" width="600" height="800" type="application/pdf"> -->
+  - [ ] Collapsible
+  - [ ] GIT Alerts
+  - [ ] Try it for a list with steps that connect to each other from number 1 to 2 with a line. On work laptop, we have a photo of this
+  - [ ] Make a clear differentiator of when to use the alert, the blockquote, or the link
+  - [ ] Replace current table with old table from VitePress
+- [ ] make a list of all used icons like i-ph:app-window and show it in a library
 
 ## Config
 

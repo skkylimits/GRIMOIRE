@@ -12,16 +12,20 @@ export default defineNuxtConfig({
     'nuxt-og-image'
   ],
 
+  // https://nuxt.com/docs/getting-started/upgrade#opting-in-to-nuxt-4  
   future: {
     compatibilityVersion: 4
   },
-
+  
+  // https://nuxt.com/docs/api/nuxt-config#compatibilitydate
   compatibilityDate: '2024-07-11',
-
+  
+  // https://nuxt.com/docs/api/nuxt-config#strict
   typescript: {
     strict: false
   },
-
+  
+  // https://nuxt.com/docs/api/nuxt-config#devtools
   devtools: {
     enabled: true,
 
@@ -29,13 +33,16 @@ export default defineNuxtConfig({
       enabled: true
     }
   },
-
+  
+  // https://color-mode.nuxtjs.org/
   colorMode: {
     disableTransition: true
   },
 
+  // https://eslint.nuxt.com/packages/module
   eslint: {
     config: {
+      // https://eslint.style/packages/default
       stylistic: {
         commaDangle: 'never', // No trailing commas
         braceStyle: '1tbs' // One true brace style (brace on same line)
@@ -59,10 +66,13 @@ export default defineNuxtConfig({
   },
 
   content: {
+    // https://content.nuxt.com/usage/navigation#custom-keys
     navigation: {
       fields: ['standalone', 'stripped', 'collapsed']
     },
+    // https://content.nuxt.com/get-started/configuration#markdown
     markdown: {
+    // https://github.com/nuxt/content/blob/17ab4785205ae9eec94580734b602eb29c6c52da/src/types/module.ts#L73
       toc: {
         depth: 2 // Adjust to your liking
         // searchDepth: 4,
