@@ -25,6 +25,3 @@ logs
 
 # VSC
 .history
-
-# Windows
-pnpm-lock.yaml
