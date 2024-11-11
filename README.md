@@ -285,3 +285,12 @@ const navigationLinks = computed(() => {
 })
 
 ```
+
+## Windows Machine
+
+Vergeet niet naar `Set-ExecutionPolicy Restricted` zodra je klaar bent
+
+PS C:\Users\MBR\Desktop\Nameless> Get-ExecutionPolicy
+>>
+Restricted
+PS C:\Users\MBR\Desktop\Nameless> Set-ExecutionPolicy RemoteSigned
