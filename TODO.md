@@ -71,6 +71,7 @@
   - [ ] Make a clear differentiator of when to use the alert, the blockquote, or the link
   - [ ] Replace current table with old table from VitePress
 - [ ] make a list of all used icons like i-ph:app-window and show it in a library
+- [ ] make a config so when we use _## or ## h2 .{exclude}, that specific h2 doesnt render in the toc.
 
 ## Config
 
