@@ -66,7 +66,8 @@
 
       <!-- <embed src="/digital-fortress/blue-team/cyber-response-plan.pdf" width="600" height="800" type="application/pdf"> -->
   - [x] foldable
-    - [ ] change colors  black and white of foldable
+    - [ ] fix no shadow on dark
+    - [ ] make into fully nuxt/tailwind component
   - [ ] GIT Alerts (give it variaty of border and background int he spectrum of red color insteaf of diffrerent colors to adhere to the websitye theme)
   - [ ] Try it for a list with steps that connect to each other from number 1 to 2 with a line. On work laptop, we have a photo of this
   - [ ] Make a clear differentiator of when to use the alert, the blockquote, or the link
