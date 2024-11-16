@@ -56,7 +56,6 @@ const layout = {
   },
   right: 'lg:col-span-2 order-first lg:order-last' // Right column is optional or hidden
 }
-console.log(layout)
 </script>
 
 <template>
