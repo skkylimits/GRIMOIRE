@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 import defaultTheme from 'tailwindcss/defaultTheme'
+import plugin from 'tailwindcss/plugin'
 
 export default <Partial<Config>>{
   theme: {
@@ -43,10 +44,18 @@ export default <Partial<Config>>{
         lg: '1080px' // Large devices (laptop)
         // 'xl': '1280px',  // Extra large devices (desktop)
         // '2xl': '1536px', // Ultra large screens
-
-      }
+      },
     }
   },
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.box-shadow': {
+          '@apply transition-shadow duration-300 ease-in-out hover:shadow-[0_4px_15px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_4px_15px_rgba(255,255,255,0.15)]': {}
+        }
+      })
+    })
+  ],
   content: [
     './app/**/*.vue',
     './app/**/*.js',

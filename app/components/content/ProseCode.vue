@@ -49,7 +49,7 @@ const { ui } = useUI('content.prose.code', undefined, config, undefined, true)
 
 <template>
   <div
-    class="relative"
+    class="relative box-shadow"
     :class="!!filename && ui.wrapper"
   >
     <div
