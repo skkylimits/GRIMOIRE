@@ -52,6 +52,9 @@ export default <Partial<Config>>{
       addUtilities({
         '.box-shadow': {
           '@apply transition-shadow duration-300 ease-in-out hover:shadow-[0_4px_15px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_4px_15px_rgba(255,255,255,0.15)]': {}
+        },
+        '.edge': {
+          '@apply border rounded-md border-[var(--tw-prose-pre-border)] dark:border-[var(--tw-prose-invert-pre-border)]' : {}
         }
       })
     })
