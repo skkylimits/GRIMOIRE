@@ -1,5 +1,8 @@
 <template>
-    <div class="block my-5 pl-4 pr-6 pt-6 edge box-shadow">
+    <div
+        class="block my-5 pl-4 pr-6 pt-6 edge box-shadow"
+        :style="{ background: background, color: color }"
+    >
         <div class="alert-title flex items-center">
             <UIcon :name="icon" class="mr-2" />
             <p class="font-bold">{{ title }}</p>
@@ -11,15 +14,25 @@
 </template>
 
 <script setup>
+import { defineProps } from 'vue';
+
 const props = defineProps({
     icon: {
         type: String,
-        default: 'mdi:highlighter' // Default icon for the base alert
+        default: 'mdi:highlighter', // Default icon for the base alert
     },
     title: {
         type: String,
         default: 'Alert' // Default title for the base alert
-    }
+    },
+    background: {
+        type: String,
+        default: 'var(--ui-background)', // Default background color (light gray)
+    },
+    color: {
+        type: String,
+        default: 'var(--tw-prose-body)', // Default text color (dark gray)
+    },
 });
 </script>
 

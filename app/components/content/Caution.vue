@@ -1,9 +1,8 @@
 <template>
-    <Alert class="bg-black" icon="icon-park-solid:caution" title="Caution">
+    <Alert icon="icon-park-solid:caution" title="Caution" background="#3b2e58" color="white">
         <slot />
     </Alert>
 </template>
 
-<script setup>
-import Alert from './Alert.vue';
-</script>
+<!-- light #efd9fd -->
+<!-- dark  #3b2e58 -->
