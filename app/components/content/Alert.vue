@@ -1,8 +1,8 @@
 <template>
-    <div class="block pl-4 pr-6 pt-6 edge box-shadow">
-        <div class="alert-title">
-            <span class="i-ph:lightbulb mr-2" aria-hidden="true">i-ph:lightbulb</span>
-            <p>Alert</p>
+    <div class="block my-5 pl-4 pr-6 pt-6 edge box-shadow">
+        <div class="alert-title flex items-center">
+            <UIcon :name="icon" class="mr-2" />
+            <p class="font-bold">{{ title }}</p>
         </div>
         <div class="alert-content">
             <slot />
@@ -10,9 +10,21 @@
     </div>
 </template>
 
+<script setup>
+const props = defineProps({
+    icon: {
+        type: String,
+        default: 'mdi:highlighter' // Default icon for the base alert
+    },
+    title: {
+        type: String,
+        default: 'Alert' // Default title for the base alert
+    }
+});
+</script>
+
 <style scoped>
 .alert-title p {
-    display: inline; /* Make any <p> inline to prevent new lines caused by MDC syntax*/
     margin: 0; /* Remove any margin that might push it down */
     padding: 0; /* Remove any padding that could affect alignment */
 }
