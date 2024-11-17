@@ -8,6 +8,7 @@
 ## Bug
 
 - [ ] Title in slug is error. Disabled for now. Deep dive into OG & SEO.
+- [ ] Why advanced markdown such aas mermad etc not working?
 
 ## UI
 
