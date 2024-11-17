@@ -1,5 +1,5 @@
 <template>
-    <Alert icon="icon-park-solid:caution" title="Caution" class="bg-[#efd9fd] dark:bg-[#3b2e58] text-black dark:text-white">
+    <Alert icon="i-material-symbols:report" title="Caution" class="bg-red-300 dark:bg-red-500 text-black dark:text-white">
         <slot />
     </Alert>
 </template>

@@ -16,7 +16,7 @@ import { defineProps } from 'vue';
 const props = defineProps({
     icon: {
         type: String,
-        default: 'mdi:highlighter', // Default icon for the base alert
+        default: 'i-mdi:highlighter', // Default icon for the base alert
     },
     title: {
         type: String,
