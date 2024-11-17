@@ -46,7 +46,7 @@
 - [ ] Make a `instructions.nameless` where you explain how your app and files work
 - [ ] Explain how your functions work (jsdoc)
 - [ ] One line scalar/openAPI docs https://www.youtube.com/shorts/BKmnBXsGwkM
-- [ ] And so on, make a list like <https://content.nuxt.com/components/prose>
+- [ ] add to thhe list by specifying when and why to use certai prose components <https://content.nuxt.com/components/prose>
 
 ## Automation
 
