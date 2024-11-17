@@ -76,7 +76,7 @@ export default defineNuxtConfig({
       toc: {
         depth: 2 // Adjust to your liking
         // searchDepth: 4,
-      }
+      },
     },
     // https://shiki.style/
     highlight: {
@@ -93,5 +93,5 @@ export default defineNuxtConfig({
         'http'
       ]
     }
-  }
+  },
 })
