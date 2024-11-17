@@ -28,9 +28,10 @@
 - git highlgights, give spectrum of red with unique border or not?
   - give them correct box-shadow colors
   - update te colors inside it correctly according the the highlight were in, now it's standard red.
+  - look at doc v1 colors for color combination inspirration
 - [ ] Try it for a list with steps that connect to each other from number 1 to 2 with a line. On work laptop, we have a photo of this
   - [ ] Replace current table with old table from VitePress
-- [ ] make a list of all used icons like i-ph:app-window and show it in a library
+- [ ] make a list of all used icons like i-ph:app-window and show it in a librar
 
 
 ## Config
