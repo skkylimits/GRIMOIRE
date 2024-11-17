@@ -1,5 +1,5 @@
 <template>
-    <div class="block my-5 px-4 pt-6 edge box-shadow">
+    <div class="block my-5 px-4 pt-6 border rounded-md box-shadow">
         <div class="alert-title flex items-center">
             <UIcon :name="icon" class="mr-2" />
             <p class="font-bold">{{ title }}</p>
