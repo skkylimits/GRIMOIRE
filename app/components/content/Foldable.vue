@@ -9,7 +9,6 @@
   </details>
 </template>
 
-
 <style>
 .foldable-summary p {
   display: inline; /* Make any <p> inline to prevent new lines caused by MDC syntax*/

@@ -3,7 +3,3 @@
         <slot />
     </Alert>
 </template>
-
-
-<!-- light #efd9fd -->
-<!-- dark  #3b2e58 -->
