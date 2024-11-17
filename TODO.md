@@ -23,17 +23,19 @@
 
 ## Prose Components
 
-- - [ ] GIT Alerts (give it variaty of border and background int he spectrum of red color insteaf of diffrerent colors to adhere to the websitye theme)
-  - [ ] Try it for a list with steps that connect to each other from number 1 to 2 with a line. On work laptop, we have a photo of this
-  - [ ] Make a clear differentiator of when to use the alert, the blockquote, or the link, specift this in /prose
+
+- git highlgights, give spectrum of red with unique border or not?
+  - give them correct box-shadow colors
+- [ ] Try it for a list with steps that connect to each other from number 1 to 2 with a line. On work laptop, we have a photo of this
   - [ ] Replace current table with old table from VitePress
 - [ ] make a list of all used icons like i-ph:app-window and show it in a library
-- [ ] make a config so when we use _## or ## h2 .{exclude}, that specific h2 doesnt render in the toc.
+
 
 ## Config
 
 - [ ] try to add a settings/config option. That certain behaviour can be enabled/disabled, like the hr below the h2. Catch my drift? - kinda like discord has
-- [ ] Make it so you can adjust the way certain prose types behave, like the h2 with standard --- hr at the end of the block
+- [ ] Make it so you can adjust the way certain prose types behave, like the h2 with standard --- hr at the end of the - [ ] 
+- [ ] make a config so when we use _## or ## h2 .{exclude}, that specific h2 doesnt render in the toc.
 
 
 ## DOC

@@ -1,7 +1,7 @@
 <template>
     <div class="block my-5 px-4 pt-6 border rounded-md box-shadow">
         <div class="alert-title flex items-center">
-            <UIcon :name="icon" class="mr-2" />
+            <UIcon :name="icon" :class="['w-5 h-5 mr-2', iconColor]" />
             <p class="font-bold">{{ title }}</p>
         </div>
         <div class="alert-content">
@@ -19,6 +19,10 @@ const props = defineProps({
     title: {
         type: String,
         default: 'Alert' // Default title for the base alert
+    },
+    iconColor: {
+        type: String,
+        default: '' // Default color for the icon
     }
 });
 </script>
