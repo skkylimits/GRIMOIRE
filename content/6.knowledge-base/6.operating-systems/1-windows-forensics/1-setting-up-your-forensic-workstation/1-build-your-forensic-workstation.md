@@ -47,6 +47,12 @@ In VirtualBox, create a "NATNetwork". This allows VM to VM communication as well
 
 2.2 **Use an Existing Windows VHD**  
 
+Direct VHD download link
+- **Windows 2019 Server EN-US VHD Direct Download**: [Download Link](https://go.microsoft.com/fwlink/p/?linkid=2195334)
+
+Honourable mention:
+- **Accessing Trials and Kits for Windows**: [Microsoft Tech Community Guide](https://techcommunity.microsoft.com/t5/windows-11/accessing-trials-and-kits-for-windows/m-p/3361125)
+
 If you already have a VHD file for Windows Server, you can attach it to a new virtual machine in VirtualBox without creating a brand-new VM from scratch.
 
 **Steps to Use an Existing VHD File in VirtualBox**:
