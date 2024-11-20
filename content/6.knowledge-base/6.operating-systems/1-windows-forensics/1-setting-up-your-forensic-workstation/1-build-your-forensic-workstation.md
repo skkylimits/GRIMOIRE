@@ -2,7 +2,7 @@
 
 title: Build Your Forensic Workstation
 description: Forge your ultimate digital blade for dissecting the dark corners of the cyber grid.
--------------------------------------------------------------------------------------------------
+---
 
 In this guide, you will learn how to create your own forensic workstation using popular tools used by professionals for real-world investigations.
 
@@ -75,7 +75,7 @@ If you already have a VHD file for Windows Server, you can attach it to a new vi
 
 2.3 **Install the Windows VM**
 
-- Follow detailed setup guides for [VirtualBox](https://www.virtualbox.org/manual/ch01.html) and Windows VMs.
+- Optonally follow detailed setup guides for [VirtualBox](https://www.virtualbox.org/manual/ch01.html) and Windows VMs or follow the steps below.
 
 **VM Requirements**:
 
@@ -85,60 +85,66 @@ If you already have a VHD file for Windows Server, you can attach it to a new vi
 - **Networking**: NAT Mode
 - **Additional Setup**: After starting the Windows VM for the first time, install VirtualBox Guest Additions to enable features like drag-and-drop, bi-directional clipboard, and folder sharing with the host. To install Guest Additions:
 
-1. Start the Windows VM.
+1. Start the VM and follow the Windows Server installation instructions:
+     - When prompted, there is no need to provide a product key.
+     - Select **“Custom”** install since there is no pre-existing Windows installation.
+     - It will prompt you to create a password for the built-in administrator account.
+   - After a reboot, you will be prompted with the login screen. In the VirtualBox menu, select **Input** -> **Keyboard** -> **Insert Ctrl+Alt+Del** to enter your password.
+   - If prompted after startup “allow your PC to be discoverable”, select **yes**.
 2. From the VirtualBox menu, click **Devices** > **Insert Guest Additions CD Image**.
-3. Open File Explorer inside the VM, navigate to the CD drive, and run `VBoxWindowsAdditions.exe`.
-4. Follow the on-screen instructions to complete the installation.
-5. Reboot the VM after installation.
+
+1. Open File Explorer inside the VM, navigate to the CD drive, and run `VBoxWindowsAdditions.exe`.
+2. Follow the on-screen instructions to complete the installation.
+3. Reboot the VM after installation.
 
 Once Windows is installed, shut down the VM and create a snapshot to save the initial clean state.
 
-2.4 **Install a Windows Server 2019 VM**
+2.4 **Shared Folder/Clipboard + Microsoft Edge**
 
-This guide describes how to install Windows 2019 Server from an ISO. Alternatively, you can also download a VHD from the site below, attach it to a new VM, and skip most of the installation!
-
-- **Download the Windows Server 2019 Essentials ISO** from the Microsoft Evaluation center.
-- In VirtualBox, create a new VM and select type **Windows** and version **Windows 2019 (64-bit)**. Ensure the VM has at least **2 GB RAM** assigned and create a virtual hard disk (preferably select **dynamic** and **VMDK** for hard disk file type – for compatibility reasons with various forensic tools). Assign at least **30 GB** for disk size.
-- Before starting the VM, open its settings and in:
-  - **Storage** – attach the downloaded Windows 2019 ISO to the VM’s optical drive.
-  - **Networking** – attach “NATNetwork” to the networking adapter.
-- Start the VM and follow the Windows Server installation instructions:
-  - When prompted, there is no need to provide a product key.
-  - Select **“Custom”** install since there is no pre-existing Windows installation.
-  - It will prompt you to create a password for the built-in administrator account.
-- After a reboot, you will be prompted with the login screen. In the VirtualBox menu, select **Input** -> **Keyboard** -> **Insert Ctrl+Alt+Del** to enter your password.
-- If prompted after startup “allow your PC to be discoverable”, select **yes**.
-- **Recommended**: Install VirtualBox Guest Additions as outlined in the Virtualization Primer. This will enable full-screen display and other features like shared folders, copy & paste, etc.
+- **Recommended**: 
+    - Activate devices -> bi-directional clipboard/drag and drop feature
+    - Configure devices -> shared folder -> choose location and select automount and 
 - **Important**: If you want to change the hostname, now is the time. Do not change it after setting up the Active Directory services!
   - Go to **Settings** -> **System** -> scroll down to the menu **“About”**.
   - Find the button **“Rename this PC”** to update the hostname.
+- Install Microsoft Edge
 - **Take a snapshot** once the VM is set up and powered off.
 
 For detailed instructions see the setup guide on how to configure a full DC [Windows 2019 Server](https://bluecapesecurity.com/build-your-lab/medium-lab/)
-
 
 ### 3. Enable Windows Subsystem for Linux (WSL) and Install Ubuntu
 
 VirtualBox now supports WSL2, which provides improved performance and compatibility.
 
+However I do recommend you to follow this guide when intaling it on Windows Server 2019
+
+::callout
+---
+icon: i-mdi:nuxt
+target: _blank
+to: https://learn.microsoft.com/en-us/windows/wsl/install-on-server
+---
+Install WSL on Windows Server
+::
+
+
 3.1 **Enable WSL2 on Windows**
 
 - Open PowerShell as Administrator and run:
-  ```
-  wsl --install
+  ```powershell
+  Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
   ```
 
 3.2 **Install Ubuntu 20.04**
 
-- [Download Ubuntu 20.04](https://ubuntu.com/download)
-- Rename the downloaded file from `.appxbundle` to `.zip` and extract it.
-- Install the `.appx` package using PowerShell:
+- [Download Ubuntu 20.04](https://aka.ms/wslubuntu2004)
+- Rename the downloaded file from `.appxbundle` to `.zip` and extract it to `\downloads\`.
+- Open Windows Powershell as administrator in file explorer top left: Install the `.appx` package
   ```
   Add-AppxPackage .\Ubuntu_2004.4.2.0_x64.appx
   ```
 - Reboot the system and open Ubuntu from the Start Menu to complete the setup.
-
-> **Note**: Ensure you use the `wsl --install` command to install WSL2, which is now compatible with VirtualBox.
+  
 
 ### 4. Configure the Windows Environment
 
@@ -147,13 +153,23 @@ For digital forensics best practices, configure the following settings on your W
 - **Time Zone**: Set to UTC for consistency in forensic analysis.
 - **Windows Explorer Settings**: Enable "Hidden items" and "File name extensions" to view important system files.
 - **Create Directories**: Create `C:\Cases` for evidence data and `C:\Tools` for your forensic tools to easily access these folders.
-- **Microsoft Defender**: Configure Defender to avoid interference:
-  - Turn off "Real-time protection" temporarily when needed.
-  - Exclude `C:\Cases` and `C:\Tools` from scans to prevent false positives.
+- **Microsoft Defender**: Virus & threat protectrion. Configure Defender to avoid interference:
+  - Disable Defender’s “Real-time protection” when needed for a temporary period of time. If you want to permanently turn off real-time protection you need to disable it via GPO as described in the next section.
+  - Turn off "Cloud-delivered protection"
+  - Exclusions: `C:\Cases` and `C:\Tools` from scans to prevent false positives.
 
 ### 5. Install Forensic Tools
 
 The tools you need depend on the type of investigation. Here are the basic Linux and Windows forensic tools to install:
+
+::callout
+---
+icon: i-mdi:nuxt
+target: _blank
+to: https://bluecapesecurity.com/build-your-forensic-workstation/#forensic-vm-tools
+---
+forensic tools on the Blue Cape Security tutorial
+::
 
 #### a) Linux-Based Tools (Install on Ubuntu Subsystem)
 
@@ -178,17 +194,15 @@ The tools you need depend on the type of investigation. Here are the basic Linux
 
 #### b) Windows-Based Tools
 
-- **VirtualBox**: Hypervisor for managing VMs.
-- **Windows Server 2019 Evaluation**: Main forensic workstation OS.
-- **Notepad++**: Text editor for viewing code and formatted text.
-- **Firefox**: Browser with developer tools useful for debugging.
-- **Microsoft Excel**: Ideal for handling large CSV files.
-- **Visual Studio Code**: Advanced text editor with plugins for reading code.
-- **7-Zip**: For file compression and decompression.
-- **FTK Imager**: Tool for acquiring disk images.
-- **KAPE**: Tool for collecting triage data from disk images.
+Download them on the host system and copy them to the shared folder.
+
+- **VirtualBox**: Hypervisor for managing VMs. [Download Link](https://www.virtualbox.org/)
+- **Windows Server 2019 Evaluation**: Main forensic workstation OS. [Download Link](https://www.microsoft.com/en-us/evalcenter/)
+
 
 > **Tip**: Take a snapshot of your VM once all tools are installed to save a clean starting point for future investigations.
+
+
 
 ## System Setup Diagram
 
@@ -200,9 +214,19 @@ graph BT
     B --> D[Target System VM]
 ```
 
-## Finish
+## Snapshotting
 
-Congratulations! Your forensic workstation is now ready. Remember to keep your system snapshots up to date to make resetting your environment quick and easy. This setup will help you practice and develop your digital forensic skills effectively.
+Congratulations! Your forensic workstation is now ready. 
 
-For more details, visit [Blue Cape Security's Guide](https://bluecapesecurity.com/build-your-forensic-workstation/).
+Remember to keep your system snapshots up to date to make resetting your environment quick and easy. This setup will help you practice and develop your digital forensic skills effectively.
 
+Machine -> Hamburgermenu -> Snapshots -> Take/Delete/Restore
+
+::callout
+---
+icon: i-mdi:nuxt
+target: _blank
+to: https://bluecapesecurity.com/build-your-forensic-workstation/
+---
+For more details, visit Blue Cape Security's Guide
+::
