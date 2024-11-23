@@ -73,6 +73,12 @@ const links = [
         description: 'A version control system to track changes in source code during software development.'
       },
       {
+        label: 'proxychains4',
+        to: '/kitt/proxychains4',
+        icon: 'file-icons:nmap',
+        description: 'Proxychains is a command-line tool that routes your network traffic through a chain of proxies, ensuring anonymity, bypassing restrictions, and masking your real IP. It\'s a vital weapon in a hacker\'s arsenal for stealth operations and reconnaissance.'
+      },
+      {
         label: 'Nmap',
         to: '/kitt/nmap',
         icon: 'file-icons:nmap',
