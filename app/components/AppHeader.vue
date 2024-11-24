@@ -75,7 +75,7 @@ const links = [
       {
         label: 'proxychains4',
         to: '/kitt/proxychains4',
-        icon: 'file-icons:nmap',
+        icon: 'i-eos-icons:proxy-outlined',
         description: 'Proxychains is a command-line tool that routes your network traffic through a chain of proxies, ensuring anonymity, bypassing restrictions, and masking your real IP. It\'s a vital weapon in a hacker\'s arsenal for stealth operations and reconnaissance.'
       },
       {
