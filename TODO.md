@@ -85,9 +85,11 @@
 
 - [ ] create auto lessen website combi van theorie toppers mikey en altijdgeslaagd
 - [ ] create baby webshop
-- [ ] create cube site 
 - [ ] continue  own website
 - [ ] create ai automation website for AI solutions like (lead automation and such)[like theaiclubhouse on IG]
+- [ ] site idee: blockchain referendum waarin je met een niek account kan temmen op iddeen die wortden doorgevoerd. referendum
+  
+- [ ] create cube site -> questionable
 
 
 - [ ] https://learn.microsoft.com/en-us/azure/architecture/solution-ideas/articles/azure-security-build-first-layer-defense zoom in on image like this website
