@@ -33,6 +33,7 @@
   - [ ] Replace current table with old table from VitePress
 - [ ] make a list of all used icons like i-ph:app-window and show it in a librar
 - [ ] make mermaid.js work --> https://github.com/nuxt/content/issues/1866
+- [ ] combi of https://www.juridischloket.nl/cookieverklaring/ and vue faq
 
 
 ## Config
@@ -71,6 +72,7 @@
 - [ ] Setup Nuxt Studio
 - [ ] flashcard creation and question
 - [ ] add community option for discussions
+- [ ] cookieverklaring - https://www.juridischloket.nl/cookieverklaring/
 
 
 ## Special
