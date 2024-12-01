@@ -102,3 +102,11 @@ When finished turn thi
 
 ## malware
 https://lolbas-project.github.io/#
+
+
+## TODOTODO
+
+SC-900
+MD-102
+RIJBWIJS
+TCM & AD/AZURE ACADEMY
