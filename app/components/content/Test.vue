@@ -1,19 +1,23 @@
+<script setup lang="ts">
+import { defineProps } from 'vue';
+
+const props = defineProps<{
+  items: Array<{ label: string; content: string }>;
+}>();
+</script>
+
 <template>
-    <div>
-      <details v-for="(item, index) in items" :key="index">
-        <summary>{{ item.question }}</summary>
-        <p>{{ item.answer }}</p>
-      </details>
-    </div>
-  </template>
-  
-  <script setup>
-  defineProps({
-    items: {
-      type: Array,
-      required: true,
-      default: () => []
-    }
-  });
-  </script>
-  
+  <div>
+    <!-- Render your FAQ items here -->
+    <ul>
+      <li v-for="item in props.items" :key="item.label">
+        <strong>{{ item.label }}</strong>
+        <p>{{ item.content }}</p>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<style scoped>
+/* Your styles here */
+</style>
