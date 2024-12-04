@@ -1,9 +1,92 @@
-
+---
 title: UWScript.ps1
-description: Describes the functions of the scrip
-
+description: A sleek, unattended Windows installation script, automating system setups with precision and style.
+---
 
 The provided script is a PowerShell function named `All-Unattended-Settings` that performs a series of modifications to optimize Windows power settings for specific requirements. Here's a detailed explanation of what each part does:
+
+## Registry
+
+This function is designed to:
+- Apply a wide range of system-wide optimizations.
+- Disable or customize certain features.
+- Improve system performance (especially for gaming and multimedia).
+- Enhance privacy by disabling telemetry-like features.
+- Customize the user experience by modifying the Start menu and context menus.
+
+It achieves this by generating and importing a `.reg` file with detailed registry configurations.
+
+This PowerShell function, `Set-RecommendedHKLMRegistry`, performs several actions, primarily targeting system-wide registry settings in a Windows environment to optimize performance, disable certain features, and apply customizations. Here’s a detailed breakdown of each part of the function:
+
+### **1. Define the Function:**
+The function `Set-RecommendedHKLMRegistry` is defined to modify registry keys by creating and applying a `.reg` file.
+
+### **2. Multi-line Comment Creation:**
+- A block of text (stored in `$MultilineComment`) contains registry modifications written in the syntax of a `.reg` file.
+
+### **3. Purpose of Registry Modifications:**
+The registry modifications include a wide range of optimizations and customizations, divided into categories:
+
+#### **Context Menu Customization:**
+- Adds a "Take Ownership" option to the right-click context menu for files, directories, and drives.
+  - Configures `takeown` and `icacls` commands to update ownership and permissions for the selected file or folder.
+  - Excludes critical directories like `C:\Windows`, `C:\Program Files`, and `C:\Users` to avoid accidental ownership changes.
+
+#### **Application and Feature Restrictions:**
+- Disables features like:
+  - Windows Copilot.
+  - Automatic installation of Dev Home, New Outlook, and Chat applications.
+  - BitLocker auto-encryption on Windows 11 (24H2 and onward).
+  - Cortana assistant.
+  - Wi-Fi Sense features like auto-connect to hotspots.
+  - Tablet mode.
+
+#### **Start Menu Customization:**
+- Clears all pinned apps from the Start menu for a cleaner experience.
+
+#### **File System Settings:**
+- Enables long file paths (up to 32,767 characters).
+
+#### **Multimedia and Gaming Optimizations:**
+- Configures higher priorities for multimedia applications and gaming tasks (e.g., CPU and GPU prioritization).
+
+#### **System Customizations:**
+- Disables startup sound.
+- Blocks "Allow my organization to manage my device" pop-ups.
+- Turns on hardware-accelerated GPU scheduling.
+- Disables OneDrive auto-backups and Windows Consumer Features.
+- Removes 3D Objects and Home folders from File Explorer.
+
+#### **Network and Internet:**
+- Disables certain networking features, such as allowing other users to control shared connections.
+
+#### **Security and Maintenance:**
+- Disables:
+  - Remote Assistance.
+  - Automatic maintenance.
+  - Problem reporting.
+
+#### **Privacy and Apps:**
+- Prevents background apps from running.
+- Disables archive apps and automatic app updates from the Microsoft Store.
+
+#### **NVIDIA-Specific Configuration:**
+- Enables the old NVIDIA sharpening setting (`EnableGR535`).
+
+### **4. Save `.reg` File:**
+- The `$MultilineComment` content is written to a temporary `.reg` file at `$env:TEMP\Optimize_LocalMachine_Registry.reg` using `Set-Content`.
+
+### **5. Edit the `.reg` File:**
+- The function performs a string replacement operation to replace any instances of `?` with `$` in the `.reg` file. The updated file is saved back.
+
+### **6. Import Registry File:**
+- The `.reg` file is imported into the system using the `Regedit.exe /S` command. This applies all the specified registry changes.
+
+### **7. Display Messages:**
+- Displays a confirmation message (`Recommended Local Machine Registry Settings Applied`) in green text after successful application.
+
+### **8. Call Supporting Functions:**
+- Calls two undefined functions, `Show-Header` and `Wait-IfNotSpecialize`, presumably to display a header and perform a wait operation, respectively.
 
 ## Tasks & Services
 
@@ -529,3 +612,22 @@ if (-not $isSpecializePhase) {
 - If the function is not running during the "specialize" phase of Windows setup, it:
   - Displays a header and success message.
   - Waits if needed for additional steps.
+
+#### Summarizing Table
+
+| **Setting**                           | **Ideal Value**       | **Reason**                                                                 |
+|---------------------------------------|-----------------------|----------------------------------------------------------------------------|
+| CPU Core Parking                      | 0 (Unparked)          | Ensures all cores are always active for maximum performance.               |
+| Sleep                                 | Disable               | Keeps the system fully operational and avoids unexpected sleep states.     |
+| Hibernate                             | Disable               | Avoids latency when waking up and eliminates the hibernation file.         |
+| Fast Startup                          | Disable               | Ensures full system initialization for compatibility, updates, and troubleshooting. |
+| Hard Disk Timeout                     | Never                 | Prevents hard disks from turning off, ensuring better system responsiveness. |
+| Slide Show                            | Available             | Allows slide shows in the desktop background, useful for personalization.  |
+| Wireless Adapter Power Saving         | Maximum Performance   | Maintains high-speed network connectivity at the cost of slightly more power. |
+| Allow Wake Timers                     | Disable               | Prevents unexpected wake-ups due to scheduled tasks or timers.             |
+| USB Hub Selective Suspend Timeout     | Disabled              | Ensures USB devices stay active and responsive.                            |
+| USB 3 Link Power Management           | Off                   | Ensures USB 3.0 devices stay active for maximum performance.               |
+| USB Selective Suspend                 | Disable               | Prevents device interruptions and maintains connectivity.                  |
+| PCI Express Link State Power Management | Off                  | Prevents latency caused by PCI power-saving features, ensuring responsiveness. |
+| Processor Power Management (Min/Max) | 100%                  | Ensures maximum performance by keeping all CPU cores active and avoiding throttling. |
+| Display Timeout                       | Never                 | Keeps the screen on to avoid interruptions during active sessions.         |

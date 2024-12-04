@@ -970,249 +970,252 @@ Windows Registry Editor Version 5.00
 }
 # End of Windows Update Functions
 
-# Start of Registry Optimizations
+############################################
+#               Registry                   #
+############################################
+
 function Set-RecommendedHKLMRegistry {
     # Create Registry Keys
     $MultilineComment = @"
-Windows Registry Editor Version 5.00
+        Windows Registry Editor Version 5.00
 
-; Adds "Take Ownership" to the Right Click Context Menu for All Users
+        ; Adds "Take Ownership" to the Right Click Context Menu for All Users
+                        
+        [-HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
+        [-HKEY_CLASSES_ROOT\*\shell\runas]
                 
-[-HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
-[-HKEY_CLASSES_ROOT\*\shell\runas]
-          
-[HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
-@="Take Ownership"
-"Extended"=-
-"HasLUAShield"=""
-"NoWorkingDirectory"=""
-"NeverDefault"=""
-          
-[HKEY_CLASSES_ROOT\*\shell\TakeOwnership\command]
-@="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l & pause' -Verb runAs\""
-"IsolatedCommand"= "powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l & pause' -Verb runAs\""
-               
-[HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership]
-@="Take Ownership"
-"AppliesTo"="NOT (System.ItemPathDisplay:=\"C:\\Users\" OR System.ItemPathDisplay:=\"C:\\ProgramData\" OR System.ItemPathDisplay:=\"C:\\Windows\" OR System.ItemPathDisplay:=\"C:\\Windows\\System32\" OR System.ItemPathDisplay:=\"C:\\Program Files\" OR System.ItemPathDisplay:=\"C:\\Program Files (x86)\")"
-"Extended"=-
-"HasLUAShield"=""
-"NoWorkingDirectory"=""
-"Position"="middle"
-          
-[HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership\command]
-@="powershell -windowstyle hidden -command \"$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList ('/c takeown /f \\\"%1\\\" /r /d ' + $Y + ' && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l /q & pause') -Verb runAs\""
-"IsolatedCommand"="powershell -windowstyle hidden -command \"$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList ('/c takeown /f \\\"%1\\\" /r /d ' + $Y + ' && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l /q & pause') -Verb runAs\""
+        [HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
+        @="Take Ownership"
+        "Extended"=-
+        "HasLUAShield"=""
+        "NoWorkingDirectory"=""
+        "NeverDefault"=""
                 
-[HKEY_CLASSES_ROOT\Drive\shell\runas]
-@="Take Ownership"
-"Extended"=-
-"HasLUAShield"=""
-"NoWorkingDirectory"=""
-"Position"="middle"
-"AppliesTo"="NOT (System.ItemPathDisplay:=\"C:\\\")"
-          
-[HKEY_CLASSES_ROOT\Drive\shell\runas\command]
-@="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant *S-1-3-4:F /t /c & Pause"
-"IsolatedCommand"="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant *S-1-3-4:F /t /c & Pause"
+        [HKEY_CLASSES_ROOT\*\shell\TakeOwnership\command]
+        @="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l & pause' -Verb runAs\""
+        "IsolatedCommand"= "powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l & pause' -Verb runAs\""
+                    
+        [HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership]
+        @="Take Ownership"
+        "AppliesTo"="NOT (System.ItemPathDisplay:=\"C:\\Users\" OR System.ItemPathDisplay:=\"C:\\ProgramData\" OR System.ItemPathDisplay:=\"C:\\Windows\" OR System.ItemPathDisplay:=\"C:\\Windows\\System32\" OR System.ItemPathDisplay:=\"C:\\Program Files\" OR System.ItemPathDisplay:=\"C:\\Program Files (x86)\")"
+        "Extended"=-
+        "HasLUAShield"=""
+        "NoWorkingDirectory"=""
+        "Position"="middle"
+                
+        [HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership\command]
+        @="powershell -windowstyle hidden -command \"$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList ('/c takeown /f \\\"%1\\\" /r /d ' + $Y + ' && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l /q & pause') -Verb runAs\""
+        "IsolatedCommand"="powershell -windowstyle hidden -command \"$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList ('/c takeown /f \\\"%1\\\" /r /d ' + $Y + ' && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l /q & pause') -Verb runAs\""
+                        
+        [HKEY_CLASSES_ROOT\Drive\shell\runas]
+        @="Take Ownership"
+        "Extended"=-
+        "HasLUAShield"=""
+        "NoWorkingDirectory"=""
+        "Position"="middle"
+        "AppliesTo"="NOT (System.ItemPathDisplay:=\"C:\\\")"
+                
+        [HKEY_CLASSES_ROOT\Drive\shell\runas\command]
+        @="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant *S-1-3-4:F /t /c & Pause"
+        "IsolatedCommand"="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant *S-1-3-4:F /t /c & Pause"
 
-; --Application and Feature Restrictions--
+        ; --Application and Feature Restrictions--
 
-; Disable Windows Copilot system-wide
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot]
-"TurnOffWindowsCopilot"=dword:00000001
+        ; Disable Windows Copilot system-wide
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot]
+        "TurnOffWindowsCopilot"=dword:00000001
 
-; Prevents Dev Home Installation
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
+        ; Prevents Dev Home Installation
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
 
-; Prevents New Outlook for Windows Installation
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
+        ; Prevents New Outlook for Windows Installation
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
 
-; Prevents Chat Auto Installation and Removes Chat Icon
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications]
-"ConfigureChatAutoInstall"=dword:00000000
+        ; Prevents Chat Auto Installation and Removes Chat Icon
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications]
+        "ConfigureChatAutoInstall"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
-"ChatIcon"=dword:00000003
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
+        "ChatIcon"=dword:00000003
 
-; Disables Bitlocker Auto Encryption on Windows 11 24H2 and Onwards
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BitLocker]
-"PreventDeviceEncryption"=dword:00000001
+        ; Disables Bitlocker Auto Encryption on Windows 11 24H2 and Onwards
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BitLocker]
+        "PreventDeviceEncryption"=dword:00000001
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EnhancedStorageDevices]
-"TCGSecurityActivationDisabled"=dword:00000001
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EnhancedStorageDevices]
+        "TCGSecurityActivationDisabled"=dword:00000001
 
-; Disables Cortana
-[HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Windows Search]
-"AllowCortana"=dword:00000000
+        ; Disables Cortana
+        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Windows Search]
+        "AllowCortana"=dword:00000000
 
-; Set Registry Keys to Disable Wifi-Sense
-[HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting]
-"Value"=dword:00000000
+        ; Set Registry Keys to Disable Wifi-Sense
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting]
+        "Value"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots]
-"Value"=dword:00000000
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots]
+        "Value"=dword:00000000
 
-; Disable Tablet Mode
-; Always go to desktop mode on sign-in
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell]
-"TabletMode"=dword:00000000
-"SignInMode"=dword:00000001
+        ; Disable Tablet Mode
+        ; Always go to desktop mode on sign-in
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell]
+        "TabletMode"=dword:00000000
+        "SignInMode"=dword:00000001
 
-; Disable Xbox GameDVR
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\GameDVR]
-"AllowGameDVR"=dword:00000000
+        ; Disable Xbox GameDVR
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\GameDVR]
+        "AllowGameDVR"=dword:00000000
 
-; Disables OneDrive Automatic Backups of Important Folders (Documents, Pictures etc.)
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\OneDrive]
-"KFMBlockOptIn"=dword:00000001
+        ; Disables OneDrive Automatic Backups of Important Folders (Documents, Pictures etc.)
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\OneDrive]
+        "KFMBlockOptIn"=dword:00000001
 
-; Disables the "Push To Install" feature in Windows
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\PushToInstall]
-"DisablePushToInstall"=dword:00000001
+        ; Disables the "Push To Install" feature in Windows
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\PushToInstall]
+        "DisablePushToInstall"=dword:00000001
 
-; Disables Windows Consumer Features Like App Promotions etc.
-; Disables Consumer Account State Content
-; Disables Cloud Optimized Content
-[HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CloudContent]
-"DisableWindowsConsumerFeatures"=dword:00000000
-"DisableConsumerAccountStateContent"=dword:00000001
-"DisableCloudOptimizedContent"=dword:00000001
+        ; Disables Windows Consumer Features Like App Promotions etc.
+        ; Disables Consumer Account State Content
+        ; Disables Cloud Optimized Content
+        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CloudContent]
+        "DisableWindowsConsumerFeatures"=dword:00000000
+        "DisableConsumerAccountStateContent"=dword:00000001
+        "DisableCloudOptimizedContent"=dword:00000001
 
-; Blocks the "Allow my organization to manage my device" and "No, sign in to this app only" pop-up message
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WorkplaceJoin]
-"BlockAADWorkplaceJoin"=dword:00000001
+        ; Blocks the "Allow my organization to manage my device" and "No, sign in to this app only" pop-up message
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WorkplaceJoin]
+        "BlockAADWorkplaceJoin"=dword:00000001
 
-; --Start Menu Customization--
-; Removes All Pinned Apps from the Start Menu to Clean it Up
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start]
-"ConfigureStartPins"="{ \"pinnedList\": [] }"
-"ConfigureStartPins_ProviderSet"=dword:00000001
-"ConfigureStartPins_WinningProvider"="B5292708-1619-419B-9923-E5D9F3925E71"
+        ; --Start Menu Customization--
+        ; Removes All Pinned Apps from the Start Menu to Clean it Up
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start]
+        "ConfigureStartPins"="{ \"pinnedList\": [] }"
+        "ConfigureStartPins_ProviderSet"=dword:00000001
+        "ConfigureStartPins_WinningProvider"="B5292708-1619-419B-9923-E5D9F3925E71"
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\providers\B5292708-1619-419B-9923-E5D9F3925E71\default\Device\Start]
-"ConfigureStartPins"="{ \"pinnedList\": [] }"
-"ConfigureStartPins_LastWrite"=dword:00000001
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\providers\B5292708-1619-419B-9923-E5D9F3925E71\default\Device\Start]
+        "ConfigureStartPins"="{ \"pinnedList\": [] }"
+        "ConfigureStartPins_LastWrite"=dword:00000001
 
-; --File System Settings--
-; Enable Long File Paths with Up to 32,767 Characters
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem]
-"LongPathsEnabled"=dword:00000001
+        ; --File System Settings--
+        ; Enable Long File Paths with Up to 32,767 Characters
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem]
+        "LongPathsEnabled"=dword:00000001
 
-; --Multimedia and Gaming Performance--
-; Gives Multimedia Applications like Games and Video Editing a Higher Priority
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
-"SystemResponsiveness"=dword:00000000
-"NetworkThrottlingIndex"=dword:0000000a
+        ; --Multimedia and Gaming Performance--
+        ; Gives Multimedia Applications like Games and Video Editing a Higher Priority
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
+        "SystemResponsiveness"=dword:00000000
+        "NetworkThrottlingIndex"=dword:0000000a
 
-; Gives Graphics Cards a Higher Priority for Gaming
-; Gives the CPU a Higher Priority for Gaming
-; Gives Games a higher priority in the system's scheduling
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
-"GPU Priority"=dword:00000008
-"Priority"=dword:00000006
-"Scheduling Category"="High"
+        ; Gives Graphics Cards a Higher Priority for Gaming
+        ; Gives the CPU a Higher Priority for Gaming
+        ; Gives Games a higher priority in the system's scheduling
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
+        "GPU Priority"=dword:00000008
+        "Priority"=dword:00000006
+        "Scheduling Category"="High"
 
-; disable startup sound
-[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation]
-"DisableStartupSound"=dword:00000001
+        ; disable startup sound
+        ; [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation]
+        ; "DisableStartupSound"=dword:00000001
 
-[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\EditionOverrides]
-"UserSetting_DisableStartupSound"=dword:00000001
+        ; [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\EditionOverrides]
+        ; "UserSetting_DisableStartupSound"=dword:00000001
 
-; disable device installation settings
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata]
-"PreventDeviceMetadataFromNetwork"=dword:00000001
+        ; disable device installation settings
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata]
+        "PreventDeviceMetadataFromNetwork"=dword:00000001
 
-; NETWORK AND INTERNET
-; disable allow other network users to control or disable the shared internet connection
-[HKEY_LOCAL_MACHINE\System\ControlSet001\Control\Network\SharedAccessConnection]
-"EnableControl"=dword:00000000
+        ; NETWORK AND INTERNET
+        ; disable allow other network users to control or disable the shared internet connection
+        [HKEY_LOCAL_MACHINE\System\ControlSet001\Control\Network\SharedAccessConnection]
+        "EnableControl"=dword:00000000
 
-; SYSTEM AND SECURITY
-; adjust for best performance of programs
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
-"Win32PrioritySeparation"=dword:00000026
+        ; SYSTEM AND SECURITY
+        ; adjust for best performance of programs
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
+        "Win32PrioritySeparation"=dword:00000026
 
-; disable remote assistance
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance]
-"fAllowToGetHelp"=dword:00000000
+        ; disable remote assistance
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance]
+        "fAllowToGetHelp"=dword:00000000
 
-; TROUBLESHOOTING
-; disable automatic maintenance
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance]
-"MaintenanceDisabled"=dword:00000001
+        ; TROUBLESHOOTING
+        ; disable automatic maintenance
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance]
+        "MaintenanceDisabled"=dword:00000001
 
-; SECURITY AND MAINTENANCE
-; disable report problems
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting]
-"Disabled"=dword:00000001
+        ; SECURITY AND MAINTENANCE
+        ; disable report problems
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting]
+        "Disabled"=dword:00000001
 
-; ACCOUNTS
-; disable use my sign in info after restart
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
-"DisableAutomaticRestartSignOn"=dword:00000001
+        ; ACCOUNTS
+        ; disable use my sign in info after restart
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+        "DisableAutomaticRestartSignOn"=dword:00000001
 
-; APPS
-; disable archive apps 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Appx]
-"AllowAutomaticAppArchiving"=dword:00000000
+        ; APPS
+        ; disable archive apps 
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Appx]
+        "AllowAutomaticAppArchiving"=dword:00000000
 
-; PERSONALIZATION
-; Hides the Meet Now Button on the Taskbar
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
-"HideSCAMeetNow"=dword:00000001
-"NoStartMenuMFUprogramsList"=-
-"NoInstrumentation"=-
+        ; PERSONALIZATION
+        ; Hides the Meet Now Button on the Taskbar
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+        "HideSCAMeetNow"=dword:00000001
+        "NoStartMenuMFUprogramsList"=-
+        "NoInstrumentation"=-
 
-; remove windows widgets from taskbar
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh] 
-"AllowNewsAndInterests"=dword:00000000
+        ; remove windows widgets from taskbar
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh] 
+        "AllowNewsAndInterests"=dword:00000000
 
-; remove news and interests from Taskbar
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds]
-"EnableFeeds"=dword:00000000
+        ; remove news and interests from Taskbar
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds]
+        "EnableFeeds"=dword:00000000
 
-; SYSTEM
-; turn on hardware accelerated gpu scheduling
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
-"HwSchMode"=dword:00000002
+        ; SYSTEM
+        ; turn on hardware accelerated gpu scheduling
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
+        "HwSchMode"=dword:00000002
 
-; disable storage sense
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\StorageSense]
-"AllowStorageSenseGlobal"=dword:00000000
+        ; disable storage sense
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\StorageSense]
+        "AllowStorageSenseGlobal"=dword:00000000
 
-; --OTHER--
-; Disable update Microsoft Store apps automatically
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore]
-"AutoDownload"=dword:00000002
+        ; --OTHER--
+        ; Disable update Microsoft Store apps automatically
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore]
+        "AutoDownload"=dword:00000002
 
-; UWP APPS
-; disable background apps
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy]
-"LetAppsRunInBackground"=dword:00000002
+        ; UWP APPS
+        ; disable background apps
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy]
+        "LetAppsRunInBackground"=dword:00000002
 
-; disable widgets
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests]
-"value"=dword:00000000
+        ; disable widgets
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests]
+        "value"=dword:00000000
 
-; NVIDIA
-; enable old nvidia sharpening
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS]
-"EnableGR535"=dword:00000000
+        ; NVIDIA
+        ; enable old nvidia sharpening
+        ; [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS]
+        "EnableGR535"=dword:00000000
 
-; OTHER
-; remove 3d objects
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
-[-HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+        ; OTHER
+        ; remove 3d objects
+        ; [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+        ; [-HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
 
-; Remove Home Folder
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}]
+        ; Remove Home Folder
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}]
 
-[HKEY_USERS\.DEFAULT\Control Panel\Mouse]
-"MouseSpeed"="0"
-"MouseThreshold1"="0"
-"MouseThreshold2"="0"
+        [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
+        "MouseSpeed"="0"
+        "MouseThreshold1"="0"
+        "MouseThreshold2"="0"
 "@
     Set-Content -Path "$env:TEMP\Optimize_LocalMachine_Registry.reg" -Value $MultilineComment -Force
     # edit reg file
@@ -1228,723 +1231,723 @@ Windows Registry Editor Version 5.00
 function Set-DefaultHKLMRegistry {
     # create reg file
     $MultilineComment = @"
-Windows Registry Editor Version 5.00
+        Windows Registry Editor Version 5.00
 
-; --Revert Application and Feature Restrictions--
+        ; --Revert Application and Feature Restrictions--
 
-; Allows Dev Home Installation
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
-@=""
+        ; Allows Dev Home Installation
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
+        @=""
 
-; Allows New Outlook for Windows Installation
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
-@=""
+        ; Allows New Outlook for Windows Installation
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
+        @=""
 
-; Reverts Chat Auto Installation and Restores Chat Icon
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications]
-"ConfigureChatAutoInstall"=dword:00000001
+        ; Reverts Chat Auto Installation and Restores Chat Icon
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications]
+        "ConfigureChatAutoInstall"=dword:00000001
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
-"ChatIcon"=dword:00000001
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
+        "ChatIcon"=dword:00000001
 
-; Enables News and Interests
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh]
-"AllowNewsAndInterests"=-
+        ; Enables News and Interests
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh]
+        "AllowNewsAndInterests"=-
 
-; Enables BitLocker Auto Encryption on Windows 11 24H2 and Onwards
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BitLocker]
-"PreventDeviceEncryption"=-
+        ; Enables BitLocker Auto Encryption on Windows 11 24H2 and Onwards
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BitLocker]
+        "PreventDeviceEncryption"=-
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EnhancedStorageDevices]
-"TCGSecurityActivationDisabled"=-
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EnhancedStorageDevices]
+        "TCGSecurityActivationDisabled"=-
 
-; Enables Cortana
-[HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Windows Search]
-"AllowCortana"=-
+        ; Enables Cortana
+        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Windows Search]
+        "AllowCortana"=-
 
-; Shows the Meet Now Button on the Taskbar
-; Shows Recently Added Apps in Start Menu
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
-"HideSCAMeetNow"=-
+        ; Shows the Meet Now Button on the Taskbar
+        ; Shows Recently Added Apps in Start Menu
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+        "HideSCAMeetNow"=-
 
-; Re-enables WiFi-Sense
-[HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting]
-"Value"=dword:00000001
+        ; Re-enables WiFi-Sense
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting]
+        "Value"=dword:00000001
 
-[HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots]
-"Value"=dword:00000001
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots]
+        "Value"=dword:00000001
 
-; Enables Tablet Mode
-; Default Sign-In Mode
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell]
-"TabletMode"=dword:00000001
-"SignInMode"=dword:00000000
+        ; Enables Tablet Mode
+        ; Default Sign-In Mode
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell]
+        "TabletMode"=dword:00000001
+        "SignInMode"=dword:00000000
 
-; Enables Xbox GameDVR
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\GameDVR]
-"AllowGameDVR"=-
+        ; Enables Xbox GameDVR
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\GameDVR]
+        "AllowGameDVR"=-
 
-; Enables OneDrive Automatic Backups of Important Folders (Documents, Pictures etc.)
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\OneDrive]
-"KFMBlockOptIn"=-
+        ; Enables OneDrive Automatic Backups of Important Folders (Documents, Pictures etc.)
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\OneDrive]
+        "KFMBlockOptIn"=-
 
-; Enables "Push To Install" feature in Windows
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\PushToInstall]
-"DisablePushToInstall"=-
+        ; Enables "Push To Install" feature in Windows
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\PushToInstall]
+        "DisablePushToInstall"=-
 
-; Enables Windows Consumer Features Like App Promotions etc.
-; Enables Consumer Account State Content
-; Enables Cloud Optimized Content
-[HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CloudContent]
-"DisableWindowsConsumerFeatures"=-
-"DisableConsumerAccountStateContent"=-
-"DisableCloudOptimizedContent"=-
+        ; Enables Windows Consumer Features Like App Promotions etc.
+        ; Enables Consumer Account State Content
+        ; Enables Cloud Optimized Content
+        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CloudContent]
+        "DisableWindowsConsumerFeatures"=-
+        "DisableConsumerAccountStateContent"=-
+        "DisableCloudOptimizedContent"=-
 
-; Unblocks "Allow my organization to manage my device" pop-up message
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WorkplaceJoin]
-"BlockAADWorkplaceJoin"=-
+        ; Unblocks "Allow my organization to manage my device" pop-up message
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WorkplaceJoin]
+        "BlockAADWorkplaceJoin"=-
 
-; --Revert Start Menu Customization--
+        ; --Revert Start Menu Customization--
 
-; Restores Default Pinned Apps to the Start Menu
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start]
-"ConfigureStartPins"=-
-"ConfigureStartPins_ProviderSet"=-
-"ConfigureStartPins_WinningProvider"=-
+        ; Restores Default Pinned Apps to the Start Menu
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start]
+        "ConfigureStartPins"=-
+        "ConfigureStartPins_ProviderSet"=-
+        "ConfigureStartPins_WinningProvider"=-
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\providers\B5292708-1619-419B-9923-E5D9F3925E71\default\Device\Start]
-"ConfigureStartPins"=-
-"ConfigureStartPins_LastWrite"=-
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\providers\B5292708-1619-419B-9923-E5D9F3925E71\default\Device\Start]
+        "ConfigureStartPins"=-
+        "ConfigureStartPins_LastWrite"=-
 
-; --Revert File System Settings--
+        ; --Revert File System Settings--
 
-; Revert Long File Paths to Default (Disabled)
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem]
-"LongPathsEnabled"=dword:00000000
+        ; Revert Long File Paths to Default (Disabled)
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem]
+        "LongPathsEnabled"=dword:00000000
 
-; --Revert Multimedia and Gaming Performance--
+        ; --Revert Multimedia and Gaming Performance--
 
-; Reverts Multimedia Applications' System Responsiveness and Network Throttling Index to Default Values
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
-"SystemResponsiveness"=dword:00000014
-"NetworkThrottlingIndex"=dword:ffffffff
+        ; Reverts Multimedia Applications' System Responsiveness and Network Throttling Index to Default Values
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
+        "SystemResponsiveness"=dword:00000014
+        "NetworkThrottlingIndex"=dword:ffffffff
 
-; --Revert Gaming Performance--
+        ; --Revert Gaming Performance--
 
-; Reverts Graphics Cards Priority for Gaming to Default
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
-"GPU Priority"=dword:00000002 ; Default value is 2
+        ; Reverts Graphics Cards Priority for Gaming to Default
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
+        "GPU Priority"=dword:00000002 ; Default value is 2
 
-; Reverts CPU Priority for Gaming to Default
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
-"Priority"=dword:00000002 ; Default value is 2
+        ; Reverts CPU Priority for Gaming to Default
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
+        "Priority"=dword:00000002 ; Default value is 2
 
-; Reverts Games Scheduling Category to Default
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
-"Scheduling Category"="Medium" ; Default value is "Medium"
+        ; Reverts Games Scheduling Category to Default
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
+        "Scheduling Category"="Medium" ; Default value is "Medium"
 
-; Removes "Take Ownership" from Context Menu
-[-HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
+        ; Removes "Take Ownership" from Context Menu
+        [-HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
 
-[-HKEY_CLASSES_ROOT\*\shell\runas]
+        [-HKEY_CLASSES_ROOT\*\shell\runas]
 
-[-HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership]
+        [-HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership]
 
-[-HKEY_CLASSES_ROOT\Drive\shell\runas]
+        [-HKEY_CLASSES_ROOT\Drive\shell\runas]
 
-; HARDWARE AND SOUND
-; lock
-[-HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings]
+        ; HARDWARE AND SOUND
+        ; lock
+        [-HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings]
 
-; sleep
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings]
+        ; sleep
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings]
 
-; startup sound
-[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation]
-"DisableStartupSound"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\EditionOverrides]
-"UserSetting_DisableStartupSound"=dword:00000000
-
-; device installation settings
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata]
-"PreventDeviceMetadataFromNetwork"=dword:00000000
-
-; NETWORK AND INTERNET
-; allow other network users to control or disable the shared internet connection
-[HKEY_LOCAL_MACHINE\System\ControlSet001\Control\Network\SharedAccessConnection]
-"EnableControl"=dword:00000001
-
-; SYSTEM AND SECURITY
-; revert adjust for best performance of programs
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
-"Win32PrioritySeparation"=dword:00000002
-
-; remote assistance
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance]
-"fAllowToGetHelp"=dword:00000001
-
-; TROUBLESHOOTING
-; automatic maintenance
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance]
-"MaintenanceDisabled"=-
-
-; SECURITY AND MAINTENANCE
-; report problems
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting]
-
-; ACCOUNTS
-; use my sign in info after restart
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
-"DisableAutomaticRestartSignOn"=-
-
-; APPS
-; archive apps
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Appx]
-"AllowAutomaticAppArchiving"=-
-
-; PERSONALIZATION
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize]
-
-; don't hide most used list in start menu
-; show recently added apps
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer]
-
-; news and interests
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds]
-
-; SYSTEM
-; hardware accelerated gpu scheduling
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
-"HwSchMode"=-
-
-; storage sense
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\StorageSense]
-
-; --OTHER--
-; Enable update Microsoft Store apps automatically
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore]
-
-; --CAN'T DO NATIVELY--
-; UWP APPS
-; background apps
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy]
-"LetAppsRunInBackground"=-
-
-; widgets
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests]
-"value"=dword:00000001
-
-; NVIDIA
-; old nvidia sharpening
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS]
-"EnableGR535"=dword:00000001
-
-; OTHER
-; 3d objects
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
-[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
-
-; Restores Home Folder
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}]
-@="CLSID_MSGraphHomeFolder"
-
-[HKEY_USERS\.DEFAULT\Control Panel\Mouse]
-"MouseSpeed"="1"
-"MouseThreshold1"="6"
-"MouseThreshold2"="10"
-"@
-    Set-Content -Path "$env:TEMP\Restore_LocalMachine_Registry.reg" -Value $MultilineComment -Force
-    # edit reg file
-    $path = "$env:TEMP\Restore_LocalMachine_Registry.reg"
-                (Get-Content $path) -replace "\?", "$" | Out-File $path
-    # import reg file
-    Regedit.exe /S "$env:TEMP\Restore_LocalMachine_Registry.reg"
-    Show-Header
-    Write-Host "Default Local Machine Registry Settings Applied." -ForegroundColor Green
-    Wait-IfNotSpecialize
-}
-
-
-function Set-RecommendedHKCURegistry {
-    Clear-Host
-    Write-Host "Optimizing User Registry . . ."
-
-    # Set Wallpaper (Helper Function for Recommended User Settings)
-    $defaultWallpaperPath = "C:\Windows\Web\4K\Wallpaper\Windows\img0_3840x2160.jpg"
-    $darkModeWallpaperPath = "https://i.imgur.com/HyevkUi.png"
-
-    function Set-Wallpaper ($wallpaperPath) {
-        reg.exe add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "$wallpaperPath" /f | Out-Null
-        # Notify the system of the change
-        rundll32.exe user32.dll, UpdatePerUserSystemParameters
-    }
-
-    # Check Windows version
-    $windowsVersion = (Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion").CurrentBuild
-
-    # Apply appropriate wallpaper based on Windows version or existence of dark mode wallpaper
-    if ($windowsVersion -ge 22000) {
-        # Assuming Windows 11 starts at build 22000
-        if (Test-Path $darkModeWallpaperPath) {
-            Set-Wallpaper -wallpaperPath $darkModeWallpaperPath
+        ; startup sound
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation]
+        "DisableStartupSound"=dword:00000000
+
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\EditionOverrides]
+        "UserSetting_DisableStartupSound"=dword:00000000
+
+        ; device installation settings
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata]
+        "PreventDeviceMetadataFromNetwork"=dword:00000000
+
+        ; NETWORK AND INTERNET
+        ; allow other network users to control or disable the shared internet connection
+        [HKEY_LOCAL_MACHINE\System\ControlSet001\Control\Network\SharedAccessConnection]
+        "EnableControl"=dword:00000001
+
+        ; SYSTEM AND SECURITY
+        ; revert adjust for best performance of programs
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
+        "Win32PrioritySeparation"=dword:00000002
+
+        ; remote assistance
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance]
+        "fAllowToGetHelp"=dword:00000001
+
+        ; TROUBLESHOOTING
+        ; automatic maintenance
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance]
+        "MaintenanceDisabled"=-
+
+        ; SECURITY AND MAINTENANCE
+        ; report problems
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting]
+
+        ; ACCOUNTS
+        ; use my sign in info after restart
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+        "DisableAutomaticRestartSignOn"=-
+
+        ; APPS
+        ; archive apps
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Appx]
+        "AllowAutomaticAppArchiving"=-
+
+        ; PERSONALIZATION
+
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize]
+
+        ; don't hide most used list in start menu
+        ; show recently added apps
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer]
+
+        ; news and interests
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds]
+
+        ; SYSTEM
+        ; hardware accelerated gpu scheduling
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
+        "HwSchMode"=-
+
+        ; storage sense
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\StorageSense]
+
+        ; --OTHER--
+        ; Enable update Microsoft Store apps automatically
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore]
+
+        ; --CAN'T DO NATIVELY--
+        ; UWP APPS
+        ; background apps
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy]
+        "LetAppsRunInBackground"=-
+
+        ; widgets
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests]
+        "value"=dword:00000001
+
+        ; NVIDIA
+        ; old nvidia sharpening
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS]
+        "EnableGR535"=dword:00000001
+
+        ; OTHER
+        ; 3d objects
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+        [HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+
+        ; Restores Home Folder
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}]
+        @="CLSID_MSGraphHomeFolder"
+
+        [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
+        "MouseSpeed"="1"
+        "MouseThreshold1"="6"
+        "MouseThreshold2"="10"
+        "@
+            Set-Content -Path "$env:TEMP\Restore_LocalMachine_Registry.reg" -Value $MultilineComment -Force
+            # edit reg file
+            $path = "$env:TEMP\Restore_LocalMachine_Registry.reg"
+                        (Get-Content $path) -replace "\?", "$" | Out-File $path
+            # import reg file
+            Regedit.exe /S "$env:TEMP\Restore_LocalMachine_Registry.reg"
+            Show-Header
+            Write-Host "Default Local Machine Registry Settings Applied." -ForegroundColor Green
+            Wait-IfNotSpecialize
         }
-    }
-    else {
-        # Apply default wallpaper for Windows 10
-        Set-Wallpaper -wallpaperPath $defaultWallpaperPath
-    }
-
-    $MultilineComment = @"
-Windows Registry Editor Version 5.00
-
-; EASE OF ACCESS
-; disable narrator
-[HKEY_CURRENT_USER\Software\Microsoft\Narrator\NoRoam]
-"DuckAudio"=dword:00000000
-"WinEnterLaunchEnabled"=dword:00000000
-"ScriptingEnabled"=dword:00000000
-"OnlineServicesEnabled"=dword:00000000
-"EchoToggleKeys"=dword:00000000
-
-; disable narrator settings
-[HKEY_CURRENT_USER\Software\Microsoft\Narrator]
-"NarratorCursorHighlight"=dword:00000000
-"CoupleNarratorCursorKeyboard"=dword:00000000
-"IntonationPause"=dword:00000000
-"ReadHints"=dword:00000000
-"ErrorNotificationType"=dword:00000000
-"EchoChars"=dword:00000000
-"EchoWords"=dword:00000000
-
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Narrator\NarratorHome]
-"MinimizeType"=dword:00000000
-"AutoStart"=dword:00000000
-
-; disable ease of access settings 
-[HKEY_CURRENT_USER\Software\Microsoft\Ease of Access]
-"selfvoice"=dword:00000000
-"selfscan"=dword:00000000
-
-[HKEY_CURRENT_USER\Control Panel\Accessibility]
-"Sound on Activation"=dword:00000000
-"Warning Sounds"=dword:00000000
-
-[HKEY_CURRENT_USER\Control Panel\Accessibility\HighContrast]
-"Flags"="4194"
-
-[HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response]
-"Flags"="2"
-"AutoRepeatRate"="0"
-"AutoRepeatDelay"="0"
-
-[HKEY_CURRENT_USER\Control Panel\Accessibility\MouseKeys]
-"Flags"="130"
-"MaximumSpeed"="39"
-"TimeToMaximumSpeed"="3000"
-
-[HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys]
-"Flags"="2"
-
-[HKEY_CURRENT_USER\Control Panel\Accessibility\ToggleKeys]
-"Flags"="34"
-
-[HKEY_CURRENT_USER\Control Panel\Accessibility\SoundSentry]
-"Flags"="0"
-"FSTextEffect"="0"
-"TextEffect"="0"
-"WindowsEffect"="0"
-
-[HKEY_CURRENT_USER\Control Panel\Accessibility\SlateLaunch]
-"ATapp"=""
-"LaunchAT"=dword:00000000
-
-; CLOCK AND REGION
-; disable notify me when the clock changes
-[HKEY_CURRENT_USER\Control Panel\TimeDate]
-"DstNotification"=dword:00000000
-
-; APPEARANCE AND PERSONALIZATION
-; open file explorer to this pc
-; show file name extensions
-; disable display file size information in folder tips
-; disable show pop-up description for folder and desktop items
-; disable show preview handlers in preview pane
-; disable show status bar
-; disable show sync provider notifications
-; disable use sharing wizard
-; disable animations in the taskbar
-; enable show thumbnails instead of icons
-; disable show translucent selection rectangle
-; disable use drop shadows for icon labels on the desktop
-; more pins personalization start
-; disable show account-related notifications
-; disable show recently opened items in start, jump lists and file explorer
-; left taskbar alignment
-; remove chat from taskbar
-; remove task view from taskbar
-; remove copilot from taskbar
-; disable show recommendations for tips shortcuts new apps and more
-; disable share any window from my taskbar
-; disable snap window settings - SnapAssist to JointResize Entries
-; alt tab open windows only
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
-"LaunchTo"=dword:00000001
-"HideFileExt"=dword:00000000
-"FolderContentsInfoTip"=dword:00000000
-"ShowInfoTip"=dword:00000000
-"ShowPreviewHandlers"=dword:00000000
-"ShowStatusBar"=dword:00000000
-"ShowSyncProviderNotifications"=dword:00000000
-"SharingWizardOn"=dword:00000000
-"TaskbarAnimations"=dword:0
-"IconsOnly"=dword:0
-"ListviewAlphaSelect"=dword:0
-"ListviewShadow"=dword:0
-"Start_Layout"=dword:00000001
-"Start_AccountNotifications"=dword:00000000
-"Start_TrackDocs"=dword:00000000 
-"TaskbarAl"=dword:00000000
-"TaskbarMn"=dword:00000000
-"ShowTaskViewButton"=dword:00000000
-"ShowCopilotButton"=dword:00000000
-"Start_IrisRecommendations"=dword:00000000
-"TaskbarSn"=dword:00000000
-"SnapAssist"=dword:00000000
-"DITest"=dword:00000000
-"EnableSnapBar"=dword:00000000
-"EnableTaskGroups"=dword:00000000
-"EnableSnapAssistFlyout"=dword:00000000
-"SnapFill"=dword:00000000
-"JointResize"=dword:00000000
-"MultiTaskingAltTabFilter"=dword:00000003
-
-; hide frequent folders in quick access
-; disable show files from office.com
-; show all taskbar icons on Windows 10
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer]
-"ShowFrequent"=dword:00000000
-"ShowCloudFilesInQuickAccess"=dword:00000000
-"EnableAutoTray"=dword:00000000
-
-; enable display full path in the title bar
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState]
-"FullPath"=dword:00000001
-
-; HARDWARE AND SOUND
-; sound communications do nothing
-[HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio]
-"UserDuckingPreference"=dword:00000003
-
-; disable enhance pointer precision
-; mouse fix (no accel with epp on)
-[HKEY_CURRENT_USER\Control Panel\Mouse]
-"MouseSpeed"="0"
-"MouseThreshold1"="0"
-"MouseThreshold2"="0"
-"MouseSensitivity"="10"
-"SmoothMouseXCurve"=hex:\
-	00,00,00,00,00,00,00,00,\
-	C0,CC,0C,00,00,00,00,00,\
-	80,99,19,00,00,00,00,00,\
-	40,66,26,00,00,00,00,00,\
-	00,33,33,00,00,00,00,00
-"SmoothMouseYCurve"=hex:\
-	00,00,00,00,00,00,00,00,\
-	00,00,38,00,00,00,00,00,\
-	00,00,70,00,00,00,00,00,\
-	00,00,A8,00,00,00,00,00,\
-	00,00,E0,00,00,00,00,00
-
-; SYSTEM AND SECURITY
-; set appearance options to custom
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects]
-"VisualFXSetting"=dword:3
-
-; disable animate controls and elements inside windows
-; disable fade or slide menus into view
-; disable fade or slide tooltips into view
-; disable fade out menu items after clicking
-; disable show shadows under mouse pointer
-; disable show shadows under windows
-; disable slide open combo boxes
-; disable smooth-scroll list boxes
-; enable smooth edges of screen fonts
-; 100% dpi scaling
-; disable fix scaling for apps
-; disable menu show delay
-[HKEY_CURRENT_USER\Control Panel\Desktop]
-"UserPreferencesMask"=hex(2):90,12,03,80,10,00,00,00
-"FontSmoothing"="2"
-"LogPixels"=dword:00000060
-"Win8DpiScaling"=dword:00000001
-"EnablePerProcessSystemDPI"=dword:00000000
-"MenuShowDelay"="0"
-
-; --IMMERSIVE CONTROL PANEL--
-; PRIVACY
-; disable show me notification in the settings app
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SystemSettings\AccountNotifications]
-"EnableAccountNotifications"=dword:00000000
-
-; disable voice activation
-[HKEY_CURRENT_USER\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps]
-"AgentActivationEnabled"=dword:00000000
-
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps]
-"AgentActivationLastUsed"=dword:00000000
-
-; disable other devices 
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\bluetoothSync]
-"Value"="Deny"
-
-; disable let websites show me locally relevant content by accessing my language list 
-[HKEY_CURRENT_USER\Control Panel\International\User Profile]
-"HttpAcceptLanguageOptOut"=dword:00000001
-
-; disable let windows improve start and search results by tracking app launches  
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\EdgeUI]
-"DisableMFUTracking"=dword:00000001
-
-; disable personal inking and typing dictionary
-[HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization]
-"RestrictImplicitInkCollection"=dword:00000001
-"RestrictImplicitTextCollection"=dword:00000001
-
-[HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization\TrainedDataStore]
-"HarvestContacts"=dword:00000000
-
-[HKEY_CURRENT_USER\Software\Microsoft\Personalization\Settings]
-"AcceptedPrivacyPolicy"=dword:00000000
-
-; feedback frequency never
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Siuf\Rules]
-"NumberOfSIUFInPeriod"=dword:00000000
-"PeriodInNanoSeconds"=-
-
-; SEARCH
-; disable search highlights
-; disable search history
-; disable safe search
-; disable cloud content search for work or school account
-; disable cloud content search for microsoft account
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SearchSettings]
-"IsDynamicSearchBoxEnabled"=dword:00000000
-"IsDeviceSearchHistoryEnabled"=dword:00000000
-"SafeSearchMode"=dword:00000000
-"IsAADCloudSearchEnabled"=dword:00000000
-"IsMSACloudSearchEnabled"=dword:00000000
-
-; EASE OF ACCESS
-; disable magnifier settings 
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\ScreenMagnifier]
-"FollowCaret"=dword:00000000
-"FollowNarrator"=dword:00000000
-"FollowMouse"=dword:00000000
-"FollowFocus"=dword:00000000
-
-; GAMING
-; disable game bar
-[HKEY_CURRENT_USER\System\GameConfigStore]
-"GameDVR_Enabled"=dword:00000000
-
-; disable enable open xbox game bar using game controller
-; enable game mode
-[HKEY_CURRENT_USER\Software\Microsoft\GameBar]
-"UseNexusForGameBarEnabled"=dword:00000000
-"AutoGameModeEnabled"=dword:00000001
-
-; other settings
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\GameDVR]
-"AppCaptureEnabled"=dword:00000000
-"AudioEncodingBitrate"=dword:0001f400
-"AudioCaptureEnabled"=dword:00000000
-"CustomVideoEncodingBitrate"=dword:003d0900
-"CustomVideoEncodingHeight"=dword:000002d0
-"CustomVideoEncodingWidth"=dword:00000500
-"HistoricalBufferLength"=dword:0000001e
-"HistoricalBufferLengthUnit"=dword:00000001
-"HistoricalCaptureEnabled"=dword:00000000
-"HistoricalCaptureOnBatteryAllowed"=dword:00000001
-"HistoricalCaptureOnWirelessDisplayAllowed"=dword:00000001
-"MaximumRecordLength"=hex(b):00,D0,88,C3,10,00,00,00
-"VideoEncodingBitrateMode"=dword:00000002
-"VideoEncodingResolutionMode"=dword:00000002
-"VideoEncodingFrameRateMode"=dword:00000000
-"EchoCancellationEnabled"=dword:00000001
-"CursorCaptureEnabled"=dword:00000000
-"VKToggleGameBar"=dword:00000000
-"VKMToggleGameBar"=dword:00000000
-"VKSaveHistoricalVideo"=dword:00000000
-"VKMSaveHistoricalVideo"=dword:00000000
-"VKToggleRecording"=dword:00000000
-"VKMToggleRecording"=dword:00000000
-"VKTakeScreenshot"=dword:00000000
-"VKMTakeScreenshot"=dword:00000000
-"VKToggleRecordingIndicator"=dword:00000000
-"VKMToggleRecordingIndicator"=dword:00000000
-"VKToggleMicrophoneCapture"=dword:00000000
-"VKMToggleMicrophoneCapture"=dword:00000000
-"VKToggleCameraCapture"=dword:00000000
-"VKMToggleCameraCapture"=dword:00000000
-"VKToggleBroadcast"=dword:00000000
-"VKMToggleBroadcast"=dword:00000000
-"MicrophoneCaptureEnabled"=dword:00000000
-"SystemAudioGain"=hex(b):10,27,00,00,00,00,00,00
-"MicrophoneGain"=hex(b):10,27,00,00,00,00,00,00
-
-; TIME & LANGUAGE 
-; disable show the voice typing mic button
-; disable typing insights
-[HKEY_CURRENT_USER\Software\Microsoft\input\Settings]
-"IsVoiceTypingKeyEnabled"=dword:00000000
-"InsightsEnabled"=dword:00000000
-
-; disable capitalize the first letter of each sentence
-; disable play key sounds as i type
-; disable add a period after i double-tap the spacebar
-; disable show key background
-[HKEY_CURRENT_USER\Software\Microsoft\TabletTip\1.7]
-"EnableAutoShiftEngage"=dword:00000000
-"EnableKeyAudioFeedback"=dword:00000000
-"EnableDoubleTapSpace"=dword:00000000
-"IsKeyBackgroundEnabled"=dword:00000000
-
-; PERSONALIZATION
-; dark theme 
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize]
-"AppsUseLightTheme"=dword:00000000
-"SystemUsesLightTheme"=dword:00000000
-"EnableTransparency"=dword:00000001
-
-; disable web search in start menu 
-[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer]
-"DisableSearchBoxSuggestions"=dword:00000001
-
-; Remove meet now
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
-"NoStartMenuMFUprogramsList"=-
-"NoInstrumentation"=-
-"HideSCAMeetNow"=dword:00000001
-
-; remove search from taskbar
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search]
-"SearchboxTaskbarMode"=dword:00000000
-
-; disable use dynamic lighting on my devices
-; disable compatible apps in the forground always control lighting
-; disable match my windows accent color
-[HKEY_CURRENT_USER\Software\Microsoft\Lighting]
-"AmbientLightingEnabled"=dword:00000000
-"ControlledByForegroundApp"=dword:00000000
-"UseSystemAccentColor"=dword:00000000
-
-; DEVICES
-; disable let windows manage my default printer
-[HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Windows]
-"LegacyDefaultPrinterMode"=dword:00000001
-
-; disable write with your fingertip
-[HKEY_CURRENT_USER\Software\Microsoft\TabletTip\EmbeddedInkControl]
-"EnableInkingWithTouch"=dword:00000000
-
-; SYSTEM
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\DWM]
-"UseDpiScaling"=dword:00000000
-
-; disable variable refresh rate & enable optimizations for windowed games
-[HKEY_CURRENT_USER\Software\Microsoft\DirectX\UserGpuPreferences]
-"DirectXUserGlobalSettings"="SwapEffectUpgradeEnable=1;VRROptimizeEnable=0;"
-
-; disable notifications
-; Disable Notifications on Lock Screen
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PushNotifications]
-"ToastEnabled"=dword:00000000
-"LockScreenToastEnabled"=dword:00000000
-
-; Disable Allow Notifications to Play Sounds
-; Disable Notifications on Lock Screen
-; Disable Show Reminders and VoIP Calls Notifications on Lock Screen
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings]
-"NOC_GLOBAL_SETTING_ALLOW_NOTIFICATION_SOUND"=dword:00000000
-"NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK"=dword:00000000
-"NOC_GLOBAL_SETTING_ALLOW_CRITICAL_TOASTS_ABOVE_LOCK"=dword:00000000
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance]
-"Enabled"=dword:00000000
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\windows.immersivecontrolpanel_cw5n1h2txyewy!microsoft.windows.immersivecontrolpanel]
-"Enabled"=dword:00000000
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.CapabilityAccess]
-"Enabled"=dword:00000000
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.StartupApp]
-"Enabled"=dword:00000000
-
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\UserProfileEngagement]
-"ScoobeSystemSettingEnabled"=dword:00000000
-
-; disable suggested actions
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SmartActionPlatform\SmartClipboard]
-"Disabled"=dword:00000001
-
-; battery options optimize for video quality
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\VideoSettings]
-"VideoQualityOnBattery"=dword:00000001
-
-; UWP Apps
-; disable windows input experience preload
-[HKEY_CURRENT_USER\Software\Microsoft\input]
-"IsInputAppPreloadEnabled"=dword:00000000
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Dsh]
-"IsPrelaunchEnabled"=dword:00000000
-
-; disable copilot
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\WindowsCopilot]
-"TurnOffWindowsCopilot"=dword:00000001
-
-; DISABLE ADVERTISING & PROMOTIONAL
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
-"ContentDeliveryAllowed"=dword:00000000
-"FeatureManagementEnabled"=dword:00000000
-"OemPreInstalledAppsEnabled"=dword:00000000
-"PreInstalledAppsEnabled"=dword:00000000
-"PreInstalledAppsEverEnabled"=dword:00000000
-"RotatingLockScreenEnabled"=dword:00000000
-"RotatingLockScreenOverlayEnabled"=dword:00000000
-"SilentInstalledAppsEnabled"=dword:00000000
-"SlideshowEnabled"=dword:00000000
-"SoftLandingEnabled"=dword:00000000
-"SubscribedContent-310093Enabled"=dword:00000000
-"SubscribedContent-314563Enabled"=dword:00000000
-"SubscribedContent-338388Enabled"=dword:00000000
-"SubscribedContent-338389Enabled"=dword:00000000
-"SubscribedContent-338393Enabled"=dword:00000000
-"SubscribedContent-353694Enabled"=dword:00000000
-"SubscribedContent-353696Enabled"=dword:00000000
-"SubscribedContent-353698Enabled"=dword:00000000
-"SubscribedContentEnabled"=dword:00000000
-"SystemPaneSuggestionsEnabled"=dword:00000000
-
-; OTHER
-; remove gallery
-[HKEY_CURRENT_USER\Software\Classes\CLSID\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}]
-"System.IsPinnedToNameSpaceTree"=dword:00000000
-
-; restore the classic context menu
-[HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32]
-@=""
-
-; removes OneDrive Setup
-[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
-"OneDriveSetup"=-
-
-; Hides the Try New Outlook Button
-[HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\Outlook\Options\General]
-"HideNewOutlookToggle"=dword:00000000
+
+
+        function Set-RecommendedHKCURegistry {
+            Clear-Host
+            Write-Host "Optimizing User Registry . . ."
+
+            # Set Wallpaper (Helper Function for Recommended User Settings)
+            $defaultWallpaperPath = "C:\Windows\Web\4K\Wallpaper\Windows\img0_3840x2160.jpg"
+            $darkModeWallpaperPath = "https://i.imgur.com/HyevkUi.png"
+
+            function Set-Wallpaper ($wallpaperPath) {
+                reg.exe add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "$wallpaperPath" /f | Out-Null
+                # Notify the system of the change
+                rundll32.exe user32.dll, UpdatePerUserSystemParameters
+            }
+
+            # Check Windows version
+            $windowsVersion = (Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion").CurrentBuild
+
+            # Apply appropriate wallpaper based on Windows version or existence of dark mode wallpaper
+            if ($windowsVersion -ge 22000) {
+                # Assuming Windows 11 starts at build 22000
+                if (Test-Path $darkModeWallpaperPath) {
+                    Set-Wallpaper -wallpaperPath $darkModeWallpaperPath
+                }
+            }
+            else {
+                # Apply default wallpaper for Windows 10
+                Set-Wallpaper -wallpaperPath $defaultWallpaperPath
+            }
+
+            $MultilineComment = @"
+        Windows Registry Editor Version 5.00
+
+        ; EASE OF ACCESS
+        ; disable narrator
+        [HKEY_CURRENT_USER\Software\Microsoft\Narrator\NoRoam]
+        "DuckAudio"=dword:00000000
+        "WinEnterLaunchEnabled"=dword:00000000
+        "ScriptingEnabled"=dword:00000000
+        "OnlineServicesEnabled"=dword:00000000
+        "EchoToggleKeys"=dword:00000000
+
+        ; disable narrator settings
+        [HKEY_CURRENT_USER\Software\Microsoft\Narrator]
+        "NarratorCursorHighlight"=dword:00000000
+        "CoupleNarratorCursorKeyboard"=dword:00000000
+        "IntonationPause"=dword:00000000
+        "ReadHints"=dword:00000000
+        "ErrorNotificationType"=dword:00000000
+        "EchoChars"=dword:00000000
+        "EchoWords"=dword:00000000
+
+        [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Narrator\NarratorHome]
+        "MinimizeType"=dword:00000000
+        "AutoStart"=dword:00000000
+
+        ; disable ease of access settings 
+        [HKEY_CURRENT_USER\Software\Microsoft\Ease of Access]
+        "selfvoice"=dword:00000000
+        "selfscan"=dword:00000000
+
+        [HKEY_CURRENT_USER\Control Panel\Accessibility]
+        "Sound on Activation"=dword:00000000
+        "Warning Sounds"=dword:00000000
+
+        [HKEY_CURRENT_USER\Control Panel\Accessibility\HighContrast]
+        "Flags"="4194"
+
+        [HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response]
+        "Flags"="2"
+        "AutoRepeatRate"="0"
+        "AutoRepeatDelay"="0"
+
+        [HKEY_CURRENT_USER\Control Panel\Accessibility\MouseKeys]
+        "Flags"="130"
+        "MaximumSpeed"="39"
+        "TimeToMaximumSpeed"="3000"
+
+        [HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys]
+        "Flags"="2"
+
+        [HKEY_CURRENT_USER\Control Panel\Accessibility\ToggleKeys]
+        "Flags"="34"
+
+        [HKEY_CURRENT_USER\Control Panel\Accessibility\SoundSentry]
+        "Flags"="0"
+        "FSTextEffect"="0"
+        "TextEffect"="0"
+        "WindowsEffect"="0"
+
+        [HKEY_CURRENT_USER\Control Panel\Accessibility\SlateLaunch]
+        "ATapp"=""
+        "LaunchAT"=dword:00000000
+
+        ; CLOCK AND REGION
+        ; disable notify me when the clock changes
+        [HKEY_CURRENT_USER\Control Panel\TimeDate]
+        "DstNotification"=dword:00000000
+
+        ; APPEARANCE AND PERSONALIZATION
+        ; open file explorer to this pc
+        ; show file name extensions
+        ; disable display file size information in folder tips
+        ; disable show pop-up description for folder and desktop items
+        ; disable show preview handlers in preview pane
+        ; disable show status bar
+        ; disable show sync provider notifications
+        ; disable use sharing wizard
+        ; disable animations in the taskbar
+        ; enable show thumbnails instead of icons
+        ; disable show translucent selection rectangle
+        ; disable use drop shadows for icon labels on the desktop
+        ; more pins personalization start
+        ; disable show account-related notifications
+        ; disable show recently opened items in start, jump lists and file explorer
+        ; left taskbar alignment
+        ; remove chat from taskbar
+        ; remove task view from taskbar
+        ; remove copilot from taskbar
+        ; disable show recommendations for tips shortcuts new apps and more
+        ; disable share any window from my taskbar
+        ; disable snap window settings - SnapAssist to JointResize Entries
+        ; alt tab open windows only
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+        "LaunchTo"=dword:00000001
+        "HideFileExt"=dword:00000000
+        "FolderContentsInfoTip"=dword:00000000
+        "ShowInfoTip"=dword:00000000
+        "ShowPreviewHandlers"=dword:00000000
+        "ShowStatusBar"=dword:00000000
+        "ShowSyncProviderNotifications"=dword:00000000
+        "SharingWizardOn"=dword:00000000
+        "TaskbarAnimations"=dword:0
+        "IconsOnly"=dword:0
+        "ListviewAlphaSelect"=dword:0
+        "ListviewShadow"=dword:0
+        "Start_Layout"=dword:00000001
+        "Start_AccountNotifications"=dword:00000000
+        "Start_TrackDocs"=dword:00000000 
+        "TaskbarAl"=dword:00000000
+        "TaskbarMn"=dword:00000000
+        "ShowTaskViewButton"=dword:00000000
+        "ShowCopilotButton"=dword:00000000
+        "Start_IrisRecommendations"=dword:00000000
+        "TaskbarSn"=dword:00000000
+        "SnapAssist"=dword:00000000
+        "DITest"=dword:00000000
+        "EnableSnapBar"=dword:00000000
+        "EnableTaskGroups"=dword:00000000
+        "EnableSnapAssistFlyout"=dword:00000000
+        "SnapFill"=dword:00000000
+        "JointResize"=dword:00000000
+        "MultiTaskingAltTabFilter"=dword:00000003
+
+        ; hide frequent folders in quick access
+        ; disable show files from office.com
+        ; show all taskbar icons on Windows 10
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer]
+        "ShowFrequent"=dword:00000000
+        "ShowCloudFilesInQuickAccess"=dword:00000000
+        "EnableAutoTray"=dword:00000000
+
+        ; enable display full path in the title bar
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState]
+        "FullPath"=dword:00000001
+
+        ; HARDWARE AND SOUND
+        ; sound communications do nothing
+        [HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio]
+        "UserDuckingPreference"=dword:00000003
+
+        ; disable enhance pointer precision
+        ; mouse fix (no accel with epp on)
+        [HKEY_CURRENT_USER\Control Panel\Mouse]
+        "MouseSpeed"="0"
+        "MouseThreshold1"="0"
+        "MouseThreshold2"="0"
+        "MouseSensitivity"="10"
+        "SmoothMouseXCurve"=hex:\
+            00,00,00,00,00,00,00,00,\
+            C0,CC,0C,00,00,00,00,00,\
+            80,99,19,00,00,00,00,00,\
+            40,66,26,00,00,00,00,00,\
+            00,33,33,00,00,00,00,00
+        "SmoothMouseYCurve"=hex:\
+            00,00,00,00,00,00,00,00,\
+            00,00,38,00,00,00,00,00,\
+            00,00,70,00,00,00,00,00,\
+            00,00,A8,00,00,00,00,00,\
+            00,00,E0,00,00,00,00,00
+
+        ; SYSTEM AND SECURITY
+        ; set appearance options to custom
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects]
+        "VisualFXSetting"=dword:3
+
+        ; disable animate controls and elements inside windows
+        ; disable fade or slide menus into view
+        ; disable fade or slide tooltips into view
+        ; disable fade out menu items after clicking
+        ; disable show shadows under mouse pointer
+        ; disable show shadows under windows
+        ; disable slide open combo boxes
+        ; disable smooth-scroll list boxes
+        ; enable smooth edges of screen fonts
+        ; 100% dpi scaling
+        ; disable fix scaling for apps
+        ; disable menu show delay
+        [HKEY_CURRENT_USER\Control Panel\Desktop]
+        "UserPreferencesMask"=hex(2):90,12,03,80,10,00,00,00
+        "FontSmoothing"="2"
+        "LogPixels"=dword:00000060
+        "Win8DpiScaling"=dword:00000001
+        "EnablePerProcessSystemDPI"=dword:00000000
+        "MenuShowDelay"="0"
+
+        ; --IMMERSIVE CONTROL PANEL--
+        ; PRIVACY
+        ; disable show me notification in the settings app
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SystemSettings\AccountNotifications]
+        "EnableAccountNotifications"=dword:00000000
+
+        ; disable voice activation
+        [HKEY_CURRENT_USER\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps]
+        "AgentActivationEnabled"=dword:00000000
+
+        [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps]
+        "AgentActivationLastUsed"=dword:00000000
+
+        ; disable other devices 
+        [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\bluetoothSync]
+        "Value"="Deny"
+
+        ; disable let websites show me locally relevant content by accessing my language list 
+        [HKEY_CURRENT_USER\Control Panel\International\User Profile]
+        "HttpAcceptLanguageOptOut"=dword:00000001
+
+        ; disable let windows improve start and search results by tracking app launches  
+        [HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\EdgeUI]
+        "DisableMFUTracking"=dword:00000001
+
+        ; disable personal inking and typing dictionary
+        [HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization]
+        "RestrictImplicitInkCollection"=dword:00000001
+        "RestrictImplicitTextCollection"=dword:00000001
+
+        [HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization\TrainedDataStore]
+        "HarvestContacts"=dword:00000000
+
+        [HKEY_CURRENT_USER\Software\Microsoft\Personalization\Settings]
+        "AcceptedPrivacyPolicy"=dword:00000000
+
+        ; feedback frequency never
+        [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Siuf\Rules]
+        "NumberOfSIUFInPeriod"=dword:00000000
+        "PeriodInNanoSeconds"=-
+
+        ; SEARCH
+        ; disable search highlights
+        ; disable search history
+        ; disable safe search
+        ; disable cloud content search for work or school account
+        ; disable cloud content search for microsoft account
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SearchSettings]
+        "IsDynamicSearchBoxEnabled"=dword:00000000
+        "IsDeviceSearchHistoryEnabled"=dword:00000000
+        "SafeSearchMode"=dword:00000000
+        "IsAADCloudSearchEnabled"=dword:00000000
+        "IsMSACloudSearchEnabled"=dword:00000000
+
+        ; EASE OF ACCESS
+        ; disable magnifier settings 
+        [HKEY_CURRENT_USER\SOFTWARE\Microsoft\ScreenMagnifier]
+        "FollowCaret"=dword:00000000
+        "FollowNarrator"=dword:00000000
+        "FollowMouse"=dword:00000000
+        "FollowFocus"=dword:00000000
+
+        ; GAMING
+        ; disable game bar
+        [HKEY_CURRENT_USER\System\GameConfigStore]
+        "GameDVR_Enabled"=dword:00000000
+
+        ; disable enable open xbox game bar using game controller
+        ; enable game mode
+        [HKEY_CURRENT_USER\Software\Microsoft\GameBar]
+        "UseNexusForGameBarEnabled"=dword:00000000
+        "AutoGameModeEnabled"=dword:00000001
+
+        ; other settings
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\GameDVR]
+        "AppCaptureEnabled"=dword:00000000
+        "AudioEncodingBitrate"=dword:0001f400
+        "AudioCaptureEnabled"=dword:00000000
+        "CustomVideoEncodingBitrate"=dword:003d0900
+        "CustomVideoEncodingHeight"=dword:000002d0
+        "CustomVideoEncodingWidth"=dword:00000500
+        "HistoricalBufferLength"=dword:0000001e
+        "HistoricalBufferLengthUnit"=dword:00000001
+        "HistoricalCaptureEnabled"=dword:00000000
+        "HistoricalCaptureOnBatteryAllowed"=dword:00000001
+        "HistoricalCaptureOnWirelessDisplayAllowed"=dword:00000001
+        "MaximumRecordLength"=hex(b):00,D0,88,C3,10,00,00,00
+        "VideoEncodingBitrateMode"=dword:00000002
+        "VideoEncodingResolutionMode"=dword:00000002
+        "VideoEncodingFrameRateMode"=dword:00000000
+        "EchoCancellationEnabled"=dword:00000001
+        "CursorCaptureEnabled"=dword:00000000
+        "VKToggleGameBar"=dword:00000000
+        "VKMToggleGameBar"=dword:00000000
+        "VKSaveHistoricalVideo"=dword:00000000
+        "VKMSaveHistoricalVideo"=dword:00000000
+        "VKToggleRecording"=dword:00000000
+        "VKMToggleRecording"=dword:00000000
+        "VKTakeScreenshot"=dword:00000000
+        "VKMTakeScreenshot"=dword:00000000
+        "VKToggleRecordingIndicator"=dword:00000000
+        "VKMToggleRecordingIndicator"=dword:00000000
+        "VKToggleMicrophoneCapture"=dword:00000000
+        "VKMToggleMicrophoneCapture"=dword:00000000
+        "VKToggleCameraCapture"=dword:00000000
+        "VKMToggleCameraCapture"=dword:00000000
+        "VKToggleBroadcast"=dword:00000000
+        "VKMToggleBroadcast"=dword:00000000
+        "MicrophoneCaptureEnabled"=dword:00000000
+        "SystemAudioGain"=hex(b):10,27,00,00,00,00,00,00
+        "MicrophoneGain"=hex(b):10,27,00,00,00,00,00,00
+
+        ; TIME & LANGUAGE 
+        ; disable show the voice typing mic button
+        ; disable typing insights
+        [HKEY_CURRENT_USER\Software\Microsoft\input\Settings]
+        "IsVoiceTypingKeyEnabled"=dword:00000000
+        "InsightsEnabled"=dword:00000000
+
+        ; disable capitalize the first letter of each sentence
+        ; disable play key sounds as i type
+        ; disable add a period after i double-tap the spacebar
+        ; disable show key background
+        [HKEY_CURRENT_USER\Software\Microsoft\TabletTip\1.7]
+        "EnableAutoShiftEngage"=dword:00000000
+        "EnableKeyAudioFeedback"=dword:00000000
+        "EnableDoubleTapSpace"=dword:00000000
+        "IsKeyBackgroundEnabled"=dword:00000000
+
+        ; PERSONALIZATION
+        ; dark theme 
+        [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize]
+        "AppsUseLightTheme"=dword:00000000
+        "SystemUsesLightTheme"=dword:00000000
+        "EnableTransparency"=dword:00000001
+
+        ; disable web search in start menu 
+        [HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer]
+        "DisableSearchBoxSuggestions"=dword:00000001
+
+        ; Remove meet now
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+        "NoStartMenuMFUprogramsList"=-
+        "NoInstrumentation"=-
+        "HideSCAMeetNow"=dword:00000001
+
+        ; remove search from taskbar
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search]
+        "SearchboxTaskbarMode"=dword:00000000
+
+        ; disable use dynamic lighting on my devices
+        ; disable compatible apps in the forground always control lighting
+        ; disable match my windows accent color
+        [HKEY_CURRENT_USER\Software\Microsoft\Lighting]
+        "AmbientLightingEnabled"=dword:00000000
+        "ControlledByForegroundApp"=dword:00000000
+        "UseSystemAccentColor"=dword:00000000
+
+        ; DEVICES
+        ; disable let windows manage my default printer
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Windows]
+        "LegacyDefaultPrinterMode"=dword:00000001
+
+        ; disable write with your fingertip
+        [HKEY_CURRENT_USER\Software\Microsoft\TabletTip\EmbeddedInkControl]
+        "EnableInkingWithTouch"=dword:00000000
+
+        ; SYSTEM
+        [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\DWM]
+        "UseDpiScaling"=dword:00000000
+
+        ; disable variable refresh rate & enable optimizations for windowed games
+        [HKEY_CURRENT_USER\Software\Microsoft\DirectX\UserGpuPreferences]
+        "DirectXUserGlobalSettings"="SwapEffectUpgradeEnable=1;VRROptimizeEnable=0;"
+
+        ; disable notifications
+        ; Disable Notifications on Lock Screen
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PushNotifications]
+        "ToastEnabled"=dword:00000000
+        "LockScreenToastEnabled"=dword:00000000
+
+        ; Disable Allow Notifications to Play Sounds
+        ; Disable Notifications on Lock Screen
+        ; Disable Show Reminders and VoIP Calls Notifications on Lock Screen
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings]
+        "NOC_GLOBAL_SETTING_ALLOW_NOTIFICATION_SOUND"=dword:00000000
+        "NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK"=dword:00000000
+        "NOC_GLOBAL_SETTING_ALLOW_CRITICAL_TOASTS_ABOVE_LOCK"=dword:00000000
+
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance]
+        "Enabled"=dword:00000000
+
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\windows.immersivecontrolpanel_cw5n1h2txyewy!microsoft.windows.immersivecontrolpanel]
+        "Enabled"=dword:00000000
+
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.CapabilityAccess]
+        "Enabled"=dword:00000000
+
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.StartupApp]
+        "Enabled"=dword:00000000
+
+        [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\UserProfileEngagement]
+        "ScoobeSystemSettingEnabled"=dword:00000000
+
+        ; disable suggested actions
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SmartActionPlatform\SmartClipboard]
+        "Disabled"=dword:00000001
+
+        ; battery options optimize for video quality
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\VideoSettings]
+        "VideoQualityOnBattery"=dword:00000001
+
+        ; UWP Apps
+        ; disable windows input experience preload
+        [HKEY_CURRENT_USER\Software\Microsoft\input]
+        "IsInputAppPreloadEnabled"=dword:00000000
+
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Dsh]
+        "IsPrelaunchEnabled"=dword:00000000
+
+        ; disable copilot
+        [HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\WindowsCopilot]
+        "TurnOffWindowsCopilot"=dword:00000001
+
+        ; DISABLE ADVERTISING & PROMOTIONAL
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+        "ContentDeliveryAllowed"=dword:00000000
+        "FeatureManagementEnabled"=dword:00000000
+        "OemPreInstalledAppsEnabled"=dword:00000000
+        "PreInstalledAppsEnabled"=dword:00000000
+        "PreInstalledAppsEverEnabled"=dword:00000000
+        "RotatingLockScreenEnabled"=dword:00000000
+        "RotatingLockScreenOverlayEnabled"=dword:00000000
+        "SilentInstalledAppsEnabled"=dword:00000000
+        "SlideshowEnabled"=dword:00000000
+        "SoftLandingEnabled"=dword:00000000
+        "SubscribedContent-310093Enabled"=dword:00000000
+        "SubscribedContent-314563Enabled"=dword:00000000
+        "SubscribedContent-338388Enabled"=dword:00000000
+        "SubscribedContent-338389Enabled"=dword:00000000
+        "SubscribedContent-338393Enabled"=dword:00000000
+        "SubscribedContent-353694Enabled"=dword:00000000
+        "SubscribedContent-353696Enabled"=dword:00000000
+        "SubscribedContent-353698Enabled"=dword:00000000
+        "SubscribedContentEnabled"=dword:00000000
+        "SystemPaneSuggestionsEnabled"=dword:00000000
+
+        ; OTHER
+        ; remove gallery
+        [HKEY_CURRENT_USER\Software\Classes\CLSID\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}]
+        "System.IsPinnedToNameSpaceTree"=dword:00000000
+
+        ; restore the classic context menu
+        [HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32]
+        @=""
+
+        ; removes OneDrive Setup
+        [-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
+        "OneDriveSetup"=-
+
+        ; Hides the Try New Outlook Button
+        [HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\Outlook\Options\General]
+        "HideNewOutlookToggle"=dword:00000000
 "@
     Set-Content -Path "$env:TEMP\Optimize_User_Registry.reg" -Value $MultilineComment -Force
     Regedit.exe /S "$env:TEMP\Optimize_User_Registry.reg"
@@ -1957,393 +1960,397 @@ function Set-DefaultHKCURegistry {
     Clear-Host
     Write-Host "Restoring User Default Registry Settings . . ."
     $MultilineComment = @"
-Windows Registry Editor Version 5.00
+        Windows Registry Editor Version 5.00
 
-; --LEGACY CONTROL PANEL--
-; EASE OF ACCESS
-; narrator
-[HKEY_CURRENT_USER\Software\Microsoft\Narrator\NoRoam]
-"DuckAudio"=-
-"WinEnterLaunchEnabled"=-
-"ScriptingEnabled"=-
-"OnlineServicesEnabled"=-
-"EchoToggleKeys"=-
+        ; --LEGACY CONTROL PANEL--
+        ; EASE OF ACCESS
+        ; narrator
+        [HKEY_CURRENT_USER\Software\Microsoft\Narrator\NoRoam]
+        "DuckAudio"=-
+        "WinEnterLaunchEnabled"=-
+        "ScriptingEnabled"=-
+        "OnlineServicesEnabled"=-
+        "EchoToggleKeys"=-
 
-; narrator settings
-[HKEY_CURRENT_USER\Software\Microsoft\Narrator]
-"NarratorCursorHighlight"=-
-"CoupleNarratorCursorKeyboard"=-
-"IntonationPause"=-
-"ReadHints"=-
-"ErrorNotificationType"=-
-"EchoChars"=-
-"EchoWords"=-
+        ; narrator settings
+        [HKEY_CURRENT_USER\Software\Microsoft\Narrator]
+        "NarratorCursorHighlight"=-
+        "CoupleNarratorCursorKeyboard"=-
+        "IntonationPause"=-
+        "ReadHints"=-
+        "ErrorNotificationType"=-
+        "EchoChars"=-
+        "EchoWords"=-
 
-[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Narrator\NarratorHome]
+        [-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Narrator\NarratorHome]
 
-; ease of access settings
-[-HKEY_CURRENT_USER\Software\Microsoft\Ease of Access]
+        ; ease of access settings
+        [-HKEY_CURRENT_USER\Software\Microsoft\Ease of Access]
 
-[HKEY_CURRENT_USER\Control Panel\Accessibility]
-"Sound on Activation"=-
-"Warning Sounds"=-
+        [HKEY_CURRENT_USER\Control Panel\Accessibility]
+        "Sound on Activation"=-
+        "Warning Sounds"=-
 
-[HKEY_CURRENT_USER\Control Panel\Accessibility\HighContrast]
-"Flags"="126"
+        [HKEY_CURRENT_USER\Control Panel\Accessibility\HighContrast]
+        "Flags"="126"
 
-[HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response]
-"Flags"="126"
-"AutoRepeatRate"="500"
-"AutoRepeatDelay"="1000"
+        [HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response]
+        "Flags"="126"
+        "AutoRepeatRate"="500"
+        "AutoRepeatDelay"="1000"
 
-[HKEY_CURRENT_USER\Control Panel\Accessibility\MouseKeys]
-"Flags"="62"
-"MaximumSpeed"="80"
-"TimeToMaximumSpeed"="3000"
+        [HKEY_CURRENT_USER\Control Panel\Accessibility\MouseKeys]
+        "Flags"="62"
+        "MaximumSpeed"="80"
+        "TimeToMaximumSpeed"="3000"
 
-[HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys]
-"Flags"="510"
+        [HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys]
+        "Flags"="510"
 
-[HKEY_CURRENT_USER\Control Panel\Accessibility\ToggleKeys]
-"Flags"="62"
+        [HKEY_CURRENT_USER\Control Panel\Accessibility\ToggleKeys]
+        "Flags"="62"
 
-[HKEY_CURRENT_USER\Control Panel\Accessibility\SoundSentry]
-"Flags"="2"
-"FSTextEffect"="0"
-"TextEffect"="0"
-"WindowsEffect"="1"
+        [HKEY_CURRENT_USER\Control Panel\Accessibility\SoundSentry]
+        "Flags"="2"
+        "FSTextEffect"="0"
+        "TextEffect"="0"
+        "WindowsEffect"="1"
 
-[HKEY_CURRENT_USER\Control Panel\Accessibility\SlateLaunch]
-"ATapp"="narrator"
-"LaunchAT"=dword:00000001
+        [HKEY_CURRENT_USER\Control Panel\Accessibility\SlateLaunch]
+        "ATapp"="narrator"
+        "LaunchAT"=dword:00000001
 
-; CLOCK AND REGION
-; notify me when the clock changes
-[-HKEY_CURRENT_USER\Control Panel\TimeDate]
+        ; CLOCK AND REGION
+        ; notify me when the clock changes
+        [-HKEY_CURRENT_USER\Control Panel\TimeDate]
 
-; APPEARANCE AND PERSONALIZATION
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
-"LaunchTo"=-
-"HideFileExt"=dword:00000001
-"FolderContentsInfoTip"=-
-"ShowInfoTip"=dword:00000001
-"ShowPreviewHandlers"=-
-"ShowStatusBar"=dword:00000001
-"ShowSyncProviderNotifications"=-
-"SharingWizardOn"=-
-"TaskbarAnimations"=dword:1
-"IconsOnly"=dword:0
-"ListviewAlphaSelect"=dword:1
-"ListviewShadow"=dword:1
-"Start_Layout"=-
-"Start_AccountNotifications"=-
-"Start_TrackDocs"=-
-"TaskbarAl"=-
-"TaskbarMn"=-
-"ShowTaskViewButton"=-
-"ShowCopilotButton"=-
-"Start_IrisRecommendations"=-
-"TaskbarSn"=-
-"SnapAssist"=-
-"DITest"=-
-"EnableSnapBar"=-
-"EnableTaskGroups"=-
-"EnableSnapAssistFlyout"=-
-"SnapFill"=-
-"JointResize"=-
-"MultiTaskingAltTabFilter"=-
+        ; APPEARANCE AND PERSONALIZATION
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+        "LaunchTo"=-
+        "HideFileExt"=dword:00000001
+        "FolderContentsInfoTip"=-
+        "ShowInfoTip"=dword:00000001
+        "ShowPreviewHandlers"=-
+        "ShowStatusBar"=dword:00000001
+        "ShowSyncProviderNotifications"=-
+        "SharingWizardOn"=-
+        "TaskbarAnimations"=dword:1
+        "IconsOnly"=dword:0
+        "ListviewAlphaSelect"=dword:1
+        "ListviewShadow"=dword:1
+        "Start_Layout"=-
+        "Start_AccountNotifications"=-
+        "Start_TrackDocs"=-
+        "TaskbarAl"=-
+        "TaskbarMn"=-
+        "ShowTaskViewButton"=-
+        "ShowCopilotButton"=-
+        "Start_IrisRecommendations"=-
+        "TaskbarSn"=-
+        "SnapAssist"=-
+        "DITest"=-
+        "EnableSnapBar"=-
+        "EnableTaskGroups"=-
+        "EnableSnapAssistFlyout"=-
+        "SnapFill"=-
+        "JointResize"=-
+        "MultiTaskingAltTabFilter"=-
 
-; frequent folders in quick access
-; show files from office.com
-; don't show all taskbar icons
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer]
-"ShowFrequent"=-
-"ShowCloudFilesInQuickAccess"=-
-"EnableAutoTray"=-
+        ; frequent folders in quick access
+        ; show files from office.com
+        ; don't show all taskbar icons
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer]
+        "ShowFrequent"=-
+        "ShowCloudFilesInQuickAccess"=-
+        "EnableAutoTray"=-
 
-; display full path in the title bar
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState]
-"FullPath"=dword:00000000
+        ; display full path in the title bar
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState]
+        "FullPath"=dword:00000000
 
-; HARDWARE AND SOUND
-; sound communications
-[HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio]
-"UserDuckingPreference"=-
+        ; HARDWARE AND SOUND
+        ; sound communications
+        [HKEY_CURRENT_USER\Software\Microsoft\Multimedia\Audio]
+        "UserDuckingPreference"=-
 
-; enhance pointer precision
-; mouse (default accel with epp on)
-[HKEY_CURRENT_USER\Control Panel\Mouse]
-"MouseSpeed"="1"
-"MouseThreshold1"="6"
-"MouseThreshold2"="10"
-"MouseSensitivity"="10"
-"SmoothMouseXCurve"=hex:00,00,00,00,00,00,00,00,15,6e,00,00,00,00,00,00,00,40,\
-  01,00,00,00,00,00,29,dc,03,00,00,00,00,00,00,00,28,00,00,00,00,00
-"SmoothMouseYCurve"=hex:00,00,00,00,00,00,00,00,fd,11,01,00,00,00,00,00,00,24,\
-  04,00,00,00,00,00,00,fc,12,00,00,00,00,00,00,c0,bb,01,00,00,00,00
+        ; enhance pointer precision
+        ; mouse (default accel with epp on)
+        [HKEY_CURRENT_USER\Control Panel\Mouse]
+        "MouseSpeed"="1"
+        "MouseThreshold1"="6"
+        "MouseThreshold2"="10"
+        "MouseSensitivity"="10"
+        "SmoothMouseXCurve"=hex:00,00,00,00,00,00,00,00,15,6e,00,00,00,00,00,00,00,40,\
+        01,00,00,00,00,00,29,dc,03,00,00,00,00,00,00,00,28,00,00,00,00,00
+        "SmoothMouseYCurve"=hex:00,00,00,00,00,00,00,00,fd,11,01,00,00,00,00,00,00,24,\
+        04,00,00,00,00,00,00,fc,12,00,00,00,00,00,00,c0,bb,01,00,00,00,00
 
-; SYSTEM AND SECURITY
-; set appearance options
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects]
-"VisualFXSetting"=-
+        ; SYSTEM AND SECURITY
+        ; set appearance options
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects]
+        "VisualFXSetting"=-
 
-; animate controls and elements inside windows
-; fade or slide menus into view
-; fade or slide tooltips into view
-; fade out menu items after clicking
-; show shadows under mouse pointer
-; show shadows under windows
-; slide open combo boxes
-; smooth-scroll list boxes
-; smooth edges of screen fonts
-; dpi scaling
-; fix scaling for apps
-; menu show delay
-[HKEY_CURRENT_USER\Control Panel\Desktop]
-"UserPreferencesMask"=hex(2):9e,1e,07,80,12,00,00,00
-"FontSmoothing"="2"
-"LogPixels"=-
-"Win8DpiScaling"=dword:00000000
-"EnablePerProcessSystemDPI"=-
-"MenuShowDelay"="400"
+        ; animate controls and elements inside windows
+        ; fade or slide menus into view
+        ; fade or slide tooltips into view
+        ; fade out menu items after clicking
+        ; show shadows under mouse pointer
+        ; show shadows under windows
+        ; slide open combo boxes
+        ; smooth-scroll list boxes
+        ; smooth edges of screen fonts
+        ; dpi scaling
+        ; fix scaling for apps
+        ; menu show delay
+        [HKEY_CURRENT_USER\Control Panel\Desktop]
+        "UserPreferencesMask"=hex(2):9e,1e,07,80,12,00,00,00
+        "FontSmoothing"="2"
+        "LogPixels"=-
+        "Win8DpiScaling"=dword:00000000
+        "EnablePerProcessSystemDPI"=-
+        "MenuShowDelay"="400"
 
-; --IMMERSIVE CONTROL PANEL--
-; PRIVACY
-; show me notification in the settings app
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SystemSettings\AccountNotifications]
-"EnableAccountNotifications"=-
+        ; --IMMERSIVE CONTROL PANEL--
+        ; PRIVACY
+        ; show me notification in the settings app
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SystemSettings\AccountNotifications]
+        "EnableAccountNotifications"=-
 
-; allow location override
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\UserLocationOverridePrivacySetting]
-"Value"=dword:00000001
+        ; allow location override
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\UserLocationOverridePrivacySetting]
+        "Value"=dword:00000001
 
-; voice activation
-[-HKEY_CURRENT_USER\Software\Microsoft\Speech_OneCore\Settings]
+        ; voice activation
+        [-HKEY_CURRENT_USER\Software\Microsoft\Speech_OneCore\Settings]
 
-; other devices 
-[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\bluetoothSync]
+        ; other devices 
+        [-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\bluetoothSync]
 
-; let websites show me locally relevant content by accessing my language list 
-[HKEY_CURRENT_USER\Control Panel\International\User Profile]
-"HttpAcceptLanguageOptOut"=-
+        ; let websites show me locally relevant content by accessing my language list 
+        [HKEY_CURRENT_USER\Control Panel\International\User Profile]
+        "HttpAcceptLanguageOptOut"=-
 
-; let windows improve start and search results by tracking app launches  
-[-HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\EdgeUI]
+        ; let windows improve start and search results by tracking app launches  
+        [-HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\EdgeUI]
 
-; personal inking and typing dictionary
-[HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization]
-"RestrictImplicitInkCollection"=dword:00000000
-"RestrictImplicitTextCollection"=dword:00000000
+        ; personal inking and typing dictionary
+        [HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization]
+        "RestrictImplicitInkCollection"=dword:00000000
+        "RestrictImplicitTextCollection"=dword:00000000
 
-[HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization\TrainedDataStore]
-"HarvestContacts"=dword:00000001
+        [HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization\TrainedDataStore]
+        "HarvestContacts"=dword:00000001
 
-[HKEY_CURRENT_USER\Software\Microsoft\Personalization\Settings]
-"AcceptedPrivacyPolicy"=dword:00000001
+        [HKEY_CURRENT_USER\Software\Microsoft\Personalization\Settings]
+        "AcceptedPrivacyPolicy"=dword:00000001
 
-; feedback frequency
-[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Siuf]
+        ; feedback frequency
+        [-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Siuf]
 
-; SEARCH
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SearchSettings]
-"IsDynamicSearchBoxEnabled"=-
-"IsDeviceSearchHistoryEnabled"=-
-"SafeSearchMode"=-
-"IsAADCloudSearchEnabled"=-
-"IsMSACloudSearchEnabled"=-
+        ; SEARCH
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SearchSettings]
+        "IsDynamicSearchBoxEnabled"=-
+        "IsDeviceSearchHistoryEnabled"=-
+        "SafeSearchMode"=-
+        "IsAADCloudSearchEnabled"=-
+        "IsMSACloudSearchEnabled"=-
 
-; EASE OF ACCESS
-; magnifier settings 
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\ScreenMagnifier]
-"FollowCaret"=-
-"FollowNarrator"=-
-"FollowMouse"=-
-"FollowFocus"=-
+        ; EASE OF ACCESS
+        ; magnifier settings 
+        [HKEY_CURRENT_USER\SOFTWARE\Microsoft\ScreenMagnifier]
+        "FollowCaret"=-
+        "FollowNarrator"=-
+        "FollowMouse"=-
+        "FollowFocus"=-
 
-; GAMING
-; game bar
-[HKEY_CURRENT_USER\System\GameConfigStore]
-"GameDVR_Enabled"=dword:00000000
+        ; GAMING
+        ; game bar
+        [HKEY_CURRENT_USER\System\GameConfigStore]
+        "GameDVR_Enabled"=dword:00000000
 
-; enable open xbox game bar using game controller
-; game mode
-[HKEY_CURRENT_USER\Software\Microsoft\GameBar]
-"UseNexusForGameBarEnabled"=-
-"AutoGameModeEnabled"=-
+        ; enable open xbox game bar using game controller
+        ; game mode
+        [HKEY_CURRENT_USER\Software\Microsoft\GameBar]
+        "UseNexusForGameBarEnabled"=-
+        "AutoGameModeEnabled"=-
 
-; other settings
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\GameDVR]
-"AppCaptureEnabled"=-
-"AudioEncodingBitrate"=-
-"AudioCaptureEnabled"=-
-"CustomVideoEncodingBitrate"=-
-"CustomVideoEncodingHeight"=-
-"CustomVideoEncodingWidth"=-
-"HistoricalBufferLength"=-
-"HistoricalBufferLengthUnit"=-
-"HistoricalCaptureEnabled"=-
-"HistoricalCaptureOnBatteryAllowed"=-
-"HistoricalCaptureOnWirelessDisplayAllowed"=-
-"MaximumRecordLength"=-
-"VideoEncodingBitrateMode"=-
-"VideoEncodingResolutionMode"=-
-"VideoEncodingFrameRateMode"=-
-"EchoCancellationEnabled"=-
-"CursorCaptureEnabled"=-
-"VKToggleGameBar"=-
-"VKMToggleGameBar"=-
-"VKSaveHistoricalVideo"=-
-"VKMSaveHistoricalVideo"=-
-"VKToggleRecording"=-
-"VKMToggleRecording"=-
-"VKTakeScreenshot"=-
-"VKMTakeScreenshot"=-
-"VKToggleRecordingIndicator"=-
-"VKMToggleRecordingIndicator"=-
-"VKToggleMicrophoneCapture"=-
-"VKMToggleMicrophoneCapture"=-
-"VKToggleCameraCapture"=-
-"VKMToggleCameraCapture"=-
-"VKToggleBroadcast"=-
-"VKMToggleBroadcast"=-
-"MicrophoneCaptureEnabled"=-
-"SystemAudioGain"=-
-"MicrophoneGain"=-
+        ; other settings
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\GameDVR]
+        "AppCaptureEnabled"=-
+        "AudioEncodingBitrate"=-
+        "AudioCaptureEnabled"=-
+        "CustomVideoEncodingBitrate"=-
+        "CustomVideoEncodingHeight"=-
+        "CustomVideoEncodingWidth"=-
+        "HistoricalBufferLength"=-
+        "HistoricalBufferLengthUnit"=-
+        "HistoricalCaptureEnabled"=-
+        "HistoricalCaptureOnBatteryAllowed"=-
+        "HistoricalCaptureOnWirelessDisplayAllowed"=-
+        "MaximumRecordLength"=-
+        "VideoEncodingBitrateMode"=-
+        "VideoEncodingResolutionMode"=-
+        "VideoEncodingFrameRateMode"=-
+        "EchoCancellationEnabled"=-
+        "CursorCaptureEnabled"=-
+        "VKToggleGameBar"=-
+        "VKMToggleGameBar"=-
+        "VKSaveHistoricalVideo"=-
+        "VKMSaveHistoricalVideo"=-
+        "VKToggleRecording"=-
+        "VKMToggleRecording"=-
+        "VKTakeScreenshot"=-
+        "VKMTakeScreenshot"=-
+        "VKToggleRecordingIndicator"=-
+        "VKMToggleRecordingIndicator"=-
+        "VKToggleMicrophoneCapture"=-
+        "VKMToggleMicrophoneCapture"=-
+        "VKToggleCameraCapture"=-
+        "VKMToggleCameraCapture"=-
+        "VKToggleBroadcast"=-
+        "VKMToggleBroadcast"=-
+        "MicrophoneCaptureEnabled"=-
+        "SystemAudioGain"=-
+        "MicrophoneGain"=-
 
-; TIME & LANGUAGE 
-; show the voice typing mic button
-; typing insights
-[HKEY_CURRENT_USER\Software\Microsoft\input\Settings]
-"IsVoiceTypingKeyEnabled"=-
-"InsightsEnabled"=-
+        ; TIME & LANGUAGE 
+        ; show the voice typing mic button
+        ; typing insights
+        [HKEY_CURRENT_USER\Software\Microsoft\input\Settings]
+        "IsVoiceTypingKeyEnabled"=-
+        "InsightsEnabled"=-
 
-; capitalize the first letter of each sentence
-; play key sounds as i type
-; add a period after i double-tap the spacebar
-; show key background
-[HKEY_CURRENT_USER\Software\Microsoft\TabletTip\1.7]
-"EnableAutoShiftEngage"=-
-"EnableKeyAudioFeedback"=-
-"EnableDoubleTapSpace"=-
-"IsKeyBackgroundEnabled"=-
+        ; capitalize the first letter of each sentence
+        ; play key sounds as i type
+        ; add a period after i double-tap the spacebar
+        ; show key background
+        [HKEY_CURRENT_USER\Software\Microsoft\TabletTip\1.7]
+        "EnableAutoShiftEngage"=-
+        "EnableKeyAudioFeedback"=-
+        "EnableDoubleTapSpace"=-
+        "IsKeyBackgroundEnabled"=-
 
-; PERSONALIZATION
-; light theme 
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize]
-"AppsUseLightTheme"=dword:00000001
-"SystemUsesLightTheme"=dword:00000001
+        ; PERSONALIZATION
+        ; light theme 
+        [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize]
+        "AppsUseLightTheme"=dword:00000001
+        "SystemUsesLightTheme"=dword:00000001
 
-[-HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer]
+        [-HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer]
 
-[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+        [-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
 
-; search from taskbar
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search]
-"SearchboxTaskbarMode"=-
+        ; search from taskbar
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search]
+        "SearchboxTaskbarMode"=-
 
-; meet now
-[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+        ; meet now
+        [-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
 
-; use dynamic lighting on my devices
-; compatible apps in the forground always control lighting
-; match my windows accent color
-[HKEY_CURRENT_USER\Software\Microsoft\Lighting]
-"AmbientLightingEnabled"=dword:00000001
-"ControlledByForegroundApp"=-
-"UseSystemAccentColor"=dword:00000001
+        ; use dynamic lighting on my devices
+        ; compatible apps in the forground always control lighting
+        ; match my windows accent color
+        [HKEY_CURRENT_USER\Software\Microsoft\Lighting]
+        "AmbientLightingEnabled"=dword:00000001
+        "ControlledByForegroundApp"=-
+        "UseSystemAccentColor"=dword:00000001
 
-; DEVICES
-; let windows manage my default printer
-[HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Windows]
-"LegacyDefaultPrinterMode"=dword:ffffffff
+        ; DEVICES
+        ; let windows manage my default printer
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Windows]
+        "LegacyDefaultPrinterMode"=dword:ffffffff
 
-; write with your fingertip
-[-HKEY_CURRENT_USER\Software\Microsoft\TabletTip\EmbeddedInkControl]
+        ; write with your fingertip
+        [-HKEY_CURRENT_USER\Software\Microsoft\TabletTip\EmbeddedInkControl]
 
-; SYSTEM
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\DWM]
-"UseDpiScaling"=-
+        ; SYSTEM
+        [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\DWM]
+        "UseDpiScaling"=-
 
-; variable refresh rate & optimizations for windowed games
-[HKEY_CURRENT_USER\Software\Microsoft\DirectX\UserGpuPreferences]
-"DirectXUserGlobalSettings"=-
+        ; variable refresh rate & optimizations for windowed games
+        [HKEY_CURRENT_USER\Software\Microsoft\DirectX\UserGpuPreferences]
+        "DirectXUserGlobalSettings"=-
 
-; Notification defaults
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PushNotifications]
-"ToastEnabled"=-
-"LockScreenToastEnabled"=-
+        ; Notification defaults
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PushNotifications]
+        "ToastEnabled"=-
+        "LockScreenToastEnabled"=-
 
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings]
-"NOC_GLOBAL_SETTING_ALLOW_NOTIFICATION_SOUND"=-
-"NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK"=-
-"NOC_GLOBAL_SETTING_ALLOW_CRITICAL_TOASTS_ABOVE_LOCK"=-
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings]
+        "NOC_GLOBAL_SETTING_ALLOW_NOTIFICATION_SOUND"=-
+        "NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK"=-
+        "NOC_GLOBAL_SETTING_ALLOW_CRITICAL_TOASTS_ABOVE_LOCK"=-
 
-[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance]
+        [-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance]
 
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\windows.immersivecontrolpanel_cw5n1h2txyewy!microsoft.windows.immersivecontrolpanel]
-"Enabled"=-
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\windows.immersivecontrolpanel_cw5n1h2txyewy!microsoft.windows.immersivecontrolpanel]
+        "Enabled"=-
 
-[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.CapabilityAccess]
+        [-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.CapabilityAccess]
 
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.StartupApp]
-"Enabled"=dword:00000000
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.StartupApp]
+        "Enabled"=dword:00000000
 
-[-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\UserProfileEngagement]
+        [-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\UserProfileEngagement]
 
-; suggested actions
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SmartActionPlatform\SmartClipboard]
-"Disabled"=-
+        ; suggested actions
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SmartActionPlatform\SmartClipboard]
+        "Disabled"=-
 
-; battery options optimize
-[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\VideoSettings]
+        ; battery options optimize
+        [-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\VideoSettings]
 
-; UWP APPS
-; disable windows input experience preload
-[HKEY_CURRENT_USER\Software\Microsoft\input]
-"IsInputAppPreloadEnabled"=-
+        ; UWP APPS
+        ; disable windows input experience preload
+        [HKEY_CURRENT_USER\Software\Microsoft\input]
+        "IsInputAppPreloadEnabled"=-
 
-[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Dsh]
+        [-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Dsh]
 
-; copilot
-[-HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\WindowsCopilot]
+        ; copilot
+        [-HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\WindowsCopilot]
 
-; ADVERTISING & PROMOTIONAL
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
-"ContentDeliveryAllowed"=dword:00000001
-"FeatureManagementEnabled"=dword:00000001
-"OemPreInstalledAppsEnabled"=dword:00000001
-"PreInstalledAppsEnabled"=dword:00000001
-"PreInstalledAppsEverEnabled"=dword:00000001
-"RotatingLockScreenEnabled"=dword:00000001
-"RotatingLockScreenOverlayEnabled"=dword:00000001
-"SilentInstalledAppsEnabled"=dword:00000001
-"SlideshowEnabled"=dword:00000001
-"SoftLandingEnabled"=dword:00000001
-"SubscribedContent-310093Enabled"=-
-"SubscribedContent-314563Enabled"=-
-"SubscribedContent-338388Enabled"=-
-"SubscribedContent-338389Enabled"=-
-"SubscribedContent-338393Enabled"=-
-"SubscribedContent-353694Enabled"=-
-"SubscribedContent-353696Enabled"=-
-"SubscribedContent-353698Enabled"=-
-"SubscribedContentEnabled"=dword:00000001
-"SystemPaneSuggestionsEnabled"=dword:00000001
+        ; ADVERTISING & PROMOTIONAL
+        [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+        "ContentDeliveryAllowed"=dword:00000001
+        "FeatureManagementEnabled"=dword:00000001
+        "OemPreInstalledAppsEnabled"=dword:00000001
+        "PreInstalledAppsEnabled"=dword:00000001
+        "PreInstalledAppsEverEnabled"=dword:00000001
+        "RotatingLockScreenEnabled"=dword:00000001
+        "RotatingLockScreenOverlayEnabled"=dword:00000001
+        "SilentInstalledAppsEnabled"=dword:00000001
+        "SlideshowEnabled"=dword:00000001
+        "SoftLandingEnabled"=dword:00000001
+        "SubscribedContent-310093Enabled"=-
+        "SubscribedContent-314563Enabled"=-
+        "SubscribedContent-338388Enabled"=-
+        "SubscribedContent-338389Enabled"=-
+        "SubscribedContent-338393Enabled"=-
+        "SubscribedContent-353694Enabled"=-
+        "SubscribedContent-353696Enabled"=-
+        "SubscribedContent-353698Enabled"=-
+        "SubscribedContentEnabled"=dword:00000001
+        "SystemPaneSuggestionsEnabled"=dword:00000001
 
-; OTHER
-; gallery
-[-HKEY_CURRENT_USER\Software\Classes\CLSID\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}]
+        ; OTHER
+        ; gallery
+        [-HKEY_CURRENT_USER\Software\Classes\CLSID\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}]
 
-; context menu
-[-HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}]
+        ; context menu
+        [-HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}]
 "@
+    
     Set-Content -Path "$env:TEMP\Restore_User_Registry.reg" -Value $MultilineComment -Force
     Regedit.exe /S "$env:TEMP\Restore_User_Registry.reg"
     Show-Header
     Write-Host "Default User Registry Settings Applied." -ForegroundColor Green
     Wait-IfNotSpecialize
 }
-# End of Registry Optimizations
+
+############################################
+#               Registry                   #
+############################################
 
 ############################################
 #             TASK & SERVICES              #
@@ -2547,7 +2554,7 @@ function Enable-ScheduledTasks {
 
 function Set-RecommendedPowerSettings {
     Clear-Host
-    # Import and set Ultimate power plan
+    # Import and set Ultimate power plan at Control Panel\Hardware and Sound\Power Options\Edit Plan Settings -> Change advanced power settings
     cmd /c "powercfg /duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 99999999-9999-9999-9999-999999999999 >nul 2>&1 & powercfg /SETACTIVE 99999999-9999-9999-9999-999999999999 >nul 2>&1"
 
     # Get all power plans and delete them
@@ -2562,63 +2569,62 @@ function Set-RecommendedPowerSettings {
 
     # Registry modifications
     $regChanges = @(
-        'HKLM\SYSTEM\CurrentControlSet\Control\Power /v HibernateEnabled /t REG_DWORD /d 0', # Disables hibernate
-        'HKLM\SYSTEM\CurrentControlSet\Control\Power /v HibernateEnabledDefault /t REG_DWORD /d 0', # Disables default hibernate settings
         'HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings /v ShowLockOption /t REG_DWORD /d 0', # Hides the Lock option from the Power menu
         'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings /v ShowSleepOption /t REG_DWORD /d 0', # Hides the Sleep option from the Power menu
         'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power /v HiberbootEnabled /t REG_DWORD /d 0', # Disables Fast Startup (Hiberboot)
-        'HKLM\SYSTEM\ControlSet001\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583 /v ValueMax /t REG_DWORD /d 0', # Unparks CPU cores by setting the maximum processor state
-        'HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling /v PowerThrottlingOff /t REG_DWORD /d 1', # Disables power throttling
-        'HKLM\System\ControlSet001\Control\Power\PowerSettings\2a737441-1930-4402-8d77-b2bebba308a3\0853a681-27c8-4100-a2fd-82013e970683 /v Attributes /t REG_DWORD /d 2', # Unhides "Hub Selective Suspend Timeout"
-        'HKLM\System\ControlSet001\Control\Power\PowerSettings\2a737441-1930-4402-8d77-b2bebba308a3\d4e98f31-5ffe-4ce1-be31-1b38b384c009 /v Attributes /t REG_DWORD /d 2' # Unhides "USB 3 Link Power Management"
+        'HKLM\SYSTEM\CurrentControlSet\Control\Power /v HibernateEnabled /t REG_DWORD /d 0', # Disables hibernate
+        'HKLM\SYSTEM\CurrentControlSet\Control\Power /v HibernateEnabledDefault /t REG_DWORD /d 0', # Disables default hibernate settings
+        'HKLM\SYSTEM\CCurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583 /v ValueMax /t REG_DWORD /d 0', # Unparks CPU cores by setting the maximum processor state: 100%
+        'HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\2a737441-1930-4402-8d77-b2bebba308a3\d4e98f31-5ffe-4ce1-be31-1b38b384c009 /v Attributes /t REG_DWORD /d 2' # Unhides "USB 3 Link Power Management"
+        'HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\2a737441-1930-4402-8d77-b2bebba308a3\0853a681-27c8-4100-a2fd-82013e970683 /v Attributes /t REG_DWORD /d 2' # Unhides "Hub Selective Suspend Timeout"
     )
 
-
     foreach ($reg in $regChanges) {
-        cmd /c "reg add `$reg` /f >nul 2>&1"
+        cmd /c "reg add $reg /f >nul 2>&1"
     }
 
-    # Modify Power Plan settings
+    # Ensure Hibernate file is deleted
+    cmd /c "powercfg /h off >nul 2>&1"
+
+
+    # Modify Advcaned Power Plan settings
     $settings = @(
         @{
             SubgroupGUID = "0012ee47-9041-4b5d-9b77-535fba8b1442" # Hard Disk
-            SettingGUIDs = @("6738e2c4-e8a5-4a42-b16a-e040e769756e") # Turn off hard disk after
+            SettingGUIDs = @("6738e2c4-e8a5-4a42-b16a-e040e769756e") # Turn off hard disk after: Never
         },
         @{
             SubgroupGUID = "0d7dbae2-4294-402a-ba8e-26777e8488cd" # Desktop Background Settings
-            SettingGUIDs = @("309dce9b-bef4-4119-9921-a851fb12f0f4") # Slide show
+            SettingGUIDs = @("309dce9b-bef4-4119-9921-a851fb12f0f4") # Slide show: Available
         },
         @{
             SubgroupGUID = "19cbb8fa-5279-450e-9fac-8a3d5fedd0c1" # Wireless Adapter Settings
-            SettingGUIDs = @("12bbebe6-58d6-4636-95bb-3217ef867c1a") # Power saving mode
+            SettingGUIDs = @("12bbebe6-58d6-4636-95bb-3217ef867c1a") # Power saving mode: Maximum Performance
         },
         @{
             SubgroupGUID = "238c9fa8-0aad-41ed-83f4-97be242c8f20" # Sleep
             SettingGUIDs = @(
-                "29f6c1db-86da-48c5-9fdb-f2b67b1f44da", # Sleep after
-                "94ac6d29-73ce-41a6-809f-6363ba21b47e", # Allow hybrid sleep
-                "9d7815a6-7ee4-497e-8888-515a05f02364", # Hibernate after
-                "bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d"  # Allow wake timers
+                "29f6c1db-86da-48c5-9fdb-f2b67b1f44da", # Sleep after: Never
+                "bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d"  # Allow wake timers: Disable
             )
         },
         @{
             SubgroupGUID = "2a737441-1930-4402-8d77-b2bebba308a3" # USB Settings
             SettingGUIDs = @(
-                "0853a681-27c8-4100-a2fd-82013e970683", # USB selective suspend setting
-                "48e6b7a6-50f5-4782-a5d4-53bb8f07e226", # USB 3 Link Power Management
-                "d4e98f31-5ffe-4ce1-be31-1b38b384c009"  # USB Hub Selective Suspend Timeout
+                "0853a681-27c8-4100-a2fd-82013e970683", # USB selective suspend setting: Disabled 
+                "d4e98f31-5ffe-4ce1-be31-1b38b384c009",  # USB Hub Selective Suspend Timeout: Disabled (0 milliseconds)
+                "48e6b7a6-50f5-4782-a5d4-53bb8f07e226" # USB 3 Link Power Management: Off
             )
         },
         @{
             SubgroupGUID = "501a4d13-42af-4429-9fd1-a8218c268e20" # PCI Express
-            SettingGUIDs = @("ee12f906-d277-404b-b6da-e5fa1a576df5") # Link State Power Management
+            SettingGUIDs = @("ee12f906-d277-404b-b6da-e5fa1a576df5") # Link State Power Management: Off
         },
         @{
             SubgroupGUID = "7516b95f-f776-4464-8c53-06167f40cc99" # Display settings
-            SettingGUIDs = @("3c0bc021-c8a8-4e07-a973-6b14cbcb2b7e") # Turn off Display After setting
+            SettingGUIDs = @("3c0bc021-c8a8-4e07-a973-6b14cbcb2b7e") # Turn off Display After setting: Never
         }
     )
-
 
     foreach ($group in $settings) {
         $subgroup = $group.SubgroupGUID
@@ -2634,6 +2640,19 @@ function Set-RecommendedPowerSettings {
         Wait-IfNotSpecialize
         return
     }
+
+    ############################################
+    #                  DEBUG                   #
+    ############################################
+
+    # Displays the detailed configuration of all power settings for the currently active power plan.
+    # powercfg /query
+
+    # Generates a detailed energy report for your system, highlighting issues and inefficiencies in the power management configuration.
+    # powercfg /energy
+
+    # The command powercfg /a is used to display the sleep states that are currently available on your system. It helps you determine which power-saving states (e.g., Sleep, Hibernate, Hybrid Sleep) are supported or unsupported on your system.
+    # powercfg /a
 }
 
 function Set-DefaultPowerSettings {
@@ -2654,7 +2673,7 @@ function Set-DefaultPowerSettings {
     )
 
     foreach ($reg in $regChanges) {
-        cmd /c "reg add `$reg` /f >nul 2>&1"
+        cmd /c "reg add $reg /f >nul 2>&1"
     }
 
     Show-Header
