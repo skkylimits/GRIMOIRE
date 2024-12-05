@@ -5,34 +5,625 @@ description: A sleek, unattended Windows installation script, automating system 
 
 The provided script is a PowerShell function named `All-Unattended-Settings` that performs a series of modifications to optimize Windows power settings for specific requirements. Here's a detailed explanation of what each part does:
 
+## Software & Apps
+
+test
+
+## Privacy & Security
+
+The PowerShell script `Set-RecommendedPrivacySettings` is designed to apply a set of recommended privacy settings to a Windows system by modifying the Windows Registry. Here's a detailed explanation of what the script does, line by line, grouped into phases:
+
+```sql
++-------------------------------+
+|   Check if Not in Specialize Phase |
++-------------------------------+
+           |
+           v
++---------------------------+
+| Is $isSpecializePhase False? |
++---------------------------+
+        |      |
+       Yes     No
+        |       |
++---------------------------+     +------------------------+
+| Show Header & Display     |     | Skip Display Message   |
+| "Applying Recommended      |     |                        |
+| Privacy Settings"          |     +------------------------+
++---------------------------+
+           |
+           v
++----------------------------------+
+| Create Registry Changes         |
+| (Activity Feed, Telemetry, etc.) |
++----------------------------------+
+           |
+           v
++------------------------------------+
+| Write Registry Changes to File    |
+| ($env:TEMP\Recommended_Privacy_Settings.reg) |
++------------------------------------+
+           |
+           v
++------------------------------------+
+| Import the .reg File Using regedit |
+| (Silent Mode, Wait for Completion) |
++------------------------------------+
+           |
+           v
++---------------------------+
+| Check if Not in Specialize Phase |
++---------------------------+
+        |      |
+       Yes     No
+        |       |
++----------------------------+     +-----------------------------+
+| Show Header & Display      |     | Skip Display Message        |
+| "Recommended Privacy       |     |                             |
+| Settings Applied."          |     +-----------------------------+
++----------------------------+
+           |
+           v
++-----------------------------+
+| End of Function              |
+| (Privacy settings applied)   |
++-----------------------------+
+```
+
+### 1. Display a Header (if not in the specialize phase)
+```powershell
+if (-not $isSpecializePhase) {
+    Show-Header
+    Write-Host "Applying Recommended Privacy Settings . . ."
+}
+```
+- **Purpose**: This section checks if the `$isSpecializePhase` variable is not set to `$true`. If it's not in the "specialize" phase, it displays a header message to indicate that the script is applying the recommended privacy settings.
+    - `Show-Header`: Likely a function defined elsewhere in the script to display a header (not shown in the provided code).
+    - `Write-Host`: Prints the message `"Applying Recommended Privacy Settings . . ."` to the console.
+
+### 2. Create a Multi-Line String Containing Registry Changes
+```powershell
+$MultilineComment = @"
+    Windows Registry Editor Version 5.00
+
+    ; --Privacy and Security Settings--
+
+    ; Disables Activity History
+    [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
+    "EnableActivityFeed"=dword:00000000
+    "PublishUserActivities"=dword:00000000
+    "UploadUserActivities"=dword:00000000
+
+    ; Disables Location Tracking
+    [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location]
+    "Value"="Deny"
+
+    [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}]
+    "SensorPermissionState"=dword:00000000
+
+    [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration]
+    "Status"=dword:00000000
+
+    [HKEY_LOCAL_MACHINE\SYSTEM\Maps]
+    "AutoUpdateEnabled"=dword:00000000
+
+    ; Disables Telemetry
+    [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection]
+    "AllowTelemetry"=dword:00000000
+
+    ; Disables Telemetry and Feedback Notifications
+    [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection]
+    "AllowTelemetry"=dword:00000000
+    "DoNotShowFeedbackNotifications"=dword:00000001
+
+    ; Disables Windows Ink Workspace
+    [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace]
+    "AllowWindowsInkWorkspace"=dword:00000000
+
+    ; Disables the Advertising ID for All Users
+    [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo]
+    "DisabledByGroupPolicy"=dword:00000001
+
+    ; Disable Account Info
+    [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation]
+    "Value"="Deny"
+"@
+```
+- **Purpose**: This block creates a multi-line string `$MultilineComment` containing the Registry modifications to apply the privacy settings. These changes are grouped into different categories:
+    - **Disabling Activity History**: Prevents Windows from collecting activity data, which includes features like activity history and publishing/uploading user activities.
+    - **Disabling Location Tracking**: Prevents Windows from tracking the device's location and prevents location-based features from being used.
+    - **Disabling Telemetry**: Prevents Windows from sending diagnostic and telemetry data to Microsoft. It also disables feedback notifications to the user.
+    - **Disabling Windows Ink Workspace**: Disables the Windows Ink Workspace feature that allows users to draw and annotate with a pen or stylus.
+    - **Disabling Advertising ID**: Disables the advertising ID, which is used by Microsoft to show personalized ads.
+    - **Disabling Account Information**: Prevents access to user account information for apps that request it.
+
+### 3. Write the Registry Modifications to a `.reg` File
+```powershell
+Set-Content -Path "$env:TEMP\Recommended_Privacy_Settings.reg" -Value $MultilineComment -Force
+```
+- **Purpose**: This line writes the registry changes (stored in `$MultilineComment`) to a `.reg` file located in the system's temporary folder (`$env:TEMP`). The file is named `Recommended_Privacy_Settings.reg`.
+    - The `-Force` parameter ensures that the file is written, even if it already exists.
+
+### 4. Import the `.reg` File Using `regedit`
+```powershell
+Start-Process -FilePath "regedit.exe" -ArgumentList "/S `"$env:TEMP\Recommended_Privacy_Settings.reg`"" -NoNewWindow -Wait
+```
+- **Purpose**: This command silently imports the `.reg` file into the Windows Registry using the `regedit.exe` utility. The `/S` flag ensures the import is silent (no user prompts or notifications).
+    - `-NoNewWindow`: Ensures that `regedit` is not opened in a new window.
+    - `-Wait`: Makes the script wait for `regedit` to complete before moving on.
+
+### 5. Display Success Message (if not in the specialize phase)
+```powershell
+if (-not $isSpecializePhase) {
+    Show-Header
+    Write-Host "Recommended Privacy Settings Applied." -ForegroundColor Green
+    Wait-IfNotSpecialize
+}
+```
+- **Purpose**: This block checks again if the `$isSpecializePhase` variable is not set to `$true`. If not in the specialize phase, it:
+    - Displays a header again using `Show-Header` (likely defined elsewhere in the script).
+    - Prints `"Recommended Privacy Settings Applied."` in green to indicate that the privacy settings were successfully applied.
+    - `Wait-IfNotSpecialize` is called, which is presumably another function that either waits for certain conditions or performs additional tasks, but the exact behavior is not defined in the provided code.
+
+This script helps enforce privacy by disabling activity tracking, telemetry, location tracking, and other privacy-invasive features within Windows, ensuring better user privacy and control over data collection.
+
+## Windows Updates 
+
+Let me explain what the `Set-RecommendedUpdateSettings` function does, breaking it down into key phases and actions. This function modifies Windows Update settings through the registry to enforce specific update behaviors.
+
+```sql
++-------------------------------+
+|   Check if Not in Specialize Phase |
++-------------------------------+
+           |
+           v
++---------------------------+
+| Is $isSpecializePhase False? |
++---------------------------+
+        |      |
+       Yes     No
+        |       |
++---------------------------+     +------------------------+
+| Show Header & Display     |     | Skip Display Message   |
+| "Applying Recommended      |     |                        |
+| Windows Update Settings"   |     +------------------------+
++---------------------------+
+           |
+           v
++----------------------------------+
+| Create Registry Changes         |
+| (Disable Auto Updates, Defer,  |
+| Prevent Upgrade, etc.)          |
++----------------------------------+
+           |
+           v
++------------------------------------+
+| Write Registry Changes to File    |
+| ($env:TEMP\Recommended_Windows_Update_Settings.reg) |
++------------------------------------+
+           |
+           v
++------------------------------------+
+| Import the .reg File Using regedit |
+| (Silent Mode, Wait for Completion) |
++------------------------------------+
+           |
+           v
++---------------------------+
+| Check if Not in Specialize Phase |
++---------------------------+
+        |      |
+       Yes     No
+        |       |
++----------------------------+     +-----------------------------+
+| Show Header & Display      |     | Skip Display Message        |
+| "Recommended Windows Update|     |                             |
+| Settings Applied."          |     +-----------------------------+
++----------------------------+
+           |
+           v
++-----------------------------+
+| End of Function              |
+| (Windows Update settings applied) |
++-----------------------------+
+```
+
+### **1. Check if Not in Specialize Phase**
+```powershell
+if (-not $isSpecializePhase) {
+    Show-Header
+    Write-Host "Applying Recommended Windows Update Settings . . ."
+}
+```
+- **Purpose**: The function first checks if it's not in the "specialize" phase by evaluating the `$isSpecializePhase` variable. 
+  - **If true** (it's not in the specialize phase), it:
+    - Calls `Show-Header` (presumably a function that displays a header or title).
+    - Prints `"Applying Recommended Windows Update Settings . . ."` to the console.
+  - **If false**, it skips this step and doesn't display the header or message.
+
+
+### **2. Create Registry Changes (Multiline String)**
+```powershell
+$MultilineComment = @"
+    Windows Registry Editor Version 5.00
+
+    ; --Windows Update Settings--
+
+    ; Disable Automatic Updates (Only Check for Updates Manually)
+    ; Notify Before Downloading and Installing Updates
+    ; Enable Notifications for Security Updates Only (Do Not Auto-Download)
+    [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU]
+    "NoAutoUpdate"=dword:00000001
+    "AUOptions"=dword:00000002
+    "AutoInstallMinorUpdates"=dword:00000000
+
+    ; Prevent Automatic Upgrade from Windows 10 22H2 to Windows 11 (Manual Upgrade Still Allowed)
+    ; Delay Feature and Quality updates for 1 year from install.
+    [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate]
+    "TargetReleaseVersion"=dword:00000001
+    "TargetReleaseVersionInfo"="22H2"
+    "ProductVersion"="Windows 10"
+    "DeferFeatureUpdates"=dword:00000001
+    "DeferFeatureUpdatesPeriodInDays"=dword:0000016d
+    "DeferQualityUpdates"=dword:00000001
+    "DeferQualityUpdatesPeriodInDays"=dword:00000007
+
+    ; Disables allowing downloads from other PCs (Delivery Optimization)
+    [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization]
+    "DODownloadMode"=dword:00000000
+"@
+```
+- **Purpose**: Here, the function prepares a multiline string `$MultilineComment` containing the registry changes needed to apply the recommended Windows Update settings.
+    - **Disable Automatic Updates**: It disables automatic updates and sets Windows Update to only check for updates manually.
+    - **Upgrade Settings**: Prevents an automatic upgrade from Windows 10 22H2 to Windows 11. It also delays feature and quality updates for 1 year.
+    - **Delivery Optimization**: Disables downloading updates from other PCs, which is part of Windows' Delivery Optimization feature.
+
+
+### **3. Write Registry Changes to a `.reg` File**
+```powershell
+Set-Content -Path "$env:TEMP\Recommended_Windows_Update_Settings.reg" -Value $MultilineComment -Force
+```
+- **Purpose**: The function writes the registry changes (stored in `$MultilineComment`) to a `.reg` file located in the temporary folder (`$env:TEMP`).
+  - **Path**: `$env:TEMP\Recommended_Windows_Update_Settings.reg`
+  - The `-Force` flag ensures that the file is written even if it already exists.
+
+
+### **4. Import the `.reg` File Using `regedit`**
+```powershell
+Regedit.exe /S "$env:TEMP\Recommended_Windows_Update_Settings.reg"
+```
+- **Purpose**: This line runs the `regedit.exe` utility to import the `.reg` file created in the previous step.
+  - The `/S` flag ensures that the import happens silently, without requiring user confirmation.
+  - The settings are applied to the Windows registry.
+
+
+### **5. Check if Not in Specialize Phase Again**
+```powershell
+if (-not $isSpecializePhase) {
+    Show-Header
+    Write-Host "Recommended Windows Update Settings Applied." -ForegroundColor Green
+    Wait-IfNotSpecialize
+}
+```
+
+- **Purpose**: The function checks again if it's not in the specialize phase.
+  - **If true**:
+    - Calls `Show-Header` (likely displaying a header indicating the settings have been applied).
+    - Prints `"Recommended Windows Update Settings Applied."` in green to inform the user that the settings were successfully applied.
+    - Calls the `Wait-IfNotSpecialize` function, which is presumably a custom function to either pause the script or handle certain tasks, but the exact behavior is not provided.
+
+### **6. End of Function**
+- **Purpose**: The function ends, having successfully applied the Windows Update settings based on the registry modifications.
+
 ## Registry
 
-This function is designed to:
-- Apply a wide range of system-wide optimizations.
-- Disable or customize certain features.
-- Improve system performance (especially for gaming and multimedia).
-- Enhance privacy by disabling telemetry-like features.
-- Customize the user experience by modifying the Start menu and context menus.
+Let's break down the `Set-RecommendedHKLMRegistry` function and explain each part of it, grouping it into logical phases where needed. This function is responsible for modifying the Windows registry to apply a series of recommended settings, typically for system optimization, privacy, and security improvements.
 
-It achieves this by generating and importing a `.reg` file with detailed registry configurations.
+```sql
++-------------------------------------+
+|        Create Registry Keys        |
+| (Take Ownership, Windows Features, |
+| Security, etc.)                    |
++-------------------------------------+
+               |
+               v
++-------------------------------------------+
+| Write Registry Changes to File           |
+| ($env:TEMP\Optimize_LocalMachine_Registry.reg) |
++-------------------------------------------+
+               |
+               v
++------------------------------------------+
+| Modify Registry File Content            |
+| (Replace `?` with `$` for proper parsing)|
++------------------------------------------+
+               |
+               v
++------------------------------------------+
+| Import the .reg File Using regedit      |
+| (Silent Mode, Wait for Completion)      |
++------------------------------------------+
+               |
+               v
++-------------------------------------+
+| Show Success Message               |
+| "Recommended Local Machine Registry|
+| Settings Applied"                   |
++-------------------------------------+
+               |
+               v
++-------------------------------------+
+| Wait If Not in Specialize Phase     |
++-------------------------------------+
+               |
+               v
++-------------------------------------+
+| End of Function                    |
+| (Local machine registry settings   |
+| applied successfully)               |
++-------------------------------------+
+```
 
-This PowerShell function, `Set-RecommendedHKLMRegistry`, performs several actions, primarily targeting system-wide registry settings in a Windows environment to optimize performance, disable certain features, and apply customizations. Here’s a detailed breakdown of each part of the function:
+### **1. Preparing the Registry Changes**
+```powershell
+$MultilineComment = @"
+    $MultilineComment = @"
+        Windows Registry Editor Version 5.00
 
-### **1. Define the Function:**
-The function `Set-RecommendedHKLMRegistry` is defined to modify registry keys by creating and applying a `.reg` file.
+        ; Adds "Take Ownership" to the Right Click Context Menu for All Users
+                        
+        [-HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
+        [-HKEY_CLASSES_ROOT\*\shell\runas]
+                
+        [HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
+        @="Take Ownership"
+        "Extended"=-
+        "HasLUAShield"=""
+        "NoWorkingDirectory"=""
+        "NeverDefault"=""
+                
+        [HKEY_CLASSES_ROOT\*\shell\TakeOwnership\command]
+        @="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l & pause' -Verb runAs\""
+        "IsolatedCommand"= "powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l & pause' -Verb runAs\""
+                    
+        [HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership]
+        @="Take Ownership"
+        "AppliesTo"="NOT (System.ItemPathDisplay:=\"C:\\Users\" OR System.ItemPathDisplay:=\"C:\\ProgramData\" OR System.ItemPathDisplay:=\"C:\\Windows\" OR System.ItemPathDisplay:=\"C:\\Windows\\System32\" OR System.ItemPathDisplay:=\"C:\\Program Files\" OR System.ItemPathDisplay:=\"C:\\Program Files (x86)\")"
+        "Extended"=-
+        "HasLUAShield"=""
+        "NoWorkingDirectory"=""
+        "Position"="middle"
+                
+        [HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership\command]
+        @="powershell -windowstyle hidden -command \"$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList ('/c takeown /f \\\"%1\\\" /r /d ' + $Y + ' && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l /q & pause') -Verb runAs\""
+        "IsolatedCommand"="powershell -windowstyle hidden -command \"$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList ('/c takeown /f \\\"%1\\\" /r /d ' + $Y + ' && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l /q & pause') -Verb runAs\""
+                        
+        [HKEY_CLASSES_ROOT\Drive\shell\runas]
+        @="Take Ownership"
+        "Extended"=-
+        "HasLUAShield"=""
+        "NoWorkingDirectory"=""
+        "Position"="middle"
+        "AppliesTo"="NOT (System.ItemPathDisplay:=\"C:\\\")"
+                
+        [HKEY_CLASSES_ROOT\Drive\shell\runas\command]
+        @="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant *S-1-3-4:F /t /c & Pause"
+        "IsolatedCommand"="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant *S-1-3-4:F /t /c & Pause"
 
-### **2. Multi-line Comment Creation:**
-- A block of text (stored in `$MultilineComment`) contains registry modifications written in the syntax of a `.reg` file.
+        ; --Application and Feature Restrictions--
 
-### **3. Purpose of Registry Modifications:**
-The registry modifications include a wide range of optimizations and customizations, divided into categories:
+        ; Disable Windows Copilot system-wide
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot]
+        "TurnOffWindowsCopilot"=dword:00000001
 
-#### **Context Menu Customization:**
+        ; Prevents Dev Home Installation
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
+
+        ; Prevents New Outlook for Windows Installation
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
+
+        ; Prevents Chat Auto Installation and Removes Chat Icon
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications]
+        "ConfigureChatAutoInstall"=dword:00000000
+
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
+        "ChatIcon"=dword:00000003
+
+        ; Disables Bitlocker Auto Encryption on Windows 11 24H2 and Onwards
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BitLocker]
+        "PreventDeviceEncryption"=dword:00000001
+
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EnhancedStorageDevices]
+        "TCGSecurityActivationDisabled"=dword:00000001
+
+        ; Disables Cortana
+        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Windows Search]
+        "AllowCortana"=dword:00000000
+
+        ; Set Registry Keys to Disable Wifi-Sense
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting]
+        "Value"=dword:00000000
+
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots]
+        "Value"=dword:00000000
+
+        ; Disable Tablet Mode
+        ; Always go to desktop mode on sign-in
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell]
+        "TabletMode"=dword:00000000
+        "SignInMode"=dword:00000001
+
+        ; Disable Xbox GameDVR
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\GameDVR]
+        "AllowGameDVR"=dword:00000000
+
+        ; Disables OneDrive Automatic Backups of Important Folders (Documents, Pictures etc.)
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\OneDrive]
+        "KFMBlockOptIn"=dword:00000001
+
+        ; Disables the "Push To Install" feature in Windows
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\PushToInstall]
+        "DisablePushToInstall"=dword:00000001
+
+        ; Disables Windows Consumer Features Like App Promotions etc.
+        ; Disables Consumer Account State Content
+        ; Disables Cloud Optimized Content
+        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CloudContent]
+        "DisableWindowsConsumerFeatures"=dword:00000000
+        "DisableConsumerAccountStateContent"=dword:00000001
+        "DisableCloudOptimizedContent"=dword:00000001
+
+        ; Blocks the "Allow my organization to manage my device" and "No, sign in to this app only" pop-up message
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WorkplaceJoin]
+        "BlockAADWorkplaceJoin"=dword:00000001
+
+        ; --Start Menu Customization--
+        ; Removes All Pinned Apps from the Start Menu to Clean it Up
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start]
+        "ConfigureStartPins"="{ \"pinnedList\": [] }"
+        "ConfigureStartPins_ProviderSet"=dword:00000001
+        "ConfigureStartPins_WinningProvider"="B5292708-1619-419B-9923-E5D9F3925E71"
+
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\providers\B5292708-1619-419B-9923-E5D9F3925E71\default\Device\Start]
+        "ConfigureStartPins"="{ \"pinnedList\": [] }"
+        "ConfigureStartPins_LastWrite"=dword:00000001
+
+        ; --File System Settings--
+        ; Enable Long File Paths with Up to 32,767 Characters
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem]
+        "LongPathsEnabled"=dword:00000001
+
+        ; --Multimedia and Gaming Performance--
+        ; Gives Multimedia Applications like Games and Video Editing a Higher Priority
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
+        "SystemResponsiveness"=dword:00000000
+        "NetworkThrottlingIndex"=dword:0000000a
+
+        ; Gives Graphics Cards a Higher Priority for Gaming
+        ; Gives the CPU a Higher Priority for Gaming
+        ; Gives Games a higher priority in the system's scheduling
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
+        "GPU Priority"=dword:00000008
+        "Priority"=dword:00000006
+        "Scheduling Category"="High"
+
+        ; disable startup sound
+        ; [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation]
+        ; "DisableStartupSound"=dword:00000001
+
+        ; [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\EditionOverrides]
+        ; "UserSetting_DisableStartupSound"=dword:00000001
+
+        ; disable device installation settings
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata]
+        "PreventDeviceMetadataFromNetwork"=dword:00000001
+
+        ; NETWORK AND INTERNET
+        ; disable allow other network users to control or disable the shared internet connection
+        [HKEY_LOCAL_MACHINE\System\ControlSet001\Control\Network\SharedAccessConnection]
+        "EnableControl"=dword:00000000
+
+        ; SYSTEM AND SECURITY
+        ; adjust for best performance of programs
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
+        "Win32PrioritySeparation"=dword:00000026
+
+        ; disable remote assistance
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance]
+        "fAllowToGetHelp"=dword:00000000
+
+        ; TROUBLESHOOTING
+        ; disable automatic maintenance
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance]
+        "MaintenanceDisabled"=dword:00000001
+
+        ; SECURITY AND MAINTENANCE
+        ; disable report problems
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting]
+        "Disabled"=dword:00000001
+
+        ; ACCOUNTS
+        ; disable use my sign in info after restart
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+        "DisableAutomaticRestartSignOn"=dword:00000001
+
+        ; APPS
+        ; disable archive apps 
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Appx]
+        "AllowAutomaticAppArchiving"=dword:00000000
+
+        ; PERSONALIZATION
+        ; Hides the Meet Now Button on the Taskbar
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+        "HideSCAMeetNow"=dword:00000001
+        "NoStartMenuMFUprogramsList"=-
+        "NoInstrumentation"=-
+
+        ; remove windows widgets from taskbar
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh] 
+        "AllowNewsAndInterests"=dword:00000000
+
+        ; remove news and interests from Taskbar
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds]
+        "EnableFeeds"=dword:00000000
+
+        ; SYSTEM
+        ; turn on hardware accelerated gpu scheduling
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
+        "HwSchMode"=dword:00000002
+
+        ; disable storage sense
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\StorageSense]
+        "AllowStorageSenseGlobal"=dword:00000000
+
+        ; --OTHER--
+        ; Disable update Microsoft Store apps automatically
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore]
+        "AutoDownload"=dword:00000002
+
+        ; UWP APPS
+        ; disable background apps
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy]
+        "LetAppsRunInBackground"=dword:00000002
+
+        ; disable widgets
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests]
+        "value"=dword:00000000
+
+        ; NVIDIA
+        ; enable old nvidia sharpening
+        ; [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS]
+        "EnableGR535"=dword:00000000
+
+        ; OTHER
+        ; remove 3d objects
+        ; [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+        ; [-HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+
+        ; Remove Home Folder
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}]
+
+        [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
+        "MouseSpeed"="0"
+        "MouseThreshold1"="0"
+        "MouseThreshold2"="0"
+"@
+```
+::foldable
+#title
+regedit description
+
+#content
+**Context Menu Customization:**
 - Adds a "Take Ownership" option to the right-click context menu for files, directories, and drives.
   - Configures `takeown` and `icacls` commands to update ownership and permissions for the selected file or folder.
   - Excludes critical directories like `C:\Windows`, `C:\Program Files`, and `C:\Users` to avoid accidental ownership changes.
 
-#### **Application and Feature Restrictions:**
+| Registry Key/Setting | Description | Reason to Disable/Enable |
+|----------------------|-------------|--------------------------|
+| **Take Ownership Context Menu** | Adds "Take Ownership" to the right-click context menu for files, folders, and drives. | **Enable**: Allows users to easily take ownership of files or folders, which is useful for administrative purposes. |
+
+
+**Application and Feature Restrictions:**
 - Disables features like:
   - Windows Copilot.
   - Automatic installation of Dev Home, New Outlook, and Chat applications.
@@ -41,52 +632,146 @@ The registry modifications include a wide range of optimizations and customizati
   - Wi-Fi Sense features like auto-connect to hotspots.
   - Tablet mode.
 
-#### **Start Menu Customization:**
+| Registry Key/Setting | Description | Reason to Disable/Enable |
+|----------------------|-------------|--------------------------|
+| **Windows Copilot** | Disables the Windows Copilot system-wide. | **Disable**: Prevents the system from using Windows Copilot for user assistance, enhancing privacy and reducing background services. |
+| **Dev Home Installation** | Prevents Dev Home Installation. | **Disable**: Prevents installation of Dev Home, a feature that might not be needed in certain environments (e.g., corporate or personal systems). |
+| **Outlook Update** | Prevents the new Outlook for Windows installation. | **Disable**: Stops automatic installation of the new Outlook app, useful if the user prefers the classic version or another email client. |
+| **Chat Icon** | Prevents Chat Auto Installation and removes the Chat icon. | **Disable**: Reduces unnecessary features, especially if the user doesn’t use Microsoft Teams or Chat. |
+| **Bitlocker Auto Encryption** | Disables Bitlocker auto-encryption in Windows 11 24H2 and beyond. | **Disable**: Prevents automatic encryption of devices, useful in non-enterprise environments or if manual encryption is preferred. |
+| **Cortana** | Disables Cortana, Microsoft's digital assistant. | **Disable**: Helps improve privacy and system performance by disabling unnecessary background services. |
+| **Wi-Fi Sense** | Disables Wi-Fi HotSpot Reporting and AutoConnect to Wi-Fi Sense hotspots. | **Disable**: Prevents automatic connection to untrusted or open Wi-Fi hotspots, improving security. |
+| **Tablet Mode** | Disables Tablet Mode and forces Desktop Mode at sign-in. | **Disable**: Makes the system default to Desktop Mode, useful for devices that are not tablets or hybrid devices. |
+
+
+**Start Menu Customization:**
 - Clears all pinned apps from the Start menu for a cleaner experience.
 
-#### **File System Settings:**
+| Registry Key/Setting | Description | Reason to Disable/Enable |
+|----------------------|-------------|--------------------------|
+| **Start Menu Customization** | Removes all pinned apps from the Start Menu. | **Enable**: Ensures a clean Start Menu, improving the user experience in corporate or minimal setups. |
+
+
+**File System Settings:**
 - Enables long file paths (up to 32,767 characters).
 
-#### **Multimedia and Gaming Optimizations:**
+| Registry Key/Setting | Description | Reason to Disable/Enable |
+|----------------------|-------------|--------------------------|
+| **Long File Paths** | Enables long file paths (up to 32,767 characters). | **Enable**: Supports the use of long file paths in applications that require them. |
+
+
+**Multimedia and Gaming Optimizations:**
 - Configures higher priorities for multimedia applications and gaming tasks (e.g., CPU and GPU prioritization).
 
-#### **System Customizations:**
+| Registry Key/Setting | Description | Reason to Disable/Enable |
+|----------------------|-------------|--------------------------|
+| **Multimedia and Gaming Performance** | Optimizes multimedia applications (games, video editing) by prioritizing their performance. | **Enable**: Improves performance for gaming and multimedia applications by adjusting system priorities. |
+
+
+**System Customizations:**
 - Disables startup sound.
-- Blocks "Allow my organization to manage my device" pop-ups.
 - Turns on hardware-accelerated GPU scheduling.
 - Disables OneDrive auto-backups and Windows Consumer Features.
-- Removes 3D Objects and Home folders from File Explorer.
+- Prevents the display of ads or content for consumer-based apps
 
-#### **Network and Internet:**
+| Registry Key/Setting            | Description                                                                                      | Reason to Disable/Enable                                                                 |
+|---------------------------------|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| **Startup Sound**               | Disables startup sound.                                                                          | **Disable**: Stops the startup sound to make the system experience quieter and less distracting. |
+| **Graphics Scheduling**         | Enables hardware-accelerated GPU scheduling.                                                     | **Enable**: Improves gaming and graphic-intensive application performance by offloading tasks to the GPU. |
+| **OneDrive Automatic Backup**   | Disables OneDrive automatic backups for important folders (Documents, Pictures, etc.).          | **Disable**: Prevents automatic backup to OneDrive, useful for users who prefer other backup solutions or don’t use OneDrive. |
+| **Consumer Features**           | Disables Windows Consumer Features like app promotions and cloud-optimized content.             | **Disable**: Prevents the display of ads or content for consumer-based apps, making the system more professional and less distracting. |
+
+**Network and Internet:**
 - Disables certain networking features, such as allowing other users to control shared connections.
 
-#### **Security and Maintenance:**
+| Registry Key/Setting | Description | Reason to Disable/Enable |
+|----------------------|-------------|--------------------------|
+| **Network Sharing** | Disables the ability for other network users to control or disable the shared internet connection. | **Disable**: Ensures more control over shared internet connections, useful for home networks or enterprise settings. |
+
+**Security and Maintenance:**
 - Disables:
   - Remote Assistance.
   - Automatic maintenance.
   - Problem reporting.
 
-#### **Privacy and Apps:**
+| Registry Key/Setting | Description | Reason to Disable/Enable |
+|----------------------|-------------|--------------------------|
+| **Remote Assistance** | Disables remote assistance. | **Disable**: Improves security by preventing unauthorized remote access. |
+| **Automatic Maintenance** | Disables automatic system maintenance tasks. | **Disable**: Stops automatic maintenance, useful when the user wants to control when these tasks occur, such as in a production environment. |
+| **Problem Reporting** | Disables Windows Error Reporting (WER). | **Disable**: Prevents sending error data to Microsoft, improving privacy by not sharing diagnostic data. |
+
+**Privacy and Apps:**
 - Prevents background apps from running.
 - Disables archive apps and automatic app updates from the Microsoft Store.
 
-#### **NVIDIA-Specific Configuration:**
+| Registry Key/Setting | Description | Reason to Disable/Enable |
+|----------------------|-------------|--------------------------|
+| **Background Apps** | Disables background apps. | **Disable**: Improves performance by stopping apps from running in the background unless actively needed. |
+| **Automatic App Updates** | Disables automatic Microsoft Store app updates. | **Disable**: Prevents apps from automatically updating via the Microsoft Store, allowing users to control updates manually. |
+
+
+**NVIDIA-Specific Configuration:**
 - Enables the old NVIDIA sharpening setting (`EnableGR535`).
 
-### **4. Save `.reg` File:**
-- The `$MultilineComment` content is written to a temporary `.reg` file at `$env:TEMP\Optimize_LocalMachine_Registry.reg` using `Set-Content`.
+| Registry Key/Setting | Description | Reason to Disable/Enable |
+|----------------------|-------------|--------------------------|
+| **NVIDIA Sharpening** | Enables old NVIDIA sharpening. | **Enable**: Activates sharpening for NVIDIA GPUs to enhance image quality in games or applications. |
 
-### **5. Edit the `.reg` File:**
-- The function performs a string replacement operation to replace any instances of `?` with `$` in the `.reg` file. The updated file is saved back.
 
-### **6. Import Registry File:**
-- The `.reg` file is imported into the system using the `Regedit.exe /S` command. This applies all the specified registry changes.
+**Other System Settings:**
+- Removes 3D objects from the File Explorer.
+- Removes the Home folder from the desktop.
 
-### **7. Display Messages:**
-- Displays a confirmation message (`Recommended Local Machine Registry Settings Applied`) in green text after successful application.
+| Registry Key/Setting | Description | Reason to Disable/Enable |
+|----------------------|-------------|--------------------------|
+| **3D Objects Removal** | Removes the "3D Objects" folder from Explorer. | **Disable**: Cleans up the file explorer by removing unnecessary folders, especially if they are not used. |
+| **Home Folder** | Removes the "Home" folder from the desktop. | **Disable**: Removes the Home folder from the desktop to keep it cleaner. |
+::
 
-### **8. Call Supporting Functions:**
-- Calls two undefined functions, `Show-Header` and `Wait-IfNotSpecialize`, presumably to display a header and perform a wait operation, respectively.
+### **2. Writing Registry Changes to a `.reg` File**
+```powershell
+Set-Content -Path "$env:TEMP\Optimize_LocalMachine_Registry.reg" -Value $MultilineComment -Force
+```
+- **Purpose**: This line writes the registry changes (stored in `$MultilineComment`) to a `.reg` file, specifically located in the **temporary folder** (`$env:TEMP`), with the name `Optimize_LocalMachine_Registry.reg`.
+  - The `-Force` flag ensures that the file is created even if it already exists.
+
+### **3. Modify the Registry File Content**
+```powershell
+$path = "$env:TEMP\Optimize_LocalMachine_Registry.reg"
+(Get-Content $path) -replace "\?", "$" | Out-File $path
+```
+- **Purpose**: This block modifies the `.reg` file content:
+  - It reads the content of the registry file using `Get-Content`.
+  - It performs a **replacement** on the content: every occurrence of the `?` character is replaced with `$` (likely intended to escape or alter certain characters for proper registry parsing).
+  - The modified content is then written back to the same `.reg` file using `Out-File`.
+
+### **.4 Import the `.reg` File Using `regedit`**
+```powershell
+Regedit.exe /S "$env:TEMP\Optimize_LocalMachine_Registry.reg"
+```
+- **Purpose**: This line invokes the **`regedit.exe`** tool to import the `.reg` file silently using the `/S` flag.
+  - The `/S` flag ensures that the registry import is **silent**, meaning no prompts will appear for the user during the process.
+  - The `.reg` file will be applied to the system's registry, making the necessary changes.
+
+### **5. Display Success Message**
+```powershell
+Show-Header
+Write-Host "Recommended Local Machine Registry Settings Applied." -ForegroundColor Green
+```
+- **Purpose**: After the registry changes have been successfully applied, this block:
+  - Calls the `Show-Header` function (presumably defined elsewhere in the script) to display a header (likely to indicate the task is complete).
+  - Uses `Write-Host` to print the message **"Recommended Local Machine Registry Settings Applied."** in green, confirming that the changes were successfully applied.
+
+### **6. Wait Until Not in Specialize Phase**
+```powershell
+Wait-IfNotSpecialize
+```
+- **Purpose**: This line calls the `Wait-IfNotSpecialize` function (which is presumably defined elsewhere in the script). The exact behavior of this function is unknown, but it likely:
+  - Waits for a specific condition or event to occur (possibly ensuring that the system is not in the "specialize" phase before proceeding or finishing).
+  - Ensures that the settings are applied after a particular stage of system configuration, like during imaging or customization in deployment.
+
+
+This function is aimed at configuring various system settings, optimizing them for specific use cases (like system performance, security, privacy, and personalization), and providing a cleaner, more controlled Windows environment.
 
 ## Tasks & Services
 

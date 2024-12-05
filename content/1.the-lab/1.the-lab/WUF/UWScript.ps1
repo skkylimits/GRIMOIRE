@@ -633,7 +633,10 @@ function Remove-Apps {
 }
 # End of Software & Apps Functions
 
-# Start of Privacy & Security Functions
+##################################################
+#              PRIVACY & SECURITY                #
+##################################################
+
 # Check if Windows Defender is Enabled or Disabled
 function Get-WindowsDefenderStatus {
     Clear-Host
@@ -674,26 +677,26 @@ function Get-WindowsDefenderStatus {
 # Function to Enable Windows Defender
 function Enable-WindowsDefender {
     $MultilineComment = @"
-Windows Registry Editor Version 5.00
+        Windows Registry Editor Version 5.00
 
-; Enables Windows Defender to start in Windows Security
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Sense]
-"Start"=dword:00000003
+        ; Enables Windows Defender to start in Windows Security
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Sense]
+        "Start"=dword:00000003
 
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot]
-"Start"=dword:00000000
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot]
+        "Start"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdFilter]
-"Start"=dword:00000000
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdFilter]
+        "Start"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv]
-"Start"=dword:00000003
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv]
+        "Start"=dword:00000003
 
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc]
-"Start"=dword:00000003
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc]
+        "Start"=dword:00000003
 
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend]
-"Start"=dword:00000002
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend]
+        "Start"=dword:00000002
 "@
     Set-Content -Path "$env:TEMP\Enable_Windows_Defender.reg" -Value $MultilineComment -Force
     $path = "$env:TEMP\Enable_Windows_Defender.reg"
@@ -758,6 +761,35 @@ function Get-UACStatus {
 
 # Function to Apply the Recommended Privacy Settings
 function Set-RecommendedPrivacySettings {
+    <#
+    Program Workflow Visualization:
+
+    1. Check if Not in Specialize Phase
+    → $isSpecializePhase = False?
+        → Yes 
+            → Show Header & Apply Privacy Settings
+        → No 
+            → Skip Header & Apply Privacy Settings
+
+    2. Create Registry Changes
+    → Define registry keys for privacy settings (Activity Feed, Location Tracking, Telemetry, etc.)
+
+    3. Write Registry Changes to File
+    → Save to `$env:TEMP\Recommended_Privacy_Settings.reg`
+
+    4. Import the .reg File using `regedit`
+    → Apply settings silently with `/S` flag
+
+    5. Check if Not in Specialize Phase Again
+    → $isSpecializePhase = False?
+        → Yes
+            → Show Success Message
+        → No
+            → Skip Success Message
+
+    6. End Function
+    → Privacy settings applied successfully
+    #>
     
     if (-not $isSpecializePhase) {
         Show-Header
@@ -765,49 +797,49 @@ function Set-RecommendedPrivacySettings {
     }
 
     $MultilineComment = @"
-Windows Registry Editor Version 5.00
+        Windows Registry Editor Version 5.00
 
-; --Privacy and Security Settings--
+        ; --Privacy and Security Settings--
 
-; Disables Activity History
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
-"EnableActivityFeed"=dword:00000000
-"PublishUserActivities"=dword:00000000
-"UploadUserActivities"=dword:00000000
+        ; Disables Activity History
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
+        "EnableActivityFeed"=dword:00000000
+        "PublishUserActivities"=dword:00000000
+        "UploadUserActivities"=dword:00000000
 
-; Disables Location Tracking
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location]
-"Value"="Deny"
+        ; Disables Location Tracking
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location]
+        "Value"="Deny"
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}]
-"SensorPermissionState"=dword:00000000
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}]
+        "SensorPermissionState"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration]
-"Status"=dword:00000000
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration]
+        "Status"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SYSTEM\Maps]
-"AutoUpdateEnabled"=dword:00000000
+        [HKEY_LOCAL_MACHINE\SYSTEM\Maps]
+        "AutoUpdateEnabled"=dword:00000000
 
-; Disables Telemetry
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection]
-"AllowTelemetry"=dword:00000000
+        ; Disables Telemetry
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection]
+        "AllowTelemetry"=dword:00000000
 
-; Disables Telemetry and Feedback Notifications
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection]
-"AllowTelemetry"=dword:00000000
-"DoNotShowFeedbackNotifications"=dword:00000001
+        ; Disables Telemetry and Feedback Notifications
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection]
+        "AllowTelemetry"=dword:00000000
+        "DoNotShowFeedbackNotifications"=dword:00000001
 
-; Disables Windows Ink Workspace
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace]
-"AllowWindowsInkWorkspace"=dword:00000000
+        ; Disables Windows Ink Workspace
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace]
+        "AllowWindowsInkWorkspace"=dword:00000000
 
-; Disables the Advertising ID for All Users
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo]
-"DisabledByGroupPolicy"=dword:00000001
+        ; Disables the Advertising ID for All Users
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo]
+        "DisabledByGroupPolicy"=dword:00000001
 
-; Disable Account Info
-[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation]
-"Value"="Deny"
+        ; Disable Account Info
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation]
+        "Value"="Deny"
 "@
     # Write the registry changes to a file and silently import it using regedit
     Set-Content -Path "$env:TEMP\Recommended_Privacy_Settings.reg" -Value $MultilineComment -Force
@@ -828,49 +860,49 @@ function Set-DefaultPrivacySettings {
     Write-Host "Applying Default Privacy Settings . . ."
 
     $MultilineComment = @"
-Windows Registry Editor Version 5.00
+        Windows Registry Editor Version 5.00
 
-; --Revert Privacy and Security Settings--
+        ; --Revert Privacy and Security Settings--
 
-; Enables Activity History
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
-"EnableActivityFeed"=-
-"PublishUserActivities"=-
-"UploadUserActivities"=-
+        ; Enables Activity History
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
+        "EnableActivityFeed"=-
+        "PublishUserActivities"=-
+        "UploadUserActivities"=-
 
-; Enables Location Tracking
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location]
-"Value"=-
+        ; Enables Location Tracking
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location]
+        "Value"=-
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}]
-"SensorPermissionState"=-
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}]
+        "SensorPermissionState"=-
 
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration]
-"Status"=-
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration]
+        "Status"=-
 
-[HKEY_LOCAL_MACHINE\SYSTEM\Maps]
-"AutoUpdateEnabled"=dword:00000001
+        [HKEY_LOCAL_MACHINE\SYSTEM\Maps]
+        "AutoUpdateEnabled"=dword:00000001
 
-; Enables Telemetry to the default level
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection]
-"AllowTelemetry"=-
+        ; Enables Telemetry to the default level
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection]
+        "AllowTelemetry"=-
 
-; Enables Telemetry and Feedback Notifications
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection]
-"AllowTelemetry"=-
-"DoNotShowFeedbackNotifications"=-
+        ; Enables Telemetry and Feedback Notifications
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection]
+        "AllowTelemetry"=-
+        "DoNotShowFeedbackNotifications"=-
 
-; Enables Windows Ink Workspace
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace]
-"AllowWindowsInkWorkspace"=-
+        ; Enables Windows Ink Workspace
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace]
+        "AllowWindowsInkWorkspace"=-
 
-; Enables the Advertising ID for All Users
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo]
-"DisabledByGroupPolicy"=-
+        ; Enables the Advertising ID for All Users
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo]
+        "DisabledByGroupPolicy"=-
 
-; Allow Account info
-[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation]
-"Value"="Allow"
+        ; Allow Account info
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation]
+        "Value"="Allow"
 "@
     Set-Content -Path "$env:TEMP\Default_Privacy_Settings.reg" -Value $MultilineComment -Force
     Regedit.exe /S "$env:TEMP\Default_Privacy_Settings.reg"
@@ -879,9 +911,14 @@ Windows Registry Editor Version 5.00
     Wait-IfNotSpecialize
 }
 
-# End of Privacy and Security Functions
+##################################################
+#              PRIVACY & SECURITY                #
+##################################################
 
-# Start of Windows Update Functions
+##################################################
+#                WINDOWS UPDATES                 #
+##################################################
+
 function Set-RecommendedUpdateSettings {
 
     if (-not $isSpecializePhase) {
@@ -890,32 +927,32 @@ function Set-RecommendedUpdateSettings {
     }
 
     $MultilineComment = @"
-Windows Registry Editor Version 5.00
+        Windows Registry Editor Version 5.00
 
-; --Windows Update Settings--
+        ; --Windows Update Settings--
 
-; Disable Automatic Updates (Only Check for Updates Manually)
-; Notify Before Downloading and Installing Updates
-; Enable Notifications for Security Updates Only (Do Not Auto-Download)
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU]
-"NoAutoUpdate"=dword:00000001
-"AUOptions"=dword:00000002
-"AutoInstallMinorUpdates"=dword:00000000
+        ; Disable Automatic Updates (Only Check for Updates Manually)
+        ; Notify Before Downloading and Installing Updates
+        ; Enable Notifications for Security Updates Only (Do Not Auto-Download)
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU]
+        "NoAutoUpdate"=dword:00000001
+        "AUOptions"=dword:00000002
+        "AutoInstallMinorUpdates"=dword:00000000
 
-; Prevent Automatic Upgrade from Windows 10 22H2 to Windows 11 (Manual Upgrade Still Allowed)
-; Delay Feature and Quality updates for 1 year from install.
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate]
-"TargetReleaseVersion"=dword:00000001
-"TargetReleaseVersionInfo"="22H2"
-"ProductVersion"="Windows 10"
-"DeferFeatureUpdates"=dword:00000001
-"DeferFeatureUpdatesPeriodInDays"=dword:0000016d
-"DeferQualityUpdates"=dword:00000001
-"DeferQualityUpdatesPeriodInDays"=dword:00000007
+        ; Prevent Automatic Upgrade from Windows 10 22H2 to Windows 11 (Manual Upgrade Still Allowed)
+        ; Delay Feature and Quality updates for 1 year from install.
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate]
+        "TargetReleaseVersion"=dword:00000001
+        "TargetReleaseVersionInfo"="22H2"
+        "ProductVersion"="Windows 10"
+        "DeferFeatureUpdates"=dword:00000001
+        "DeferFeatureUpdatesPeriodInDays"=dword:0000016d
+        "DeferQualityUpdates"=dword:00000001
+        "DeferQualityUpdatesPeriodInDays"=dword:00000007
 
-; Disables allowing downloads from other PCs (Delivery Optimization)
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization]
-"DODownloadMode"=dword:00000000
+        ; Disables allowing downloads from other PCs (Delivery Optimization)
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization]
+        "DODownloadMode"=dword:00000000
 "@
     Set-Content -Path "$env:TEMP\Recommended_Windows_Update_Settings.reg" -Value $MultilineComment -Force
     # import reg file
@@ -975,6 +1012,32 @@ Windows Registry Editor Version 5.00
 ############################################
 
 function Set-RecommendedHKLMRegistry {
+    <#
+    Program Workflow Visualization:
+
+    1. Create Registry Keys
+    → Define settings for Take Ownership, Windows Features, Security, etc.
+
+    2. Write Registry Changes to File
+    → Save to `$env:TEMP\Optimize_LocalMachine_Registry.reg`
+
+    3. Modify Registry File Content
+    → Replace `?` with `$` in the `.reg` file for proper parsing
+
+    4. Import the .reg File Using `regedit`
+    → Apply registry changes silently with `/S` flag
+
+    5. Display Success Message
+    → Show "Recommended Local Machine Registry Settings Applied"
+
+    6. Wait If Not in Specialize Phase
+    → Ensure the system is not in the "specialize" phase before finishing
+
+    7. End Function
+    → Local machine registry settings applied successfully
+    #>
+
+
     # Create Registry Keys
     $MultilineComment = @"
         Windows Registry Editor Version 5.00
