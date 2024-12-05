@@ -758,7 +758,6 @@ function Get-UACStatus {
     }
 }
 
-
 # Function to Apply the Recommended Privacy Settings
 function Set-RecommendedPrivacySettings {
     <#
@@ -920,6 +919,35 @@ function Set-DefaultPrivacySettings {
 ###################################################
 
 function Set-RecommendedUpdateSettings {
+    <#
+    Program Workflow Visualization:
+
+    1. Check if Not in Specialize Phase
+    → $isSpecializePhase = False?
+        → Yes
+            → Show Header & Display "Applying Recommended Windows Update Settings"
+        → No
+            → Skip Header & Apply Update Settings
+
+    2. Create Registry Changes
+    → Define registry keys for Windows Update settings (Disable Automatic Updates, Defer Updates, etc.)
+
+    3. Write Registry Changes to File
+    → Save to `$env:TEMP\Recommended_Windows_Update_Settings.reg`
+
+    4. Import the .reg File using `regedit`
+    → Apply settings silently with `/S` flag
+
+    5. Check if Not in Specialize Phase Again
+    → $isSpecializePhase = False?
+        → Yes
+            → Show Success Message "Recommended Windows Update Settings Applied"
+        → No
+            → Skip Success Message
+
+    6. End Function
+    → Windows Update settings applied successfully
+    #>
 
     if (-not $isSpecializePhase) {
         Show-Header
@@ -1272,6 +1300,9 @@ function Set-RecommendedHKLMRegistry {
 
         ; Remove Home Folder
         [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}]
+
+        ; Remove Gallery Folder
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}]
 
         [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
         "MouseSpeed"="0"
