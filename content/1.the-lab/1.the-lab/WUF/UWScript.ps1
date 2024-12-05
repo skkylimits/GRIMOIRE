@@ -633,9 +633,9 @@ function Remove-Apps {
 }
 # End of Software & Apps Functions
 
-##################################################
-#              PRIVACY & SECURITY                #
-##################################################
+###################################################
+#               PRIVACY & SECURITY                #
+###################################################
 
 # Check if Windows Defender is Enabled or Disabled
 function Get-WindowsDefenderStatus {
@@ -911,13 +911,13 @@ function Set-DefaultPrivacySettings {
     Wait-IfNotSpecialize
 }
 
-##################################################
-#              PRIVACY & SECURITY                #
-##################################################
+###################################################
+#               PRIVACY & SECURITY                #
+###################################################
 
-##################################################
-#                WINDOWS UPDATES                 #
-##################################################
+###################################################
+#                 WINDOWS UPDATES                 #
+###################################################
 
 function Set-RecommendedUpdateSettings {
 
@@ -1005,7 +1005,10 @@ Windows Registry Editor Version 5.00
     Write-Host "Default Windows Update Settings Applied." -ForegroundColor Green
     Wait-IfNotSpecialize
 }
-# End of Windows Update Functions
+
+###################################################
+#                 WINDOWS UPDATES                 #
+###################################################
 
 ############################################
 #               Registry                   #
@@ -1261,11 +1264,6 @@ function Set-RecommendedHKLMRegistry {
         ; disable widgets
         [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests]
         "value"=dword:00000000
-
-        ; NVIDIA
-        ; enable old nvidia sharpening
-        ; [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS]
-        "EnableGR535"=dword:00000000
 
         ; OTHER
         ; remove 3d objects
@@ -2420,6 +2418,39 @@ function Set-DefaultHKCURegistry {
 ############################################
 
 function Set-ServiceStartup {
+    <#
+    Program Workflow Visualization:
+
+    1. Initialize Lists of Services
+    → Define two lists: `$disabledServices` and `$manualServices`
+        → `$disabledServices` contains services to be set to Disabled
+        → `$manualServices` contains services to be set to Manual
+
+    2. Set Services to Disabled
+    → Iterate over `$disabledServices` list
+        → For each service:
+            → Try to set the service to Disabled
+            → If successful, continue to next service
+            → If an error occurs, log the error message and continue
+
+    3. Set Services to Manual
+    → Iterate over `$manualServices` list
+        → For each service:
+            → Try to set the service to Manual
+            → If successful, continue to next service
+            → If an error occurs, log the error message and continue
+
+    4. Show Success Message
+    → After all services are updated, display a success message
+
+    5. Wait If Not in Specialize Phase
+    → Ensure that the system is not in the "specialize" phase before proceeding
+
+    6. End Function
+    → Service startup types updated successfully
+    #>
+
+
     # List of services to set to Disabled
     $disabledServices = @(
     'AJRouter', 'AppVClient', 'AssignedAccessManagerSvc', 
@@ -2615,6 +2646,38 @@ function Enable-ScheduledTasks {
 ############################################
 
 function Set-RecommendedPowerSettings {
+    <#
+    Program Workflow Visualization:
+
+    1. Initialize Lists of Services
+    → Define two lists: `$disabledServices` and `$manualServices`
+        → `$disabledServices` contains services to be set to Disabled
+        → `$manualServices` contains services to be set to Manual
+
+    2. Set Services to Disabled
+    → Iterate over `$disabledServices` list
+        → For each service:
+            → Try to set the service to Disabled
+            → If successful, continue to next service
+            → If an error occurs, log the error message and continue
+
+    3. Set Services to Manual
+    → Iterate over `$manualServices` list
+        → For each service:
+            → Try to set the service to Manual
+            → If successful, continue to next service
+            → If an error occurs, log the error message and continue
+
+    4. Show Success Message
+    → After all services are updated, display a success message
+
+    5. Wait If Not in Specialize Phase
+    → Ensure that the system is not in the "specialize" phase before proceeding
+
+    6. End Function
+    → Service startup types updated successfully
+    #>
+
     Clear-Host
     # Import and set Ultimate power plan at Control Panel\Hardware and Sound\Power Options\Edit Plan Settings -> Change advanced power settings
     cmd /c "powercfg /duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 99999999-9999-9999-9999-999999999999 >nul 2>&1 & powercfg /SETACTIVE 99999999-9999-9999-9999-999999999999 >nul 2>&1"

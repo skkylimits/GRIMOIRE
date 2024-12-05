@@ -782,6 +782,42 @@ This function adjusts the startup behavior of Windows services for optimized sys
 - **Secure Environment:** Disables potentially risky services like **RemoteRegistry**.
 - **Privacy**: Some services, like telemetry, send data to Microsoft.
 
+```sql
++---------------------------------------------+
+|        Initialize Lists of Services        |
+| ($disabledServices and $manualServices)    |
++---------------------------------------------+
+               |
+               v
++---------------------------------------------+
+| Set Services in Disabled List to Disabled  |
+| (Iterate over $disabledServices)           |
++---------------------------------------------+
+               |
+               v
++---------------------------------------------+
+| Set Services in Manual List to Manual      |
+| (Iterate over $manualServices)             |
++---------------------------------------------+
+               |
+               v
++---------------------------------------------+
+| Show Success Message                      |
+| "Service startup types updated successfully"|
++---------------------------------------------+
+               |
+               v
++---------------------------------------------+
+| Wait If Not in Specialize Phase            |
++---------------------------------------------+
+               |
+               v
++---------------------------------------------+
+| End of Function                           |
+| (Service startup types applied successfully)|
++---------------------------------------------+
+```
+
 
 ### **1. Disabled Task**
 
@@ -1223,6 +1259,42 @@ This script applies an **aggressive performance-optimization strategy** to Windo
 **When to Use It**
 - Ideal for gaming PCs, high-performance workstations, or virtual machines requiring consistent high performance.
 - Avoid on laptops or battery-powered devices, as these settings will reduce battery life.
+
+```sql
++---------------------------------------------+
+|        Initialize Lists of Services        |
+| ($disabledServices and $manualServices)    |
++---------------------------------------------+
+               |
+               v
++---------------------------------------------+
+| Set Services in Disabled List to Disabled  |
+| (Iterate over $disabledServices)           |
++---------------------------------------------+
+               |
+               v
++---------------------------------------------+
+| Set Services in Manual List to Manual      |
+| (Iterate over $manualServices)             |
++---------------------------------------------+
+               |
+               v
++---------------------------------------------+
+| Show Success Message                      |
+| "Service startup types updated successfully"|
++---------------------------------------------+
+               |
+               v
++---------------------------------------------+
+| Wait If Not in Specialize Phase            |
++---------------------------------------------+
+               |
+               v
++---------------------------------------------+
+| End of Function                           |
+| (Service startup types applied successfully)|
++---------------------------------------------+
+```
 
 
 ### **1. Clears the Console**
