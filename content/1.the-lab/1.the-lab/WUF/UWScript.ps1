@@ -2406,8 +2406,7 @@ function Set-ServiceStartup {
     'lltdsvc', 'lmhosts', 'msiserver', 'netprofm', 'p2pimsvc', 'p2psvc', 
     'perceptionsimulation', 'pla', 'seclogon', 'smphost', 'spectrum', 
     'sppsvc', 'svsvc', 'swprv', 'upnphost', 'vds', 'vm3dservice', 
-    'vmicguestinterface', 'vmicheartbeat', 'vmickvpexchange', 'vmicrdv', 
-    'vmicshutdown', 'vmictimesync', 'vmicvmsession', 'vmicvss', 'wbengine', 
+    'vmicguestinterface', 'vmicheartbeat', 'vmickvpexchange', 'wbengine', 
     'wcncsvc', 'webthreatdefsvc', 'wercplsupport', 'wisvc', 'wlidsvc', 
     'wlpasvc', 'wmiApSrv', 'workfolderssvc', 'wuauserv', 'wudfsvc'
     )

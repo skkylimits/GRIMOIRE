@@ -97,7 +97,63 @@ This function adjusts the startup behavior of Windows services for optimized sys
 - **Secure Environment:** Disables potentially risky services like **RemoteRegistry**.
 - **Privacy**: Some services, like telemetry, send data to Microsoft.
 
-### **1. Identify Services**
+
+### **1. Disabled Task**
+
+```powershell
+# Define the list of scheduled tasks to disable
+    $scheduledTasks = @(
+        "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser",
+        "Microsoft\Windows\Application Experience\ProgramDataUpdater",
+        "Microsoft\Windows\Autochk\Proxy",
+        "Microsoft\Windows\Customer Experience Improvement Program\Consolidator",
+        "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip",
+        "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector",
+        "Microsoft\Windows\Feedback\Siuf\DmClient",
+        "Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload",
+        "Microsoft\Windows\Windows Error Reporting\QueueReporting",
+        "Microsoft\Windows\Application Experience\MareBackup",
+        "Microsoft\Windows\Application Experience\StartupAppTask",
+        "Microsoft\Windows\Application Experience\PcaPatchDbTask",
+        "Microsoft\Windows\Maps\MapsUpdateTask"
+    )
+
+    $successCount = 0
+    foreach ($task in $scheduledTasks) {
+        try {
+            # Disable the task without wildcards
+            schtasks /Change /TN $task /Disable 2>&1 | Out-Null
+            $successCount++
+        }
+        catch {
+            # Silently continue if a task fails
+            continue
+        }
+    }
+    
+    Show-Header
+    Write-Host "Successfully disabled unneeded scheduled tasks." -ForegroundColor Green
+    Wait-IfNotSpecialize
+```
+
+| Task Name                                                                                      | Reason to Disable                                                                                              |
+|-------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser                      | Collects system compatibility data with new Windows versions. Not needed for users who do not upgrade frequently. |
+| Microsoft\Windows\Application Experience\ProgramDataUpdater                                      | Updates program data related to application compatibility. Disabling can reduce background tasks.               |
+| Microsoft\Windows\Autochk\Proxy                                                                  | Used for disk error checking during startup. Disabling might reduce unnecessary startup checks if disk issues are not frequent. |
+| Microsoft\Windows\Customer Experience Improvement Program\Consolidator                          | Collects user data for the Customer Experience Improvement Program (CEIP). Disabling helps to reduce background telemetry. |
+| Microsoft\Windows\Customer Experience Improvement Program\UsbCeip                               | Collects data on USB device usage for CEIP. Reducing telemetry data and background processes.                   |
+| Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector                 | Collects disk diagnostic data, which is not useful for users who do not encounter disk problems.                |
+| Microsoft\Windows\Feedback\Siuf\DmClient                                                        | Client for gathering feedback about Windows experience. Disabling reduces participation in CEIP.                |
+| Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload                                       | Collects data when downloading new scenarios for feedback. Reducing unnecessary background activity.            |
+| Microsoft\Windows\Windows Error Reporting\QueueReporting                                         | Queues error reporting data to be sent to Microsoft. Disabling can protect user privacy and reduce network activity. |
+| Microsoft\Windows\Application Experience\MareBackup                                             | Creates backups related to application experience. Disabling can reduce unnecessary backup tasks for users not using this feature. |
+| Microsoft\Windows\Application Experience\StartupAppTask                                         | Runs a task at startup related to application experience. Not essential for most users and adds unnecessary startup delay. |
+| Microsoft\Windows\Application Experience\PcaPatchDbTask                                         | Runs a task related to system diagnostics. Disabling can reduce background processes without affecting system performance. |
+| Microsoft\Windows\Maps\MapsUpdateTask                                                           | Handles maps updates in the background. Disabling may reduce unnecessary background activity for users not using maps. |
+
+
+### **2. Identify Services**
 
 #### **Disabled Services**
 - Includes services that are either not required for most users or pose potential performance or security issues.
@@ -149,8 +205,7 @@ Service Description
     'AxInstSV', 'BDESVC', 'BITS', 'BTAGService', 'BcastDVRUserService_*',
     'Browser', 'CDPSvc', 'CDPUserSvc_*', 'COMSysApp', 'CaptureService_*',
     'CertPropSvc', 'ClipSVC', 'ConsentUxUserSvc_*', 'CscService', 'DcpSvc',
-    'DevQueryBroker', 'DeviceAssociationBrokerSvc_*', 'DeviceAssociationService', 
-    'DeviceInstall', 'DevicePickerUserSvc_*', 'DevicesFlowUserSvc_*', 
+    'DevQueryBroker', 'DevicePickerUserSvc_*', 'DevicesFlowUserSvc_*', 
     'DisplayEnhancementService', 'DmEnrollmentSvc', 'DoSvc', 'DsSvc', 'DsmSvc',
     'EFS', 'EapHost', 'EntAppSvc', 'FDResPub', 'Fax', 'FrameServer',
     'FrameServerMonitor', 'GraphicsPerfSvc', 'HomeGroupListener', 
@@ -161,8 +216,8 @@ Service Description
     'MixedRealityOpenXRSvc', 'MsKeyboardFilter', 'NPSMSvc_*', 'NaturalAuthentication',
     'NcaSvc', 'NcbService', 'NcdAutoSetup', 'Netman', 'NgcCtnrSvc', 'NgcSvc',
     'NlaSvc', 'P9RdrService_*', 'PNRPAutoReg', 'PNRPsvc', 'PcaSvc', 'PeerDistSvc',
-    'PenService_*', 'PerfHost', 'PhoneSvc', 'PimIndexMaintenanceSvc_*', 'PlugPlay',
-    'PolicyAgent', 'PrintNotify', 'PrintWorkflowUserSvc_*', 'PushToInstall', 'QWAVE',
+    'PenService_*', 'PerfHost', 'PhoneSvc', 'PimIndexMaintenanceSvc_*',
+    'PolicyAgent', 'PrintNotify', 'PrintWorkflowUserSvc_*', 'PushToInstall',
     'RasAuto', 'RasMan', 'RetailDemo', 'RmSvc', 'RpcLocator', 'SCPolicySvc',
     'SCardSvr', 'SDRSVC', 'SEMgrSvc', 'SecurityHealthService', 
     'SensorDataService', 'SensorService', 'SensrSvc', 'SessionEnv', 
@@ -176,14 +231,13 @@ Service Description
     'WSearch', 'WaaSMedicSvc', 'WalletService', 'WarpJITSvc', 'WbioSrvc',
     'WcsPlugInService', 'WdiServiceHost', 'WdiSystemHost', 'WebClient', 'Wecsvc',
     'WerSvc', 'WiaRpc', 'WinHttpAutoProxySvc', 'WinRM', 'WpcMonSvc', 
-    'WpnService', 'WwanSvc', 'XblAuthManager', 'XblGameSave', 'XboxGipSvc', 
-    'XboxNetApiSvc', 'autotimesvc', 'bthserv', 'camsvc', 'cbdhsvc_*',
+    'WpnService', 'WwanSvc', 'autotimesvc', 'bthserv', 'camsvc', 'cbdhsvc_*',
     'cloudidsvc', 'dcsvc', 'defragsvc', 'diagnosticshub.standardcollector.service',
     'diagsvc', 'dmwappushservice', 'dot3svc', 'edgeupdate', 'edgeupdatem', 
     'embeddedmode', 'fdPHost', 'fhsvc', 'hidserv', 'icssvc', 'lfsvc', 
-    'lltdsvc', 'lmhosts', 'msiserver', 'netprofm', 'p2pimsvc', 'p2psvc', 
+    'lltdsvc', 'lmhosts', 'netprofm', 'p2pimsvc', 'p2psvc', 
     'perceptionsimulation', 'pla', 'seclogon', 'smphost', 'spectrum', 
-    'sppsvc', 'svsvc', 'swprv', 'upnphost', 'vds', 'vm3dservice', 
+    'sppsvc', 'svsvc', 'swprv', 'upnphost', 'vm3dservice', 
     'vmicguestinterface', 'vmicheartbeat', 'vmickvpexchange', 'vmicrdv', 
     'vmicshutdown', 'vmictimesync', 'vmicvmsession', 'vmicvss', 'wbengine', 
     'wcncsvc', 'webthreatdefsvc', 'wercplsupport', 'wisvc', 'wlidsvc', 
@@ -203,7 +257,7 @@ Service Description
 | ALG                 | Application Layer Gateway service for Internet Connection Sharing.                                                  | Disable unless using legacy ICS tasks.                |
 | Netman              | Manages network connections.                                                                                        | Leave Manual for flexibility.                         |
 | NlaSvc              | Determines network location profiles.                                                                               | Leave Automatic for network stability.                |
-| QWAVE               | Improves audio/video streaming quality.                                                                             | Disable unless using streaming services.              |
+| `QWAVE`               | Improves audio/video streaming quality.                                                                             | Disable unless using streaming services.              |
 | RasAuto             | Creates connections for remote networks when requested by programs.                                                 | Disable unless using VPN.                             |
 | RasMan              | Manages dial-up and VPN connections.                                                                                | Disable unless using VPN/dial-up connections.         |
 | PeerDistSvc         | Enables Peer-to-Peer content transfers in a network.                                                                | Disable unless required for a specific app.           |
@@ -309,12 +363,12 @@ Service Description
 
 | **Service**                  | **Description**                                                                                                    | **Recommendation**                                 |
 |------------------------------|--------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
-| DeviceAssociationBrokerSvc_* | Manages connections between the system and external devices.                                                       | Disable unless frequently connecting devices.      |
-| DeviceAssociationService     | Provides support for pairing and connecting external devices.                                                      | Disable unless required for peripherals.           |
-| DeviceInstall                | Handles driver installation for newly connected devices.                                                           | Leave Automatic for hardware compatibility.        |
+| `DeviceAssociationBrokerSvc_*` | Manages connections between the system and external devices.                                                       | Disable unless frequently connecting devices.      |
+| `DeviceAssociationService`     | Provides support for pairing and connecting external devices.                                                      | Disable unless required for peripherals.           |
+| `DeviceInstall`                | Handles driver installation for newly connected devices.                                                           | Leave Automatic for hardware compatibility.        |
 | DevicePickerUserSvc_*        | Provides a user interface for selecting devices.                                                                   | Disable unless regularly selecting peripherals.    |
 | DevicesFlowUserSvc_*         | Manages workflows for connected devices.                                                                           | Disable unless required for specific peripherals.  |
-| PlugPlay                     | Detects and manages hardware connections.                                                                          | Leave Automatic to ensure hardware stability.      |
+| `PlugPlay`                     | Detects and manages hardware connections.                                                                          | Leave Automatic to ensure hardware stability.      |
 | PhoneSvc                     | Manages phone device interactions.                                                                                 | Disable unless syncing or managing mobile devices. |
 | WPDBusEnum                   | Handles communication with portable devices like smartphones.                                                      | Disable unless using portable devices.             |
 | WiaRpc                       | Provides support for imaging devices like scanners and cameras.                                                    | Disable unless using such devices.                 |
@@ -374,10 +428,10 @@ Service Description
 | Wecsvc                       | Collects events from remote computers.                                                                             | Disable unless using event logging.    |
 | WpcMonSvc                    | Monitors Windows Parental Controls.                                                                                | Disable unless using parental controls.|
 | WpnService                   | Manages push notifications for apps.                                                                               | Disable unless using notifications.    |
-| XblAuthManager               | Manages Xbox Live authentication.                                                                                  | Disable unless using Xbox Live.        |
-| XblGameSave                  | Handles game saves for Xbox-enabled apps.                                                                          | Disable unless using Xbox features.    |
-| XboxGipSvc                   | Supports Xbox game input.                                                                                          | Disable unless using Xbox controllers. |
-| XboxNetApiSvc                | Manages Xbox networking for multiplayer gaming.                                                                    | Disable unless using Xbox features.    |
+| `XblAuthManager`               | Manages Xbox Live authentication.                                                                                  | Disable unless using Xbox Live.        |
+| `XblGameSave`                  | Handles game saves for Xbox-enabled apps.                                                                          | Disable unless using Xbox features.    |
+| `XboxGipSvc`                   | Supports Xbox game input.                                                                                          | Disable unless using Xbox controllers. |
+| `XboxNetApiSvc`                | Manages Xbox networking for multiplayer gaming.                                                                    | Disable unless using Xbox features.    |
 | bthserv                      | Bluetooth Support Service, manages Bluetooth devices.                                                              | Disable unless using Bluetooth.        |
 | cbdhsvc_*                    | Clipboard service for cloud synchronization of clipboard content.                                                  | Disable unless using clipboard sync.   |
 | cloudidsvc                   | Manages Microsoft account sign-ins.                                                                                | Leave Automatic for account functionality. |
@@ -393,21 +447,21 @@ Service Description
 | lfsvc                        | Location Framework service, provides geolocation data.                                                             | Disable unless using location-based apps. |
 | lltdsvc                      | Link Layer Topology Discovery, helps discover network devices.                                                     | Disable unless required for network mapping. |
 | lmhosts                      | Manages legacy NetBIOS names.                                                                                      | Disable unless using NetBIOS.          |
-| msiserver                    | Windows Installer service, manages installations.                                                                  | Leave Manual for installation support. |
+| `msiserver`                    | Windows Installer service, manages installations.                                                                  | Leave Manual for installation support. |
 | perceptionsimulation         | Manages virtual reality or simulation input.                                                                       | Disable unless using VR apps.          |
 | spectrum                     | Manages spectrum analysis for wireless devices.                                                                    | Disable unless troubleshooting Wi-Fi.  |
 | svsvc                        | Spot Verifier, checks file system integrity.                                                                       | Leave Manual for file system health.   |
 | swprv                        | Software Shadow Copy Provider, supports backups.                                                                   | Leave Manual for backup functionality. |
-| vds                          | Virtual Disk Service, manages disk volumes.                                                                       | Leave Manual for advanced storage configurations. |
+| `vds`                          | Virtual Disk Service, manages disk volumes.                                                                       | Leave Manual for advanced storage configurations. |
 | vm3dservice                  | VMware 3D service, supports virtual machine graphics.                                                              | Leave Automatic if using VMware.       |
 | vmicguestinterface           | Provides interface for guest-to-host communication in Hyper-V.                                                     | Leave Automatic for Hyper-V stability. |
 | vmicheartbeat                | Monitors heartbeat between guest and host in virtual environments.                                                 | Leave Automatic for virtual environments. |
 | vmickvpexchange              | Facilitates data exchange between guest and host in Hyper-V.                                                       | Leave Automatic for Hyper-V stability. |
-| vmicrdv                      | Manages Remote Desktop Virtualization Host.                                                                       | Leave Manual unless using RDP in Hyper-V. |
-| vmicshutdown                 | Handles shutdown requests from host to guest in Hyper-V.                                                          | Leave Automatic for Hyper-V environments. |
-| vmictimesync                 | Synchronizes guest time with host in Hyper-V.                                                                     | Leave Automatic for Hyper-V stability. |
-| vmicvmsession                | Manages virtual session state in Hyper-V.                                                                         | Leave Automatic for Hyper-V stability. |
-| vmicvss                      | Manages Volume Shadow Copy service for virtual machines.                                                          | Leave Automatic for backups in Hyper-V. |
+| `vmicrdv`                      | Manages Remote Desktop Virtualization Host.                                                                       | Leave Manual unless using RDP in Hyper-V. |
+| `vmicshutdown`                 | Handles shutdown requests from host to guest in Hyper-V.                                                          | Leave Automatic for Hyper-V environments. |
+| `vmictimesync`                 | Synchronizes guest time with host in Hyper-V.                                                                     | Leave Automatic for Hyper-V stability. |
+| `vmicvmsession`                | Manages virtual session state in Hyper-V.                                                                         | Leave Automatic for Hyper-V stability. |
+| `vmicvss`                      | Manages Volume Shadow Copy service for virtual machines.                                                          | Leave Automatic for backups in Hyper-V. |
 | webthreatdefsvc              | Web Threat Defender, provides advanced security.                                                                  | Disable unless required by security tools. |
 | wisvc                        | Windows Image Acquisition, supports imaging devices like scanners.                                                | Disable unless using imaging devices.  |
 | wlidsvc                      | Windows Live ID Sign-in Assistant, enables sign-ins to Microsoft accounts.                                         | Leave Automatic for account functionality. |
@@ -429,12 +483,14 @@ Service Description
 | TextInputManagementService   | Manages advanced text input devices and IMEs.                                                                     | Disable unless using specialized input.|
 | Autotimesvc                  | Synchronizes system time automatically.                                                                           | Leave Automatic for time accuracy.     |
 | wuauserv                     | Manages Windows Update downloads and installations.                                                               | Leave Automatic for system updates.    |
-
-
 ::
 
+```powershell
+# To start a service again
+Start-Service -Name MixedRealityOpenXRSvc
+```
 
-### **2. Disables Unnecessary Services**
+### **3. Disables Unnecessary Services**
 
 1. **Disables Unnecessary Services**
    - Identifies and disables services that are rarely needed or can impact performance negatively. Set the services in the disabledServices list to Disabled
@@ -515,22 +571,25 @@ powercfg /L | ForEach-Object {
 
 ### **4. Registry Modifications**
 ```powershell
+# Registry modifications
 $regChanges = @(
-    'HKLM\SYSTEM\CurrentControlSet\Control\Power /v HibernateEnabled /t REG_DWORD /d 0', # Disables hibernate
-    'HKLM\SYSTEM\CurrentControlSet\Control\Power /v HibernateEnabledDefault /t REG_DWORD /d 0', # Disables default hibernate settings
     'HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings /v ShowLockOption /t REG_DWORD /d 0', # Hides the Lock option from the Power menu
     'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings /v ShowSleepOption /t REG_DWORD /d 0', # Hides the Sleep option from the Power menu
     'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power /v HiberbootEnabled /t REG_DWORD /d 0', # Disables Fast Startup (Hiberboot)
-    'HKLM\SYSTEM\ControlSet001\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583 /v ValueMax /t REG_DWORD /d 0', # Unparks CPU cores by setting the maximum processor state
-    'HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling /v PowerThrottlingOff /t REG_DWORD /d 1', # Disables power throttling
-    'HKLM\System\ControlSet001\Control\Power\PowerSettings\2a737441-1930-4402-8d77-b2bebba308a3\0853a681-27c8-4100-a2fd-82013e970683 /v Attributes /t REG_DWORD /d 2', # Unhides "Hub Selective Suspend Timeout"
-    'HKLM\System\ControlSet001\Control\Power\PowerSettings\2a737441-1930-4402-8d77-b2bebba308a3\d4e98f31-5ffe-4ce1-be31-1b38b384c009 /v Attributes /t REG_DWORD /d 2' # Unhides "USB 3 Link Power Management"
+    'HKLM\SYSTEM\CurrentControlSet\Control\Power /v HibernateEnabled /t REG_DWORD /d 0', # Disables hibernate
+    'HKLM\SYSTEM\CurrentControlSet\Control\Power /v HibernateEnabledDefault /t REG_DWORD /d 0', # Disables default hibernate settings
+    'HKLM\SYSTEM\CCurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583 /v ValueMax /t REG_DWORD /d 0', # Unparks CPU cores by setting the maximum processor state: 100%
+    'HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\2a737441-1930-4402-8d77-b2bebba308a3\d4e98f31-5ffe-4ce1-be31-1b38b384c009 /v Attributes /t REG_DWORD /d 2' # Unhides "USB 3 Link Power Management"
+    'HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\2a737441-1930-4402-8d77-b2bebba308a3\0853a681-27c8-4100-a2fd-82013e970683 /v Attributes /t REG_DWORD /d 2' # Unhides "Hub Selective Suspend Timeout"
 )
 
-
 foreach ($reg in $regChanges) {
-    cmd /c "reg add `$reg` /f >nul 2>&1"
+    cmd /c "reg add $reg /f >nul 2>&1"
 }
+
+# Ensure Hibernate file is deleted
+cmd /c "powercfg /h off >nul 2>&1"
+
 ```
 - Modifies several registry settings for system power management:
   - **Disables hibernation** by setting `HibernateEnabled` and `HibernateEnabledDefault` to `0`.
@@ -540,56 +599,54 @@ foreach ($reg in $regChanges) {
   - **Unhides USB power settings** like "Selective Suspend Timeout."
 
 
-### **5. Modifies Specific Power Plan Settings**
+### **5. Modifies Specific Advanced Power Plan Settings**
 ```powershell
+ # Modify Advcaned Power Plan settings
 $settings = @(
-        @{
-            SubgroupGUID = "0012ee47-9041-4b5d-9b77-535fba8b1442" # Hard Disk
-            SettingGUIDs = @("6738e2c4-e8a5-4a42-b16a-e040e769756e") # Turn off hard disk after
-        },
-        @{
-            SubgroupGUID = "0d7dbae2-4294-402a-ba8e-26777e8488cd" # Desktop Background Settings
-            SettingGUIDs = @("309dce9b-bef4-4119-9921-a851fb12f0f4") # Slide show
-        },
-        @{
-            SubgroupGUID = "19cbb8fa-5279-450e-9fac-8a3d5fedd0c1" # Wireless Adapter Settings
-            SettingGUIDs = @("12bbebe6-58d6-4636-95bb-3217ef867c1a") # Power saving mode
-        },
-        @{
-            SubgroupGUID = "238c9fa8-0aad-41ed-83f4-97be242c8f20" # Sleep
-            SettingGUIDs = @(
-                "29f6c1db-86da-48c5-9fdb-f2b67b1f44da", # Sleep after
-                "94ac6d29-73ce-41a6-809f-6363ba21b47e", # Allow hybrid sleep
-                "9d7815a6-7ee4-497e-8888-515a05f02364", # Hibernate after
-                "bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d"  # Allow wake timers
-            )
-        },
-        @{
-            SubgroupGUID = "2a737441-1930-4402-8d77-b2bebba308a3" # USB Settings
-            SettingGUIDs = @(
-                "0853a681-27c8-4100-a2fd-82013e970683", # USB selective suspend setting
-                "48e6b7a6-50f5-4782-a5d4-53bb8f07e226", # USB 3 Link Power Management
-                "d4e98f31-5ffe-4ce1-be31-1b38b384c009"  # USB Hub Selective Suspend Timeout
-            )
-        },
-        @{
-            SubgroupGUID = "501a4d13-42af-4429-9fd1-a8218c268e20" # PCI Express
-            SettingGUIDs = @("ee12f906-d277-404b-b6da-e5fa1a576df5") # Link State Power Management
-        },
-        @{
-            SubgroupGUID = "7516b95f-f776-4464-8c53-06167f40cc99" # Display settings
-            SettingGUIDs = @("3c0bc021-c8a8-4e07-a973-6b14cbcb2b7e") # Turn off Display After setting
-        }
-    )
-
-
-    foreach ($group in $settings) {
-        $subgroup = $group.SubgroupGUID
-        foreach ($setting in $group.SettingGUIDs) {
-            powercfg /setacvalueindex 99999999-9999-9999-9999-999999999999 $subgroup $setting 0x00000000
-            powercfg /setdcvalueindex 99999999-9999-9999-9999-999999999999 $subgroup $setting 0x00000000
-        }
+    @{
+        SubgroupGUID = "0012ee47-9041-4b5d-9b77-535fba8b1442" # Hard Disk
+        SettingGUIDs = @("6738e2c4-e8a5-4a42-b16a-e040e769756e") # Turn off hard disk after: Never
+    },
+    @{
+        SubgroupGUID = "0d7dbae2-4294-402a-ba8e-26777e8488cd" # Desktop Background Settings
+        SettingGUIDs = @("309dce9b-bef4-4119-9921-a851fb12f0f4") # Slide show: Available
+    },
+    @{
+        SubgroupGUID = "19cbb8fa-5279-450e-9fac-8a3d5fedd0c1" # Wireless Adapter Settings
+        SettingGUIDs = @("12bbebe6-58d6-4636-95bb-3217ef867c1a") # Power saving mode: Maximum Performance
+    },
+    @{
+        SubgroupGUID = "238c9fa8-0aad-41ed-83f4-97be242c8f20" # Sleep
+        SettingGUIDs = @(
+            "29f6c1db-86da-48c5-9fdb-f2b67b1f44da", # Sleep after: Never
+            "bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d"  # Allow wake timers: Disable
+        )
+    },
+    @{
+        SubgroupGUID = "2a737441-1930-4402-8d77-b2bebba308a3" # USB Settings
+        SettingGUIDs = @(
+            "0853a681-27c8-4100-a2fd-82013e970683", # USB selective suspend setting: Disabled 
+            "d4e98f31-5ffe-4ce1-be31-1b38b384c009",  # USB Hub Selective Suspend Timeout: Disabled (0 milliseconds)
+            "48e6b7a6-50f5-4782-a5d4-53bb8f07e226" # USB 3 Link Power Management: Off
+        )
+    },
+    @{
+        SubgroupGUID = "501a4d13-42af-4429-9fd1-a8218c268e20" # PCI Express
+        SettingGUIDs = @("ee12f906-d277-404b-b6da-e5fa1a576df5") # Link State Power Management: Off
+    },
+    @{
+        SubgroupGUID = "7516b95f-f776-4464-8c53-06167f40cc99" # Display settings
+        SettingGUIDs = @("3c0bc021-c8a8-4e07-a973-6b14cbcb2b7e") # Turn off Display After setting: Never
     }
+)
+
+foreach ($group in $settings) {
+    $subgroup = $group.SubgroupGUID
+    foreach ($setting in $group.SettingGUIDs) {
+        powercfg /setacvalueindex 99999999-9999-9999-9999-999999999999 $subgroup $setting 0x00000000
+        powercfg /setdcvalueindex 99999999-9999-9999-9999-999999999999 $subgroup $setting 0x00000000
+    }
+}
 ```
 - Modifies specific settings within the active power plan:
   - **Hard Disk**: Prevents the disk from turning off during inactivity.
@@ -613,7 +670,7 @@ if (-not $isSpecializePhase) {
   - Displays a header and success message.
   - Waits if needed for additional steps.
 
-#### Summarizing Table
+#### Changes
 
 | **Setting**                           | **Ideal Value**       | **Reason**                                                                 |
 |---------------------------------------|-----------------------|----------------------------------------------------------------------------|
