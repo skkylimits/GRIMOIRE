@@ -613,120 +613,76 @@ $MultilineComment = @"
 regedit description
 
 #content
-**Context Menu Customization:**
-- Adds a "Take Ownership" option to the right-click context menu for files, directories, and drives.
-  - Configures `takeown` and `icacls` commands to update ownership and permissions for the selected file or folder.
-  - Excludes critical directories like `C:\Windows`, `C:\Program Files`, and `C:\Users` to avoid accidental ownership changes.
+**1. System and Application Restrictions**
+| **Name** | **Description** | **Reason** |
+|----------|-----------------|-----------|
+| **Disable Windows Copilot** | Disables Windows Copilot system-wide. | **Disable**: Prevents the use of Windows Copilot for assistance or guidance. |
+| **Prevent Dev Home Installation** | Prevents the installation of Dev Home. | **Disable**: Stops the automatic installation of Dev Home, useful for avoiding unnecessary bloat. |
+| **Prevent New Outlook for Windows Installation** | Prevents the installation of the new Outlook app. | **Disable**: Prevents the installation of the new Outlook, ensuring users continue to use the classic app. |
+| **Prevent Chat Auto Installation and Removes Chat Icon** | Disables automatic installation of Chat (Microsoft Teams) and removes the Chat icon. | **Disable**: Removes Microsoft Teams and the Chat icon, reducing system clutter. |
+| **Disable Bitlocker Auto Encryption** | Disables Bitlocker auto-encryption on Windows 11 24H2 and onwards. | **Disable**: Prevents automatic encryption of devices, leaving encryption management in the hands of the user. |
+| **Disable Cortana** | Disables Cortana completely. | **Disable**: Turns off Cortana, improving privacy and system performance by eliminating unnecessary background services. |
+| **Disable Widgets** | Disables the News and Interests feature and removes widgets. | **Disable**: Removes the News and Interests feature, decluttering the taskbar and enhancing focus. |
+| **Disable Wi-Fi Sense** | Disables Wi-Fi hotspot reporting and auto-connect to Wi-Fi Sense hotspots. | **Disable**: Prevents automatic connections to open networks and sharing hotspot data with others. |
+| **Disable Tablet Mode** | Forces Windows to stay in Desktop Mode, even on touch devices. | **Disable**: Ensures that Windows always operates in Desktop Mode for users who don't require Tablet Mode. |
+| **Disable Xbox GameDVR** | Disables the GameDVR feature for gaming recording. | **Disable**: Stops Xbox GameDVR to free up system resources, beneficial for users not needing game recording features. |
+| **Disable OneDrive Automatic Backups** | Prevents OneDrive from automatically backing up important folders. | **Disable**: Disables OneDrive’s automatic backup to prevent unwanted syncing of important files. |
+| **Disable Push To Install** | Stops the automatic installation of apps via the "Push to Install" feature. | **Disable**: Prevents the automatic installation of apps, providing the user with more control. |
+| **Disable Windows Consumer Features** | Disables consumer features like app promotions, cloud content, and consumer account content. | **Disable**: Removes consumer-centric features such as advertisements and unnecessary cloud-based content. |
+| **Block "Allow My Organization to Manage My Device" Pop-Up** | Stops the "Allow my organization to manage my device" pop-up during setup. | **Disable**: Prevents unwanted prompts during device setup, making it less intrusive for personal or non-managed devices. |
 
-| Registry Key/Setting | Description | Reason to Disable/Enable |
-|----------------------|-------------|--------------------------|
-| **Take Ownership Context Menu** | Adds "Take Ownership" to the right-click context menu for files, folders, and drives. | **Enable**: Allows users to easily take ownership of files or folders, which is useful for administrative purposes. |
+**2. UI and Desktop Customization**
+| **Name** | **Description** | **Reason** |
+|----------|-----------------|-----------|
+| **Remove Pinned Apps from Start Menu** | Removes all pinned apps from the Start Menu for a clean look. | **Enable**: Cleans up the Start Menu, making it more minimalistic and easier to navigate. |
+| **Hide Meet Now Button on Taskbar** | Hides the Meet Now button from the taskbar. | **Enable**: Removes the Meet Now button, streamlining the taskbar for essential tools. |
+| **Remove Windows Widgets from Taskbar** | Disables the News and Interests feature on the taskbar. | **Enable**: Simplifies the taskbar by removing unnecessary widgets, reducing distractions. |
+| **Remove News and Interests from Taskbar** | Stops news and weather updates from appearing on the taskbar. | **Enable**: Disables the News and Interests feature, making the taskbar more focused on essential features. |
+| **Remove 3D Objects** | Removes the 3D Objects folder from File Explorer. | **Enable**: Cleans up File Explorer by removing unnecessary folders that are rarely used. |
+| **Remove Home Folder** | Removes the Home folder from the desktop and File Explorer. | **Enable**: Cleans up the desktop and File Explorer, improving the user interface. |
+| **Remove Gallery Folder** | Removes the Gallery folder from the desktop and File Explorer. | **Enable**: Removes an unused folder, streamlining File Explorer and the desktop. |
+| **Mouse Speed Settings** | Changes mouse speed and sensitivity settings. | **Enable**: Adjusts the mouse settings for better control and sensitivity, improving user experience. |
 
-
-**Application and Feature Restrictions:**
-- Disables features like:
-  - Windows Copilot.
-  - Automatic installation of Dev Home, New Outlook, and Chat applications.
-  - BitLocker auto-encryption on Windows 11 (24H2 and onward).
-  - Cortana assistant.
-  - Wi-Fi Sense features like auto-connect to hotspots.
-  - Tablet mode.
-
-| Registry Key/Setting | Description | Reason to Disable/Enable |
-|----------------------|-------------|--------------------------|
-| **Windows Copilot** | Disables the Windows Copilot system-wide. | **Disable**: Prevents the system from using Windows Copilot for user assistance, enhancing privacy and reducing background services. |
-| **Dev Home Installation** | Prevents Dev Home Installation. | **Disable**: Prevents installation of Dev Home, a feature that might not be needed in certain environments (e.g., corporate or personal systems). |
-| **Outlook Update** | Prevents the new Outlook for Windows installation. | **Disable**: Stops automatic installation of the new Outlook app, useful if the user prefers the classic version or another email client. |
-| **Chat Icon** | Prevents Chat Auto Installation and removes the Chat icon. | **Disable**: Reduces unnecessary features, especially if the user doesn’t use Microsoft Teams or Chat. |
-| **Bitlocker Auto Encryption** | Disables Bitlocker auto-encryption in Windows 11 24H2 and beyond. | **Disable**: Prevents automatic encryption of devices, useful in non-enterprise environments or if manual encryption is preferred. |
-| **Cortana** | Disables Cortana, Microsoft's digital assistant. | **Disable**: Helps improve privacy and system performance by disabling unnecessary background services. |
-| **Wi-Fi Sense** | Disables Wi-Fi HotSpot Reporting and AutoConnect to Wi-Fi Sense hotspots. | **Disable**: Prevents automatic connection to untrusted or open Wi-Fi hotspots, improving security. |
-| **Tablet Mode** | Disables Tablet Mode and forces Desktop Mode at sign-in. | **Disable**: Makes the system default to Desktop Mode, useful for devices that are not tablets or hybrid devices. |
-
-
-**Start Menu Customization:**
-- Clears all pinned apps from the Start menu for a cleaner experience.
-
-| Registry Key/Setting | Description | Reason to Disable/Enable |
-|----------------------|-------------|--------------------------|
-| **Start Menu Customization** | Removes all pinned apps from the Start Menu. | **Enable**: Ensures a clean Start Menu, improving the user experience in corporate or minimal setups. |
+**3. Context Menu Customization**
+| **Name** | **Description** | **Reason** |
+|----------|-----------------|-----------|
+| **Take Ownership** | Adds "Take Ownership" to the right-click context menu for files, directories, and drives. | **Enable**: Provides an easy way to take ownership of files, directories, and drives for administrative purposes. |
 
 
-**File System Settings:**
-- Enables long file paths (up to 32,767 characters).
+**4. File and System Settings**
+| **Name** | **Description** | **Reason** |
+|----------|-----------------|-----------|
+| **Enable Long File Paths** | Enables support for long file paths, up to 32,767 characters. | **Enable**: Ensures compatibility with applications that require longer file paths. |
+| `**Disable Startup Sound**` | Disables the startup sound that plays during system boot. | **Disable**: Prevents any sound from playing at startup, making the boot process quieter. |
+| **Disable Device Installation Settings** | Prevents device metadata from being downloaded from the network. | **Disable**: Reduces unnecessary network traffic by stopping the download of device metadata. |
 
-| Registry Key/Setting | Description | Reason to Disable/Enable |
-|----------------------|-------------|--------------------------|
-| **Long File Paths** | Enables long file paths (up to 32,767 characters). | **Enable**: Supports the use of long file paths in applications that require them. |
+**5. Multimedia, Gaming, and Advanced Performance**
+| **Name** | **Description** | **Reason** |
+|----------|-----------------|-----------|
+| **Multimedia and Gaming Performance** | Prioritizes multimedia applications and games for better performance. | **Enable**: Improves performance for multimedia apps, games, and video editing by giving them higher priority. |
+| **Adjust for Best Performance of Programs** | Improves system performance for programs by adjusting system priorities. | **Enable**: Boosts the responsiveness of system programs, ensuring better performance. |
+| **Enable Hardware Accelerated GPU Scheduling** | Enables hardware-accelerated GPU scheduling for better gaming performance. | **Enable**: Offloads certain tasks to the GPU, improving gaming and graphic-intensive applications' performance. |
+| **Give Graphics Cards a Higher Priority for Gaming** | Improves gaming performance by prioritizing graphics cards. | **Enable**: Optimizes the system to use the GPU more efficiently for gaming. |
+| **Give CPU a Higher Priority for Gaming** | Improves gaming performance by prioritizing the CPU. | **Enable**: Ensures that the CPU gets more system resources to improve gaming performance. |
 
+**6. Privacy and Security**
+| **Name** | **Description** | **Reason** |
+|----------|-----------------|-----------|
+| **Disable Remote Assistance** | Disables the ability for others to remotely assist your system. | **Disable**: Stops remote assistance, improving security by not allowing others to access your system remotely. |
+| **Disable Use My Sign In Info After Restart** | Prevents automatic sign-in after restart for improved security. | **Disable**: Enhances security by requiring manual sign-in after a system restart. |
+| **Disable Allow Other Network Users to Control Internet Connection** | Stops other users from controlling or disabling shared internet connections. | **Disable**: Ensures that users have complete control over their internet connection without interference. |
+| **Disable Archive Apps** | Stops automatic archiving of apps. | **Disable**: Prevents the system from archiving apps in the background, giving the user control over app management. |
+| **Disable Background Apps** | Prevents UWP apps from running in the background unless explicitly needed. | **Disable**: Frees up system resources by stopping apps from running when they are not actively being used. |
 
-**Multimedia and Gaming Optimizations:**
-- Configures higher priorities for multimedia applications and gaming tasks (e.g., CPU and GPU prioritization).
-
-| Registry Key/Setting | Description | Reason to Disable/Enable |
-|----------------------|-------------|--------------------------|
-| **Multimedia and Gaming Performance** | Optimizes multimedia applications (games, video editing) by prioritizing their performance. | **Enable**: Improves performance for gaming and multimedia applications by adjusting system priorities. |
-
-
-**System Customizations:**
-- Disables startup sound.
-- Turns on hardware-accelerated GPU scheduling.
-- Disables OneDrive auto-backups and Windows Consumer Features.
-- Prevents the display of ads or content for consumer-based apps
-
-| Registry Key/Setting            | Description                                                                                      | Reason to Disable/Enable                                                                 |
-|---------------------------------|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
-| **Startup Sound**               | Disables startup sound.                                                                          | **Disable**: Stops the startup sound to make the system experience quieter and less distracting. |
-| **Graphics Scheduling**         | Enables hardware-accelerated GPU scheduling.                                                     | **Enable**: Improves gaming and graphic-intensive application performance by offloading tasks to the GPU. |
-| **OneDrive Automatic Backup**   | Disables OneDrive automatic backups for important folders (Documents, Pictures, etc.).          | **Disable**: Prevents automatic backup to OneDrive, useful for users who prefer other backup solutions or don’t use OneDrive. |
-| **Consumer Features**           | Disables Windows Consumer Features like app promotions and cloud-optimized content.             | **Disable**: Prevents the display of ads or content for consumer-based apps, making the system more professional and less distracting. |
-
-**Network and Internet:**
-- Disables certain networking features, such as allowing other users to control shared connections.
-
-| Registry Key/Setting | Description | Reason to Disable/Enable |
-|----------------------|-------------|--------------------------|
-| **Network Sharing** | Disables the ability for other network users to control or disable the shared internet connection. | **Disable**: Ensures more control over shared internet connections, useful for home networks or enterprise settings. |
-
-**Security and Maintenance:**
-- Disables:
-  - Remote Assistance.
-  - Automatic maintenance.
-  - Problem reporting.
-
-| Registry Key/Setting | Description | Reason to Disable/Enable |
-|----------------------|-------------|--------------------------|
-| **Remote Assistance** | Disables remote assistance. | **Disable**: Improves security by preventing unauthorized remote access. |
-| **Automatic Maintenance** | Disables automatic system maintenance tasks. | **Disable**: Stops automatic maintenance, useful when the user wants to control when these tasks occur, such as in a production environment. |
-| **Problem Reporting** | Disables Windows Error Reporting (WER). | **Disable**: Prevents sending error data to Microsoft, improving privacy by not sharing diagnostic data. |
-
-**Privacy and Apps:**
-- Prevents background apps from running.
-- Disables archive apps and automatic app updates from the Microsoft Store.
-
-| Registry Key/Setting | Description | Reason to Disable/Enable |
-|----------------------|-------------|--------------------------|
-| **Background Apps** | Disables background apps. | **Disable**: Improves performance by stopping apps from running in the background unless actively needed. |
-| **Automatic App Updates** | Disables automatic Microsoft Store app updates. | **Disable**: Prevents apps from automatically updating via the Microsoft Store, allowing users to control updates manually. |
-
-
-**NVIDIA-Specific Configuration:**
-- Enables the old NVIDIA sharpening setting (`EnableGR535`).
-
-| Registry Key/Setting | Description | Reason to Disable/Enable |
-|----------------------|-------------|--------------------------|
-| **NVIDIA Sharpening** | Enables old NVIDIA sharpening. | **Enable**: Activates sharpening for NVIDIA GPUs to enhance image quality in games or applications. |
-
-
-**Other System Settings:**
-- Removes 3D objects from the File Explorer.
-- Removes the Home folder from the desktop.
-
-| Registry Key/Setting | Description | Reason to Disable/Enable |
-|----------------------|-------------|--------------------------|
-| **3D Objects Removal** | Removes the "3D Objects" folder from Explorer. | **Disable**: Cleans up the file explorer by removing unnecessary folders, especially if they are not used. |
-| **Home Folder** | Removes the "Home" folder from the desktop. | **Disable**: Removes the Home folder from the desktop to keep it cleaner. |
+**7. System Maintenance and Troubleshooting**
+| **Name** | **Description** | **Reason** |
+|----------|-----------------|-----------|
+| **Disable Automatic Maintenance** | Prevents automatic maintenance tasks like disk cleanup or updates. | **Disable**: Gives the user control over when maintenance tasks are performed, improving system stability. |
+| **Disable Storage Sense** | Disables Storage Sense, preventing automatic cleanup of disk space. | **Disable**: Stops the automatic cleanup of files by Storage Sense, giving users manual control over storage management. |
+| **Enable Update Microsoft Store Apps Automatically** | Enables automatic updates for apps in the Microsoft Store. | **Enable**: Keeps Microsoft Store apps up-to-date automatically, ensuring the latest features and security updates. |
+| **Disable Windows Error Reporting** | Stops sending error reports to Microsoft. |
 ::
+
 
 ### **2. Writing Registry Changes to a `.reg` File**
 ```powershell

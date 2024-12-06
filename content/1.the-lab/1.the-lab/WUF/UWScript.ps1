@@ -1073,8 +1073,132 @@ function Set-RecommendedHKLMRegistry {
     $MultilineComment = @"
         Windows Registry Editor Version 5.00
 
-        ; Adds "Take Ownership" to the Right Click Context Menu for All Users
-                        
+        ; +------------------------------------------------+
+        ; -       System and Application Restrictions      -
+        ; +------------------------------------------------+
+
+
+        ; Disable Windows Copilot system-wide
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot]
+        "TurnOffWindowsCopilot"=dword:00000001
+
+        ; Prevents Dev Home Installation
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
+
+        ; prevents New Outlook for Windows Installation
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
+
+        ; Prevents Chat Auto Installation and Removes Chat Icon
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications]
+        "ConfigureChatAutoInstall"=dword:00000000
+
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
+        "ChatIcon"=dword:00000003
+
+        ; Disables Bitlocker Auto Encryption on Windows 11 24H2 and Onwards
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BitLocker]
+        "PreventDeviceEncryption"=dword:00000001
+
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EnhancedStorageDevices]
+        "TCGSecurityActivationDisabled"=dword:00000001
+
+        ; Disables Cortana
+        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Windows Search]
+        "AllowCortana"=dword:00000000
+
+        ; Set Registry keys to Disable Wifi-Sense
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting]
+        "Value"=dword:00000000
+
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots]
+        "Value"=dword:00000000
+
+        ; Disable Widgets
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests]
+        "value"=dword:00000000
+
+        ; Remove Windows Widgets from Taskbar
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh] 
+        "AllowNewsAndInterests"=dword:00000000
+
+        ; Remove News and Interests from Taskbar
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds]
+        "EnableFeeds"=dword:00000000
+
+        ; Disable Tablet Mode
+        ; Always go to desktop mode on sign-in
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell]
+        "TabletMode"=dword:00000000
+        "SignInMode"=dword:00000001
+
+        ; Disable Xbox GameDVR
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\GameDVR]
+        "AllowGameDVR"=dword:00000000
+
+        ; Disables OneDrive Automatic Backups of Important Folders (Documents, Pictures etc.)
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\OneDrive]
+        "KFMBlockOptIn"=dword:00000001
+
+        ; Disables the "Push To Install" feature in Windows
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\PushToInstall]
+        "DisablePushToInstall"=dword:00000001
+
+        ; Disables Windows Consumer Features Like App Promotions etc.
+        ; Disables Consumer Account State Content
+        ; Disables Cloud Optimized Content
+        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CloudContent]
+        "DisableWindowsConsumerFeatures"=dword:00000000
+        "DisableConsumerAccountStateContent"=dword:00000001
+        "DisableCloudOptimizedContent"=dword:00000001
+
+        ; Blocks the "Allow my organization to manage my device" and "No, sign in to this app only" pop-up message
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WorkplaceJoin]
+        "BlockAADWorkplaceJoin"=dword:00000001
+
+
+        ; +------------------------------------------------+
+        ; -          UI and Desktop Customizations         -
+        ; +------------------------------------------------+
+
+
+        ; Removes All Pinned Apps from the Start Menu to Clean it Up
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start]
+        "ConfigureStartPins"="{ \"pinnedList\": [] }"
+        "ConfigureStartPins_ProviderSet"=dword:00000001
+        "ConfigureStartPins_WinningProvider"="B5292708-1619-419B-9923-E5D9F3925E71"
+
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\providers\B5292708-1619-419B-9923-E5D9F3925E71\default\Device\Start]
+        "ConfigureStartPins"="{ \"pinnedList\": [] }"
+        "ConfigureStartPins_LastWrite"=dword:00000001
+
+        ; Hides the Meet Now Button on the Taskbar
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+        "HideSCAMeetNow"=dword:00000001
+        "NoStartMenuMFUprogramsList"=-
+        "NoInstrumentation"=-
+
+        ; Remove 3D Objects
+        ; [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+        ; [-HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+
+        ; Remove Home Folder
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}]
+
+        ; Remove Gallery Folder
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}]
+
+        [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
+        "MouseSpeed"="0"
+        "MouseThreshold1"="0"
+        "MouseThreshold2"="0"
+
+
+        ; +------------------------------------------------+
+        ; -            Context Menu Customization          -
+        ; +------------------------------------------------+
+
+
+        ; Adds "Take Ownership" to the Right Click Context Menu for All Users       
         [-HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
         [-HKEY_CLASSES_ROOT\*\shell\runas]
                 
@@ -1113,94 +1237,45 @@ function Set-RecommendedHKLMRegistry {
         @="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant *S-1-3-4:F /t /c & Pause"
         "IsolatedCommand"="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant *S-1-3-4:F /t /c & Pause"
 
-        ; --Application and Feature Restrictions--
 
-        ; Disable Windows Copilot system-wide
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot]
-        "TurnOffWindowsCopilot"=dword:00000001
+        ; +------------------------------------------------+
+        ; -             File and System Settings           -
+        ; +------------------------------------------------+
 
-        ; Prevents Dev Home Installation
-        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
 
-        ; Prevents New Outlook for Windows Installation
-        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
-
-        ; Prevents Chat Auto Installation and Removes Chat Icon
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications]
-        "ConfigureChatAutoInstall"=dword:00000000
-
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
-        "ChatIcon"=dword:00000003
-
-        ; Disables Bitlocker Auto Encryption on Windows 11 24H2 and Onwards
-        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BitLocker]
-        "PreventDeviceEncryption"=dword:00000001
-
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EnhancedStorageDevices]
-        "TCGSecurityActivationDisabled"=dword:00000001
-
-        ; Disables Cortana
-        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Windows Search]
-        "AllowCortana"=dword:00000000
-
-        ; Set Registry Keys to Disable Wifi-Sense
-        [HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting]
-        "Value"=dword:00000000
-
-        [HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots]
-        "Value"=dword:00000000
-
-        ; Disable Tablet Mode
-        ; Always go to desktop mode on sign-in
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell]
-        "TabletMode"=dword:00000000
-        "SignInMode"=dword:00000001
-
-        ; Disable Xbox GameDVR
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\GameDVR]
-        "AllowGameDVR"=dword:00000000
-
-        ; Disables OneDrive Automatic Backups of Important Folders (Documents, Pictures etc.)
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\OneDrive]
-        "KFMBlockOptIn"=dword:00000001
-
-        ; Disables the "Push To Install" feature in Windows
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\PushToInstall]
-        "DisablePushToInstall"=dword:00000001
-
-        ; Disables Windows Consumer Features Like App Promotions etc.
-        ; Disables Consumer Account State Content
-        ; Disables Cloud Optimized Content
-        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CloudContent]
-        "DisableWindowsConsumerFeatures"=dword:00000000
-        "DisableConsumerAccountStateContent"=dword:00000001
-        "DisableCloudOptimizedContent"=dword:00000001
-
-        ; Blocks the "Allow my organization to manage my device" and "No, sign in to this app only" pop-up message
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WorkplaceJoin]
-        "BlockAADWorkplaceJoin"=dword:00000001
-
-        ; --Start Menu Customization--
-        ; Removes All Pinned Apps from the Start Menu to Clean it Up
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start]
-        "ConfigureStartPins"="{ \"pinnedList\": [] }"
-        "ConfigureStartPins_ProviderSet"=dword:00000001
-        "ConfigureStartPins_WinningProvider"="B5292708-1619-419B-9923-E5D9F3925E71"
-
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\providers\B5292708-1619-419B-9923-E5D9F3925E71\default\Device\Start]
-        "ConfigureStartPins"="{ \"pinnedList\": [] }"
-        "ConfigureStartPins_LastWrite"=dword:00000001
-
-        ; --File System Settings--
         ; Enable Long File Paths with Up to 32,767 Characters
         [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem]
         "LongPathsEnabled"=dword:00000001
 
-        ; --Multimedia and Gaming Performance--
-        ; Gives Multimedia Applications like Games and Video Editing a Higher Priority
+        ; Disable Startup Sound
+        ; [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation]
+        ; "DisableStartupSound"=dword:00000001
+
+        ; [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\EditionOverrides]
+        ; "UserSetting_DisableStartupSound"=dword:00000001
+
+        ; Disable Device Installation Settings
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata]
+        "PreventDeviceMetadataFromNetwork"=dword:00000001
+
+
+        ; +------------------------------------------------+
+        ; -  Multimedia, Gaming, and Advanced Performances -
+        ; +------------------------------------------------+
+
+
+        ; Gives Multimedia Applications Like Games and Video Editing a Higher Priority
         [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
         "SystemResponsiveness"=dword:00000000
         "NetworkThrottlingIndex"=dword:0000000a
+
+        ; Adjust for Best Performance of Programs
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
+        "Win32PrioritySeparation"=dword:00000026
+
+        ; Turn On Hardware Accelerated GPU Scheduling
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
+        "HwSchMode"=dword:00000002
 
         ; Gives Graphics Cards a Higher Priority for Gaming
         ; Gives the CPU a Higher Priority for Gaming
@@ -1210,104 +1285,55 @@ function Set-RecommendedHKLMRegistry {
         "Priority"=dword:00000006
         "Scheduling Category"="High"
 
-        ; disable startup sound
-        ; [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation]
-        ; "DisableStartupSound"=dword:00000001
+       
+        ; +------------------------------------------------+
+        ; -              Privacy and Securitys             -
+        ; +------------------------------------------------+
 
-        ; [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\EditionOverrides]
-        ; "UserSetting_DisableStartupSound"=dword:00000001
 
-        ; disable device installation settings
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata]
-        "PreventDeviceMetadataFromNetwork"=dword:00000001
-
-        ; NETWORK AND INTERNET
-        ; disable allow other network users to control or disable the shared internet connection
-        [HKEY_LOCAL_MACHINE\System\ControlSet001\Control\Network\SharedAccessConnection]
-        "EnableControl"=dword:00000000
-
-        ; SYSTEM AND SECURITY
-        ; adjust for best performance of programs
-        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
-        "Win32PrioritySeparation"=dword:00000026
-
-        ; disable remote assistance
-        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance]
-        "fAllowToGetHelp"=dword:00000000
-
-        ; TROUBLESHOOTING
-        ; disable automatic maintenance
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance]
-        "MaintenanceDisabled"=dword:00000001
-
-        ; SECURITY AND MAINTENANCE
-        ; disable report problems
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting]
-        "Disabled"=dword:00000001
-
-        ; ACCOUNTS
-        ; disable use my sign in info after restart
+        ; Disable Use My Sign In Info After Restart
         [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
         "DisableAutomaticRestartSignOn"=dword:00000001
 
-        ; APPS
-        ; disable archive apps 
+        ; Disable Remote Assistance
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance]
+        "fAllowToGetHelp"=dword:00000000
+
+        ; Disable Allow Other Network Users To Control Or Disable The Shared Internet Connection
+        [HKEY_LOCAL_MACHINE\System\ControlSet001\Control\Network\SharedAccessConnection]
+        "EnableControl"=dword:00000000
+
+        ; Disable Archive Apps 
         [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Appx]
         "AllowAutomaticAppArchiving"=dword:00000000
 
-        ; PERSONALIZATION
-        ; Hides the Meet Now Button on the Taskbar
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
-        "HideSCAMeetNow"=dword:00000001
-        "NoStartMenuMFUprogramsList"=-
-        "NoInstrumentation"=-
-
-        ; remove windows widgets from taskbar
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh] 
-        "AllowNewsAndInterests"=dword:00000000
-
-        ; remove news and interests from Taskbar
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds]
-        "EnableFeeds"=dword:00000000
-
-        ; SYSTEM
-        ; turn on hardware accelerated gpu scheduling
-        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
-        "HwSchMode"=dword:00000002
-
-        ; disable storage sense
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\StorageSense]
-        "AllowStorageSenseGlobal"=dword:00000000
-
-        ; --OTHER--
-        ; Disable update Microsoft Store apps automatically
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore]
-        "AutoDownload"=dword:00000002
-
-        ; UWP APPS
-        ; disable background apps
+        ; Disable Background Apps
         [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy]
         "LetAppsRunInBackground"=dword:00000002
 
-        ; disable widgets
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests]
-        "value"=dword:00000000
 
-        ; OTHER
-        ; remove 3d objects
-        ; [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
-        ; [-HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+        ; +------------------------------------------------+
+        ; -     System Maintenance and Troubleshooting     -
+        ; +------------------------------------------------+
 
-        ; Remove Home Folder
-        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}]
 
-        ; Remove Gallery Folder
-        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}]
+        ; Disable Automatic Maintenance
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance]
+        "MaintenanceDisabled"=dword:00000001
 
-        [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
-        "MouseSpeed"="0"
-        "MouseThreshold1"="0"
-        "MouseThreshold2"="0"
+        ; Disable Storage Sense
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\StorageSense]
+        "AllowStorageSenseGlobal"=dword:00000000
+
+        ; Disable Update Microsoft Store Apps Automatically
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore]
+        "AutoDownload"=dword:00000002
+
+        ; Disable Report Problems
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting]
+        "Disabled"=dword:00000001
+
+    
 "@
     Set-Content -Path "$env:TEMP\Optimize_LocalMachine_Registry.reg" -Value $MultilineComment -Force
     # edit reg file
