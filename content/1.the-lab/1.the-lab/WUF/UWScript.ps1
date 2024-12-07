@@ -94,7 +94,7 @@ function Show-MainMenu {
     Write-Host "4. Optimize Registry"
     Write-Host "5. Tasks & Services"
     Write-Host "6. Power Settings"
-    Write-Host "7. All Unattended Settings"
+    Write-Host "7. Resist The Matrix"
     Write-Host "0. Exit"
     
     $choice = Read-Host "Select an option (0-7)"
@@ -106,7 +106,7 @@ function Show-MainMenu {
         "4" { Show-OptimizeRegistryMenu } # Call the Optimize Registry menu
         "5" { Show-TasksServicesMenu } # Call the Tasks & Services menu
         "6" { Show-PowerSettingsMenu } # Call the Power Settings menu
-        "6" { Execute-AllUnattednedSettings } # Call the Power Settings menu
+        "7" { Show-ResistTheMatrixMenu } # Call the Resist The Matrix Menu
         "0" { $script:loop = $false }  # Exit
         default {
             Write-Host "Invalid selection. Please try again." -ForegroundColor Red
@@ -259,6 +259,17 @@ function Show-PowerSettingsMenu {
         -actions @{
         "1" = { Set-RecommendedPowerSettings }
         "2" = { Set-DefaultPowerSettings }
+    } `
+        -showHeader
+}
+
+# 7. Resist The Matrix Menu Menu
+function Show-PowerSettingsMenu {
+    Show-Menu -menuTitle "Power Settings" `
+        -options @("Recommended Power Settings", "Default Power Settings") `
+        -actions @{
+        "1" = { Set-RecommendedPrivacySettings; Set-RecommendedUpdateSettings; Set-RecommendedHKLMRegistry; Set-RecommendedHKCURegistry; Set-ServiceStartup; Disable-ScheduledTasks; Set-RecommendedPowerSettings }
+        "2" = { Set-DefaultPrivacySettings; Set-DefaultUpdateSettings ;Set-DefaultHKLMRegistry; Set-DefaultHKCURegistry; Set-DefaultServices; Disable-ScheduledTasks; Set-DefaultPowerSettings}
     } `
         -showHeader
 }
@@ -559,19 +570,21 @@ $capabilities = @(
 
 # Apply registry mods to prevent reinstallation and disable features
 function Set-AppsRegistry {
-@"
-+----------------------------------------+
--            Registry Edits Explained          -
-+----------------------------------------+
-- `value = -`: Deletes the registry entry or reverts a setting to its default, effectively **disabling** or **removing** that configuration.
-- `value = dword:000001`: Sets the registry value to `1`, which typically **enables** or **activates** the corresponding feature or setting.
-- `value = dword:000000`: Sets the registry value to `0`, which typically **disables** or **deactivates** the corresponding feature or setting.
-"@
+    @"
+    +-----------------------------------------+
+    -          Registry Edits Explained       -
+    +-----------------------------------------+
+    - `value = -`: Deletes the registry entry or reverts a setting to its default, effectively **disabling** or **removing** that configuration.
+    - `value = dword:000001`: Sets the registry value to `1`, which typically **enables** or **activates** the corresponding feature or setting.
+    - `value = dword:000000`: Sets the registry value to `0`, which typically **disables** or **deactivates** the corresponding feature or setting.
+    "@
 
     $MultilineComment = @"
         Windows Registry Editor Version 5.00
 
-        ; --Application and Feature Restrictions--
+        ; +-------------------------------------------------+
+        ; -        Application & Feature Restrictions       -
+        ; +-------------------------------------------------+
 
         ; Disable Windows Copilot system-wide
         [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot]
@@ -905,7 +918,7 @@ function Set-DefaultPrivacySettings {
         Windows Registry Editor Version 5.00
 
         ; +-------------------------------------------------+
-        ; -       Revert Privacy and Security Settings      -
+        ; -        Revert Privacy & Security Settings       -
         ; +-------------------------------------------------+
 
 
@@ -1132,7 +1145,7 @@ function Set-RecommendedHKLMRegistry {
         Windows Registry Editor Version 5.00
 
         ; +------------------------------------------------+
-        ; -       System and Application Restrictions      -
+        ; -        System & Application Restrictions       -
         ; +------------------------------------------------+
 
 
@@ -1215,7 +1228,7 @@ function Set-RecommendedHKLMRegistry {
 
 
         ; +------------------------------------------------+
-        ; -          UI and Desktop Customizations         -
+        ; -           UI & Desktop Customizations          -
         ; +------------------------------------------------+
 
 
@@ -1301,7 +1314,7 @@ function Set-RecommendedHKLMRegistry {
 
 
         ; +------------------------------------------------+
-        ; -             File and System Settings           -
+        ; -              File & System Settings            -
         ; +------------------------------------------------+
 
 
@@ -1322,7 +1335,7 @@ function Set-RecommendedHKLMRegistry {
 
 
         ; +------------------------------------------------+
-        ; -  Multimedia, Gaming, and Advanced Performances -
+        ; -   Multimedia, Gaming & Advanced Performances   -
         ; +------------------------------------------------+
 
 
@@ -1367,7 +1380,7 @@ function Set-RecommendedHKLMRegistry {
 
 
         ; +------------------------------------------------+
-        ; -     System Maintenance and Troubleshooting     -
+        ; -      System Maintenance & Troubleshooting      -
         ; +------------------------------------------------+
 
 
@@ -1400,275 +1413,36 @@ function Set-RecommendedHKLMRegistry {
     Wait-IfNotSpecialize
 }
 
-function Set-DefaultHKLMRegistry {
-    # create reg file
-    $MultilineComment = @"
-        Windows Registry Editor Version 5.00
+function Set-RecommendedHKCURegistry {
+    Clear-Host
+    Write-Host "Optimizing User Registry . . ."
 
-        ; --Revert Application and Feature Restrictions--
+    # Set Wallpaper (Helper Function for Recommended User Settings)
+    $defaultWallpaperPath = "C:\Windows\Web\4K\Wallpaper\Windows\img0_3840x2160.jpg"
+    $darkModeWallpaperPath = "https://i.imgur.com/HyevkUi.png"
 
-        ; Allows Dev Home Installation
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
-        @=""
+    function Set-Wallpaper ($wallpaperPath) {
+        reg.exe add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "$wallpaperPath" /f | Out-Null
+        # Notify the system of the change
+        rundll32.exe user32.dll, UpdatePerUserSystemParameters
+    }
 
-        ; Allows New Outlook for Windows Installation
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
-        @=""
+    # Check Windows version
+    $windowsVersion = (Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion").CurrentBuild
 
-        ; Reverts Chat Auto Installation and Restores Chat Icon
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications]
-        "ConfigureChatAutoInstall"=dword:00000001
-
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
-        "ChatIcon"=dword:00000001
-
-        ; Enables News and Interests
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh]
-        "AllowNewsAndInterests"=-
-
-        ; Enables BitLocker Auto Encryption on Windows 11 24H2 and Onwards
-        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BitLocker]
-        "PreventDeviceEncryption"=-
-
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EnhancedStorageDevices]
-        "TCGSecurityActivationDisabled"=-
-
-        ; Enables Cortana
-        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Windows Search]
-        "AllowCortana"=-
-
-        ; Shows the Meet Now Button on the Taskbar
-        ; Shows Recently Added Apps in Start Menu
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
-        "HideSCAMeetNow"=-
-
-        ; Re-enables WiFi-Sense
-        [HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting]
-        "Value"=dword:00000001
-
-        [HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots]
-        "Value"=dword:00000001
-
-        ; Enables Tablet Mode
-        ; Default Sign-In Mode
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell]
-        "TabletMode"=dword:00000001
-        "SignInMode"=dword:00000000
-
-        ; Enables Xbox GameDVR
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\GameDVR]
-        "AllowGameDVR"=-
-
-        ; Enables OneDrive Automatic Backups of Important Folders (Documents, Pictures etc.)
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\OneDrive]
-        "KFMBlockOptIn"=-
-
-        ; Enables "Push To Install" feature in Windows
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\PushToInstall]
-        "DisablePushToInstall"=-
-
-        ; Enables Windows Consumer Features Like App Promotions etc.
-        ; Enables Consumer Account State Content
-        ; Enables Cloud Optimized Content
-        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CloudContent]
-        "DisableWindowsConsumerFeatures"=-
-        "DisableConsumerAccountStateContent"=-
-        "DisableCloudOptimizedContent"=-
-
-        ; Unblocks "Allow my organization to manage my device" pop-up message
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WorkplaceJoin]
-        "BlockAADWorkplaceJoin"=-
-
-        ; --Revert Start Menu Customization--
-
-        ; Restores Default Pinned Apps to the Start Menu
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start]
-        "ConfigureStartPins"=-
-        "ConfigureStartPins_ProviderSet"=-
-        "ConfigureStartPins_WinningProvider"=-
-
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\providers\B5292708-1619-419B-9923-E5D9F3925E71\default\Device\Start]
-        "ConfigureStartPins"=-
-        "ConfigureStartPins_LastWrite"=-
-
-        ; --Revert File System Settings--
-
-        ; Revert Long File Paths to Default (Disabled)
-        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem]
-        "LongPathsEnabled"=dword:00000000
-
-        ; --Revert Multimedia and Gaming Performance--
-
-        ; Reverts Multimedia Applications' System Responsiveness and Network Throttling Index to Default Values
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
-        "SystemResponsiveness"=dword:00000014
-        "NetworkThrottlingIndex"=dword:ffffffff
-
-        ; --Revert Gaming Performance--
-
-        ; Reverts Graphics Cards Priority for Gaming to Default
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
-        "GPU Priority"=dword:00000002 ; Default value is 2
-
-        ; Reverts CPU Priority for Gaming to Default
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
-        "Priority"=dword:00000002 ; Default value is 2
-
-        ; Reverts Games Scheduling Category to Default
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
-        "Scheduling Category"="Medium" ; Default value is "Medium"
-
-        ; Removes "Take Ownership" from Context Menu
-        [-HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
-
-        [-HKEY_CLASSES_ROOT\*\shell\runas]
-
-        [-HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership]
-
-        [-HKEY_CLASSES_ROOT\Drive\shell\runas]
-
-        ; HARDWARE AND SOUND
-        ; lock
-        [-HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings]
-
-        ; sleep
-        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings]
-
-        ; startup sound
-        [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation]
-        "DisableStartupSound"=dword:00000000
-
-        [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\EditionOverrides]
-        "UserSetting_DisableStartupSound"=dword:00000000
-
-        ; device installation settings
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata]
-        "PreventDeviceMetadataFromNetwork"=dword:00000000
-
-        ; NETWORK AND INTERNET
-        ; allow other network users to control or disable the shared internet connection
-        [HKEY_LOCAL_MACHINE\System\ControlSet001\Control\Network\SharedAccessConnection]
-        "EnableControl"=dword:00000001
-
-        ; SYSTEM AND SECURITY
-        ; revert adjust for best performance of programs
-        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
-        "Win32PrioritySeparation"=dword:00000002
-
-        ; remote assistance
-        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance]
-        "fAllowToGetHelp"=dword:00000001
-
-        ; TROUBLESHOOTING
-        ; automatic maintenance
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance]
-        "MaintenanceDisabled"=-
-
-        ; SECURITY AND MAINTENANCE
-        ; report problems
-        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting]
-
-        ; ACCOUNTS
-        ; use my sign in info after restart
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
-        "DisableAutomaticRestartSignOn"=-
-
-       
-
-        ; PERSONALIZATION
-
-        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize]
-
-        ; don't hide most used list in start menu
-        ; show recently added apps
-        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer]
-
-        ; news and interests
-        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds]
-
-        ; SYSTEM
-        ; hardware accelerated gpu scheduling
-        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
-        "HwSchMode"=-
-
-        ; storage sense
-        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\StorageSense]
-
-        ; --OTHER--
-        ; Enable update Microsoft Store apps automatically
-        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore]
-
-        ; --CAN'T DO NATIVELY--
-        ; UWP APPS
-        ; background apps
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy]
-        "LetAppsRunInBackground"=-
-
-        ; widgets
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests]
-        "value"=dword:00000001
-
-        ; NVIDIA
-        ; old nvidia sharpening
-        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS]
-        "EnableGR535"=dword:00000001
-
-        ; OTHER
-        ; 3d objects
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
-        [HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
-
-        ; Restores Home Folder
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}]
-        @="CLSID_MSGraphHomeFolder"
-
-        [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
-        "MouseSpeed"="1"
-        "MouseThreshold1"="6"
-        "MouseThreshold2"="10"
-        "@
-            Set-Content -Path "$env:TEMP\Restore_LocalMachine_Registry.reg" -Value $MultilineComment -Force
-            # edit reg file
-            $path = "$env:TEMP\Restore_LocalMachine_Registry.reg"
-                        (Get-Content $path) -replace "\?", "$" | Out-File $path
-            # import reg file
-            Regedit.exe /S "$env:TEMP\Restore_LocalMachine_Registry.reg"
-            Show-Header
-            Write-Host "Default Local Machine Registry Settings Applied." -ForegroundColor Green
-            Wait-IfNotSpecialize
+    # Apply appropriate wallpaper based on Windows version or existence of dark mode wallpaper
+    if ($windowsVersion -ge 22000) {
+        # Assuming Windows 11 starts at build 22000
+        if (Test-Path $darkModeWallpaperPath) {
+            Set-Wallpaper -wallpaperPath $darkModeWallpaperPath
         }
+    }
+    else {
+        # Apply default wallpaper for Windows 10
+        Set-Wallpaper -wallpaperPath $defaultWallpaperPath
+    }
 
-
-        function Set-RecommendedHKCURegistry {
-            Clear-Host
-            Write-Host "Optimizing User Registry . . ."
-
-            # Set Wallpaper (Helper Function for Recommended User Settings)
-            $defaultWallpaperPath = "C:\Windows\Web\4K\Wallpaper\Windows\img0_3840x2160.jpg"
-            $darkModeWallpaperPath = "https://i.imgur.com/HyevkUi.png"
-
-            function Set-Wallpaper ($wallpaperPath) {
-                reg.exe add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "$wallpaperPath" /f | Out-Null
-                # Notify the system of the change
-                rundll32.exe user32.dll, UpdatePerUserSystemParameters
-            }
-
-            # Check Windows version
-            $windowsVersion = (Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion").CurrentBuild
-
-            # Apply appropriate wallpaper based on Windows version or existence of dark mode wallpaper
-            if ($windowsVersion -ge 22000) {
-                # Assuming Windows 11 starts at build 22000
-                if (Test-Path $darkModeWallpaperPath) {
-                    Set-Wallpaper -wallpaperPath $darkModeWallpaperPath
-                }
-            }
-            else {
-                # Apply default wallpaper for Windows 10
-                Set-Wallpaper -wallpaperPath $defaultWallpaperPath
-            }
-
-            $MultilineComment = @"
+    $MultilineComment = @"
         Windows Registry Editor Version 5.00
 
         ; EASE OF ACCESS
@@ -2117,11 +1891,258 @@ function Set-DefaultHKLMRegistry {
         ; Hides the Try New Outlook Button
         [HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\Outlook\Options\General]
         "HideNewOutlookToggle"=dword:00000000
-"@
+"@ 
+
     Set-Content -Path "$env:TEMP\Optimize_User_Registry.reg" -Value $MultilineComment -Force
     Regedit.exe /S "$env:TEMP\Optimize_User_Registry.reg"
     Show-Header
     Write-Host "Recommended User Registry Settings Applied." -ForegroundColor Green
+    Wait-IfNotSpecialize
+
+}
+
+function Set-DefaultHKLMRegistry {
+    # create reg file
+    $MultilineComment = @"
+        Windows Registry Editor Version 5.00
+
+        ; --Revert Application and Feature Restrictions--
+
+        ; Allows Dev Home Installation
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
+        @=""
+
+        ; Allows New Outlook for Windows Installation
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
+        @=""
+
+        ; Reverts Chat Auto Installation and Restores Chat Icon
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications]
+        "ConfigureChatAutoInstall"=dword:00000001
+
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
+        "ChatIcon"=dword:00000001
+
+        ; Enables News and Interests
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh]
+        "AllowNewsAndInterests"=-
+
+        ; Enables BitLocker Auto Encryption on Windows 11 24H2 and Onwards
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BitLocker]
+        "PreventDeviceEncryption"=-
+
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EnhancedStorageDevices]
+        "TCGSecurityActivationDisabled"=-
+
+        ; Enables Cortana
+        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Windows Search]
+        "AllowCortana"=-
+
+        ; Shows the Meet Now Button on the Taskbar
+        ; Shows Recently Added Apps in Start Menu
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+        "HideSCAMeetNow"=-
+
+        ; Re-enables WiFi-Sense
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting]
+        "Value"=dword:00000001
+
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots]
+        "Value"=dword:00000001
+
+        ; Enables Tablet Mode
+        ; Default Sign-In Mode
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell]
+        "TabletMode"=dword:00000001
+        "SignInMode"=dword:00000000
+
+        ; Enables Xbox GameDVR
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\GameDVR]
+        "AllowGameDVR"=-
+
+        ; Enables OneDrive Automatic Backups of Important Folders (Documents, Pictures etc.)
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\OneDrive]
+        "KFMBlockOptIn"=-
+
+        ; Enables "Push To Install" feature in Windows
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\PushToInstall]
+        "DisablePushToInstall"=-
+
+        ; Enables Windows Consumer Features Like App Promotions etc.
+        ; Enables Consumer Account State Content
+        ; Enables Cloud Optimized Content
+        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CloudContent]
+        "DisableWindowsConsumerFeatures"=-
+        "DisableConsumerAccountStateContent"=-
+        "DisableCloudOptimizedContent"=-
+
+        ; Unblocks "Allow my organization to manage my device" pop-up message
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WorkplaceJoin]
+        "BlockAADWorkplaceJoin"=-
+
+        ; --Revert Start Menu Customization--
+
+        ; Restores Default Pinned Apps to the Start Menu
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start]
+        "ConfigureStartPins"=-
+        "ConfigureStartPins_ProviderSet"=-
+        "ConfigureStartPins_WinningProvider"=-
+
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\providers\B5292708-1619-419B-9923-E5D9F3925E71\default\Device\Start]
+        "ConfigureStartPins"=-
+        "ConfigureStartPins_LastWrite"=-
+
+        ; --Revert File System Settings--
+
+        ; Revert Long File Paths to Default (Disabled)
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem]
+        "LongPathsEnabled"=dword:00000000
+
+        ; --Revert Multimedia and Gaming Performance--
+
+        ; Reverts Multimedia Applications' System Responsiveness and Network Throttling Index to Default Values
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
+        "SystemResponsiveness"=dword:00000014
+        "NetworkThrottlingIndex"=dword:ffffffff
+
+        ; --Revert Gaming Performance--
+
+        ; Reverts Graphics Cards Priority for Gaming to Default
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
+        "GPU Priority"=dword:00000002 ; Default value is 2
+
+        ; Reverts CPU Priority for Gaming to Default
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
+        "Priority"=dword:00000002 ; Default value is 2
+
+        ; Reverts Games Scheduling Category to Default
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
+        "Scheduling Category"="Medium" ; Default value is "Medium"
+
+        ; Removes "Take Ownership" from Context Menu
+        [-HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
+
+        [-HKEY_CLASSES_ROOT\*\shell\runas]
+
+        [-HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership]
+
+        [-HKEY_CLASSES_ROOT\Drive\shell\runas]
+
+        ; HARDWARE AND SOUND
+        ; lock
+        [-HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings]
+
+        ; sleep
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings]
+
+        ; startup sound
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation]
+        "DisableStartupSound"=dword:00000000
+
+        [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\EditionOverrides]
+        "UserSetting_DisableStartupSound"=dword:00000000
+
+        ; device installation settings
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata]
+        "PreventDeviceMetadataFromNetwork"=dword:00000000
+
+        ; NETWORK AND INTERNET
+        ; allow other network users to control or disable the shared internet connection
+        [HKEY_LOCAL_MACHINE\System\ControlSet001\Control\Network\SharedAccessConnection]
+        "EnableControl"=dword:00000001
+
+        ; SYSTEM AND SECURITY
+        ; revert adjust for best performance of programs
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
+        "Win32PrioritySeparation"=dword:00000002
+
+        ; remote assistance
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance]
+        "fAllowToGetHelp"=dword:00000001
+
+        ; TROUBLESHOOTING
+        ; automatic maintenance
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance]
+        "MaintenanceDisabled"=-
+
+        ; SECURITY AND MAINTENANCE
+        ; report problems
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting]
+
+        ; ACCOUNTS
+        ; use my sign in info after restart
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+        "DisableAutomaticRestartSignOn"=-
+
+       
+
+        ; PERSONALIZATION
+
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize]
+
+        ; don't hide most used list in start menu
+        ; show recently added apps
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer]
+
+        ; news and interests
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds]
+
+        ; SYSTEM
+        ; hardware accelerated gpu scheduling
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
+        "HwSchMode"=-
+
+        ; storage sense
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\StorageSense]
+
+        ; --OTHER--
+        ; Enable update Microsoft Store apps automatically
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore]
+
+        ; --CAN'T DO NATIVELY--
+        ; UWP APPS
+        ; background apps
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy]
+        "LetAppsRunInBackground"=-
+
+        ; widgets
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests]
+        "value"=dword:00000001
+
+        ; NVIDIA
+        ; old nvidia sharpening
+        [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS]
+        "EnableGR535"=dword:00000001
+
+        ; OTHER
+        ; 3d objects
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+        [HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+
+        ; Restores Home Folder
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}]
+        @="CLSID_MSGraphHomeFolder"
+
+        [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
+        "MouseSpeed"="1"
+        "MouseThreshold1"="6"
+        "MouseThreshold2"="10"
+        "@
+            Set-Content -Path "$env:TEMP\Restore_LocalMachine_Registry.reg" -Value $MultilineComment -Force
+            # edit reg file
+            $path = "$env:TEMP\Restore_LocalMachine_Registry.reg"
+                        (Get-Content $path) -replace "\?", "$" | Out-File $path
+            # import reg file
+            Regedit.exe /S "$env:TEMP\Restore_LocalMachine_Registry.reg"
+            Show-Header
+            Write-Host "Default Local Machine Registry Settings Applied." -ForegroundColor Green
+            Wait-IfNotSpecialize
+        }
+"@
+    Set-Content -Path "$env:TEMP\Retore_LocalMachine_Registry.reg" -Value $MultilineComment -Force
+    Regedit.exe /S "$env:TEMP\Retore_LocalMachine_Registry.reg"
+    Show-Header
+    Write-Host "Default Local Machine Registry Settings Applied." -ForegroundColor Green
     Wait-IfNotSpecialize
 }
 
@@ -2919,8 +2940,11 @@ function Set-DefaultPowerSettings {
 #                      POWER                      #
 ###################################################
 
-
-# END OF COMMAND & OPERATION FUNCTIONS
+###################################################
+###################################################
+##               COMMAND & OPERATIONS            ##
+###################################################
+###################################################
 
 # Check if this is running in the specialize phase to Apply Settings automatically during Windows Installation
 if (Test-Path -Path $markerFilePath) {
