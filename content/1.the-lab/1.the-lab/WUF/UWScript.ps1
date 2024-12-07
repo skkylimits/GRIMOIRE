@@ -265,8 +265,8 @@ function Show-PowerSettingsMenu {
 
 # 7. Resist The Matrix Menu Menu
 function Show-ResistTheMatrixMenu {
-    Show-Menu -menuTitle "Resist The MAtrix" `
-        -options @("Red Pill Settings", "Blue Pill Settings") `
+    Show-Menu -menuTitle "Resist The Matrix" `
+        -options @("Red Pill", "Blue Pill") `
         -actions @{
         "1" = { Set-RecommendedPrivacySettings; Set-RecommendedUpdateSettings; Set-RecommendedHKLMRegistry; Set-RecommendedHKCURegistry; Set-ServiceStartup; Disable-ScheduledTasks; Set-RecommendedPowerSettings }
         "2" = { Set-DefaultPrivacySettings; Set-DefaultUpdateSettings ;Set-DefaultHKLMRegistry; Set-DefaultHKCURegistry; Set-DefaultServices; Disable-ScheduledTasks; Set-DefaultPowerSettings}
