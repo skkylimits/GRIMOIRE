@@ -957,7 +957,9 @@ function Set-RecommendedUpdateSettings {
     $MultilineComment = @"
         Windows Registry Editor Version 5.00
 
-        ; --Windows Update Settings--
+        ; +------------------------------------------------+
+        ; -             Windows Update Settings            -
+        ; +------------------------------------------------+
 
         ; Disable Automatic Updates (Only Check for Updates Manually)
         ; Notify Before Downloading and Installing Updates
@@ -978,7 +980,7 @@ function Set-RecommendedUpdateSettings {
         "DeferQualityUpdates"=dword:00000001
         "DeferQualityUpdatesPeriodInDays"=dword:00000007
 
-        ; Disables allowing downloads from other PCs (Delivery Optimization)
+        ; Disables Allowing Downloads From Other PCs (Delivery Optimization)
         [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization]
         "DODownloadMode"=dword:00000000
 "@
@@ -999,32 +1001,34 @@ function Set-DefaultUpdateSettings {
     Write-Host "Applying Default Windows Update Settings . . ."
 
     $MultilineComment = @"
-Windows Registry Editor Version 5.00
-    
-; --Set Default Windows Update Settings--
-    
-; Enable Automatic Updates (Default: Automatic Download and Install)
-; Set Updates to Default Behavior (Automatic Download and Install)
-; Allow Automatic Installation of Minor Updates (Default: Allowed)
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU]
-"NoAutoUpdate"=-
-"AUOptions"=-    
-"AutoInstallMinorUpdates"=-
-    
-; --Revert Windows 10 22H2 Auto Upgrade to 11 Block to Default--
-; Allow Feature and Quality updates
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate]
-"TargetReleaseVersion"=-
-"TargetReleaseVersionInfo"=-
-"ProductVersion"=-
-"DeferFeatureUpdates"=-
-"DeferFeatureUpdatesPeriodInDays"=-
-"DeferQualityUpdates"=dword:-
-"DeferQualityUpdatesPeriodInDays"=-
+        Windows Registry Editor Version 5.00
+            
+        ; +------------------------------------------------+
+        ; -       Set Default Windows Update Settings      -
+        ; +------------------------------------------------+
+            
+        ; Enable Automatic Updates (Default: Automatic Download and Install)
+        ; Set Updates to Default Behavior (Automatic Download and Install)
+        ; Allow Automatic Installation of Minor Updates (Default: Allowed)
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU]
+        "NoAutoUpdate"=-
+        "AUOptions"=-    
+        "AutoInstallMinorUpdates"=-
+            
+        ; --Revert Windows 10 22H2 Auto Upgrade to 11 Block to Default--
+        ; Allow Feature and Quality updates
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate]
+        "TargetReleaseVersion"=-
+        "TargetReleaseVersionInfo"=-
+        "ProductVersion"=-
+        "DeferFeatureUpdates"=-
+        "DeferFeatureUpdatesPeriodInDays"=-
+        "DeferQualityUpdates"=dword:-
+        "DeferQualityUpdatesPeriodInDays"=-
 
-; Reverts Delivery Optimization settings to allow downloads from other PCs
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization]
-"DODownloadMode"=-
+        ; Reverts Delivery Optimization settings to allow downloads from other PCs
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization]
+        "DODownloadMode"=-
 "@
     Set-Content -Path "$env:TEMP\Default_Windows_Update_Settings.reg" -Value $MultilineComment -Force
     Regedit.exe /S "$env:TEMP\Default_Windows_Update_Settings.reg"
@@ -1191,6 +1195,10 @@ function Set-RecommendedHKLMRegistry {
         "MouseSpeed"="0"
         "MouseThreshold1"="0"
         "MouseThreshold2"="0"
+
+        ; Enable Windows Shaking
+
+        ; Disable Multiple Tabs open from browsers
 
 
         ; +------------------------------------------------+
