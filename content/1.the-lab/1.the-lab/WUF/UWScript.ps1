@@ -1,3 +1,7 @@
+###################################################
+#            POWERSHELL &  RUNAS ADMIN            #
+###################################################
+
 # Check if script is running as Administrator
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator")) {
     Try {
@@ -59,7 +63,14 @@ public class WindowCentering {
 
 [WindowCentering]::CenterWindow($psWindow)
 
-# START OF MENU FUNCTIONS
+###################################################
+#            POWERSHELL &  RUNAS ADMIN            #
+###################################################
+
+###################################################
+#                      MENU                       #
+###################################################
+
 $script:loop = $true
 
 # Header
@@ -252,12 +263,15 @@ function Show-PowerSettingsMenu {
         -showHeader
 }
 
-# END OF MENU FUNCTIONS
+###################################################
+#                      MENU                       #
+###################################################
 
 # Define Unattended Windows Installation Variables & Functions
 # Check if the marker file exists to determine if we are in the specialize phase
 $markerFilePath = "C:\specialize_marker.txt"
 $isSpecializePhase = Test-Path $markerFilePath
+
 # Function to Pause scripts only when not in Specialize Phase
 function Wait-IfNotSpecialize {
     if (-not $isSpecializePhase) {
@@ -265,9 +279,15 @@ function Wait-IfNotSpecialize {
     }
 }
 
-# START OF COMMAND & OPERATION FUNCTIONS
-# Start of Software & Apps Functions
-# Install Software Functions
+###################################################
+###################################################
+##               COMMAND & OPERATIONS            ##
+###################################################
+###################################################
+
+###################################################
+#                      APPS                       #
+###################################################
 
 # Check for internet connection
 function Test-InternetConnection {
@@ -539,35 +559,44 @@ $capabilities = @(
 
 # Apply registry mods to prevent reinstallation and disable features
 function Set-AppsRegistry {
+@"
++----------------------------------------+
+-            Registry Edits Explained          -
++----------------------------------------+
+- `value = -`: Deletes the registry entry or reverts a setting to its default, effectively **disabling** or **removing** that configuration.
+- `value = dword:000001`: Sets the registry value to `1`, which typically **enables** or **activates** the corresponding feature or setting.
+- `value = dword:000000`: Sets the registry value to `0`, which typically **disables** or **deactivates** the corresponding feature or setting.
+"@
+
     $MultilineComment = @"
-Windows Registry Editor Version 5.00
+        Windows Registry Editor Version 5.00
 
-; --Application and Feature Restrictions--
+        ; --Application and Feature Restrictions--
 
-; Disable Windows Copilot system-wide
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot]
-"TurnOffWindowsCopilot"=dword:00000001
+        ; Disable Windows Copilot system-wide
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot]
+        "TurnOffWindowsCopilot"=dword:00000001
 
-; Prevents Dev Home Installation
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
+        ; Prevents Dev Home Installation
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
 
-; Prevents New Outlook for Windows Installation
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
+        ; Prevents New Outlook for Windows Installation
+        [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
 
-; Prevents Chat Auto Installation
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications]
-"ConfigureChatAutoInstall"=dword:00000000
+        ; Prevents Chat Auto Installation
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications]
+        "ConfigureChatAutoInstall"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
-"ChatIcon"=dword:00000003
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
+        "ChatIcon"=dword:00000003
 
-; Disables Cortana
-[HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Windows Search]
-"AllowCortana"=dword:00000000
+        ; Disables Cortana
+        [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Windows Search]
+        "AllowCortana"=dword:00000000
 
-; Disables OneDrive Automatic Backups of Important Folders (Documents, Pictures etc.)
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\OneDrive]
-"KFMBlockOptIn"=dword:00000001
+        ; Disables OneDrive Automatic Backups of Important Folders (Documents, Pictures etc.)
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\OneDrive]
+        "KFMBlockOptIn"=dword:00000001
 "@
     Set-Content -Path "$env:TEMP\Windows_Apps.reg" -Value $MultilineComment -Force -ErrorAction SilentlyContinue
     Regedit.exe /S "$env:TEMP\Windows_Apps.reg" -Force -ErrorAction SilentlyContinue
@@ -631,7 +660,10 @@ function Remove-Apps {
         Show-MainMenu
     }
 }
-# End of Software & Apps Functions
+
+###################################################
+#                      APPS                       #
+###################################################
 
 ###################################################
 #               PRIVACY & SECURITY                #
@@ -798,13 +830,16 @@ function Set-RecommendedPrivacySettings {
     $MultilineComment = @"
         Windows Registry Editor Version 5.00
 
-        ; --Privacy and Security Settings--
+        ; +-------------------------------------------------+
+        ; -          Privacy and Security Settings          -
+        ; +-------------------------------------------------+
+        
 
         ; Disables Activity History
         [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
         "EnableActivityFeed"=dword:00000000
         "PublishUserActivities"=dword:00000000
-        "UploadUserActivities"=dword:00000000
+        "UploadUserActivities"=dword:000000000
 
         ; Disables Location Tracking
         [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location]
@@ -839,6 +874,14 @@ function Set-RecommendedPrivacySettings {
         ; Disable Account Info
         [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation]
         "Value"="Deny"
+
+        ; Disable Archive Apps 
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Appx]
+        "AllowAutomaticAppArchiving"=dword:00000000
+
+        ; Disable Background Apps
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy]
+        "LetAppsRunInBackground"=dword:00000002
 "@
     # Write the registry changes to a file and silently import it using regedit
     Set-Content -Path "$env:TEMP\Recommended_Privacy_Settings.reg" -Value $MultilineComment -Force
@@ -861,7 +904,10 @@ function Set-DefaultPrivacySettings {
     $MultilineComment = @"
         Windows Registry Editor Version 5.00
 
-        ; --Revert Privacy and Security Settings--
+        ; +-------------------------------------------------+
+        ; -       Revert Privacy and Security Settings      -
+        ; +-------------------------------------------------+
+
 
         ; Enables Activity History
         [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
@@ -871,13 +917,13 @@ function Set-DefaultPrivacySettings {
 
         ; Enables Location Tracking
         [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location]
-        "Value"=-
+        "Value"="Allow"
 
         [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}]
-        "SensorPermissionState"=-
+        "SensorPermissionState"=dword:00000001
 
         [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration]
-        "Status"=-
+        "Status"=dword:00000001
 
         [HKEY_LOCAL_MACHINE\SYSTEM\Maps]
         "AutoUpdateEnabled"=dword:00000001
@@ -902,6 +948,14 @@ function Set-DefaultPrivacySettings {
         ; Allow Account info
         [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation]
         "Value"="Allow"
+
+        ; Archive Apps
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Appx]
+        "AllowAutomaticAppArchiving"=-
+
+        ; Background Apps
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy]
+        "LetAppsRunInBackground"=-
 "@
     Set-Content -Path "$env:TEMP\Default_Privacy_Settings.reg" -Value $MultilineComment -Force
     Regedit.exe /S "$env:TEMP\Default_Privacy_Settings.reg"
@@ -1295,7 +1349,7 @@ function Set-RecommendedHKLMRegistry {
 
        
         ; +------------------------------------------------+
-        ; -              Privacy and Securitys             -
+        ; -                    Security                    -
         ; +------------------------------------------------+
 
 
@@ -1310,14 +1364,6 @@ function Set-RecommendedHKLMRegistry {
         ; Disable Allow Other Network Users To Control Or Disable The Shared Internet Connection
         [HKEY_LOCAL_MACHINE\System\ControlSet001\Control\Network\SharedAccessConnection]
         "EnableControl"=dword:00000000
-
-        ; Disable Archive Apps 
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Appx]
-        "AllowAutomaticAppArchiving"=dword:00000000
-
-        ; Disable Background Apps
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy]
-        "LetAppsRunInBackground"=dword:00000002
 
 
         ; +------------------------------------------------+
@@ -1527,10 +1573,7 @@ function Set-DefaultHKLMRegistry {
         [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
         "DisableAutomaticRestartSignOn"=-
 
-        ; APPS
-        ; archive apps
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Appx]
-        "AllowAutomaticAppArchiving"=-
+       
 
         ; PERSONALIZATION
 

@@ -166,6 +166,27 @@ if (-not $isSpecializePhase) {
 
 This script helps enforce privacy by disabling activity tracking, telemetry, location tracking, and other privacy-invasive features within Windows, ensuring better user privacy and control over data collection.
 
+::foldable
+#title
+regedit descriptions
+
+#content
+| **Registry Key** | **Location in Windows Settings** | **Description** |
+|------------------|----------------------------------|-----------------|
+| **Activity History** | `Settings` > `Privacy` > `Activity History` | Controls the recording of user activities. |
+| **Location Tracking** | `Settings` > `Privacy` > `Location` | Manages access to location services by apps. |
+| **Sensor Permissions** | `Settings` > `Privacy` > `Sensors` | Controls which apps can use sensors. |
+| **Location Services** | No direct UI | Affects location and geofencing services. |
+| **Maps Auto Update** | `Settings` > `Privacy` > `Location` > `Location History` | Controls whether maps data auto-updates. |
+| **Telemetry** | `Settings` > `Privacy` > `Diagnostics & Feedback` | Manages data sent to Microsoft. |
+| **Telemetry Notifications** | `Settings` > `Privacy` > `Diagnostics & Feedback` | Controls telemetry feedback notifications. |
+| **Windows Ink Workspace** | `Settings` > `Devices` > `Pen & Windows Ink` | Controls whether the Windows Ink Workspace is available. |
+| **Advertising ID** | `Settings` > `Privacy` > `General` | Manages whether apps can use your advertising ID. |
+| **Account Info** | `Settings` > `Privacy` > `App Permissions` > `Account info` | Controls whether apps can access account information. |
+
+By checking these settings in the **Windows Settings** menu, you can verify whether the registry changes are successfully applied.
+::
+
 ## Windows Updates 
 
 Let me explain what the `Set-RecommendedUpdateSettings` function does, breaking it down into key phases and actions. This function modifies Windows Update settings through the registry to enforce specific update behaviors.

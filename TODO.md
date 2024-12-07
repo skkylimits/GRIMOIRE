@@ -42,6 +42,8 @@
 - [ ] Make it so you can adjust the way certain prose types behave, like the h2 with standard --- hr at the end of the - [ ] 
 - [ ] make a config so when we use _## or ## h2 .{exclude}, that specific h2 doesnt render in the toc.
 
+- [ ] Zoekn in winowds customizen, zodat everything weg kan? everytihg  indexeert o basis van files, windows o basis van content
+
 
 ## DOC
 
