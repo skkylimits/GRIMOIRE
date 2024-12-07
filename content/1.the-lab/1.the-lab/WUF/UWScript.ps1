@@ -264,9 +264,9 @@ function Show-PowerSettingsMenu {
 }
 
 # 7. Resist The Matrix Menu Menu
-function Show-PowerSettingsMenu {
-    Show-Menu -menuTitle "Power Settings" `
-        -options @("Recommended Power Settings", "Default Power Settings") `
+function Show-ResistTheMatrixMenu {
+    Show-Menu -menuTitle "Resist The MAtrix" `
+        -options @("Red Pill Settings", "Blue Pill Settings") `
         -actions @{
         "1" = { Set-RecommendedPrivacySettings; Set-RecommendedUpdateSettings; Set-RecommendedHKLMRegistry; Set-RecommendedHKCURegistry; Set-ServiceStartup; Disable-ScheduledTasks; Set-RecommendedPowerSettings }
         "2" = { Set-DefaultPrivacySettings; Set-DefaultUpdateSettings ;Set-DefaultHKLMRegistry; Set-DefaultHKCURegistry; Set-DefaultServices; Disable-ScheduledTasks; Set-DefaultPowerSettings}
@@ -544,21 +544,18 @@ function Install-AppWithWinGet {
 # Remove Bloatware Apps Functions
 # Define Packages
 $appxPackages = @(
-    'Microsoft.Microsoft3DViewer', 'Microsoft.BingSearch', 'Microsoft.WindowsCamera', 'Clipchamp.Clipchamp',
-    'Microsoft.WindowsAlarms', 'Microsoft.549981C3F5F10', 'Microsoft.Windows.DevHome',
-    'MicrosoftCorporationII.MicrosoftFamily', 'Microsoft.WindowsFeedbackHub', 'Microsoft.GetHelp',
+    'Microsoft.BingSearch', 'Microsoft.WindowsCamera','Microsoft.WindowsAlarms', 'Microsoft.549981C3F5F10', 
+    'Microsoft.Windows.DevHome', 'MicrosoftCorporationII.MicrosoftFamily', 'Microsoft.WindowsFeedbackHub',
     'microsoft.windowscommunicationsapps', 'Microsoft.WindowsMaps', 'Microsoft.ZuneVideo',
     'Microsoft.BingNews', 'Microsoft.MicrosoftOfficeHub', 'Microsoft.Office.OneNote',
     'Microsoft.OutlookForWindows', 'Microsoft.People', 'Microsoft.Windows.Photos',
-    'Microsoft.PowerAutomateDesktop', 'MicrosoftCorporationII.QuickAssist', 'Microsoft.SkypeApp',
+    'Microsoft.PowerAutomateDesktop', 'Microsoft.SkypeApp',
     'Microsoft.MicrosoftSolitaireCollection', 'Microsoft.MicrosoftStickyNotes', 'MSTeams',
     'Microsoft.Getstarted', 'Microsoft.Todos', 'Microsoft.WindowsSoundRecorder', 'Microsoft.BingWeather',
-    'Microsoft.ZuneMusic', 'Microsoft.WindowsTerminal', 'Microsoft.Xbox.TCUI', 'Microsoft.XboxApp',
-    'Microsoft.XboxGameOverlay', 'Microsoft.XboxGamingOverlay', 'Microsoft.XboxIdentityProvider',
-    'Microsoft.XboxSpeechToTextOverlay', 'Microsoft.GamingApp', 'Microsoft.YourPhone', 'Microsoft.OneDrive',
-    'Microsoft.549981C3F5F10', 'Microsoft.MixedReality.Portal', 'Microsoft.ScreenSketch'
+    'Microsoft.ZuneMusic', 'Microsoft.XboxApp', 'Microsoft.XboxIdentityProvider', 'Microsoft.GamingApp', 'Microsoft.YourPhone', 'Microsoft.OneDrive',
+    'Microsoft.549981C3F5fF10', 'Microsoft.MixedReality.Portal', 'Microsoft.ScreenSketch'
     'Microsoft.Windows.Ai.Copilot.Provider', 'Microsoft.Copilot', 'Microsoft.Copilot_8wekyb3d8bbwe',
-    'Microsoft.WindowsMeetNow', 'Microsoft.WindowsStore', 'Microsoft.Paint', 'Microsoft.MSPaint'
+    'Microsoft.WindowsMeetNow', 'Microsoft.Paint'
 )
 
 # Define Windows Capabilities
@@ -907,7 +904,6 @@ function Set-RecommendedPrivacySettings {
     }
 }
 
-
 # Function to Apply the Default Privacy Settings
 function Set-DefaultPrivacySettings {
     
@@ -1112,6 +1108,8 @@ function Set-DefaultUpdateSettings {
 ###################################################
 #                     Registry                    #
 ###################################################
+
+# Best Practice (Even for Single User): It's still a good practice to separate user-specific settings (e.g., appearance, notifications, and apps) in HKCU and system-wide settings (e.g., BitLocker, Windows Copilot) in HKLM. This keeps the configuration clean, future-proof, and more manageable.
 
 function Set-RecommendedHKLMRegistry {
     <#
@@ -1898,7 +1896,6 @@ function Set-RecommendedHKCURegistry {
     Show-Header
     Write-Host "Recommended User Registry Settings Applied." -ForegroundColor Green
     Wait-IfNotSpecialize
-
 }
 
 function Set-DefaultHKLMRegistry {
