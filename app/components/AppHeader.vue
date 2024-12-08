@@ -184,6 +184,12 @@ const links = [
         description: 'Master the management and maintenance of computer systems and networks.'
       },
       {
+        label: 'Web Dev',
+        icon: 'i-game-icons-spider-web',
+        to: '/knowledge-base/web-dev',
+        description: 'This is the art and grit of web development—a never-ending race against time, technology, and the limits of creativity..'
+      },
+      {
         label: 'Cyber Crusades',
         icon: 'i-heroicons-bug-ant',
         to: '/knowledge-base/cyber-crusades',

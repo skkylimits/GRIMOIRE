@@ -294,3 +294,10 @@ PS C:\Users\MBR\Desktop\Nameless> Get-ExecutionPolicy
 >>
 Restricted
 PS C:\Users\MBR\Desktop\Nameless> Set-ExecutionPolicy RemoteSigned
+
+
+## XXSrat
+
+https://thexssrat.podia.com/full-house-bundle-all-of-our-current-and-future-courses-in-one?coupon=DDSFSDFSFS
+
+kjk of je deze nodig hebt of niet

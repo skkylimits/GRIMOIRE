@@ -1,9 +1,11 @@
-﻿# Windows + R
-Hier is de aangepaste lijst voor systeembeheerders onderverdeeld in categorieën voor meer overzicht:
+﻿---
+title: Windows + R
+description: Hier is de aangepaste lijst voor systeembeheerders onderverdeeld in categorieën voor meer overzicht
+---
 
 ## Voor systeembeheerders:
 
-**Systeemconfiguratie en Beleid:**
+**Systeemconfiguratie en Beleid:**  
 2. **gpedit.msc** - Lokale Groepsbeleidseditor
 3. **msconfig** - Systeemconfiguratie
 4. **secpol.msc** - Lokale Beveiligingsbeleid
