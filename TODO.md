@@ -112,3 +112,7 @@ SC-900
 MD-102
 RIJBWIJS
 TCM & AD/AZURE ACADEMY
+
+## te plaatsen
+
+https://go.recordedfuture.com/the-intelligence-handbook-fourth-edition
