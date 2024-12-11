@@ -65,7 +65,9 @@ export default <Partial<Config>>{
     './app/**/*.ts',
     './app/components/**/*.{js,vue,ts}',
     './app/layouts/**/*.vue',
-    './app/pages/**/*.vue'
-    // './plugins/**/*.{js,ts}',
-  ]
+    './app/pages/**/*.vue',
+    // Exclude problematic files
+    '!./node_modules',
+    '!./.nuxt/content-cache/parsed/**/*.md'
+  ]  
 }

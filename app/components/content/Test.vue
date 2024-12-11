@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
-
 const props = defineProps<{
   items: Array<{ label: string; content: string }>;
 }>();
