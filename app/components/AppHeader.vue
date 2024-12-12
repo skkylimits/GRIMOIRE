@@ -35,6 +35,12 @@ const links = [
     active: false,
     description: 'Explore and master different scripting languages for automation and development.',
     children: [
+    {
+        label: 'Morse',
+        to: '/syntax/morse',
+        icon: 'i-arcticons-morse',
+        description: 'For times when it\s needed'
+      },
       {
         label: 'Terminal',
         to: '/syntax/bash',

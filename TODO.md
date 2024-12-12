@@ -4,6 +4,7 @@
 
 - [ ] Markdown lint -> Integrate antufu/eslint for css & markdown
 - [ ] Make sure lint doesnt make nuxt unreadable
+- [ ] https://github.com/funkhaus/fuxt/pull/121
 
 ## Bug
 
@@ -116,3 +117,30 @@ TCM & AD/AZURE ACADEMY
 ## te plaatsen
 
 https://go.recordedfuture.com/the-intelligence-handbook-fourth-edition
+
+## Windows PC storage
+
+3 NVME's for top performance.
+
+- Main OS
+- Main Games
+- Kali/Ubuntu
+
+TerraMaster NAS F8 SSD Plus
+
+- 4x 4TB NVME disks
+
+QUBE NAS
+
+-4 x 1TB Offline Storage
+
+then run syncback pro for backup
+
+## Pyenv
+
+https://www.liquidweb.com/blog/how-to-install-pyenv-on-ubuntu-18-04/
+
+## CISSP
+
+- CBK CISSP
+- Study guide CISSP
