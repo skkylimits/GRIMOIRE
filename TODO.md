@@ -144,3 +144,7 @@ https://www.liquidweb.com/blog/how-to-install-pyenv-on-ubuntu-18-04/
 
 - CBK CISSP
 - Study guide CISSP
+
+## WSL2
+
+This is a test
