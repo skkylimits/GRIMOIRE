@@ -151,3 +151,7 @@ https://www.liquidweb.com/blog/how-to-install-pyenv-on-ubuntu-18-04/
    just raised the bar for easy, resilient and secure K8s cluster deployment.
 
    https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+## Your Main Branch Is Not Protected
+
+https://github.com/skkylimits/Nameless/settings/rules/new?target=branch&enforcement=disabled
