@@ -144,3 +144,10 @@ https://www.liquidweb.com/blog/how-to-install-pyenv-on-ubuntu-18-04/
 
 - CBK CISSP
 - Study guide CISSP
+  
+## Kubernetes
+
+ Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge

@@ -1,4 +1,6 @@
 # editorconfig.org
+
+# Top-level configuration file
 root = true
 
 [*]
@@ -9,5 +11,14 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.md]
-trim_trailing_whitespace = false
+# Override for Windows-specific scripts (CRLF)
+[*.bat]
+end_of_line = crlf
+
+[*.cmd]
+end_of_line = crlf
+
+# Override for markdown and text files
+[*.{md,txt}]
+trim_trailing_whitespace = true
+insert_final_newline = true
