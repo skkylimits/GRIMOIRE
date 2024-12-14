@@ -155,3 +155,20 @@ https://www.liquidweb.com/blog/how-to-install-pyenv-on-ubuntu-18-04/
 ## Your Main Branch Is Not Protected
 
 https://github.com/skkylimits/Nameless/settings/rules/new?target=branch&enforcement=disabled
+
+## Automate Windows Unattended
+
+Make it so windows unattended will:
+- detect vmware
+- detect virtualbox
+- detect hyper-v
+
+  
+and install different settings accordingly(uefi. or bios for hyper-v)
+
+- detect physical machine
+
+
+and install needed settings accordingly
+
+This all so I don't have to manually create iso files from scratch and stuff
