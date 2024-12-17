@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
-	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=nl-NL&Locale=en-US&Keyboard=00000409&GeoLocation=176&ProcessorArchitecture=amd64&ComputerNameMode=Custom&ComputerName=BEELZEBUB&CompactOsMode=Default&TimeZoneMode=Implicit&PartitionMode=Unattended&PartitionLayout=GPT&EspSize=600&RecoveryMode=Partition&RecoverySize=1000&WindowsEditionMode=Interactive&UserAccountMode=Unattended&AccountName0=skkylimits&AccountPassword0=&AccountGroup0=Administrators&AccountName1=&AccountName2=&AccountName3=&AccountName4=&AutoLogonMode=Own&PasswordExpirationMode=Unlimited&LockoutMode=Custom&LockoutThreshold=12&LockoutWindow=9&LockoutDuration=12&HideFiles=None&TaskbarSearch=Hide&ShowFileExtensions=true&DisableWidgets=true&DeleteTaskbarIcons=true&HideTaskViewButton=true&LaunchToThisPC=true&DisableUac=true&DisableSac=true&DisableSmartScreen=true&DisableSystemRestore=true&EnableLongPaths=true&HardenSystemDriveAcl=true&AllowPowerShellScripts=true&DisableLastAccess=true&DisableAppSuggestions=true&PreventDeviceEncryption=true&HideEdgeFre=true&DisablePointerPrecision=true&WifiMode=Skip&ExpressSettings=DisableAll&KeysMode=Skip&ColorMode=Custom&SystemColorTheme=Dark&AppsColorTheme=Dark&AccentColor=%23e81119&AccentColorOnBorders=true&EnableTransparency=true&WallpaperMode=Script&WallpaperScript=%3C%23%0D%0AProgram+Workflow+Visualization%3A%0D%0A%0D%0A1.+Initialize+Folder+%26+Paths%0D%0A2.+Check+URL%0D%0A+++%E2%86%92+Valid+URL%3F+%0D%0A+++++++%E2%86%92+Yes+%0D%0A+++++++++++%E2%86%92+Download+%26+Convert+to+Base64%0D%0A+++++++++++%E2%86%92+Save+File%0D%0A+++++++%E2%86%92+No%0D%0A+++++++++++%E2%86%92+Fallback+to+Base64+File+or+Image+File%0D%0A3.+Decode+Base64+or+Use+Existing+File%0D%0A4.+Save+File%0D%0A5.+Set+Wallpaper%0D%0A6.+Log+Success%0D%0A%23%3E%0D%0A%0D%0A%23+Ensure+the+folder+exists%0D%0Aif+%28-not+%28Test-Path+-Path+%22C%3A%5CTemp%22%29%29+%7B%0D%0A++++New-Item+-ItemType+Directory+-Path+%22C%3A%5CTemp%22%0D%0A%7D%0D%0A%0D%0A%23+URL+of+the+image%0D%0A%24imageUrl+%3D+%27https%3A%2F%2Fi.imgur.com%2FHyevkUi.png%27%0D%0A%24downloadPath+%3D+%22C%3A%5CTemp%5Cwindows-red.png%22%0D%0A%24base64FilePath+%3D+%22C%3A%5CTemp%5Cwindows-red-base64.txt%22%0D%0A%0D%0A%23+Function+to+check+if+the+URL+points+to+a+valid+image%0D%0Afunction+Test-ImageUrl+%7B%0D%0A++++param+%28%5Bstring%5D%24Url%29%0D%0A%0D%0A++++try+%7B%0D%0A++++++++%24response+%3D+Invoke-WebRequest+-Uri+%24Url+-Method+Head+-ErrorAction+Stop%0D%0A++++++++if+%28%24response.Headers%5B%22Content-Type%22%5D+-like+%22image%2F*%22%29+%7B%0D%0A++++++++++++return+%24true%0D%0A++++++++%7D+else+%7B%0D%0A++++++++++++return+%24false%0D%0A++++++++%7D%0D%0A++++%7D+catch+%7B%0D%0A++++++++return+%24false%0D%0A++++%7D%0D%0A%7D%0D%0A%0D%0A%23+Validate+the+URL+and+download+the+image+if+it+is+valid%0D%0Aif+%28Test-ImageUrl+-Url+%24imageUrl%29+%7B%0D%0A++++try+%7B%0D%0A++++++++%23+Download+the+image%0D%0A++++++++Invoke-WebRequest+-Uri+%24imageUrl+-OutFile+%24downloadPath+-ErrorAction+Stop%0D%0A++++++++Write-Output+%22Image+downloaded+successfully+from+%24imageUrl%22%0D%0A%0D%0A++++++++%23+Convert+the+image+to+a+Base64+string%0D%0A++++++++%24base64String+%3D+%5Bconvert%5D%3A%3AToBase64String%28%5BSystem.IO.File%5D%3A%3AReadAllBytes%28%24downloadPath%29%29%0D%0A%0D%0A++++++++%23+Save+the+Base64+string+to+a+file%0D%0A++++++++Set-Content+-Path+%24base64FilePath+-Value+%24base64String%0D%0A++++++++Write-Output+%22Base64+string+saved+to+%24base64FilePath%22%0D%0A%0D%0A++++++++Write-Host+%22%22++%23+Adds+a+blank+line%0D%0A++++%7D+catch+%7B%0D%0A++++++++Write-Output+%22Error%3A+Failed+to+download+the+image.%22%0D%0A%0D%0A++++++++Write-Host+%22%22++%23+Adds+a+blank+line%0D%0A++++++++return%0D%0A++++%7D%0D%0A%7D+else+%7B%0D%0A++++Write-Output+%22Error%3A+URL+%24imageUrl+does+not+point+to+a+valid+image.+Attempting+to+load+Base64+string+from+a+local+file...%22%0D%0A%0D%0A++++Write-Host+%22%22++%23+Adds+a+blank+line%0D%0A++++%23+Fallback+to+loading+Base64+string+from+a+local+file%0D%0A++++if+%28Test-Path+%24base64FilePath%29+%7B%0D%0A++++++++Write-Output+%22Base64+string+file+found+at+%24base64FilePath.+Importing...%22%0D%0A++++++++%24base64String+%3D+Get-Content+-Path+%24base64FilePath+-Raw%0D%0A++++%7D+elseif+%28Test-Path+%24downloadPath%29+%7B%0D%0A++++++++Write-Output+%22Base64+string+file+not+found.+Using+existing+image+file+at+%24downloadPath.%22%0D%0A++++%7D+else+%7B%0D%0A++++++++Write-Output+%22Error%3A+No+valid+image+source+found+%28URL%2C+Base64+file%2C+or+existing+image%29.+Exiting.%22%0D%0A++++++++return%0D%0A++++%7D%0D%0A%7D%0D%0A%0D%0A%23+Decode+the+Base64+string+into+a+byte+array+if+available%0D%0Aif+%28%24base64String%29+%7B%0D%0A++++%23+Output+the+Base64+string+length%0D%0A++++Write-Output+%22The+Base64+string+length+%28characters%29%3A+%24%28%24base64String.Length%29%22%0D%0A%0D%0A++++%23+Decode+the+Base64+string+to+a+byte+array%0D%0A++++Write-Output+%22Decoding+Base64+string+to+original+binary+data...%22%0D%0A++++%24byteArray+%3D+%5Bconvert%5D%3A%3AFromBase64String%28%24base64String%29%0D%0A++++Write-Output+%22Byte+Array+Length+%28bytes%29%3A+%24%28%24byteArray.Length%29%22%0D%0A%0D%0A++++%23+Save+the+Byte+Array+as+a+File%0D%0A++++%5BSystem.IO.File%5D%3A%3AWriteAllBytes%28%24downloadPath%2C+%24byteArray%29%0D%0A%0D%0A++++Write-Host+%22%22++%23+Adds+a+blank+line%0D%0A%0D%0A++++%23+Confirm+the+file+creation%0D%0A++++if+%28Test-Path+%24downloadPath%29+%7B%0D%0A++++++++Write-Output+%22File+saved+successfully+to+%24downloadPath%22%0D%0A++++%7D+else+%7B%0D%0A++++++++Write-Output+%22Error%3A+File+could+not+be+saved.%22%0D%0A++++++++return%0D%0A++++%7D%0D%0A%7D+else+%7B%0D%0A++++Write-Output+%22Using+pre-existing+image+file+at+%24downloadPath.%22%0D%0A%7D%0D%0A%0D%0A%23+Path+to+the+image%0D%0A%24imagePath+%3D+%24downloadPath%0D%0A%0D%0A%23+Add+a+.NET+type+to+change+system+wallpaper%0D%0AAdd-Type+-TypeDefinition+%40%22%0D%0Ausing+System%3B%0D%0Ausing+System.Runtime.InteropServices%3B%0D%0A%0D%0Apublic+class+Wallpaper+%7B%0D%0A++++%5BDllImport%28%22user32.dll%22%2C+CharSet+%3D+CharSet.Auto%29%5D%0D%0A++++public+static+extern+int+SystemParametersInfo%28int+uAction%2C+int+uParam%2C+string+lpvParam%2C+int+fuWinIni%29%3B%0D%0A%0D%0A++++public+const+int+SPI_SETDESKWALLPAPER+%3D+20%3B%0D%0A++++public+const+int+SPIF_UPDATEINIFILE+%3D+0x01%3B%0D%0A++++public+const+int+SPIF_SENDCHANGE+%3D+0x02%3B%0D%0A%7D%0D%0A%22%40%0D%0A%0D%0A%23+Set+the+image+as+wallpaper%0D%0A%5BWallpaper%5D%3A%3ASystemParametersInfo%2820%2C+0%2C+%24imagePath%2C+0x01+-bor+0x02%29%0D%0A%0D%0A%23+Notify+success%0D%0AWrite-Output+%22Wallpaper+set+successfully+to+%24imagePath%22%0D%0A&RemoveBingSearch=true&RemoveCopilot=true&RemoveCortana=true&RemoveDevHome=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveHandwriting=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMathInputPanel=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveNotepadClassic=true&RemoveNotepad=true&RemoveOffice365=true&RemoveOneDrive=true&RemoveOneNote=true&RemoveOneSync=true&RemoveOutlook=true&RemovePaint=true&RemovePeople=true&RemovePowerAutomate=true&RemoveQuickAssist=true&RemoveRecall=true&RemoveSkype=true&RemoveSolitaire=true&RemoveSpeech=true&RemoveStepsRecorder=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveWallet=true&RemoveWeather=true&RemoveFaxAndScan=true&RemoveWindowsMediaPlayer=true&RemoveWordPad=true&StartTilesMode=Empty&StartPinsMode=Empty&WdacMode=Skip-->
+	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=en-US&Locale=en-US&Keyboard=00000409&GeoLocation=176&ProcessorArchitecture=amd64&BypassRequirementsCheck=true&ComputerNameMode=Custom&ComputerName=BEELZEBUB&CompactOsMode=Default&TimeZoneMode=Implicit&PartitionMode=Unattended&PartitionLayout=GPT&EspSize=300&RecoveryMode=Partition&RecoverySize=1000&WindowsEditionMode=Generic&WindowsEdition=pro&UserAccountMode=Unattended&AccountName0=skkylimits&AccountPassword0=&AccountGroup0=Administrators&AccountName1=&AccountName2=&AccountName3=&AccountName4=&AutoLogonMode=Own&PasswordExpirationMode=Unlimited&LockoutMode=Custom&LockoutThreshold=12&LockoutWindow=9&LockoutDuration=12&HideFiles=None&TaskbarSearch=Hide&ShowFileExtensions=true&DisableWidgets=true&DeleteTaskbarIcons=true&HideTaskViewButton=true&LaunchToThisPC=true&DisableUac=true&DisableSac=true&DisableSmartScreen=true&DisableFastStartup=true&DisableSystemRestore=true&EnableLongPaths=true&HardenSystemDriveAcl=true&AllowPowerShellScripts=true&DisableLastAccess=true&DisableAppSuggestions=true&PreventDeviceEncryption=true&HideEdgeFre=true&DisablePointerPrecision=true&WifiMode=Skip&ExpressSettings=DisableAll&KeysMode=Skip&ColorMode=Custom&SystemColorTheme=Dark&AppsColorTheme=Dark&AccentColor=%23e81119&AccentColorOnBorders=true&EnableTransparency=true&WallpaperMode=Default&RemoveBingSearch=true&RemoveCopilot=true&RemoveCortana=true&RemoveDevHome=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveHandwriting=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMathInputPanel=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveNotepadClassic=true&RemoveOffice365=true&RemoveOneDrive=true&RemoveOneNote=true&RemoveOneSync=true&RemoveOutlook=true&RemovePaint=true&RemovePeople=true&RemovePowerAutomate=true&RemoveQuickAssist=true&RemoveRecall=true&RemoveSkype=true&RemoveSolitaire=true&RemoveSpeech=true&RemoveStepsRecorder=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveWallet=true&RemoveWeather=true&RemoveFaxAndScan=true&RemoveWindowsMediaPlayer=true&RemoveWordPad=true&StartTilesMode=Empty&StartPinsMode=Empty&WdacMode=Skip-->
 	<settings pass="offlineServicing"></settings>
 	<settings pass="windowsPE">
 		<component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
 			<SetupUILanguage>
-				<UILanguage>nl-NL</UILanguage>
+				<UILanguage>en-US</UILanguage>
 			</SetupUILanguage>
 			<InputLocale>0409:00000409</InputLocale>
 			<SystemLocale>en-US</SystemLocale>
-			<UILanguage>nl-NL</UILanguage>
+			<UILanguage>en-US</UILanguage>
 			<UserLocale>en-US</UserLocale>
 		</component>
 		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
@@ -23,14 +23,15 @@
 			</ImageInstall>
 			<UserData>
 				<ProductKey>
-					<Key>00000-00000-00000-00000-00000</Key>
+					<Key>VK7JG-NPHTM-C97JM-9MPGT-3V66T</Key>
 				</ProductKey>
 				<AcceptEula>true</AcceptEula>
 			</UserData>
+			<UseConfigurationSet>false</UseConfigurationSet>
 			<RunSynchronous>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>1</Order>
-					<Path>cmd.exe /c "&gt;&gt;"X:\diskpart.txt" (echo SELECT DISK=0&amp;echo CLEAN&amp;echo CONVERT GPT&amp;echo CREATE PARTITION EFI SIZE=600&amp;echo FORMAT QUICK FS=FAT32 LABEL="System"&amp;echo CREATE PARTITION MSR SIZE=16)"</Path>
+					<Path>cmd.exe /c "&gt;&gt;"X:\diskpart.txt" (echo SELECT DISK=0&amp;echo CLEAN&amp;echo CONVERT GPT&amp;echo CREATE PARTITION EFI SIZE=300&amp;echo FORMAT QUICK FS=FAT32 LABEL="System"&amp;echo CREATE PARTITION MSR SIZE=16)"</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>2</Order>
@@ -43,6 +44,18 @@
 				<RunSynchronousCommand wcm:action="add">
 					<Order>4</Order>
 					<Path>cmd.exe /c "diskpart.exe /s "X:\diskpart.txt" &gt;&gt;"X:\diskpart.log" || ( type "X:\diskpart.log" &amp; echo diskpart encountered an error. &amp; pause &amp; exit /b 1 )"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassTPMCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>6</Order>
+					<Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassSecureBootCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>7</Order>
+					<Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassRAMCheck /t REG_DWORD /d 1 /f</Path>
 				</RunSynchronousCommand>
 			</RunSynchronous>
 		</component>
@@ -83,7 +96,7 @@
 		<component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
 			<InputLocale>0409:00000409</InputLocale>
 			<SystemLocale>en-US</SystemLocale>
-			<UILanguage>nl-NL</UILanguage>
+			<UILanguage>en-US</UILanguage>
 			<UserLocale>en-US</UserLocale>
 		</component>
 		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
@@ -158,7 +171,6 @@ $selectors = @(
 	'Microsoft.WindowsMaps';
 	'Microsoft.MixedReality.Portal';
 	'Microsoft.BingNews';
-	'Microsoft.WindowsNotepad';
 	'Microsoft.MicrosoftOfficeHub';
 	'Microsoft.Office.OneNote';
 	'Microsoft.OutlookForWindows';
@@ -398,196 +410,11 @@ $htmlAccentColor = '#E81119';
 	Set-ItemProperty @params -Value $palette -Type 'Binary' -Force;
 };
 		</File>
-		<File path="C:\Windows\Setup\Scripts\GetWallpaper.ps1" transformation="Text">
-&lt;#
-Program Workflow Visualization:
-
-1. Initialize Folder &amp; Paths
-2. Check URL
-   &#x2192; Valid URL? 
-       &#x2192; Yes 
-           &#x2192; Download &amp; Convert to Base64
-           &#x2192; Save File
-       &#x2192; No
-           &#x2192; Fallback to Base64 File or Image File
-3. Decode Base64 or Use Existing File
-4. Save File
-5. Set Wallpaper
-6. Log Success
-#&gt;
-
-# Ensure the folder exists
-if (-not (Test-Path -Path "C:\Temp")) {
-    New-Item -ItemType Directory -Path "C:\Temp"
-}
-
-# URL of the image
-$imageUrl = 'https://i.imgur.com/HyevkUi.png'
-$downloadPath = "C:\Temp\windows-red.png"
-$base64FilePath = "C:\Temp\windows-red-base64.txt"
-
-# Function to check if the URL points to a valid image
-function Test-ImageUrl {
-    param ([string]$Url)
-
-    try {
-        $response = Invoke-WebRequest -Uri $Url -Method Head -ErrorAction Stop
-        if ($response.Headers["Content-Type"] -like "image/*") {
-            return $true
-        } else {
-            return $false
-        }
-    } catch {
-        return $false
-    }
-}
-
-# Validate the URL and download the image if it is valid
-if (Test-ImageUrl -Url $imageUrl) {
-    try {
-        # Download the image
-        Invoke-WebRequest -Uri $imageUrl -OutFile $downloadPath -ErrorAction Stop
-        Write-Output "Image downloaded successfully from $imageUrl"
-
-        # Convert the image to a Base64 string
-        $base64String = [convert]::ToBase64String([System.IO.File]::ReadAllBytes($downloadPath))
-
-        # Save the Base64 string to a file
-        Set-Content -Path $base64FilePath -Value $base64String
-        Write-Output "Base64 string saved to $base64FilePath"
-
-        Write-Host ""  # Adds a blank line
-    } catch {
-        Write-Output "Error: Failed to download the image."
-
-        Write-Host ""  # Adds a blank line
-        return
-    }
-} else {
-    Write-Output "Error: URL $imageUrl does not point to a valid image. Attempting to load Base64 string from a local file..."
-
-    Write-Host ""  # Adds a blank line
-    # Fallback to loading Base64 string from a local file
-    if (Test-Path $base64FilePath) {
-        Write-Output "Base64 string file found at $base64FilePath. Importing..."
-        $base64String = Get-Content -Path $base64FilePath -Raw
-    } elseif (Test-Path $downloadPath) {
-        Write-Output "Base64 string file not found. Using existing image file at $downloadPath."
-    } else {
-        Write-Output "Error: No valid image source found (URL, Base64 file, or existing image). Exiting."
-        return
-    }
-}
-
-# Decode the Base64 string into a byte array if available
-if ($base64String) {
-    # Output the Base64 string length
-    Write-Output "The Base64 string length (characters): $($base64String.Length)"
-
-    # Decode the Base64 string to a byte array
-    Write-Output "Decoding Base64 string to original binary data..."
-    $byteArray = [convert]::FromBase64String($base64String)
-    Write-Output "Byte Array Length (bytes): $($byteArray.Length)"
-
-    # Save the Byte Array as a File
-    [System.IO.File]::WriteAllBytes($downloadPath, $byteArray)
-
-    Write-Host ""  # Adds a blank line
-
-    # Confirm the file creation
-    if (Test-Path $downloadPath) {
-        Write-Output "File saved successfully to $downloadPath"
-    } else {
-        Write-Output "Error: File could not be saved."
-        return
-    }
-} else {
-    Write-Output "Using pre-existing image file at $downloadPath."
-}
-
-# Path to the image
-$imagePath = $downloadPath
-
-# Add a .NET type to change system wallpaper
-Add-Type -TypeDefinition @"
-using System;
-using System.Runtime.InteropServices;
-
-public class Wallpaper {
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
-
-    public const int SPI_SETDESKWALLPAPER = 20;
-    public const int SPIF_UPDATEINIFILE = 0x01;
-    public const int SPIF_SENDCHANGE = 0x02;
-}
-"@
-
-# Set the image as wallpaper
-[Wallpaper]::SystemParametersInfo(20, 0, $imagePath, 0x01 -bor 0x02)
-
-# Notify success
-Write-Output "Wallpaper set successfully to $imagePath"
-		</File>
-		<File path="C:\Windows\Setup\Scripts\SetWallpaper.ps1" transformation="Text">
-Add-Type -TypeDefinition '
-	using System.Drawing;
-	using System.Runtime.InteropServices;
-	
-	public static class WallpaperSetter {
-		[DllImport("user32.dll")]
-		private static extern bool SetSysColors(
-			int cElements, 
-			int[] lpaElements,
-			int[] lpaRgbValues
-		);
-
-		[DllImport("user32.dll")]
-		private static extern bool SystemParametersInfo(
-			uint uiAction,
-			uint uiParam,
-			string pvParam,
-			uint fWinIni
-		);
-
-		public static void SetDesktopBackground(Color color) {
-			SystemParametersInfo(20, 0, "", 0);
-			SetSysColors(1, new int[] { 1 }, new int[] { ColorTranslator.ToWin32(color) });
-		}
-
-		public static void SetDesktopImage(string file) {
-			SystemParametersInfo(20, 0, file, 0);
-		}
-	}
-' -ReferencedAssemblies 'System.Drawing';
-
-function Set-WallpaperColor {
-	param(
-		[string]
-		$HtmlColor
-	);
-
-	$color = [System.Drawing.ColorTranslator]::FromHtml( $HtmlColor );
-	[WallpaperSetter]::SetDesktopBackground( $color );
-	Set-ItemProperty -Path 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Wallpapers' -Name 'BackgroundType' -Type 'DWord' -Value 1 -Force;
-	Set-ItemProperty -Path 'Registry::HKCU\Control Panel\Desktop' -Name 'WallPaper' -Type 'String' -Value '' -Force;
-	Set-ItemProperty -Path 'Registry::HKCU\Control Panel\Colors' -Name 'Background' -Type 'String' -Value "$($color.R) $($color.G) $($color.B)" -Force;
-}
-
-function Set-WallpaperImage {
-	param(
-		[string]
-		$LiteralPath
-	);
-
-	[WallpaperSetter]::SetDesktopImage( $LiteralPath );
-	Set-ItemProperty -Path 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Wallpapers' -Name 'BackgroundType' -Type 'DWord' -Value 0 -Force;
-	Set-ItemProperty -Path 'Registry::HKCU\Control Panel\Desktop' -Name 'WallPaper' -Type 'String' -Value $LiteralPath -Force;
-}
-Set-WallpaperImage -LiteralPath 'C:\Windows\Setup\Scripts\Wallpaper';
-		</File>
 		<File path="C:\Windows\Setup\Scripts\Specialize.ps1" transformation="Text">
 $scripts = @(
+	{
+		reg.exe add "HKLM\SYSTEM\Setup\MoSetup" /v AllowUpgradesWithUnsupportedTPMOrCPU /t REG_DWORD /d 1 /f;
+	};
 	{
 		Remove-Item -LiteralPath 'Registry::HKLM\Software\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate' -Force -ErrorAction 'SilentlyContinue';
 	};
@@ -641,6 +468,9 @@ $scripts = @(
 		fsutil.exe behavior set disableLastAccess 1;
 	};
 	{
+		reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v HiberbootEnabled /t REG_DWORD /d 0 /f;
+	};
+	{
 		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Dsh" /v AllowNewsAndInterests /t REG_DWORD /d 0 /f;
 	};
 	{
@@ -654,14 +484,6 @@ $scripts = @(
 	};
 	{
 		Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\SetStartPins.ps1' -Raw | Invoke-Expression;
-	};
-	{
-		try {
-		  $bytes = Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\GetWallpaper.ps1' -Raw | Invoke-Expression;
-		  [System.IO.File]::WriteAllBytes( 'C:\Windows\Setup\Scripts\Wallpaper', $bytes );
-		} catch {
-		  $_;
-		}
 	};
 );
 
@@ -696,9 +518,6 @@ $scripts = @(
 		Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\SetColorTheme.ps1' -Raw | Invoke-Expression;
 	};
 	{
-		Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\SetWallpaper.ps1' -Raw | Invoke-Expression;
-	};
-	{
 		Get-Process -Name 'explorer' -ErrorAction 'SilentlyContinue' | Where-Object -FilterScript {
 			$_.SessionId -eq ( Get-Process -Id $PID ).SessionId;
 		} | Stop-Process -Force;
@@ -719,9 +538,6 @@ $scripts = @(
 $scripts = @(
 	{
 		reg.exe add "HKU\DefaultUser\Software\Policies\Microsoft\Windows\WindowsCopilot" /v TurnOffWindowsCopilot /t REG_DWORD /d 1 /f;
-	};
-	{
-		reg.exe add "HKU\DefaultUser\Software\Microsoft\Notepad" /v ShowStoreBanner /t REG_DWORD /d 0 /f;
 	};
 	{
 		Remove-ItemProperty -LiteralPath 'Registry::HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'OneDriveSetup' -Force -ErrorAction 'Continue';

@@ -1525,14 +1525,17 @@ function Set-RecommendedHKCURegistry {
         ; more pins personalization start
         ; disable show account-related notifications
         ; disable show recently opened items in start, jump lists and file explorer
-        ; left taskbar alignment
+        ; align taskbar to the center
+        ; disable minimize and maximize animations
+        ; remove task view button from the taskbar
         ; remove chat from taskbar
         ; remove task view from taskbar
         ; remove copilot from taskbar
         ; disable show recommendations for tips shortcuts new apps and more
         ; disable share any window from my taskbar
-        ; disable snap window settings - SnapAssist to JointResize Entries
-        ; alt tab open windows only
+        ; show only open windows in alt+tab
+        ; disable experimental desktop integration test feature
+        ; disable task groups in the taskbar
         [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
         "LaunchTo"=dword:00000001
         "HideFileExt"=dword:00000000
@@ -1542,27 +1545,35 @@ function Set-RecommendedHKCURegistry {
         "ShowStatusBar"=dword:00000000
         "ShowSyncProviderNotifications"=dword:00000000
         "SharingWizardOn"=dword:00000000
-        "TaskbarAnimations"=dword:0
-        "IconsOnly"=dword:0
-        "ListviewAlphaSelect"=dword:0
-        "ListviewShadow"=dword:0
+        "TaskbarAnimations"=dword:00000000
+        "IconsOnly"=dword:00000000
+        "ListviewAlphaSelect"=dword:00000000
+        "ListviewShadow"=dword:00000000
         "Start_Layout"=dword:00000001
         "Start_AccountNotifications"=dword:00000000
         "Start_TrackDocs"=dword:00000000 
-        "TaskbarAl"=dword:00000000
+        "TaskbarAl"=dword:00000001
         "TaskbarMn"=dword:00000000
-        "ShowTaskViewButton"=dword:00000000
+        "ShowTaskViewButton"=dword:00000001
         "ShowCopilotButton"=dword:00000000
         "Start_IrisRecommendations"=dword:00000000
         "TaskbarSn"=dword:00000000
-        "SnapAssist"=dword:00000000
-        "DITest"=dword:00000000
-        "EnableSnapBar"=dword:00000000
-        "EnableTaskGroups"=dword:00000000
-        "EnableSnapAssistFlyout"=dword:00000000
-        "SnapFill"=dword:00000000
-        "JointResize"=dword:00000000
         "MultiTaskingAltTabFilter"=dword:00000003
+        "DITest"=dword:00000000
+        "EnableTaskGroups"=dword:00000000
+       
+        ; WINDOWS SNAP LAYOUT
+        ; disable snap assist feature
+        ; disable snap layouts flyout (Windows+Z or hover over maximize button)
+        ; disable snap fill to populate remaining screen space with windows
+        ; disable snap bar when dragging windows
+        ; disable snap window settings - SnapAssist to JointResize Entries
+        ; [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+        ; "SnapAssist"=dword:00000000
+        ; "EnableSnapAssistFlyout"=dword:00000000
+        ; "EnableSnapBar"=dword:00000000
+        ; "SnapFill"=dword:00000000
+        ; "JointResize"=dword:00000000
 
         ; hide frequent folders in quick access
         ; disable show files from office.com
@@ -1802,14 +1813,14 @@ function Set-RecommendedHKCURegistry {
         "DirectXUserGlobalSettings"="SwapEffectUpgradeEnable=1;VRROptimizeEnable=0;"
 
         ; disable notifications
-        ; Disable Notifications on Lock Screen
+        ; Disable notifications on lock screen
         [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PushNotifications]
         "ToastEnabled"=dword:00000000
         "LockScreenToastEnabled"=dword:00000000
 
-        ; Disable Allow Notifications to Play Sounds
-        ; Disable Notifications on Lock Screen
-        ; Disable Show Reminders and VoIP Calls Notifications on Lock Screen
+        ; disable allow notifications to Play Sounds
+        ; disable notifications on lock screen
+        ; disable Show Reminders and VoIP Calls Notifications on lock screen
         [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings]
         "NOC_GLOBAL_SETTING_ALLOW_NOTIFICATION_SOUND"=dword:00000000
         "NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK"=dword:00000000
@@ -1879,10 +1890,10 @@ function Set-RecommendedHKCURegistry {
         "System.IsPinnedToNameSpaceTree"=dword:00000000
 
         ; restore the classic context menu
-        [HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32]
-        @=""
+        ;[HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32]
+        ;@=""
 
-        ; removes OneDrive Setup
+        ; removes OneDrive setup
         [-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
         "OneDriveSetup"=-
 
@@ -2820,7 +2831,7 @@ function Set-RecommendedPowerSettings {
 
     # Registry modifications
     $regChanges = @(
-        'HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings /v ShowLockOption /t REG_DWORD /d 0', # Hides the Lock option from the Power menu
+        # 'HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings /v ShowLockOption /t REG_DWORD /d 0', # Hides the Lock option from the Power menu
         'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings /v ShowSleepOption /t REG_DWORD /d 0', # Hides the Sleep option from the Power menu
         'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power /v HiberbootEnabled /t REG_DWORD /d 0', # Disables Fast Startup (Hiberboot)
         'HKLM\SYSTEM\CurrentControlSet\Control\Power /v HibernateEnabled /t REG_DWORD /d 0', # Disables hibernate

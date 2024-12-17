@@ -172,3 +172,8 @@ and install different settings accordingly(uefi. or bios for hyper-v)
 and install needed settings accordingly
 
 This all so I don't have to manually create iso files from scratch and stuff
+
+
+## 3d mussle software
+
+https://www.youtube.com/shorts/A1PJm4V_jVM
