@@ -1,14 +1,57 @@
 import markdown from '@eslint/markdown'
+import json from '@eslint/json'
 import withNuxt from './.nuxt/eslint.config.mjs'
 
 console.log(markdown)
 
 export default withNuxt([
 	{
-		files: ['**/*.md'],
 		plugins: {
-			markdown, // Register the markdown plugin
+			markdown,
+			json,
 		},
+	},
+	// Enable stylistic formatting rules for JavaScript, TypeScript, and Vue
+	{
+		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.vue'],
+		rules: {
+			'@stylistic/indent': ['error', 'tab'], // Example: enforce 2-space indentation
+			'@stylistic/semi': ['error', 'always'], // Example: enforce semicolons
+		},
+	},
+
+	// Enable stylistic formatting rules
+
+	{
+		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.vue'],
+		rules: {
+			// Add general ESLint rules that are not part of @stylistic
+
+			// 'no-console': 'off' // allow console.log in TypeScript files
+		},
+	},
+
+	// lint JSON files
+	{
+		files: ['**/*.json'],
+		language: 'json/json',
+		rules: {
+			'json/no-duplicate-keys': 'error',
+			'json/no-empty-keys': 'error',
+			'json/no-unsafe-values': 'error',
+			'json/no-unnormalized-keys': 'error',
+			'json/top-level-interop': 'error',
+
+			// Disable the problematic rule for json files
+			'no-irregular-whitespace': 'off',
+
+			// Disable indent rule for json files
+			'@stylistic/indent': 'off', // Disable indentation rule for Markdown
+		},
+	},
+	// lint Markdown files
+	{
+		files: ['**/*.md'],
 		language: 'markdown/gfm',
 		rules: {
 			'markdown/fenced-code-language': 'error',

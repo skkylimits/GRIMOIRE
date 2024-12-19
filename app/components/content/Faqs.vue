@@ -39,7 +39,7 @@ const faqCategories = [
 			},
 		],
 	},
-]
+];
 </script>
 
 <template>

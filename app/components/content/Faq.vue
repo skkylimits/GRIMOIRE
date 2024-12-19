@@ -8,7 +8,7 @@ const items = [
 		label: 'Can I use Nuxt UI Pro for Open Source projects?',
 		content: 'Et adipisicing do do do sunt irure proident consequat fugiat tempor occaecat commodo fugiat in proident.',
 	},
-]
+];
 </script>
 
 <template>

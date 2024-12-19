@@ -28,9 +28,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick } from 'vue';
 
-const appConfig = useAppConfig()
+const appConfig = useAppConfig();
 
 const config = computed(() => ({
 	wrapper: 'scroll-mt-[calc(48px+48px+var(--header-height))] lg:scroll-mt-[calc(48px+var(--header-height))]',
@@ -39,7 +39,7 @@ const config = computed(() => ({
 		base: 'w-4 h-4 text-primary',
 		name: appConfig.ui.icons.hash,
 	},
-}))
+}));
 
 // Define props for 'id'
 const props = defineProps({
@@ -47,41 +47,41 @@ const props = defineProps({
 		type: String,
 		required: true,
 	},
-})
+});
 
-const { id } = props
+const { id } = props;
 
 // Track if this is the first <h2> in the page
-const isFirstH2 = ref(null)
-const h2Element = ref<HTMLElement | null>(null)
+const isFirstH2 = ref(null);
+const h2Element = ref<HTMLElement | null>(null);
 
 onMounted(async () => {
-	await nextTick()
+	await nextTick();
 
 	// Find H2 grandparent & childNodes
-	const grandparentElementH2 = document.querySelector('h2').parentElement?.parentElement
-	const childNodes = grandparentElementH2?.childNodes
+	const grandparentElementH2 = document.querySelector('h2').parentElement?.parentElement;
+	const childNodes = grandparentElementH2?.childNodes;
 
 	if (childNodes) {
-		const firstChild = childNodes[0] // Get the first child node
+		const firstChild = childNodes[0]; // Get the first child node
 
 		// Check if the first child is an Element node
 		if (firstChild && firstChild.nodeType === Node.ELEMENT_NODE) {
-			const h2InsideFirstChild = (firstChild as Element).querySelector('h2') // Cast to Element
+			const h2InsideFirstChild = (firstChild as Element).querySelector('h2'); // Cast to Element
 
 			if (h2InsideFirstChild) {
 				// Check if the current <h2> is the first <h2> in the grandparent's child nodes.
 				// If it is, set isFirstH2 to true; otherwise, set it to false.
-				isFirstH2.value = (h2InsideFirstChild === h2Element.value)
+				isFirstH2.value = (h2InsideFirstChild === h2Element.value);
 			}
 			else {
-				isFirstH2.value = false
+				isFirstH2.value = false;
 			}
 		}
 	}
-})
+});
 
-const { ui } = useUI('content.prose.h2', undefined, config, undefined, true)
+const { ui } = useUI('content.prose.h2', undefined, config, undefined, true);
 </script>
 
 <style scoped>

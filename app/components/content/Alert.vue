@@ -29,7 +29,7 @@ const { icon, title, iconColor } = defineProps({
 		type: String,
 		default: '', // Default color for the icon
 	},
-})
+});
 </script>
 
 <style scoped>

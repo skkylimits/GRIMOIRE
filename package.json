@@ -38,6 +38,7 @@
     "tailwindcss": "^3.4.10"
   },
   "devDependencies": {
+    "@eslint/json": "^0.9.0",
     "@eslint/markdown": "^6.2.1",
     "@nuxt/eslint": "^0.7.3",
     "@nuxthq/studio": "^2.0.3",

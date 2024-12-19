@@ -1,6 +1,6 @@
-import type { Config } from 'tailwindcss'
-import defaultTheme from 'tailwindcss/defaultTheme'
-import plugin from 'tailwindcss/plugin'
+import type { Config } from 'tailwindcss';
+import defaultTheme from 'tailwindcss/defaultTheme';
+import plugin from 'tailwindcss/plugin';
 
 export default <Partial<Config>>{
 	theme: {
@@ -56,7 +56,7 @@ export default <Partial<Config>>{
 				'.edge': {
 					'@apply border rounded-md border-[var(--tw-prose-pre-border)] dark:border-[var(--tw-prose-invert-pre-border)]': {},
 				},
-			})
+			});
 		}),
 	],
 	content: [
@@ -70,4 +70,4 @@ export default <Partial<Config>>{
 		'!./node_modules',
 		'!./.nuxt/content-cache/parsed/**/*.md',
 	],
-}
+};

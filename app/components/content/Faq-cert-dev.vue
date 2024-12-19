@@ -11,7 +11,7 @@ const items = [{
 }, {
 	label: 'Do you offer technical support?',
 	content: 'Sint id sint incididunt culpa.',
-}]
+}];
 </script>
 
 <template>
