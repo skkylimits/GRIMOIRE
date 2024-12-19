@@ -120,7 +120,6 @@ TCM & AD/AZURE ACADEMY
 https://go.recordedfuture.com/the-intelligence-handbook-fourth-edition
 
 ## Windows PC storage
-## Windows PC storage
 
 3 NVME's for top performance.
 
@@ -180,6 +179,6 @@ This all so I don't have to manually create iso files from scratch and stuff
 
 https://www.youtube.com/shorts/A1PJm4V_jVM
 
-## GEDAAN HEBBEN
+## eslint/markdown
 
-- ESLINT/editorconfig/vscode synergy
+schrijf je eigen versie in eslint/markdown met de regels van markdownlint
