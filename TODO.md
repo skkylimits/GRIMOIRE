@@ -40,7 +40,7 @@
 ## Config
 
 - [ ] try to add a settings/config option. That certain behaviour can be enabled/disabled, like the hr below the h2. Catch my drift? - kinda like discord has
-- [ ] Make it so you can adjust the way certain prose types behave, like the h2 with standard --- hr at the end of the - [ ] 
+- [ ] Make it so you can adjust the way certain prose types behave, like the h2 with standard --- hr at the end of the - [ ]
 - [ ] make a config so when we use _## or ## h2 .{exclude}, that specific h2 doesnt render in the toc.
 
 - [ ] Zoekn in winowds customizen, zodat everything weg kan? everytihg  indexeert o basis van files, windows o basis van content
@@ -93,7 +93,7 @@
 - [ ] continue  own website
 - [ ] create ai automation website for AI solutions like (lead automation and such)[like theaiclubhouse on IG]
 - [ ] site idee: blockchain referendum waarin je met een niek account kan temmen op iddeen die wortden doorgevoerd. referendum
-  
+
 - [ ] create cube site -> questionable
 
 
@@ -144,7 +144,7 @@ https://www.liquidweb.com/blog/how-to-install-pyenv-on-ubuntu-18-04/
 
 - CBK CISSP
 - Study guide CISSP
-  
+
 ## Kubernetes
 
  Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
@@ -163,7 +163,7 @@ Make it so windows unattended will:
 - detect virtualbox
 - detect hyper-v
 
-  
+
 and install different settings accordingly(uefi. or bios for hyper-v)
 
 - detect physical machine
@@ -177,3 +177,7 @@ This all so I don't have to manually create iso files from scratch and stuff
 ## 3d mussle software
 
 https://www.youtube.com/shorts/A1PJm4V_jVM
+
+## GEDAAN HEBBEN
+
+- ESLINT/editorconfig/vscode synergy
