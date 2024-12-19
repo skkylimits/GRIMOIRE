@@ -1,7 +1,7 @@
 <template>
-  <ul class="square-list">
-    <slot />
-  </ul>
+	<ul class="square-list">
+		<slot />
+	</ul>
 </template>
 
 <style>

@@ -1,7 +1,7 @@
 <template>
-  <code class="red-highlight">
-    <slot />
-  </code>
+	<code class="red-highlight">
+		<slot />
+	</code>
 </template>
 
 <style>

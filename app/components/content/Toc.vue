@@ -5,5 +5,5 @@ const { data: page } = await useAsyncData(route.path, () => queryContent(route.p
 </script>
 
 <template>
-  <UContentToc :links="page.body.toc.links" />
+	<UContentToc :links="page.body.toc.links" />
 </template>

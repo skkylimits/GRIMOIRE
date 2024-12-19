@@ -3,51 +3,51 @@ import type { ParsedContent } from '@nuxt/content'
 import type { NuxtError } from '#app'
 
 useSeoMeta({
-  title: 'Page not found',
-  description: 'We are sorry but this page could not be found.',
+	title: 'Page not found',
+	description: 'We are sorry but this page could not be found.',
 })
 
 defineProps({
-  error: {
-    type: Object as PropType<NuxtError>,
-    required: true,
-  },
+	error: {
+		type: Object as PropType<NuxtError>,
+		required: true,
+	},
 })
 
 useHead({
-  htmlAttrs: {
-    lang: 'en',
-  },
+	htmlAttrs: {
+		lang: 'en',
+	},
 })
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
 const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', {
-  default: () => [],
-  server: false,
+	default: () => [],
+	server: false,
 })
 
 provide('navigation', navigation)
 </script>
 
 <template>
-  <div>
-    <AppHeader />
+	<div>
+		<AppHeader />
 
-    <UMain>
-      <UContainer>
-        <UPage>
-          <UPageError :error="error" />
-        </UPage>
-      </UContainer>
-    </UMain>
+		<UMain>
+			<UContainer>
+				<UPage>
+					<UPageError :error="error" />
+				</UPage>
+			</UContainer>
+		</UMain>
 
-    <ClientOnly>
-      <LazyUContentSearch
-        :files="files"
-        :navigation="navigation"
-      />
-    </ClientOnly>
+		<ClientOnly>
+			<LazyUContentSearch
+				:files="files"
+				:navigation="navigation"
+			/>
+		</ClientOnly>
 
-    <UNotifications />
-  </div>
+		<UNotifications />
+	</div>
 </template>

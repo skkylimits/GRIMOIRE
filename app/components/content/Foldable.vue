@@ -1,12 +1,12 @@
 <template>
-  <details class="foldable my-5 p-4 box-shadow bg-[var(--tw-prose-pre-bg)] dark:bg-[var(--tw-prose-pre-bg)] border rounded-md border-[var(--tw-prose-pre-border)] dark:border-[var(--tw-prose-invert-pre-border)]">
-    <summary class="foldable-summary">
-      <slot name="title" />
-    </summary>
-    <div class="foldable-content">
-      <slot name="content" />
-    </div>
-  </details>
+	<details class="foldable my-5 p-4 box-shadow bg-[var(--tw-prose-pre-bg)] dark:bg-[var(--tw-prose-pre-bg)] border rounded-md border-[var(--tw-prose-pre-border)] dark:border-[var(--tw-prose-invert-pre-border)]">
+		<summary class="foldable-summary">
+			<slot name="title" />
+		</summary>
+		<div class="foldable-content">
+			<slot name="content" />
+		</div>
+	</details>
 </template>
 
 <style>

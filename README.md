@@ -269,7 +269,7 @@ const navigationLinks = computed(() => {
 
   if (validNav) {
     const children = validNav.node.children || []
-    
+
     const mappedNav = mapContentNavigation(children).map(child => {
       const extendedChild = child as ExtendedNavItem; // Use the local interface
       return {

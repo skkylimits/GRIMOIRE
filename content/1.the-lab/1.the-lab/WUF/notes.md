@@ -2,7 +2,7 @@
 
 the new Windows 11 Notepad is a UWP (Universal Windows Platform) app rather than a traditional Win32 .exe. UWP apps like the new Notepad are sandboxed, and their settings are generally not modifiable through traditional registry tweaks. Instead, UWP apps use AppxManifest configurations or other modern deployment tools
 
-As of yet not posssible to tweak base settings
+As of yet not posssible to tweak base settings.
 
 ## Unattend.xml Phases
 

@@ -5,6 +5,7 @@
 - [ ] Markdown lint -> Integrate antufu/eslint for css & markdown
 - [ ] Make sure lint doesnt make nuxt unreadable
 - [ ] https://github.com/funkhaus/fuxt/pull/121
+- [ ] MAKW LINTING SYNERGIZE THEN CONTIUE WITH FORENSIC RESEARCH/EXTERNAL PLAYBOOX THEN AD HACKING
 
 ## Bug
 
