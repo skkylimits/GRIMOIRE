@@ -1,30 +1,35 @@
 <template>
-    <div class="block my-5 px-4 pt-6 border rounded-md box-shadow">
-        <div class="alert-title flex items-center">
-            <UIcon :name="icon" :class="['w-5 h-5 mr-2', iconColor]" />
-            <p class="font-bold">{{ title }}</p>
-        </div>
-        <div class="alert-content">
-            <slot />
-        </div>
+  <div class="block my-5 px-4 pt-6 border rounded-md box-shadow">
+    <div class="alert-title flex items-center">
+      <UIcon
+        :name="icon"
+        :class="['w-5 h-5 mr-2', iconColor]"
+      />
+      <p class="font-bold">
+        {{ title }}
+      </p>
     </div>
+    <div class="alert-content">
+      <slot />
+    </div>
+  </div>
 </template>
 
 <script setup>
-const props = defineProps({
-    icon: {
-        type: String,
-        default: 'i-mdi:highlighter', // Default icon for the base alert
-    },
-    title: {
-        type: String,
-        default: 'Alert' // Default title for the base alert
-    },
-    iconColor: {
-        type: String,
-        default: '' // Default color for the icon
-    }
-});
+const { icon, title, iconColor } = defineProps({
+  icon: {
+    type: String,
+    default: 'i-mdi:highlighter', // Default icon for the base alert
+  },
+  title: {
+    type: String,
+    default: 'Alert', // Default title for the base alert
+  },
+  iconColor: {
+    type: String,
+    default: '', // Default color for the icon
+  },
+})
 </script>
 
 <style scoped>

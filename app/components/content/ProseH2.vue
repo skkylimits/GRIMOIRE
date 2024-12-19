@@ -37,16 +37,16 @@ const config = computed(() => ({
   icon: {
     wrapper: '-ml-6 pr-2 py-2 inline-flex opacity-0 group-hover:lg:opacity-100 transition-opacity absolute',
     base: 'w-4 h-4 text-primary',
-    name: appConfig.ui.icons.hash
-  }
+    name: appConfig.ui.icons.hash,
+  },
 }))
 
 // Define props for 'id'
 const props = defineProps({
   id: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const { id } = props
@@ -73,7 +73,8 @@ onMounted(async () => {
       // Check if the current <h2> is the first <h2> in the grandparent's child nodes.
       // If it is, set isFirstH2 to true; otherwise, set it to false.
         isFirstH2.value = (h2InsideFirstChild === h2Element.value)
-      } else {
+      }
+      else {
         isFirstH2.value = false
       }
     }

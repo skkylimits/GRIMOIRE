@@ -4,44 +4,44 @@ import type { PropType } from 'vue'
 defineProps({
   code: {
     type: String,
-    required: true
+    required: true,
   },
   icon: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   language: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   hideHeader: {
     type: Boolean,
-    default: false
+    default: false,
   },
   filename: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   highlights: {
     type: Array as PropType<number[]>,
-    default: undefined
+    default: undefined,
   },
   meta: {
     type: String,
-    default: undefined
-  }
+    default: undefined,
+  },
 })
 
 const config = {
   wrapper: '[&>pre]:!rounded-t-none [&>pre]:!my-0 my-5',
   header: 'flex items-center gap-1.5 border dark:border-gray-700 border-b-0 relative rounded-t-md px-4 py-3 not-prose text-white bg-black dark:bg-gray-900',
   icon: {
-    base: ''
+    base: '',
   },
   button: {
-    base: 'absolute top-2.5 right-2.5 dark:border-gray-700'
+    base: 'absolute top-2.5 right-2.5 dark:border-gray-700',
   },
-  filename: 'text-sm/6'
+  filename: 'text-sm/6',
 }
 
 const { ui } = useUI('content.prose.code', undefined, config, undefined, true)

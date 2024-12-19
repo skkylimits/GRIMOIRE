@@ -2,20 +2,18 @@
 const items = [
   {
     label: 'Do you have a free trial?',
-    content: 'Ea est ex aliqua exercitation quis et cillum adipisicing sit tempor veniam incididunt labore.'
+    content: 'Ea est ex aliqua exercitation quis et cillum adipisicing sit tempor veniam incididunt labore.',
   },
   {
     label: 'Can I use Nuxt UI Pro for Open Source projects?',
-    content: 'Et adipisicing do do do sunt irure proident consequat fugiat tempor occaecat commodo fugiat in proident.'
+    content: 'Et adipisicing do do do sunt irure proident consequat fugiat tempor occaecat commodo fugiat in proident.',
   },
 ]
 </script>
 
 <template>
-  <ULandingFAQ :items="items">
-  </ULandingFAQ>
+  <ULandingFAQ :items="items" />
 </template>
- 
 
 <style>
 button[data-headlessui-state="open"] span {

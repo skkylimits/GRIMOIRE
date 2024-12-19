@@ -20,7 +20,8 @@ const findValidNavPath = (currentPath: string) => {
     if (currentNav) {
       if (currentNav.standalone) {
         return { node: currentNav, type: 'standalone', path: partialPath }
-      } else if (currentNav.stripped) {
+      }
+      else if (currentNav.stripped) {
         // Render children of the stripped directory as if they are at the root
         return { node: currentNav, type: 'stripped', path: partialPath }
       }
@@ -43,7 +44,8 @@ const navigationLinks = computed(() => {
       // Map the standalone directory and its children
       const mappedNav = mapContentNavigation([validNav.node])
       return mappedNav
-    } else if (validNav.type === 'stripped') {
+    }
+    else if (validNav.type === 'stripped') {
       // Strip the parent folder and only render its children
       const strippedChildren = validNav.node.children || []
       const mappedNav = mapContentNavigation(strippedChildren)

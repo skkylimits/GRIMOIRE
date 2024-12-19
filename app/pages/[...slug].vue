@@ -6,7 +6,7 @@ import { withoutTrailingSlash } from 'ufo'
 // const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(navigation.value, page.value)))
 
 definePageMeta({
-  layout: 'docs'
+  layout: 'docs',
 })
 
 const route = useRoute()
@@ -20,18 +20,18 @@ if (!page.value) {
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => queryContent()
   .where({ _extension: 'md', navigation: { $ne: false } })
   .only(['title', 'description', '_path'])
-  .findSurround(withoutTrailingSlash(route.path))
+  .findSurround(withoutTrailingSlash(route.path)),
 )
 
 useSeoMeta({
   title: page.value.title,
   ogTitle: `${page.value.title} - ${seo?.siteName}`,
   description: page.value.description,
-  ogDescription: page.value.description
+  ogDescription: page.value.description,
 })
 
 defineOgImage({
-  component: 'Docs'
+  component: 'Docs',
   // title: page.value.title,
   // description: page.value.description
 })
@@ -43,7 +43,7 @@ const links = computed(() => [toc?.bottom?.edit && {
   icon: 'i-heroicons-pencil-square',
   label: 'Edit this page',
   to: `${toc.bottom.edit}/${editOnGithub}/${page?.value?._file}`,
-  target: '_blank'
+  target: '_blank',
 }, ...(toc?.bottom?.links || [])].filter(Boolean))
 
 const layout = {
@@ -52,9 +52,9 @@ const layout = {
   center: {
     narrow: 'lg:col-span-6',
     base: 'lg:col-span-7', // Set both narrow and base to 3
-    full: 'lg:col-span-10'
+    full: 'lg:col-span-10',
   },
-  right: 'lg:col-span-2 order-first lg:order-last' // Right column is optional or hidden
+  right: 'lg:col-span-2 order-first lg:order-last', // Right column is optional or hidden
 }
 console.log(layout)
 </script>

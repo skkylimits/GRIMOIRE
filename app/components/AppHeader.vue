@@ -16,7 +16,7 @@ const isActiveLink = (link) => {
   // Check if any child links are active
   if (link.children) {
     return link.children.some(child =>
-      child.to === route.path || route.path.startsWith(child.to)
+      child.to === route.path || route.path.startsWith(child.to),
     )
   }
 
@@ -27,7 +27,7 @@ const links = [
   {
     label: 'The Lab',
     icon: 'i-mdi-test-tube',
-    to: '/the-lab'
+    to: '/the-lab',
   },
   {
     label: 'Syntax',
@@ -35,37 +35,37 @@ const links = [
     active: false,
     description: 'Explore and master different scripting languages for automation and development.',
     children: [
-    {
+      {
         label: 'Morse',
         to: '/syntax/morse',
         icon: 'i-arcticons-morse',
-        description: 'For times when it\s needed'
+        description: 'For times when it\'s needed',
       },
       {
         label: 'Terminal',
         to: '/syntax/bash',
         icon: 'i-heroicons-command-line',
-        description: 'Master Bash scripting for automating tasks in UNIX-based systems.'
+        description: 'Master Bash scripting for automating tasks in UNIX-based systems.',
       },
       {
         label: 'JavaScript',
         to: '/syntax/javascript',
         icon: 'i-simple-icons-javascript',
-        description: 'Learn JavaScript to build dynamic web applications and automate web tasks.'
+        description: 'Learn JavaScript to build dynamic web applications and automate web tasks.',
       },
       {
         label: 'Python',
         to: '/syntax/python',
         icon: 'i-simple-icons-python',
-        description: 'Dive into Python scripting for a wide variety of applications, from automation to AI.'
+        description: 'Dive into Python scripting for a wide variety of applications, from automation to AI.',
       },
       {
         label: 'SQL',
         to: '/syntax/sql',
         icon: 'i-simple-icons-postgresql',
-        description: 'Understand SQL to query and manage relational databases effectively.'
-      }
-    ]
+        description: 'Understand SQL to query and manage relational databases effectively.',
+      },
+    ],
   },
   {
     label: 'KITT', // Key Interface and Technical Tools
@@ -76,27 +76,27 @@ const links = [
         label: 'Git',
         to: '/kitt/git',
         icon: 'i-simple-icons-git',
-        description: 'A version control system to track changes in source code during software development.'
+        description: 'A version control system to track changes in source code during software development.',
       },
       {
         label: 'proxychains4',
         to: '/kitt/proxychains4',
         icon: 'i-eos-icons:proxy-outlined',
-        description: 'Proxychains is a command-line tool that routes your network traffic through a chain of proxies, ensuring anonymity, bypassing restrictions, and masking your real IP. It\'s a vital weapon in a hacker\'s arsenal for stealth operations and reconnaissance.'
+        description: 'Proxychains is a command-line tool that routes your network traffic through a chain of proxies, ensuring anonymity, bypassing restrictions, and masking your real IP. It\'s a vital weapon in a hacker\'s arsenal for stealth operations and reconnaissance.',
       },
       {
         label: 'Nmap',
         to: '/kitt/nmap',
         icon: 'file-icons:nmap',
-        description: 'A network scanning tool used to discover hosts, services, and vulnerabilities in a network.'
+        description: 'A network scanning tool used to discover hosts, services, and vulnerabilities in a network.',
       },
       {
         label: 'ZeroTier',
         to: '/kitt/zerotier',
         icon: 'i-simple-icons-zerotier',
-        description: 'Weave your own invisible, encrypted network through the digital chaos—connect anything, anywhere, in a world beyond firewalls.'
-      }
-    ]
+        description: 'Weave your own invisible, encrypted network through the digital chaos—connect anything, anywhere, in a world beyond firewalls.',
+      },
+    ],
   },
   {
     label: 'VulN',
@@ -107,21 +107,21 @@ const links = [
         label: 'XSS',
         to: '/vuln/xss',
         icon: 'i-heroicons-exclamation-circle',
-        description: 'Learn about Cross-Site Scripting (XSS) vulnerabilities and how to prevent them.'
+        description: 'Learn about Cross-Site Scripting (XSS) vulnerabilities and how to prevent them.',
       },
       {
         label: 'XRSF',
         to: '/vuln/xrsf',
         icon: 'i-heroicons-exclamation-circle',
-        description: 'Understand Cross-Site Request Forgery (XSRF) attacks and mitigation strategies.'
+        description: 'Understand Cross-Site Request Forgery (XSRF) attacks and mitigation strategies.',
       },
       {
         label: 'CVE',
         to: '/vuln/cve',
         icon: 'i-heroicons-exclamation-triangle',
-        description: 'Explore Common Vulnerabilities and Exposures (CVE) to stay informed about security threats.'
-      }
-    ]
+        description: 'Explore Common Vulnerabilities and Exposures (CVE) to stay informed about security threats.',
+      },
+    ],
   },
   {
     label: 'Xpl01ts',
@@ -132,15 +132,15 @@ const links = [
         label: 'DoS',
         to: '/xpl01ts/dos',
         icon: 'mdi:cloud',
-        description: 'There are many types of DoS (Denial of Service) attacks.'
+        description: 'There are many types of DoS (Denial of Service) attacks.',
       },
       {
         label: 'Zero-Day',
         to: '/xpl01ts/zero-day',
         icon: 'game-icons:skull-bolt',
-        description: 'Explore zero-day vulnerabilities and their exploitation before patches are available.'
-      }
-    ]
+        description: 'Explore zero-day vulnerabilities and their exploitation before patches are available.',
+      },
+    ],
   },
   {
     label: 'Knowledge Base',
@@ -151,64 +151,64 @@ const links = [
         label: 'Digital Fortress',
         to: '/knowledge-base/digital-fortress',
         icon: 'i-game-icons-tower-fall',
-        description: 'Rise as the ultimate stronghold in the digital battlefield, where cutting-edge warfare tactics are honed to perfection'
+        description: 'Rise as the ultimate stronghold in the digital battlefield, where cutting-edge warfare tactics are honed to perfection',
       },
       {
         label: 'Certifize',
         to: '/knowledge-base/proving-grounds',
         icon: 'i-heroicons-academic-cap',
-        description: 'Gain recognition and prove your worth, it\'s not about the cert but about so much more.'
+        description: 'Gain recognition and prove your worth, it\'s not about the cert but about so much more.',
       },
       {
         label: 'System Engineering',
         to: '/knowledge-base/system-engineering',
         icon: 'i-heroicons-cog',
-        description: 'Learn about system design, architecture, and integration.'
+        description: 'Learn about system design, architecture, and integration.',
       },
       {
         label: 'Networking',
         to: '/knowledge-base/networking',
         icon: 'i-heroicons-globe-alt',
-        description: 'Understand the principles of networking and communication.'
+        description: 'Understand the principles of networking and communication.',
       },
       {
         label: 'Virtualization',
         to: '/knowledge-base/virtualization',
         icon: 'i-heroicons-server',
-        description: 'Explore the concepts and technologies behind virtual environments.'
+        description: 'Explore the concepts and technologies behind virtual environments.',
       },
       {
         label: 'Operating Systems',
         to: '/knowledge-base/operating-systems',
         icon: 'i-heroicons-computer-desktop',
-        description: 'Delve into the fundamentals and inner workings of operating systems.'
+        description: 'Delve into the fundamentals and inner workings of operating systems.',
       },
       {
         label: 'System Administration',
         to: '/knowledge-base/system-administration',
         icon: 'i-heroicons-command-line',
-        description: 'Master the management and maintenance of computer systems and networks.'
+        description: 'Master the management and maintenance of computer systems and networks.',
       },
       {
         label: 'Web Dev',
         icon: 'i-game-icons-spider-web',
         to: '/knowledge-base/web-dev',
-        description: 'This is the art and grit of web development—a never-ending race against time, technology, and the limits of creativity..'
+        description: 'This is the art and grit of web development—a never-ending race against time, technology, and the limits of creativity..',
       },
       {
         label: 'Cyber Crusades',
         icon: 'i-heroicons-bug-ant',
         to: '/knowledge-base/cyber-crusades',
-        description: 'The Cybercrusades represent a new era of digital warfare.'
+        description: 'The Cybercrusades represent a new era of digital warfare.',
       },
       {
         label: 'The Pentest 101',
         to: '/knowledge-base/the-pentest-101',
         icon: 'i-heroicons-cube',
-        description: 'A guide to penetration testing, vulnerability analysis, and security strategies.'
-      }
-    ]
-  }
+        description: 'A guide to penetration testing, vulnerability analysis, and security strategies.',
+      },
+    ],
+  },
 ]
 
 // Computed property to update the active state of links
@@ -218,10 +218,10 @@ const activeLinks = computed(() => {
     active: isActiveLink(link), // Set active state for parent
     children: link.children
       ? link.children.map(child => ({
-        ...child,
-        active: isActiveLink(child) // Set active state for child links
-      }))
-      : [] // Handle child links if they exist
+          ...child,
+          active: isActiveLink(child), // Set active state for child links
+        }))
+      : [], // Handle child links if they exist
   }))
 })
 </script>

@@ -4,8 +4,8 @@ export default defineAppConfig({
     gray: 'zinc',
     container: {
       // full-width: max-w-8xl
-      constrained: 'max-w-7xl'
-    }
+      constrained: 'max-w-7xl',
+    },
     // to be continued
     // page: {
     //   wrapper: 'flex flex-col lg:grid lg:grid-cols-12 lg:gap-8',
@@ -30,13 +30,13 @@ export default defineAppConfig({
     // },
   },
   seo: {
-    siteName: 'Nameless'
+    siteName: 'Nameless',
   },
   header: {
     logo: {
       alt: '',
       light: '',
-      dark: ''
+      dark: '',
     },
     search: true,
     colorMode: true,
@@ -52,15 +52,15 @@ export default defineAppConfig({
         'icon': 'i-mdi-tag',
         'to': '/the-lab',
         'target': '_blank',
-        'aria-label': 'Changelog'
+        'aria-label': 'Changelog',
       },
       {
         'icon': 'i-simple-icons-github',
         'to': 'https://github.com/skkylimits/Nameless',
         'target': '_blank',
-        'aria-label': 'Nameless on GitHub'
-      }
-    ]
+        'aria-label': 'Nameless on GitHub',
+      },
+    ],
   },
   toc: {
     title: 'Table of Contents',
@@ -72,9 +72,9 @@ export default defineAppConfig({
           icon: 'i-heroicons-star',
           label: 'Star on GitHub',
           to: 'https://github.com/skkylimits/Nameless',
-          target: '_blank'
-        }
-      ]
-    }
-  }
+          target: '_blank',
+        },
+      ],
+    },
+  },
 })

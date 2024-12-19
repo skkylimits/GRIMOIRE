@@ -2,12 +2,12 @@
 const props = defineProps({
   icon: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   filename: {
     type: String,
-    default: undefined
-  }
+    default: undefined,
+  },
 })
 
 const config = {
@@ -51,7 +51,7 @@ const config = {
   'bun': 'vscode-icons:file-type-bun',
   'yml': 'vscode-icons:file-type-yaml',
   'terminal': 'i-heroicons-command-line',
-  'csv': 'vscode-icons:file-type-text'
+  'csv': 'vscode-icons:file-type-text',
 }
 
 const { ui } = useUI('content.prose.code.icon', undefined, config, undefined, true)

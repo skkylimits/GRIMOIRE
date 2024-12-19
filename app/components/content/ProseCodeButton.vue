@@ -2,15 +2,15 @@
 const props = defineProps({
   code: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const config = {
   icon: {
     copy: 'i-heroicons-clipboard-document',
-    copied: 'i-heroicons-clipboard-document-check'
-  }
+    copied: 'i-heroicons-clipboard-document-check',
+  },
 }
 
 const { ui } = useUI('content.prose.code.button', undefined, config, undefined, true)
