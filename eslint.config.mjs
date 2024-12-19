@@ -1,15 +1,31 @@
+import markdown from '@eslint/markdown'
 import withNuxt from './.nuxt/eslint.config.mjs'
 
-export default withNuxt(
-	// your custom flat configs go here, for example:
-	{
-		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.vue'], // Include .vue files for Vue-specific rules
-		rules: {
+console.log(markdown)
 
-		// Other stylistic rules...
+export default withNuxt([
+	{
+		files: ['**/*.md'],
+		plugins: {
+			markdown, // Register the markdown plugin
+		},
+		language: 'markdown/gfm',
+		rules: {
+			'markdown/fenced-code-language': 'error',
+			'markdown/heading-increment': 'error',
+			'markdown/no-duplicate-headings': 'error',
+			'markdown/no-empty-links': 'error',
+			// 'markdown/no-html': 'error',
+			'markdown/no-invalid-label-refs': 'error',
+
+			// Disable the problematic rule for Markdown files
+			'no-irregular-whitespace': 'off',
+
+			// Disable indent rule for markdown files
+			'@stylistic/indent': 'off', // Disable indentation rule for Markdown
 		},
 	},
-)
+])
 
 // https://eslint.vuejs.org/rules/multiline-html-element-content-newline.html
 

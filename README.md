@@ -164,7 +164,7 @@ We have implemented two powerful rendering features for our directory structure:
 
 Here’s the initial directory structure for reference:
 
-```
+```plaintext
 6.knowledge-base/
 └── networking/
     ├── dhcp
@@ -179,7 +179,7 @@ The **Standalone** feature renders the entire directory structure from the top-l
 
 For the directory path `6.knowledge-base/networking/`, the Standalone feature will display:
 
-```
+```plaintext
 networking
 ├── dhcp
 └── dns
@@ -197,7 +197,7 @@ The **Stripped** feature simplifies the view by removing the top-level folder. I
 
 For the same directory path `6.knowledge-base/networking/`, the Stripped feature will render:
 
-```
+```plaintext
 ├── dhcp
 └── dns
 ```
@@ -258,7 +258,7 @@ If you want to download a new icon, place it in: `icon: 'i-simple-icons-gitkrake
 
 ## Extending NavItem
 
-```
+```javascript
 interface ExtendedNavItem extends NavItem {
   collapsed?: boolean; // Add collapsed here without changing NavItem globally
 }
