@@ -45,7 +45,7 @@ In VirtualBox, create a "NATNetwork". This allows VM to VM communication as well
 
    Alternatively, you can also use other Windows versions by following the instructions for WSL setup carefully.
 
-2.2 **Use an Existing Windows VHD**  
+2.2 **Use an Existing Windows VHD**
 
 Direct VHD download link
 - **Windows 2019 Server EN-US VHD Direct Download**: [Download Link](https://go.microsoft.com/fwlink/p/?linkid=2195334)
@@ -101,9 +101,9 @@ Once Windows is installed, shut down the VM and create a snapshot to save the in
 
 2.4 **Shared Folder/Clipboard + Microsoft Edge**
 
-- **Recommended**: 
+- **Recommended**:
     - Activate devices -> bi-directional clipboard/drag and drop feature
-    - Configure devices -> shared folder -> choose location and select automount and 
+    - Configure devices -> shared folder -> choose location and select automount and
 - **Important**: If you want to change the hostname, now is the time. Do not change it after setting up the Active Directory services!
   - Go to **Settings** -> **System** -> scroll down to the menu **“About”**.
   - Find the button **“Rename this PC”** to update the hostname.
@@ -127,7 +127,6 @@ to: https://learn.microsoft.com/en-us/windows/wsl/install-on-server
 Install WSL on Windows Server
 ::
 
-
 3.1 **Enable WSL2 on Windows**
 
 - Open PowerShell as Administrator and run:
@@ -144,7 +143,6 @@ Install WSL on Windows Server
   Add-AppxPackage .\Ubuntu_2004.4.2.0_x64.appx
   ```
 - Reboot the system and open Ubuntu from the Start Menu to complete the setup.
-  
 
 ### 4. Configure the Windows Environment
 
@@ -199,10 +197,7 @@ Download them on the host system and copy them to the shared folder.
 - **VirtualBox**: Hypervisor for managing VMs. [Download Link](https://www.virtualbox.org/)
 - **Windows Server 2019 Evaluation**: Main forensic workstation OS. [Download Link](https://www.microsoft.com/en-us/evalcenter/)
 
-
 > **Tip**: Take a snapshot of your VM once all tools are installed to save a clean starting point for future investigations.
-
-
 
 ## System Setup Diagram
 
@@ -216,7 +211,7 @@ graph BT
 
 ## Snapshotting
 
-Congratulations! Your forensic workstation is now ready. 
+Congratulations! Your forensic workstation is now ready.
 
 Remember to keep your system snapshots up to date to make resetting your environment quick and easy. This setup will help you practice and develop your digital forensic skills effectively.
 

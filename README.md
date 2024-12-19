@@ -108,11 +108,9 @@ Add this module to your `nuxt.config.ts`:
 
 ```ts
 export default defineNuxtConfig({
-  ...
-  modules: [
-    ...
-    '@nuxthq/studio'
-  ]
+	modules: [
+		'@nuxthq/studio'
+	],
 })
 ```
 
@@ -226,7 +224,6 @@ export default {
   }
 }
 
-
 ## Icons [workaround]
 
 - [Iconify](https://iconify.design/) - Freedom to choose icons
@@ -245,7 +242,6 @@ If you want to download a new icon, place it in: `icon: 'i-simple-icons-gitkrake
       }
 ```
 
-
 ## Icons
 
 "@iconify-json/heroicons": "^1.1.21",
@@ -256,36 +252,6 @@ If you want to download a new icon, place it in: `icon: 'i-simple-icons-gitkrake
 
 ---
 
-## Extending NavItem
-
-```javascript
-interface ExtendedNavItem extends NavItem {
-  collapsed?: boolean; // Add collapsed here without changing NavItem globally
-}
-
-const navigationLinks = computed(() => {
-  const path = route.path
-  const validNav = findValidNavPath(path)
-
-  if (validNav) {
-    const children = validNav.node.children || []
-
-    const mappedNav = mapContentNavigation(children).map(child => {
-      const extendedChild = child as ExtendedNavItem; // Use the local interface
-      return {
-        ...child,
-        defaultOpen: !extendedChild.collapsed // This will work
-      }
-    })
-
-    return mappedNav
-  }
-
-  return [] // If no valid directory is found, return an empty array
-})
-
-```
-
 ## Windows Machine
 
 Vergeet niet naar `Set-ExecutionPolicy Restricted` zodra je klaar bent
@@ -294,7 +260,6 @@ PS C:\Users\MBR\Desktop\Nameless> Get-ExecutionPolicy
 >>
 Restricted
 PS C:\Users\MBR\Desktop\Nameless> Set-ExecutionPolicy RemoteSigned
-
 
 ## XXSrat
 

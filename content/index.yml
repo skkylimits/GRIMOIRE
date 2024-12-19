@@ -1,9 +1,9 @@
-title: 'Nameless'
+title: Nameless
 description: My Zettelkasten.
 navigation: false
 hero:
-  title: 'Nameless'
-  description: 'Accelerate your ascent in the digital hierarchy. Unleash a stream of interconnected ideas.'
+  title: Nameless
+  description: Accelerate your ascent in the digital hierarchy. Unleash a stream of interconnected ideas.
   orientation: horizontal
   headline:
     label: Made with 💖
@@ -13,7 +13,7 @@ hero:
     - label: Get started
       icon: i-heroicons-arrow-right-20-solid
       trailing: true
-      to: '/the-lab'
+      to: /the-lab
       size: lg
     - label: Inject.. into the </>
       icon: i-simple-icons-github
@@ -26,37 +26,37 @@ hero:
     sudo rm -rf / --no-preserve-root --simulate
     ```
 features:
-  title: 'The Zettelkasten Method'
+  title: The Zettelkasten Method
   items:
-    - title: 'The Lab'
-      description: 'Prepare for battle. Transform raw hardware into your digital fortress.'
-      icon: 'i-mdi-test-tube'
-      to: '/the-lab'
-    - title: 'Syntax'
-      description: 'Elevate your coding prowess in the Syntax zone. Unlocking your hidden potential.'
-      icon: 'i-simple-icons-gnometerminal'
-      to: '/kitt/git'
-      target: '_blank'
-    - title: 'KITT'
-      description: 'Key Interface and Technical Tools. A command center for mastering your arsenal.'
-      icon: 'i-simple-icons-codechef'
+    - title: The Lab
+      description: Prepare for battle. Transform raw hardware into your digital fortress.
+      icon: i-mdi-test-tube
+      to: /the-lab
+    - title: Syntax
+      description: Elevate your coding prowess in the Syntax zone. Unlocking your hidden potential.
+      icon: i-simple-icons-gnometerminal
+      to: /kitt/git
+      target: _blank
+    - title: KITT
+      description: Key Interface and Technical Tools. A command center for mastering your arsenal.
+      icon: i-simple-icons-codechef
       to: 'https://ui.nuxt.com'
-      target: '_blank'
-    - title: 'VulN'
+      target: _blank
+    - title: VulN
       description: 'In the shadows of cyberspace, vulnerabilities are the hidden cracks in the digital armor.'
-      icon: 'i-heroicons-exclamation-circle'
+      icon: i-heroicons-exclamation-circle
       to: 'https://www.typescriptlang.org'
-      target: '_blank'
-    - title: 'Xpl01ts'
+      target: _blank
+    - title: Xpl01ts
       description: 'In the dark alleys of the cyberworld, Exploits are your ticket to power.'
-      icon: 'i-simple-icons-gitkraken'
+      icon: i-simple-icons-gitkraken
       to: 'https://nuxt.studio'
-      target: '_blank'
-    - title: 'Knowledge Base'
+      target: _blank
+    - title: Knowledge Base
       description: 'The secrets of the cyberverse, offering you the knowledge thrive in this ever-shifting landscape.'
-      icon: 'i-raphael-book'
+      icon: i-raphael-book
       to: 'https://ui.nuxt.com/pro/components/docs/docs-search'
-      target: '_blank'
+      target: _blank
   # links:
   #   - label: 'Explore Nuxt UI Pro'
   #     icon: 'i-simple-icons-nuxtdotjs'

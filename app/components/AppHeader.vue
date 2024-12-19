@@ -3,25 +3,25 @@
 
 // const navigation = inject<NavItem[]>('navigation', [])
 
-const route = useRoute();
-const { header } = useAppConfig();
+const route = useRoute()
+const { header } = useAppConfig()
 
 // Function to check if a link is active
-const isActiveLink = (link) => {
+function isActiveLink(link) {
 	// Check for an exact match or a nested match (starts with link's path)
 	if (link.to === route.path || route.path.startsWith(link.to)) {
-		return true;
+		return true
 	}
 
 	// Check if any child links are active
 	if (link.children) {
 		return link.children.some(child =>
 			child.to === route.path || route.path.startsWith(child.to),
-		);
+		)
 	}
 
-	return false;
-};
+	return false
+}
 
 const links = [
 	{
@@ -209,7 +209,7 @@ const links = [
 			},
 		],
 	},
-];
+]
 
 // Computed property to update the active state of links
 const activeLinks = computed(() => {
@@ -218,12 +218,12 @@ const activeLinks = computed(() => {
 		active: isActiveLink(link), // Set active state for parent
 		children: link.children
 			? link.children.map(child => ({
-				...child,
-				active: isActiveLink(child), // Set active state for child links
-			}))
+					...child,
+					active: isActiveLink(child), // Set active state for child links
+				}))
 			: [], // Handle child links if they exist
-	}));
-});
+	}))
+})
 </script>
 
 <template>

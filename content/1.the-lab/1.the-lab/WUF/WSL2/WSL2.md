@@ -1,9 +1,6 @@
-
-
-# WSL 2 
+# WSL 2
 
 Read more about WSl https://learn.microsoft.com/en-us/windows/wsl/install
-
 
 ## Pre-requisites
 
@@ -52,5 +49,3 @@ Run the setup.sh to install packages.
 ### ~./.bashrc
 
 Paste .bashrc from github into directory
-
-
