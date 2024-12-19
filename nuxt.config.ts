@@ -10,7 +10,7 @@ export default defineNuxtConfig({
 		'@nuxt/ui',
 		'@nuxthq/studio',
 		'nuxt-og-image',
-		'@nuxtjs/eslint-module',
+		'@nuxt/eslint',
 	],
 
 	// https://nuxt.com/docs/api/nuxt-config#devtools
@@ -91,6 +91,7 @@ export default defineNuxtConfig({
 			stylistic: {
 				indent: 'tab',
 				semi: false,
+
 				// ...
 			},
 		},

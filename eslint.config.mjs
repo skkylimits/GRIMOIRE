@@ -5,7 +5,9 @@ export default withNuxt(
 	{
 		files: ['**/*.ts', '**/*.tsx'],
 		rules: {
-			'no-console': 'off', // allow console.log in TypeScript files
+			// Add general ESLint rules that are not part of @stylistic
+
+			// Other stylistic rules...
 		},
 	},
 )
