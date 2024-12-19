@@ -3,14 +3,15 @@ import withNuxt from './.nuxt/eslint.config.mjs'
 export default withNuxt(
 	// your custom flat configs go here, for example:
 	{
-		files: ['**/*.ts', '**/*.tsx'],
+		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.vue'], // Include .vue files for Vue-specific rules
 		rules: {
-			// Add general ESLint rules that are not part of @stylistic
 
-			// Other stylistic rules...
+		// Other stylistic rules...
 		},
 	},
 )
+
+// https://eslint.vuejs.org/rules/multiline-html-element-content-newline.html
 
 /**
  * Why Have ESLint Config in Both Files?
