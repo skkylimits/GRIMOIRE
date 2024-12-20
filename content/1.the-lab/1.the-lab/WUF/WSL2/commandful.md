@@ -28,6 +28,7 @@ sudo netstat -tulpn | grep LISTEN
 ### How to force kill process in Linux
 
 1. Use the pidof command to find the process ID of a running program or app
+
    ```
    pidof appname
    ```
@@ -44,6 +45,7 @@ sudo netstat -tulpn | grep LISTEN
    ```
 
 ## Delete node_modules
+
 https://www.cyberciti.biz/faq/show-all-running-processes-in-linux/
 
 Remove & delete all node_modules files

@@ -38,15 +38,15 @@ const iframeSrc = computed(() => {
 
 <style scoped>
 .volta-board-container {
-  height: calc(100vh - 64px); /* Subtract the header height (64px) from the viewport height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	height: calc(100vh - 64px); /* Subtract the header height (64px) from the viewport height */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 iframe {
-  width: 100%;
-  height: 100%; /* Take the full height of the adjusted container */
-  border: none; /* Remove iframe borders */
+	width: 100%;
+	height: 100%; /* Take the full height of the adjusted container */
+	border: none; /* Remove iframe borders */
 }
 </style>

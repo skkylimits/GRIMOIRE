@@ -97,6 +97,7 @@ npm -v
 https://pnpm.io/installation
 
 Install pnpm and removes the appended code done automatically by pnpm since we already have that in our .bashrc
+
 ```sh
 curl -fsSL https://get.pnpm.io/install.sh | sh - && sh - && sed -i '/# pnpm/,/# pnpm end/d' ~/.bashrc && sed -i '/^$/d;${/^$/d;}' ~/.bashrc
 
@@ -115,6 +116,7 @@ sudo apt-get update --yes
 ```bash
 curl https://pyenv.run | bash
 ```
+
 Install the depencies(if automatic installer doesn't work)
 
 ```bash
@@ -142,6 +144,7 @@ pyenv global 3.12.6 # check the default version
 ```
 
 python --version# check the executable file
+
 ```bash
 which python
 ```
@@ -149,6 +152,7 @@ which python
 Warning: Never remove default python. WSL depends on this package
 
 python --version# check the executable file
+
 ```bash
 pyenv versions
 ```
@@ -186,6 +190,7 @@ pip3 freeze
 https://gist.github.com/bradtraversy/c70a93d6536ed63786c434707b898d55
 
 ## pipx
+
 https://pipx.pypa.io/stable/installation/
 
 pipx is a Python tool that allows you to install and run Python applications in isolated environments, preventing conflicts with other projects or system packages.
@@ -200,6 +205,7 @@ pipx ensurepath
 ```
 which pipx
 ```
+
 gives
 
 `/usr/bin/pipx` then its installed in default python system wide.
@@ -207,6 +213,7 @@ gives
 ```
 which pipx
 ```
+
 ```
 `/usr/bin/pipx` run python --version
 ⚠️  python is already on your PATH and installed at /home/skkylimits/.pyenv/shims/python. Downloading and running anyway.
@@ -214,11 +221,13 @@ Python 3.12.3
 ```
 
 remove pipx
+
 ```
 sudo apt remove pipx
 ```
 
 install pipx in pyenv python 3.12.6
+
 ```
 pyenv global 3.12.6
 python -m pip install --user pipx
@@ -255,6 +264,7 @@ pnpx nuxi init
 install docker with docker engine to keep it cli only
 
 1. Set up Docker's apt repository.
+
 ```
 # Add Docker's official GPG key:
 sudo apt-get update
@@ -272,20 +282,23 @@ sudo apt-get update
 ```
 
 2. Install the Docker packages.
+
 ```
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 3. Verify that the installation is successful by running the hello-world image:
+
 ```
 sudo docker run hello-world
 ```
 
 4. Fix: Allow Your User to Access Docker Without sudo
+
 ```
 sudo usermod -aG docker $USER
 ```
 
 remember to close temrinal and restart for efect to take place
 
-** manually -> run `docker login`
+\*\* manually -> run `docker login`

@@ -34,7 +34,7 @@ const { icon, title, iconColor } = defineProps({
 
 <style scoped>
 .alert-title p {
-    margin: 0; /* Remove any margin that might push it down */
-    padding: 0; /* Remove any padding that could affect alignment */
+	margin: 0; /* Remove any margin that might push it down */
+	padding: 0; /* Remove any padding that could affect alignment */
 }
 </style>

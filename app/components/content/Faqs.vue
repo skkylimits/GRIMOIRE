@@ -62,7 +62,7 @@ const faqCategories = [
 
 <style scoped>
 .faq-category-title {
-  --tw-text-opacity: 1;
-  color: rgb(var(--color-primary-DEFAULT) / var(--tw-text-opacity));
+	--tw-text-opacity: 1;
+	color: rgb(var(--color-primary-DEFAULT) / var(--tw-text-opacity));
 }
 </style>

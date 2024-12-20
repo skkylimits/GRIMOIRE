@@ -1,9 +1,11 @@
 Absolutely, let's revert to the color-based classification while keeping it adaptable and broad. Here’s a refined classification system based on the primary colors (Blue, Red, Yellow) and secondary colors (Purple, Green, Orange, White) that maintains flexibility and can accommodate future expansion:
 
 ### **1. **Blue Team** (Defenders)**
+
 **Purpose**: To defend the organization's assets against threats by implementing security measures and responding to incidents.
 
 - **Security Operations and Incident Response**
+
   - **Operational Security**
     - Security Operation Centers (SOC)
     - Vulnerability Management
@@ -20,6 +22,7 @@ Absolutely, let's revert to the color-based classification while keeping it adap
     - Cyber Threat Sharing
 
 - **Identity, Access, and Asset Management**
+
   - **Identity and Access Management (IAM)**
     - Multi-Factor Authentication (MFA)
     - Single Sign-On (SSO)
@@ -35,9 +38,11 @@ Absolutely, let's revert to the color-based classification while keeping it adap
     - Phishing Simulations and Social Engineering Defense
 
 ### **2. **Red Team** (Attackers)**
+
 **Purpose**: To emulate attackers and test the organization’s defenses by finding and exploiting vulnerabilities.
 
 - **Application, Infrastructure, and Emerging Technology Security**
+
   - **Application Security**
     - Secure Software Development Lifecycle (S-SDLC)
     - API Security
@@ -58,9 +63,11 @@ Absolutely, let's revert to the color-based classification while keeping it adap
     - Phishing and Deception Tactics
 
 ### **3. **Yellow Team** (Builders)**
+
 **Purpose**: To design and develop secure systems and applications, focusing on integrating security from the ground up.
 
 - **Application, Infrastructure, and Emerging Technology Security**
+
   - **Application Security**
     - Secure Software Development Lifecycle (S-SDLC)
     - API Security
@@ -83,6 +90,7 @@ Absolutely, let's revert to the color-based classification while keeping it adap
     - Secure System Integration
 
 ### **4. **Purple Team** (Bridging)**
+
 **Purpose**: To enhance the effectiveness of both the Blue and Red Teams by integrating offensive and defensive strategies.
 
 - **Integration and Collaboration**
@@ -93,6 +101,7 @@ Absolutely, let's revert to the color-based classification while keeping it adap
     - Training and joint exercises with Red and Blue Teams
 
 ### **5. **Green Team** (Collaboration)**
+
 **Purpose**: To improve the collaboration between Blue and Yellow Teams, focusing on secure development and operations.
 
 - **Integration and Collaboration**
@@ -104,6 +113,7 @@ Absolutely, let's revert to the color-based classification while keeping it adap
     - Securing end-points through collaboration with Yellow Team
 
 ### **6. **Orange Team** (Awareness)**
+
 **Purpose**: To increase security awareness among developers and improve the security of systems through offensive training.
 
 - **Training and Awareness**
@@ -114,6 +124,7 @@ Absolutely, let's revert to the color-based classification while keeping it adap
     - Identifying and fixing security bugs during development
 
 ### **7. **White Team** (Oversight)**
+
 **Purpose**: To oversee and coordinate all teams, managing strategy, compliance, and overall security posture.
 
 - **Management and Coordination**

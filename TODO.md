@@ -39,9 +39,9 @@
 
 - [ ] try to add a settings/config option. That certain behaviour can be enabled/disabled, like the hr below the h2. Catch my drift? - kinda like discord has
 - [ ] Make it so you can adjust the way certain prose types behave, like the h2 with standard --- hr at the end of the - [ ]
-- [ ] make a config so when we use _## or ## h2 .{exclude}, that specific h2 doesnt render in the toc.
+- [ ] make a config so when we use \_## or ## h2 .{exclude}, that specific h2 doesnt render in the toc.
 
-- [ ] Zoekn in winowds customizen, zodat everything weg kan? everytihg  indexeert o basis van files, windows o basis van content
+- [ ] Zoekn in winowds customizen, zodat everything weg kan? everytihg indexeert o basis van files, windows o basis van content
 
 ## DOC
 
@@ -85,7 +85,7 @@
 
 - [ ] create auto lessen website combi van theorie toppers mikey en altijdgeslaagd
 - [ ] create baby webshop
-- [ ] continue  own website
+- [ ] continue own website
 - [ ] create ai automation website for AI solutions like (lead automation and such)[like theaiclubhouse on IG]
 - [ ] site idee: blockchain referendum waarin je met een niek account kan temmen op iddeen die wortden doorgevoerd. referendum
 
@@ -98,6 +98,7 @@
 When finished turn thi
 
 ## malware
+
 https://lolbas-project.github.io/#
 
 ## TODOTODO
@@ -140,10 +141,10 @@ https://www.liquidweb.com/blog/how-to-install-pyenv-on-ubuntu-18-04/
 
 ## Kubernetes
 
- Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
-   just raised the bar for easy, resilient and secure K8s cluster deployment.
+Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+just raised the bar for easy, resilient and secure K8s cluster deployment.
 
-   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+https://ubuntu.com/engage/secure-kubernetes-at-the-edge
 
 ## Your Main Branch Is Not Protected
 
@@ -152,6 +153,7 @@ https://github.com/skkylimits/Nameless/settings/rules/new?target=branch&enforcem
 ## Automate Windows Unattended
 
 Make it so windows unattended will:
+
 - detect vmware
 - detect virtualbox
 - detect hyper-v

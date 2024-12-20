@@ -207,21 +207,21 @@ In this view, you can directly access "dhcp" and "dns" without the "networking" 
 To enable these features, you need to add them to your nuxt.config.ts file:
 
 export default {
-  content: {
-    navigation: {
-      fields: ['standalone', 'stripped']
-    },
-    highlight: {
-      theme: {
-        default: 'github-dark'
-      },
-      langs: [
-        // other languages you might be using
-        'powershell',
-        'http'
-      ]
-    }
-  }
+content: {
+navigation: {
+fields: ['standalone', 'stripped']
+},
+highlight: {
+theme: {
+default: 'github-dark'
+},
+langs: [
+// other languages you might be using
+'powershell',
+'http'
+]
+}
+}
 }
 
 ## Icons [workaround]
@@ -257,9 +257,9 @@ If you want to download a new icon, place it in: `icon: 'i-simple-icons-gitkrake
 Vergeet niet naar `Set-ExecutionPolicy Restricted` zodra je klaar bent
 
 PS C:\Users\MBR\Desktop\Nameless> Get-ExecutionPolicy
->>
-Restricted
-PS C:\Users\MBR\Desktop\Nameless> Set-ExecutionPolicy RemoteSigned
+
+> > Restricted
+> > PS C:\Users\MBR\Desktop\Nameless> Set-ExecutionPolicy RemoteSigned
 
 ## XXSrat
 

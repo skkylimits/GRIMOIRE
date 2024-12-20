@@ -24,7 +24,7 @@ To start, you'll need a hypervisor for managing virtual machines. We'll use Virt
 
 - [VirtualBox Download Link](https://www.virtualbox.org/)
 
-1.2 **Install VirtualBox Extension Pack**
+  1.2 **Install VirtualBox Extension Pack**
 
 - Download and install the [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads) to add additional functionality, such as USB 2.0/3.0 support, RDP, and disk encryption.
 
@@ -41,16 +41,19 @@ In VirtualBox, create a "NATNetwork". This allows VM to VM communication as well
 ### 2. Install Windows Guest VM
 
 2.1 **Download the Guest VM**
+
 - [Windows Server 2019 VHD](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2019)
 
-   Alternatively, you can also use other Windows versions by following the instructions for WSL setup carefully.
+  Alternatively, you can also use other Windows versions by following the instructions for WSL setup carefully.
 
-2.2 **Use an Existing Windows VHD**
+  2.2 **Use an Existing Windows VHD**
 
 Direct VHD download link
+
 - **Windows 2019 Server EN-US VHD Direct Download**: [Download Link](https://go.microsoft.com/fwlink/p/?linkid=2195334)
 
 Honourable mention:
+
 - **Accessing Trials and Kits for Windows**: [Microsoft Tech Community Guide](https://techcommunity.microsoft.com/t5/windows-11/accessing-trials-and-kits-for-windows/m-p/3361125)
 
 If you already have a VHD file for Windows Server, you can attach it to a new virtual machine in VirtualBox without creating a brand-new VM from scratch.
@@ -86,24 +89,24 @@ If you already have a VHD file for Windows Server, you can attach it to a new vi
 - **Additional Setup**: After starting the Windows VM for the first time, install VirtualBox Guest Additions to enable features like drag-and-drop, bi-directional clipboard, and folder sharing with the host. To install Guest Additions:
 
 1. Start the VM and follow the Windows Server installation instructions:
-     - When prompted, there is no need to provide a product key.
-     - Select **“Custom”** install since there is no pre-existing Windows installation.
-     - It will prompt you to create a password for the built-in administrator account.
+   - When prompted, there is no need to provide a product key.
+   - Select **“Custom”** install since there is no pre-existing Windows installation.
+   - It will prompt you to create a password for the built-in administrator account.
    - After a reboot, you will be prompted with the login screen. In the VirtualBox menu, select **Input** -> **Keyboard** -> **Insert Ctrl+Alt+Del** to enter your password.
    - If prompted after startup “allow your PC to be discoverable”, select **yes**.
 2. From the VirtualBox menu, click **Devices** > **Insert Guest Additions CD Image**.
 
-1. Open File Explorer inside the VM, navigate to the CD drive, and run `VBoxWindowsAdditions.exe`.
-2. Follow the on-screen instructions to complete the installation.
-3. Reboot the VM after installation.
+3. Open File Explorer inside the VM, navigate to the CD drive, and run `VBoxWindowsAdditions.exe`.
+4. Follow the on-screen instructions to complete the installation.
+5. Reboot the VM after installation.
 
 Once Windows is installed, shut down the VM and create a snapshot to save the initial clean state.
 
 2.4 **Shared Folder/Clipboard + Microsoft Edge**
 
 - **Recommended**:
-    - Activate devices -> bi-directional clipboard/drag and drop feature
-    - Configure devices -> shared folder -> choose location and select automount and
+  - Activate devices -> bi-directional clipboard/drag and drop feature
+  - Configure devices -> shared folder -> choose location and select automount and
 - **Important**: If you want to change the hostname, now is the time. Do not change it after setting up the Active Directory services!
   - Go to **Settings** -> **System** -> scroll down to the menu **“About”**.
   - Find the button **“Rename this PC”** to update the hostname.
@@ -118,23 +121,26 @@ VirtualBox now supports WSL2, which provides improved performance and compatibil
 
 However I do recommend you to follow this guide when intaling it on Windows Server 2019
 
-::callout
----
+## ::callout
+
 icon: i-mdi:nuxt
-target: _blank
+target: \_blank
 to: https://learn.microsoft.com/en-us/windows/wsl/install-on-server
+
 ---
+
 Install WSL on Windows Server
 ::
 
 3.1 **Enable WSL2 on Windows**
 
 - Open PowerShell as Administrator and run:
+
   ```powershell
   Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
   ```
 
-3.2 **Install Ubuntu 20.04**
+  3.2 **Install Ubuntu 20.04**
 
 - [Download Ubuntu 20.04](https://aka.ms/wslubuntu2004)
 - Rename the downloaded file from `.appxbundle` to `.zip` and extract it to `\downloads\`.
@@ -160,12 +166,14 @@ For digital forensics best practices, configure the following settings on your W
 
 The tools you need depend on the type of investigation. Here are the basic Linux and Windows forensic tools to install:
 
-::callout
----
+## ::callout
+
 icon: i-mdi:nuxt
-target: _blank
+target: \_blank
 to: https://bluecapesecurity.com/build-your-forensic-workstation/#forensic-vm-tools
+
 ---
+
 forensic tools on the Blue Cape Security tutorial
 ::
 
@@ -217,11 +225,13 @@ Remember to keep your system snapshots up to date to make resetting your environ
 
 Machine -> Hamburgermenu -> Snapshots -> Take/Delete/Restore
 
-::callout
----
+## ::callout
+
 icon: i-mdi:nuxt
-target: _blank
+target: \_blank
 to: https://bluecapesecurity.com/build-your-forensic-workstation/
+
 ---
+
 For more details, visit Blue Cape Security's Guide
 ::

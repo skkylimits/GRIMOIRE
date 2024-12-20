@@ -16,7 +16,7 @@ const items = [
 </template>
 
 <style>
-button[data-headlessui-state="open"] span {
-  color: rgb(var(--color-primary-DEFAULT) / var(--tw-text-opacity)) !important;
+button[data-headlessui-state='open'] span {
+	color: rgb(var(--color-primary-DEFAULT) / var(--tw-text-opacity)) !important;
 }
 </style>

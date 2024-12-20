@@ -29,7 +29,7 @@ Having said that, here are some gotchas to watch out for
 2. Shared storage partitions. If there is a partition which both OSes can see _natively_, meaning `FAT32` or `NFTS`, then there can be issues with data loss. If windows goes into hibernation, and another OS makes changes to the shared partition, Windows will tend to undo the changed when it is resumed. I recommend either external storage or disabling hibernation no Windows, or Both
 
 3. `UEFI`. This is new from Windows 8. There are two types of firmware interface. `BIOS` (older) and `UEFI` (newer). Both operating systems need to be installed using the same one. You can find a much more in-depth-explantion on the net or chatgpt.
-::
+   ::
 
 ## Verdict
 

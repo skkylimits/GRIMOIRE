@@ -70,17 +70,20 @@ The PowerShell script `Set-RecommendedPrivacySettings` is designed to apply a se
 ```
 
 ### 1. Display a Header (if not in the specialize phase)
+
 ```powershell
 if (-not $isSpecializePhase) {
     Show-Header
     Write-Host "Applying Recommended Privacy Settings . . ."
 }
 ```
+
 - **Purpose**: This section checks if the `$isSpecializePhase` variable is not set to `$true`. If it's not in the "specialize" phase, it displays a header message to indicate that the script is applying the recommended privacy settings.
-    - `Show-Header`: Likely a function defined elsewhere in the script to display a header (not shown in the provided code).
-    - `Write-Host`: Prints the message `"Applying Recommended Privacy Settings . . ."` to the console.
+  - `Show-Header`: Likely a function defined elsewhere in the script to display a header (not shown in the provided code).
+  - `Write-Host`: Prints the message `"Applying Recommended Privacy Settings . . ."` to the console.
 
 ### 2. Create a Multi-Line String Containing Registry Changes
+
 ```powershell
 $MultilineComment = @"
     Windows Registry Editor Version 5.00
@@ -128,30 +131,36 @@ $MultilineComment = @"
     "Value"="Deny"
 "@
 ```
+
 - **Purpose**: This block creates a multi-line string `$MultilineComment` containing the Registry modifications to apply the privacy settings. These changes are grouped into different categories:
-    - **Disabling Activity History**: Prevents Windows from collecting activity data, which includes features like activity history and publishing/uploading user activities.
-    - **Disabling Location Tracking**: Prevents Windows from tracking the device's location and prevents location-based features from being used.
-    - **Disabling Telemetry**: Prevents Windows from sending diagnostic and telemetry data to Microsoft. It also disables feedback notifications to the user.
-    - **Disabling Windows Ink Workspace**: Disables the Windows Ink Workspace feature that allows users to draw and annotate with a pen or stylus.
-    - **Disabling Advertising ID**: Disables the advertising ID, which is used by Microsoft to show personalized ads.
-    - **Disabling Account Information**: Prevents access to user account information for apps that request it.
+  - **Disabling Activity History**: Prevents Windows from collecting activity data, which includes features like activity history and publishing/uploading user activities.
+  - **Disabling Location Tracking**: Prevents Windows from tracking the device's location and prevents location-based features from being used.
+  - **Disabling Telemetry**: Prevents Windows from sending diagnostic and telemetry data to Microsoft. It also disables feedback notifications to the user.
+  - **Disabling Windows Ink Workspace**: Disables the Windows Ink Workspace feature that allows users to draw and annotate with a pen or stylus.
+  - **Disabling Advertising ID**: Disables the advertising ID, which is used by Microsoft to show personalized ads.
+  - **Disabling Account Information**: Prevents access to user account information for apps that request it.
 
 ### 3. Write the Registry Modifications to a `.reg` File
+
 ```powershell
 Set-Content -Path "$env:TEMP\Recommended_Privacy_Settings.reg" -Value $MultilineComment -Force
 ```
+
 - **Purpose**: This line writes the registry changes (stored in `$MultilineComment`) to a `.reg` file located in the system's temporary folder (`$env:TEMP`). The file is named `Recommended_Privacy_Settings.reg`.
-    - The `-Force` parameter ensures that the file is written, even if it already exists.
+  - The `-Force` parameter ensures that the file is written, even if it already exists.
 
 ### 4. Import the `.reg` File Using `regedit`
+
 ```powershell
 Start-Process -FilePath "regedit.exe" -ArgumentList "/S `"$env:TEMP\Recommended_Privacy_Settings.reg`"" -NoNewWindow -Wait
 ```
+
 - **Purpose**: This command silently imports the `.reg` file into the Windows Registry using the `regedit.exe` utility. The `/S` flag ensures the import is silent (no user prompts or notifications).
-    - `-NoNewWindow`: Ensures that `regedit` is not opened in a new window.
-    - `-Wait`: Makes the script wait for `regedit` to complete before moving on.
+  - `-NoNewWindow`: Ensures that `regedit` is not opened in a new window.
+  - `-Wait`: Makes the script wait for `regedit` to complete before moving on.
 
 ### 5. Display Success Message (if not in the specialize phase)
+
 ```powershell
 if (-not $isSpecializePhase) {
     Show-Header
@@ -159,10 +168,11 @@ if (-not $isSpecializePhase) {
     Wait-IfNotSpecialize
 }
 ```
+
 - **Purpose**: This block checks again if the `$isSpecializePhase` variable is not set to `$true`. If not in the specialize phase, it:
-    - Displays a header again using `Show-Header` (likely defined elsewhere in the script).
-    - Prints `"Recommended Privacy Settings Applied."` in green to indicate that the privacy settings were successfully applied.
-    - `Wait-IfNotSpecialize` is called, which is presumably another function that either waits for certain conditions or performs additional tasks, but the exact behavior is not defined in the provided code.
+  - Displays a header again using `Show-Header` (likely defined elsewhere in the script).
+  - Prints `"Recommended Privacy Settings Applied."` in green to indicate that the privacy settings were successfully applied.
+  - `Wait-IfNotSpecialize` is called, which is presumably another function that either waits for certain conditions or performs additional tasks, but the exact behavior is not defined in the provided code.
 
 This script helps enforce privacy by disabling activity tracking, telemetry, location tracking, and other privacy-invasive features within Windows, ensuring better user privacy and control over data collection.
 
@@ -249,12 +259,14 @@ Let me explain what the `Set-RecommendedUpdateSettings` function does, breaking 
 ```
 
 ### **1. Check if Not in Specialize Phase**
+
 ```powershell
 if (-not $isSpecializePhase) {
     Show-Header
     Write-Host "Applying Recommended Windows Update Settings . . ."
 }
 ```
+
 - **Purpose**: The function first checks if it's not in the "specialize" phase by evaluating the `$isSpecializePhase` variable.
   - **If true** (it's not in the specialize phase), it:
     - Calls `Show-Header` (presumably a function that displays a header or title).
@@ -262,6 +274,7 @@ if (-not $isSpecializePhase) {
   - **If false**, it skips this step and doesn't display the header or message.
 
 ### **2. Create Registry Changes (Multiline String)**
+
 ```powershell
 $MultilineComment = @"
     Windows Registry Editor Version 5.00
@@ -292,28 +305,34 @@ $MultilineComment = @"
     "DODownloadMode"=dword:00000000
 "@
 ```
+
 - **Purpose**: Here, the function prepares a multiline string `$MultilineComment` containing the registry changes needed to apply the recommended Windows Update settings.
-    - **Disable Automatic Updates**: It disables automatic updates and sets Windows Update to only check for updates manually.
-    - **Upgrade Settings**: Prevents an automatic upgrade from Windows 10 22H2 to Windows 11. It also delays feature and quality updates for 1 year.
-    - **Delivery Optimization**: Disables downloading updates from other PCs, which is part of Windows' Delivery Optimization feature.
+  - **Disable Automatic Updates**: It disables automatic updates and sets Windows Update to only check for updates manually.
+  - **Upgrade Settings**: Prevents an automatic upgrade from Windows 10 22H2 to Windows 11. It also delays feature and quality updates for 1 year.
+  - **Delivery Optimization**: Disables downloading updates from other PCs, which is part of Windows' Delivery Optimization feature.
 
 ### **3. Write Registry Changes to a `.reg` File**
+
 ```powershell
 Set-Content -Path "$env:TEMP\Recommended_Windows_Update_Settings.reg" -Value $MultilineComment -Force
 ```
+
 - **Purpose**: The function writes the registry changes (stored in `$MultilineComment`) to a `.reg` file located in the temporary folder (`$env:TEMP`).
   - **Path**: `$env:TEMP\Recommended_Windows_Update_Settings.reg`
   - The `-Force` flag ensures that the file is written even if it already exists.
 
 ### **4. Import the `.reg` File Using `regedit`**
+
 ```powershell
 Regedit.exe /S "$env:TEMP\Recommended_Windows_Update_Settings.reg"
 ```
+
 - **Purpose**: This line runs the `regedit.exe` utility to import the `.reg` file created in the previous step.
   - The `/S` flag ensures that the import happens silently, without requiring user confirmation.
   - The settings are applied to the Windows registry.
 
 ### **5. Check if Not in Specialize Phase Again**
+
 ```powershell
 if (-not $isSpecializePhase) {
     Show-Header
@@ -329,6 +348,7 @@ if (-not $isSpecializePhase) {
     - Calls the `Wait-IfNotSpecialize` function, which is presumably a custom function to either pause the script or handle certain tasks, but the exact behavior is not provided.
 
 ### **6. End of Function**
+
 - **Purpose**: The function ends, having successfully applied the Windows Update settings based on the registry modifications.
 
 ## Registry
@@ -381,6 +401,7 @@ Let's break down the `Set-RecommendedHKLMRegistry` function and explain each par
 ```
 
 ### **1. Preparing the Registry Changes**
+
 ```powershell
 $MultilineComment = @"
     $MultilineComment = @"
@@ -625,6 +646,7 @@ $MultilineComment = @"
         "MouseThreshold2"="0"
 "@
 ```
+
 ::foldable
 #title
 regedit description
@@ -700,43 +722,53 @@ regedit description
 ::
 
 ### **2. Writing Registry Changes to a `.reg` File**
+
 ```powershell
 Set-Content -Path "$env:TEMP\Optimize_LocalMachine_Registry.reg" -Value $MultilineComment -Force
 ```
+
 - **Purpose**: This line writes the registry changes (stored in `$MultilineComment`) to a `.reg` file, specifically located in the **temporary folder** (`$env:TEMP`), with the name `Optimize_LocalMachine_Registry.reg`.
   - The `-Force` flag ensures that the file is created even if it already exists.
 
 ### **3. Modify the Registry File Content**
+
 ```powershell
 $path = "$env:TEMP\Optimize_LocalMachine_Registry.reg"
 (Get-Content $path) -replace "\?", "$" | Out-File $path
 ```
+
 - **Purpose**: This block modifies the `.reg` file content:
   - It reads the content of the registry file using `Get-Content`.
   - It performs a **replacement** on the content: every occurrence of the `?` character is replaced with `$` (likely intended to escape or alter certain characters for proper registry parsing).
   - The modified content is then written back to the same `.reg` file using `Out-File`.
 
 ### **.4 Import the `.reg` File Using `regedit`**
+
 ```powershell
 Regedit.exe /S "$env:TEMP\Optimize_LocalMachine_Registry.reg"
 ```
+
 - **Purpose**: This line invokes the **`regedit.exe`** tool to import the `.reg` file silently using the `/S` flag.
   - The `/S` flag ensures that the registry import is **silent**, meaning no prompts will appear for the user during the process.
   - The `.reg` file will be applied to the system's registry, making the necessary changes.
 
 ### **5. Display Success Message**
+
 ```powershell
 Show-Header
 Write-Host "Recommended Local Machine Registry Settings Applied." -ForegroundColor Green
 ```
+
 - **Purpose**: After the registry changes have been successfully applied, this block:
   - Calls the `Show-Header` function (presumably defined elsewhere in the script) to display a header (likely to indicate the task is complete).
   - Uses `Write-Host` to print the message **"Recommended Local Machine Registry Settings Applied."** in green, confirming that the changes were successfully applied.
 
 ### **6. Wait Until Not in Specialize Phase**
+
 ```powershell
 Wait-IfNotSpecialize
 ```
+
 - **Purpose**: This line calls the `Wait-IfNotSpecialize` function (which is presumably defined elsewhere in the script). The exact behavior of this function is unknown, but it likely:
   - Waits for a specific condition or event to occur (possibly ensuring that the system is not in the "specialize" phase before proceeding or finishing).
   - Ensures that the settings are applied after a particular stage of system configuration, like during imaging or customization in deployment.
@@ -826,28 +858,30 @@ This function adjusts the startup behavior of Windows services for optimized sys
     Wait-IfNotSpecialize
 ```
 
-| Task Name                                                                                      | Reason to Disable                                                                                              |
-|-------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser                      | Collects system compatibility data with new Windows versions. Not needed for users who do not upgrade frequently. |
-| Microsoft\Windows\Application Experience\ProgramDataUpdater                                      | Updates program data related to application compatibility. Disabling can reduce background tasks.               |
-| Microsoft\Windows\Autochk\Proxy                                                                  | Used for disk error checking during startup. Disabling might reduce unnecessary startup checks if disk issues are not frequent. |
-| Microsoft\Windows\Customer Experience Improvement Program\Consolidator                          | Collects user data for the Customer Experience Improvement Program (CEIP). Disabling helps to reduce background telemetry. |
-| Microsoft\Windows\Customer Experience Improvement Program\UsbCeip                               | Collects data on USB device usage for CEIP. Reducing telemetry data and background processes.                   |
-| Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector                 | Collects disk diagnostic data, which is not useful for users who do not encounter disk problems.                |
-| Microsoft\Windows\Feedback\Siuf\DmClient                                                        | Client for gathering feedback about Windows experience. Disabling reduces participation in CEIP.                |
-| Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload                                       | Collects data when downloading new scenarios for feedback. Reducing unnecessary background activity.            |
-| Microsoft\Windows\Windows Error Reporting\QueueReporting                                         | Queues error reporting data to be sent to Microsoft. Disabling can protect user privacy and reduce network activity. |
-| Microsoft\Windows\Application Experience\MareBackup                                             | Creates backups related to application experience. Disabling can reduce unnecessary backup tasks for users not using this feature. |
-| Microsoft\Windows\Application Experience\StartupAppTask                                         | Runs a task at startup related to application experience. Not essential for most users and adds unnecessary startup delay. |
-| Microsoft\Windows\Application Experience\PcaPatchDbTask                                         | Runs a task related to system diagnostics. Disabling can reduce background processes without affecting system performance. |
-| Microsoft\Windows\Maps\MapsUpdateTask                                                           | Handles maps updates in the background. Disabling may reduce unnecessary background activity for users not using maps. |
+| Task Name                                                                      | Reason to Disable                                                                                                                  |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser     | Collects system compatibility data with new Windows versions. Not needed for users who do not upgrade frequently.                  |
+| Microsoft\Windows\Application Experience\ProgramDataUpdater                    | Updates program data related to application compatibility. Disabling can reduce background tasks.                                  |
+| Microsoft\Windows\Autochk\Proxy                                                | Used for disk error checking during startup. Disabling might reduce unnecessary startup checks if disk issues are not frequent.    |
+| Microsoft\Windows\Customer Experience Improvement Program\Consolidator         | Collects user data for the Customer Experience Improvement Program (CEIP). Disabling helps to reduce background telemetry.         |
+| Microsoft\Windows\Customer Experience Improvement Program\UsbCeip              | Collects data on USB device usage for CEIP. Reducing telemetry data and background processes.                                      |
+| Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector | Collects disk diagnostic data, which is not useful for users who do not encounter disk problems.                                   |
+| Microsoft\Windows\Feedback\Siuf\DmClient                                       | Client for gathering feedback about Windows experience. Disabling reduces participation in CEIP.                                   |
+| Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload                     | Collects data when downloading new scenarios for feedback. Reducing unnecessary background activity.                               |
+| Microsoft\Windows\Windows Error Reporting\QueueReporting                       | Queues error reporting data to be sent to Microsoft. Disabling can protect user privacy and reduce network activity.               |
+| Microsoft\Windows\Application Experience\MareBackup                            | Creates backups related to application experience. Disabling can reduce unnecessary backup tasks for users not using this feature. |
+| Microsoft\Windows\Application Experience\StartupAppTask                        | Runs a task at startup related to application experience. Not essential for most users and adds unnecessary startup delay.         |
+| Microsoft\Windows\Application Experience\PcaPatchDbTask                        | Runs a task related to system diagnostics. Disabling can reduce background processes without affecting system performance.         |
+| Microsoft\Windows\Maps\MapsUpdateTask                                          | Handles maps updates in the background. Disabling may reduce unnecessary background activity for users not using maps.             |
 
 ### **2. Identify Services**
 
 #### **Disabled Services**
+
 - Includes services that are either not required for most users or pose potential performance or security issues.
 
   **List:**
+
   ```powershell
   $disabledServices = @(
     'AJRouter', 'AppVClient', 'AssignedAccessManagerSvc',
@@ -855,7 +889,7 @@ This function adjusts the startup behavior of Windows services for optimized sys
     'RemoteAccess', 'RemoteRegistry', 'shpamsvc',
     'ssh-agent', 'tzautoupdate', 'uhssvc',
     'UevAgentService'
-	)
+  )
   ```
 
 ::foldable
@@ -863,29 +897,33 @@ This function adjusts the startup behavior of Windows services for optimized sys
 Service Description
 
 #content
+
 #### **Service Descriptions and Recommendations**
 
-| **Service**                  | **Description**                                                                                                     | **Recommendation**                     |
-|------------------------------|---------------------------------------------------------------------------------------------------------------------|----------------------------------------|
-| **AJRouter**                 | AllJoyn Router Service, used for communication between IoT devices.                                                | Disable unless using IoT features.     |
-| **AppVClient**               | Application Virtualization Client, supports virtualized applications.                                               | Disable unless using App-V applications. |
-| **AssignedAccessManagerSvc** | Enables "Assigned Access" mode for user accounts.                                                                  | Disable unless using kiosk mode.       |
-| **DiagTrack**                | Connected User Experiences and Telemetry, collects diagnostics and usage data.                                      | Disable for privacy concerns.          |
-| **DialogBlockingService**    | Manages blocking of dialog popups during certain system operations.                                                 | Disable unless troubleshooting.        |
-| **NetTcpPortSharing**        | Allows multiple applications to share TCP ports.                                                                   | Disable unless required by applications. |
-| **RemoteAccess**             | Provides support for remote network connections.                                                                   | Disable unless using remote networks or VPN. |
-| **RemoteRegistry**           | Allows remote registry access for management.                                                                      | Disable for security reasons.          |
-| **shpamsvc**                 | Shell Hardware Detection, handles media change notifications (e.g., for removable drives).                         | Leave Automatic for drive notifications. |
-| **ssh-agent**                | Manages SSH keys for remote access.                                                                                 | Disable unless using SSH features.     |
-| **tzautoupdate**             | Updates the system time zone automatically.                                                                        | Leave Automatic for time accuracy.     |
-| **uhssvc**                   | Universal Home Shell, related to home automation.                                                                  | Disable unless using home automation.  |
-| **UevAgentService**          | Manages User Experience Virtualization (UE-V) for settings synchronization.                                         | Disable unless using UE-V.             |
+| **Service**                  | **Description**                                                                            | **Recommendation**                           |
+| ---------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------- |
+| **AJRouter**                 | AllJoyn Router Service, used for communication between IoT devices.                        | Disable unless using IoT features.           |
+| **AppVClient**               | Application Virtualization Client, supports virtualized applications.                      | Disable unless using App-V applications.     |
+| **AssignedAccessManagerSvc** | Enables "Assigned Access" mode for user accounts.                                          | Disable unless using kiosk mode.             |
+| **DiagTrack**                | Connected User Experiences and Telemetry, collects diagnostics and usage data.             | Disable for privacy concerns.                |
+| **DialogBlockingService**    | Manages blocking of dialog popups during certain system operations.                        | Disable unless troubleshooting.              |
+| **NetTcpPortSharing**        | Allows multiple applications to share TCP ports.                                           | Disable unless required by applications.     |
+| **RemoteAccess**             | Provides support for remote network connections.                                           | Disable unless using remote networks or VPN. |
+| **RemoteRegistry**           | Allows remote registry access for management.                                              | Disable for security reasons.                |
+| **shpamsvc**                 | Shell Hardware Detection, handles media change notifications (e.g., for removable drives). | Leave Automatic for drive notifications.     |
+| **ssh-agent**                | Manages SSH keys for remote access.                                                        | Disable unless using SSH features.           |
+| **tzautoupdate**             | Updates the system time zone automatically.                                                | Leave Automatic for time accuracy.           |
+| **uhssvc**                   | Universal Home Shell, related to home automation.                                          | Disable unless using home automation.        |
+| **UevAgentService**          | Manages User Experience Virtualization (UE-V) for settings synchronization.                | Disable unless using UE-V.                   |
+
 ::
 
 #### **Manual Services**
+
 - Services that may occasionally be needed but don’t require automatic startup.
 
   **List:**
+
   ```powershell
   $manualServices = @(
     'ALG', 'AppIDSvc', 'AppMgmt', 'AppReadiness', 'AppXSvc', 'Appinfo',
@@ -937,239 +975,241 @@ Service Description
 Service Description
 
 #content
+
 #### **Network and Internet Services**
 
-| **Service**         | **Description**                                                                                                     | **Recommendation**                                    |
-|---------------------|---------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
-| ALG                 | Application Layer Gateway service for Internet Connection Sharing.                                                  | Disable unless using legacy ICS tasks.                |
-| Netman              | Manages network connections.                                                                                        | Leave Manual for flexibility.                         |
-| NlaSvc              | Determines network location profiles.                                                                               | Leave Automatic for network stability.                |
-| `QWAVE`               | Improves audio/video streaming quality.                                                                             | Disable unless using streaming services.              |
-| RasAuto             | Creates connections for remote networks when requested by programs.                                                 | Disable unless using VPN.                             |
-| RasMan              | Manages dial-up and VPN connections.                                                                                | Disable unless using VPN/dial-up connections.         |
-| PeerDistSvc         | Enables Peer-to-Peer content transfers in a network.                                                                | Disable unless required for a specific app.           |
-| PNRPAutoReg         | Handles Peer Name Resolution Protocol registration.                                                                 | Disable unless required for peer-to-peer tasks.       |
-| PNRPsvc             | Supports Peer Name Resolution Protocol.                                                                             | Disable unless required.                              |
-| SharedAccess        | Provides Internet Connection Sharing.                                                                               | Disable unless sharing an internet connection.        |
-| SstpSvc             | Supports Secure Socket Tunneling Protocol VPN connections.                                                          | Disable unless using SSTP VPN.                        |
-| WFDSConMgrSvc       | Manages Wi-Fi Direct connections.                                                                                   | Disable unless using Wi-Fi Direct.                    |
-| WinHttpAutoProxySvc | Detects and configures HTTP proxy settings.                                                                         | Disable unless using proxy settings.                  |
-| WinRM               | Windows Remote Management for remote system connections.                                                            | Disable unless needed for remote management.          |
-| WwanSvc             | Manages mobile broadband connections.                                                                               | Disable unless using mobile broadband.                |
-| fdPHost             | Hosts Function Discovery services.                                                                                  | Disable unless required for device discovery.         |
-| wcncsvc             | Wireless configuration for peer-to-peer device connections.                                                         | Disable unless needed for sharing.                    |
-| netprofm            | Identifies and manages network profiles.                                                                            | Leave Automatic for network-based tasks.              |
-| p2pimsvc            | Manages Peer-to-Peer Identity Manager services.                                                                     | Disable unless required for a specific app.           |
-| p2psvc              | Manages Peer-to-Peer Grouping tasks.                                                                                | Disable unless using peer-to-peer services.           |
-| upnphost            | Supports Universal Plug and Play device hosting.                                                                    | Disable unless needed for device discovery.           |
+| **Service**         | **Description**                                                     | **Recommendation**                              |
+| ------------------- | ------------------------------------------------------------------- | ----------------------------------------------- |
+| ALG                 | Application Layer Gateway service for Internet Connection Sharing.  | Disable unless using legacy ICS tasks.          |
+| Netman              | Manages network connections.                                        | Leave Manual for flexibility.                   |
+| NlaSvc              | Determines network location profiles.                               | Leave Automatic for network stability.          |
+| `QWAVE`             | Improves audio/video streaming quality.                             | Disable unless using streaming services.        |
+| RasAuto             | Creates connections for remote networks when requested by programs. | Disable unless using VPN.                       |
+| RasMan              | Manages dial-up and VPN connections.                                | Disable unless using VPN/dial-up connections.   |
+| PeerDistSvc         | Enables Peer-to-Peer content transfers in a network.                | Disable unless required for a specific app.     |
+| PNRPAutoReg         | Handles Peer Name Resolution Protocol registration.                 | Disable unless required for peer-to-peer tasks. |
+| PNRPsvc             | Supports Peer Name Resolution Protocol.                             | Disable unless required.                        |
+| SharedAccess        | Provides Internet Connection Sharing.                               | Disable unless sharing an internet connection.  |
+| SstpSvc             | Supports Secure Socket Tunneling Protocol VPN connections.          | Disable unless using SSTP VPN.                  |
+| WFDSConMgrSvc       | Manages Wi-Fi Direct connections.                                   | Disable unless using Wi-Fi Direct.              |
+| WinHttpAutoProxySvc | Detects and configures HTTP proxy settings.                         | Disable unless using proxy settings.            |
+| WinRM               | Windows Remote Management for remote system connections.            | Disable unless needed for remote management.    |
+| WwanSvc             | Manages mobile broadband connections.                               | Disable unless using mobile broadband.          |
+| fdPHost             | Hosts Function Discovery services.                                  | Disable unless required for device discovery.   |
+| wcncsvc             | Wireless configuration for peer-to-peer device connections.         | Disable unless needed for sharing.              |
+| netprofm            | Identifies and manages network profiles.                            | Leave Automatic for network-based tasks.        |
+| p2pimsvc            | Manages Peer-to-Peer Identity Manager services.                     | Disable unless required for a specific app.     |
+| p2psvc              | Manages Peer-to-Peer Grouping tasks.                                | Disable unless using peer-to-peer services.     |
+| upnphost            | Supports Universal Plug and Play device hosting.                    | Disable unless needed for device discovery.     |
 
 #### **Application and System Services**
 
-| **Service**                   | **Description**                                                                                                    | **Recommendation**                                  |
-|-------------------------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
-| AppIDSvc                      | Application Identity service for Group Policy AppLocker.                                                           | Disable unless using AppLocker policies.            |
-| AppMgmt                       | Manages software deployment via Group Policy.                                                                      | Leave Manual unless using Group Policy.             |
-| AppReadiness                  | Prepares apps for first use.                                                                                       | Disable to improve login times.                     |
-| AppXSvc                       | Supports apps from the Microsoft Store.                                                                            | Disable unless using Store apps.                    |
-| Appinfo                       | Provides app information for software elevation tasks.                                                             | Leave Manual for security purposes.                 |
-| AxInstSV                      | Facilitates ActiveX control installation.                                                                          | Disable unless required by legacy software.         |
-| MessagingService_*            | Handles messaging tasks for apps.                                                                                  | Disable unless required by specific apps.           |
-| MicrosoftEdgeElevationService | Supports privilege elevation for Edge.                                                                             | Disable unless Edge is heavily used.                |
-| PolicyAgent                   | Manages IPsec policies.                                                                                            | Leave Manual unless using IPsec policies.           |
-| PrintNotify                   | Provides notifications for print jobs.                                                                             | Disable unless managing multiple printers.          |
-| RetailDemo                    | Powers retail demo mode.                                                                                           | Disable for non-retail systems.                     |
-| RpcLocator                    | Supports RPC endpoint mapping.                                                                                     | Disable unless troubleshooting remote calls.        |
-| SCPolicySvc                   | Configures smart card policies.                                                                                    | Disable unless using smart cards.                   |
-| StateRepository               | Handles app states and repositories.                                                                               | Disable unless using modern apps.                   |
-| TextInputManagementService    | Manages advanced text input methods.                                                                               | Disable unless required by the user.                |
-| TimeBroker                    | Manages process time synchronization.                                                                              | Leave Manual for system stability.                  |
-| TroubleshootingSvc            | Powers Windows troubleshooting tools.                                                                              | Disable unless troubleshooting.                     |
-| TrustedInstaller              | Handles system updates and installs.                                                                               | Leave Automatic for system stability.               |
-| UI0Detect                     | Detects and interacts with interactive services.                                                                   | Disable unless troubleshooting legacy apps.         |
-| UsoSvc                        | Manages Windows Update services.                                                                                   | Leave Automatic to ensure updates are applied.      |
+| **Service**                   | **Description**                                          | **Recommendation**                             |
+| ----------------------------- | -------------------------------------------------------- | ---------------------------------------------- |
+| AppIDSvc                      | Application Identity service for Group Policy AppLocker. | Disable unless using AppLocker policies.       |
+| AppMgmt                       | Manages software deployment via Group Policy.            | Leave Manual unless using Group Policy.        |
+| AppReadiness                  | Prepares apps for first use.                             | Disable to improve login times.                |
+| AppXSvc                       | Supports apps from the Microsoft Store.                  | Disable unless using Store apps.               |
+| Appinfo                       | Provides app information for software elevation tasks.   | Leave Manual for security purposes.            |
+| AxInstSV                      | Facilitates ActiveX control installation.                | Disable unless required by legacy software.    |
+| MessagingService\_\*          | Handles messaging tasks for apps.                        | Disable unless required by specific apps.      |
+| MicrosoftEdgeElevationService | Supports privilege elevation for Edge.                   | Disable unless Edge is heavily used.           |
+| PolicyAgent                   | Manages IPsec policies.                                  | Leave Manual unless using IPsec policies.      |
+| PrintNotify                   | Provides notifications for print jobs.                   | Disable unless managing multiple printers.     |
+| RetailDemo                    | Powers retail demo mode.                                 | Disable for non-retail systems.                |
+| RpcLocator                    | Supports RPC endpoint mapping.                           | Disable unless troubleshooting remote calls.   |
+| SCPolicySvc                   | Configures smart card policies.                          | Disable unless using smart cards.              |
+| StateRepository               | Handles app states and repositories.                     | Disable unless using modern apps.              |
+| TextInputManagementService    | Manages advanced text input methods.                     | Disable unless required by the user.           |
+| TimeBroker                    | Manages process time synchronization.                    | Leave Manual for system stability.             |
+| TroubleshootingSvc            | Powers Windows troubleshooting tools.                    | Disable unless troubleshooting.                |
+| TrustedInstaller              | Handles system updates and installs.                     | Leave Automatic for system stability.          |
+| UI0Detect                     | Detects and interacts with interactive services.         | Disable unless troubleshooting legacy apps.    |
+| UsoSvc                        | Manages Windows Update services.                         | Leave Automatic to ensure updates are applied. |
 
 #### **Security Services**
 
-| **Service**                  | **Description**                                                                                                    | **Recommendation**                                            |
-|------------------------------|--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|
-| BDESVC                       | BitLocker Drive Encryption Service.                                                                                | Disable unless using BitLocker for drive encryption.          |
-| SecurityHealthService        | Provides notifications about system health and security.                                                           | Leave Automatic to ensure updates and health notifications.   |
-| SCardSvr                     | Manages smart card access.                                                                                         | Disable unless using smart cards.                             |
-| NaturalAuthentication        | Supports advanced biometric authentication.                                                                        | Leave Manual unless using biometrics.                         |
-| NgcCtnrSvc                   | Handles Next Generation Credentials for enhanced security.                                                         | Leave Manual for secure logins.                               |
-| NgcSvc                       | Manages PIN and biometric authentication methods.                                                                  | Leave Manual to ensure login stability.                       |
-| SEMgrSvc                     | Manages secure elements for security purposes.                                                                     | Disable unless using smart cards or secure elements.          |
-| SensrSvc                     | Adjusts desktop brightness using ambient light sensors.                                                            | Disable unless using light sensors.                           |
-| SensorService                | Manages sensor devices like accelerometers.                                                                        | Disable unless required by hardware.                          |
-| SensorDataService            | Collects and processes data from system sensors.                                                                   | Disable unless using sensor-reliant apps.                     |
-| sppsvc                       | Manages activation of Windows and Microsoft products.                                                              | Leave Automatic for activation stability.                     |
-| smphost                      | Hosts system processes for compatibility and management.                                                           | Leave Manual unless troubleshooting.                          |
-| seclogon                     | Enables applications to run as a different user.                                                                   | Leave Manual for flexibility when switching accounts.         |
+| **Service**           | **Description**                                            | **Recommendation**                                          |
+| --------------------- | ---------------------------------------------------------- | ----------------------------------------------------------- |
+| BDESVC                | BitLocker Drive Encryption Service.                        | Disable unless using BitLocker for drive encryption.        |
+| SecurityHealthService | Provides notifications about system health and security.   | Leave Automatic to ensure updates and health notifications. |
+| SCardSvr              | Manages smart card access.                                 | Disable unless using smart cards.                           |
+| NaturalAuthentication | Supports advanced biometric authentication.                | Leave Manual unless using biometrics.                       |
+| NgcCtnrSvc            | Handles Next Generation Credentials for enhanced security. | Leave Manual for secure logins.                             |
+| NgcSvc                | Manages PIN and biometric authentication methods.          | Leave Manual to ensure login stability.                     |
+| SEMgrSvc              | Manages secure elements for security purposes.             | Disable unless using smart cards or secure elements.        |
+| SensrSvc              | Adjusts desktop brightness using ambient light sensors.    | Disable unless using light sensors.                         |
+| SensorService         | Manages sensor devices like accelerometers.                | Disable unless required by hardware.                        |
+| SensorDataService     | Collects and processes data from system sensors.           | Disable unless using sensor-reliant apps.                   |
+| sppsvc                | Manages activation of Windows and Microsoft products.      | Leave Automatic for activation stability.                   |
+| smphost               | Hosts system processes for compatibility and management.   | Leave Manual unless troubleshooting.                        |
+| seclogon              | Enables applications to run as a different user.           | Leave Manual for flexibility when switching accounts.       |
 
 #### **File and Data Services**
 
-| **Service**                  | **Description**                                                                                                     | **Recommendation**                              |
-|------------------------------|---------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
-| CscService                   | Manages offline file synchronization.                                                                               | Disable unless using offline file sync.         |
-| FDResPub                     | Publishes network resources for device discovery.                                                                   | Disable unless required for sharing.            |
-| PimIndexMaintenanceSvc_*     | Maintains data like contacts, calendar, and emails for apps.                                                        | Disable unless using related apps.              |
-| UnistoreSvc_*                | Manages storage for app-related data.                                                                               | Disable unless required by apps.                |
-| UserDataSvc_*                | Handles synchronization of user data for apps.                                                                      | Disable unless using apps that rely on it.      |
-| VSS                          | Volume Shadow Copy Service for creating backups.                                                                    | Leave Manual for backup operations.             |
-| wbengine                     | Provides backup and recovery features.                                                                              | Leave Manual for recovery functionality.        |
-| storSvc                      | Manages storage services and policies for the system.                                                               | Leave Automatic for stable storage performance. |
-| pla                          | Performance Logs and Alerts for monitoring.                                                                         | Disable unless analyzing system performance.    |
+| **Service**                | **Description**                                              | **Recommendation**                              |
+| -------------------------- | ------------------------------------------------------------ | ----------------------------------------------- |
+| CscService                 | Manages offline file synchronization.                        | Disable unless using offline file sync.         |
+| FDResPub                   | Publishes network resources for device discovery.            | Disable unless required for sharing.            |
+| PimIndexMaintenanceSvc\_\* | Maintains data like contacts, calendar, and emails for apps. | Disable unless using related apps.              |
+| UnistoreSvc\_\*            | Manages storage for app-related data.                        | Disable unless required by apps.                |
+| UserDataSvc\_\*            | Handles synchronization of user data for apps.               | Disable unless using apps that rely on it.      |
+| VSS                        | Volume Shadow Copy Service for creating backups.             | Leave Manual for backup operations.             |
+| wbengine                   | Provides backup and recovery features.                       | Leave Manual for recovery functionality.        |
+| storSvc                    | Manages storage services and policies for the system.        | Leave Automatic for stable storage performance. |
+| pla                        | Performance Logs and Alerts for monitoring.                  | Disable unless analyzing system performance.    |
 
 #### **Media and Graphics Services**
 
-| **Service**                  | **Description**                                                                                                    | **Recommendation**                                    |
-|------------------------------|--------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
-| BcastDVRUserService_*        | Supports game recording and streaming features.                                                                    | Disable unless required for game streaming.           |
-| GraphicsPerfSvc              | Optimizes and monitors graphics performance.                                                                       | Disable unless troubleshooting GPU performance.       |
-| MixedRealityOpenXRSvc        | Provides services for Mixed Reality and VR devices.                                                                | Disable unless using VR or AR systems.                |
-| PenService_*                 | Manages stylus and pen input devices.                                                                              | Disable unless using a pen input device.              |
-| PerfHost                     | Hosts performance counters for processes.                                                                          | Disable unless required for diagnostics.              |
-| TabletInputService           | Manages touch and handwriting input devices.                                                                       | Disable unless using touch-enabled devices.           |
-| WMPNetworkSvc                | Windows Media Player sharing service for media libraries.                                                          | Disable unless sharing media over a network.          |
-| WarpJITSvc                   | Provides just-in-time GPU rendering for apps.                                                                      | Disable unless using apps requiring GPU acceleration. |
+| **Service**             | **Description**                                           | **Recommendation**                                    |
+| ----------------------- | --------------------------------------------------------- | ----------------------------------------------------- |
+| BcastDVRUserService\_\* | Supports game recording and streaming features.           | Disable unless required for game streaming.           |
+| GraphicsPerfSvc         | Optimizes and monitors graphics performance.              | Disable unless troubleshooting GPU performance.       |
+| MixedRealityOpenXRSvc   | Provides services for Mixed Reality and VR devices.       | Disable unless using VR or AR systems.                |
+| PenService\_\*          | Manages stylus and pen input devices.                     | Disable unless using a pen input device.              |
+| PerfHost                | Hosts performance counters for processes.                 | Disable unless required for diagnostics.              |
+| TabletInputService      | Manages touch and handwriting input devices.              | Disable unless using touch-enabled devices.           |
+| WMPNetworkSvc           | Windows Media Player sharing service for media libraries. | Disable unless sharing media over a network.          |
+| WarpJITSvc              | Provides just-in-time GPU rendering for apps.             | Disable unless using apps requiring GPU acceleration. |
 
 #### **Diagnostic and Monitoring Services**
 
-| **Service**                              | **Description**                                                                                         | **Recommendation**                                |
-|------------------------------------------|---------------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| WdiServiceHost                           | Hosts diagnostic services for performance and reliability monitoring.                                   | Disable unless troubleshooting system issues.     |
-| WdiSystemHost                            | Manages system diagnostics for troubleshooting.                                                         | Disable unless actively monitoring system issues. |
-| WaaSMedicSvc                             | Windows Update Medic Service, ensures proper functioning of Windows Update.                             | Leave Automatic for system updates.               |
-| WerSvc                                   | Windows Error Reporting, collects crash data for analysis.                                              | Leave enabled unless privacy concerns arise.      |
-| diagsvc                                  | Diagnostic Service Host, manages diagnostic tasks for the system.                                       | Disable unless required for troubleshooting.      |
-| diagnosticshub.standardcollector.service | Collects diagnostic information for applications and the system.                                        | Disable unless debugging or troubleshooting.      |
-| wercplsupport                            | Provides support for error reporting in the Control Panel.                                              | Leave enabled for crash report functionality.     |
-| wlpasvc                                  | Windows Licensing Monitoring service for validating activation and licensing.                           | Leave Manual for licensing validation.            |
+| **Service**                              | **Description**                                                               | **Recommendation**                                |
+| ---------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------- |
+| WdiServiceHost                           | Hosts diagnostic services for performance and reliability monitoring.         | Disable unless troubleshooting system issues.     |
+| WdiSystemHost                            | Manages system diagnostics for troubleshooting.                               | Disable unless actively monitoring system issues. |
+| WaaSMedicSvc                             | Windows Update Medic Service, ensures proper functioning of Windows Update.   | Leave Automatic for system updates.               |
+| WerSvc                                   | Windows Error Reporting, collects crash data for analysis.                    | Leave enabled unless privacy concerns arise.      |
+| diagsvc                                  | Diagnostic Service Host, manages diagnostic tasks for the system.             | Disable unless required for troubleshooting.      |
+| diagnosticshub.standardcollector.service | Collects diagnostic information for applications and the system.              | Disable unless debugging or troubleshooting.      |
+| wercplsupport                            | Provides support for error reporting in the Control Panel.                    | Leave enabled for crash report functionality.     |
+| wlpasvc                                  | Windows Licensing Monitoring service for validating activation and licensing. | Leave Manual for licensing validation.            |
 
 #### **Device and Peripheral Management Services**
 
-| **Service**                  | **Description**                                                                                                    | **Recommendation**                                 |
-|------------------------------|--------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
-| `DeviceAssociationBrokerSvc_*` | Manages connections between the system and external devices.                                                       | Disable unless frequently connecting devices.      |
-| `DeviceAssociationService`     | Provides support for pairing and connecting external devices.                                                      | Disable unless required for peripherals.           |
-| `DeviceInstall`                | Handles driver installation for newly connected devices.                                                           | Leave Automatic for hardware compatibility.        |
-| DevicePickerUserSvc_*        | Provides a user interface for selecting devices.                                                                   | Disable unless regularly selecting peripherals.    |
-| DevicesFlowUserSvc_*         | Manages workflows for connected devices.                                                                           | Disable unless required for specific peripherals.  |
-| `PlugPlay`                     | Detects and manages hardware connections.                                                                          | Leave Automatic to ensure hardware stability.      |
-| PhoneSvc                     | Manages phone device interactions.                                                                                 | Disable unless syncing or managing mobile devices. |
-| WPDBusEnum                   | Handles communication with portable devices like smartphones.                                                      | Disable unless using portable devices.             |
-| WiaRpc                       | Provides support for imaging devices like scanners and cameras.                                                    | Disable unless using such devices.                 |
-| WbioSrvc                     | Manages biometric devices such as fingerprint readers.                                                             | Leave Manual unless using biometric authentication.|
-| MsKeyboardFilter             | Handles tasks related to specialized keyboards.                                                                    | Disable unless using a specialized keyboard.       |
-| camsvc                       | Provides support for webcam services.                                                                              | Disable unless using a webcam.                     |
+| **Service**                    | **Description**                                                 | **Recommendation**                                  |
+| ------------------------------ | --------------------------------------------------------------- | --------------------------------------------------- |
+| `DeviceAssociationBrokerSvc_*` | Manages connections between the system and external devices.    | Disable unless frequently connecting devices.       |
+| `DeviceAssociationService`     | Provides support for pairing and connecting external devices.   | Disable unless required for peripherals.            |
+| `DeviceInstall`                | Handles driver installation for newly connected devices.        | Leave Automatic for hardware compatibility.         |
+| DevicePickerUserSvc\_\*        | Provides a user interface for selecting devices.                | Disable unless regularly selecting peripherals.     |
+| DevicesFlowUserSvc\_\*         | Manages workflows for connected devices.                        | Disable unless required for specific peripherals.   |
+| `PlugPlay`                     | Detects and manages hardware connections.                       | Leave Automatic to ensure hardware stability.       |
+| PhoneSvc                       | Manages phone device interactions.                              | Disable unless syncing or managing mobile devices.  |
+| WPDBusEnum                     | Handles communication with portable devices like smartphones.   | Disable unless using portable devices.              |
+| WiaRpc                         | Provides support for imaging devices like scanners and cameras. | Disable unless using such devices.                  |
+| WbioSrvc                       | Manages biometric devices such as fingerprint readers.          | Leave Manual unless using biometric authentication. |
+| MsKeyboardFilter               | Handles tasks related to specialized keyboards.                 | Disable unless using a specialized keyboard.        |
+| camsvc                         | Provides support for webcam services.                           | Disable unless using a webcam.                      |
 
 #### **Miscellaneous Services**
 
-| **Service**                  | **Description**                                                                                                     | **Recommendation**                     |
-|------------------------------|---------------------------------------------------------------------------------------------------------------------|----------------------------------------|
-| ClipSVC                      | Supports Microsoft Store infrastructure for app updates and licensing.                                             | Disable if not using Store apps.       |
-| ConsentUxUserSvc_*           | Manages consent and UAC prompts for apps.                                                                          | Leave Manual for app functionality.    |
-| AppReadiness                 | Prepares apps for first-time use.                                                                                   | Disable unless using Store apps.       |
-| Autotimesvc                  | Synchronizes time automatically.                                                                                   | Leave Automatic for time accuracy.     |
-| BITS                         | Background Intelligent Transfer Service, manages background downloads like updates.                                 | Leave Automatic for updates.           |
-| BTAGService                  | Provides Bluetooth audio gateway support.                                                                          | Disable unless using Bluetooth audio devices. |
-| Browser                      | Maintains a list of network computers for legacy domains.                                                          | Disable unless on legacy networks.     |
-| CDPSvc                       | Handles Connected Devices Platform services.                                                                       | Disable unless using connected devices.|
-| CDPUserSvc_*                 | Supports connected device experiences.                                                                             | Disable unless using devices like smartphones. |
-| COMSysApp                    | Manages COM+ applications.                                                                                         | Leave Manual for system functionality. |
-| CaptureService_*             | Provides screen and audio capture for apps.                                                                        | Disable unless required by apps.       |
-| CertPropSvc                  | Manages certificate propagation for smart cards.                                                                   | Disable unless using smart cards.      |
-| DcpSvc                       | Data Collection and Publishing service for telemetry.                                                              | Disable for privacy concerns.          |
-| DevQueryBroker               | Queries device metadata and pairing information.                                                                   | Disable unless managing devices.       |
-| HomeGroupListener            | Enables HomeGroup connections for sharing files and printers.                                                      | Disable unless using HomeGroups.       |
-| HomeGroupProvider            | Provides support for creating and managing HomeGroups.                                                             | Disable unless using HomeGroups.       |
-| HvHost                       | Hypervisor service for virtualized environments.                                                                   | Leave Manual unless using Hyper-V.     |
-| IEEtwCollectorService        | Collects Internet Explorer diagnostics.                                                                            | Disable unless troubleshooting IE.     |
-| IKEEXT                       | Manages IPsec key exchange and security associations.                                                              | Leave Manual unless using IPsec.       |
-| InstallService               | Supports installation operations for Windows updates.                                                              | Leave Automatic for update stability.  |
-| InventorySvc                 | Collects inventory for diagnostic purposes.                                                                        | Disable for privacy concerns.          |
-| IpxlatCfgSvc                 | Configures IP Translation for IPv6.                                                                                | Disable unless required.               |
-| LicenseManager               | Manages licensing for Microsoft products.                                                                          | Leave Automatic for licensing stability.|
-| LxpSvc                       | Language Experience Service, enables additional language features.                                                 | Disable unless using additional languages. |
-| MSDTC                        | Distributed Transaction Coordinator, supports transactions across resources.                                        | Disable unless using distributed apps. |
-| MSiSCSI                      | Manages iSCSI sessions for network storage.                                                                        | Disable unless using iSCSI storage.    |
-| MapsBroker                   | Supports map and location services.                                                                                | Disable unless using map apps.         |
-| McpManagementService         | Manages mobile device configuration.                                                                               | Disable unless managing mobile devices.|
-| NcaSvc                       | Handles notifications for Universal Windows Platform apps.                                                         | Disable unless using UWP apps.         |
-| NcbService                   | Manages notifications for Cortana and other apps.                                                                  | Disable unless using notifications.    |
-| NcdAutoSetup                 | Enables automatic setup of network-connected devices.                                                              | Disable unless frequently adding devices.|
-| PcaSvc                       | Program Compatibility Assistant, helps run older apps.                                                             | Disable unless troubleshooting old software. |
-| PrintNotify                  | Manages notifications for print jobs.                                                                              | Disable unless managing multiple printers. |
-| PrintWorkflowUserSvc_*       | Provides workflows for advanced printing tasks.                                                                    | Disable unless required by printers.   |
-| PushToInstall                | Installs apps pushed from other devices.                                                                           | Disable unless using this feature.     |
-| RpcLocator                   | Supports RPC endpoint mapping for remote communications.                                                           | Disable unless troubleshooting.        |
-| SCPolicySvc                  | Manages smart card policies.                                                                                       | Disable unless using smart cards.      |
-| SDRSVC                       | Manages recovery tasks for system disasters.                                                                       | Leave Manual for recovery functionality.|
-| SensrSvc                     | Adjusts brightness based on ambient light sensors.                                                                 | Disable unless using light sensors.    |
-| StiSvc                       | Provides support for still image devices like scanners.                                                            | Disable unless using imaging devices.  |
-| TapiSrv                      | Manages Telephony API for legacy apps.                                                                             | Disable unless using TAPI apps.        |
-| TieringEngineService         | Manages storage tier optimization.                                                                                 | Leave Automatic for storage performance.|
-| WManSvc                      | Wireless LAN configuration service.                                                                                | Leave Automatic for wireless stability.|
-| WalletService                | Manages wallet and payment features for apps.                                                                      | Disable unless using wallet apps.      |
-| WebClient                    | Enables WebDAV connections for accessing remote files.                                                             | Disable unless required by apps.       |
-| Wecsvc                       | Collects events from remote computers.                                                                             | Disable unless using event logging.    |
-| WpcMonSvc                    | Monitors Windows Parental Controls.                                                                                | Disable unless using parental controls.|
-| WpnService                   | Manages push notifications for apps.                                                                               | Disable unless using notifications.    |
-| `XblAuthManager`               | Manages Xbox Live authentication.                                                                                  | Disable unless using Xbox Live.        |
-| `XblGameSave`                  | Handles game saves for Xbox-enabled apps.                                                                          | Disable unless using Xbox features.    |
-| `XboxGipSvc`                   | Supports Xbox game input.                                                                                          | Disable unless using Xbox controllers. |
-| `XboxNetApiSvc`                | Manages Xbox networking for multiplayer gaming.                                                                    | Disable unless using Xbox features.    |
-| bthserv                      | Bluetooth Support Service, manages Bluetooth devices.                                                              | Disable unless using Bluetooth.        |
-| cbdhsvc_*                    | Clipboard service for cloud synchronization of clipboard content.                                                  | Disable unless using clipboard sync.   |
-| cloudidsvc                   | Manages Microsoft account sign-ins.                                                                                | Leave Automatic for account functionality. |
-| dcsvc                        | Device Setup Manager, enables device configuration.                                                                | Leave Automatic for device stability.  |
-| defragsvc                    | Disk Defragmenter service, manages drive optimization.                                                             | Leave Manual for disk performance.     |
-| dot3svc                      | Wired AutoConfig, manages wired network connections.                                                               | Disable unless using wired 802.1X authentication. |
-| edgeupdate                   | Updates Microsoft Edge browser.                                                                                    | Leave Automatic to keep Edge updated.  |
-| edgeupdatem                  | Auxiliary service for Edge updates.                                                                                | Leave Automatic to support Edge.       |
-| embeddedmode                 | Provides support for embedded systems.                                                                             | Disable unless using embedded mode.    |
-| fhsvc                        | File History service, manages backups of user files.                                                              | Disable unless using File History.     |
-| hidserv                      | Human Interface Device Service, manages keyboards, mice, and other devices.                                        | Leave Automatic for input device stability. |
-| icssvc                       | Internet Connection Sharing service.                                                                               | Disable unless using ICS.              |
-| lfsvc                        | Location Framework service, provides geolocation data.                                                             | Disable unless using location-based apps. |
-| lltdsvc                      | Link Layer Topology Discovery, helps discover network devices.                                                     | Disable unless required for network mapping. |
-| lmhosts                      | Manages legacy NetBIOS names.                                                                                      | Disable unless using NetBIOS.          |
-| `msiserver`                    | Windows Installer service, manages installations.                                                                  | Leave Manual for installation support. |
-| perceptionsimulation         | Manages virtual reality or simulation input.                                                                       | Disable unless using VR apps.          |
-| spectrum                     | Manages spectrum analysis for wireless devices.                                                                    | Disable unless troubleshooting Wi-Fi.  |
-| svsvc                        | Spot Verifier, checks file system integrity.                                                                       | Leave Manual for file system health.   |
-| swprv                        | Software Shadow Copy Provider, supports backups.                                                                   | Leave Manual for backup functionality. |
-| `vds`                          | Virtual Disk Service, manages disk volumes.                                                                       | Leave Manual for advanced storage configurations. |
-| vm3dservice                  | VMware 3D service, supports virtual machine graphics.                                                              | Leave Automatic if using VMware.       |
-| vmicguestinterface           | Provides interface for guest-to-host communication in Hyper-V.                                                     | Leave Automatic for Hyper-V stability. |
-| vmicheartbeat                | Monitors heartbeat between guest and host in virtual environments.                                                 | Leave Automatic for virtual environments. |
-| vmickvpexchange              | Facilitates data exchange between guest and host in Hyper-V.                                                       | Leave Automatic for Hyper-V stability. |
-| `vmicrdv`                      | Manages Remote Desktop Virtualization Host.                                                                       | Leave Manual unless using RDP in Hyper-V. |
-| `vmicshutdown`                 | Handles shutdown requests from host to guest in Hyper-V.                                                          | Leave Automatic for Hyper-V environments. |
-| `vmictimesync`                 | Synchronizes guest time with host in Hyper-V.                                                                     | Leave Automatic for Hyper-V stability. |
-| `vmicvmsession`                | Manages virtual session state in Hyper-V.                                                                         | Leave Automatic for Hyper-V stability. |
-| `vmicvss`                      | Manages Volume Shadow Copy service for virtual machines.                                                          | Leave Automatic for backups in Hyper-V. |
-| webthreatdefsvc              | Web Threat Defender, provides advanced security.                                                                  | Disable unless required by security tools. |
-| wisvc                        | Windows Image Acquisition, supports imaging devices like scanners.                                                | Disable unless using imaging devices.  |
-| wlidsvc                      | Windows Live ID Sign-in Assistant, enables sign-ins to Microsoft accounts.                                         | Leave Automatic for account functionality. |
-| wmiApSrv                     | WMI Performance Adapter, provides performance counters to WMI clients.                                            | Leave Manual for performance monitoring. |
-| workfolderssvc               | Enables syncing of files for Work Folders.                                                                        | Disable unless using Work Folders.     |
-| wudfsvc                      | Windows Driver Foundation, supports user-mode drivers.                                                            | Leave Automatic for driver stability.  |
-| SmsRouter                    | Routes SMS for apps and devices.                                                                                   | Disable unless using SMS features.     |
-| FrameServer                  | Provides video input stream for processing.                                                                       | Disable unless required by apps.       |
-| FrameServerMonitor           | Monitors frame server activities.                                                                                  | Disable unless required.               |
-| DoSvc                        | Delivery Optimization, manages P2P updates for Windows Update.                                                    | Disable for privacy concerns.          |
-| DsSvc                        | Data Sharing Service, manages data sharing between apps.                                                          | Disable unless required.               |
-| DsmSvc                       | Device Setup Manager, handles new device setup.                                                                   | Leave Automatic for hardware compatibility. |
-| EFS                          | Encrypting File System, manages encrypted files.                                                                  | Disable unless using EFS.              |
-| EapHost                      | Manages EAP authentication for network connections.                                                               | Leave Automatic unless using advanced authentication. |
-| EntAppSvc                    | Enterprise App Management Service, supports enterprise app deployment.                                                          | Disable unless using enterprise apps.   |
-| Fax                          | Manages fax operations for connected devices.                                                                                   | Disable unless using fax machines.      |
-| PhoneSvc                     | Provides phone services for calls and messaging.                                                                                | Disable unless using phone integration. |
-| PolicyAgent                  | Manages IPsec policies and security associations.                                                                               | Leave Manual unless using IPsec.        |
-| TextInputManagementService   | Manages advanced text input devices and IMEs.                                                                     | Disable unless using specialized input.|
-| Autotimesvc                  | Synchronizes system time automatically.                                                                           | Leave Automatic for time accuracy.     |
-| wuauserv                     | Manages Windows Update downloads and installations.                                                               | Leave Automatic for system updates.    |
+| **Service**                | **Description**                                                                     | **Recommendation**                                    |
+| -------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| ClipSVC                    | Supports Microsoft Store infrastructure for app updates and licensing.              | Disable if not using Store apps.                      |
+| ConsentUxUserSvc\_\*       | Manages consent and UAC prompts for apps.                                           | Leave Manual for app functionality.                   |
+| AppReadiness               | Prepares apps for first-time use.                                                   | Disable unless using Store apps.                      |
+| Autotimesvc                | Synchronizes time automatically.                                                    | Leave Automatic for time accuracy.                    |
+| BITS                       | Background Intelligent Transfer Service, manages background downloads like updates. | Leave Automatic for updates.                          |
+| BTAGService                | Provides Bluetooth audio gateway support.                                           | Disable unless using Bluetooth audio devices.         |
+| Browser                    | Maintains a list of network computers for legacy domains.                           | Disable unless on legacy networks.                    |
+| CDPSvc                     | Handles Connected Devices Platform services.                                        | Disable unless using connected devices.               |
+| CDPUserSvc\_\*             | Supports connected device experiences.                                              | Disable unless using devices like smartphones.        |
+| COMSysApp                  | Manages COM+ applications.                                                          | Leave Manual for system functionality.                |
+| CaptureService\_\*         | Provides screen and audio capture for apps.                                         | Disable unless required by apps.                      |
+| CertPropSvc                | Manages certificate propagation for smart cards.                                    | Disable unless using smart cards.                     |
+| DcpSvc                     | Data Collection and Publishing service for telemetry.                               | Disable for privacy concerns.                         |
+| DevQueryBroker             | Queries device metadata and pairing information.                                    | Disable unless managing devices.                      |
+| HomeGroupListener          | Enables HomeGroup connections for sharing files and printers.                       | Disable unless using HomeGroups.                      |
+| HomeGroupProvider          | Provides support for creating and managing HomeGroups.                              | Disable unless using HomeGroups.                      |
+| HvHost                     | Hypervisor service for virtualized environments.                                    | Leave Manual unless using Hyper-V.                    |
+| IEEtwCollectorService      | Collects Internet Explorer diagnostics.                                             | Disable unless troubleshooting IE.                    |
+| IKEEXT                     | Manages IPsec key exchange and security associations.                               | Leave Manual unless using IPsec.                      |
+| InstallService             | Supports installation operations for Windows updates.                               | Leave Automatic for update stability.                 |
+| InventorySvc               | Collects inventory for diagnostic purposes.                                         | Disable for privacy concerns.                         |
+| IpxlatCfgSvc               | Configures IP Translation for IPv6.                                                 | Disable unless required.                              |
+| LicenseManager             | Manages licensing for Microsoft products.                                           | Leave Automatic for licensing stability.              |
+| LxpSvc                     | Language Experience Service, enables additional language features.                  | Disable unless using additional languages.            |
+| MSDTC                      | Distributed Transaction Coordinator, supports transactions across resources.        | Disable unless using distributed apps.                |
+| MSiSCSI                    | Manages iSCSI sessions for network storage.                                         | Disable unless using iSCSI storage.                   |
+| MapsBroker                 | Supports map and location services.                                                 | Disable unless using map apps.                        |
+| McpManagementService       | Manages mobile device configuration.                                                | Disable unless managing mobile devices.               |
+| NcaSvc                     | Handles notifications for Universal Windows Platform apps.                          | Disable unless using UWP apps.                        |
+| NcbService                 | Manages notifications for Cortana and other apps.                                   | Disable unless using notifications.                   |
+| NcdAutoSetup               | Enables automatic setup of network-connected devices.                               | Disable unless frequently adding devices.             |
+| PcaSvc                     | Program Compatibility Assistant, helps run older apps.                              | Disable unless troubleshooting old software.          |
+| PrintNotify                | Manages notifications for print jobs.                                               | Disable unless managing multiple printers.            |
+| PrintWorkflowUserSvc\_\*   | Provides workflows for advanced printing tasks.                                     | Disable unless required by printers.                  |
+| PushToInstall              | Installs apps pushed from other devices.                                            | Disable unless using this feature.                    |
+| RpcLocator                 | Supports RPC endpoint mapping for remote communications.                            | Disable unless troubleshooting.                       |
+| SCPolicySvc                | Manages smart card policies.                                                        | Disable unless using smart cards.                     |
+| SDRSVC                     | Manages recovery tasks for system disasters.                                        | Leave Manual for recovery functionality.              |
+| SensrSvc                   | Adjusts brightness based on ambient light sensors.                                  | Disable unless using light sensors.                   |
+| StiSvc                     | Provides support for still image devices like scanners.                             | Disable unless using imaging devices.                 |
+| TapiSrv                    | Manages Telephony API for legacy apps.                                              | Disable unless using TAPI apps.                       |
+| TieringEngineService       | Manages storage tier optimization.                                                  | Leave Automatic for storage performance.              |
+| WManSvc                    | Wireless LAN configuration service.                                                 | Leave Automatic for wireless stability.               |
+| WalletService              | Manages wallet and payment features for apps.                                       | Disable unless using wallet apps.                     |
+| WebClient                  | Enables WebDAV connections for accessing remote files.                              | Disable unless required by apps.                      |
+| Wecsvc                     | Collects events from remote computers.                                              | Disable unless using event logging.                   |
+| WpcMonSvc                  | Monitors Windows Parental Controls.                                                 | Disable unless using parental controls.               |
+| WpnService                 | Manages push notifications for apps.                                                | Disable unless using notifications.                   |
+| `XblAuthManager`           | Manages Xbox Live authentication.                                                   | Disable unless using Xbox Live.                       |
+| `XblGameSave`              | Handles game saves for Xbox-enabled apps.                                           | Disable unless using Xbox features.                   |
+| `XboxGipSvc`               | Supports Xbox game input.                                                           | Disable unless using Xbox controllers.                |
+| `XboxNetApiSvc`            | Manages Xbox networking for multiplayer gaming.                                     | Disable unless using Xbox features.                   |
+| bthserv                    | Bluetooth Support Service, manages Bluetooth devices.                               | Disable unless using Bluetooth.                       |
+| cbdhsvc\_\*                | Clipboard service for cloud synchronization of clipboard content.                   | Disable unless using clipboard sync.                  |
+| cloudidsvc                 | Manages Microsoft account sign-ins.                                                 | Leave Automatic for account functionality.            |
+| dcsvc                      | Device Setup Manager, enables device configuration.                                 | Leave Automatic for device stability.                 |
+| defragsvc                  | Disk Defragmenter service, manages drive optimization.                              | Leave Manual for disk performance.                    |
+| dot3svc                    | Wired AutoConfig, manages wired network connections.                                | Disable unless using wired 802.1X authentication.     |
+| edgeupdate                 | Updates Microsoft Edge browser.                                                     | Leave Automatic to keep Edge updated.                 |
+| edgeupdatem                | Auxiliary service for Edge updates.                                                 | Leave Automatic to support Edge.                      |
+| embeddedmode               | Provides support for embedded systems.                                              | Disable unless using embedded mode.                   |
+| fhsvc                      | File History service, manages backups of user files.                                | Disable unless using File History.                    |
+| hidserv                    | Human Interface Device Service, manages keyboards, mice, and other devices.         | Leave Automatic for input device stability.           |
+| icssvc                     | Internet Connection Sharing service.                                                | Disable unless using ICS.                             |
+| lfsvc                      | Location Framework service, provides geolocation data.                              | Disable unless using location-based apps.             |
+| lltdsvc                    | Link Layer Topology Discovery, helps discover network devices.                      | Disable unless required for network mapping.          |
+| lmhosts                    | Manages legacy NetBIOS names.                                                       | Disable unless using NetBIOS.                         |
+| `msiserver`                | Windows Installer service, manages installations.                                   | Leave Manual for installation support.                |
+| perceptionsimulation       | Manages virtual reality or simulation input.                                        | Disable unless using VR apps.                         |
+| spectrum                   | Manages spectrum analysis for wireless devices.                                     | Disable unless troubleshooting Wi-Fi.                 |
+| svsvc                      | Spot Verifier, checks file system integrity.                                        | Leave Manual for file system health.                  |
+| swprv                      | Software Shadow Copy Provider, supports backups.                                    | Leave Manual for backup functionality.                |
+| `vds`                      | Virtual Disk Service, manages disk volumes.                                         | Leave Manual for advanced storage configurations.     |
+| vm3dservice                | VMware 3D service, supports virtual machine graphics.                               | Leave Automatic if using VMware.                      |
+| vmicguestinterface         | Provides interface for guest-to-host communication in Hyper-V.                      | Leave Automatic for Hyper-V stability.                |
+| vmicheartbeat              | Monitors heartbeat between guest and host in virtual environments.                  | Leave Automatic for virtual environments.             |
+| vmickvpexchange            | Facilitates data exchange between guest and host in Hyper-V.                        | Leave Automatic for Hyper-V stability.                |
+| `vmicrdv`                  | Manages Remote Desktop Virtualization Host.                                         | Leave Manual unless using RDP in Hyper-V.             |
+| `vmicshutdown`             | Handles shutdown requests from host to guest in Hyper-V.                            | Leave Automatic for Hyper-V environments.             |
+| `vmictimesync`             | Synchronizes guest time with host in Hyper-V.                                       | Leave Automatic for Hyper-V stability.                |
+| `vmicvmsession`            | Manages virtual session state in Hyper-V.                                           | Leave Automatic for Hyper-V stability.                |
+| `vmicvss`                  | Manages Volume Shadow Copy service for virtual machines.                            | Leave Automatic for backups in Hyper-V.               |
+| webthreatdefsvc            | Web Threat Defender, provides advanced security.                                    | Disable unless required by security tools.            |
+| wisvc                      | Windows Image Acquisition, supports imaging devices like scanners.                  | Disable unless using imaging devices.                 |
+| wlidsvc                    | Windows Live ID Sign-in Assistant, enables sign-ins to Microsoft accounts.          | Leave Automatic for account functionality.            |
+| wmiApSrv                   | WMI Performance Adapter, provides performance counters to WMI clients.              | Leave Manual for performance monitoring.              |
+| workfolderssvc             | Enables syncing of files for Work Folders.                                          | Disable unless using Work Folders.                    |
+| wudfsvc                    | Windows Driver Foundation, supports user-mode drivers.                              | Leave Automatic for driver stability.                 |
+| SmsRouter                  | Routes SMS for apps and devices.                                                    | Disable unless using SMS features.                    |
+| FrameServer                | Provides video input stream for processing.                                         | Disable unless required by apps.                      |
+| FrameServerMonitor         | Monitors frame server activities.                                                   | Disable unless required.                              |
+| DoSvc                      | Delivery Optimization, manages P2P updates for Windows Update.                      | Disable for privacy concerns.                         |
+| DsSvc                      | Data Sharing Service, manages data sharing between apps.                            | Disable unless required.                              |
+| DsmSvc                     | Device Setup Manager, handles new device setup.                                     | Leave Automatic for hardware compatibility.           |
+| EFS                        | Encrypting File System, manages encrypted files.                                    | Disable unless using EFS.                             |
+| EapHost                    | Manages EAP authentication for network connections.                                 | Leave Automatic unless using advanced authentication. |
+| EntAppSvc                  | Enterprise App Management Service, supports enterprise app deployment.              | Disable unless using enterprise apps.                 |
+| Fax                        | Manages fax operations for connected devices.                                       | Disable unless using fax machines.                    |
+| PhoneSvc                   | Provides phone services for calls and messaging.                                    | Disable unless using phone integration.               |
+| PolicyAgent                | Manages IPsec policies and security associations.                                   | Leave Manual unless using IPsec.                      |
+| TextInputManagementService | Manages advanced text input devices and IMEs.                                       | Disable unless using specialized input.               |
+| Autotimesvc                | Synchronizes system time automatically.                                             | Leave Automatic for time accuracy.                    |
+| wuauserv                   | Manages Windows Update downloads and installations.                                 | Leave Automatic for system updates.                   |
+
 ::
 
 ```powershell
@@ -1180,9 +1220,11 @@ Start-Service -Name MixedRealityOpenXRSvc
 ### **3. Disables Unnecessary Services**
 
 1. **Disables Unnecessary Services**
+
    - Identifies and disables services that are rarely needed or can impact performance negatively. Set the services in the disabledServices list to Disabled
 
    **Implementation:**
+
    ```powershell
    foreach ($service in $disabledServices) {
        try {
@@ -1195,9 +1237,11 @@ Start-Service -Name MixedRealityOpenXRSvc
    ```
 
 2. **Sets Services to Manual Startup**
+
    - Configures non-critical services to start only when needed, reducing system resource usage during boot. Set the services in the manualServices list to Manual
 
    **Implementation:**
+
    ```powershell
    foreach ($service in $manualServices) {
        try {
@@ -1212,6 +1256,7 @@ Start-Service -Name MixedRealityOpenXRSvc
 ## Powerplan
 
 This script applies an **aggressive performance-optimization strategy** to Windows power settings, ensuring:
+
 1. **Maximum Performance**:
    - Enables the Ultimate Performance power plan.
    - Prevents power-saving features like throttling or disk/USB suspensions.
@@ -1222,6 +1267,7 @@ This script applies an **aggressive performance-optimization strategy** to Windo
    - Allows for extended hardware configurations like USB and PCI Express settings.
 
 **When to Use It**
+
 - Ideal for gaming PCs, high-performance workstations, or virtual machines requiring consistent high performance.
 - Avoid on laptops or battery-powered devices, as these settings will reduce battery life.
 
@@ -1262,18 +1308,23 @@ This script applies an **aggressive performance-optimization strategy** to Windo
 ```
 
 ### **1. Clears the Console**
+
 ```powershell
 Clear-Host
 ```
+
 - Clears the PowerShell console for better readability before running the rest of the function.
 
 ### **2. Configures the "Ultimate Performance" Power Plan**
+
 ```powershell
 cmd /c "powercfg /duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 99999999-9999-9999-9999-999999999999 >nul 2>&1 & powercfg /SETACTIVE 99999999-9999-9999-9999-999999999999 >nul 2>&1"
 ```
+
 - Creates a duplicate of the **Ultimate Performance** power plan (GUID: `e9a42b02-d5df-448d-aa00-03f14749eb61`) with a new GUID (`99999999-9999-9999-9999-999999999999`) and sets it as the active power plan.
 
 ### **3. Deletes All Other Power Plans**
+
 ```powershell
 powercfg /L | ForEach-Object {
     if ($_ -match "^\s*Power Scheme GUID: (\S+)") {
@@ -1284,10 +1335,12 @@ powercfg /L | ForEach-Object {
     }
 }
 ```
+
 - Lists all power plans using `powercfg /L`.
 - Deletes any power plan whose GUID is not the one created in the previous step.
 
 ### **4. Registry Modifications**
+
 ```powershell
 # Registry modifications
 $regChanges = @(
@@ -1309,6 +1362,7 @@ foreach ($reg in $regChanges) {
 cmd /c "powercfg /h off >nul 2>&1"
 
 ```
+
 - Modifies several registry settings for system power management:
   - **Disables hibernation** by setting `HibernateEnabled` and `HibernateEnabledDefault` to `0`.
   - **Hides "Lock" and "Sleep" options** in the power menu by modifying `FlyoutMenuSettings`.
@@ -1317,6 +1371,7 @@ cmd /c "powercfg /h off >nul 2>&1"
   - **Unhides USB power settings** like "Selective Suspend Timeout."
 
 ### **5. Modifies Specific Advanced Power Plan Settings**
+
 ```powershell
  # Modify Advcaned Power Plan settings
 $settings = @(
@@ -1365,6 +1420,7 @@ foreach ($group in $settings) {
     }
 }
 ```
+
 - Modifies specific settings within the active power plan:
   - **Hard Disk**: Prevents the disk from turning off during inactivity.
   - **Wireless Adapter**: Ensures wireless adapter remains in high-performance mode.
@@ -1374,6 +1430,7 @@ foreach ($group in $settings) {
   - **Display**: Prevents the display from turning off.
 
 ### **6. Displays Success Message**
+
 ```powershell
 if (-not $isSpecializePhase) {
     Show-Header
@@ -1382,25 +1439,26 @@ if (-not $isSpecializePhase) {
     return
 }
 ```
+
 - If the function is not running during the "specialize" phase of Windows setup, it:
   - Displays a header and success message.
   - Waits if needed for additional steps.
 
 #### Changes
 
-| **Setting**                           | **Ideal Value**       | **Reason**                                                                 |
-|---------------------------------------|-----------------------|----------------------------------------------------------------------------|
-| CPU Core Parking                      | 0 (Unparked)          | Ensures all cores are always active for maximum performance.               |
-| Sleep                                 | Disable               | Keeps the system fully operational and avoids unexpected sleep states.     |
-| Hibernate                             | Disable               | Avoids latency when waking up and eliminates the hibernation file.         |
-| Fast Startup                          | Disable               | Ensures full system initialization for compatibility, updates, and troubleshooting. |
-| Hard Disk Timeout                     | Never                 | Prevents hard disks from turning off, ensuring better system responsiveness. |
-| Slide Show                            | Available             | Allows slide shows in the desktop background, useful for personalization.  |
-| Wireless Adapter Power Saving         | Maximum Performance   | Maintains high-speed network connectivity at the cost of slightly more power. |
-| Allow Wake Timers                     | Disable               | Prevents unexpected wake-ups due to scheduled tasks or timers.             |
-| USB Hub Selective Suspend Timeout     | Disabled              | Ensures USB devices stay active and responsive.                            |
-| USB 3 Link Power Management           | Off                   | Ensures USB 3.0 devices stay active for maximum performance.               |
-| USB Selective Suspend                 | Disable               | Prevents device interruptions and maintains connectivity.                  |
-| PCI Express Link State Power Management | Off                  | Prevents latency caused by PCI power-saving features, ensuring responsiveness. |
-| Processor Power Management (Min/Max) | 100%                  | Ensures maximum performance by keeping all CPU cores active and avoiding throttling. |
-| Display Timeout                       | Never                 | Keeps the screen on to avoid interruptions during active sessions.         |
+| **Setting**                             | **Ideal Value**     | **Reason**                                                                           |
+| --------------------------------------- | ------------------- | ------------------------------------------------------------------------------------ |
+| CPU Core Parking                        | 0 (Unparked)        | Ensures all cores are always active for maximum performance.                         |
+| Sleep                                   | Disable             | Keeps the system fully operational and avoids unexpected sleep states.               |
+| Hibernate                               | Disable             | Avoids latency when waking up and eliminates the hibernation file.                   |
+| Fast Startup                            | Disable             | Ensures full system initialization for compatibility, updates, and troubleshooting.  |
+| Hard Disk Timeout                       | Never               | Prevents hard disks from turning off, ensuring better system responsiveness.         |
+| Slide Show                              | Available           | Allows slide shows in the desktop background, useful for personalization.            |
+| Wireless Adapter Power Saving           | Maximum Performance | Maintains high-speed network connectivity at the cost of slightly more power.        |
+| Allow Wake Timers                       | Disable             | Prevents unexpected wake-ups due to scheduled tasks or timers.                       |
+| USB Hub Selective Suspend Timeout       | Disabled            | Ensures USB devices stay active and responsive.                                      |
+| USB 3 Link Power Management             | Off                 | Ensures USB 3.0 devices stay active for maximum performance.                         |
+| USB Selective Suspend                   | Disable             | Prevents device interruptions and maintains connectivity.                            |
+| PCI Express Link State Power Management | Off                 | Prevents latency caused by PCI power-saving features, ensuring responsiveness.       |
+| Processor Power Management (Min/Max)    | 100%                | Ensures maximum performance by keeping all CPU cores active and avoiding throttling. |
+| Display Timeout                         | Never               | Keeps the screen on to avoid interruptions during active sessions.                   |
