@@ -2,7 +2,7 @@
 
 ## Linting
 
-- [ ] fix the tailwind css linting conflict. .css files gets linted but tailwind or the css in .vue does not. We need to manually do that with prettier now
+- [ ] fix the tailwind css linting conflict. .css files gets linted but tailwind or the css in .vue does not. We need to manually do that with prettier no, fix it in a way trough antfu eslint repo, instead of building your own prettier file again -https://www.youtube.com/watch?v=jlZzzpE-D0s
 
 ## Bug
 
@@ -80,15 +80,21 @@
 
 ## When finished
 
-- [ ] create auto lessen website combi van theorie toppers mikey en altijdgeslaagd
+- [ ] AUTORIJLESSENS SITE: website combi van theorie toppers mikey en altijdgeslaagd
 - [ ] create baby webshop
-- [ ] continue own website
-- [ ] create ai automation website for AI solutions like (lead automation and such)[like theaiclubhouse on IG]
-- [ ] site idee: blockchain referendum waarin je met een niek account kan temmen op iddeen die wortden doorgevoerd. referendum
-
-- [ ] create cube site -> questionable
+- [ ] WEBDDESIGN/DEV
+- [ ] SECURITY SITE
+- [ ] VERHUISLIFT
+- [ ] MIKEYrojas: continue own website
+- [ ] AIHOUSE: create ai automation website for AI solutions like (lead automation and such)[like theaiclubhouse on IG]
+- [ ] STEM SITE: blockchain referendum waarin je met een niek account kan temmen op iddeen die wortden doorgevoerd. referendum
+- [ ] 3D ARENA GAME
+- [ ] COMMENT EXTENTIONS FOR BROWNSER LIKE POCKET
+- [ ] VSCODE EXTENSION FOR DOCS
+- [ ] OPEN SOURCE CONTRIBUTOR: eslint/markdown add MarkdownAllInOne Rules
 
 - [ ] https://learn.microsoft.com/en-us/azure/architecture/solution-ideas/articles/azure-security-build-first-layer-defense zoom in on image like this website
+- [ ] create cube site -> questionable
 
 ## Finito
 

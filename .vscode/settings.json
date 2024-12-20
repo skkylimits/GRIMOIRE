@@ -146,6 +146,14 @@
 		}
 	],
 
+	// ========== TailwindCSS ==========
+	"files.associations": {
+		"*.css": "tailwindcss"
+	},
+	"editor.quickSuggestions": {
+		"strings": false // Enable quick suggestions specifically for strings
+	},
+
 	// ========== Extension configs ==========
 	"emmet.showSuggestionsAsSnippets": true,
 	"emmet.triggerExpansionOnTab": false,
@@ -213,6 +221,7 @@
 	// "i18n-ally.autoDetection": false,
 	// "i18n-ally.displayLanguage": "en",
 	// "i18n-ally.ignoredLocales": [],
+
 	"iconify.annotations": true,
 	"iconify.inplace": true,
 	"svg.preview.mode": "svg",
