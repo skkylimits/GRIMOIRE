@@ -22,7 +22,7 @@ hero:
       to: https://github.com/skkylimits/Nameless
       target: _blank
   code: |
-    ```bash [Terminal]
+    ```shell [Terminal]
     sudo rm -rf / --no-preserve-root --simulate
     ```
 features:

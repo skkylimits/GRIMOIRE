@@ -11,7 +11,7 @@ sudo apt update && sudo apt upgrade
 > [!CAUTION]
 > Back up your own settings if necessary before running this command.
 
-```bash
+```shell
 curl -o ~/.bashrc https://raw.githubusercontent.com/skkylimits/.bashrc/main/.bashrc && curl -o ~/.bash_aliases https://raw.githubusercontent.com/skkylimits/.bashrc/main/.bash_aliases && curl -o ~/.bash_logout https://raw.githubusercontent.com/skkylimits/.bashrc/main/.bash_logout && echo "Settings downloaded! Restart your terminal or source ~/.bashrc"
 ```
 
@@ -108,16 +108,16 @@ https://github.com/pyenv/pyenv#install-additional-python-versions
 
 update the source list and source list directory
 
-```bash
+```shell
 sudo apt-get update --yes
 ```
 
-```bash
+```shell
 curl https://pyenv.run | bash
 ```
 Install the depencies(if automatic installer doesn't work)
 
-```bash
+```shell
 sudo apt update; sudo apt install build-essential libssl-dev zlib1g-dev \
 libbz2-dev libreadline-dev libsqlite3-dev curl wget \
 libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
@@ -125,31 +125,31 @@ libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-d
 
 View available python versions
 
-```bash
+```shell
 pyenv install --list
 ```
 
 Install python version
 
-```bash
+```shell
 pyenv install 3.12.6
 ```
 
 Set the default version
 
-```bash
+```shell
 pyenv global 3.12.6 # check the default version
 ```
 
 python --version# check the executable file
-```bash
+```shell
 which python
 ```
 
 Warning: Never remove default python. WSL depends on this package
 
 python --version# check the executable file
-```bash
+```shell
 pyenv versions
 ```
 
@@ -173,7 +173,7 @@ https://code.visualstudio.com/docs/python/environments
 
 Download pip3 after install python3
 
-```bash
+```shell
 pip3 install pipenv
 ```
 

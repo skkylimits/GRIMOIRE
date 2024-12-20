@@ -51,8 +51,11 @@ export default defineNuxtConfig({
 			},
 			langs: [
 				// other languages you might be using
+				'sql',
+				'cmd',
 				'powershell',
 				'http',
+				'mdc',
 			],
 		},
 	},
