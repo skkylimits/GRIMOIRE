@@ -2,10 +2,8 @@
 
 ## Linting
 
-- [ ] Markdown lint -> Integrate antufu/eslint for css & markdown
-- [ ] Make sure lint doesnt make nuxt unreadable
-- [ ] https://github.com/funkhaus/fuxt/pull/121
-- [ ] MAKW LINTING SYNERGIZE THEN CONTIUE WITH FORENSIC RESEARCH/EXTERNAL PLAYBOOX THEN AD HACKING
+- [ ]  fix the tailwind css linting conflict. .css files gets linted but tailwind or the css in .vue does not. We need to manually do that with prettier no, fix it in a way trough antfu eslint repo, instead of building your own prettier file again -https://www.youtube.com/watch?v=jlZzzpE-D0s
+- [ ]  fix MDC. mdc should NOT be linted
 
 ## Bug
 
