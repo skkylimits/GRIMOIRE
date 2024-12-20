@@ -45,17 +45,17 @@ const links = computed(() => [toc?.bottom?.edit && {
 	target: '_blank',
 }, ...(toc?.bottom?.links || [])].filter(Boolean))
 
-const layout = {
-	wrapper: 'flex flex-col lg:grid lg:grid-cols-10 lg:gap-8',
-	left: 'lg:col-span-2',
-	center: {
-		narrow: 'lg:col-span-6',
-		base: 'lg:col-span-7', // Set both narrow and base to 3
-		full: 'lg:col-span-10',
-	},
-	right: 'lg:col-span-2 order-first lg:order-last', // Right column is optional or hidden
-}
-console.log(layout)
+// const layout = {
+// 	wrapper: 'flex flex-col lg:grid lg:grid-cols-10 lg:gap-8',
+// 	left: 'lg:col-span-2',
+// 	center: {
+// 		narrow: 'lg:col-span-6',
+// 		base: 'lg:col-span-7', // Set both narrow and base to 3
+// 		full: 'lg:col-span-10',
+// 	},
+// 	right: 'lg:col-span-2 order-first lg:order-last', // Right column is optional or hidden
+// }
+// console.log(layout)
 </script>
 
 <template>
