@@ -84,16 +84,4 @@ export default defineNuxtConfig({
 			globals.forEach(c => c.global = true)
 		},
 	},
-
-	// https://eslint.nuxt.com/packages/module
-	eslint: {
-		config: {
-			stylistic: {
-				indent: 'tab',
-				semi: false,
-
-				// ...
-			},
-		},
-	},
 })
