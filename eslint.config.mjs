@@ -1,6 +1,25 @@
 // eslint.config.mjs
 import antfu from '@antfu/eslint-config'
 
+const mdcIgnoreProcessor = {
+	preprocess: (text) => {
+		// Preprocessing: Split text into lines and replace nested MDC blocks with placeholders
+		const ignoredSections = []
+		const processedText = text.replace(
+			/(::[a-z-]+)([\s\S]*?)(::)/gi,
+			(match, start, content, end) => {
+				ignoredSections.push(match)
+				return '' // Replace ignored sections with an empty string
+			},
+		)
+		return [processedText]
+	},
+	postprocess: (messages) => {
+		// Postprocessing: Ignore lint messages for ignored sections
+		return messages[0].filter(message => !message.ruleId)
+	},
+}
+
 export default antfu(
 
 	{
@@ -19,6 +38,28 @@ export default antfu(
 		typescript: {
 			overrides: {
 				'ts/consistent-type-definitions': ['error', 'interface'],
+			},
+		},
+		markdown: {
+			overrides: {
+				plugins: ['markdown'],
+				overrides: [
+					{
+						files: ['**/*.md'],
+						processor: mdcIgnoreProcessor,
+						rules: {
+							// Ignore specific blocks of content within markdown
+							'no-console': 'off',
+							// You can add more rules here to disable or customize as needed
+						},
+					},
+				],
+				ignorePatterns: [
+					// Ignore MDC blocks starting and ending with ::, including multiline
+					'^::.*::$', // Single-line MDC blocks (e.g., ::note::)
+					'^::.*\\n[\\s\\S]*?::$', // Multiline MDC blocks
+					'::[\\s\\S]*?::', // General match for any MDC block
+				],
 			},
 		},
 		// `.eslintignore` is no longer supported in Flat config, use `ignores` instead
@@ -42,7 +83,7 @@ export default antfu(
 			 * Supports Prettier and dprint
 			 * By default uses Prettier
 			 */
-			markdown: 'prettier',
+			// markdown: 'prettier',
 		},
 	},
 

@@ -20,7 +20,7 @@ end_of_line = crlf
 
 # Override for markdown and text files
 [*.{md,txt}]
-trim_trailing_whitespace = true
+trim_trailing_whitespace = false
 insert_final_newline = true
 
 # .editorconfig can't be used to remove trailing empty lines at the end of a file.
