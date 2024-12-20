@@ -1,4 +1,4 @@
-import { field, group } from '@nuxthq/studio/theme';
+import { field, group } from '@nuxthq/studio/theme'
 
 export default defineNuxtSchema({
 	appConfig: {
@@ -187,4 +187,4 @@ export default defineNuxtSchema({
 			},
 		}),
 	},
-});
+})

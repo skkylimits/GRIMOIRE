@@ -11,8 +11,8 @@
 
 <style>
 .foldable-summary p {
-  display: inline; /* Make any <p> inline to prevent new lines caused by MDC syntax*/
-  margin: 0; /* Remove any margin that might push it down */
-  padding: 0; /* Remove any padding that could affect alignment */
+	display: inline; /* Make any <p> inline to prevent new lines caused by MDC syntax*/
+	margin: 0; /* Remove any margin that might push it down */
+	padding: 0; /* Remove any padding that could affect alignment */
 }
 </style>

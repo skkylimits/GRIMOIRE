@@ -187,7 +187,7 @@ regedit descriptions
 By checking these settings in the **Windows Settings** menu, you can verify whether the registry changes are successfully applied.
 ::
 
-## Windows Updates 
+## Windows Updates
 
 Let me explain what the `Set-RecommendedUpdateSettings` function does, breaking it down into key phases and actions. This function modifies Windows Update settings through the registry to enforce specific update behaviors.
 
@@ -255,12 +255,11 @@ if (-not $isSpecializePhase) {
     Write-Host "Applying Recommended Windows Update Settings . . ."
 }
 ```
-- **Purpose**: The function first checks if it's not in the "specialize" phase by evaluating the `$isSpecializePhase` variable. 
+- **Purpose**: The function first checks if it's not in the "specialize" phase by evaluating the `$isSpecializePhase` variable.
   - **If true** (it's not in the specialize phase), it:
     - Calls `Show-Header` (presumably a function that displays a header or title).
     - Prints `"Applying Recommended Windows Update Settings . . ."` to the console.
   - **If false**, it skips this step and doesn't display the header or message.
-
 
 ### **2. Create Registry Changes (Multiline String)**
 ```powershell
@@ -298,7 +297,6 @@ $MultilineComment = @"
     - **Upgrade Settings**: Prevents an automatic upgrade from Windows 10 22H2 to Windows 11. It also delays feature and quality updates for 1 year.
     - **Delivery Optimization**: Disables downloading updates from other PCs, which is part of Windows' Delivery Optimization feature.
 
-
 ### **3. Write Registry Changes to a `.reg` File**
 ```powershell
 Set-Content -Path "$env:TEMP\Recommended_Windows_Update_Settings.reg" -Value $MultilineComment -Force
@@ -307,7 +305,6 @@ Set-Content -Path "$env:TEMP\Recommended_Windows_Update_Settings.reg" -Value $Mu
   - **Path**: `$env:TEMP\Recommended_Windows_Update_Settings.reg`
   - The `-Force` flag ensures that the file is written even if it already exists.
 
-
 ### **4. Import the `.reg` File Using `regedit`**
 ```powershell
 Regedit.exe /S "$env:TEMP\Recommended_Windows_Update_Settings.reg"
@@ -315,7 +312,6 @@ Regedit.exe /S "$env:TEMP\Recommended_Windows_Update_Settings.reg"
 - **Purpose**: This line runs the `regedit.exe` utility to import the `.reg` file created in the previous step.
   - The `/S` flag ensures that the import happens silently, without requiring user confirmation.
   - The settings are applied to the Windows registry.
-
 
 ### **5. Check if Not in Specialize Phase Again**
 ```powershell
@@ -391,21 +387,21 @@ $MultilineComment = @"
         Windows Registry Editor Version 5.00
 
         ; Adds "Take Ownership" to the Right Click Context Menu for All Users
-                        
+
         [-HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
         [-HKEY_CLASSES_ROOT\*\shell\runas]
-                
+
         [HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
         @="Take Ownership"
         "Extended"=-
         "HasLUAShield"=""
         "NoWorkingDirectory"=""
         "NeverDefault"=""
-                
+
         [HKEY_CLASSES_ROOT\*\shell\TakeOwnership\command]
         @="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l & pause' -Verb runAs\""
         "IsolatedCommand"= "powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l & pause' -Verb runAs\""
-                    
+
         [HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership]
         @="Take Ownership"
         "AppliesTo"="NOT (System.ItemPathDisplay:=\"C:\\Users\" OR System.ItemPathDisplay:=\"C:\\ProgramData\" OR System.ItemPathDisplay:=\"C:\\Windows\" OR System.ItemPathDisplay:=\"C:\\Windows\\System32\" OR System.ItemPathDisplay:=\"C:\\Program Files\" OR System.ItemPathDisplay:=\"C:\\Program Files (x86)\")"
@@ -413,11 +409,11 @@ $MultilineComment = @"
         "HasLUAShield"=""
         "NoWorkingDirectory"=""
         "Position"="middle"
-                
+
         [HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership\command]
         @="powershell -windowstyle hidden -command \"$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList ('/c takeown /f \\\"%1\\\" /r /d ' + $Y + ' && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l /q & pause') -Verb runAs\""
         "IsolatedCommand"="powershell -windowstyle hidden -command \"$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList ('/c takeown /f \\\"%1\\\" /r /d ' + $Y + ' && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l /q & pause') -Verb runAs\""
-                        
+
         [HKEY_CLASSES_ROOT\Drive\shell\runas]
         @="Take Ownership"
         "Extended"=-
@@ -425,7 +421,7 @@ $MultilineComment = @"
         "NoWorkingDirectory"=""
         "Position"="middle"
         "AppliesTo"="NOT (System.ItemPathDisplay:=\"C:\\\")"
-                
+
         [HKEY_CLASSES_ROOT\Drive\shell\runas\command]
         @="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant *S-1-3-4:F /t /c & Pause"
         "IsolatedCommand"="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant *S-1-3-4:F /t /c & Pause"
@@ -568,7 +564,7 @@ $MultilineComment = @"
         "DisableAutomaticRestartSignOn"=dword:00000001
 
         ; APPS
-        ; disable archive apps 
+        ; disable archive apps
         [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Appx]
         "AllowAutomaticAppArchiving"=dword:00000000
 
@@ -580,7 +576,7 @@ $MultilineComment = @"
         "NoInstrumentation"=-
 
         ; remove windows widgets from taskbar
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh] 
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh]
         "AllowNewsAndInterests"=dword:00000000
 
         ; remove news and interests from Taskbar
@@ -669,7 +665,6 @@ regedit description
 |----------|-----------------|-----------|
 | **Take Ownership** | Adds "Take Ownership" to the right-click context menu for files, directories, and drives. | **Enable**: Provides an easy way to take ownership of files, directories, and drives for administrative purposes. |
 
-
 **4. File and System Settings**
 | **Name** | **Description** | **Reason** |
 |----------|-----------------|-----------|
@@ -703,7 +698,6 @@ regedit description
 | **Enable Update Microsoft Store Apps Automatically** | Enables automatic updates for apps in the Microsoft Store. | **Enable**: Keeps Microsoft Store apps up-to-date automatically, ensuring the latest features and security updates. |
 | **Disable Windows Error Reporting** | Stops sending error reports to Microsoft. |
 ::
-
 
 ### **2. Writing Registry Changes to a `.reg` File**
 ```powershell
@@ -746,7 +740,6 @@ Wait-IfNotSpecialize
 - **Purpose**: This line calls the `Wait-IfNotSpecialize` function (which is presumably defined elsewhere in the script). The exact behavior of this function is unknown, but it likely:
   - Waits for a specific condition or event to occur (possibly ensuring that the system is not in the "specialize" phase before proceeding or finishing).
   - Ensures that the settings are applied after a particular stage of system configuration, like during imaging or customization in deployment.
-
 
 This function is aimed at configuring various system settings, optimizing them for specific use cases (like system performance, security, privacy, and personalization), and providing a cleaner, more controlled Windows environment.
 
@@ -795,7 +788,6 @@ This function adjusts the startup behavior of Windows services for optimized sys
 +---------------------------------------------+
 ```
 
-
 ### **1. Disabled Task**
 
 ```powershell
@@ -828,7 +820,7 @@ This function adjusts the startup behavior of Windows services for optimized sys
             continue
         }
     }
-    
+
     Show-Header
     Write-Host "Successfully disabled unneeded scheduled tasks." -ForegroundColor Green
     Wait-IfNotSpecialize
@@ -850,25 +842,24 @@ This function adjusts the startup behavior of Windows services for optimized sys
 | Microsoft\Windows\Application Experience\PcaPatchDbTask                                         | Runs a task related to system diagnostics. Disabling can reduce background processes without affecting system performance. |
 | Microsoft\Windows\Maps\MapsUpdateTask                                                           | Handles maps updates in the background. Disabling may reduce unnecessary background activity for users not using maps. |
 
-
 ### **2. Identify Services**
 
 #### **Disabled Services**
 - Includes services that are either not required for most users or pose potential performance or security issues.
-  
+
   **List:**
   ```powershell
   $disabledServices = @(
-    'AJRouter', 'AppVClient', 'AssignedAccessManagerSvc', 
+    'AJRouter', 'AppVClient', 'AssignedAccessManagerSvc',
     'DiagTrack', 'DialogBlockingService', 'NetTcpPortSharing',
-    'RemoteAccess', 'RemoteRegistry', 'shpamsvc', 
+    'RemoteAccess', 'RemoteRegistry', 'shpamsvc',
     'ssh-agent', 'tzautoupdate', 'uhssvc',
     'UevAgentService'
 	)
   ```
-  
+
 ::foldable
-#title 
+#title
 Service Description
 
 #content
@@ -891,8 +882,6 @@ Service Description
 | **UevAgentService**          | Manages User Experience Virtualization (UE-V) for settings synchronization.                                         | Disable unless using UE-V.             |
 ::
 
-
-
 #### **Manual Services**
 - Services that may occasionally be needed but don’t require automatic startup.
 
@@ -903,48 +892,48 @@ Service Description
     'AxInstSV', 'BDESVC', 'BITS', 'BTAGService', 'BcastDVRUserService_*',
     'Browser', 'CDPSvc', 'CDPUserSvc_*', 'COMSysApp', 'CaptureService_*',
     'CertPropSvc', 'ClipSVC', 'ConsentUxUserSvc_*', 'CscService', 'DcpSvc',
-    'DevQueryBroker', 'DevicePickerUserSvc_*', 'DevicesFlowUserSvc_*', 
+    'DevQueryBroker', 'DevicePickerUserSvc_*', 'DevicesFlowUserSvc_*',
     'DisplayEnhancementService', 'DmEnrollmentSvc', 'DoSvc', 'DsSvc', 'DsmSvc',
     'EFS', 'EapHost', 'EntAppSvc', 'FDResPub', 'Fax', 'FrameServer',
-    'FrameServerMonitor', 'GraphicsPerfSvc', 'HomeGroupListener', 
+    'FrameServerMonitor', 'GraphicsPerfSvc', 'HomeGroupListener',
     'HomeGroupProvider', 'HvHost', 'IEEtwCollectorService', 'IKEEXT',
     'InstallService', 'InventorySvc', 'IpxlatCfgSvc', 'KtmRm', 'LicenseManager',
-    'LxpSvc', 'MSDTC', 'MSiSCSI', 'MapsBroker', 'McpManagementService', 
-    'MessagingService_*', 'MicrosoftEdgeElevationService', 
+    'LxpSvc', 'MSDTC', 'MSiSCSI', 'MapsBroker', 'McpManagementService',
+    'MessagingService_*', 'MicrosoftEdgeElevationService',
     'MixedRealityOpenXRSvc', 'MsKeyboardFilter', 'NPSMSvc_*', 'NaturalAuthentication',
     'NcaSvc', 'NcbService', 'NcdAutoSetup', 'Netman', 'NgcCtnrSvc', 'NgcSvc',
     'NlaSvc', 'P9RdrService_*', 'PNRPAutoReg', 'PNRPsvc', 'PcaSvc', 'PeerDistSvc',
     'PenService_*', 'PerfHost', 'PhoneSvc', 'PimIndexMaintenanceSvc_*',
     'PolicyAgent', 'PrintNotify', 'PrintWorkflowUserSvc_*', 'PushToInstall',
     'RasAuto', 'RasMan', 'RetailDemo', 'RmSvc', 'RpcLocator', 'SCPolicySvc',
-    'SCardSvr', 'SDRSVC', 'SEMgrSvc', 'SecurityHealthService', 
-    'SensorDataService', 'SensorService', 'SensrSvc', 'SessionEnv', 
-    'SharedAccess', 'SharedRealitySvc', 'SmsRouter', 'SstpSvc', 
+    'SCardSvr', 'SDRSVC', 'SEMgrSvc', 'SecurityHealthService',
+    'SensorDataService', 'SensorService', 'SensrSvc', 'SessionEnv',
+    'SharedAccess', 'SharedRealitySvc', 'SmsRouter', 'SstpSvc',
     'StateRepository', 'StiSvc', 'StorSvc', 'TabletInputService', 'TapiSrv',
     'TextInputManagementService', 'TieringEngineService', 'TimeBroker',
     'TimeBrokerSvc', 'TokenBroker', 'TroubleshootingSvc', 'TrustedInstaller',
-    'UI0Detect', 'UdkUserSvc_*', 'UmRdpService', 'UnistoreSvc_*', 
+    'UI0Detect', 'UdkUserSvc_*', 'UmRdpService', 'UnistoreSvc_*',
     'UserDataSvc_*', 'UsoSvc', 'VSS', 'VacSvc', 'W32Time', 'WEPHOSTSVC',
     'WFDSConMgrSvc', 'WMPNetworkSvc', 'WManSvc', 'WPDBusEnum', 'WSService',
     'WSearch', 'WaaSMedicSvc', 'WalletService', 'WarpJITSvc', 'WbioSrvc',
     'WcsPlugInService', 'WdiServiceHost', 'WdiSystemHost', 'WebClient', 'Wecsvc',
-    'WerSvc', 'WiaRpc', 'WinHttpAutoProxySvc', 'WinRM', 'WpcMonSvc', 
+    'WerSvc', 'WiaRpc', 'WinHttpAutoProxySvc', 'WinRM', 'WpcMonSvc',
     'WpnService', 'WwanSvc', 'autotimesvc', 'bthserv', 'camsvc', 'cbdhsvc_*',
     'cloudidsvc', 'dcsvc', 'defragsvc', 'diagnosticshub.standardcollector.service',
-    'diagsvc', 'dmwappushservice', 'dot3svc', 'edgeupdate', 'edgeupdatem', 
-    'embeddedmode', 'fdPHost', 'fhsvc', 'hidserv', 'icssvc', 'lfsvc', 
-    'lltdsvc', 'lmhosts', 'netprofm', 'p2pimsvc', 'p2psvc', 
-    'perceptionsimulation', 'pla', 'seclogon', 'smphost', 'spectrum', 
-    'sppsvc', 'svsvc', 'swprv', 'upnphost', 'vm3dservice', 
-    'vmicguestinterface', 'vmicheartbeat', 'vmickvpexchange', 'vmicrdv', 
-    'vmicshutdown', 'vmictimesync', 'vmicvmsession', 'vmicvss', 'wbengine', 
-    'wcncsvc', 'webthreatdefsvc', 'wercplsupport', 'wisvc', 'wlidsvc', 
+    'diagsvc', 'dmwappushservice', 'dot3svc', 'edgeupdate', 'edgeupdatem',
+    'embeddedmode', 'fdPHost', 'fhsvc', 'hidserv', 'icssvc', 'lfsvc',
+    'lltdsvc', 'lmhosts', 'netprofm', 'p2pimsvc', 'p2psvc',
+    'perceptionsimulation', 'pla', 'seclogon', 'smphost', 'spectrum',
+    'sppsvc', 'svsvc', 'swprv', 'upnphost', 'vm3dservice',
+    'vmicguestinterface', 'vmicheartbeat', 'vmickvpexchange', 'vmicrdv',
+    'vmicshutdown', 'vmictimesync', 'vmicvmsession', 'vmicvss', 'wbengine',
+    'wcncsvc', 'webthreatdefsvc', 'wercplsupport', 'wisvc', 'wlidsvc',
     'wlpasvc', 'wmiApSrv', 'workfolderssvc', 'wuauserv', 'wudfsvc'
     )
   ```
 
 ::foldable
-#title 
+#title
 Service Description
 
 #content
@@ -1232,7 +1221,6 @@ This script applies an **aggressive performance-optimization strategy** to Windo
    - Hides specific power menu options (e.g., Sleep, Lock).
    - Allows for extended hardware configurations like USB and PCI Express settings.
 
-
 **When to Use It**
 - Ideal for gaming PCs, high-performance workstations, or virtual machines requiring consistent high performance.
 - Avoid on laptops or battery-powered devices, as these settings will reduce battery life.
@@ -1273,20 +1261,17 @@ This script applies an **aggressive performance-optimization strategy** to Windo
 +---------------------------------------------+
 ```
 
-
 ### **1. Clears the Console**
 ```powershell
 Clear-Host
 ```
 - Clears the PowerShell console for better readability before running the rest of the function.
 
-
 ### **2. Configures the "Ultimate Performance" Power Plan**
 ```powershell
 cmd /c "powercfg /duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 99999999-9999-9999-9999-999999999999 >nul 2>&1 & powercfg /SETACTIVE 99999999-9999-9999-9999-999999999999 >nul 2>&1"
 ```
 - Creates a duplicate of the **Ultimate Performance** power plan (GUID: `e9a42b02-d5df-448d-aa00-03f14749eb61`) with a new GUID (`99999999-9999-9999-9999-999999999999`) and sets it as the active power plan.
-
 
 ### **3. Deletes All Other Power Plans**
 ```powershell
@@ -1301,7 +1286,6 @@ powercfg /L | ForEach-Object {
 ```
 - Lists all power plans using `powercfg /L`.
 - Deletes any power plan whose GUID is not the one created in the previous step.
-
 
 ### **4. Registry Modifications**
 ```powershell
@@ -1332,7 +1316,6 @@ cmd /c "powercfg /h off >nul 2>&1"
   - **Disables CPU power throttling** and **unparks CPU cores** to maximize performance.
   - **Unhides USB power settings** like "Selective Suspend Timeout."
 
-
 ### **5. Modifies Specific Advanced Power Plan Settings**
 ```powershell
  # Modify Advcaned Power Plan settings
@@ -1359,7 +1342,7 @@ $settings = @(
     @{
         SubgroupGUID = "2a737441-1930-4402-8d77-b2bebba308a3" # USB Settings
         SettingGUIDs = @(
-            "0853a681-27c8-4100-a2fd-82013e970683", # USB selective suspend setting: Disabled 
+            "0853a681-27c8-4100-a2fd-82013e970683", # USB selective suspend setting: Disabled
             "d4e98f31-5ffe-4ce1-be31-1b38b384c009",  # USB Hub Selective Suspend Timeout: Disabled (0 milliseconds)
             "48e6b7a6-50f5-4782-a5d4-53bb8f07e226" # USB 3 Link Power Management: Off
         )
@@ -1389,7 +1372,6 @@ foreach ($group in $settings) {
   - **USB Settings**: Ensures USB devices are always active (no power-saving mode).
   - **PCI Express**: Disables Link State Power Management.
   - **Display**: Prevents the display from turning off.
-
 
 ### **6. Displays Success Message**
 ```powershell

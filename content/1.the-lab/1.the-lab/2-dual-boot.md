@@ -1,7 +1,7 @@
 ---
 title: Dual Boot
 description: Encapsulate your code in digital pods, deploying microcosms across the cyber landscape with precision and ease.
---- 
+---
 
 ## RAM Split in Two?
 

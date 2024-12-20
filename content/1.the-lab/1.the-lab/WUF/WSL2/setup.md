@@ -9,7 +9,7 @@ sudo apt update && sudo apt upgrade
 ## .bashrc
 
 > [!CAUTION]
-> Back up your own settings if necessary before running this command. 
+> Back up your own settings if necessary before running this command.
 
 ```bash
 curl -o ~/.bashrc https://raw.githubusercontent.com/skkylimits/.bashrc/main/.bashrc && curl -o ~/.bash_aliases https://raw.githubusercontent.com/skkylimits/.bashrc/main/.bash_aliases && curl -o ~/.bash_logout https://raw.githubusercontent.com/skkylimits/.bashrc/main/.bash_logout && echo "Settings downloaded! Restart your terminal or source ~/.bashrc"
@@ -153,8 +153,6 @@ python --version# check the executable file
 pyenv versions
 ```
 
-
-
 ## Switch between Python versions
 
 To select a Pyenv-installed Python as the version to use, run one of the following commands:
@@ -168,8 +166,6 @@ E.g. to select the above-mentioned newly-installed Python 3.10.4 as your preferr
 ```
 pyenv global 3.12.6
 ```
-
-
 
 ## pipenv
 
@@ -189,7 +185,6 @@ pip3 freeze
 
 https://gist.github.com/bradtraversy/c70a93d6536ed63786c434707b898d55
 
-
 ## pipx
 https://pipx.pypa.io/stable/installation/
 
@@ -205,7 +200,7 @@ pipx ensurepath
 ```
 which pipx
 ```
-gives 
+gives
 
 `/usr/bin/pipx` then its installed in default python system wide.
 

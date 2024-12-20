@@ -1,52 +1,54 @@
 {
-  "name": "nameless",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "typecheck": "nuxt typecheck",
-    "test": ""
-  },
-  "dependencies": {
-    "@iconify-json/bi": "^1.2.0",
-    "@iconify-json/el": "^1.2.0",
-    "@iconify-json/fa-brands": "^1.2.0",
-    "@iconify-json/file-icons": "^1.2.0",
-    "@iconify-json/game-icons": "^1.2.0",
-    "@iconify-json/heroicons": "^1.1.21",
-    "@iconify-json/lets-icons": "^1.2.1",
-    "@iconify-json/map": "^1.2.0",
-    "@iconify-json/mdi": "^1.2.0",
-    "@iconify-json/octicon": "^1.2.1",
-    "@iconify-json/ph": "^1.2.0",
-    "@iconify-json/raphael": "^1.2.0",
-    "@iconify-json/simple-icons": "^1.1.109",
-    "@iconify-json/vscode-icons": "^1.2.1",
-    "@nuxt/content": "^2.13.4",
-    "@nuxt/eslint": "^0.7.3",
-    "@nuxt/fonts": "^0.7.1",
-    "@nuxt/image": "^1.7.0",
-    "@nuxt/ui-pro": "^1.3.1",
-    "nuxt": "^3.12.3",
-    "nuxt-og-image": "^3.0.0-rc.64",
-    "tailwindcss": "^3.4.10"
-  },
-  "devDependencies": {
-    "@eslint/json": "^0.9.0",
-    "@eslint/markdown": "^6.2.1",
-    "@nuxt/eslint": "^0.7.3",
-    "@nuxthq/studio": "^2.0.3",
-    "eslint": "^9.6.0",
-    "vue-tsc": "^2.0.26"
-  },
-  "bugs": {
-    "url": "https://github.com/skkylimits/Nameless/issues"
-  },
-  "packageManager": "pnpm@9.6.0+sha512.38dc6fba8dba35b39340b9700112c2fe1e12f10b17134715a4aa98ccf7bb035e76fd981cf0bb384dfa98f8d6af5481c2bef2f4266a24bfa20c34eb7147ce0b5e"
+	"name": "nameless",
+	"type": "module",
+	"private": true,
+	"packageManager": "pnpm@9.6.0+sha512.38dc6fba8dba35b39340b9700112c2fe1e12f10b17134715a4aa98ccf7bb035e76fd981cf0bb384dfa98f8d6af5481c2bef2f4266a24bfa20c34eb7147ce0b5e",
+	"bugs": {
+		"url": "https://github.com/skkylimits/Nameless/issues"
+	},
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"typecheck": "nuxt typecheck",
+		"test": ""
+	},
+	"dependencies": {
+		"@iconify-json/bi": "^1.2.0",
+		"@iconify-json/el": "^1.2.0",
+		"@iconify-json/fa-brands": "^1.2.0",
+		"@iconify-json/file-icons": "^1.2.0",
+		"@iconify-json/game-icons": "^1.2.0",
+		"@iconify-json/heroicons": "^1.1.21",
+		"@iconify-json/lets-icons": "^1.2.1",
+		"@iconify-json/map": "^1.2.0",
+		"@iconify-json/mdi": "^1.2.0",
+		"@iconify-json/octicon": "^1.2.1",
+		"@iconify-json/ph": "^1.2.0",
+		"@iconify-json/raphael": "^1.2.0",
+		"@iconify-json/simple-icons": "^1.1.109",
+		"@iconify-json/vscode-icons": "^1.2.1",
+		"@nuxt/content": "^2.13.4",
+		"@nuxt/eslint": "^0.7.3",
+		"@nuxt/fonts": "^0.7.1",
+		"@nuxt/image": "^1.7.0",
+		"@nuxt/ui-pro": "^1.3.1",
+		"nuxt": "^3.12.3",
+		"nuxt-og-image": "^3.0.0-rc.64",
+		"tailwindcss": "^3.4.10"
+	},
+	"devDependencies": {
+		"@antfu/eslint-config": "^3.12.0",
+		"@eslint/json": "^0.9.0",
+		"@eslint/markdown": "^6.2.1",
+		"@nuxt/eslint": "^0.7.3",
+		"@nuxthq/studio": "^2.0.3",
+		"eslint": "^9.6.0",
+		"eslint-plugin-format": "^0.1.3",
+		"vue-tsc": "^2.0.26"
+	}
 }

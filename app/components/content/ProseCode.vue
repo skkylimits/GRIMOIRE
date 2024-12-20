@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PropType } from 'vue';
+import type { PropType } from 'vue'
 
 defineProps({
 	code: {
@@ -30,7 +30,7 @@ defineProps({
 		type: String,
 		default: undefined,
 	},
-});
+})
 
 const config = {
 	wrapper: '[&>pre]:!rounded-t-none [&>pre]:!my-0 my-5',
@@ -42,9 +42,9 @@ const config = {
 		base: 'absolute top-2.5 right-2.5 dark:border-gray-700',
 	},
 	filename: 'text-sm/6',
-};
+}
 
-const { ui } = useUI('content.prose.code', undefined, config, undefined, true);
+const { ui } = useUI('content.prose.code', undefined, config, undefined, true)
 </script>
 
 <template>

@@ -226,7 +226,6 @@ export default {
   }
 }
 
-
 ## Icons [workaround]
 
 - [Iconify](https://iconify.design/) - Freedom to choose icons
@@ -244,7 +243,6 @@ If you want to download a new icon, place it in: `icon: 'i-simple-icons-gitkrake
         description: 'A network scanning tool used to discover hosts, services, and vulnerabilities in a network.'
       }
 ```
-
 
 ## Icons
 
@@ -294,7 +292,6 @@ PS C:\Users\MBR\Desktop\Nameless> Get-ExecutionPolicy
 >>
 Restricted
 PS C:\Users\MBR\Desktop\Nameless> Set-ExecutionPolicy RemoteSigned
-
 
 ## XXSrat
 

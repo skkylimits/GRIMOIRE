@@ -8,7 +8,7 @@ const items = [
 		label: 'Can I use Nuxt UI Pro for Open Source projects?',
 		content: 'Et adipisicing do do do sunt irure proident consequat fugiat tempor occaecat commodo fugiat in proident.',
 	},
-];
+]
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const items = [
 </template>
 
 <style>
-button[data-headlessui-state="open"] span {
-  color: rgb(var(--color-primary-DEFAULT) / var(--tw-text-opacity)) !important;
+button[data-headlessui-state='open'] span {
+	color: rgb(var(--color-primary-DEFAULT) / var(--tw-text-opacity)) !important;
 }
 </style>

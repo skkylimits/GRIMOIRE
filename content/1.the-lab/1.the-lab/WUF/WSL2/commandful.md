@@ -1,21 +1,20 @@
-# Commandful 
-
+# Commandful
 
 ## PORTS
 
 ### What the hell are a TCP and a UDP ports
 
 ```
-cat /etc/services 
-grep -w '80/tcp' /etc/services 
-grep -w '443/tcp' /etc/services 
+cat /etc/services
+grep -w '80/tcp' /etc/services
+grep -w '443/tcp' /etc/services
 grep -E -w '22/(tcp|udp)' /etc/services
 ```
 
 My frequently used command is:
 
 ```
-netstat -tulpn 
+netstat -tulpn
 ```
 
 ### Using netstat to list open ports
@@ -44,7 +43,7 @@ sudo netstat -tulpn | grep LISTEN
    killall -9 appname
    ```
 
-## Delete node_modules   
+## Delete node_modules
 https://www.cyberciti.biz/faq/show-all-running-processes-in-linux/
 
 Remove & delete all node_modules files

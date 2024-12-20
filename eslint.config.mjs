@@ -1,74 +1,82 @@
-import markdown from '@eslint/markdown'
-import json from '@eslint/json'
-import withNuxt from './.nuxt/eslint.config.mjs'
+// eslint.config.mjs
+import antfu from '@antfu/eslint-config'
 
-console.log(markdown)
+export default antfu(
 
-export default withNuxt([
 	{
-		plugins: {
-			markdown,
-			json,
+		// Configures for antfu's config
+		stylistic: {
+			indent: 'tab', // 4, or 'tab'
+			quotes: 'single', // or 'double'
+		},
+		//
+		vue: {
+			// We also provided the overrides options in each integration to make it easier:
+			overrides: {
+				'vue/operator-linebreak': ['error', 'before'],
+			},
+		},
+		typescript: {
+			overrides: {
+				'ts/consistent-type-definitions': ['error', 'interface'],
+			},
+		},
+		// `.eslintignore` is no longer supported in Flat config, use `ignores` instead
+		ignores: [
+			'**/fixtures',
+			// ...globs
+		],
+		formatters: {
+			/**
+			 * Format CSS, LESS, SCSS files, also the `<style>` blocks in Vue
+			 * By default uses Prettier
+			 */
+			css: true,
+			/**
+			 * Format HTML files
+			 * By default uses Prettier
+			 */
+			html: true,
+			/**
+			 * Format Markdown files
+			 * Supports Prettier and dprint
+			 * By default uses Prettier
+			 * MDC not supported yet so disabling for now
+			 */
+			// markdown: 'prettier',
 		},
 	},
-	// Enable stylistic formatting rules for JavaScript, TypeScript, and Vue
+
+	// From the second arguments they are ESLint Flat Configs
+	// you can have multiple configs
 	{
-		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.vue'],
-		rules: {
-			'@stylistic/indent': ['error', 'tab'], // Example: enforce 2-space indentation
-			'@stylistic/semi': ['error', 'always'], // Example: enforce semicolons
-		},
-	},
-
-	// Enable stylistic formatting rules
-
-	{
-		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.vue'],
-		rules: {
-			// Add general ESLint rules that are not part of @stylistic
-
-			// 'no-console': 'off' // allow console.log in TypeScript files
-		},
-	},
-
-	// lint JSON files
-	{
-		files: ['**/*.json'],
-		language: 'json/json',
-		rules: {
-			'json/no-duplicate-keys': 'error',
-			'json/no-empty-keys': 'error',
-			'json/no-unsafe-values': 'error',
-			'json/no-unnormalized-keys': 'error',
-			'json/top-level-interop': 'error',
-
-			// Disable the problematic rule for json files
-			'no-irregular-whitespace': 'off',
-
-			// Disable indent rule for json files
-			'@stylistic/indent': 'off', // Disable indentation rule for Markdown
-		},
-	},
-	// lint Markdown files
-	{
+		// Doesnt work just yet. Switching to prettier for md files now
 		files: ['**/*.md'],
-		language: 'markdown/gfm',
 		rules: {
-			'markdown/fenced-code-language': 'error',
-			'markdown/heading-increment': 'error',
-			'markdown/no-duplicate-headings': 'error',
-			'markdown/no-empty-links': 'error',
-			// 'markdown/no-html': 'error',
-			'markdown/no-invalid-label-refs': 'error',
-
-			// Disable the problematic rule for Markdown files
-			'no-irregular-whitespace': 'off',
-
-			// Disable indent rule for markdown files
-			'@stylistic/indent': 'off', // Disable indentation rule for Markdown
 		},
 	},
-])
+	{
+		files: ['**/*.js'],
+		rules: {},
+	},
+	{
+		files: ['**/*.ts'],
+		rules: {},
+	},
+	{
+		// Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
+		files: ['**/*.vue'],
+		rules: {
+			'vue/operator-linebreak': ['error', 'before'],
+		},
+	},
+	{
+		// Without `files`, they are general rules for all files
+		rules: {
+			// 'style/semi': ['error', 'never'],
+		},
+	},
+)
 
 // https://eslint.vuejs.org/rules/multiline-html-element-content-newline.html
 

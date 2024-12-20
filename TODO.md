@@ -23,9 +23,7 @@
 - [ ] make copy code from codeblock scrollable. Meaning when you scroll down and code block hasnt ended the copy code scrolls with you. like chatgpt
 - [ ] make changelog page with tag that scroll when in view. https://volta.net/changelog
 
-
 ## Prose Components
-
 
 - git highlgights, give spectrum of red with unique border or not?
   - give them correct box-shadow colors
@@ -37,7 +35,6 @@
 - [ ] make mermaid.js work --> https://github.com/nuxt/content/issues/1866
 - [ ] combi of https://www.juridischloket.nl/cookieverklaring/ and vue faq
 
-
 ## Config
 
 - [ ] try to add a settings/config option. That certain behaviour can be enabled/disabled, like the hr below the h2. Catch my drift? - kinda like discord has
@@ -45,7 +42,6 @@
 - [ ] make a config so when we use _## or ## h2 .{exclude}, that specific h2 doesnt render in the toc.
 
 - [ ] Zoekn in winowds customizen, zodat everything weg kan? everytihg  indexeert o basis van files, windows o basis van content
-
 
 ## DOC
 
@@ -78,14 +74,12 @@
 - [ ] add community option for discussions
 - [ ] cookieverklaring - https://www.juridischloket.nl/cookieverklaring/
 
-
 ## Special
 
 - [ ] Make a [extension] in VS Code that lists all prose styling options?
 - [ ] Create a ChatGPT [app] mode for IT, Doc Writing, & Email Writing
 - [ ] Make a browser extension that captures important comments(and lets you organize them) Kinda like pocket
 - [ ] create a nuxt module(dont know what to code yet tho)
-
 
 ## When finished
 
@@ -97,7 +91,6 @@
 
 - [ ] create cube site -> questionable
 
-
 - [ ] https://learn.microsoft.com/en-us/azure/architecture/solution-ideas/articles/azure-security-build-first-layer-defense zoom in on image like this website
 
 ## Finito
@@ -106,7 +99,6 @@ When finished turn thi
 
 ## malware
 https://lolbas-project.github.io/#
-
 
 ## TODOTODO
 
@@ -164,16 +156,13 @@ Make it so windows unattended will:
 - detect virtualbox
 - detect hyper-v
 
-
 and install different settings accordingly(uefi. or bios for hyper-v)
 
 - detect physical machine
 
-
 and install needed settings accordingly
 
 This all so I don't have to manually create iso files from scratch and stuff
-
 
 ## 3d mussle software
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { withoutTrailingSlash } from 'ufo';
+import { withoutTrailingSlash } from 'ufo'
 // import type { NavItem } from '@nuxt/content'
 
 // const navigation = inject<Ref<NavItem[]>>('navigation', ref([]))
@@ -7,44 +7,43 @@ import { withoutTrailingSlash } from 'ufo';
 
 definePageMeta({
 	layout: 'docs',
-});
+})
 
-const route = useRoute();
-const { toc, seo } = useAppConfig();
+const route = useRoute()
+const { toc, seo } = useAppConfig()
 
-const { data: page } = await useAsyncData(route.path, () => queryContent(route.path).findOne());
+const { data: page } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
 if (!page.value) {
-	throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true });
+	throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => queryContent()
 	.where({ _extension: 'md', navigation: { $ne: false } })
 	.only(['title', 'description', '_path'])
-	.findSurround(withoutTrailingSlash(route.path)),
-);
+	.findSurround(withoutTrailingSlash(route.path)))
 
 useSeoMeta({
 	title: page.value.title,
 	ogTitle: `${page.value.title} - ${seo?.siteName}`,
 	description: page.value.description,
 	ogDescription: page.value.description,
-});
+})
 
 defineOgImage({
 	component: 'Docs',
 	// title: page.value.title,
 	// description: page.value.description
-});
+})
 
-const headline = computed(() => findPageHeadline(page.value));
-const editOnGithub = 'edit/main/content';
+const headline = computed(() => findPageHeadline(page.value))
+const editOnGithub = 'edit/main/content'
 
 const links = computed(() => [toc?.bottom?.edit && {
 	icon: 'i-heroicons-pencil-square',
 	label: 'Edit this page',
 	to: `${toc.bottom.edit}/${editOnGithub}/${page?.value?._file}`,
 	target: '_blank',
-}, ...(toc?.bottom?.links || [])].filter(Boolean));
+}, ...(toc?.bottom?.links || [])].filter(Boolean))
 
 const layout = {
 	wrapper: 'flex flex-col lg:grid lg:grid-cols-10 lg:gap-8',
@@ -55,8 +54,8 @@ const layout = {
 		full: 'lg:col-span-10',
 	},
 	right: 'lg:col-span-2 order-first lg:order-last', // Right column is optional or hidden
-};
-console.log(layout);
+}
+console.log(layout)
 </script>
 
 <template>

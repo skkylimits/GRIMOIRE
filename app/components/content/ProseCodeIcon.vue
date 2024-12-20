@@ -8,7 +8,7 @@ const props = defineProps({
 		type: String,
 		default: undefined,
 	},
-});
+})
 
 const config = {
 	'package.json': 'vscode-icons:file-type-node',
@@ -52,13 +52,13 @@ const config = {
 	'yml': 'vscode-icons:file-type-yaml',
 	'terminal': 'i-heroicons-command-line',
 	'csv': 'vscode-icons:file-type-text',
-};
+}
 
-const { ui } = useUI('content.prose.code.icon', undefined, config, undefined, true);
+const { ui } = useUI('content.prose.code.icon', undefined, config, undefined, true)
 
-const extension = computed(() => (props.filename?.split('.').pop() || '').toLowerCase());
-const hasIcon = computed(() => props.icon || ui.value[extension.value] || props.filename.includes('.'));
-const icon = computed(() => props.icon ?? (props.filename && (ui.value[props.filename.split('/').pop()] ?? ui.value[extension.value] ?? `vscode-icons:file-type-${extension.value}`)));
+const extension = computed(() => (props.filename?.split('.').pop() || '').toLowerCase())
+const hasIcon = computed(() => props.icon || ui.value[extension.value] || props.filename.includes('.'))
+const icon = computed(() => props.icon ?? (props.filename && (ui.value[props.filename.split('/').pop()] ?? ui.value[extension.value] ?? `vscode-icons:file-type-${extension.value}`)))
 </script>
 
 <template>
