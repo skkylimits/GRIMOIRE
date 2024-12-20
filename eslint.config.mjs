@@ -1,25 +1,6 @@
 // eslint.config.mjs
 import antfu from '@antfu/eslint-config'
 
-const mdcIgnoreProcessor = {
-	preprocess: (text) => {
-		// Preprocessing: Split text into lines and replace nested MDC blocks with placeholders
-		const ignoredSections = []
-		const processedText = text.replace(
-			/(::[a-z-]+)([\s\S]*?)(::)/gi,
-			(match, start, content, end) => {
-				ignoredSections.push(match)
-				return '' // Replace ignored sections with an empty string
-			},
-		)
-		return [processedText]
-	},
-	postprocess: (messages) => {
-		// Postprocessing: Ignore lint messages for ignored sections
-		return messages[0].filter(message => !message.ruleId)
-	},
-}
-
 export default antfu(
 
 	{
@@ -46,7 +27,7 @@ export default antfu(
 				overrides: [
 					{
 						files: ['**/*.md'],
-						processor: mdcIgnoreProcessor,
+						processor: "markdown/markdown",
 						rules: {
 							// Ignore specific blocks of content within markdown
 							'no-console': 'off',
