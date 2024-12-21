@@ -14,7 +14,7 @@
 
 - [ ] geojson
 - [ ] stl
-- [ ] mermaid
+- [ ] mermaid -> https://github.com/nuxt/content/issues/1866#issuecomment-1442360997
 
 ## UI
 
@@ -36,7 +36,6 @@
 - [ ] Try it for a list with steps that connect to each other from number 1 to 2 with a line. On work laptop, we have a photo of this
   - [ ] Replace current table with old table from VitePress
 - [ ] make a list of all used icons like i-ph:app-window and show it in a librar
-- [ ] make mermaid.js work --> https://github.com/nuxt/content/issues/1866
 - [ ] combi of https://www.juridischloket.nl/cookieverklaring/ and vue faq
 
 ## Config
@@ -68,7 +67,7 @@
 
 ## Features
 
-- [ ] Integrate ChatGPT or create own gpt? free
+- [ ] Integrate ChatGPT or create own gpt? free -> https://www.kapa.ai/
 - [ ] Translate language or i18?
 - [ ] Setup ZeroTier [with login and such]
 - [ ] Setup database like you did with Nameless HTTP server
@@ -87,11 +86,11 @@
 
 ## When finished
 
-- [ ] create auto lessen website combi van theorie toppers mikey en altijdgeslaagd
-- [ ] create baby webshop
-- [ ] continue  own website
-- [ ] create ai automation website for AI solutions like (lead automation and such)[like theaiclubhouse on IG]
-- [ ] site idee: blockchain referendum waarin je met een niek account kan temmen op iddeen die wortden doorgevoerd. referendum
+- [ ] ALTIJDGESLAAGD: create auto lessen website combi van theorie toppers mikey en altijdgeslaagd
+- [ ] DROPSHIP: create baby webshop
+- [ ] MIEKYROJAS: continue  own website
+- [ ] AIHOUSE: automation website for AI solutions like (lead automation and such)[like theaiclubhouse on IG]
+- [ ] STEM: blockchain referendum waarin je met een niek account kan temmen op iddeen die wortden doorgevoerd. referendum
 
 - [ ] create cube site -> questionable
 
