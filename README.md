@@ -266,3 +266,6 @@ PS C:\Users\MBR\Desktop\Nameless> Set-ExecutionPolicy RemoteSigned
 https://thexssrat.podia.com/full-house-bundle-all-of-our-current-and-future-courses-in-one?coupon=DDSFSDFSFS
 
 kjk of je deze nodig hebt of niet
+
+## Windows 2019 downlods VDH/ISO
+https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019
