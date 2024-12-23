@@ -289,3 +289,13 @@ sudo usermod -aG docker $USER
 remember to close temrinal and restart for efect to take place
 
 ** manually -> run `docker login`
+
+## shasum
+
+```
+sudo apt install perl
+
+shasum --version
+
+shasum win10-memory.raw -> win10-memory-hash.txt
+```

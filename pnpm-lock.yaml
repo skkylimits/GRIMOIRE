@@ -20,6 +20,9 @@ importers:
       '@iconify-json/file-icons':
         specifier: ^1.2.0
         version: 1.2.1
+      '@iconify-json/fluent-mdl2':
+        specifier: ^1.2.1
+        version: 1.2.1
       '@iconify-json/game-icons':
         specifier: ^1.2.0
         version: 1.2.1
@@ -32,6 +35,9 @@ importers:
       '@iconify-json/map':
         specifier: ^1.2.0
         version: 1.2.2
+      '@iconify-json/material-symbols':
+        specifier: ^1.2.12
+        version: 1.2.12
       '@iconify-json/mdi':
         specifier: ^1.2.0
         version: 1.2.2
@@ -891,6 +897,9 @@ packages:
   '@iconify-json/file-icons@1.2.1':
     resolution: {integrity: sha512-ciDy+wGZpF2QELM5aGVTwsvh6l3puPbdrIy+L9sVAv1tvSHWFZB2UuadfiLODlVtZFUrzuO404NxESwH88MY1Q==}
 
+  '@iconify-json/fluent-mdl2@1.2.1':
+    resolution: {integrity: sha512-zFgd1V9r0a+mqA46Z4mOoSf6PbQbhYnY9Uhtpjl3xvw03doNolh4apMtsZoLlC/Y7wO2uj306MgziaqwWdNMwg==}
+
   '@iconify-json/game-icons@1.2.1':
     resolution: {integrity: sha512-JrKwJT+xmee87QRGIoUdR59fxMzqykS9NUnG7P0XVeznKwr3WkAw5IVWSQVQDLcN6+X3mdMFme3Hbhh6f0qTDw==}
 
@@ -902,6 +911,9 @@ packages:
 
   '@iconify-json/map@1.2.2':
     resolution: {integrity: sha512-UnxUR7AxBZwucqg47ueqmQ8jrQG2Us15Pu1/6BAPEBmoOT/MNt8EPN2Wc/NkjTjbRyV5Wqd8U173scR0KqbgJQ==}
+
+  '@iconify-json/material-symbols@1.2.12':
+    resolution: {integrity: sha512-2p2T13Kccy7R2HNbdiVsIcHxjp4s9a+iKlfbtt29hldG1pVNaPIlMALNA9bjdEwPjwsVFe06INCbjCRc68JysQ==}
 
   '@iconify-json/mdi@1.2.2':
     resolution: {integrity: sha512-84aznJXzfGdbOXGe8xB7E5uNAb7Yo5IABwTgq2X3kczb819qZeS9eL31bTVn7wJdCLK5ieaoUc2GTS3QYIkJ6g==}
@@ -6429,6 +6441,10 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
+  '@iconify-json/fluent-mdl2@1.2.1':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify-json/game-icons@1.2.1':
     dependencies:
       '@iconify/types': 2.0.0
@@ -6442,6 +6458,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/map@1.2.2':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/material-symbols@1.2.12':
     dependencies:
       '@iconify/types': 2.0.0
 
