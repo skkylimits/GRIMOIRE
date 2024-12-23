@@ -9,7 +9,7 @@ Preparing your target system is the first step in a forensic investigation.
 ## Create Virtual Machine
 We will simulate an attack on a Windows 10 VM.
 
-### Download the Windows 10 ISO 
+### Download the Windows 10 ISO
 
 By running the installation media creation tool.
 
@@ -51,7 +51,7 @@ Once Windows is installed and started up, install VirtualBox Guest additions:
 #### Change the following Windows settings:
 
 - optional*** Enable network discovery (if using shared folders) Control Panel\Network and Internet\Network and Sharing Center\Advanced sharing settings
-- Open developer settings -> apply the checkbox to change execution policy to allow scripts to run 
+- Open developer settings -> apply the checkbox to change execution policy to allow scripts to run
 
 #### Turn off Windows Defender:
 
@@ -84,7 +84,11 @@ If Sysmon is running and the script executed with no errors, proceed with runnin
 powershell.exe -ExecutionPolicy bypass -File .\ART-attack.ps1
 ```
 
-During the script, Notepad should open with "BOOM: Locked & loaded". Click OK, but don't close the Notepad window!
+::warning
+As shown in the screenshot below you need to close the pop up by clicking OK to proceed, but DO NOT close the notepad process! This is needed for memory analysis.
+::
+
+![attack.png](/windows-forensics/attack.png)
 
 If you see:
 
