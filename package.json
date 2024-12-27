@@ -14,9 +14,9 @@
 		"postinstall": "nuxt prepare",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
+		"normalize": "node utils/NormalizeMarkdownImage.js",
 		"typecheck": "nuxt typecheck",
-		"test": "",
-		"normalize-markdown-image": "node utils/NormalizeMarkdownImage.js"
+		"test": "pnpm vitest"
 	},
 	"dependencies": {
 		"@iconify-json/bi": "^1.2.0",
