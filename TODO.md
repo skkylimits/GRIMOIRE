@@ -4,6 +4,7 @@
 
 - [ ]  fix the tailwind css linting conflict. .css files gets linted but tailwind or the css in .vue does not. We need to manually do that with prettier no, fix it in a way trough antfu eslint repo, instead of building your own prettier file again -https://www.youtube.com/watch?v=jlZzzpE-D0s
 - [ ]  fix MDC. mdc should NOT be linted
+- [ ] // TODO: make line number in console.log point towards the exact line in vscode NormalizeMarkdownImageSyntax
 
 ## Bug
 

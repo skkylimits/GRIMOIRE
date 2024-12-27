@@ -2,6 +2,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 
+// TODO: make line number in console.log point towards the exact line in vscode
+
 // ANSI escape codes for colors
 const RED = '\x1B[31m'
 const GREEN = '\x1B[32m'
