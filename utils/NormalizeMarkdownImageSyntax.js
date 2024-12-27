@@ -7,7 +7,7 @@ const RED = '\x1B[31m'
 const GREEN = '\x1B[32m'
 const RESET = '\x1B[0m' // Resets color
 
-// Function to normalize the markdown image links
+// Function to normalize the markdown image links with line numbers
 export function normalizeImagePathInMarkdown(markdown, filePath) {
 	// Regex to match markdown image links: ![alt text](url)
 	const regex = /!\[([^\]]*)\]\(([^)]+)\)/g
@@ -17,55 +17,65 @@ export function normalizeImagePathInMarkdown(markdown, filePath) {
 	// Only log if not in a test environment
 	const isTestEnvironment = process.env.NODE_ENV === 'test'
 
-	// Replace the links with normalized paths
-	return markdown.replace(regex, (match, altText, url) => {
-		// Store the original URL
-		const originalUrl = url
+	let lineNumber = 0 // Track line number
 
-		// Edge case: If URL contains 'https://', 'http://', or any full URL, don't modify
-		if (url.startsWith('http://') || url.startsWith('https://')) {
-			return `![${altText}](${url})` // Return unchanged URL
-		}
+	// Replace the links with normalized paths, line by line
+	return markdown.split('\n').map((line) => {
+		lineNumber++
 
-		// Normalize paths containing 'public'
-		if (url.includes('public')) {
-			// Replace multiple levels of ../public with root paths
-			url = url.replace(/(\.\.\/)+public/, '/')
+		// Use regex to find all image URLs in the line
+		return line.replace(regex, (match, altText, url) => {
+			const originalUrl = url
 
-			// Remove 'public/' only if it's at the start
-			if (url.startsWith('public/')) {
-				url = url.substring(7) // Remove 'public/' prefix
+			// Edge case: If URL contains 'https://', 'http://', or any full URL, don't modify
+			if (url.startsWith('http://') || url.startsWith('https://')) {
+				return `![${altText}](${url})` // Return unchanged URL
 			}
-		}
 
-		// Normalize excess slashes (e.g., //// to /)
-		url = url.replace(/\/+/g, '/')
+			// Normalize paths containing 'public'
+			if (url.includes('public')) {
+				// Replace multiple levels of ../public with root paths
+				url = url.replace(/(\.\.\/)+public/, '/')
 
-		// Ensure paths without slashes get prefixed with '/'
-		if (!url.startsWith('/') && !url.includes('/')) {
-			url = `/${url}`
-		}
-
-		// Log the original and updated URLs with more descriptive text
-		if (!isTestEnvironment) {
-			// Log only if the URL has changed and the file path hasn't been logged yet
-			if (originalUrl !== url) {
-				/* eslint-disable no-console */
-				if (!isFilePathLogged) {
-				// Log the file path only once
-					console.log(`${filePath}`)
-					isFilePathLogged = true
+				// Remove 'public/' only if it's at the start
+				if (url.startsWith('public/')) {
+					url = url.substring(7) // Remove 'public/' prefix
 				}
-				// Log the original and updated URLs
-				console.log(`	Original: ${RED}${originalUrl}${RESET}`)
-				console.log(`	Normalized: ${GREEN}${url}${RESET}`)
-				console.log('') // Add a blank line for spacing
 			}
-		}
 
-		// Return the updated markdown with the modified path
-		return `![${altText}](${url})`
-	})
+			// Normalize excess slashes (e.g., //// to /)
+			url = url.replace(/\/+/g, '/')
+
+			// Ensure paths without slashes get prefixed with '/'
+			if (!url.startsWith('/') && !url.includes('/')) {
+				url = `/${url}`
+			}
+
+			// Log the original and updated URLs with more descriptive text
+			if (!isTestEnvironment) {
+				// Log only if the URL has changed and the file path hasn't been logged yet
+				if (originalUrl !== url) {
+					/* eslint-disable no-console */
+					if (!isFilePathLogged) {
+						// Log the file path only once
+						console.log(`${filePath}`)
+						isFilePathLogged = true
+					}
+					// Calculate the padding for alignment
+					const lineNumPadding = `Line ${lineNumber + 1}:`.padEnd(12) // Adjust the padding length as needed
+					const originalText = `Original: ${originalUrl}`.padEnd(50) // Adjust the padding length for alignment
+					const updatedText = `Updated: ${url}`
+
+					console.log(`${lineNumPadding}${RED}${originalText}${RESET}`)
+					console.log(`${' '.padEnd(12)}${GREEN}${updatedText}${RESET}`) // Align updated line under the original one
+					console.log('') // Add a blank line for spacing
+				}
+			}
+
+			// Return the updated markdown with the modified path
+			return `![${altText}](${url})`
+		})
+	}).join('\n') // Recombine the lines back into a single string
 }
 
 // Function to normalize a single markdown file
