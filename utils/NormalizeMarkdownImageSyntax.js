@@ -2,13 +2,13 @@ import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 
+// ANSI escape codes for colors
+const RED = '\x1B[31m'
+const GREEN = '\x1B[32m'
+const RESET = '\x1B[0m' // Resets color
+
 // Function to normalize the markdown image links
 export function normalizeImagePathInMarkdown(markdown) {
-	// ANSI escape codes for colors
-	const RED = '\x1B[31m'
-	const GREEN = '\x1B[32m'
-	const RESET = '\x1B[0m' // Resets color
-
 	// Regex to match markdown image links: ![alt text](url)
 	const regex = /!\[([^\]]*)\]\(([^)]+)\)/g
 
@@ -63,7 +63,7 @@ export function NormalizeImagePathInMarkdownFile(filePath) {
 		// If the content is different, write it back and log the change
 		if (markdown !== normalizedMarkdown) {
 			fs.writeFileSync(filePath, normalizedMarkdown, 'utf8')
-			console.log(`File ${filePath} has been normalized`)
+			console.log(`${GREEN}File ${filePath} has been normalized${RESET}`)
 		}
 	}
 	catch (err) {
