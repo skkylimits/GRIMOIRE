@@ -8,9 +8,11 @@ const GREEN = '\x1B[32m'
 const RESET = '\x1B[0m' // Resets color
 
 // Function to normalize the markdown image links
-export function normalizeImagePathInMarkdown(markdown) {
+export function normalizeImagePathInMarkdown(markdown, filePath) {
 	// Regex to match markdown image links: ![alt text](url)
 	const regex = /!\[([^\]]*)\]\(([^)]+)\)/g
+
+	let isFilePathLogged = false // Flag to check if file path has been logged
 
 	// Replace the links with normalized paths
 	return markdown.replace(regex, (match, altText, url) => {
@@ -41,11 +43,17 @@ export function normalizeImagePathInMarkdown(markdown) {
 			url = `/${url}`
 		}
 
-		// Log only if the URL has changed
+		// Log only if the URL has changed and the file path hasn't been logged yet
 		if (originalUrl !== url) {
-			/* eslint-disable no-console */
-			console.log(`${RED}Original:${RESET} ${RED}${originalUrl}${RESET}`)
-			console.log(`${GREEN}Updated:${RESET} ${GREEN}${url}${RESET}`)
+			if (!isFilePathLogged) {
+				// Log the file path only once
+				console.log(`${filePath}`)
+				isFilePathLogged = true
+			}
+
+			// Log the original and updated URLs
+			console.log(`	Original: ${RED}${originalUrl}${RESET}`)
+			console.log(`	Normalized: ${GREEN}${url}${RESET}`)
 			console.log('') // Add a blank line for spacing
 		}
 
@@ -58,7 +66,7 @@ export function normalizeImagePathInMarkdown(markdown) {
 export function NormalizeImagePathInMarkdownFile(filePath) {
 	try {
 		const markdown = fs.readFileSync(filePath, 'utf8')
-		const normalizedMarkdown = normalizeImagePathInMarkdown(markdown)
+		const normalizedMarkdown = normalizeImagePathInMarkdown(markdown, filePath) // Pass filePath here
 
 		// If the content is different, write it back and log the change
 		if (markdown !== normalizedMarkdown) {
