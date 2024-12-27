@@ -5,6 +5,7 @@ import process from 'node:process'
 // ANSI escape codes for colors
 const RED = '\x1B[31m'
 const GREEN = '\x1B[32m'
+const GREY = '\x1B[90m'
 const RESET = '\x1B[0m' // Resets color
 
 // Function to normalize the markdown image links with line numbers
@@ -61,13 +62,17 @@ export function normalizeImagePathInMarkdown(markdown, filePath) {
 						console.log(`${filePath}`)
 						isFilePathLogged = true
 					}
-					// Calculate the padding for alignment
-					const lineNumPadding = `Line ${lineNumber + 1}:`.padEnd(12) // Adjust the padding length as needed
-					const originalText = `Original: ${originalUrl}`.padEnd(50) // Adjust the padding length for alignment
-					const updatedText = `Updated: ${url}`
 
+					// Calculate the padding for alignment
+					const lineNumPadding = `${GREY}${(lineNumber + 1).toString().padEnd(6)}${RESET}` // Padding for line number
+
+					// Adjust the padding for "Original" and "Updated" texts
+					const originalText = `Original: ${originalUrl}`.padEnd(50) // Adjust this length for alignment
+					const updatedText = `Updated: ${url}`.padEnd(50) // Adjust this length for alignment
+
+					// Print the aligned output
 					console.log(`${lineNumPadding}${RED}${originalText}${RESET}`)
-					console.log(`${' '.padEnd(12)}${GREEN}${updatedText}${RESET}`) // Align updated line under the original one
+					console.log(`${' '.padEnd(6)}${GREEN}${updatedText}${RESET}`) // Align updated line under the original one
 					console.log('') // Add a blank line for spacing
 				}
 			}
