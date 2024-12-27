@@ -1,0 +1,23 @@
+// sudo apt install perl
+// regex: (\.\.\/)+public
+// perl: perl -i -p -e 's/(\.\.\/)+public//g' your_file.txt
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Fix Image Paths in Markdown",
+			"type": "shell",
+			"command": "/usr/bin/perl -i -p -e 's/(\\.\\.\\/)+public//g' ${file}",
+			"problemMatcher": [],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"options": {
+				"cwd": "${workspaceFolder}"
+			}
+		}
+	]
+}
+
+// s/!\[([^\]]*)\]\(([^)]+\/)(\.\.\/)+public([^)]*)\)/![\1](\2public\4)/g
