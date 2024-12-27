@@ -87,11 +87,23 @@ export function NormalizeImagePathInMarkdownFile(filePath) {
 
 // Function to normalize all markdown files in a directory (recursively)
 export function NormalizeImagePathInMarkdownsDirectory(dirPath) {
+	const EXCLUDED_DIRECTORIES = ['.nuxt', '.output', '.dist']
+
 	try {
 		const files = fs.readdirSync(dirPath)
 
 		files.forEach((file) => {
 			const fullPath = path.join(dirPath, file)
+
+			// Skip directories that are in the EXCLUDED_DIRECTORIES array
+			const isExcludedDir = EXCLUDED_DIRECTORIES.some(excludedDir =>
+				fullPath.includes(excludedDir),
+			)
+
+			if (isExcludedDir) {
+				// console.log(`Skipping directory: ${fullPath}`)
+				return
+			}
 
 			if (fs.statSync(fullPath).isDirectory()) {
 				// Recursively process directories
