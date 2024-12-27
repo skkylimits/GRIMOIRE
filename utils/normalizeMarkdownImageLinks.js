@@ -4,21 +4,27 @@ function normalizeMarkdownImageLinks(markdown) {
 
 	// Replace the links with normalized paths
 	return markdown.replace(regex, (match, altText, url) => {
-		// Check if the URL contains 'public' and adjust
-		if (url.includes('public')) {
-		// Use regex to remove any ../../public from the start of the URL
-			url = url.replace(/(\.\.\/)+public/, '/') // This will replace multiple ../public with a single slash
+		// Edge case: If URL contains 'https://', 'http://', or any full URL, don't modify
+		if (url.startsWith('http://') || url.startsWith('https://')) {
+			// Leave the URL unchanged if it starts with 'http' or 'https'
+			return `![${altText}](${url})`
+		}
 
-			// If 'public' is directly at the start, remove it
+		// Normalize paths containing 'public'
+		if (url.includes('public')) {
+			// Replace multiple levels of ../public with root paths
+			url = url.replace(/(\.\.\/)+public/, '/')
+
+			// Remove 'public/' only if it's at the start
 			if (url.startsWith('public/')) {
-				url = url.substring(7) // Remove 'public/' from the start
+				url = url.substring(7) // Remove 'public/' prefix
 			}
 		}
 
-		// Remove any excess slashes (e.g., //// to /)
-		url = url.replace(/\/+/g, '/') // This replaces multiple slashes with a single slash
+		// Normalize excess slashes (e.g., //// to /)
+		url = url.replace(/\/+/g, '/')
 
-		// If the URL is a simple file name (no slashes), prepend a slash to point to /public
+		// Ensure paths without slashes get prefixed with '/'
 		if (!url.startsWith('/') && !url.includes('/')) {
 			url = `/${url}`
 		}
@@ -27,47 +33,42 @@ function normalizeMarkdownImageLinks(markdown) {
 		return `![${altText}](${url})`
 	})
 }
+// Test cases
 
-// Example usage:
+const testCases = [
+	// Edge Case: URL is a full HTTP(S) URL with ../public
+	{
+		input: '![example](https://example.com/../public/content/logo.png)',
+		expected: '![example](https://example.com/../public/content/logo.png)',
+	},
+	// Normal Case: Relative path with ../public
+	{
+		input: '![alt text](../../../../public/content/auto-imgager.png)',
+		expected: '![alt text](/content/auto-imgager.png)',
+	},
+	// Case with public/ at the start
+	{
+		input: '![alt text](public/auto-imgager.png)',
+		expected: '![alt text](/auto-imgager.png)',
+	},
+	// Case with one level deep ../public
+	{
+		input: '![alt text](../public/content/auto-imgager.png)',
+		expected: '![alt text](/content/auto-imgager.png)',
+	},
+	// Excess slashes in path
+	{
+		input: '![alt text](////content/auto-imgager.png)',
+		expected: '![alt text](/content/auto-imgager.png)',
+	},
+	// Simple file without slashes
+	{
+		input: '![alt text](auto-imgager.png)',
+		expected: '![alt text](/auto-imgager.png)',
+	},
+]
 
-// Case 1: Nested path with multiple levels of ../public/
-const markdown1 = '![alt text](../../../../public/content/6.knowledge-base/6.operating-systems/1.windows-forensics/auto-imgager.png)'
-const updatedMarkdown1 = normalizeMarkdownImageLinks(markdown1)
-console.log(updatedMarkdown1) // Expected: ![alt text](/content/6.knowledge-base/6.operating-systems/1.windows-forensics/auto-imgager.png)
-
-// Case 2: Root level with public/
-const markdown2 = '![alt text](public/auto-imgager.png)'
-const updatedMarkdown2 = normalizeMarkdownImageLinks(markdown2)
-console.log(updatedMarkdown2) // Expected: ![alt text](auto-imgager.png)
-
-// Case 3: One level deep with ../public/
-const markdown3 = '![alt text](../public/content/auto-imgager.png)'
-const updatedMarkdown3 = normalizeMarkdownImageLinks(markdown3)
-console.log(updatedMarkdown3) // Expected: ![alt text](content/auto-imgager.png)
-
-// Case 4: Nested path with `public/` in a more complex path
-const markdown4 = '![alt text](/../../../../public/content/6.knowledge-base/6.operating-systems/1.windows-forensics/auto-imgager.png)'
-const updatedMarkdown4 = normalizeMarkdownImageLinks(markdown4)
-console.log(updatedMarkdown4) // Expected: ![alt text](/content/6.knowledge-base/6.operating-systems/1.windows-forensics/auto-imgager.png)
-
-// Case 5: Excess slashes (should normalize to a single slash)
-const markdown5 = '![alt text](////content/6.knowledge-base/6.operating-systems/1.windows-forensics/auto-imgager.png)'
-const updatedMarkdown5 = normalizeMarkdownImageLinks(markdown5)
-console.log(updatedMarkdown5) // Expected: ![alt text](/content/6.knowledge-base/6.operating-systems/1.windows-forensics/auto-imgager.png)
-
-// Case 6: Excess slashes (should normalize to a single slash)
-const markdown6 = '![alt text](///content/auto-imgager.png)'
-const updatedMarkdown6 = normalizeMarkdownImageLinks(markdown6)
-console.log(updatedMarkdown6) // Expected: ![alt text](/content/auto-imgager.png)
-
-// Case 7: Protocol-relative URL with excess slashes
-const markdown7 = '![alt text](//content/6.knowledge-base/6.operating-systems/1.windows-forensics/auto-imgager.png)'
-const updatedMarkdown7 = normalizeMarkdownImageLinks(markdown7)
-console.log(updatedMarkdown7) // Expected: ![alt text](/content/6.knowledge-base/6.operating-systems/1.windows-forensics/auto-imgager.png)
-
-// Case 8: Simple file (no directory), should add a slash
-const markdown8 = '![alt text](auto-imgager.png)'
-const updatedMarkdown8 = normalizeMarkdownImageLinks(markdown8)
-console.log(updatedMarkdown8) // Expected: ![alt text](/auto-imgager.png)
-
-export default normalizeMarkdownImageLinks
+testCases.forEach(({ input, expected }, index) => {
+	const result = normalizeMarkdownImageLinks(input)
+	console.log(`Case ${index + 1}:`, result === expected ? 'Pass ✅' : `Fail ❌ (Got: ${result})`)
+})

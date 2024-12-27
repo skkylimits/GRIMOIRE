@@ -9,21 +9,27 @@ export function normalizeMarkdownImageLinks(markdown) {
 
 	// Replace the links with normalized paths
 	return markdown.replace(regex, (match, altText, url) => {
-		// Check if the URL contains 'public' and adjust
-		if (url.includes('public')) {
-			// Use regex to remove any ../../public from the start of the URL
-			url = url.replace(/(\.\.\/)+public/, '/') // Replace multiple ../public with a single slash
+		// Edge case: If URL contains 'https://', 'http://', or any full URL, don't modify
+		if (url.startsWith('http://') || url.startsWith('https://')) {
+			// Leave the URL unchanged if it starts with 'http' or 'https'
+			return `![${altText}](${url})`
+		}
 
-			// If 'public' is directly at the start, remove it
+		// Normalize paths containing 'public'
+		if (url.includes('public')) {
+			// Replace multiple levels of ../public with root paths
+			url = url.replace(/(\.\.\/)+public/, '/')
+
+			// Remove 'public/' only if it's at the start
 			if (url.startsWith('public/')) {
-				url = url.substring(7) // Remove 'public/' from the start
+				url = url.substring(7) // Remove 'public/' prefix
 			}
 		}
 
-		// Remove any excess slashes (e.g., //// to /)
-		url = url.replace(/\/+/g, '/') // Replace multiple slashes with a single slash
+		// Normalize excess slashes (e.g., //// to /)
+		url = url.replace(/\/+/g, '/')
 
-		// If the URL is a simple file name (no slashes), prepend a slash
+		// Ensure paths without slashes get prefixed with '/'
 		if (!url.startsWith('/') && !url.includes('/')) {
 			url = `/${url}`
 		}
