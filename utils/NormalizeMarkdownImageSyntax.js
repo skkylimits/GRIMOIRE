@@ -3,16 +3,23 @@ import path from 'node:path'
 import process from 'node:process'
 
 // Function to normalize the markdown image links
-export function normalizeMarkdownImageLinks(markdown) {
+export function normalizeImagePathInMarkdown(markdown) {
+	// ANSI escape codes for colors
+	const RED = '\x1B[31m'
+	const GREEN = '\x1B[32m'
+	const RESET = '\x1B[0m' // Resets color
+
 	// Regex to match markdown image links: ![alt text](url)
 	const regex = /!\[([^\]]*)\]\(([^)]+)\)/g
 
 	// Replace the links with normalized paths
 	return markdown.replace(regex, (match, altText, url) => {
+		// Store the original URL
+		const originalUrl = url
+
 		// Edge case: If URL contains 'https://', 'http://', or any full URL, don't modify
 		if (url.startsWith('http://') || url.startsWith('https://')) {
-			// Leave the URL unchanged if it starts with 'http' or 'https'
-			return `![${altText}](${url})`
+			return `![${altText}](${url})` // Return unchanged URL
 		}
 
 		// Normalize paths containing 'public'
@@ -34,16 +41,24 @@ export function normalizeMarkdownImageLinks(markdown) {
 			url = `/${url}`
 		}
 
+		// Log only if the URL has changed
+		if (originalUrl !== url) {
+			/* eslint-disable no-console */
+			console.log(`${RED}Original:${RESET} ${RED}${originalUrl}${RESET}`)
+			console.log(`${GREEN}Updated:${RESET} ${GREEN}${url}${RESET}`)
+			console.log('') // Add a blank line for spacing
+		}
+
 		// Return the updated markdown with the modified path
 		return `![${altText}](${url})`
 	})
 }
 
 // Function to normalize a single markdown file
-export function normalizeMarkdownFile(filePath) {
+export function NormalizeImagePathInMarkdownFile(filePath) {
 	try {
 		const markdown = fs.readFileSync(filePath, 'utf8')
-		const normalizedMarkdown = normalizeMarkdownImageLinks(markdown)
+		const normalizedMarkdown = normalizeImagePathInMarkdown(markdown)
 
 		// If the content is different, write it back and log the change
 		if (markdown !== normalizedMarkdown) {
@@ -57,7 +72,7 @@ export function normalizeMarkdownFile(filePath) {
 }
 
 // Function to normalize all markdown files in a directory (recursively)
-export function normalizeMarkdownFilesInDirectory(dirPath) {
+export function NormalizeImagePathInMarkdownsDirectory(dirPath) {
 	try {
 		const files = fs.readdirSync(dirPath)
 
@@ -66,10 +81,10 @@ export function normalizeMarkdownFilesInDirectory(dirPath) {
 
 			if (fs.statSync(fullPath).isDirectory()) {
 				// Recursively process directories
-				normalizeMarkdownFilesInDirectory(fullPath)
+				NormalizeImagePathInMarkdownsDirectory(fullPath)
 			}
 			else if (fullPath.endsWith('.md')) {
-				normalizeMarkdownFile(fullPath)
+				NormalizeImagePathInMarkdownFile(fullPath)
 			}
 		})
 	}
@@ -86,10 +101,10 @@ function main() {
 		const stat = fs.statSync(inputPath)
 
 		if (stat.isDirectory()) {
-			normalizeMarkdownFilesInDirectory(inputPath)
+			NormalizeImagePathInMarkdownsDirectory(inputPath)
 		}
 		else if (stat.isFile() && inputPath.endsWith('.md')) {
-			normalizeMarkdownFile(inputPath)
+			NormalizeImagePathInMarkdownFile(inputPath)
 		}
 		else {
 			console.error('Please provide a valid markdown file or directory.')

@@ -13,8 +13,8 @@
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
 		"lint": "eslint .",
-		"lint:fix": "eslint . --fix",
-		"normalize": "node utils/NormalizeMarkdownImage.js",
+		"lint:fix": "pnpm run normalize . && eslint . --fix",
+		"normalize": "node utils/NormalizeMarkdownImageSyntax.js",
 		"typecheck": "nuxt typecheck",
 		"test": "pnpm vitest"
 	},
