@@ -14,6 +14,9 @@ export function normalizeImagePathInMarkdown(markdown, filePath) {
 
 	let isFilePathLogged = false // Flag to check if file path has been logged
 
+	// Only log if not in a test environment
+	const isTestEnvironment = process.env.NODE_ENV === 'test'
+
 	// Replace the links with normalized paths
 	return markdown.replace(regex, (match, altText, url) => {
 		// Store the original URL
@@ -43,18 +46,21 @@ export function normalizeImagePathInMarkdown(markdown, filePath) {
 			url = `/${url}`
 		}
 
-		// Log only if the URL has changed and the file path hasn't been logged yet
-		if (originalUrl !== url) {
-			if (!isFilePathLogged) {
+		// Log the original and updated URLs with more descriptive text
+		if (!isTestEnvironment) {
+			// Log only if the URL has changed and the file path hasn't been logged yet
+			if (originalUrl !== url) {
+				/* eslint-disable no-console */
+				if (!isFilePathLogged) {
 				// Log the file path only once
-				console.log(`${filePath}`)
-				isFilePathLogged = true
+					console.log(`${filePath}`)
+					isFilePathLogged = true
+				}
+				// Log the original and updated URLs
+				console.log(`	Original: ${RED}${originalUrl}${RESET}`)
+				console.log(`	Normalized: ${GREEN}${url}${RESET}`)
+				console.log('') // Add a blank line for spacing
 			}
-
-			// Log the original and updated URLs
-			console.log(`	Original: ${RED}${originalUrl}${RESET}`)
-			console.log(`	Normalized: ${GREEN}${url}${RESET}`)
-			console.log('') // Add a blank line for spacing
 		}
 
 		// Return the updated markdown with the modified path
