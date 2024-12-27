@@ -5,9 +5,9 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Fix Image Paths in Markdown",
+			"label": "Normalize Image Paths In Markdown",
 			"type": "shell",
-			"command": "/usr/bin/perl -i -p -e 's/(\\.\\.\\/)+public//g' ${file}",
+			"command": "npm run normalize-markdown-image ${file}",
 			"problemMatcher": [],
 			"group": {
 				"kind": "build",
