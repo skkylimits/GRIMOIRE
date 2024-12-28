@@ -15,14 +15,38 @@ export function updateAssetMetadataInMarkdown(markdown, filePath) {
 	// Regex to match markdown image syntax ![alt](path)
 	const regex = /!\[(.*?)\]\((.*?)\)/g
 
+	// To keep track of all changes
+	const changes = []
+
 	// Only log if not in a test environment
 	const isTestEnvironment = process.env.NODE_ENV === 'test'
 
-	// Replace alt text with the image filename without extensions
+	// Replace alt text with the image filename without extensions and log changes
 	markdown = markdown.replace(regex, (match, alt, path) => {
 		const fileName = path.split('/').pop().split('.')[0] // Extract filename without extension
-		return `[${fileName}](${path})` // Replace alt text with filename without extension
+		const updatedLink = `[${fileName}](${path})` // Replace alt text with filename without extension
+
+		// Log the change (only if not in test environment)
+		if (!isTestEnvironment) {
+			changes.push({
+				original: match,
+				updated: updatedLink,
+				filePath,
+			})
+		}
+
+		return updatedLink
 	})
+
+	// Log all changes if not in test environment
+	if (!isTestEnvironment && changes.length > 0) {
+		changes.forEach((change) => {
+			console.log(`${change.filePath}`)
+			console.log(`${change.original}`)
+			console.log(`${change.updated}`)
+			console.log('---')
+		})
+	}
 
 	// Return the updated markdown (no need to write back to file here)
 	return markdown
