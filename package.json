@@ -13,9 +13,9 @@
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
 		"lint": "eslint .",
-		"lint:fix": "pnpm run normalize && eslint . --fix",
+		"lint:fix": "pnpm run normalize && pnpm run metadata-update && eslint . --fix",
 		"normalize": "node utils/NormalizeMarkdownImageSyntax.js .",
-		"update": "node utils/updateAssetMetadataInMarkdown.js .",
+		"metadata-update": "node utils/updateAssetMetadataInMarkdown.js .",
 		"typecheck": "nuxt typecheck",
 		"test": "pnpm vitest"
 	},
