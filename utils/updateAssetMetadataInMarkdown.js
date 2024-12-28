@@ -1,7 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-
 // ANSI escape codes for colors
 const RED = '\x1B[31m'
 const GREEN = '\x1B[32m'
@@ -18,33 +17,46 @@ export function updateAssetMetadataInMarkdown(markdown, filePath) {
 	// Only log if not in a test environment
 	const isTestEnvironment = process.env.NODE_ENV === 'test'
 
+	let lineNumber = 0 // Track line number
+
 	// Replace alt text with the image filename without extensions and log changes
-	markdown = markdown.replace(regex, (match, alt, path) => {
-		const fileName = path.split('/').pop().split('.')[0] // Extract filename without extension
-		const updatedLink = `![${fileName}](${path})` // Replace alt text with filename without extension
+	return markdown.split('\n').map((line) => {
+		lineNumber++
 
-		// Log the changes if not in test environment
-		if (!isTestEnvironment) {
-		// Log only if the alt text has changed (i.e., filename was modified)
-			if (match !== updatedLink) {
-				/* eslint-disable no-console */
-				if (!isFilePathLogged) {
-					// Log the file path only once
-					console.log(`${filePath}`)
-					isFilePathLogged = true
+		// Use regex to find all image URLs in the line
+		return line.replace(regex, (match, alt, path) => {
+			const fileName = path.split('/').pop().split('.')[0] // Extract filename without extension
+			const updatedLink = `![${fileName}](${path})` // Replace alt text with filename without extension
+
+			// Log the changes if not in test environment
+			if (!isTestEnvironment) {
+				// Log only if the alt text has changed (i.e., filename was modified)
+				if (match !== updatedLink) {
+					/* eslint-disable no-console */
+					if (!isFilePathLogged) {
+						// Log the file path only once
+						console.log(`${filePath}`)
+						isFilePathLogged = true
+					}
+
+					// Calculate the padding for alignment
+					const lineNumPadding = `${GREY}${(lineNumber).toString().padEnd(6)}${RESET}` // Padding for line number
+
+					// Adjust the padding for "Original" and "Updated" texts
+					const originalText = `Original: ${RED}![${alt}]${RESET}`.padEnd(50) // Adjust this length for alignment
+					const updatedText = `Updated: ${GREEN}![${fileName}]${RESET}`.padEnd(50) // Adjust this length for alignment
+
+					// Print the aligned output
+					console.log(`${lineNumPadding}${originalText}`)
+					console.log(`${' '.padEnd(6)}${updatedText}`) // Align updated line under the original one
+					console.log('') // Add a blank line for spacing
 				}
-				// Log the original alt text in red and the updated alt text in green
-				console.log(`	Original: ${RED}![${alt}]${RESET}`)
-				console.log(`	Updated: ${GREEN}![${fileName}]${RESET}`)
-				console.log('') // Add a blank line for spacing
 			}
-		}
 
-		return updatedLink
-	})
-
-	// Return the updated markdown (no need to write back to file here)
-	return markdown
+			// Return the updated markdown
+			return updatedLink
+		})
+	}).join('\n') // Recombine the lines back into a single string
 }
 
 // Function to normalize a single markdown file
