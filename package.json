@@ -15,7 +15,7 @@
 		"lint": "eslint .",
 		"lint:fix": "pnpm run normalize && eslint . --fix",
 		"normalize": "node utils/NormalizeMarkdownImageSyntax.js .",
-		"update": "node utils/NormalizeMarkdownImageSyntax.js .",
+		"update": "node utils/updateAltTextMarkdownImageSyntax.js .",
 		"typecheck": "nuxt typecheck",
 		"test": "pnpm vitest"
 	},
