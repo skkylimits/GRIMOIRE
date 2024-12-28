@@ -94,7 +94,7 @@ export function NormalizeImagePathInMarkdownFile(filePath) {
 		// If the content is different, write it back and log the change
 		if (markdown !== normalizedMarkdown) {
 			fs.writeFileSync(filePath, normalizedMarkdown, 'utf8')
-			console.log(`${GREEN}File ${filePath} has been normalized${RESET}`)
+			console.log(`${GREEN}File ${filePath} has been normalized${RESET}\n`)
 		}
 	}
 	catch (err) {

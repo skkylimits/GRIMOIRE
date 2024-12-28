@@ -56,7 +56,7 @@ export function updateAssetMetadataInMarkdownFile(filePath) {
 		// If the content is different, write it back and log the change
 		if (markdown !== updatedMarkdown) {
 			fs.writeFileSync(filePath, updatedMarkdown, 'utf8')
-			console.log(`${GREEN}File ${filePath} has been updated${RESET}`)
+			console.log(`${GREEN}File ${filePath} has been updated${RESET}\n`)
 		}
 	}
 	catch (err) {
