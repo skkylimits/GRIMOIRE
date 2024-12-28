@@ -18,6 +18,11 @@ export function updateAssetMetadataInMarkdown(markdown, filePath) {
 	// Regex to match markdown image syntax ![alt](path)
 	const regex = /!\[(.*?)\]\((.*?)\)/g
 
+	const isFilePathLogged = false // Flag to check if file path has been logged
+
+	// Only log if not in a test environment
+	const isTestEnvironment = process.env.NODE_ENV === 'test'
+
 	// Replace alt text with the image filename without extensions
 	content = content.replace(regex, (match, alt, path) => {
 		const fileName = path.split('/').pop().split('.')[0] // Extract filename without extension
