@@ -8,15 +8,12 @@ const GREEN = '\x1B[32m'
 const GREY = '\x1B[90m'
 const RESET = '\x1B[0m' // Resets color
 
-/* eslint-disable no-console */
-
 // Function to normalize the markdown image links with line numbers
 export function updateAssetMetadataInMarkdown(markdown, filePath) {
 	// Regex to match markdown image syntax ![alt](path)
 	const regex = /!\[(.*?)\]\((.*?)\)/g
 
-	// To keep track of all changes
-	const changes = []
+	let isFilePathLogged = false // Flag to check if file path has been logged
 
 	// Only log if not in a test environment
 	const isTestEnvironment = process.env.NODE_ENV === 'test'
@@ -26,27 +23,25 @@ export function updateAssetMetadataInMarkdown(markdown, filePath) {
 		const fileName = path.split('/').pop().split('.')[0] // Extract filename without extension
 		const updatedLink = `[${fileName}](${path})` // Replace alt text with filename without extension
 
-		// Log the change (only if not in test environment)
+		// Log the changes if not in test environment
 		if (!isTestEnvironment) {
-			changes.push({
-				original: match,
-				updated: updatedLink,
-				filePath,
-			})
+		// Log only if the alt text has changed (i.e., filename was modified)
+			if (match !== updatedLink) {
+				/* eslint-disable no-console */
+				if (!isFilePathLogged) {
+					// Log the file path only once
+					console.log(`${filePath}`)
+					isFilePathLogged = true
+				}
+				// Log the original and updated markdown
+				console.log(`	Original: ${RED}${match}${RESET}`)
+				console.log(`	Updated: ${GREEN}${updatedLink}${RESET}`)
+				console.log('') // Add a blank line for spacing
+			}
 		}
 
 		return updatedLink
 	})
-
-	// Log all changes if not in test environment
-	if (!isTestEnvironment && changes.length > 0) {
-		changes.forEach((change) => {
-			console.log(`${change.filePath}`)
-			console.log(`${change.original}`)
-			console.log(`${change.updated}`)
-			console.log('---')
-		})
-	}
 
 	// Return the updated markdown (no need to write back to file here)
 	return markdown
