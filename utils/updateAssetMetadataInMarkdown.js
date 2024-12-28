@@ -12,28 +12,20 @@ const RESET = '\x1B[0m' // Resets color
 
 // Function to normalize the markdown image links with line numbers
 export function updateAssetMetadataInMarkdown(markdown, filePath) {
-	// Read the markdown file
-	let content = fs.readFileSync(filePath, 'utf8')
-
 	// Regex to match markdown image syntax ![alt](path)
 	const regex = /!\[(.*?)\]\((.*?)\)/g
-
-	const isFilePathLogged = false // Flag to check if file path has been logged
 
 	// Only log if not in a test environment
 	const isTestEnvironment = process.env.NODE_ENV === 'test'
 
 	// Replace alt text with the image filename without extensions
-	content = content.replace(regex, (match, alt, path) => {
+	markdown = markdown.replace(regex, (match, alt, path) => {
 		const fileName = path.split('/').pop().split('.')[0] // Extract filename without extension
-		return `![${fileName}](${path})` // Replace alt text with filename without extension
+		return `[${fileName}](${path})` // Replace alt text with filename without extension
 	})
 
-	// Write the updated content back to the file
-	fs.writeFileSync(filePath, content)
-
-	// Return the updated content (instead of writing it back immediately)
-	return content
+	// Return the updated markdown (no need to write back to file here)
+	return markdown
 }
 
 // Function to normalize a single markdown file
