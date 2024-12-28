@@ -17,7 +17,7 @@
 		{
 			"label": "Update Alt Text In Markdown",
 			"type": "shell",
-			"command": "node utils/updateAltTextMarkdownImageSyntax.js ${file}",
+			"command": "node utils/updateAssetMetadataInMarkdown.js ${file}",
 			"problemMatcher": [],
 			"group": {
 				"kind": "build",
