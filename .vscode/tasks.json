@@ -4,7 +4,7 @@
 		{
 			"label": "Normalize Image Paths In Markdown",
 			"type": "shell",
-			"command": "npm run normalize ${file}",
+			"command": "node utils/NormalizeMarkdownImageSyntax.js ${file}",
 			"problemMatcher": [],
 			"group": {
 				"kind": "build",

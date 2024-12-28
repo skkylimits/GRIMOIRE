@@ -48,26 +48,36 @@ export function updateAssetMetadataInMarkdownFile(filePath) {
 
 // Function to update all markdown files in a directory (recursively)
 export function updateAssetMetadataInMarkdownsDirectory(dirPath) {
-	console.log(`Processing directory: ${dirPath}`)
+	const EXCLUDED_DIRECTORIES = ['.nuxt', '.output', '.dist']
 
-	// Read all files in the directory
-	const files = fs.readdirSync(dirPath)
+	try {
+		const files = fs.readdirSync(dirPath)
 
-	files.forEach((file) => {
-		const fullPath = path.join(dirPath, file)
+		files.forEach((file) => {
+			const fullPath = path.join(dirPath, file)
 
-		// Check if it's a file or directory
-		const stat = fs.statSync(fullPath)
+			// Skip directories that are in the EXCLUDED_DIRECTORIES array
+			const isExcludedDir = EXCLUDED_DIRECTORIES.some(excludedDir =>
+				fullPath.includes(excludedDir),
+			)
 
-		if (stat.isDirectory()) {
-			// If it's a directory, call the function recursively
-			updateAssetMetadataInMarkdownsDirectory(fullPath)
-		}
-		else if (stat.isFile() && fullPath.endsWith('.md')) {
-			// If it's a markdown file, update the file
-			updateAssetMetadataInMarkdownFile(fullPath)
-		}
-	})
+			if (isExcludedDir) {
+				// console.log(`Skipping directory: ${fullPath}`)
+				return
+			}
+
+			if (fs.statSync(fullPath).isDirectory()) {
+				// Recursively process directories
+				updateAssetMetadataInMarkdownsDirectory(fullPath)
+			}
+			else if (fullPath.endsWith('.md')) {
+				updateAssetMetadataInMarkdownFile(fullPath)
+			}
+		})
+	}
+	catch (err) {
+		console.error(`Error processing directory: ${dirPath}`, err)
+	}
 }
 
 // Main function for CLI usage
