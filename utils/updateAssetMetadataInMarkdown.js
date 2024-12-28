@@ -21,7 +21,7 @@ export function updateAssetMetadataInMarkdown(markdown, filePath) {
 	// Replace alt text with the image filename without extensions and log changes
 	markdown = markdown.replace(regex, (match, alt, path) => {
 		const fileName = path.split('/').pop().split('.')[0] // Extract filename without extension
-		const updatedLink = `[${fileName}](${path})` // Replace alt text with filename without extension
+		const updatedLink = `![${fileName}](${path})` // Replace alt text with filename without extension
 
 		// Log the changes if not in test environment
 		if (!isTestEnvironment) {
@@ -33,9 +33,9 @@ export function updateAssetMetadataInMarkdown(markdown, filePath) {
 					console.log(`${filePath}`)
 					isFilePathLogged = true
 				}
-				// Log the original and updated markdown
-				console.log(`	Original: ${RED}${match}${RESET}`)
-				console.log(`	Updated: ${GREEN}${updatedLink}${RESET}`)
+				// Log the original alt text in red and the updated alt text in green
+				console.log(`	Original: ${RED}![${alt}]${RESET}`)
+				console.log(`	Updated: ${GREEN}![${fileName}]${RESET}`)
 				console.log('') // Add a blank line for spacing
 			}
 		}

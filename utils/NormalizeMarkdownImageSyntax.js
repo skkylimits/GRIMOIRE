@@ -69,12 +69,12 @@ export function normalizeImagePathInMarkdown(markdown, filePath) {
 					const lineNumPadding = `${GREY}${(lineNumber + 1).toString().padEnd(6)}${RESET}` // Padding for line number
 
 					// Adjust the padding for "Original" and "Updated" texts
-					const originalText = `Original: ${originalUrl}`.padEnd(50) // Adjust this length for alignment
-					const updatedText = `Updated: ${url}`.padEnd(50) // Adjust this length for alignment
+					const originalText = `Original: ${RED}${originalUrl}${RESET}`.padEnd(50) // Adjust this length for alignment
+					const updatedText = `Updated: ${GREEN}${url}${RESET}`.padEnd(50) // Adjust this length for alignment
 
 					// Print the aligned output
-					console.log(`${lineNumPadding}${RED}${originalText}${RESET}`)
-					console.log(`${' '.padEnd(6)}${GREEN}${updatedText}${RESET}`) // Align updated line under the original one
+					console.log(`${lineNumPadding}${originalText}`)
+					console.log(`${' '.padEnd(6)}${updatedText}`) // Align updated line under the original one
 					console.log('') // Add a blank line for spacing
 				}
 			}
