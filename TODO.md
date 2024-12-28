@@ -1,58 +1,56 @@
 # TODO
 
-## Linting
-
-- [ ]  fix the tailwind css linting conflict. .css files gets linted but tailwind or the css in .vue does not. We need to manually do that with prettier no, fix it in a way trough antfu eslint repo, instead of building your own prettier file again -https://www.youtube.com/watch?v=jlZzzpE-D0s
-- [ ]  fix MDC. mdc should NOT be linted
-- [ ] // TODO: make line number in console.log point towards the exact line in vscode NormalizeMarkdownImageSyntax
-
 ## Bug
 
-- [ ] Title in slug is error. Disabled for now. Deep dive into OG & SEO.
-- [ ] Why advanced markdown such aas mermad etc not working?
-
-## Markdown
-
-- [ ] geojson
-- [ ] stl
-- [ ] mermaid -> https://github.com/nuxt/content/issues/1866#issuecomment-1442360997
+- [ ] **Title in Slug Error**: Currently disabled. Requires further investigation.
+    - Deep dive into **OG** & **SEO** settings.
+- [ ] **Advanced Markdown Rendering Issues**:
+    - [ ] **GeoJSON**: Ensure GeoJSON support is working correctly.
+    - [ ] **STL**: Investigate if STL files render properly.
+    - [ ] **Mermaid**: Review issue discussed in [GitHub thread](https://github.com/nuxt/content/issues/1866#issuecomment-1442360997) to resolve Mermaid rendering problems.
+- [ ] **Linting Issues**:
+    - [ ] **Tailwind CSS Linting Conflict**:
+        - `.css` files are being linted, but Tailwind CSS or CSS within `.vue` files is not.
+        - Solution: Fix this through the Antfu ESLint repo instead of manually configuring a Prettier file. [Watch the tutorial here](https://www.youtube.com/watch?v=jlZzzpE-D0s).
+    - [ ] **MDC Linting**: Ensure **MDC** files are **NOT** linted.
+    - [ ] **Console Log Line Numbers**: Adjust configuration to make sure line numbers in `console.log` point to the exact line in **VSCode**.
+- [ ] **Normalize Markdown Image Syntax**: Fix inconsistencies in image syntax for better rendering in markdown files.
 
 ## UI
 
-- [ ] Breadcrumb (we already have a working one)
-- [ ] Collapsed & Multiple feature (work in progress -> created branch)
-- [ ] Fix clickable header. Currently, you can't use a link in a header, which can be frustrating (what-is-web.md <https://chatgpt.com/share/67c92a28-dec0-4f6e-8374-16ddf11507d4>)
-  - [ ] [Nuxt] [NuxtLink] You can't nest one <a> inside another <a>. This will cause a hydration error on client-side. You can pass the custom prop to take full control of the markup.
-  - [ ] now customize the according to handle the logic instead of usink navLink & accordion. this is not modifyable how it is now
-- [ ] Make own Shiki theme. Same theme for light and dark uses
-- [ ] make copy code from codeblock scrollable. Meaning when you scroll down and code block hasnt ended the copy code scrolls with you. like chatgpt
-- [ ] make changelog page with tag that scroll when in view. https://volta.net/changelog
+- [ ] **Breadcrumb**: Already have a working implementation.
+- [ ] **Collapsed & Multiple Feature**: Work in progress. A branch has been created for this.
+- [ ] **Fix Clickable Header**: Currently, you can't use a link in a header, which can be frustrating. Example: [What is Web](https://chatgpt.com/share/67c92a28-dec0-4f6e-8374-16ddf11507d4)
+    - [ ] **[Nuxt] [NuxtLink]**: You can't nest one `<a>` inside another `<a>`. This causes a hydration error on the client-side. You can pass a custom prop to take full control of the markup.
+    - [ ] Customize the logic to handle this issue, instead of using `navLink` & `accordion`. This part is not modifiable as it stands now.
+- [ ] **Create Custom Shiki Theme**: Design and implement a custom Shiki theme, ensuring it works for both light and dark modes.
+- [ ] **Make Code Block Scrollable with Copy Code**: Implement functionality where the "copy code" button scrolls with the code block, similar to the behavior in ChatGPT, ensuring the button remains in view as you scroll down.
+- [ ] **Changelog Page**: Create a changelog page with a tag that scrolls when in view, similar to the one on [Volta Changelog](https://volta.net/changelog).
 
 ## Prose Components
 
-- git highlgights, give spectrum of red with unique border or not?
-  - give them correct box-shadow colors
-  - update te colors inside it correctly according the the highlight were in, now it's standard red.
-  - look at doc v1 colors for color combination inspirration
-- [ ] Try it for a list with steps that connect to each other from number 1 to 2 with a line. On work laptop, we have a photo of this
-  - [ ] Replace current table with old table from VitePress
-- [ ] make a list of all used icons like i-ph:app-window and show it in a librar
-- [ ] combi of https://www.juridischloket.nl/cookieverklaring/ and vue faq
+- [ ] **Git Highlights**: Decide on a spectrum of red with or without a unique border.
+    - [ ] Ensure **correct box-shadow colors** are applied.
+    - [ ] Update the colors inside the highlight to reflect the correct context (currently using standard red).
+    - [ ] Look at **Doc v1 colors** for inspiration on color combinations.
+- [ ] **List with Steps Connected**: Create a list with steps that visually connect from number 1 to 2 using a line. (Reference image available on work laptop).
+    - [ ] Replace the current table with the old table from **VitePress**.
+- [ ] **Icon Library**: Make a list of all used icons (e.g., `i-ph:app-window`) and display them in a library format.
+- [ ] **Combination of Cookie Declaration and FAQ**: Combine elements of the [Cookie Declaration](https://www.juridischloket.nl/cookieverklaring/) and Vue FAQ for a new feature.
+- [ ] **Image Zoom**: Implement an image zoom feature like the one on this page: [Azure Security - First Layer Defense](https://learn.microsoft.com/en-us/azure/architecture/solution-ideas/articles/azure-security-build-first-layer-defense).
+    - Focus on zooming in on the image as done on the website.
 
 ## Config
 
-- [ ] try to add a settings/config option. That certain behaviour can be enabled/disabled, like the hr below the h2. Catch my drift? - kinda like discord has
-- [ ] Make it so you can adjust the way certain prose types behave, like the h2 with standard --- hr at the end of the - [ ]
-- [ ] make a config so when we use _## or ## h2 .{exclude}, that specific h2 doesnt render in the toc.
-
-- [ ] Zoekn in winowds customizen, zodat everything weg kan? everytihg  indexeert o basis van files, windows o basis van content
+- [ ] **Add Settings/Config Option**: Implement a setting that allows enabling or disabling certain behaviors, such as the horizontal rule (`hr`) below the `h2` header. Think of it like how Discord has toggleable features.
+- [ ] **Adjust Prose Behavior**: Make it configurable to adjust how certain prose elements behave, such as the `h2` headers with a standard `---` horizontal rule at the end.
+- [ ] **Exclude Specific H2 from TOC**: Create a configuration so that when using `_##` or `## h2 .{exclude}`, that specific `h2` will not render in the Table of Contents (TOC).
 
 ## DOC
 
-- [ ] Make a `instructions.nameless` where you explain how your app and files work
+- [ ] find out how to incorporate subdomains. instructions.nameless.com / prose.nameless.com etc
 - [ ] Explain how your functions work (jsdoc)
 - [ ] One line scalar/openAPI docs https://www.youtube.com/shorts/BKmnBXsGwkM
-- [ ] add to thhe list by specifying when and why to use certai prose components <https://content.nuxt.com/components/prose>
 
 ## Automation
 
@@ -68,7 +66,7 @@
 
 ## Features
 
-- [ ] Integrate ChatGPT or create own gpt? free -> https://www.kapa.ai/
+- [ ] Integrate ChatGPT -> https://www.kapa.ai/
 - [ ] Translate language or i18?
 - [ ] Setup ZeroTier [with login and such]
 - [ ] Setup database like you did with Nameless HTTP server
@@ -77,103 +75,91 @@
 - [ ] flashcard creation and question
 - [ ] add community option for discussions
 - [ ] cookieverklaring - https://www.juridischloket.nl/cookieverklaring/
+- [ ] download to pdf - https://michaelnthiessen.com/create-beautiful-pdfs-with-html-css-and-markdown
 
-## Special
+## Production
 
-- [ ] Make a [extension] in VS Code that lists all prose styling options?
-- [ ] Create a ChatGPT [app] mode for IT, Doc Writing, & Email Writing
-- [ ] Make a browser extension that captures important comments(and lets you organize them) Kinda like pocket
-- [ ] create a nuxt module(dont know what to code yet tho)
-
-## When finished
-
-- [ ] ALTIJDGESLAAGD: create auto lessen website combi van theorie toppers mikey en altijdgeslaagd
-- [ ] DROPSHIP: create baby webshop
-- [ ] MIEKYROJAS: continue  own website
-- [ ] AIHOUSE: automation website for AI solutions like (lead automation and such)[like theaiclubhouse on IG]
-- [ ] STEM: blockchain referendum waarin je met een niek account kan temmen op iddeen die wortden doorgevoerd. referendum
-
-- [ ] create cube site -> questionable
-
-- [ ] https://learn.microsoft.com/en-us/azure/architecture/solution-ideas/articles/azure-security-build-first-layer-defense zoom in on image like this website
-
-## Finito
-
-When finished turn thi
-
-## malware
-https://lolbas-project.github.io/#
-
-## TODOTODO
-
-SC-900
-MD-102
-RIJBWIJS
-TCM & AD/AZURE ACADEMY
-
-## te plaatsen
-
-https://go.recordedfuture.com/the-intelligence-handbook-fourth-edition
-
-## Windows PC storage
-
-3 NVME's for top performance.
-
-- Main OS
-- Main Games
-- Kali/Ubuntu
-
-TerraMaster NAS F8 SSD Plus
-
-- 4x 4TB NVME disks
-
-QUBE NAS
-
--4 x 1TB Offline Storage
-
-then run syncback pro for backup
-
-## Pyenv
-
-https://www.liquidweb.com/blog/how-to-install-pyenv-on-ubuntu-18-04/
-
-## CISSP
-
-- CBK CISSP
-- Study guide CISSP
-
-## Kubernetes
-
- Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
-   just raised the bar for easy, resilient and secure K8s cluster deployment.
-
-   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+- [ ] **Decide Between Cloud or CDN**: Choose whether to use cloud storage or a CDN, and make the appropriate adjustments in `runtimeConfig` and `.env`. Ensure assets like `![alt text](url)` are served from the correct path:
+    - In development: `/images/img.png`
+    - In production: `{cdn}/images/img.png`
+    - Explore options such as [Cloudflare R2](https://www.cloudflare.com/developer-platform/products/r2/) or [Backblaze B2 Cloud Storage](https://www.backblaze.com/cloud-storage).
+- [ ] **Evaluate the Necessity of Nuxt Image Module for Markdown**: Assess whether the Nuxt Image module is really necessary for serving images in markdown content, or if another solution could be more efficient.
 
 ## Your Main Branch Is Not Protected
 
 https://github.com/skkylimits/Nameless/settings/rules/new?target=branch&enforcement=disabled
 
+## Special
+
+- [ ] Make a [vsode extension]
+	- [ ] that lists all prose styling options?
+	- [ ] eslint/markdown schrijf je eigen versie in eslint/markdown met de regels van markdownlint
+	- [ ] keyboard overlay? een extensie van ctrl + space?
+- [ ] Make a [browser extension]
+	- [ ] that captures important comments(and lets you organize them) Kinda like pocket
+- [ ] Create a [nuxt module]
+- [ ] Create a [GPT]
+	- [ ] Focused on writing:mode for IT, Doc Writing, & Email Writing
+
+## When finished
+
+- [ ] **MIKEYROJAS**: Continue development of personal website.
+    - [ ] **Design/Development Site**: Work on the design and development of the site.
+    - [ ] **Security Site**: Implement necessary security features for the website.
+- [ ] **AIHOUSE**: Create an automation website for AI solutions (e.g., lead automation), inspired by [The AI Clubhouse on Instagram](https://www.instagram.com/theaiclubhouse).
+- [ ] **ALTIJDGESLAAGD**: Develop an auto driving lessons website combining features from **Theorie Toppers Mikey** and **Altijd Geslaagd**.
+- [ ] **STEM**: Build a blockchain-based referendum platform where users can submit and vote on ideas that will be implemented (users vote using a "niek" account).
+- [ ] **VERHUISLIFT**: Develop a website for a moving lift service.
+- [ ] **DROPSHIP**: Create a baby product webshop using dropshipping.
+- [ ] **3D GAMES**: Develop 3D games.
+
+## Research
+
+- [ ] Customize windows search(search NAS + user files) en de rest voor Everything. Everytihg  indexeert op basis van files, windows op basis van content
+
+## Certificates
+
+- [ ] **SC-900**: Prepare for and pass the Microsoft Security, Compliance, and Identity Fundamentals exam.
+- [ ] **MD-102**: Prepare for and pass the Microsoft Windows 10 exam.
+- [ ] **RIJBWIJS**: Focus on the "Rijbewijs" (driver’s license) exam preparation.
+- [ ] **TCM & AD/AZURE ACADEMY**: Study and complete the TCM & Azure Academy courses.
+- [ ] **CBK CISSP**: Study for the Certified Information Systems Security Professional (CISSP) certification.
+    - [ ] **Study Guide for CISSP**: Follow a structured study guide to prepare for the CISSP exam.
+
+## Windows PC storage
+
+Primary System (Windows PC)
+- 3 NVMe SSDs for top-tier performance:
+	- Main OS: Fast boot and responsive system.
+	- Games/VM: High-speed storage for games and virtual machines.
+	- Kali/Ubuntu: Dedicated drives for Linux distributions (Kali and Ubuntu).
+
+TerraMaster NAS F8 SSD Plus
+- 4x 4TB/8TB NVMe SSDs configured for high-speed storage and efficient access.
+
+NAS Storage
+- 4x 16TB Offline Storage: For secure, cold storage of essential data.
+
+Backup Solution
+    SyncBack Pro: Automated backup and synchronization to keep your data safe and up to date
+
 ## Automate Windows Unattended
 
-Make it so windows unattended will:
-- detect vmware
-- detect virtualbox
-- detect hyper-v
+Automate the Windows installation process to detect virtualization environments and physical machines, and apply the appropriate settings (UEFI/Bios) without manually creating ISO files from scratch.
+Features:
 
-and install different settings accordingly(uefi. or bios for hyper-v)
+- Detect Virtualization Environments:
+	- VMware: Detect VMware and apply relevant configuration.
+	- VirtualBox: Detect VirtualBox and apply relevant configuration.
+	- Hyper-V: Detect Hyper-V and apply UEFI settings if needed.
 
-- detect physical machine
+- Detect Physical Machines:
+	- Automatically detect whether the installation is on a physical machine or a virtual machine and adjust installation settings accordingly (e.g., BIOS/UEFI mode).
 
-and install needed settings accordingly
-
-This all so I don't have to manually create iso files from scratch and stuff
+- Automate the Process:
+	- Use an unattended installation to automatically detect the environment and apply the necessary settings during the Windows setup.
+	- Eliminate the need to manually create or modify ISO files for different setups.
 
 ## 3d mussle software
 
 https://www.youtube.com/shorts/A1PJm4V_jVM
-
-## eslint/markdown
-
-schrijf je eigen versie in eslint/markdown met de regels van markdownlint
-
-## Keybinding Overlay
