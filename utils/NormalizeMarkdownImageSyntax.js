@@ -104,7 +104,7 @@ export function NormalizeImagePathInMarkdownFile(filePath) {
 
 // Function to normalize all markdown files in a directory (recursively)
 export function NormalizeImagePathInMarkdownsDirectory(dirPath) {
-	const EXCLUDED_DIRECTORIES = ['.nuxt', '.output', '.dist']
+	const EXCLUDED_DIRECTORIES = ['.nuxt', '.output', '.dist', 'node_modules']
 
 	try {
 		const files = fs.readdirSync(dirPath)

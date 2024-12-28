@@ -48,7 +48,7 @@ export function updateAssetMetadataInMarkdownFile(filePath) {
 
 // Function to update all markdown files in a directory (recursively)
 export function updateAssetMetadataInMarkdownsDirectory(dirPath) {
-	const EXCLUDED_DIRECTORIES = ['.nuxt', '.output', '.dist']
+	const EXCLUDED_DIRECTORIES = ['.nuxt', '.output', '.dist', 'node_modules']
 
 	try {
 		const files = fs.readdirSync(dirPath)
