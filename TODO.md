@@ -57,6 +57,7 @@
 - [ ] Renovate https://github.com/renovatebot/tutorial
 - [ ] CI pipeline
 - [ ] automated changelog
+- [ ] git hooks -> pre commits (npm run test)
 
 ## Nameless
 
@@ -159,7 +160,3 @@ Features:
 - Automate the Process:
 	- Use an unattended installation to automatically detect the environment and apply the necessary settings during the Windows setup.
 	- Eliminate the need to manually create or modify ISO files for different setups.
-
-## 3d mussle software
-
-https://www.youtube.com/shorts/A1PJm4V_jVM
