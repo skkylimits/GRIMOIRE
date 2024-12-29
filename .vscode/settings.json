@@ -1,7 +1,7 @@
 {
 	// ========== Formatting ==========
 	"markdown.copyFiles.destination": {
-		"**/*": "/public/${documentRelativeDirName}/"
+		"**/*": "/public/${documentRelativeDirName}/${documentBaseName}/"
 	},
 
 	// Disable the default formatter, use eslint instead
