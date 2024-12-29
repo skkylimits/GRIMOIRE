@@ -160,3 +160,28 @@ Features:
 - Automate the Process:
 	- Use an unattended installation to automatically detect the environment and apply the necessary settings during the Windows setup.
 	- Eliminate the need to manually create or modify ISO files for different setups.
+
+## Career
+
+<https://bluecapesecurity.com/faq/>
+
+## Convert to snippets
+
+- [ ] Video
+- [ ] Audio
+- [ ] Maps
+- [ ] Sandbox
+- [ ] GitHub Highlights
+- [ ] Superscript
+- [ ] Subscript
+- [ ] Table
+- [ ] Collapsible
+- [ ] Foldable
+- [ ] Card
+- [ ] CardGroup
+- [ ] Field
+- [ ] FieldGroup
+- [ ] Tabs
+- [ ] Shortcut
+- [ ] Underline
+- [ ] CodeGroup
