@@ -170,18 +170,6 @@ Features:
 - [ ] Video
 - [ ] Audio
 - [ ] Maps
-- [ ] Sandbox
-- [ ] GitHub Highlights
-- [ ] Superscript
-- [ ] Subscript
+
 - [ ] Table
-- [ ] Collapsible
-- [ ] Foldable
-- [ ] Card
-- [ ] CardGroup
-- [ ] Field
-- [ ] FieldGroup
 - [ ] Tabs
-- [ ] Shortcut
-- [ ] Underline
-- [ ] CodeGroup
