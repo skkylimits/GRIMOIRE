@@ -164,12 +164,3 @@ Features:
 ## Career
 
 <https://bluecapesecurity.com/faq/>
-
-## Convert to snippets
-
-- [ ] Video
-- [ ] Audio
-- [ ] Maps
-
-- [ ] Table
-- [ ] Tabs
