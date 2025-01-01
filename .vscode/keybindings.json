@@ -1,7 +1,5 @@
 // Place your key bindings in this file to override the defaults.
-
 // This is my attempt to create a custom keybinding file for Visual Studio Code simulating the browser experience.
-
 [
 	{
 		"key": "ctrl+t",
@@ -28,12 +26,19 @@
 		"key": "alt+f", // Replace with your preferred shortcut
 		"command": "workbench.action.tasks.runTask",
 		"args": "Normalize Image Paths In Markdown"
+	},
+	{
+		"key": "alt+g", // Replace with your preferred shortcut
+		"command": "workbench.action.tasks.runTask",
+		"args": "Update Alt Text In Markdown"
+	},
+	{
+		"key": "ctrl+shift+space",
+		"command": "editor.action.insertSnippet",
+		"when": "editorTextFocus"
 	}
-
 ]
-
 // Paste these settings to Preference: Open Keyboard Shortcuts (JSON) in Visual Studio Code.
 // To launch the Define Keybinding widget, press Ctrl+K Ctrl+K
 // https://code.visualstudio.com/docs/getstarted/keybindings#_keyboard-layoutindependent-bindings
-
 // ADD: a way to switch between vscode windows
