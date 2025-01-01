@@ -164,3 +164,9 @@ Features:
 ## Career
 
 <https://bluecapesecurity.com/faq/>
+
+## snippets
+
+- svg
+- footnotes
+- convert markdowndefault to custom snippets
