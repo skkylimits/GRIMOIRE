@@ -169,4 +169,7 @@ Features:
 
 - svg
 - footnotes
-- convert markdowndefault to custom snippets
+- convert markdowndefault to custom snippets <https://danielabaron.me/blog/vscode-markdown-basics-custom-fenced-languages/>
+- add vue snippets from nuxtpro
+
+## Paste red border around media automatically
