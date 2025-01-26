@@ -269,3 +269,8 @@ kjk of je deze nodig hebt of niet
 
 ## Windows 2019 downlods VDH/ISO
 https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019
+
+## Icons
+
+npm i -D @iconify-json/arcticons
+npm i -D @iconify-json/eos-icons
