@@ -274,3 +274,7 @@ https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019
 
 npm i -D @iconify-json/arcticons
 npm i -D @iconify-json/eos-icons
+
+alt f & alt g to clean up after cntrl v pasting image
+
+iconify preview?
