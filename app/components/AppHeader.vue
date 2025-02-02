@@ -73,6 +73,12 @@ const links = [
 		description: 'Tools and utilities for development, networking, and system administration.',
 		children: [
 			{
+				label: 'AI',
+				to: '/kitt/ai',
+				icon: 'ix:ai',
+				description: 'Stay ahead of the curve and don\'t get left out.',
+			},
+			{
 				label: 'Git',
 				to: '/kitt/git',
 				icon: 'i-simple-icons-git',
@@ -139,6 +145,12 @@ const links = [
 				to: '/xpl01ts/zero-day',
 				icon: 'game-icons:skull-bolt',
 				description: 'Explore zero-day vulnerabilities and their exploitation before patches are available.',
+			},
+			{
+				label: 'Techniques',
+				to: '/xpl01ts/techniques',
+				icon: 'mingcute:vector-group-line',
+				description: 'Learn about common techniques used in penetration testing and cyber attacks.',
 			},
 		],
 	},
