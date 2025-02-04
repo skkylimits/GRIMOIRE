@@ -143,3 +143,8 @@ graph moule and api different things
 interestingly this small env is wel managed and in top 1% of security. if env grows it becomes harder to manage and less secure
 
 ![image](/content/6.knowledge-base/8.cyber-crusades/6.cloud/4.enumeration/werweme/image.png)
+
+owner of a device would be a member of the locl admin group of the device help us in chucking an attack path
+
+$RoleId = (Get-MgDirectoryRole -Filter "DisplayName eq 'Global Administrator'").Id
+(Get-MgDirectoryRoleMember -DirectoryRoleId $RoleId).AdditionalProperties
