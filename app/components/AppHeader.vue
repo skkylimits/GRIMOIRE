@@ -60,6 +60,12 @@ const links = [
 				description: 'Dive into Python scripting for a wide variety of applications, from automation to AI.',
 			},
 			{
+				label: 'PHP',
+				to: '/syntax/php',
+				icon: 'i-devicon:php',
+				description: 'A popular general-purpose scripting language.',
+			},
+			{
 				label: 'SQL',
 				to: '/syntax/sql',
 				icon: 'i-simple-icons-postgresql',
