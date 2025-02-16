@@ -214,6 +214,12 @@ const links = [
 				description: 'This is the art and grit of web development—a never-ending race against time, technology, and the limits of creativity..',
 			},
 			{
+				label: 'OSINT',
+				icon: 'i-el:opensource',
+				to: '/knowledge-base/osint',
+				description: 'OSINT refers to the process of collecting and analyzing publicly available information.',
+			},
+			{
 				label: 'Cyber Crusades',
 				icon: 'i-heroicons-bug-ant',
 				to: '/knowledge-base/cyber-crusades',
