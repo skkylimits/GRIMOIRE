@@ -173,3 +173,24 @@ Features:
 - add vue snippets from nuxtpro
 
 ## Paste red border around media automatically
+
+## Firefox
+
+Find a way to use policies.json in `C:\Program Files\Mozilla Firefox\distribution`
+
+If you can't create a file in that dir. Open a notepad with admin priv. Then open file. Navigate to `C:\Program Files\Mozilla Firefox\distribution` and right click in the windows the create file. Than set file type to all files.
+
+```json
+{
+	"policies": {
+		"PinnedTabs": [
+			"https://google.com",
+			"https://facebook.com"
+		]
+	}
+}
+```
+
+This is just ofr reference if you go to.
+
+Go to `about:policies` in the browser and make sure your polcies.json is properly formatted. Because PinnedTabs doesnt work.

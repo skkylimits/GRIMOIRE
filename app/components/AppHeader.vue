@@ -71,6 +71,12 @@ const links = [
 				icon: 'i-simple-icons-postgresql',
 				description: 'Understand SQL to query and manage relational databases effectively.',
 			},
+			{
+				label: 'YAML',
+				to: '/syntax/yaml',
+				icon: 'i-file-icons:yaml-alt4',
+				description: 'A YAML header contains YAML arguments, such as “title”, “author”, and “output”, demarcated by three dashes (—) on either end.',
+			},
 		],
 	},
 	{
