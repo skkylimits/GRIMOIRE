@@ -1,7 +1,7 @@
 ---
 seo:
-  title: Home
-  description: This is the homepage of the Nameless project.
+  title: Access Point
+  description: This is the homepage gof the Nameless project.
 ---
 
 ::u-page-hero
