@@ -1,7 +1,7 @@
 ---
 seo:
-  title: Nameless
-  description: My Zettelkasten.
+  title: Home
+  description: This is the homepage of the Nameless project.
 ---
 
 ::u-page-hero
