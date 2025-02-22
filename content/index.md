@@ -64,7 +64,6 @@ The Zettelkasten Method
   ---
   icon: i-simple-icons-gnometerminal
   to: /syntax
-  target: _blank
   ---
   #title
   Syntax
@@ -77,7 +76,6 @@ The Zettelkasten Method
   ---
   icon: i-simple-icons-codechef
   to: /kitt
-  target: _blank
   ---
   #title
   KITT
@@ -90,7 +88,6 @@ The Zettelkasten Method
   ---
   icon: i-heroicons-exclamation-circle
   to: /vuln
-  target: _blank
   ---
   #title
   VulN
@@ -103,7 +100,6 @@ The Zettelkasten Method
   ---
   icon: i-simple-icons-gitkraken
   to: /xpl01ts
-  target: _blank
   ---
   #title
   Xpl01ts
@@ -116,7 +112,6 @@ The Zettelkasten Method
   ---
   icon: i-raphael-book
   to: /knowledge-base
-  target: _blank
   ---
   #title
   Knowledge Base
