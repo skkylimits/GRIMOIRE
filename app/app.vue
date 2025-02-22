@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import type { ParsedContent } from '@nuxt/content'
-
 const { seo } = useAppConfig()
 
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
-const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', {
-	default: () => [],
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs'))
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
 	server: false,
 })
 
@@ -33,11 +30,8 @@ provide('navigation', navigation)
 </script>
 
 <template>
-	<div>
-		<NuxtLoadingIndicator
-			color="repeating-linear-gradient(to right,#FFCCCB 0%,#FF5859 60%,#FF0000 100%)"
-			error-color="repeating-linear-gradient(to right,#FF0000 0%,#FF0000 100%)"
-		/>
+	<UApp>
+		<NuxtLoadingIndicator />
 
 		<AppHeader />
 
@@ -47,13 +41,13 @@ provide('navigation', navigation)
 			</NuxtLayout>
 		</UMain>
 
+		<!-- <AppFooter /> -->
+
 		<ClientOnly>
 			<LazyUContentSearch
 				:files="files"
 				:navigation="navigation"
 			/>
 		</ClientOnly>
-
-		<UNotifications />
-	</div>
+	</UApp>
 </template>

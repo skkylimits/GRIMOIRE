@@ -1,24 +1,27 @@
-# Nameless
+![nuxt-ui-docs-social-card](https://github.com/nuxt-ui-pro/docs/assets/739984/f64e13d9-9ae0-4e03-bf7f-6be4c36cd9ba)
 
-[![Made%20with-Nuxt%20UI%20Pro-00DC82?logo=nuxt](https://img.shields.io/badge/Made%20with-Nuxt%20UI%20Pro-00DC82?logo=nuxt.js&labelColor=020420)](https://ui.nuxt.com/pro)
-[![Open%20in%20Nuxt%20Studio-18181B?&logo=nuxt](https://img.shields.io/badge/Open%20in%20Nuxt%20Studio-18181B?&logo=nuxt.js&logoColor=3BB5EC)](https://nuxt.studio/themes/docs)
+# Nuxt UI Pro - Docs template
 
-- [Live demo](https://docs-template.nuxt.dev/)
-- [Play on Stackblitz](https://stackblitz.com/github/nuxt-ui-pro/docs)
-- [Documentation](https://ui.nuxt.com/pro/getting-started)
-- [Clone on Nuxt Studio](https://nuxt.studio/themes/docs)
+[![Nuxt UI Pro](https://img.shields.io/badge/Made%20with-Nuxt%20UI%20Pro-00DC82?logo=nuxt.js&labelColor=020420)](https://ui.nuxt.com/pro)
+[![Nuxt Studio](https://img.shields.io/badge/Open%20in%20Nuxt%20Studio-18181B?&logo=nuxt.js&logoColor=3BB5EC)](https://nuxt.studio/themes/docs)
+
+- [Live demo](https://docs-template.nuxt.dev)
+- [Documentation](https://ui3.nuxt.dev/getting-started/installation/pro/nuxt)
+- [Clone on Nuxt Studio](https://content.nuxt.com/templates/docs)
+
+[![Deploy to NuxtHub](https://hub.nuxt.com/button.svg)](https://hub.nuxt.com/new?repo=nuxt-ui-pro/docs)
 
 ## Quick Start
 
-```shell [Terminal]
-npx nuxi init -t github:nuxt-ui-pro/docs
+```bash [Terminal]
+npx nuxi init -t github:nuxt-ui-pro/docs#v3
 ```
 
 ## Setup
 
 Make sure to install the dependencies:
 
-```shell
+```bash
 # npm
 npm install
 
@@ -36,7 +39,7 @@ bun install
 
 Start the development server on `http://localhost:3000`:
 
-```shell
+```bash
 # npm
 npm run dev
 
@@ -54,7 +57,7 @@ bun run dev
 
 Build the application for production:
 
-```shell
+```bash
 # npm
 npm run build
 
@@ -70,7 +73,7 @@ bun run build
 
 Locally preview production build:
 
-```shell
+```bash
 # npm
 npm run preview
 
@@ -88,193 +91,26 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 ## Nuxt Studio integration
 
-Add `@nuxthq/studio` dependency to your package.json:
+Studio is an intuitive CMS interface to edit your Nuxt Content websites.
 
-```shell
-# npm
-npm install --save-dev @nuxthq/studio
+It take advantage of the Preview API included in Nuxt Content to propose the best editing experience for your content files. Editors can benefit from a user-friendly interface to edit their Markdown, YAML or JSON files.
 
-# pnpm
-pnpm add -D @nuxthq/studio
+You can import your project on the platform without any extra setup.
 
-# yarn
-yarn add -D @nuxthq/studio
+However to enable the live preview on the platform, you just need to activate studio in the content configuration of your `nuxt.config.ts` file.
 
-# bun
-bun add -d @nuxthq/studio
-```
-
-Add this module to your `nuxt.config.ts`:
-
-```ts
+```ts [nuxt.config.ts]
 export default defineNuxtConfig({
-	modules: [
-		'@nuxthq/studio'
-	]
+  content: {
+    preview: {
+      api: 'https://api.nuxt.studio'
+    }
+  }
 })
 ```
 
-Read more on [Nuxt Studio docs](https://nuxt.studio/docs/get-started/setup).
+Read more on [Nuxt Studio docs](https://content.nuxt.com/studio/setup).
 
 ## Renovate integration
 
 Install [Renovate GitHub app](https://github.com/apps/renovate/installations/select_target) on your repository and you are good to go.
-
-## Nuxt Ecosystem
-
-There are already many websites based on this template:
-
-- [Nuxt](https://nuxt.com) - The Nuxt website
-- [Nuxt UI](https://ui.nuxt.com) - The documentation of `@nuxt/ui` and `@nuxt/ui-pro`
-- [Nuxt Image](https://image.nuxt.com) - The documentation of `@nuxt/image`
-- [Nuxt Content](https://content.nuxt.com) - The documentation of `@nuxt/content`
-- [Nuxt Devtools](https://devtools.nuxt.com) - The documentation of `@nuxt/devtools`
-- [Nuxt Studio](https://nuxt.studio) - The pro version of Nuxt Content
-
-## \_dir.yml
-
-## Overview
-
-The `_dir.yml` file is used to configure the rendering of navigation elements in your application. This file allows you to specify properties that influence how directories are displayed in the navigation tree. The configuration options include setting a `title`, defining whether the directory is `stripped`, and specifying if it is `standalone`.
-
-Here are the prompts that made [this](https://chatgpt.com/share/95a60589-504a-497d-821d-ac974407d556) happen.
-
-## Key Concepts
-
-### Title
-
-The `title` property specifies the display name of the directory or section in the navigation tree. This is the text that will be shown to users.
-
-**Example configuration:**
-
-```yaml
-title: The Lab
-```
-
-In this example, the directory or section will be labeled as "The Lab" in the navigation menu.
-Sure! Here’s the updated documentation that includes the initial directory structure:
-
-## Features: Standalone and Stripped
-
-We have implemented two powerful rendering features for our directory structure: **Standalone** and **Stripped**. These features enhance the way you can visualize and interact with your content.
-
-### Initial Directory Structure
-
-Here’s the initial directory structure for reference:
-
-```plaintext
-6.knowledge-base/
-└── networking/
-    ├── dhcp
-    └── dns
-```
-
-### 1. Standalone
-
-The **Standalone** feature renders the entire directory structure from the top-level root. This allows you to view all components and subcomponents under a specified category.
-
-**Example:**
-
-For the directory path `6.knowledge-base/networking/`, the Standalone feature will display:
-
-```plaintext
-networking
-├── dhcp
-└── dns
-```
-
-In this view, you can see the top-level category "networking" along with all its child components.
-
----
-
-### 2. Stripped
-
-The **Stripped** feature simplifies the view by removing the top-level folder. It only displays the subfolders and their contents, making it easier to focus on specific components without the hierarchy of the parent directory.
-
-**Example:**
-
-For the same directory path `6.knowledge-base/networking/`, the Stripped feature will render:
-
-```plaintext
-├── dhcp
-└── dns
-```
-
-In this view, you can directly access "dhcp" and "dns" without the "networking" parent folder, providing a cleaner and more focused presentation.
-
-### Nuxt Configuration
-
-To enable these features, you need to add them to your nuxt.config.ts file:
-
-export default {
-  content: {
-    navigation: {
-      fields: ['standalone', 'stripped']
-    },
-    highlight: {
-      theme: {
-        default: 'github-dark'
-      },
-      langs: [
-        // other languages you might be using
-        'powershell',
-        'http'
-      ]
-    }
-  }
-}
-
-## Icons [workaround]
-
-- [Iconify](https://iconify.design/) - Freedom to choose icons
-
-If you want to download a new icon, place it in: `icon: 'i-simple-icons-gitkraken`. After that it will render everywhere in your site.
-
-// place this wherever between a <template></template> It might invoke a redownload
-<UIcon name="i-heroicons-js" class="w-5 h-5" />
-
-```appHeader.vue [javascript]
-{
-        label: 'Nmap',
-        to: '/kitt/nmap',
-        icon: 'i-simple-icons-gitkraken',
-        description: 'A network scanning tool used to discover hosts, services, and vulnerabilities in a network.'
-      }
-```
-
-## Icons
-
-"@iconify-json/heroicons": "^1.1.21",
-"@iconify-json/simple-icons": "^1.1.109",
-"@iconify-json/file-icons": "^1.1.10",
-"@iconify-json/game-icons": "^1.1.10",
-"@iconify-json/mdi": "^1.1.68",
-
----
-
-## Windows Machine
-
-Vergeet niet naar `Set-ExecutionPolicy Restricted` zodra je klaar bent
-
-PS C:\Users\MBR\Desktop\Nameless> Get-ExecutionPolicy
->>
-Restricted
-PS C:\Users\MBR\Desktop\Nameless> Set-ExecutionPolicy RemoteSigned
-
-## XXSrat
-
-https://thexssrat.podia.com/full-house-bundle-all-of-our-current-and-future-courses-in-one?coupon=DDSFSDFSFS
-
-kjk of je deze nodig hebt of niet
-
-## Windows 2019 downlods VDH/ISO
-https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019
-
-## Icons
-
-npm i -D @iconify-json/arcticons
-npm i -D @iconify-json/eos-icons
-
-alt f & alt g to clean up after cntrl v pasting image
-
-iconify preview?

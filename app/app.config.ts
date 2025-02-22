@@ -1,38 +1,24 @@
 export default defineAppConfig({
 	ui: {
-		primary: 'red',
-		gray: 'zinc',
-		container: {
-			// full-width: max-w-8xl
-			constrained: 'max-w-7xl',
+		colors: {
+			primary: 'red',
+			neutral: 'zinc',
 		},
-		// to be continued
-		// page: {
-		//   wrapper: 'flex flex-col lg:grid lg:grid-cols-12 lg:gap-8',
-		//   left: 'lg:col-span-3',
-		//   center: {
-		//     narrow: 'lg:col-span-6',
-		//     base: 'lg:col-span-8',
-		//     full: 'lg:col-span-12'
-		//   },
-		//   right: 'lg:col-span-3 order-first lg:order-last'
-		// },
-		// proseCode: {
-		//   wrapper: '[&>pre]:!rounded-t-none [&>pre]:!my-0 my-5',
-		//   header: 'flex items-center gap-1.5 border dark:border-gray-700 border-b-0 relative rounded-t-md px-4 py-3 not-prose',
-		//   icon: {
-		//     base: ''
-		//   },
-		//   button: {
-		//     base: 'absolute top-2.5 right-2.5'
-		//   },
-		//   filename: 'dark:text-gray-200 text-sm/6'
-		// },
+	},
+	uiPro: {
+		footer: {
+			slots: {
+				root: 'border-t border-(--ui-border)',
+				left: 'text-sm text-(--ui-text-muted)',
+			},
+		},
 	},
 	seo: {
 		siteName: 'Nameless',
 	},
 	header: {
+		title: '',
+		to: '/',
 		logo: {
 			alt: '',
 			light: '',
@@ -40,41 +26,54 @@ export default defineAppConfig({
 		},
 		search: true,
 		colorMode: true,
-		links: [
-			// Uncomment volta-board & make git repo public to enable functionality
-
-			// {
-			//   'icon': 'i-bi-activity',
-			//   'to': '/volta-board',
-			//   'aria-label': 'Volta board'
-			// },
-			{
-				'icon': 'i-mdi-tag',
-				'to': '/the-lab',
-				'target': '_blank',
-				'aria-label': 'Changelog',
-			},
-			{
-				'icon': 'i-simple-icons-github',
-				'to': 'https://github.com/skkylimits/Nameless',
-				'target': '_blank',
-				'aria-label': 'Nameless on GitHub',
-			},
-		],
+		links: [{
+			'icon': 'i-simple-icons-github',
+			'to': 'https://github.com/nuxt-ui-pro/docs/tree/v3',
+			'target': '_blank',
+			'aria-label': 'GitHub',
+		}],
+	},
+	footer: {
+		credits: `Copyright © ${new Date().getFullYear()}`,
+		colorMode: false,
+		links: [{
+			'icon': 'i-simple-icons-discord',
+			'to': 'https://discord.com/invite/ps2h6QT',
+			'target': '_blank',
+			'aria-label': 'Nuxt UI on Discord',
+		}, {
+			'icon': 'i-simple-icons-x',
+			'to': 'https://x.com/nuxt_js',
+			'target': '_blank',
+			'aria-label': 'Nuxt on X',
+		}, {
+			'icon': 'i-simple-icons-github',
+			'to': 'https://github.com/nuxt/ui',
+			'target': '_blank',
+			'aria-label': 'Nuxt UI on GitHub',
+		}],
 	},
 	toc: {
 		title: 'Table of Contents',
 		bottom: {
 			title: 'Community',
-			edit: 'https://github.com/skkylimits/Zettelkasten',
-			links: [
-				{
-					icon: 'i-heroicons-star',
-					label: 'Star on GitHub',
-					to: 'https://github.com/skkylimits/Nameless',
-					target: '_blank',
-				},
-			],
+			edit: 'https://github.com/nuxt-ui-pro/docs/edit/v3/content',
+			links: [{
+				icon: 'i-lucide-star',
+				label: 'Star on GitHub',
+				to: 'https://github.com/nuxt/ui',
+				target: '_blank',
+			}, {
+				icon: 'i-lucide-book-open',
+				label: 'Nuxt UI Pro docs',
+				to: 'https://ui3.nuxt.dev/getting-started/installation/pro/nuxt',
+				target: '_blank',
+			}, {
+				icon: 'i-simple-icons-nuxtdotjs',
+				label: 'Purchase a license',
+				to: 'https://ui.nuxt.com/pro/purchase',
+				target: '_blank',
+			}],
 		},
 	},
 })
