@@ -2,6 +2,7 @@
 import type { ContentNavigationItem } from '@nuxt/content'
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+console.log(navigation)
 </script>
 
 <template>
@@ -10,6 +11,7 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 			<template #left>
 				<UPageAside>
 					<UContentNavigation
+						type="single"
 						highlight
 						:navigation="navigation"
 					/>
