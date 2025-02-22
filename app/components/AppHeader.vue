@@ -56,6 +56,7 @@ const { header } = useAppConfig()
 					label="Docs"
 					variant="subtle"
 				/>
+				<!-- <MainLogo class="w-auto h-6 shrink-0" /> -->
 			</NuxtLink>
 
 			<!-- <TemplateMenu /> -->
