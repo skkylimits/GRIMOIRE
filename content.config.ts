@@ -10,7 +10,7 @@ export default defineContentConfig({
 			type: 'page',
 			source: {
 				include: '**',
-				exclude: ['index.md']
+				exclude: ['**/index.md', '**/.!(navigation.yml)']
 			},
 			schema: z.object({
 				links: z.array(z.object({
