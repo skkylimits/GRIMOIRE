@@ -16,7 +16,16 @@ const safeAppConfig = toRef(appConfig) // ✅ Prevents function serialization is
 
 const appConfigProseCallout = _appConfig as AppConfig & { uiPro: { prose: { callout: Partial<typeof theme> } } }
 
-const callout = tv({ extend: tv(theme), ...(appConfigProseCallout.uiPro?.prose?.callout || {}) })
+const callout = tv({
+	extend: tv(theme),
+	...(appConfigProseCallout.uiPro?.prose?.callout || {}),
+	variants: {
+		color: {
+			important: 'bg-blue-100 border-l-4 border-blue-500 text-blue-900 dark:bg-blue-900/20 dark:border-blue-400 dark:text-blue-100', // Add the `important` variant
+			...theme.variants.color // Preserve existing variants
+		}
+	}
+})
 
 type CalloutVariants = VariantProps<typeof callout>
 
@@ -42,7 +51,7 @@ const ui = computed(() => callout({
 	color: props.color,
 	to: !!props.to
 }))
-
+console.log(props.color)
 const target = computed(() => props.target ?? '') // ✅ Ensure string return
 
 const externalIcon = computed(() => {

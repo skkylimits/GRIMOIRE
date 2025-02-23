@@ -8,6 +8,13 @@ export default defineNuxtConfig({
 		'nuxt-og-image'
 	],
 
+	components: [
+		{
+			path: '~/components',
+			pathPrefix: false // Disable prefix if you want to use it directly
+		}
+	],
+
 	// https://nuxt.com/docs/api/nuxt-config#devtools
 	devtools: {
 		enabled: true,
@@ -18,6 +25,12 @@ export default defineNuxtConfig({
 	},
 
 	css: ['~/assets/css/main.css'],
+
+	vue: {
+		compilerOptions: {
+			isCustomElement: tag => ['Important'].includes(tag)
+		}
+	},
 
 	// https://nuxt.com/docs/getting-started/upgrade#opting-in-to-nuxt-4
 	future: {
