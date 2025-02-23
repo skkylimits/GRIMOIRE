@@ -37,7 +37,6 @@ defineOgImageComponent('Docs')
 
 // Optional chaining for navigation
 const headline = computed(() => findPageHeadline(navigation?.value, page.value))
-console.log('page', page.value)
 
 // Build the GitHub edit URL using the current route
 const editOnGithub = 'edit/main/content'

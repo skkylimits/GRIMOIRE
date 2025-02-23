@@ -52,14 +52,40 @@ const filteredNavigation = computed(() => {
 	const validNav = findValidNavPath(route.path, navigation.value)
 
 	if (validNav) {
+		let items: ContentNavigationItem[] = []
+
 		if (validNav.type === 'standalone') {
-			// Only return the standalone node itself
-			return [validNav.node]
+			items = [validNav.node]
 		}
 		else if (validNav.type === 'stripped') {
-			// Return the children of the stripped node as top-level items
-			return validNav.node.children || []
+			items = validNav.node.children || []
 		}
+
+		// 🛠 Helper function to extract the last number in `stem`
+		function extractSortNumber(stem: string): number {
+			const parts = stem.split('/') // Split by "/"
+			const lastPart = parts[parts.length - 1] // Get the last segment
+			const match = lastPart ? lastPart.match(/^(\d+)/) : null // Extract leading number
+			return match && match[1] ? parseInt(match[1], 10) : 1000 // Default to 1000 if no number found
+		}
+
+		// 🛠 Recursive sorting function
+		function sortItems(items: ContentNavigationItem[]): ContentNavigationItem[] {
+			return items
+				.map(item => ({
+					...item,
+					children: item.children ? sortItems(item.children) : [] // Recursively sort children
+				}))
+				.sort((a, b) => extractSortNumber(a.stem || '') - extractSortNumber(b.stem || ''))
+		}
+
+		// ✅ Apply Sorting
+		const sortedItems = sortItems(items)
+
+		// 🔍 Log before returning
+		console.log('✅ Sorted Items:', JSON.stringify(sortedItems, null, 2))
+
+		return sortedItems
 	}
 
 	return []
