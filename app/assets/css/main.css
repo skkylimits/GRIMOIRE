@@ -23,6 +23,8 @@
 	--ui-info: #ec4899; /* Custom pink color */
 	--ui-color-info-600: #ec4899; /* Darker pink */
 	--ui-color-info-300: #f9a8d4; /* Lighter pink */
+	--ui-border-inverted: var(--ui-primary);
+	--ui-text-highlighted: var(--ui-primary);
   }
 
 

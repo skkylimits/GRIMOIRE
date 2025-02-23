@@ -124,3 +124,11 @@ https://opensource.guide/
 ```bash
 find . -type f -name "_dir.yml" -exec bash -c 'mv "$0" "${0%_dir.yml}.navigation.yml"' {} \;
 ```
+
+## Nuxt UI Pro
+
+Here resides all the componentsls
+
+```bash
+/home/skkylimits/Heaven/Nameless/node_modules/.pnpm/@nuxt+ui@3.0.0-alpha.13_@babel+parser@7.26.5_change-case@5.4.4_db0@0.2.3_@libsql+client_c47b0bb0bd421b6e6c42719a4c89f43f/node_modules/@nuxt/ui/dist/runtime/components
+```
