@@ -1,0 +1,27 @@
+Step 3: Plan the Adaptation for V3
+
+V3 removed mapContentNavigation, so we need to replace it by directly handling the navigation items.
+
+For V3, the steps should be:
+
+    Inject Navigation Data: Use inject<Ref<ContentNavigationItem[]>>('navigation').
+    Find the Valid Navigation Path: Manually search the navigation tree.
+    Filter Navigation Based on Rules: Instead of mapContentNavigation, manually return the correct items.
+    Compute & Render Navigation: Provide a structured navigation object for <UContentNavigation>.
+
+
+Why Did This Work in Nuxt Content v2?
+
+In Nuxt Content v2, you were using:
+
+    navPageFromPath(partialPath, navigation.value)
+        This function searched for the nearest valid navigation node based on the current path.
+        It worked by checking each segment of the URL, moving up until it found a standalone or stripped node.
+
+    Handling "Standalone" and "Stripped" Navigation Properly
+        If a directory was standalone, it meant that only that section and its children were displayed.
+        If a directory was stripped, it meant its children were rendered as top-level items (ignoring the parent structure).
+
+    Transforming the Navigation (mapContentNavigation)
+        Once the correct navigation node was found, it was transformed into a proper structure for the menu.
+        The transformation logic ensured only the relevant navigation items were displayed, preventing unwanted parent directories from showing up.
