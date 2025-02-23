@@ -2,7 +2,7 @@
 import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import type { LinkProps, PartialString } from '@nuxt/ui'
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { tv } from '#ui/utils/tv'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui-pro/prose/callout'
@@ -10,6 +10,9 @@ import theme from '#build/ui-pro/prose/callout'
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports'
+
+const appConfig = useAppConfig()
+const safeAppConfig = toRef(appConfig) // ✅ Prevents function serialization issues
 
 const appConfigProseCallout = _appConfig as AppConfig & { uiPro: { prose: { callout: Partial<typeof theme> } } }
 
@@ -27,7 +30,7 @@ interface CalloutProps {
 }
 
 interface CalloutSlots {
-	default(props?: unknown): unknown // ✅ Fixed
+	default?: () => unknown // ✅ Fix slot typing
 }
 
 defineOptions({ inheritAttrs: false })
@@ -35,22 +38,16 @@ defineOptions({ inheritAttrs: false })
 const props = defineProps<CalloutProps>()
 defineSlots<CalloutSlots>()
 
-const appConfig = useAppConfig()
-
 const ui = computed(() => callout({
 	color: props.color,
 	to: !!props.to
 }))
 
-const target = computed(() =>
-	props.target
-	|| (!!props.to && typeof props.to === 'string' && props.to.startsWith('http') ? '_blank' : undefined)
-	|| ''
-) // ✅ Ensure the computed value is always a string.
+const target = computed(() => props.target ?? '') // ✅ Ensure string return
 
-const externalIcon = computed(() =>
-	appConfig.ui?.icons?.external ?? 'i-heroicons:external-link'
-) // ✅ Provide a default icon if undefined.
+const externalIcon = computed(() => {
+	return safeAppConfig.value.ui?.icons?.external ?? 'i-heroicons:external-link'
+}) // ✅ Safe handling of external icon
 </script>
 
 <template>

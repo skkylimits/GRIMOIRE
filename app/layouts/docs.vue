@@ -80,18 +80,12 @@ const filteredNavigation = computed(() => {
 })
 
 // Render only the object === to the route path
-watchEffect(() => {
-	if (navigation?.value) {
-		// console.log('Route path:', route.path)
-		console.log('Navigation Data:', navigation.value)
-
-		// const matchedItem = findNavItemByPath(route.path, navigation.value)
-		// console.log('🛠 Matched Item for Route:', route.path, matchedItem)
-
-		const validNav = findValidNavPath(route.path, navigation.value)
-		console.log('🔍 Valid Navigation Path for:', route.path, validNav)
-	}
-})
+// watchEffect(() => {
+// 	if (navigation?.value) {
+// 		const validNav = findValidNavPath(route.path, navigation.value)
+// 		console.log('🔍 Valid Navigation Path for:', route.path, validNav)
+// 	}
+// })
 </script>
 
 <template>
