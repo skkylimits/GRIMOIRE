@@ -198,3 +198,11 @@ Go to `about:policies` in the browser and make sure your polcies.json is properl
 ## nuxt img
 
 ipx doesnt work properly in wsl. might have to spin up a docker container to test it.
+
+## https://content.nuxt.com/docs/utils/query-collection-navigation
+
+See if we can use this to create a custom navigation system.
+
+## Default open
+
+Menu defaults open to the first item. This is not the desired behavior. It should be closed by default.
