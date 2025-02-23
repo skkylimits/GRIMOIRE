@@ -24,7 +24,7 @@ Accelerate your ascent in the digital hierarchy. Unleash a stream of interconnec
   :::u-button
   ---
   size: xl
-  to: /getting-started
+  to: /the-lab
   trailing-icon: i-lucide-arrow-right
   ---
   Get started
