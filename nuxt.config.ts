@@ -15,6 +15,30 @@ export default defineNuxtConfig({
 	// 	}
 	// ],
 
+	content: {
+		build: {
+			markdown: {
+				highlight: {
+					// Theme used in all color schemes.
+					theme: {
+						// Force 'github-dark' for both light and dark modes
+						default: 'github-dark', // Theme for dark mode or by default
+						dark: 'github-dark', // Ensure that dark mode uses the same theme
+						light: 'github-light', // Force light mode to use the same theme as well
+					},
+					langs: [
+						// other languages you might be using
+						'sql',
+						'cmd',
+						'powershell',
+						'http',
+						'mdc',
+					],
+				}
+			}
+		}
+	},
+
 	// https://nuxt.com/docs/api/nuxt-config#devtools
 	devtools: {
 		enabled: true,

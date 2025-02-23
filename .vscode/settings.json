@@ -3,45 +3,76 @@
 	"markdown.copyFiles.destination": {
 		"**/*": "/public/${documentRelativeDirName}/${documentBaseName}/"
 	},
-
 	// Disable the default formatter, use eslint instead
 	// Use Prettier for manually formatting
 	"prettier.enable": false,
 	"prettier.printWidth": 200,
 	"prettier.semi": false,
 	"prettier.singleQuote": true,
-	"editor.formatOnSave": false,
-
+	"editor.formatOnSave": true,
 	// Auto fix
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": "explicit",
 		"source.organizeImports": "never"
 	},
-
 	// ESLint config: https://github.com/antfu/eslint-config
 	"eslint.codeAction.showDocumentation": {
 		"enable": true
 	},
-
 	"eslint.options": {
-		"flags": ["unstable_ts_config"]
+		"flags": [
+			"unstable_ts_config"
+		]
 	},
-
 	"eslint.runtime": "node",
-
 	// Silent the stylistic rules in you IDE, but still auto fix them
 	"eslint.rules.customizations": [
-		{ "rule": "style/*", "severity": "off", "fixable": true },
-		{ "rule": "*-indent", "severity": "off", "fixable": true },
-		{ "rule": "*-spacing", "severity": "off", "fixable": true },
-		{ "rule": "*-spaces", "severity": "off", "fixable": true },
-		{ "rule": "*-order", "severity": "off", "fixable": true },
-		{ "rule": "*-dangle", "severity": "off", "fixable": true },
-		{ "rule": "*-newline", "severity": "off", "fixable": true },
-		{ "rule": "*quotes", "severity": "off", "fixable": true },
-		{ "rule": "*semi", "severity": "off", "fixable": true }
+		{
+			"rule": "style/*",
+			"severity": "off",
+			"fixable": true
+		},
+		{
+			"rule": "*-indent",
+			"severity": "off",
+			"fixable": true
+		},
+		{
+			"rule": "*-spacing",
+			"severity": "off",
+			"fixable": true
+		},
+		{
+			"rule": "*-spaces",
+			"severity": "off",
+			"fixable": true
+		},
+		{
+			"rule": "*-order",
+			"severity": "off",
+			"fixable": true
+		},
+		{
+			"rule": "*-dangle",
+			"severity": "off",
+			"fixable": true
+		},
+		{
+			"rule": "*-newline",
+			"severity": "off",
+			"fixable": true
+		},
+		{
+			"rule": "*quotes",
+			"severity": "off",
+			"fixable": true
+		},
+		{
+			"rule": "*semi",
+			"severity": "off",
+			"fixable": true
+		}
 	],
-
 	// Enable eslint for all supported languages
 	"eslint.validate": [
 		"javascript",
@@ -58,7 +89,6 @@
 		"toml",
 		"xml"
 	],
-
 	"pair-diff.patterns": [
 		{
 			"source": "./fixtures/output/**/*.*",

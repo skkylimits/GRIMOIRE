@@ -17,6 +17,12 @@
 npx nuxi init -t github:nuxt-ui-pro/docs#v3
 ```
 
+## Eslint
+
+```bash
+rm -rf .eslintcache && pnpm run lint --fix .
+```
+
 ## Setup
 
 Make sure to install the dependencies:
@@ -157,3 +163,24 @@ Update prose components. Add field update breaking components and such
 http://localhost:3000/knowledge-base/cyber-crusades/bug-bounty/warfare
 
 will disapear
+
+
+## Cyber Crusades
+
+Doesnt render numerically
+
+## App layout
+
+Change the layout make left right menu bigger etc
+
+## Nuxt image
+
+Add nuxt image
+
+## Image zoom
+
+Add zoom on image click like microsoft docs
+
+## CodePre
+
+make code pre one color like before
