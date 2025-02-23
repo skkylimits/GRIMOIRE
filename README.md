@@ -186,3 +186,15 @@ Add zoom on image click like microsoft docs
 make code pre one color like before
 
 ## Markdownlint?
+
+## Homepage like V2
+
+## turn - into square bullet
+
+## Powershell
+
+## add a final entry in menu -> that leads to a page with all script languages or kitt or more vuln or xploit modules
+
+## AD hacking with windows and linux -> automate your server install
+
+## Malware bypass etc
