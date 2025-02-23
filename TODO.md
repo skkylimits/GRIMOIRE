@@ -194,3 +194,7 @@ If you can't create a file in that dir. Open a notepad with admin priv. Then ope
 This is just ofr reference if you go to.
 
 Go to `about:policies` in the browser and make sure your polcies.json is properly formatted. Because PinnedTabs doesnt work.
+
+## nuxt img
+
+ipx doesnt work properly in wsl. might have to spin up a docker container to test it.

@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
 	modules: [
 		'@nuxt/eslint',
-		'@nuxt/image',
+		// '@nuxt/image',
 		'@nuxt/ui-pro',
 		'@nuxt/content',
 		'nuxt-og-image'
