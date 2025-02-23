@@ -18,6 +18,7 @@ const { data } = await useAsyncData(route.path, () => Promise.all([
 ]), {
 	transform: ([page, surround]) => ({ page, surround })
 })
+
 if (!data.value || !data.value.page) {
 	throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
@@ -26,22 +27,33 @@ const page = computed(() => data.value?.page)
 const surround = computed(() => data.value?.surround)
 
 useSeoMeta({
-	title: page.value.seo.title,
-	ogTitle: `${page.value.seo.title} - ${seo?.siteName}`,
-	description: page.value.seo.description,
-	ogDescription: page.value.seo.description
+	title: page.value?.seo?.title,
+	ogTitle: `${page.value?.seo?.title} - ${seo?.siteName}`,
+	description: page.value?.seo?.description,
+	ogDescription: page.value?.seo?.description
 })
 
 defineOgImageComponent('Docs')
 
-const headline = computed(() => findPageHeadline(navigation.value, page.value))
+// Optional chaining for navigation
+const headline = computed(() => findPageHeadline(navigation?.value, page.value))
+console.log('page', page.value)
 
-const links = computed(() => [toc?.bottom?.edit && {
-	icon: 'i-lucide-external-link',
-	label: 'Edit this page',
-	to: `${toc.bottom.edit}/${page?.value?.path}`,
-	target: '_blank'
-}, ...(toc?.bottom?.links || [])].filter(Boolean))
+// Build the GitHub edit URL using the current route
+const editOnGithub = 'edit/main/content'
+const links = computed(() => {
+	const filePath = page.value?.id.replace(/^docs\//, '') // Remove the 'docs/' prefix from the path
+
+	return [
+		toc?.bottom?.edit && {
+			icon: 'i-heroicons-pencil-square',
+			label: 'Edit this page',
+			to: `${toc.bottom.edit}/${editOnGithub}/${filePath}`,
+			target: '_blank'
+		},
+		...(toc?.bottom?.links || [])
+	].filter(Boolean)
+})
 </script>
 
 <template>
