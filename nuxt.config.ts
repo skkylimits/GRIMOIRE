@@ -8,12 +8,12 @@ export default defineNuxtConfig({
 		'nuxt-og-image'
 	],
 
-	components: [
-		{
-			path: '~/components',
-			pathPrefix: false // Disable prefix if you want to use it directly
-		}
-	],
+	// components: [
+	// 	{
+	// 		path: '~/components',
+	// 		pathPrefix: false // Disable prefix if you want to use it directly
+	// 	}
+	// ],
 
 	// https://nuxt.com/docs/api/nuxt-config#devtools
 	devtools: {

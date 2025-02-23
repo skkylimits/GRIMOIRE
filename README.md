@@ -132,3 +132,28 @@ Here resides all the componentsls
 ```bash
 /home/skkylimits/Heaven/Nameless/node_modules/.pnpm/@nuxt+ui@3.0.0-alpha.13_@babel+parser@7.26.5_change-case@5.4.4_db0@0.2.3_@libsql+client_c47b0bb0bd421b6e6c42719a4c89f43f/node_modules/@nuxt/ui/dist/runtime/components
 ```
+
+or
+
+```bash
+/home/skkylimits/Heaven/Nameless/node_modules/.pnpm/@nuxt+ui-pro@3.0.0-alpha.13_@babel+parser@7.26.5_change-case@5.4.4_db0@0.2.3_@libsql+cl_b2d467b342db3f4cefe9dd5a41460e5a/node_modules/@nuxt/ui-pro/dist/runtime/components/prose
+```
+
+
+## H2
+
+H2.vue is not working in our project
+
+## Import img
+
+import images in markdown with task
+
+## Prose components
+
+Update prose components. Add field update breaking components and such
+
+## Disparearing menu
+
+http://localhost:3000/knowledge-base/cyber-crusades/bug-bounty/warfare
+
+will disapear

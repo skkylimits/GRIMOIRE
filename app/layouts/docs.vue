@@ -82,9 +82,6 @@ const filteredNavigation = computed(() => {
 		// ✅ Apply Sorting
 		const sortedItems = sortItems(items)
 
-		// 🔍 Log before returning
-		console.log('✅ Sorted Items:', JSON.stringify(sortedItems, null, 2))
-
 		return sortedItems
 	}
 
