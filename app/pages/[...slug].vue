@@ -41,19 +41,13 @@ console.log('page', page.value)
 
 // Build the GitHub edit URL using the current route
 const editOnGithub = 'edit/main/content'
-const links = computed(() => {
-	const filePath = page.value?.id.replace(/^docs\//, '') // Remove the 'docs/' prefix from the path
 
-	return [
-		toc?.bottom?.edit && {
-			icon: 'i-heroicons-pencil-square',
-			label: 'Edit this page',
-			to: `${toc.bottom.edit}/${editOnGithub}/${filePath}`,
-			target: '_blank'
-		},
-		...(toc?.bottom?.links || [])
-	].filter(Boolean)
-})
+const links = computed(() => [toc?.bottom?.edit && {
+	icon: 'i-heroicons-pencil-square',
+	label: 'Edit this page',
+	to: `${toc.bottom.edit}/${editOnGithub}/${page?.value?.stem}.${page?.value?.extension}`,
+	target: '_blank'
+}, ...(toc?.bottom?.links || [])].filter(Boolean))
 </script>
 
 <template>
