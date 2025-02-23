@@ -5,14 +5,33 @@ const route = useRoute()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 /**
- *
- *
- * Filter the correct Navigation Data in left menu
- *
- *
+ * Extract the correct object from /content
  */
 
-// Log the full navigation object
+// Compute the matching route navigation item
+const matchedRouteNavivation = computed((): ContentNavigationItem[] => {
+	if (!navigation?.value) return []
+
+	// Find the top-level matching item (e.g., `/syntax`)
+	const parentMatch = navigation.value.find(item => route.path.startsWith(item.path))
+
+	if (!parentMatch) return []
+
+	// If we're on a parent page (e.g., `/syntax`), return just the parent
+	if (route.path === parentMatch.path) return [parentMatch]
+
+	// Find the child that matches the current route
+	const childMatch = parentMatch.children?.find(child => route.path.startsWith(child.path))
+
+	// If a child is found, return only that
+	return childMatch ? [childMatch] : [parentMatch]
+})
+
+/**
+ * Filter the correct Navigation Data in left menu from matchedRouteNavivation
+ */
+
+// Function to filter navigation items
 function filterNavigation(navItems: ContentNavigationItem[]) {
 	return navItems.flatMap((item) => {
 		if (item?.standalone) {
@@ -25,67 +44,16 @@ function filterNavigation(navItems: ContentNavigationItem[]) {
 	})
 }
 
-// Filter the processed navigation
-const filteredNavigation = computed(() => navigation?.value ? filterNavigation(navigation.value) : [])
+// Use matchedRouteNavivation instead of navigation.value
+const filteredNavigation = computed(() => filterNavigation(matchedRouteNavivation.value))
 
-/**
- *
- *
- * Ensure the correct menu section expands automatically based on the current route on reload
- *
- *
- */
-
-// We need to find the parent title of the current route in the object to activate the correct menu section
-const findParentTitle = (data: ContentNavigationItem[], targetPath: string): string | null => {
-	for (const section of data) {
-		if (section.children) {
-			const foundChild = section.children.find(child => child.path === targetPath)
-			if (foundChild) return section.title // Return the parent's title
-			const deeperSearch = findParentTitle(section.children, targetPath)
-			if (deeperSearch) return deeperSearch
-		}
+// Render only the object === to the route path
+watchEffect(() => {
+	if (navigation?.value) {
+		console.log('Route path:', route.path)
+		console.log('Navigation Data:', navigation.value)
 	}
-	return null
-}
-
-// Function to match & click the right menu button
-const activateMenu = () => {
-	if (!navigation?.value) {
-		console.warn('Navigation data is not available yet.')
-		return
-	}
-
-	const targetPath = route.path
-	const parentTitle = findParentTitle(navigation.value, targetPath)
-
-	console.log('Parent Title:', parentTitle) // Should output "Core Principles"
-
-	if (parentTitle) {
-		setTimeout(() => {
-			const button = Array.from(document.querySelectorAll('button span.truncate'))
-				.find(span => span.textContent?.includes(parentTitle))
-				?.closest('button')
-
-			if (button) button.click()
-		}, 100) // Small delay to ensure elements are rendered
-	}
-	else {
-		console.warn('No parent title found for the current route.')
-	}
-}
-
-// Run after DOM is mounted
-onMounted(() => {
-	console.log('Navigation Data:', navigation?.value)
-	activateMenu()
 })
-
-// watchEffect(() => {
-// 	if (navigation?.value) {
-// 		console.log('Navigation Data:', navigation.value)
-// 	}
-// })
 </script>
 
 <template>
