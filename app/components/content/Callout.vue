@@ -22,29 +22,11 @@ const callout = tv({
 	variants: {
 		color: {
 			important: `
-        group relative block px-4 py-3 rounded-[calc(var(--ui-radius)*1.5)] text-sm/6 my-5 last:mb-0
-        [&_code]:text-xs/5 [&_code]:bg-(--ui-bg)
-        [&_pre]:bg-(--ui-bg)
-        [&>div]:my-2.5
-        [&_ul]:my-2.5
-        [&_ol]:my-2.5
-        [&>*]:last:!mb-0
-        [&_ul]:ps-4.5
-        [&_ol]:ps-4.5
-        [&_li]:my-0
         transition-colors
         border border-[var(--ui-important)]/25
         bg-[var(--ui-important)]/10
         text-[var(--ui-color-important-600)]
         dark:text-[var(--ui-color-important-300)]
-        [&_a]:text-[var(--ui-important)]
-        [&_a]:hover:border-[var(--ui-important)]
-        [&_code]:text-[var(--ui-color-important-600)]
-        dark:[&_code]:text-[var(--ui-color-important-300)]
-        [&_code]:border-[var(--ui-important)]/25
-        [&_a]:hover:[&>code]:border-[var(--ui-important)]
-        [&_a]:hover:[&>code]:text-[var(--ui-important)]
-        [&>ul]:marker:text-[var(--ui-important)]/50
       `,
 			...theme.variants.color // Preserve existing variants
 		}
