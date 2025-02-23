@@ -201,7 +201,7 @@ ipx doesnt work properly in wsl. might have to spin up a docker container to tes
 
 ## https://content.nuxt.com/docs/utils/query-collection-navigation
 
-See if we can use this to create a custom navigation system.
+See if we can use this to create a custom navigation system. And list it based on number of gfile insted of ABC
 
 ## Default open
 
