@@ -21,7 +21,7 @@ const callout = tv({
 	...(appConfigProseCallout.uiPro?.prose?.callout || {}),
 	variants: {
 		color: {
-			important: 'bg-blue-100 border-l-4 border-blue-500 text-blue-900 dark:bg-blue-900/20 dark:border-blue-400 dark:text-blue-100', // Add the `important` variant
+			important: 'bg-purple-100 border-l-4 border-purple-500 text-purple-900 dark:bg-purple-900/20 dark:border-purple-400 dark:text-purple-100', // Change to purple
 			...theme.variants.color // Preserve existing variants
 		}
 	}

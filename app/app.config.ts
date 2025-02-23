@@ -13,6 +13,10 @@ export default defineAppConfig({
 			}
 		}
 	},
+	icons: {
+		important: 'i-f7:exclamationmark-bubble' // The icon you want to use
+		// Add other icons if needed
+	},
 	seo: {
 		siteName: 'Nameless'
 	},
