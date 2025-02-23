@@ -20,9 +20,14 @@
 }
 
 :root {
-	--ui-info: #ec4899; /* Custom pink color */
-	--ui-color-info-600: #ec4899; /* Darker pink */
-	--ui-color-info-300: #f9a8d4; /* Lighter pink */
+	--ui-info: #ec4899;
+	--ui-color-info-600: #ec4899;
+	--ui-color-info-300: #f9a8d4;
+	--ui-important: #6b46c1;
+	--ui-color-important-600: #553c9a;
+	--ui-color-important-300: #a5b4fc;
+
+	/* Makes callout border and h1/h2 red */
 	--ui-border-inverted: var(--ui-primary);
 	--ui-text-highlighted: var(--ui-primary);
   }
