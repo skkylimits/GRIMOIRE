@@ -126,7 +126,8 @@ function findValidNavPath(currentPath: string, navItems: ContentNavigationItem[]
 
 		// Move up one level in the path
 		const parentPath = searchPath.split('/').slice(0, -1).join('/')
-		if (!parentPath) break // Stop if there's no more parent path
+		if (!parentPath)
+			break // Stop if there's no more parent path
 
 		console.log('⬆️ No standalone/stripped found, checking parent path:', parentPath)
 		searchPath = parentPath
@@ -149,7 +150,8 @@ function findValidNavPath(currentPath: string, navItems: ContentNavigationItem[]
 ### **4️⃣ Compute the Filtered Navigation**
 ```ts
 const filteredNavigation = computed(() => {
-	if (!navigation?.value) return []
+	if (!navigation?.value)
+		return []
 
 	const validNav = findValidNavPath(route.path, navigation.value)
 
@@ -223,19 +225,19 @@ watchEffect(() => {
 Navigation Data:
 ```json
 {
-  "title": "Morse",
-  "path": "/syntax/morse",
-  "standalone": true
+	"title": "Morse",
+	"path": "/syntax/morse",
+	"standalone": true
 }
 ```
 Filtered Navigation:
 ```json
 [
-  {
-    "title": "Morse",
-    "path": "/syntax/morse",
-    "standalone": true
-  }
+	{
+		"title": "Morse",
+		"path": "/syntax/morse",
+		"standalone": true
+	}
 ]
 ```
 **👉 Only "Morse" is displayed because it is `standalone`.**
@@ -246,38 +248,37 @@ Filtered Navigation:
 #### **Navigation Data:**
 ```json
 {
-  "title": "The Lab",
-  "stripped": true,
-  "path": "/the-lab",
-  "children": [
-    {
-      "title": "The Lab",
-      "path": "/the-lab/the-lab",
-      "children": [
-        { "title": "Malware", "path": "/the-lab/the-lab/malware" },
-        { "title": "Forensics", "path": "/the-lab/the-lab/forensics" }
-      ]
-    },
-    {
-      "title": "Core Principles",
-      "path": "/the-lab/core-principles"
-    },
-    {
-      "title": "Methodologies",
-      "path": "/the-lab/methodologies"
-    }
-  ]
+	"title": "The Lab",
+	"stripped": true,
+	"path": "/the-lab",
+	"children": [
+		{
+			"title": "The Lab",
+			"path": "/the-lab/the-lab",
+			"children": [
+				{ "title": "Malware", "path": "/the-lab/the-lab/malware" },
+				{ "title": "Forensics", "path": "/the-lab/the-lab/forensics" }
+			]
+		},
+		{
+			"title": "Core Principles",
+			"path": "/the-lab/core-principles"
+		},
+		{
+			"title": "Methodologies",
+			"path": "/the-lab/methodologies"
+		}
+	]
 }
 ```
 #### **Filtered Navigation Output:**
 ```json
 [
-  { "title": "The Lab", "path": "/the-lab/the-lab" },
-  { "title": "Core Principles", "path": "/the-lab/core-principles" },
-  { "title": "Methodologies", "path": "/the-lab/methodologies" }
+	{ "title": "The Lab", "path": "/the-lab/the-lab" },
+	{ "title": "Core Principles", "path": "/the-lab/core-principles" },
+	{ "title": "Methodologies", "path": "/the-lab/methodologies" }
 ]
 ```
-
 
 ---
 
@@ -297,7 +298,7 @@ Filtered Navigation:
 To **log what the function is returning**, add:
 ```ts
 const validNav = findValidNavPath(route.path, navigation.value)
-console.log("Valid Nav:", validNav)
+console.log('Valid Nav:', validNav)
 ```
 This will print **what section is being rendered** in the console.
 
