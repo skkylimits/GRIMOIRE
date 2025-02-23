@@ -115,5 +115,12 @@ Read more on [Nuxt Studio docs](https://content.nuxt.com/studio/setup).
 
 Install [Renovate GitHub app](https://github.com/apps/renovate/installations/select_target) on your repository and you are good to go.
 
+## Open Source
 
 https://opensource.guide/
+
+## Replace filenames
+
+```bash
+find . -type f -name "_dir.yml" -exec bash -c 'mv "$0" "${0%_dir.yml}.navigation.yml"' {} \;
+```
