@@ -7,23 +7,23 @@ export default antfu(
 		// Configures for antfu's config
 		stylistic: {
 			indent: 'tab', // 4, or 'tab'
-			quotes: 'single' // or 'double'
+			quotes: 'single', // or 'double'
 		},
 		//
 		vue: {
 			// We also provided the overrides options in each integration to make it easier:
 			overrides: {
-				'vue/operator-linebreak': ['error', 'before']
-			}
+				'vue/operator-linebreak': ['error', 'before'],
+			},
 		},
 		typescript: {
 			overrides: {
-				'ts/consistent-type-definitions': ['error', 'interface']
-			}
+				'ts/consistent-type-definitions': ['error', 'interface'],
+			},
 		},
 		// `.eslintignore` is no longer supported in Flat config, use `ignores` instead
 		ignores: [
-			'**/fixtures'
+			'**/fixtures',
 			// ...globs
 		],
 		formatters: {
@@ -36,7 +36,7 @@ export default antfu(
 			 * Format HTML files
 			 * By default uses Prettier
 			 */
-			html: true
+			html: true,
 			/**
 			 * Format Markdown files
 			 * Supports Prettier and dprint
@@ -44,7 +44,7 @@ export default antfu(
 			 * MDC not supported yet so disabling for now
 			 */
 			// markdown: 'prettier',
-		}
+		},
 	},
 
 	// From the second arguments they are ESLint Flat Configs
@@ -53,31 +53,31 @@ export default antfu(
 		// Doesnt work just yet. Switching to prettier for md files now
 		files: ['**/*.md'],
 		rules: {
-		}
+		},
 	},
 	{
 		files: ['**/*.js'],
-		rules: {}
+		rules: {},
 	},
 	{
 		files: ['**/*.ts'],
-		rules: {}
+		rules: {},
 	},
 	{
 		// Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
 		files: ['**/*.vue'],
 		rules: {
-			'vue/operator-linebreak': ['error', 'before']
-		}
+			'vue/operator-linebreak': ['error', 'before'],
+		},
 	},
 	{
 		// Without `files`, they are general rules for all files
 		rules: {
-			'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }]
+			'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }],
 
 			// 'style/semi': ['error', 'never'],
-		}
-	}
+		},
+	},
 )
 
 // https://eslint.vuejs.org/rules/multiline-html-element-content-newline.html

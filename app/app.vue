@@ -27,6 +27,11 @@ useSeoMeta({
 })
 
 provide('navigation', navigation)
+
+// defineShortcuts({
+// 	// '?': () => openHelpModal(),
+// 	alt_k: () => performSearch()(),
+// })
 </script>
 
 <template>

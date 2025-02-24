@@ -107,11 +107,11 @@ However to enable the live preview on the platform, you just need to activate st
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
-  content: {
-    preview: {
-      api: 'https://api.nuxt.studio'
-    }
-  }
+	content: {
+		preview: {
+			api: 'https://api.nuxt.studio'
+		}
+	}
 })
 ```
 
@@ -145,7 +145,6 @@ or
 /home/skkylimits/Heaven/Nameless/node_modules/.pnpm/@nuxt+ui-pro@3.0.0-alpha.13_@babel+parser@7.26.5_change-case@5.4.4_db0@0.2.3_@libsql+cl_b2d467b342db3f4cefe9dd5a41460e5a/node_modules/@nuxt/ui-pro/dist/runtime/components/prose
 ```
 
-
 ## H2
 
 H2.vue is not working in our project
@@ -163,7 +162,6 @@ Update prose components. Add field update breaking components and such
 http://localhost:3000/knowledge-base/cyber-crusades/bug-bounty/warfare
 
 will disapear
-
 
 ## Cyber Crusades
 

@@ -3,7 +3,7 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageHeadline } from '#ui-pro/utils/content'
 
 definePageMeta({
-	layout: 'docs'
+	layout: 'docs',
 })
 
 const route = useRoute()
@@ -13,10 +13,10 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 const { data } = await useAsyncData(route.path, () => Promise.all([
 	queryCollection('docs').path(route.path).first(),
 	queryCollectionItemSurroundings('docs', route.path, {
-		fields: ['title', 'description']
-	})
+		fields: ['title', 'description'],
+	}),
 ]), {
-	transform: ([page, surround]) => ({ page, surround })
+	transform: ([page, surround]) => ({ page, surround }),
 })
 
 if (!data.value || !data.value.page) {
@@ -30,7 +30,7 @@ useSeoMeta({
 	title: page.value?.seo?.title,
 	ogTitle: `${page.value?.seo?.title} - ${seo?.siteName}`,
 	description: page.value?.seo?.description,
-	ogDescription: page.value?.seo?.description
+	ogDescription: page.value?.seo?.description,
 })
 
 defineOgImageComponent('Docs')
@@ -45,7 +45,7 @@ const links = computed(() => [toc?.bottom?.edit && {
 	icon: 'i-heroicons-pencil-square',
 	label: 'Edit this page',
 	to: `${toc.bottom.edit}/${editOnGithub}/${page?.value?.stem}.${page?.value?.extension}`,
-	target: '_blank'
+	target: '_blank',
 }, ...(toc?.bottom?.links || [])].filter(Boolean))
 </script>
 

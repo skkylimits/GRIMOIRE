@@ -6,17 +6,18 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 // const route = useRoute()
 const { header } = useAppConfig()
 
-const truncateDescription = (text: string, wordLimit = 6) => {
-	if (!text) return ''
+function truncateDescription(text: string, wordLimit = 6) {
+	if (!text)
+		return ''
 	const words = text.split(' ')
-	return words.length > wordLimit ? words.slice(0, wordLimit).join(' ') + '...' : text
+	return words.length > wordLimit ? `${words.slice(0, wordLimit).join(' ')}...` : text
 }
 
 const links = ref([
 	{
 		label: 'The Lab',
 		// icon: 'i-mdi-test-tube',
-		to: '/the-lab'
+		to: '/the-lab',
 	},
 	{
 		label: 'Syntax',
@@ -30,8 +31,8 @@ const links = ref([
 			{ label: 'Python', to: '/syntax/python', icon: 'i-simple-icons-python', description: truncateDescription('Dive into Python scripting for a wide variety of applications.') },
 			{ label: 'PHP', to: '/syntax/php', icon: 'i-devicon:php', description: truncateDescription('A popular general-purpose scripting language.') },
 			{ label: 'SQL', to: '/syntax/sql', icon: 'i-simple-icons-postgresql', description: truncateDescription('Understand SQL to query and manage relational databases effectively.') },
-			{ label: 'YAML', to: '/syntax/yaml', icon: 'i-file-icons:yaml-alt4', description: truncateDescription('A YAML header contains YAML arguments, such as “title”...') }
-		]
+			{ label: 'YAML', to: '/syntax/yaml', icon: 'i-file-icons:yaml-alt4', description: truncateDescription('A YAML header contains YAML arguments, such as “title”...') },
+		],
 	},
 	{
 		label: 'KITT',
@@ -42,8 +43,8 @@ const links = ref([
 			{ label: 'Git', to: '/kitt/git', icon: 'i-simple-icons-git', description: truncateDescription('A version control system to track changes in source code.') },
 			{ label: 'proxychains4', to: '/kitt/proxychains4', icon: 'i-eos-icons:proxy-outlined', description: truncateDescription('A tool for routing traffic through multiple proxies for anonymity.') },
 			{ label: 'Nmap', to: '/kitt/nmap', icon: 'file-icons:nmap', description: truncateDescription('A network scanning tool used to discover hosts, services.') },
-			{ label: 'ZeroTier', to: '/kitt/zerotier', icon: 'i-simple-icons-zerotier', description: truncateDescription('Weave your own invisible, encrypted network through the digital chaos.') }
-		]
+			{ label: 'ZeroTier', to: '/kitt/zerotier', icon: 'i-simple-icons-zerotier', description: truncateDescription('Weave your own invisible, encrypted network through the digital chaos.') },
+		],
 	},
 	{
 		label: 'VulN',
@@ -52,8 +53,8 @@ const links = ref([
 		children: [
 			{ label: 'XSS', to: '/vuln/xss', icon: 'i-heroicons-exclamation-circle', description: truncateDescription('Learn about Cross-Site Scripting (XSS) vulnerabilities and prevention.') },
 			{ label: 'XRSF', to: '/vuln/xrsf', icon: 'i-heroicons-exclamation-circle', description: truncateDescription('Understand Cross-Site Request Forgery (XSRF) attacks and mitigation.') },
-			{ label: 'CVE', to: '/vuln/cve', icon: 'i-heroicons-exclamation-triangle', description: truncateDescription('Explore Common Vulnerabilities and Exposures (CVE) to stay informed.') }
-		]
+			{ label: 'CVE', to: '/vuln/cve', icon: 'i-heroicons-exclamation-triangle', description: truncateDescription('Explore Common Vulnerabilities and Exposures (CVE) to stay informed.') },
+		],
 	},
 	{
 		label: 'Xpl01ts',
@@ -62,8 +63,8 @@ const links = ref([
 		children: [
 			{ label: 'DoS', to: '/xpl01ts/dos', icon: 'mdi:cloud', description: truncateDescription('There are many types of DoS (Denial of Service) attacks.') },
 			{ label: 'Zero-Day', to: '/xpl01ts/zero-day', icon: 'game-icons:skull-bolt', description: truncateDescription('Explore zero-day vulnerabilities and their exploitation before patches.') },
-			{ label: 'Techniques', to: '/xpl01ts/techniques', icon: 'mingcute:vector-group-line', description: truncateDescription('Learn about common techniques used in penetration testing and cyber attacks.') }
-		]
+			{ label: 'Techniques', to: '/xpl01ts/techniques', icon: 'mingcute:vector-group-line', description: truncateDescription('Learn about common techniques used in penetration testing and cyber attacks.') },
+		],
 	},
 	{
 		label: 'Knowledge Base',
@@ -80,9 +81,9 @@ const links = ref([
 			{ label: 'Web Dev', icon: 'i-game-icons-spider-web', to: '/knowledge-base/web-dev', description: truncateDescription('The art and grit of web development—an endless race.') },
 			{ label: 'OSINT', icon: 'i-el:opensource', to: '/knowledge-base/osint', description: truncateDescription('OSINT refers to the process of collecting and analyzing publicly available information.') },
 			{ label: 'Cyber Crusades', icon: 'i-heroicons-bug-ant', to: '/knowledge-base/cyber-crusades', description: truncateDescription('The Cybercrusades represent a new era of digital warfare.') },
-			{ label: 'The Pentest 101', to: '/knowledge-base/the-pentest-101', icon: 'i-heroicons-cube', description: truncateDescription('A guide to penetration testing, vulnerability analysis, and security strategies.') }
-		]
-	}
+			{ label: 'The Pentest 101', to: '/knowledge-base/the-pentest-101', icon: 'i-heroicons-cube', description: truncateDescription('A guide to penetration testing, vulnerability analysis, and security strategies.') },
+		],
+	},
 ])
 
 const active = ref()
@@ -105,7 +106,7 @@ defineShortcuts({
 	},
 	6: () => {
 		active.value = '5'
-	}
+	},
 })
 </script>
 

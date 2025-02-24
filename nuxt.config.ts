@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 		// '@nuxt/image',
 		'@nuxt/ui-pro',
 		'@nuxt/content',
-		'nuxt-og-image'
+		'nuxt-og-image',
 	],
 
 	// components: [
@@ -34,9 +34,9 @@ export default defineNuxtConfig({
 						'http',
 						'mdc',
 					],
-				}
-			}
-		}
+				},
+			},
+		},
 	},
 
 	// https://nuxt.com/docs/api/nuxt-config#devtools
@@ -44,21 +44,21 @@ export default defineNuxtConfig({
 		enabled: true,
 
 		timeline: {
-			enabled: true
-		}
+			enabled: true,
+		},
 	},
 
 	css: ['~/assets/css/main.css'],
 
 	vue: {
 		compilerOptions: {
-			isCustomElement: tag => ['Important'].includes(tag)
-		}
+			isCustomElement: tag => ['Important'].includes(tag),
+		},
 	},
 
 	// https://nuxt.com/docs/getting-started/upgrade#opting-in-to-nuxt-4
 	future: {
-		compatibilityVersion: 4
+		compatibilityVersion: 4,
 	},
 
 	compatibilityDate: '2024-07-11',
@@ -66,10 +66,10 @@ export default defineNuxtConfig({
 	nitro: {
 		prerender: {
 			routes: [
-				'/'
+				'/',
 			],
-			crawlLinks: true
-		}
+			crawlLinks: true,
+		},
 	},
 
 	eslint: {
@@ -77,12 +77,12 @@ export default defineNuxtConfig({
 			stylistic: {
 				commaDangle: 'never',
 				indent: 'tab',
-				semi: false
-			}
-		}
+				semi: false,
+			},
+		},
 	},
 
 	icon: {
-		provider: 'iconify'
-	}
+		provider: 'iconify',
+	},
 })

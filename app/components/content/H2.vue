@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import { tv } from '#ui/utils/tv'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui-pro/prose/h2'
-import { useRuntimeConfig, useAppConfig } from '#imports'
+import { useAppConfig, useRuntimeConfig } from '#imports'
+import { tv } from '#ui/utils/tv'
+import { computed, nextTick, onMounted, ref } from 'vue'
+
+// Define props
+const props = defineProps<{
+	id?: string
+	class?: string
+	ui?: Partial<typeof proseH2.slots>
+}>()
 
 // Extend app config types
 const appConfigProseH2 = _appConfig as AppConfig & {
@@ -13,13 +20,6 @@ const appConfigProseH2 = _appConfig as AppConfig & {
 
 // Generate prose styles
 const proseH2 = tv({ extend: tv(theme), ...(appConfigProseH2.uiPro?.prose?.h2 || {}) })
-
-// Define props
-const props = defineProps<{
-	id?: string
-	class?: string
-	ui?: Partial<typeof proseH2.slots>
-}>()
 
 // Apply UI styles
 const proseH2Styles = proseH2()

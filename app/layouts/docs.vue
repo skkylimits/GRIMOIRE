@@ -37,7 +37,8 @@ function findValidNavPath(currentPath: string, navItems: ContentNavigationItem[]
 
 		// Move up one level in the path
 		const parentPath = searchPath.split('/').slice(0, -1).join('/')
-		if (!parentPath) break // Stop if there's no more parent path
+		if (!parentPath)
+			break // Stop if there's no more parent path
 
 		searchPath = parentPath
 		currentNav = findNavItemByPath(searchPath, navItems)
@@ -47,7 +48,8 @@ function findValidNavPath(currentPath: string, navItems: ContentNavigationItem[]
 }
 
 const filteredNavigation = computed(() => {
-	if (!navigation?.value) return []
+	if (!navigation?.value)
+		return []
 
 	const validNav = findValidNavPath(route.path, navigation.value)
 
@@ -66,7 +68,7 @@ const filteredNavigation = computed(() => {
 			const parts = stem.split('/') // Split by "/"
 			const lastPart = parts[parts.length - 1] // Get the last segment
 			const match = lastPart ? lastPart.match(/^(\d+)/) : null // Extract leading number
-			return match && match[1] ? parseInt(match[1], 10) : 1000 // Default to 1000 if no number found
+			return match && match[1] ? Number.parseInt(match[1], 10) : 1000 // Default to 1000 if no number found
 		}
 
 		// 🛠 Recursive sorting function
@@ -74,7 +76,7 @@ const filteredNavigation = computed(() => {
 			return items
 				.map(item => ({
 					...item,
-					children: item.children ? sortItems(item.children) : [] // Recursively sort children
+					children: item.children ? sortItems(item.children) : [], // Recursively sort children
 				}))
 				.sort((a, b) => extractSortNumber(a.stem || '') - extractSortNumber(b.stem || ''))
 		}

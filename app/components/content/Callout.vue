@@ -1,16 +1,19 @@
 <script lang="ts">
-import type { VariantProps } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import type { LinkProps, PartialString } from '@nuxt/ui'
-import { computed, toRef } from 'vue'
-import { tv } from '#ui/utils/tv'
+import type { VariantProps } from 'tailwind-variants'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui-pro/prose/callout'
+import { tv } from '#ui/utils/tv'
+import { computed, toRef } from 'vue'
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports'
 
+defineOptions({ inheritAttrs: false })
+const props = defineProps<CalloutProps>()
+defineSlots<CalloutSlots>()
 const appConfig = useAppConfig()
 const safeAppConfig = toRef(appConfig) // ✅ Prevents function serialization issues
 
@@ -28,9 +31,9 @@ const callout = tv({
         text-[var(--ui-color-important-600)]
         dark:text-[var(--ui-color-important-300)]
       `,
-			...theme.variants.color // Preserve existing variants
-		}
-	}
+			...theme.variants.color, // Preserve existing variants
+		},
+	},
 })
 
 type CalloutVariants = VariantProps<typeof callout>
@@ -48,16 +51,10 @@ interface CalloutSlots {
 	default?: () => unknown // ✅ Fix slot typing
 }
 
-defineOptions({ inheritAttrs: false })
-
-const props = defineProps<CalloutProps>()
-defineSlots<CalloutSlots>()
-
 const ui = computed(() => callout({
 	color: props.color,
-	to: !!props.to
+	to: !!props.to,
 }))
-console.log(props.color)
 const target = computed(() => props.target ?? '') // ✅ Ensure string return
 
 const externalIcon = computed(() => {

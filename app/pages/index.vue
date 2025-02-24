@@ -8,7 +8,7 @@ useSeoMeta({
 	title: page.value.seo.title,
 	ogTitle: page.value.seo.title,
 	description: page.value.seo.description,
-	ogDescription: page.value.seo.description
+	ogDescription: page.value.seo.description,
 })
 </script>
 
