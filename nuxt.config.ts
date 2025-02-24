@@ -8,12 +8,17 @@ export default defineNuxtConfig({
 		'nuxt-og-image',
 	],
 
-	// components: [
-	// 	{
-	// 		path: '~/components',
-	// 		pathPrefix: false // Disable prefix if you want to use it directly
-	// 	}
-	// ],
+	components: [
+		{
+			path: '~/components',
+			pathPrefix: false, // Disable prefix if you want to use it directly
+		},
+	],
+
+	alias: {
+		'@nuxt/ui-pro/dist/runtime/components/prose/Li.vue': '@/components/content/Li.vue',
+		'@nuxt/ui-pro/dist/runtime/components/prose/Ul.vue': '@/components/content/Ul.vue',
+	},
 
 	content: {
 		build: {

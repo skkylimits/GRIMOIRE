@@ -3,6 +3,13 @@
 	"markdown.copyFiles.destination": {
 		"**/*": "/public/${documentRelativeDirName}/${documentBaseName}/"
 	},
+	// Tailwind
+	"files.associations": {
+		"*.css": "tailwindcss"
+	},
+	"editor.quickSuggestions": {
+		"strings": "on"
+	},
 	// Disable the default formatter, use eslint instead
 	// Use Prettier for manually formatting
 	"prettier.enable": false,

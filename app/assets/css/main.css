@@ -6,17 +6,18 @@
 @theme {
 	--font-sans: 'Public Sans', sans-serif;
 
-	--color-green-50: #effdf5;
-	--color-green-100: #d9fbe8;
-	--color-green-200: #b3f5d1;
-	--color-green-300: #75edae;
-	--color-green-400: #00dc82;
-	--color-green-500: #00c16a;
-	--color-green-600: #00a155;
-	--color-green-700: #007f45;
-	--color-green-800: #016538;
-	--color-green-900: #0a5331;
-	--color-green-950: #052e16;
+	/* --color-red-50: #fdeff0;
+	--color-red-100: #fbd7da;
+	--color-red-200: #f9aeb3;
+	--color-red-300: #f67a86;
+	--color-red-400: #f54655;
+	--color-red-500: #fb2c36;
+	--color-red-600: #db202b;
+	--color-red-700: #b71a24;
+	--color-red-800: #93151d;
+	--color-red-900: #771319;
+	--color-red-950: #44080c; */
+
 }
 
 :root {
@@ -32,6 +33,9 @@
 	--ui-text-highlighted: var(--ui-primary);
 }
 
-li {
-	list-style-type: square; /* Changes round bullets to squares */
-}
+.list-square {
+	list-style-type: square;
+  }
+
+
+
