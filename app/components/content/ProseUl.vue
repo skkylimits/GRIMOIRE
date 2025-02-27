@@ -19,7 +19,7 @@ const props = defineProps<{
 </script>
 
 <template>
-	<ul :class="proseUl({ class: props.class })?.replace('list-disc', '')">
+	<ul :class="proseUl({ class: props.class })">
 		<slot />
 	</ul>
 </template>

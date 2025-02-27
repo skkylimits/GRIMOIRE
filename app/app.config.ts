@@ -8,7 +8,7 @@ export default defineAppConfig({
 	uiPro: {
 		prose: {
 			ul: {
-				base: 'list-square',
+				base: 'list-square !important',
 			},
 		},
 		footer: {
