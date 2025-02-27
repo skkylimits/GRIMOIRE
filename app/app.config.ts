@@ -8,10 +8,7 @@ export default defineAppConfig({
 	uiPro: {
 		prose: {
 			ul: {
-				base: 'list-square ps-6 my-5 marker:text-(--ui-border-accented)',
-			},
-			li: {
-				base: 'my-1.5 ps-1.5 leading-7 [&>ul]:my-0',
+				base: 'list-square',
 			},
 		},
 		footer: {
