@@ -61,7 +61,7 @@ onMounted(async () => {
 		<!-- Insert <hr> before all but the first <h2> -->
 		<hr
 			v-if="isFirstH2 !== null && !isFirstH2"
-			class="my-6 border-gray-300 dark:border-gray-700"
+			class="my-6 border-gray-300 dark:border-gray-600"
 		>
 
 		<h2
@@ -83,7 +83,6 @@ onMounted(async () => {
 				<slot />
 			</a>
 			<slot v-else />
-			<hr>
 		</h2>
 	</div>
 </template>

@@ -105,6 +105,7 @@ const filteredNavigation = computed(() => {
 			<template #left>
 				<UPageAside>
 					<UContentNavigation
+						default-open
 						type="single"
 						highlight
 						:navigation="filteredNavigation"
