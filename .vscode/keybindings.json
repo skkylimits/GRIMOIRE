@@ -1,4 +1,3 @@
-// Place your key bindings in this file to override the defaults.
 // This is my attempt to create a custom keybinding file for Visual Studio Code simulating the browser experience.
 [
 	{
@@ -23,14 +22,9 @@
 		"when": "editorTextFocus"
 	},
 	{
-		"key": "alt+f", // Replace with your preferred shortcut
+		"key": "alt+f", // Now runs combined task
 		"command": "workbench.action.tasks.runTask",
-		"args": "Normalize Image Paths In Markdown"
-	},
-	{
-		"key": "alt+g", // Replace with your preferred shortcut
-		"command": "workbench.action.tasks.runTask",
-		"args": "Update Alt Text In Markdown"
+		"args": "Normalize and Update Markdown Assets" // Run the combined task
 	},
 	{
 		"key": "ctrl+shift+space",
