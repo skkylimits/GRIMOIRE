@@ -7,9 +7,13 @@ export default defineAppConfig({
 	},
 	uiPro: {
 		prose: {
-			// hr: {
-			// 	base: 'border-(--ui-text-muted) !important',
-			// },
+			pre: {
+				slots: {
+					header: 'bg-black dark:bg-(--ui-color-neutral-900)',
+					icon: 'text-white',
+					filename: 'text-white',
+				},
+			},
 			ul: {
 				base: 'list-square !important',
 			},
