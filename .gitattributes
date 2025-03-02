@@ -1,0 +1,15 @@
+# Understanding the Problem - https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-git#git-line-endings
+
+# Windows: Uses CRLF (Carriage Return + Line Feed) line endings by default.
+# Linux/Unix/macOS: Use LF (Line Feed) line endings.
+# If you're working across Windows and Linux (e.g., using WSL), Git may detect files as modified because of line-ending differences, even if no other content has changed.
+
+# Why Use .editorconfig with .gitattributes and core.autocrlf 
+
+# .editorconfig: Ensures consistency within developers' editors/IDEs.
+# .gitattributes: Ensures consistency when files are committed or checked out in Git.
+# core.autocrlf: Acts as a safety net to enforce LF line endings during commits. `git config --global core.autocrlf false` Disabled line-ending conversion globally in the terminal
+
+* text=auto eol=lf
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
