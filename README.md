@@ -183,25 +183,21 @@ have formatting work on main.css
 
 Update prose components. Add field update breaking components and such
 
-## Cyber Crusades
+## Nuxt image
 
-Doesnt render numerically
+Add nuxt image
 
 ## App layout
 
 Change the layout make left right menu bigger etc
 
-## Nuxt image
+## CodePre
 
-Add nuxt image
+make code pre one color like before
 
 ## Image zoom
 
 Add zoom on image click like microsoft docs
-
-## CodePre
-
-make code pre one color like before
 
 ## Markdownlint?
 
