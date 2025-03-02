@@ -9,6 +9,7 @@ export default defineAppConfig({
 		prose: {
 			pre: {
 				slots: {
+					root: 'hover:shadow-lg hover:shadow-red-500/50 hover:dark:shadow-lg hover:dark:shadow-red-400/50 ',
 					header: 'bg-black dark:bg-(--ui-color-neutral-900)',
 					icon: 'text-white',
 					filename: 'text-white',

@@ -43,3 +43,9 @@ hr {
 .list-square {
 	list-style-type: square;
 }
+
+.box-shadow {
+	border: 1px solid var(--ui-border);
+	border-radius: 4px;
+	padding: 16px;
+}

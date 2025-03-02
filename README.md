@@ -191,10 +191,6 @@ Add nuxt image
 
 Change the layout make left right menu bigger etc
 
-## CodePre
-
-make code pre one color like before
-
 ## Image zoom
 
 Add zoom on image click like microsoft docs
