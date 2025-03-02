@@ -36,7 +36,8 @@
 
 hr {
 	margin: 32px 0;
-	color: var(--ui-border); /* Apply your variable */
+	color: var(--ui-border);
+	/* Apply your variable */
 }
 
 .list-square {

@@ -175,6 +175,10 @@ onMounted(async () => {
 
 When using search, and searchin gfor cloud opening cyber crusades will default to API anstead of the route?
 
+## Tailwind css formatter
+
+have formatting work on main.css
+
 ## Prose components
 
 Update prose components. Add field update breaking components and such
