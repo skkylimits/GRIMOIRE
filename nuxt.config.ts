@@ -33,6 +33,14 @@ export default defineNuxtConfig({
 					},
 					langs: [
 						// other languages you might be using
+						'css',
+						'javascript',
+						'json',
+						'yaml',
+						'bash',
+						'ini',
+						'java',
+						'php',
 						'sql',
 						'cmd',
 						'powershell',
