@@ -7,6 +7,9 @@ export default defineAppConfig({
 	},
 	uiPro: {
 		prose: {
+			// hr: {
+			// 	base: 'border-(--ui-text-muted) !important',
+			// },
 			ul: {
 				base: 'list-square !important',
 			},

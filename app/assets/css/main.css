@@ -28,14 +28,22 @@
 	--ui-color-important-600: #553c9a;
 	--ui-color-important-300: #a5b4fc;
 
+	/* --ui-text-muted: var(--ui-color-neutral-500) */
+
 	/* Makes callout border and h1/h2 red */
 	--ui-border-inverted: var(--ui-primary);
 	--ui-text-highlighted: var(--ui-primary);
 }
 
+hr {
+	margin: 32px 0;
+	color: var(--ui-border);  /* Apply your variable */
+}
+
+
 .list-square {
 	list-style-type: square;
-  }
+}
 
 
 

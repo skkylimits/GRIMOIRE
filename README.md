@@ -147,7 +147,29 @@ or
 
 ## H2
 
-H2.vue is not working in our project
+Perfect way of debugging h2.
+
+```typescript
+onMounted(async () => {
+	await nextTick()
+
+	// Find all <h2> elements on the page
+	const allH2s = Array.from(document.querySelectorAll('h2'))
+
+	// Debugging logs
+	console.log('🟢 All <h2> elements found:', allH2s)
+	console.log('🟢 Current <h2> element reference:', h2Element.value)
+
+	// Check if the current component is the first one in the document
+	if (h2Element.value) {
+		isFirstH2.value = allH2s.length > 0 && allH2s[0] === h2Element.value
+		console.log('🟢 isFirstH2:', isFirstH2.value)
+	}
+	else {
+		console.log('❌ h2Element is null, meaning ref did not attach correctly.')
+	}
+})
+```
 
 ## Import img
 
@@ -157,11 +179,9 @@ import images in markdown with task
 
 Update prose components. Add field update breaking components and such
 
-## Disparearing menu
+## Disparearing menu with search
 
-http://localhost:3000/knowledge-base/cyber-crusades/bug-bounty/warfare
-
-will disapear
+When using search, and searchin gfor cloud opening cyber crusades will default to API anstead of the route?
 
 ## Cyber Crusades
 
