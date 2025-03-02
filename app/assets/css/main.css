@@ -17,7 +17,6 @@
 	--color-red-800: #93151d;
 	--color-red-900: #771319;
 	--color-red-950: #44080c; */
-
 }
 
 :root {
@@ -37,13 +36,9 @@
 
 hr {
 	margin: 32px 0;
-	color: var(--ui-border);  /* Apply your variable */
+	color: var(--ui-border); /* Apply your variable */
 }
-
 
 .list-square {
 	list-style-type: square;
 }
-
-
-

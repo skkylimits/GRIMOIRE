@@ -123,7 +123,7 @@ The Zettelkasten Method
 
 <!-- <ULandingSection
 			title="The freedom to build anything"
-			 icon="i-heroicons-rocket-launch"
+			icon="i-heroicons-rocket-launch"
 		>
 			<UPageGrid>
 				<ULandingCard

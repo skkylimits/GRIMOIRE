@@ -171,17 +171,13 @@ onMounted(async () => {
 })
 ```
 
-## Import img
+## Disparearing menu with search
 
-import images in markdown with task
+When using search, and searchin gfor cloud opening cyber crusades will default to API anstead of the route?
 
 ## Prose components
 
 Update prose components. Add field update breaking components and such
-
-## Disparearing menu with search
-
-When using search, and searchin gfor cloud opening cyber crusades will default to API anstead of the route?
 
 ## Cyber Crusades
 
@@ -207,12 +203,10 @@ make code pre one color like before
 
 ## Homepage like V2
 
-## turn - into square bullet
-
-## Powershell
-
 ## add a final entry in menu -> that leads to a page with all script languages or kitt or more vuln or xploit modules
 
-## AD hacking with windows and linux -> automate your server install
+## Content
 
-## Malware bypass etc
+Powershell
+AD hacking with windows and linux -> automate your server install
+Malware bypass etc
