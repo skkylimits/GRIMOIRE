@@ -26,6 +26,24 @@
 			"options": {
 				"cwd": "${workspaceFolder}"
 			}
+		},
+		{
+			"label": "Normalize and Update Markdown Assets",
+			"type": "shell",
+			"command": "echo Running tasks...",
+			"dependsOn": [
+				"Normalize Image Paths In Markdown",
+				"Update Alt Text In Markdown"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": [],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"options": {
+				"cwd": "${workspaceFolder}"
+			}
 		}
 	]
 }
