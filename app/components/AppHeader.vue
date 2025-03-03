@@ -18,6 +18,8 @@ const links = ref([
 		label: 'The Lab',
 		// icon: 'i-mdi-test-tube',
 		to: '/the-lab',
+		active: true,
+		defaultOpen: true,
 	},
 	{
 		label: 'Syntax',
@@ -160,6 +162,8 @@ defineShortcuts({
 
 		<template #body>
 			<UContentNavigation
+				default-open
+				type="single"
 				highlight
 				:navigation="navigation"
 			/>
