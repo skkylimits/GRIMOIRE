@@ -4,23 +4,6 @@ export default defineAppConfig({
 			primary: 'red',
 			neutral: 'zinc',
 		},
-		icons: {
-			copy: 'i-mdi:content-copy', // ✅ Ensure copy icon exists
-			copyCheck: 'i-mdi:clipboard-check', // ✅ Ensure copyCheck icon exists
-			arrowLeft: '',
-			arrowRight: '',
-			check: '',
-			chevronDoubleLeft: '',
-			chevronDoubleRight: '',
-			chevronDown: '',
-			chevronLeft: '',
-			chevronRight: '',
-			chevronUp: '',
-			close: '',
-			menu: '',
-			search: '',
-			// Add other icons if needed
-		},
 	},
 	uiPro: {
 		prose: {
