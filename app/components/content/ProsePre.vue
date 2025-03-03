@@ -81,7 +81,7 @@ function copyCode() {
 
 		<!-- Copy Button -->
 		<UButton
-			:icon="copied ? 'i-mdi:content-copy' : 'i-mdi:content-copy'"
+			:icon="copied ? 'i-mdi:clipboard-check' : 'i-mdi:content-copy'"
 			color="neutral"
 			variant="outline"
 			size="sm"
