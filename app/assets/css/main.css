@@ -34,6 +34,11 @@
 	--ui-text-highlighted: var(--ui-primary);
 }
 
+img {
+    border: 3px solid var(--ui-primary);
+}
+
+
 hr {
 	margin: 32px 0;
 	color: var(--ui-border);
