@@ -26,6 +26,8 @@
 - [ ] **Create Custom Shiki Theme**: Design and implement a custom Shiki theme, ensuring it works for both light and dark modes.
 - [ ] **Make Code Block Scrollable with Copy Code**: Implement functionality where the "copy code" button scrolls with the code block, similar to the behavior in ChatGPT, ensuring the button remains in view as you scroll down.
 - [ ] **Changelog Page**: Create a changelog page with a tag that scrolls when in view, similar to the one on [Volta Changelog](https://volta.net/changelog).
+- [ ] https://mokkapps.de/blog/focus-and-code-diff-in-nuxt-content-code-blocks
+	- add to dns is a database.md
 
 ## Prose Components
 
