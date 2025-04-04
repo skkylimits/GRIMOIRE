@@ -42,15 +42,13 @@ If you find yourself locked out of your Windows account due to failed sign-in at
 - After performing this, Windows will prompt you to set up a new PIN the next time you log in or attempt to set one up.
 
 ::note
-- This method is intended for **legitimate recovery** or management of your own machine, and using it for unauthorized access could violate privacy laws and agreements.
+This method is intended for **legitimate recovery** or management of your own machine, and using it for unauthorized access could violate privacy laws and agreements.
 - **Make sure to have a backup** of any critical data before performing these actions.
 ::
 
 ### Resetting Your PIN:
 - After deleting the **Ngc** folder, you will need to **reboot** the machine.
 - Upon reboot, you can go to **Settings > Accounts > Sign-in options** and set up a new PIN.
-
----
 
 ## Additional References:
 - [Microsoft Answer: How to Reset PIN](https://answers.microsoft.com/en-us/windows/forum/all/how-do-i-reset-my-windows-pin/39f7c660-7464-4b07-a58b-0cb9f098d26b)
