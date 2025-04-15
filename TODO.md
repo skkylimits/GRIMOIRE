@@ -208,3 +208,9 @@ See if we can use this to create a custom navigation system. And list it based o
 ## Default open
 
 Menu defaults open to the first item. This is not the desired behavior. It should be closed by default.
+
+## normalize markdown image
+
+![alt text](<../../../../../public/content/7.knowledge-base/4.networking/1.dns/1.first-principle/3.zone-delegation/DNS for developers (4).png>)
+
+this gets transformed to something I dont like. Fix it
