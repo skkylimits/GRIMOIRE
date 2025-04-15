@@ -23,9 +23,9 @@
 	--ui-info: #ec4899;
 	--ui-color-info-600: #ec4899;
 	--ui-color-info-300: #f9a8d4;
-	--ui-important: #6b46c1;
-	--ui-color-important-600: #553c9a;
-	--ui-color-important-300: #a5b4fc;
+	--ui-important: #f97316;            /* vibrant orange (similar to #6b46c1) */
+	--ui-color-important-600: #ea580c;  /* darker orange (similar to #553c9a) */
+	--ui-color-important-300: #fdba74;  /* lighter orange (similar to #a5b4fc) */
 
 	/* --ui-text-muted: var(--ui-color-neutral-500) */
 
