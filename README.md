@@ -206,3 +206,7 @@ Add zoom on image click like microsoft docs
 Powershell
 AD hacking with windows and linux -> automate your server install
 Malware bypass etc
+
+## LEARN CLOUD FAST
+
+https://www.youtube.com/watch?v=LTuBvQ72ohs&t=44s
