@@ -21,7 +21,9 @@ export default defineNuxtConfig({
 					},
 					langs: [
 						// other languages you might be using
+						'html',
 						'css',
+						'js',
 						'javascript',
 						'json',
 						'yaml',
