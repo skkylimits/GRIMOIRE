@@ -1,3 +1,4 @@
+// https://code.visualstudio.com/docs/languages/markdown
 // This is my attempt to create a custom keybinding file for Visual Studio Code simulating the browser experience.
 [
 	{
@@ -26,10 +27,23 @@
 		"command": "workbench.action.tasks.runTask",
 		"args": "Normalize and Update Markdown Assets" // Run the combined task
 	},
+	// {
+	//     "key": "ctrl+shift+space",
+	//     "command": "editor.action.insertSnippet",
+	//     "when": "editorTextFocus"
+	// },
+	{
+		"key": "ctrl+shift+3",
+		"command": "outline.focus"
+	},
 	{
 		"key": "ctrl+shift+space",
-		"command": "editor.action.insertSnippet",
-		"when": "editorTextFocus"
+		"command": "workbench.action.gotoSymbol",
+		"when": "!accessibilityHelpIsShown && !accessibleViewIsShown"
+	},
+	{
+		"key": "ctrl+shift+alt+space",
+		"command": "workbench.action.showAllSymbols"
 	}
 ]
 // Paste these settings to Preference: Open Keyboard Shortcuts (JSON) in Visual Studio Code.

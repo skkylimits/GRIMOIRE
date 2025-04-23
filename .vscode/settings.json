@@ -4,9 +4,12 @@
 	"workbench.editor.limit.value": 5,
 	"workbench.iconTheme": "file-icons",
 	// ========== Formatting ==========
+	// Markdown
 	"markdown.copyFiles.destination": {
 		"**/*": "/public/${documentRelativeDirName}/${documentBaseName}/"
 	},
+	"markdown.validate.enabled": true,
+	"markdown.updateLinksOnFileMove.enabled": "prompt",
 	// Tailwind
 	"files.associations": {
 		"*.css": "tailwindcss"
