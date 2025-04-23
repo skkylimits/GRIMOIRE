@@ -26,6 +26,7 @@ export default antfu(
 			'**/fixtures',
 			'content/2.syntax/2.javascript/1.variables/2.code-structure.md',
 			'content/2.syntax/2.javascript/1.variables/4.variables.md',
+			'content/2.syntax/2.javascript/1.variables/5.data-types.md',
 			// ...globs
 		],
 		formatters: {
