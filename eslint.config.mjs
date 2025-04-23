@@ -24,6 +24,7 @@ export default antfu(
 		// `.eslintignore` is no longer supported in Flat config, use `ignores` instead
 		ignores: [
 			'**/fixtures',
+			'content/2.syntax/2.javascript/1.variables/4.variables.md',
 			// ...globs
 		],
 		formatters: {
