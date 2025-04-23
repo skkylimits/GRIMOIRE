@@ -214,3 +214,5 @@ Menu defaults open to the first item. This is not the desired behavior. It shoul
 ![alt text](<../../../../../public/content/7.knowledge-base/4.networking/1.dns/1.first-principle/3.zone-delegation/DNS for developers (4).png>)
 
 this gets transformed to something I dont like. Fix it
+
+## figure out a download solution

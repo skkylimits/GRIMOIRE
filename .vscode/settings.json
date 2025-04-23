@@ -8,8 +8,8 @@
 	"markdown.copyFiles.destination": {
 		"**/*": "/public/${documentRelativeDirName}/${documentBaseName}/"
 	},
-	"markdown.validate.enabled": true,
-	"markdown.updateLinksOnFileMove.enabled": "prompt",
+	// "markdown.validate.enabled": true,
+	// "markdown.updateLinksOnFileMove.enabled": "prompt",
 	// Tailwind
 	"files.associations": {
 		"*.css": "tailwindcss"

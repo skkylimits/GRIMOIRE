@@ -6,6 +6,13 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 // const route = useRoute()
 const { header } = useAppConfig()
 
+/**
+ * Truncates a given description to a specified word limit and appends "..." if the text exceeds the limit.
+ *
+ * @param {string} text - The text description to truncate. If the text is empty or falsy, an empty string is returned.
+ * @param {number} [wordLimit] - The maximum number of words to retain from the input text. Defaults to 6 if not provided.
+ * @returns {string} A truncated version of the input text if the word limit is exceeded, otherwise the original text.
+ */
 function truncateDescription(text: string, wordLimit = 6) {
 	if (!text)
 		return ''
