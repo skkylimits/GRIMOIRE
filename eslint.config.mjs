@@ -27,6 +27,7 @@ export default antfu(
 			'content/2.syntax/2.javascript/1.variables/2.code-structure.md',
 			'content/2.syntax/2.javascript/1.variables/4.variables.md',
 			'content/2.syntax/2.javascript/1.variables/5.data-types.md',
+			'content/2.syntax/2.javascript/2.operators/1.math-operator.md',
 			// ...globs
 		],
 		formatters: {
