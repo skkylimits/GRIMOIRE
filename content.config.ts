@@ -19,7 +19,6 @@ export default defineContentConfig({
 					to: z.string(),
 					target: z.string().optional(),
 				})).optional(),
-				noToc: z.boolean().optional(), // Adding the noToc field to the schema
 			}),
 		}),
 	},

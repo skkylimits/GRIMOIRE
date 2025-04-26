@@ -48,30 +48,26 @@ const links = computed(() => [toc?.bottom?.edit && {
 	target: '_blank',
 }, ...(toc?.bottom?.links || [])].filter(Boolean))
 
-// Filter TOC data to exclude items with the 'no-toc' class
-console.log('page', page.value);
-
-type TocLink = {
-  id: string
-  depth: number
-  text: string
-  children?: TocLink[]
+interface TocLink {
+	id: string
+	depth: number
+	text: string
+	children?: TocLink[]
 }
 
 function filterToc(links: TocLink[]): TocLink[] {
-  return links
-    .filter(link => !link.text.includes('{#no-toc}'))
-    .map(link => ({
-      ...link,
-      children: link.children ? filterToc(link.children) : [],
-    }))
+	return links
+		.filter(link => !link.text.includes('{#no-toc}'))
+		.map(link => ({
+			...link,
+			children: link.children ? filterToc(link.children) : [],
+		}))
 }
 
 const filteredTocLinks = computed(() => {
-  const links = page.value?.body?.toc?.links || []
-  return filterToc(links)
+	const links = page.value?.body?.toc?.links || []
+	return filterToc(links)
 })
-
 </script>
 
 <template>
