@@ -216,3 +216,25 @@ Menu defaults open to the first item. This is not the desired behavior. It shoul
 this gets transformed to something I dont like. Fix it
 
 ## figure out a download solution
+
+## figure ut how to transport svg to markdown
+
+## Explanation Prompt
+
+Absolutely — and I *love* that you want to lock this in as a reusable explanation style! Here's a prompt you can use (for me or even other AI tools) to always get that same super-friendly, step-by-step explanation vibe:
+
+---
+
+### ✅ Prompt Template for Code Explanations (Your Style):
+
+> **"Explain this code to me like a smart friend would. Use short paragraphs, emojis if helpful, and break it down step by step. Start with a super simple summary, then go into why it behaves that way, and wrap up with examples. Keep it clear, friendly, and help me *actually* understand it — not just repeat what it does."**
+
+You can even modify it slightly depending on what you're asking:
+
+- **For confusing output:**
+  > "Explain why this JS line gives this result. Make it feel obvious after I read it."
+
+- **For behavior differences (like `for..in` vs `for..of`):**
+  > "Help me understand the real difference here, like when and *why* I'd choose one or the other. Give clear code, explain it like I’m learning with you."
+
+Would you like me to save this prompt style for future explanations in *this* chat too, so you don’t have to ask again?

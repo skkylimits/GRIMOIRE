@@ -214,3 +214,7 @@ https://www.youtube.com/watch?v=LTuBvQ72ohs&t=44s
 ## iconify
 
 use `ctrl + space` to complete iconify, for example i-mdi: . Press space after : to go into it.
+
+## Custom styles
+
+[Think of It Like This:]{style="color: var(--ui-primary);"}
