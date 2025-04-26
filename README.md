@@ -221,3 +221,5 @@ use `ctrl + space` to complete iconify, for example i-mdi: . Press space after :
 
 ## Heading 2 {#no-toc}
 This heading should be excluded from the TOC.
+
+⚠️ Make it so this works [Heading 2]{#no-toc}
