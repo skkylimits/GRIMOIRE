@@ -218,3 +218,6 @@ use `ctrl + space` to complete iconify, for example i-mdi: . Press space after :
 ## Custom styles
 
 [Think of It Like This:]{style="color: var(--ui-primary);"}
+
+## Heading 2 {#no-toc}
+This heading should be excluded from the TOC.
