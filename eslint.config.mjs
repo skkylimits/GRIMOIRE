@@ -31,6 +31,7 @@ export default antfu(
 			'content/2.syntax/2.javascript/2.operators/1.math-operator.md',
 			'content/2.syntax/2.javascript/2.operators/2.comparison-operator.md',
 			'content/2.syntax/2.javascript/3.arrays/1.arrays.md',
+			'content/2.syntax/2.javascript/3.arrays/2.methods.md',
 			// ...globs
 		],
 		formatters: {
