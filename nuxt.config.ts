@@ -8,6 +8,10 @@ export default defineNuxtConfig({
 		'nuxt-og-image',
 	],
 
+	ui: {
+		fonts: false
+	},
+
 	content: {
 		build: {
 			markdown: {
