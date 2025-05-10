@@ -25,6 +25,10 @@ export default antfu(
 		ignores: [
 			'**/fixtures',
 			'content/7.knowledge-base/7.web-dev/9.mikeyrojas.md',
+			'content/7.knowledge-base/7.web-dev/10.singleton.md',
+			'content/7.knowledge-base/7.web-dev/11.event-emitter.md',
+			'content/7.knowledge-base/7.web-dev/12.RAF.md',
+			'content/7.knowledge-base/7.web-dev/13.movie-set.md',
 			'content/2.syntax/2.javascript/0.prerequisites/4.weirdness.md',
 			'content/2.syntax/2.javascript/1.variables/2.code-structure.md',
 			'content/2.syntax/2.javascript/1.variables/4.variables.md',
