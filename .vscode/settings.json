@@ -1,7 +1,16 @@
 {
+	// ========== Visuals ==========
+	"workbench.colorCustomizations": {
+		"activityBar.background": "#121212",
+		"titleBar.activeBackground": "#bd0000",
+		"titleBar.activeForeground": "#FFF8FF"
+	},
 	// Workbench
+	"workbench.list.smoothScrolling": true,
 	"workbench.editor.limit.enabled": true,
 	"workbench.editor.limit.value": 5,
+	"workbench.editor.highlightModifiedTabs": true,
+	"workbench.editor.closeOnFileDelete": true,
 	"workbench.iconTheme": "file-icons",
 	// ========== Formatting ==========
 	// Markdown
