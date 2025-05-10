@@ -24,6 +24,7 @@ export default antfu(
 		// `.eslintignore` is no longer supported in Flat config, use `ignores` instead
 		ignores: [
 			'**/fixtures',
+			'content/7.knowledge-base/7.web-dev/9.mikeyrojas.md',
 			'content/2.syntax/2.javascript/0.prerequisites/4.weirdness.md',
 			'content/2.syntax/2.javascript/1.variables/2.code-structure.md',
 			'content/2.syntax/2.javascript/1.variables/4.variables.md',
