@@ -9,7 +9,7 @@ export default defineNuxtConfig({
 	],
 
 	ui: {
-		fonts: false
+		fonts: false,
 	},
 
 	content: {
@@ -57,6 +57,15 @@ export default defineNuxtConfig({
 
 	css: ['~/assets/css/main.css'],
 
+	// https://ui.nuxt.com/getting-started/icons/nuxt#custom-local-collections
+	icon: {
+		provider: 'iconify',
+		customCollections: [{
+			prefix: 'custom',
+			dir: './assets/icons',
+		}],
+	},
+
 	vue: {
 		compilerOptions: {
 			isCustomElement: tag => ['Important'].includes(tag),
@@ -87,9 +96,5 @@ export default defineNuxtConfig({
 				semi: false,
 			},
 		},
-	},
-
-	icon: {
-		provider: 'iconify',
 	},
 })

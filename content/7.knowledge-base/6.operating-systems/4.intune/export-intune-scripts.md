@@ -50,5 +50,3 @@ Het script wordt geleverd in een **Base64-gecodeerd formaat**. Decodeer het scri
 ## **Belangrijke Opmerkingen**
 - Zorg ervoor dat je scripts alleen downloadt en bewerkt als je gemachtigd bent.
 - Wijzigingen aan scripts kunnen impact hebben op de apparaten binnen je organisatie. Test wijzigingen daarom altijd in een gecontroleerde omgeving.
-
-Laat me weten of je aanvullende vragen hebt of verdere uitleg nodig is!

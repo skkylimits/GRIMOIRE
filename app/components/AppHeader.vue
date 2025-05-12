@@ -81,8 +81,8 @@ const links = ref([
 		// icon: 'i-raphael-book',
 		description: truncateDescription('A comprehensive resource for learning about various technologies and concepts.'),
 		children: [
-			{ label: 'Digital Fortress', to: '/knowledge-base/digital-fortress', icon: 'i-game-icons-tower-fall', description: truncateDescription('Rise as the ultimate stronghold in the digital battlefield.') },
-			{ label: 'Certifize', to: '/knowledge-base/proving-grounds', icon: 'i-heroicons-academic-cap', description: truncateDescription('Gain recognition and prove your worth.') },
+			// { label: 'Digital Fortress', to: '/knowledge-base/digital-fortress', icon: 'i-game-icons-tower-fall', description: truncateDescription('Rise as the ultimate stronghold in the digital battlefield.') },
+			// { label: 'Certifize', to: '/knowledge-base/proving-grounds', icon: 'i-heroicons-academic-cap', description: truncateDescription('Gain recognition and prove your worth.') },
 			{ label: 'System Engineering', to: '/knowledge-base/system-engineering', icon: 'i-heroicons-cog', description: truncateDescription('Learn about system design, architecture, and integration.') },
 			{ label: 'Networking', to: '/knowledge-base/networking', icon: 'i-heroicons-globe-alt', description: truncateDescription('Understand the principles of networking and communication.') },
 			{ label: 'Virtualization', to: '/knowledge-base/virtualization', icon: 'i-heroicons-server', description: truncateDescription('Explore the concepts and technologies behind virtual environments.') },

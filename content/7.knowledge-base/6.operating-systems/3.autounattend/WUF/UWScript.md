@@ -1,6 +1,8 @@
 ---
 title: UWScript.ps1
 description: A sleek, unattended Windows installation script, automating system setups with precision and style.
+toc:
+	depth: 1
 ---
 
 The provided script is a PowerShell function named `All-Unattended-Settings` that performs a series of modifications to optimize Windows power settings for specific requirements. Here's a detailed explanation of what each part does:
