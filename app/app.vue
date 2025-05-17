@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { VitePwaManifest } from '#components'
+
 const { seo } = useAppConfig()
 
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs'))
@@ -35,6 +37,7 @@ provide('navigation', navigation)
 </script>
 
 <template>
+	<VitePwaManifest />
 	<UApp>
 		<NuxtLoadingIndicator
 			color="repeating-linear-gradient(to right,#FFCCCB 0%,#FF5859 60%,#FF0000 100%)"

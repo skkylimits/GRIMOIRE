@@ -6,10 +6,49 @@ export default defineNuxtConfig({
 		'@nuxt/ui-pro',
 		'@nuxt/content',
 		'nuxt-og-image',
+		'@vite-pwa/nuxt',
 	],
 
 	ui: {
 		fonts: false,
+	},
+
+	// @ts-ignore
+	pwa: {
+		registerType: 'autoUpdate',
+		manifest: {
+			name: 'Nameless',
+			short_name: 'Nameless',
+			description: 'My Zettelkasten',
+			theme_color: 'var(--nuxt-ui-primary)',
+			icons: [
+				{
+					src: '/public/icon.svg',
+					sizes: '512x512',
+					type: 'image/svg',
+				},
+			],
+		},
+		workbox: {
+			navigateFallback: '/',
+			// runtimeCaching: [
+			// 	{
+			// 		urlPattern: 'https://example.com/.*',
+			// 		handler: 'CacheFirst',
+			// 		options: {
+			// 			cacheName: 'example-cache',
+			// 			expiration: {
+			// 				maxEntries: 50,
+			// 				maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+			// 			},
+			// 		},
+			// 	},
+			// ],
+		},
+		devOptions: {
+			enabled: true,
+			type: 'module',
+		},
 	},
 
 	content: {
