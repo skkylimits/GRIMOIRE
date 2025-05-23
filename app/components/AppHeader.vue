@@ -36,8 +36,9 @@ const links = ref([
 		children: [
 			{ label: 'Morse', to: '/syntax/morse', icon: 'i-arcticons-morse', description: truncateDescription('For times when it\'s needed') },
 			{ label: 'Terminal', to: '/syntax/bash', icon: 'i-heroicons-command-line', description: truncateDescription('Master Bash scripting for automating tasks in UNIX-based systems.') },
-			{ label: 'JavaScript', to: '/syntax/javascript', icon: 'i-simple-icons-javascript', description: truncateDescription('Learn JavaScript to build dynamic web applications and automate web tasks.') },
+			{ label: 'PowerShell', to: '/syntax/powershell', icon: 'i-simple-icons-powershell', description: truncateDescription('Learn PowerShell to automate system tasks, manage configurations, and streamline administrative workflows.') },
 			{ label: 'Python', to: '/syntax/python', icon: 'i-simple-icons-python', description: truncateDescription('Dive into Python scripting for a wide variety of applications.') },
+			{ label: 'JavaScript', to: '/syntax/javascript', icon: 'i-simple-icons-javascript', description: truncateDescription('Learn JavaScript to build dynamic web applications and automate web tasks.') },
 			{ label: 'PHP', to: '/syntax/php', icon: 'i-devicon:php', description: truncateDescription('A popular general-purpose scripting language.') },
 			{ label: 'SQL', to: '/syntax/sql', icon: 'i-simple-icons-postgresql', description: truncateDescription('Understand SQL to query and manage relational databases effectively.') },
 			{ label: 'YAML', to: '/syntax/yaml', icon: 'i-file-icons:yaml-alt4', description: truncateDescription('A YAML header contains YAML arguments, such as “title”...') },
