@@ -82,7 +82,7 @@
 
 ## Production
 
-- [ ] **Decide Between Cloud or CDN**: Choose whether to use cloud storage or a CDN, and make the appropriate adjustments in `runtimeConfig` and `.env`. Ensure assets like `![alt text](url)` are served from the correct path:
+- [ ] **Decide Between Cloud or CDN**: Choose whether to use cloud storage or a CDN, and make the appropriate adjustments in `runtimeConfig` and `.env`. Ensure assets like `![url](/url)` are served from the correct path:
     - In development: `/images/img.png`
     - In production: `{cdn}/images/img.png`
     - Explore options such as [Cloudflare R2](https://www.cloudflare.com/developer-platform/products/r2/) or [Backblaze B2 Cloud Storage](https://www.backblaze.com/cloud-storage).
@@ -211,7 +211,7 @@ Menu defaults open to the first item. This is not the desired behavior. It shoul
 
 ## normalize markdown image
 
-![alt text](<../../../../../public/content/7.knowledge-base/4.networking/1.dns/1.first-principle/3.zone-delegation/DNS for developers (4).png>)
+![DNS for developers (4](</content/7.knowledge-base/4.networking/1.dns/1.first-principle/3.zone-delegation/DNS for developers (4).png>)
 
 this gets transformed to something I dont like. Fix it
 
@@ -222,3 +222,7 @@ this gets transformed to something I dont like. Fix it
 ## review `thisArg` & arr.sort() again
 
 It's super vague still
+
+![image](TODO/image.png)
+![image-1](TODO/image-1.png)
+![alt text](public/TODO/image-2.png)
