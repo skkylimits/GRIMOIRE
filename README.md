@@ -268,3 +268,15 @@ It feels like a **ninja arc** meets **cyber war doctrine**:
 * OSINT: *“Know your enemy.”*
 * Dead Silence: *“Strike without sound.”*
 * Cyber Crusades: *“Conquer the digital battlefield.”*
+
+## C
+Start with building your own cpu on a breadboard using raw transistors. Then everything else will be super simple
+
+## todo
+- Eigen website 3d + business card met QR
+
+- Nameless + chatgpt integration (verzi andere naam)
+
+- Autorijschool video course
+
+- 3d multiplayer video spelletje met crypto

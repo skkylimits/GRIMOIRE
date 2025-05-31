@@ -50,3 +50,8 @@
 // To launch the Define Keybinding widget, press Ctrl+K Ctrl+K
 // https://code.visualstudio.com/docs/getstarted/keybindings#_keyboard-layoutindependent-bindings
 // ADD: a way to switch between vscode windows
+// AHK - Autohotkey
+// disable: Add Cursor Above
+// disable Add Cursor Below
+// default: cursorTop
+// default: cursorBottom
