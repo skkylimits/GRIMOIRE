@@ -226,3 +226,18 @@ It's super vague still
 ![image](TODO/image.png)
 ![image-1](TODO/image-1.png)
 ![alt text](public/TODO/image-2.png)
+
+## Autoattend.xml
+
+Bare minum working setup for
+- window 10
+- windows 11
+- windows server
+
+Then a script that pushes changes like you want for example
+- test machine
+- forensic station
+- attacker machine
+- battle station
+- defender station
+- and so on
