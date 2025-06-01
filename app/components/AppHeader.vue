@@ -74,7 +74,7 @@ const links = ref([
 		children: [
 			{ label: 'DoS', to: '/xpl01ts/dos', icon: 'mdi:cloud', description: truncateDescription('There are many types of DoS (Denial of Service) attacks.') },
 			{ label: 'Zero-Day', to: '/xpl01ts/zero-day', icon: 'game-icons:skull-bolt', description: truncateDescription('Explore zero-day vulnerabilities and their exploitation before patches.') },
-			{ label: 'techniques', to: '/xpl01ts/techniques', icon: 'mingcute:vector-group-line', description: truncateDescription('Learn about common techniques used in penetration testing and cyber attacks.') },
+			{ label: 'Techniques', to: '/xpl01ts/techniques', icon: 'mingcute:vector-group-line', description: truncateDescription('Learn about common techniques used in penetration testing and cyber attacks.') },
 		],
 	},
 	{
