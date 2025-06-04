@@ -54,6 +54,7 @@ const links = ref([
 			{ label: 'proxychains4', to: '/kitt/proxychains4', icon: 'i-eos-icons:proxy-outlined', description: truncateDescription('A tool for routing traffic through multiple proxies for anonymity.') },
 			{ label: 'Nmap', to: '/kitt/nmap', icon: 'file-icons:nmap', description: truncateDescription('A network scanning tool used to discover hosts, services.') },
 			{ label: 'Wireshark', to: '/kitt/wireshark', icon: 'simple-icons:wireshark', description: truncateDescription('Wireshark lets you dive deep into your network traffic') },
+			{ label: 'Burpsuite', to: '/kitt/burpsuite', icon: 'simple-icons:burpsuite', description: truncateDescription('Bursuite: Unlock Every Door, Exploit Every Gap.') },
 			{ label: 'ZeroTier', to: '/kitt/zerotier', icon: 'i-simple-icons-zerotier', description: truncateDescription('Weave your own invisible, encrypted network through the digital chaos.') },
 			{ label: 'RDP', to: '/kitt/rdp', icon: 'i-fluent:remote-16-filled', description: truncateDescription('Remote Desktop Protocol (RDP) allows users to remotely access and control another computer’s desktop over a network.') },
 		],

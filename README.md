@@ -284,3 +284,17 @@ Start with building your own cpu on a breadboard using raw transistors. Then eve
 ## SyncBackPro
 
 [SyncBackPro](https://www.2brightsparks.com/assets/software/SyncBackProV1164_Setup.exe) - The tools to complete wipe a NAS 🦹🏽
+
+
+## Font
+
+https://fonts.adobe.com/fonts/magistral
+
+wireshark.org
+
+
+## decrypt https
+
+https://www.youtube.com/watch?v=5qecyZHL-GU
+
+## Maak een referentie lijst zoals in dead slience maar dan voor de hele site met elke toll en resource genoemd wordt met een backup.exe op je NAS opgeslagen
