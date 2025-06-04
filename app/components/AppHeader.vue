@@ -89,7 +89,7 @@ const links = ref([
 			{ label: 'Networking', to: '/knowledge-base/networking', icon: 'i-heroicons-globe-alt', description: truncateDescription('Understand the principles of networking and communication.') },
 			{ label: 'Virtualization', to: '/knowledge-base/virtualization', icon: 'i-heroicons-server', description: truncateDescription('Explore the concepts and technologies behind virtual environments.') },
 			{ label: 'Operating Systems', to: '/knowledge-base/operating-systems', icon: 'i-heroicons-computer-desktop', description: truncateDescription('Delve into the fundamentals and inner workings of operating systems.') },
-			{ label: 'System Administration', to: '/knowledge-base/system-administration', icon: 'i-heroicons-command-line', description: truncateDescription('Master the management and maintenance of computer systems and networks.') },
+			// { label: 'System Administration', to: '/knowledge-base/system-administration', icon: 'i-heroicons-command-line', description: truncateDescription('Master the management and maintenance of computer systems and networks.') },
 			{ label: 'Web Dev', icon: 'i-game-icons-spider-web', to: '/knowledge-base/web-dev', description: truncateDescription('The art and grit of web development—an endless race.') },
 			{ label: 'OPSEC', icon: 'picon:ninja', to: '/knowledge-base/opsec', description: truncateDescription('Learn how to hide yourself, clean up traces, and vanish before ever being seen..') },
 			{ label: 'OSINT', icon: 'i-el:opensource', to: '/knowledge-base/osint', description: truncateDescription('OSINT refers to the process of collecting and analyzing publicly available information.') },
