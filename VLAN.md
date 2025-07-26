@@ -3,12 +3,12 @@
 | VLAN | Apparaten | Opmerkingen |
 |------|-----------|-------------|
 | **10 - Workstation** | PC’s, laptops | Normaal LAN-gebruikers, toegang tot NAS |
-| **20 - Servers** | NAS, game servers, webservers | Sterke firewallregels nodig |
+| **20 - Servers** | Servers | Sterke firewallregels nodig |
 | **25 - Storage (optioneel)** | NAS, SAN, backups | Goed voor extra isolatie |
 | **30 - IoT** | Camera’s, TV's, smart home | Geen toegang tot andere VLANs |
 | **40 - Gasten** | Gasten-WiFi | Alleen internettoegang, geen LAN |
-| **50 - Lab** | Test-VM’s, sandbox-PC’s | Geen toegang tot productieapparaten |
-| **60 - Management** | Switches, routers, AP’s | Alleen beheerders hebben toegang |
+| **66 - Lab** | Test-VM’s, sandbox-PC’s | Geen toegang tot productieapparaten |
+| **90 - Management** | Switches, routers, AP’s | Alleen beheerders hebben toegang |
 
 ---
 

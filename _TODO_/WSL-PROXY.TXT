@@ -1,0 +1,28 @@
+Solution: Use a local proxy in WSL, then browse via Windows
+
+We'll spin up a local HTTP proxy in WSL that forwards requests to HTB. Your Windows browser connects to localhost:8080, but the proxy runs inside WSL and can talk to HTB.
+🛠 Step-by-step (Easy & Effective)
+
+    Install socat or proxychains OR a simple tool like http-proxy via npm or mitmproxy:
+
+    The fastest is using socat (lightweight proxying):
+
+sudo apt update && sudo apt install socat
+
+Forward a local port to the target machine (HTB):
+
+Example: Expose 10.129.162.34:80 as localhost:8080:
+
+socat TCP-LISTEN:8080,fork TCP:10.129.162.34:80
+
+🔁 Now, anything hitting localhost:8080 on WSL will be forwarded to the HTB box.
+
+Use your browser on Windows to go to:
+
+http://localhost:8080
+
+🎉 You’ll now see the HTB target from your Windows browser!
+
+ps aux | grep 'socat'
+skkylim+  695665  0.0  0.0   4092  1956 pts/4    S+   13:13   0:00 grep --color=auto socat
+kill -9 695665
