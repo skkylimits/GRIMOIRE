@@ -10,7 +10,8 @@
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
 		"lint": "eslint .",
-		"typecheck": "nuxt typecheck"
+		"typecheck": "nuxt typecheck",
+		"reset": "rm -rf node_modules .nuxt .output pnpm-lock.yaml && pnpm install"
 	},
 	"dependencies": {
 		"@iconify-json/lucide": "^1.2.41",
@@ -19,6 +20,7 @@
 		"@nuxt/content": "^3.5.1",
 		"@nuxt/image": "^1.10.0",
 		"@nuxt/ui-pro": "3.1.1",
+		"better-sqlite3": "^12.2.0",
 		"nuxt": "~3.17.2",
 		"nuxt-og-image": "^5.1.3"
 	},
