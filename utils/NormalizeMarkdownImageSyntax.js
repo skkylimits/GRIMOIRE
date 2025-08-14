@@ -12,7 +12,7 @@ const RESET = '\x1B[0m' // Resets color
 
 // Function to normalize the markdown image links with line numbers
 export function normalizeImagePathInMarkdown(markdown, filePath) {
-	// Regex to match markdown image links: ![alt text](url)
+    // Regex to match markdown image links: ![alt text](url)
 	const regex = /!\[([^\]]*)\]\(([^)]+)\)/g
 
 	let isFilePathLogged = false // Flag to check if file path has been logged

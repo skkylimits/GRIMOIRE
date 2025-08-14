@@ -30,7 +30,6 @@
 	- add to dns is a database.md
 
 ## Prose Components
-
 - [ ] **Git Highlights**: Decide on a spectrum of red with or without a unique border.
     - [ ] Ensure **correct box-shadow colors** are applied.
     - [ ] Update the colors inside the highlight to reflect the correct context (currently using standard red).
