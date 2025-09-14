@@ -94,6 +94,7 @@ const links = ref([
 			{ label: 'Web Dev', icon: 'i-game-icons-spider-web', to: '/knowledge-base/web-dev', description: truncateDescription('The art and grit of web development—an endless race.') },
 			{ label: 'OPSEC', icon: 'picon:ninja', to: '/knowledge-base/opsec', description: truncateDescription('Learn how to hide yourself, clean up traces, and vanish before ever being seen..') },
 			{ label: 'OSINT', icon: 'i-el:opensource', to: '/knowledge-base/osint', description: truncateDescription('OSINT refers to the process of collecting and analyzing publicly available information.') },
+			{ label: 'NullByte', icon: 'simple-icons:malwarebytes', to: '/knowledge-base/nullbyte', description: truncateDescription('Unseen by firewalls, unheard by logs. A phantom in the machine.') },
 			{ label: 'Dead Silence', icon: 'game-icons:virus', to: '/knowledge-base/dead-silence', description: truncateDescription('Forge your tools. Create malware that walks undetected. Break telemetry. Trick the watchers.') },
 			{ label: 'Cyber Crusades', icon: 'i-heroicons-bug-ant', to: '/knowledge-base/cyber-crusades', description: truncateDescription('The Cybercrusades represent a new era of digital warfare.') },
 			// { label: 'The Pentest 101', to: '/knowledge-base/the-pentest-101', icon: 'i-heroicons-cube', description: truncateDescription('A guide to penetration testing, vulnerability analysis, and security strategies.') },
