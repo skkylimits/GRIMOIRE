@@ -1,100 +1,80 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	modules: [
-		'@nuxt/eslint',
-		// '@nuxt/image',
-		'@nuxt/ui-pro',
-		'@nuxt/content',
-		'nuxt-og-image',
-	],
+  modules: [
+    '@nuxt/eslint',
+    '@nuxt/image',
+    '@nuxt/ui',
+    '@nuxt/content',
+    'nuxt-og-image',
+    'nuxt-llms',
+    '@nuxt/scripts',
+    '@nuxt/test-utils'
+  ],
 
-	ui: {
-		fonts: false,
-	},
+  devtools: {
+    enabled: true
+  },
 
-	content: {
-		build: {
-			markdown: {
-				highlight: {
-					// Theme used in all color schemes.
-					theme: {
-						// Force 'github-dark' for both light and dark modes
-						default: 'github-dark', // Theme for dark mode or by default
-						dark: 'github-dark', // Ensure that dark mode uses the same theme
-						light: 'github-light', // Force light mode to use the same theme as well
-					},
-					langs: [
-						// other languages you might be using
-						'html',
-						'css',
-						'js',
-						'javascript',
-						'json',
-						'yaml',
-						'bash',
-						'ini',
-						'java',
-						'php',
-						'sql',
-						'cmd',
-						'powershell',
-						'http',
-						'mdc',
-					],
-				},
-			},
-		},
-	},
+  css: ['~/assets/css/main.css'],
 
-	// https://nuxt.com/docs/api/nuxt-config#devtools
-	devtools: {
-		enabled: true,
+  content: {
+    build: {
+      markdown: {
+        toc: {
+          searchDepth: 1
+        }
+      }
+    }
+  },
 
-		timeline: {
-			enabled: true,
-		},
-	},
+  compatibilityDate: '2024-07-11',
 
-	css: ['~/assets/css/main.css'],
+  nitro: {
+    prerender: {
+      routes: [
+        '/'
+      ],
+      crawlLinks: true,
+      autoSubfolderIndex: false
+    }
+  },
 
-	// https://ui.nuxt.com/getting-started/icons/nuxt#custom-local-collections
-	icon: {
-		provider: 'iconify',
-		customCollections: [{
-			prefix: 'custom',
-			dir: './assets/icons',
-		}],
-	},
+  eslint: {
+    config: {
+      stylistic: {
+        commaDangle: 'never',
+        braceStyle: '1tbs'
+      }
+    }
+  },
 
-	vue: {
-		compilerOptions: {
-			isCustomElement: tag => ['Important'].includes(tag),
-		},
-	},
+  icon: {
+    provider: 'iconify'
+  },
 
-	// https://nuxt.com/docs/getting-started/upgrade#opting-in-to-nuxt-4
-	future: {
-		compatibilityVersion: 4,
-	},
-
-	compatibilityDate: '2024-07-11',
-
-	nitro: {
-		prerender: {
-			routes: [
-				'/',
-			],
-			crawlLinks: true,
-		},
-	},
-
-	eslint: {
-		config: {
-			stylistic: {
-				commaDangle: 'never',
-				indent: 'tab',
-				semi: false,
-			},
-		},
-	},
+  llms: {
+    domain: 'https://docs-template.nuxt.dev/',
+    title: 'Nuxt Docs Template',
+    description: 'A template for building documentation with Nuxt UI and Nuxt Content.',
+    full: {
+      title: 'Nuxt Docs Template - Full Documentation',
+      description: 'This is the full documentation for the Nuxt Docs Template.'
+    },
+    sections: [
+      {
+        title: 'Getting Started',
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/getting-started%' }
+        ]
+      },
+      {
+        title: 'Essentials',
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/essentials%' }
+        ]
+      }
+    ]
+  }
 })

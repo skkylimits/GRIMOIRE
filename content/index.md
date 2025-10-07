@@ -1,30 +1,27 @@
 ---
 seo:
-  title: Access Point
-  description: This is the homepage gof the Nameless project.
+  title: Nuxt Docs Template
+  description: Create stunning, fast and SEO-optimized documentation sites with Nuxt UI.
 ---
 
-::u-page-hero
+::u-page-hero{class="dark:bg-gradient-to-b from-neutral-900 to-neutral-950"}
 ---
 orientation: horizontal
 ---
-  :::prose-pre{filename="Terminal"}
-  ```bash
-  sudo rm -rf / --no-preserve-root --simulate
-  ```
-  :::
+#top
+:hero-background
 
 #title
-Nameless
+Ship Beautiful [Documentation]{.text-primary}.
 
 #description
-Accelerate your ascent in the digital hierarchy. Unleash a stream of interconnected ideas.
+Build professional documentation with Nuxt UI's powerful components, enhanced typography, and seamless Nuxt Content integration. The same system trusted by the entire [Nuxt ecosystem](https://nuxt.com).
 
 #links
   :::u-button
   ---
+  to: /getting-started
   size: xl
-  to: /the-lab
   trailing-icon: i-lucide-arrow-right
   ---
   Get started
@@ -32,104 +29,235 @@ Accelerate your ascent in the digital hierarchy. Unleash a stream of interconnec
 
   :::u-button
   ---
-  color: neutral
   icon: i-simple-icons-github
+  color: neutral
+  variant: outline
   size: xl
+  to: https://github.com/nuxt-ui-templates/docs
   target: _blank
-  to: https://github.com/skkylimits/Nameless
-  variant: subtle
   ---
-  Inject.. into the </>
+  Use this template
+  :::
+
+#default
+  :::prose-pre
+  ---
+  code: |
+    export default defineNuxtConfig({
+      modules: [
+        '@nuxt/ui',
+        '@nuxt/content',
+        'nuxt-og-image',
+        'nuxt-llms'
+      ],
+
+      css: ['~/assets/css/main.css']
+    })
+  filename: nuxt.config.ts
+  ---
+
+  ```ts [nuxt.config.ts]
+  export default defineNuxtConfig({
+    modules: [
+      '@nuxt/ui',
+      '@nuxt/content',
+      'nuxt-og-image',
+      'nuxt-llms'
+    ],
+
+    css: ['~/assets/css/main.css']
+  })
+  ```
   :::
 ::
 
-::u-page-section
+::u-page-section{class="dark:bg-neutral-950"}
 #title
-The Zettelkasten Method
+Powered by Nuxt UI components
+
+#links
+  :::u-button
+  ---
+  color: neutral
+  size: lg
+  target: _blank
+  to: https://ui.nuxt.com/docs/getting-started/installation/nuxt
+  trailingIcon: i-lucide-arrow-right
+  variant: subtle
+  ---
+  Explore Nuxt UI
+  :::
 
 #features
   :::u-page-feature
   ---
-  icon: i-mdi-test-tube
-  to: /the-lab
+  icon: i-lucide-palette
   ---
   #title
-  The Lab
+  100+ UI Components
 
   #description
-  Prepare for battle. Transform raw hardware into your digital fortress.
+  Access the complete Nuxt UI component library. From badges to modals, everything styled and accessible out of the box.
   :::
 
   :::u-page-feature
   ---
-  icon: i-simple-icons-gnometerminal
-  to: /syntax
+  icon: i-lucide-type
   ---
   #title
-  Syntax
+  Beautiful Typography
 
   #description
-  Elevate your coding prowess in the Syntax zone. Unlocking your hidden potential.
+  Pre-styled prose components with perfect visual harmony. No need for @tailwindcss/typography - get precise control over every element.
   :::
 
   :::u-page-feature
   ---
-  icon: i-simple-icons-codechef
-  to: /kitt
+  icon: i-lucide-layers
   ---
   #title
-  KITT
+  Rich Prose Components
 
   #description
-  Key Interface and Technical Tools. A command center for mastering your arsenal.
+  Accordions, cards, callouts, tabs, steps, code blocks, and more - all provided by Nuxt UI for interactive documentation.
   :::
 
   :::u-page-feature
   ---
-  icon: i-heroicons-exclamation-circle
-  to: /vuln
+  icon: i-lucide-search
   ---
   #title
-  VulN
+  Built-in Search
 
   #description
-  In the shadows of cyberspace, vulnerabilities are the hidden cracks in the digital armor.
+  Full-text search with ContentSearch component. No need for Algolia - instant, relevant results with keyboard shortcuts (⌘K).
   :::
 
   :::u-page-feature
   ---
-  icon: i-simple-icons-gitkraken
-  to: /xpl01ts
+  icon: i-lucide-navigation
   ---
   #title
-  Xpl01ts
+  Smart Navigation
 
   #description
-  In the dark alleys of the cyberworld, Exploits are your ticket to power.
+  Auto-generated navigation with ContentNavigation and ContentToc components. Sticky table of contents and prev/next links.
   :::
 
   :::u-page-feature
   ---
-  icon: i-raphael-book
-  to: /knowledge-base
+  icon: i-lucide-moon
   ---
   #title
-  Knowledge Base
+  Dark Mode Ready
 
   #description
-  The secrets of the cyberverse, offering you the knowledge to thrive in this ever-shifting landscape.
+  Automatic theme switching with smooth transitions. Respects system preferences and remembers user choice.
   :::
 ::
 
-<!-- <ULandingSection
-			title="The freedom to build anything"
-			icon="i-heroicons-rocket-launch"
-		>
-			<UPageGrid>
-				<ULandingCard
-					v-for="(item, index) of page.features.items"
-					:key="index"
-					v-bind="item"
-				/>
-			</UPageGrid>
-	</ULandingSection> -->
+::u-page-section{class="dark:bg-neutral-950"}
+#title
+Enhanced with Nuxt Content
+
+#links
+  :::u-button
+  ---
+  color: neutral
+  size: lg
+  target: _blank
+  to: https://content.nuxt.com/docs/getting-started/installation
+  trailingIcon: i-lucide-arrow-right
+  variant: subtle
+  ---
+  Explore Nuxt Content
+  :::
+
+#features
+  :::u-page-feature
+  ---
+  icon: i-simple-icons-markdown
+  ---
+  #title
+  MDC Enhanced Markdown
+
+  #description
+  Write in Markdown while embedding Vue components. Seamlessly integrate interactive elements in your content.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-file-text
+  ---
+  #title
+  File-based Routing
+
+  #description
+  Organize content in folders and files. Your documentation structure automatically becomes your navigation.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-code
+  ---
+  #title
+  Syntax Highlighting
+
+  #description
+  Beautiful code blocks with language detection, line numbers, and copy buttons. Support for 100+ languages.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-database
+  ---
+  #title
+  Content Database
+
+  #description
+  Query your content with a MongoDB-like API. Filter, sort, and search through your documentation programmatically.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-file-code
+  ---
+  #title
+  Frontmatter Support
+
+  #description
+  Add metadata to your content files. Define SEO tags, navigation properties, and custom fields.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-git-branch
+  ---
+  #title
+  Version Control
+
+  #description
+  Content lives in your repository. Branch, review, and deploy documentation alongside your code.
+  :::
+::
+
+::u-page-section{class="dark:bg-gradient-to-b from-neutral-950 to-neutral-900"}
+  :::u-page-c-t-a
+  ---
+  links:
+    - label: Start building
+      to: '/getting-started'
+      trailingIcon: i-lucide-arrow-right
+    - label: View on GitHub
+      to: 'https://github.com/nuxt-ui-templates/docs'
+      target: _blank
+      variant: subtle
+      icon: i-simple-icons-github
+  title: Ready to build an amazing documentation?
+  description: Join thousands of developers building with Nuxt and Nuxt UI. Get this template and start shipping today.
+  class: dark:bg-neutral-950
+  ---
+
+  :stars-bg
+  :::
+::

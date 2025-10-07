@@ -1,55 +1,25 @@
-@import 'tailwindcss';
-@import '@nuxt/ui-pro';
+@import "tailwindcss";
+@import "@nuxt/ui";
 
-@source "../../../content";
+@source "../../../content/**/*";
 
-@theme {
-	--font-sans: 'Public Sans', sans-serif;
+@theme static {
+  --container-8xl: 90rem;
+  --font-sans: 'Public Sans', sans-serif;
 
-	/* --color-red-50: #fdeff0;
-	--color-red-100: #fbd7da;
-	--color-red-200: #f9aeb3;
-	--color-red-300: #f67a86;
-	--color-red-400: #f54655;
-	--color-red-500: #fb2c36;
-	--color-red-600: #db202b;
-	--color-red-700: #b71a24;
-	--color-red-800: #93151d;
-	--color-red-900: #771319;
-	--color-red-950: #44080c; */
+  --color-green-50: #EFFDF5;
+  --color-green-100: #D9FBE8;
+  --color-green-200: #B3F5D1;
+  --color-green-300: #75EDAE;
+  --color-green-400: #00DC82;
+  --color-green-500: #00C16A;
+  --color-green-600: #00A155;
+  --color-green-700: #007F45;
+  --color-green-800: #016538;
+  --color-green-900: #0A5331;
+  --color-green-950: #052E16;
 }
 
 :root {
-	--ui-info: #ec4899;
-	--ui-color-info-600: #ec4899;
-	--ui-color-info-300: #f9a8d4;
-	--ui-important: #f97316; /* vibrant orange (similar to #6b46c1) */
-	--ui-color-important-600: #ea580c; /* darker orange (similar to #553c9a) */
-	--ui-color-important-300: #fdba74; /* lighter orange (similar to #a5b4fc) */
-
-	/* --ui-text-muted: var(--ui-color-neutral-500) */
-
-	/* Makes callout border and h1/h2 red */
-	--ui-border-inverted: var(--ui-primary);
-	--ui-text-highlighted: var(--ui-primary);
-}
-
-img {
-	border: 3px solid var(--ui-primary);
-}
-
-hr {
-	margin: 32px 0;
-	color: var(--ui-border);
-	/* Apply your variable */
-}
-
-.list-square {
-	list-style-type: square;
-}
-
-.box-shadow {
-	border: 1px solid var(--ui-border);
-	border-radius: 4px;
-	padding: 16px;
+  --ui-container: var(--container-8xl);
 }
