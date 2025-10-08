@@ -98,3 +98,17 @@ act push -j [JOB ID] -P ubuntu-latest=catthehacker/ubuntu:full-latest
 ## Purge repo
 pnpm store prune
 rm -rf .nuxt .output .data dist
+
+## CI/Staging/Preview/Performance
+
+💾 **Prompt om later dit gesprek of deze setup terug te halen**
+
+> 🧠 “Ik had eerder met je gewerkt aan een Nuxt project waar we een performance CI workflow hadden met GitHub Actions, Vercel en build-time metrics (dev/build/preview). Kun je me opnieuw uitleggen hoe professionele teams dat meestal aanpakken — inclusief:
+>
+> * hoe ze feature branches zoals `v4` gebruiken voor performance experiments,
+> * wanneer ze mergen naar `main` of `dev`,
+> * hoe performance thresholds in CI werken,
+> * en hoe staging / preview omgevingen worden ingericht?
+>
+> Geef me daarbij ook de best practices voor het taggen, labelen en automatisch deployen als een PR de checks haalt.”
+---
