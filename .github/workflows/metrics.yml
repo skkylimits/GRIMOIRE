@@ -13,15 +13,17 @@ jobs:
       - name: 🧰 Checkout repository
         uses: actions/checkout@v4
 
-      # Gebruik eerst Node en activeer daarna pnpm via Corepack
-      - name: 🧱 Setup Node + pnpm
+      - name: 🧱 Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: 'pnpm'
 
-      - name: ⚙️ Enable pnpm
-        run: corepack enable && corepack prepare pnpm@9 --activate
+      - name: ⚙️ Enable Corepack + install pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@9 --activate
+          pnpm -v  # ✅ check dat pnpm beschikbaar is
 
       - name: 📦 Install dependencies
         run: pnpm install --frozen-lockfile
