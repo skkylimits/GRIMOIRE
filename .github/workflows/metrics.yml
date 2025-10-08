@@ -71,8 +71,8 @@ jobs:
         run: node scripts/metrics/check-performance-thresholds.js
 
       # 📤 Fase 9 — Upload metrics-artifacts
-      - name: 📤 Upload metrics JSON files
-        uses: actions/upload-artifact@v4
-        with:
-          name: nuxt-performance-metrics
-          path: metrics/
+      # - name: 📤 Upload metrics JSON files
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: nuxt-performance-metrics
+      #     path: metrics/

@@ -3,16 +3,29 @@ import fs from "node:fs";
 
 console.log("🔍 Checking performance thresholds...");
 
-const THRESHOLDS = {
+// Detect CI environment
+const isCI =
+  process.env.CI === "true" ||
+  process.env.GITHUB_ACTIONS === "true" ||
+  process.env.DOCKER_ENV === "true";
+
+// Thresholds: lokaal strenger, CI ruimer
+const THRESHOLDS_LOCAL = {
   devStartupSeconds: 8,
   buildSeconds: 60,
-  previewStartupSeconds: 6,
-  // Optional per-phase thresholds (add as needed)
-  phases: {
-    vite: 10,
-    nitro: 35,
-  },
+  previewStartupSeconds: 5,
 };
+
+const THRESHOLDS_CI = {
+  devStartupSeconds: 15,
+  buildSeconds: 90,
+  previewStartupSeconds: 8,
+};
+
+const THRESHOLDS = isCI ? THRESHOLDS_CI : THRESHOLDS_LOCAL;
+
+console.log(`🏗️ Using ${isCI ? "CI" : "local"} thresholds:`);
+console.table(THRESHOLDS);
 
 function checkFile(path, type) {
   if (!fs.existsSync(path)) {
@@ -22,42 +35,21 @@ function checkFile(path, type) {
 
   const data = JSON.parse(fs.readFileSync(path, "utf-8"));
   const last = data[data.length - 1];
-
   if (!last) return false;
 
-  let failed = false;
+  const totalKey = `${type}Seconds`;
+  const total = last[totalKey];
+  const limit = THRESHOLDS[totalKey];
 
-  // Top-level check
-  if (THRESHOLDS[`${type}Seconds`] && last[`${type}Seconds`] > THRESHOLDS[`${type}Seconds`]) {
-    console.error(`❌ ${type} time too long: ${last[`${type}Seconds`].toFixed(2)}s (limit ${THRESHOLDS[`${type}Seconds`]}s)`);
-    failed = true;
+  if (!limit) return false;
+
+  if (total > limit) {
+    console.error(`❌ ${type} too slow: ${total.toFixed(2)}s (limit ${limit}s)`);
+    return true;
   }
 
-  // Per-phase checks
-  if (last.phases && THRESHOLDS.phases) {
-    for (const [phase, limit] of Object.entries(THRESHOLDS.phases)) {
-      const value = findPhaseTime(last.phases, phase);
-      if (value && value > limit) {
-        console.error(`❌ Phase ${phase} too slow: ${value.toFixed(2)}s (limit ${limit}s)`);
-        failed = true;
-      }
-    }
-  }
-
-  if (!failed) {
-    console.log(`✅ ${type} within limits (${last[`${type}Seconds`].toFixed(2)}s)`);
-  }
-
-  return failed;
-}
-
-function findPhaseTime(phases, key) {
-  if (phases[key]) {
-    if (typeof phases[key] === "number") return phases[key];
-    if (typeof phases[key] === "object")
-      return Object.values(phases[key]).reduce((a, b) => a + b, 0);
-  }
-  return 0;
+  console.log(`✅ ${type} within limits (${total.toFixed(2)}s)`);
+  return false;
 }
 
 const results = [

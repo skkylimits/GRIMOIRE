@@ -1,4 +1,3 @@
-// scripts/measure-preview-startup.js
 import { spawn } from "node:child_process";
 import { performance } from "node:perf_hooks";
 import {
@@ -73,20 +72,12 @@ function printPhases(total, phases) {
   console.log("\n─────────────────────────────────────────────");
   console.log("🚀 Preview server volledig operationeel!");
   console.log("─────────────────────────────────────────────");
-  console.log(
-    `🧱 Fase 1: CLI bootstrap        – ${(phases.bootstrap || 0).toFixed(3)}s`
-  );
-  console.log(
-    `⚙️ Fase 2: Runtime init         – ${(phases.runtimeInit || 0).toFixed(3)}s`
-  );
+  console.log(`🧱 Fase 1: CLI bootstrap        – ${(phases.bootstrap || 0).toFixed(3)}s`);
+  console.log(`⚙️ Fase 2: Runtime init         – ${(phases.runtimeInit || 0).toFixed(3)}s`);
   if (phases.contentLoad !== null) {
-    console.log(
-      `📚 Fase 3: Content load         – ${phases.contentLoad.toFixed(3)}s`
-    );
+    console.log(`📚 Fase 3: Content load         – ${phases.contentLoad.toFixed(3)}s`);
   }
-  console.log(
-    `🌐 Fase 4: Poort binding        – ${(phases.bindPort || 0).toFixed(3)}s`
-  );
+  console.log(`🌐 Fase 4: Poort binding        – ${(phases.bindPort || 0).toFixed(3)}s`);
   console.log("─────────────────────────────────────────────");
   console.log(`✅ Totale opstarttijd           – ${total.toFixed(3)}s`);
   console.log("─────────────────────────────────────────────\n");

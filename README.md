@@ -84,11 +84,11 @@ act -l
 Run je workflow
 
 ```bash
-act push -j [JOB NAME]
+act push -j [JOB ID]
 ```
 
 ```bash
-act push -j [JOB NAME] -P ubuntu-latest=catthehacker/ubuntu:full-latest
+act push -j [JOB ID] -P ubuntu-latest=catthehacker/ubuntu:full-latest
 ```
 
 `exec bash `→ "ik trek een nieuw jasje aan, maar ik heb nog steeds dezelfde ID-kaart"
