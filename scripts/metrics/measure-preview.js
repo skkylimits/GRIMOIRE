@@ -1,117 +1,237 @@
 // scripts/measure-preview-startup.js
-import { spawn, execSync } from "node:child_process";
-import fs from "node:fs";
+import { spawn } from "node:child_process";
+import { performance } from "node:perf_hooks";
+import {
+  getGitCommit,
+  getGitBranch,
+  getNuxtVersion,
+  readJsonSafe,
+  writeJson,
+  diff,
+  shutdown,
+} from "../helpers/index.js";
 
-console.log("⏱️ Measuring Nuxt preview startup (phase breakdown)...");
+console.log("⏱️ Measuring Nuxt preview startup (detailed phase breakdown)...");
 
-const start = Date.now();
+// 🕒 Start overall timer
+const start = performance.now();
 const proc = spawn("pnpm", ["run", "preview"]);
+const metricsFile = "metrics/preview-startup-times.json";
 
+// ─────────────────────────────────────────────────────────────
+// 🧩 Fases
+// ─────────────────────────────────────────────────────────────
 const phases = {
-  startCmd: start,
-  loadServer: null,
+  bootstrap: null,
+  runtimeInit: null,
+  contentLoad: null,
   bindPort: null,
-  ready: null,
 };
 
+// ─────────────────────────────────────────────────────────────
+// 📡 Analyseer stdout
+// ─────────────────────────────────────────────────────────────
 proc.stdout.on("data", (data) => {
   const text = data.toString();
   process.stdout.write(text);
 
-  // 🧱 Fase 1: Server init begint
-  if (text.includes("Starting preview command") && phases.loadServer === null) {
-    phases.loadServer = Date.now();
+  // 🧱 Fase 1: CLI bootstrap → "Starting preview command"
+  if (text.includes("Starting preview command") && !phases.bootstrap) {
+    phases.bootstrap = diff(performance.now(), start);
   }
 
-  // 🌐 Fase 2: Server bind op poort (klaar om te luisteren)
-  if (text.includes("Listening on") && phases.bindPort === null) {
-    phases.bindPort = Date.now();
+  // 📚 Fase 3: @nuxt/content processing
+  const matchContent = text.match(
+    /Processed (\d+) collections and (\d+) files in ([\d.]+)ms/
+  );
+  if (matchContent && !phases.contentLoad) {
+    phases.contentLoad = parseFloat(matchContent[3]) / 1000;
+  }
 
-    const total = (phases.bindPort - start) / 1000;
-    const initTime = (phases.loadServer - start) / 1000;
-    const bindTime = (phases.bindPort - phases.loadServer) / 1000;
+  // 🌐 Fase 4: Port binding → "Listening on"
+  if (text.includes("Listening on") && !phases.bindPort) {
+    const now = performance.now();
+    const totalStartup = diff(now, start);
+    const runtimeInit = diff(now, start) - (phases.bootstrap || 0);
 
-    console.log("\n─────────────────────────────────────────────");
-    console.log("🚀 Preview server volledig operationeel!");
-    console.log("─────────────────────────────────────────────");
-    console.log(`🧱 Fase 1: Server laden     – ${initTime.toFixed(2)}s`);
-    console.log(`🌐 Fase 2: Poort binding     – ${bindTime.toFixed(2)}s`);
-    console.log(`✅ Totale opstarttijd        – ${total.toFixed(2)}s`);
-    console.log("─────────────────────────────────────────────\n");
+    // Fase 2 = runtime init (van preview command tot listening)
+    phases.runtimeInit = Math.max(runtimeInit - (phases.contentLoad || 0), 0);
+    phases.bindPort = diff(now, start);
 
-    saveMetric(total, { loadServer: initTime, bindPort: bindTime });
-    gracefulShutdown(proc);
+    printPhases(totalStartup, phases);
+    saveMetric(totalStartup, phases);
+    shutdown(proc);
   }
 });
 
 proc.stderr.on("data", (data) => process.stderr.write(data));
 
-// 👂 Luister naar afsluitstatus om ELIFECYCLE te voorkomen
-proc.on("close", (code, signal) => {
-  if (["SIGINT", "SIGTERM", "SIGKILL"].includes(signal)) {
-    // Verwachte afsluiting → geen waarschuwing
-    return;
+// ─────────────────────────────────────────────────────────────
+// 📊 Logging
+// ─────────────────────────────────────────────────────────────
+function printPhases(total, phases) {
+  console.log("\n─────────────────────────────────────────────");
+  console.log("🚀 Preview server volledig operationeel!");
+  console.log("─────────────────────────────────────────────");
+  console.log(
+    `🧱 Fase 1: CLI bootstrap        – ${(phases.bootstrap || 0).toFixed(3)}s`
+  );
+  console.log(
+    `⚙️ Fase 2: Runtime init         – ${(phases.runtimeInit || 0).toFixed(3)}s`
+  );
+  if (phases.contentLoad !== null) {
+    console.log(
+      `📚 Fase 3: Content load         – ${phases.contentLoad.toFixed(3)}s`
+    );
   }
-  if (code !== 0) {
-    console.warn(`⚠️ Preview eindigde met code ${code || signal}`);
-  }
-});
+  console.log(
+    `🌐 Fase 4: Poort binding        – ${(phases.bindPort || 0).toFixed(3)}s`
+  );
+  console.log("─────────────────────────────────────────────");
+  console.log(`✅ Totale opstarttijd           – ${total.toFixed(3)}s`);
+  console.log("─────────────────────────────────────────────\n");
+}
 
+// ─────────────────────────────────────────────────────────────
+// 💾 Save metrics (gestandaardiseerde JSON)
+// ─────────────────────────────────────────────────────────────
 function saveMetric(total, phases) {
-  const logFile = "metrics/preview-startup-times.json";
-  let metrics = [];
-
-  if (fs.existsSync(logFile)) {
-    try {
-      const parsed = JSON.parse(fs.readFileSync(logFile, "utf-8"));
-      if (Array.isArray(parsed)) metrics = parsed;
-    } catch {
-      console.warn(`⚠️ ${logFile} is ongeldig of leeg, reset bestand.`);
-      metrics = [];
-    }
-  }
+  const data = readJsonSafe(metricsFile, []);
 
   const entry = {
     timestamp: new Date().toISOString(),
     gitCommit: getGitCommit(),
+    branch: getGitBranch(),
+    nodeVersion: process.version,
+    nuxtVersion: getNuxtVersion(),
     previewStartupSeconds: total,
-    phases,
+    phases: {
+      bootstrap: phases.bootstrap || 0,
+      runtimeInit: phases.runtimeInit || 0,
+      contentLoad: phases.contentLoad || 0,
+      bindPort: phases.bindPort || 0,
+    },
   };
 
-  metrics.push(entry);
-  fs.writeFileSync(logFile, JSON.stringify(metrics, null, 2));
-  console.log(`💾 Metrics opgeslagen → ${logFile}`);
+  data.push(entry);
+  writeJson(metricsFile, data);
 }
 
-/**
- * 🧩 Signaalgedrag bij procesafsluiting
- * -------------------------------------
- * SIGINT   →  Gebruiker drukt op Ctrl+C (meestal netjes)
- * SIGTERM  →  "Stop nu" signaal (CI of cleanup)
- * SIGKILL  →  Hard afsluiten, kan niet genegeerd worden
- *
- * 🔧 Aanpak:
- *   1️⃣ Probeer eerst SIGINT (graceful)
- *   2️⃣ Na 1,5s forceer SIGKILL
- */
-function gracefulShutdown(proc) {
-  try {
-    proc.kill("SIGINT"); // Probeer netjes af te sluiten
-  } catch {}
-
-  setTimeout(() => {
-    console.log("🧹 Sluit preview-server af...");
-    try {
-      proc.kill("SIGKILL"); // Forceer na timeout
-    } catch {}
-    process.exit(0);
-  }, 1500);
-}
-
-function getGitCommit() {
-  try {
-    return execSync("git rev-parse --short HEAD").toString().trim();
-  } catch {
-    return "unknown";
-  }
-}
+// ┌─────────────────────────────────────────────────────────────┐
+// │               🧠 NUXT PREVIEW STARTUP TIMELINE              │
+// └─────────────────────────────────────────────────────────────┘
+//
+// Time →
+// │
+// │   0.000s ────────► Script start (performance.now())
+// │                    ↓
+// │                    [SPAWN pnpm run preview]
+// │                    └── Fases worden geïnitialiseerd
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 1 – CLI bootstrap                                     │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Tijd tussen scriptstart en de eerste log:
+// │        → "Starting preview command: node server/index.mjs"
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - De preview CLI (`nuxi preview`) start het Node-proces.
+// │           - Node laadt `.output/server/index.mjs` en de Nitro-runtime.
+// │           - Eventuele environment-variabelen worden klaargezet.
+// │
+// │        💬 Console toont nog bijna niets behalve setupinformatie.
+// │
+// │
+// │   0.3s ────────► "[nuxi] ℹ Starting preview command" verschijnt
+// │                   ↓
+// │                   phases.bootstrap = diff(now, start)
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 2 – Runtime init (Nitro + modules)                    │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Tijd van het starten van de preview runtime
+// │        tot aan de log "Listening on http://..."
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - Nitro initialiseert routes en middleware.
+// │           - Plugins en modules worden geïnitialiseerd.
+// │           - Config wordt ingeladen vanuit `.output`.
+// │
+// │        💬 Hier verschijnen logs zoals:
+// │           [@nuxt/content] ✔ Processed 3 collections and 14 files...
+// │           Nuxt Icon server bundle mode is set to local
+// │
+// │
+// │   1.7s ────────► "[nuxt/content] Processed ..." verschijnt
+// │                   ↓
+// │                   phases.contentLoad = 0.166s (optioneel)
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 3 – (Optioneel) Content load                          │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Herkend via logregel van @nuxt/content of vergelijkbare modules.
+// │        → Regex: /Processed (\d+) collections and (\d+) files in ([\d.]+)ms/
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - De contentmodule laadt markdown/JSON uit `.content`.
+// │           - Cache wordt hersteld of vernieuwd.
+// │           - Meestal duurt dit < 0.3s bij caching.
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 4 – Poort binding                                     │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Zodra de server klaar is om requests te ontvangen:
+// │        → "Listening on http://[::]:3000"
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - De HTTP-server start op.
+// │           - Socket binding op de poort (meestal 3000).
+// │           - Runtime klaar voor verkeer (SSR & API).
+// │
+// │
+// │   2.6s ────────► "Listening on http://..." verschijnt
+// │                   ↓
+// │                   totalStartupTime = diff(now, start)
+// │                   phases.runtimeInit = totalStartupTime - bootstrap
+// │                   ✅ Resultaten gelogd en opgeslagen
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ JSON METRICS STRUCTUUR                                     │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        {
+// │          "timestamp": "2025-10-08T22:13:45.312Z",
+// │          "gitCommit": "451b475",
+// │          "branch": "v4",
+// │          "nodeVersion": "v22.17.1",
+// │          "nuxtVersion": "^4.1.2",
+// │          "previewStartupSeconds": 2.609,
+// │          "phases": {
+// │            "bootstrap": 0.321,
+// │            "runtimeInit": 1.879,
+// │            "contentLoad": 0.166,
+// │            "bindPort": 0.243
+// │          }
+// │        }
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ AFSLUITING (graceful shutdown)                             │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        🔧 Signaalgedrag:
+// │           SIGINT  → Netjes afsluiten (Ctrl+C / handmatig)
+// │           SIGKILL → Hard afsluiten na timeout (fallback in CI)
+// │
+// │        Script flow:
+// │           try proc.kill("SIGINT")
+// │           ⏳ wacht 1.5s
+// │           try proc.kill("SIGKILL")
+// │           process.exit(0)
+// │
+// │        💬 Hiermee voorkomen we ELIFECYCLE errors in CI/CD.
+// │
+// └─────────────────────────────────────────────────────────────┘

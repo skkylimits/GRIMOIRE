@@ -1,142 +1,148 @@
 // scripts/measure-build-time.js
-import { spawn, execSync } from "node:child_process";
-import fs from "node:fs";
+import { spawn } from "node:child_process";
+import { performance } from "node:perf_hooks";
+import {
+  getGitCommit,
+  getGitBranch,
+  getNuxtVersion,
+  readJsonSafe,
+  writeJson,
+} from "../helpers/index.js";
 
-console.log("⏱️ Measuring Nuxt build time (with nested phase JSON)...");
+console.log("⏱️ Measuring Nuxt build time...");
 
-const start = Date.now();
+// 🕒 Start timer
+const start = performance.now();
 const proc = spawn("pnpm", ["run", "build"]);
 
+const metricsFile = "metrics/build-times.json";
+
+// Fases met duidelijke structuur
 const phases = {
-  nuxtInitStart: start,
-  viteClientStart: null,
-  viteClientEnd: null,
-  viteServerStart: null,
-  viteServerEnd: null,
-  nitroStart: null,
-  nitroEnd: null,
-  prerenderStart: null,
-  prerenderEnd: null,
-  outputEnd: null,
+  nuxtInit: { start: start, end: null },
+  vite: {
+    client: { start: null, end: null },
+    server: { start: null, end: null },
+  },
+  nitro: {
+    build: { start: null, end: null },
+    prerender: { start: null, end: null },
+    finalize: { start: null, end: null },
+  },
 };
 
+// --- STDOUT ANALYSE ---
 proc.stdout.on("data", (data) => {
   const text = data.toString();
   process.stdout.write(text);
 
-  // --- Nuxt & Vite fases ---
-  if (text.includes("Building client...")) phases.viteClientStart = Date.now();
-  if (text.match(/Client built in ([\d.]+)m?s/)) phases.viteClientEnd = Date.now();
+  // --- Vite fases ---
+  if (text.includes("Building client...")) phases.vite.client.start = performance.now();
+  if (text.match(/Client built in ([\d.]+)m?s/)) phases.vite.client.end = performance.now();
 
-  if (text.includes("Building server...")) phases.viteServerStart = Date.now();
-  if (text.match(/Server built in ([\d.]+)m?s/)) phases.viteServerEnd = Date.now();
+  if (text.includes("Building server...")) phases.vite.server.start = performance.now();
+  if (text.match(/Server built in ([\d.]+)m?s/)) phases.vite.server.end = performance.now();
 
-  // --- Nitro fase ---
-  if (text.includes("Building Nuxt Nitro server")) phases.nitroStart = Date.now();
-  if (text.includes("Nuxt Nitro server built")) phases.nitroEnd = Date.now();
+  // --- Nitro fases ---
+  if (text.includes("Building Nuxt Nitro server")) phases.nitro.build.start = performance.now();
+  if (text.includes("Nuxt Nitro server built")) phases.nitro.build.end = performance.now();
 
   // --- Prerender fase ---
-  if (text.includes("Initializing prerenderer")) phases.prerenderStart = Date.now();
-  if (text.includes("Prerendered")) phases.prerenderEnd = Date.now();
+  if (text.includes("Initializing prerenderer")) phases.nitro.prerender.start = performance.now();
+  if (text.includes("Prerendered")) phases.nitro.prerender.end = performance.now();
 
-  // --- Output finalize ---
+  // --- Finalize fase ---
   if (
     text.includes("Generated public") ||
     text.includes("Output directory:") ||
     text.match(/Built in [\d.]+s$/)
   ) {
-    phases.outputEnd = Date.now();
+    phases.nitro.finalize.end = performance.now();
   }
 });
 
 proc.stderr.on("data", (data) => process.stderr.write(data));
 
+// --- Als proces eindigt ---
 proc.on("close", (code) => {
-  const total = (Date.now() - start) / 1000;
+  const totalSeconds = diff(performance.now(), start);
 
   if (code !== 0) {
     console.error("❌ Build failed.");
     process.exit(code);
   }
 
-  // --- Berekeningen ---
-  const flatMetrics = {
-    nuxtInit: (phases.viteClientStart - phases.nuxtInitStart) / 1000,
-    viteClient: (phases.viteClientEnd - phases.viteClientStart) / 1000,
-    viteServer: (phases.viteServerEnd - phases.viteServerStart) / 1000,
-    nitro: (phases.nitroEnd - phases.viteServerEnd) / 1000,
-    prerender:
-      phases.prerenderStart && phases.prerenderEnd
-        ? (phases.prerenderEnd - phases.prerenderStart) / 1000
-        : 0,
-    finalize:
-      phases.outputEnd && phases.prerenderEnd
-        ? (phases.outputEnd - phases.prerenderEnd) / 1000
-        : 0,
+  // --- Bereken tijden ---
+  const flat = {
+    nuxtInit: diff(phases.vite.client.start, phases.nuxtInit.start),
+    viteClient: diff(phases.vite.client.end, phases.vite.client.start),
+    viteServer: diff(phases.vite.server.end, phases.vite.server.start),
+    nitroBuild: diff(phases.nitro.build.end, phases.vite.server.end),
+    prerender: diff(phases.nitro.prerender.end, phases.nitro.prerender.start),
+    finalize: diff(phases.nitro.finalize.end, phases.nitro.prerender.end),
   };
 
-  // --- Console output (blijft exact gelijk) ---
+  // --- Console output ---
+  printPhases(flat, totalSeconds);
+
+  // --- Opslaan naar JSON ---
+  saveMetric(flat, totalSeconds);
+});
+
+/* ------------------------------------------------------------------
+ 📊 PRINT PHASES
+-------------------------------------------------------------------*/
+function printPhases(flat, totalSeconds) {
   console.log("\n─────────────────────────────────────────────");
   console.log("🏗️ Build voltooid!");
   console.log("─────────────────────────────────────────────");
-  console.log(`🧱 Fase 1: Nuxt init        – ${flatMetrics.nuxtInit.toFixed(2)}s`);
-  console.log(`⚙️ Fase 2: Vite client      – ${flatMetrics.viteClient.toFixed(2)}s`);
-  console.log(`🧩 Fase 3: Vite server      – ${flatMetrics.viteServer.toFixed(2)}s`);
-  console.log(`🔥 Fase 4: Nitro build      – ${flatMetrics.nitro.toFixed(2)}s`);
-  if (flatMetrics.prerender > 0)
-    console.log(`🌐 Fase 5: Prerender routes  – ${flatMetrics.prerender.toFixed(2)}s`);
-  if (flatMetrics.finalize > 0)
-    console.log(`📦 Fase 6: Output finalize   – ${flatMetrics.finalize.toFixed(2)}s`);
+  console.log(`🧱 Fase 1: Nuxt init        – ${flat.nuxtInit.toFixed(2)}s`);
+  console.log(`⚙️ Fase 2: Vite client      – ${flat.viteClient.toFixed(2)}s`);
+  console.log(`🧩 Fase 3: Vite server      – ${flat.viteServer.toFixed(2)}s`);
+  console.log(`🔥 Fase 4: Nitro build      – ${flat.nitroBuild.toFixed(2)}s`);
+  if (flat.prerender > 0)
+    console.log(`🌐 Fase 5: Prerender routes  – ${flat.prerender.toFixed(2)}s`);
+  if (flat.finalize > 0)
+    console.log(`📦 Fase 6: Output finalize   – ${flat.finalize.toFixed(2)}s`);
   console.log("─────────────────────────────────────────────");
-  console.log(`✅ Totale buildtijd          – ${total.toFixed(2)}s`);
+  console.log(`✅ Totale buildtijd          – ${totalSeconds.toFixed(2)}s`);
   console.log("─────────────────────────────────────────────\n");
+}
 
-  // --- Save metric in nieuwe JSON structuur ---
-  saveMetric(total, flatMetrics);
-});
+/* ------------------------------------------------------------------
+ 💾 SAVE METRICS (via helpers)
+-------------------------------------------------------------------*/
+function saveMetric(flat, totalSeconds) {
+  const data = readJsonSafe(metricsFile, []);
 
-function saveMetric(total, flatMetrics) {
-  const logFile = "metrics/build-times.json";
-  let metrics = [];
-
-  if (fs.existsSync(logFile)) {
-    try {
-      const parsed = JSON.parse(fs.readFileSync(logFile, "utf-8"));
-      if (Array.isArray(parsed)) metrics = parsed;
-    } catch {
-      console.warn(`⚠️ ${logFile} is ongeldig of leeg, reset bestand.`);
-      metrics = [];
-    }
-  }
-
-  // 👉 Geneste structuur voor JSON
   const entry = {
     timestamp: new Date().toISOString(),
     gitCommit: getGitCommit(),
-    buildSeconds: total,
+    branch: getGitBranch(),
+    nodeVersion: process.version,
+    nuxtVersion: getNuxtVersion(),
+    buildSeconds: totalSeconds,
     phases: {
-      nuxtInit: flatMetrics.nuxtInit,
+      nuxtInit: flat.nuxtInit,
       vite: {
-        client: flatMetrics.viteClient,
-        server: flatMetrics.viteServer,
+        client: flat.viteClient,
+        server: flat.viteServer,
       },
       nitro: {
-        build: flatMetrics.nitro,
-        prerender: flatMetrics.prerender,
-        finalize: flatMetrics.finalize,
+        build: flat.nitroBuild,
+        prerender: flat.prerender,
+        finalize: flat.finalize,
       },
     },
   };
 
-  metrics.push(entry);
-  fs.writeFileSync(logFile, JSON.stringify(metrics, null, 2));
-  console.log(`💾 Metrics opgeslagen → ${logFile}`);
+  data.push(entry);
+  writeJson(metricsFile, data);
 }
 
-function getGitCommit() {
-  try {
-    return execSync("git rev-parse --short HEAD").toString().trim();
-  } catch {
-    return "unknown";
-  }
+/* ------------------------------------------------------------------
+ 🔧 UTILITIES
+-------------------------------------------------------------------*/
+function diff(a, b) {
+  return a && b ? Math.max((a - b) / 1000, 0) : 0;
 }

@@ -15,5 +15,45 @@
         "finalize": 0.107
       }
     }
+  },
+  {
+    "timestamp": "2025-10-08T21:00:04.918Z",
+    "gitCommit": "f5e746b",
+    "branch": "v4",
+    "nodeVersion": "v22.17.1",
+    "nuxtVersion": "^4.1.2",
+    "buildSeconds": 47.416108317,
+    "phases": {
+      "nuxtInit": 4.0048357889999995,
+      "vite": {
+        "client": 6.662124688,
+        "server": 3.629665904000001
+      },
+      "nitro": {
+        "build": 30.975092481,
+        "prerender": 8.970725565999999,
+        "finalize": 0.10990293999999995
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-08T21:03:43.235Z",
+    "gitCommit": "f5e746b",
+    "branch": "v4",
+    "nodeVersion": "v22.17.1",
+    "nuxtVersion": "^4.1.2",
+    "buildSeconds": 45.666366228,
+    "phases": {
+      "nuxtInit": 2.9839029929999996,
+      "vite": {
+        "client": 6.772938177,
+        "server": 3.6180871209999985
+      },
+      "nitro": {
+        "build": 30.193787544,
+        "prerender": 8.731119111000002,
+        "finalize": 0.10776453299999776
+      }
+    }
   }
 ]

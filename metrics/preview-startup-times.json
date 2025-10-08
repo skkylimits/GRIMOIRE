@@ -1,1 +1,40 @@
-[]
+[
+  {
+    "timestamp": "2025-10-08T21:05:47.975Z",
+    "gitCommit": "f5e746b",
+    "branch": "v4",
+    "nodeVersion": "v22.17.1",
+    "nuxtVersion": "^4.1.2",
+    "previewStartupSeconds": 2.1450169100000003,
+    "phases": {
+      "serverLoad": 1.9430997479999998,
+      "portBind": 0.20191716200000018
+    }
+  },
+  {
+    "timestamp": "2025-10-08T21:06:35.776Z",
+    "gitCommit": "f5e746b",
+    "branch": "v4",
+    "nodeVersion": "v22.17.1",
+    "nuxtVersion": "^4.1.2",
+    "previewStartupSeconds": 2.154496252,
+    "phases": {
+      "serverLoad": 1.950698986,
+      "portBind": 0.20379726600000003
+    }
+  },
+  {
+    "timestamp": "2025-10-08T21:13:44.538Z",
+    "gitCommit": "f5e746b",
+    "branch": "v4",
+    "nodeVersion": "v22.17.1",
+    "nuxtVersion": "^4.1.2",
+    "previewStartupSeconds": 2.1369886730000003,
+    "phases": {
+      "bootstrap": 1.93488605,
+      "runtimeInit": 0.04029262300000025,
+      "contentLoad": 0.16181,
+      "bindPort": 2.1369886730000003
+    }
+  }
+]

@@ -7,6 +7,7 @@ import {
   readJsonSafe,
   writeJson,
   shutdown,
+  diff,
 } from "../helpers/index.js";
 
 console.log("⏱️ Measuring Nuxt dev startup...");
@@ -25,9 +26,6 @@ const phases = {
 };
 
 let latestEntry = null;
-
-// Helper
-const diff = (a, b) => (a && b ? Math.max((a - b) / 1000, 0) : 0);
 
 // --- Analyseer stdout ---
 proc.stdout.on("data", (data) => {
