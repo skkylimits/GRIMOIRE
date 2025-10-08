@@ -13,26 +13,27 @@ jobs:
       - name: 🧰 Checkout repository
         uses: actions/checkout@v4
 
+      # Gebruik eerst Node en activeer daarna pnpm via Corepack
       - name: 🧱 Setup Node + pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-      - uses: actions/setup-node@v4
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: 'pnpm'
+
+      - name: ⚙️ Enable pnpm
+        run: corepack enable && corepack prepare pnpm@9 --activate
 
       - name: 📦 Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: 🧪 Measure dev startup
-        run: node scripts/metrics/measure-dev-startup.js
+        run: node scripts/metrics/measure-dev.js
 
       - name: 🏗️ Measure build time
-        run: node scripts/metrics/measure-build-time.js
+        run: node scripts/metrics/measure-build.js
 
       - name: 🌐 Measure preview startup
-        run: node scripts/metrics/measure-preview-startup.js
+        run: node scripts/metrics/measure-preview.js
 
       - name: 🚨 Check performance thresholds
         run: node scripts/metrics/check-performance-thresholds.js
