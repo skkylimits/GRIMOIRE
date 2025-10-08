@@ -1,0 +1,44 @@
+name: Measure Nuxt Performance
+
+on:
+  push:
+    branches: [v4]
+
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🧱 Setup Node + pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: 📦 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🧪 Measure dev startup
+        run: node scripts/metrics/measure-dev-startup.js
+
+      - name: 🏗️ Measure build time
+        run: node scripts/metrics/measure-build-time.js
+
+      - name: 🌐 Measure preview startup
+        run: node scripts/metrics/measure-preview-startup.js
+
+      - name: 🚨 Check performance thresholds
+        run: node scripts/metrics/check-performance-thresholds.js
+
+      - name: 📤 Upload metrics JSON
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuxt-performance-metrics
+          path: metrics/
