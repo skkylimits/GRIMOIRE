@@ -1,12 +1,21 @@
-import { spawn, execSync } from "node:child_process";
-import fs from "node:fs";
+import { spawn } from "node:child_process";
 import { performance } from "node:perf_hooks";
+import {
+  getGitCommit,
+  getGitBranch,
+  getNuxtVersion,
+  readJsonSafe,
+  writeJson,
+  shutdown,
+} from "../helpers/index.js";
 
-console.log("⏱️Measuring Nuxt dev startup...");
+console.log("⏱️ Measuring Nuxt dev startup...");
 
-// ⏱️ Start overall timer
+// ⏱️ Start timer
 const start = performance.now();
 const proc = spawn("pnpm", ["run", "dev"]);
+
+const metricsFile = "metrics/dev-startup-times.json";
 
 const phases = {
   nuxtInit: { preload: null, visible: null },
@@ -17,7 +26,7 @@ const phases = {
 
 let latestEntry = null;
 
-// Helper voor veilige tijdsverschillen
+// Helper
 const diff = (a, b) => (a && b ? Math.max((a - b) / 1000, 0) : 0);
 
 // --- Analyseer stdout ---
@@ -32,7 +41,8 @@ proc.stdout.on("data", (data) => {
 
   // 2️⃣ Eerste Vite-log → begin zichtbare initfase
   if (text.includes("Vite ") && phases.nuxtInit.visible === null) {
-    phases.nuxtInit.visible = diff(performance.now(), start) - phases.nuxtInit.preload;
+    phases.nuxtInit.visible =
+      diff(performance.now(), start) - phases.nuxtInit.preload;
   }
 
   // 3️⃣ Parse Vite client buildtijd
@@ -52,7 +62,6 @@ proc.stdout.on("data", (data) => {
   if (matchNitro && !phases.nitro.server) {
     phases.nitro.server = parseFloat(matchNitro[1]) / 1000;
 
-    // Zodra Nitro klaar is → berekeningen
     const totalDevStartupTime = diff(performance.now(), start);
     latestEntry = buildMetric({ totalDevStartupTime, phases });
 
@@ -60,7 +69,7 @@ proc.stdout.on("data", (data) => {
     saveMetric(latestEntry);
   }
 
-  // 6️⃣ Parse warm-up tijden (client/server)
+  // 6️⃣ Parse warm-up tijden
   const matchClientWarm = text.match(/Vite client warmed up in (\d+(?:\.\d+)?)ms/);
   if (matchClientWarm && !phases.background.client) {
     phases.background.client = parseFloat(matchClientWarm[1]) / 1000;
@@ -71,13 +80,10 @@ proc.stdout.on("data", (data) => {
     phases.background.server = parseFloat(matchServerWarm[1]) / 1000;
   }
 
-  // Wanneer beide bekend zijn → log achtergrondfase
+  // Zodra beide warm-ups bekend zijn → log fase 5
   if (phases.background.client && phases.background.server && latestEntry) {
     const warmupTotal = phases.background.client + phases.background.server;
-
-    console.log(
-      `🕓Fase 5: Achtergrondfase (warm-up) – ${warmupTotal.toFixed(3)}s`
-    );
+    console.log(`🕓 Fase 5: Achtergrondfase (warm-up) – ${warmupTotal.toFixed(3)}s`);
     console.log("─────────────────────────────────────────────\n");
 
     latestEntry.phases.background = { ...phases.background };
@@ -128,94 +134,29 @@ function printPhases(metric) {
   const total = metric.devStartupSeconds;
 
   console.log("\n─────────────────────────────────────────────");
-  console.log("🚀Dev server is volledig operationeel!");
+  console.log("🚀 Dev server is volledig operationeel!");
   console.log("─────────────────────────────────────────────");
-  console.log(`🧱Fase 1a: Nuxt preload (stil)     – ${nuxtInit.preload.toFixed(3)}s`);
-  console.log(`🧱Fase 1b: Nuxt init zichtbaar     – ${nuxtInit.visible.toFixed(3)}s`);
-  console.log(`⚙️Fase 2: Vite client build        – ${vite.client.toFixed(3)}s`);
-  console.log(`🧩Fase 3: Vite server build        – ${vite.server.toFixed(3)}s`);
-  console.log(`🔥Fase 4: Nitro setup              – ${nitro.server.toFixed(3)}s`);
+  console.log(`🧱 Fase 1a: Nuxt preload (stil)     – ${nuxtInit.preload.toFixed(3)}s`);
+  console.log(`🧱 Fase 1b: Nuxt init zichtbaar     – ${nuxtInit.visible.toFixed(3)}s`);
+  console.log(`⚙️ Fase 2: Vite client build        – ${vite.client.toFixed(3)}s`);
+  console.log(`🧩 Fase 3: Vite server build        – ${vite.server.toFixed(3)}s`);
+  console.log(`🔥 Fase 4: Nitro setup              – ${nitro.server.toFixed(3)}s`);
   console.log("─────────────────────────────────────────────");
-  console.log("🌐Server luistert op: http://localhost:3000");
-  console.log(`✅Totale opstarttijd               – ${total.toFixed(3)}s`);
+  console.log("🌐 Server luistert op: http://localhost:3000");
+  console.log(`✅ Totale opstarttijd               – ${total.toFixed(3)}s`);
   console.log("─────────────────────────────────────────────\n");
 }
 
 /* ------------------------------------------------------------------
- 💾 SAVE METRIC FILE
+ 💾 SAVE METRIC FILE (via helpers)
 -------------------------------------------------------------------*/
 function saveMetric(entry, replaceLast = false) {
-  const file = "metrics/dev-startup-times.json";
-  let data = [];
-
-  if (fs.existsSync(file)) {
-    try {
-      const parsed = JSON.parse(fs.readFileSync(file, "utf-8"));
-      if (Array.isArray(parsed)) data = parsed;
-    } catch {
-      console.warn("⚠️ Ongeldig JSON-bestand, reset.");
-    }
-  }
+  const data = readJsonSafe(metricsFile, []);
 
   if (replaceLast && data.length > 0) data[data.length - 1] = entry;
   else data.push(entry);
 
-  fs.writeFileSync(file, JSON.stringify(data, null, 2));
-  console.log(`💾Metrics opgeslagen → ${file}`);
-}
-
-/* ------------------------------------------------------------------
- 🧹 CLEAN SHUTDOWN
--------------------------------------------------------------------*/
-function shutdown(proc) {
-  console.log("🧹Sluit dev-server af...");
-
-  try {
-    // 🟢 Eerst proberen: vriendelijk afsluiten
-    proc.kill("SIGINT");
-  } catch {}
-
-  // ⏳ Wacht even, forceer daarna volledige exit
-  setTimeout(() => {
-    try {
-      proc.kill("SIGKILL");
-    } catch {}
-    // ✅ Forceer succesvolle exit — voorkomt ELIFECYCLE
-    process.exitCode = 0;
-    process.exit(0);
-  }, 1500);
-}
-
-// SIGINT Gebruiker drukt op Ctrl+C Soms genegeerd — server blijft hangen 
-// // SIGTERM Netjes “stop nu” Sluit watchers & server meestal correct 
-// // SIGKILL Hard afsluiten (kan niet genegeerd worden) Forceert exit (zeker in CI)
-
-/* ------------------------------------------------------------------
- 🧭 HELPER FUNCTIES
--------------------------------------------------------------------*/
-function getGitCommit() {
-  try {
-    return execSync("git rev-parse --short HEAD").toString().trim();
-  } catch {
-    return "unknown";
-  }
-}
-
-function getGitBranch() {
-  try {
-    return execSync("git rev-parse --abbrev-ref HEAD").toString().trim();
-  } catch {
-    return "unknown";
-  }
-}
-
-function getNuxtVersion() {
-  try {
-    const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
-    return pkg.dependencies?.nuxt || pkg.devDependencies?.nuxt || "unknown";
-  } catch {
-    return "unknown";
-  }
+  writeJson(metricsFile, data);
 }
 
 // ┌─────────────────────────────────────────────────────────────┐

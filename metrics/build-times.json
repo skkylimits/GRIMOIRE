@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "timestamp": "2025-10-08T20:26:30.985Z",
+    "gitCommit": "451b475",
+    "buildSeconds": 53.811,
+    "phases": {
+      "nuxtInit": 4.03,
+      "vite": {
+        "client": 10.118,
+        "server": 3.529
+      },
+      "nitro": {
+        "build": 34.049,
+        "prerender": 9.582,
+        "finalize": 0.107
+      }
+    }
+  }
+]
