@@ -1,0 +1,20 @@
+[
+  {
+    "timestamp": "2025-10-08T09:14:52.894Z",
+    "gitCommit": "4c6eb5c",
+    "devStartupSeconds": 5.004,
+    "phases": {
+      "nuxtInit": 0.336,
+      "vite": {
+        "client": 2.471,
+        "server": 0.035
+      },
+      "nitro": {
+        "server": 2.162
+      },
+      "background": {
+        "warmup": 0.037
+      }
+    }
+  }
+]

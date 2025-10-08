@@ -1,15 +1,19 @@
 {
-  "name": "Nameless",
+  "name": "nameless",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "lint": "eslint .",
-    "typecheck": "nuxt typecheck"
-  },
+  "dev": "nuxt dev",
+  "build": "nuxt build",
+  "preview": "nuxt preview",
+  "postinstall": "nuxt prepare",
+  "lint": "eslint .",
+  "typecheck": "nuxt typecheck",
+  "measure:dev": "node scripts/metrics/measure-dev.js",
+  "measure:build": "node scripts/metrics/measure-build.js",
+  "measure:preview": "node scripts/metrics/measure-preview.js",
+  "measure:reset": "node scripts/metrics/measure-reset.js"
+},
   "dependencies": {
     "@googlemaps/markerclusterer": "^2.6.2",
     "@iconify-json/lucide": "^1.2.68",
