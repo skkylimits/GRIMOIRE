@@ -2,7 +2,7 @@ import { spawn, execSync } from "node:child_process";
 import fs from "node:fs";
 import { performance } from "node:perf_hooks";
 
-console.log("⏱️ Measuring Nuxt dev startup (minimal clean version)...");
+console.log("⏱️Measuring Nuxt dev startup...");
 
 // ⏱️ Start overall timer
 const start = performance.now();
@@ -76,7 +76,7 @@ proc.stdout.on("data", (data) => {
     const warmupTotal = phases.background.client + phases.background.server;
 
     console.log(
-      `🕓 Fase 5: Achtergrondfase (warm-up) – ${warmupTotal.toFixed(3)}s`
+      `🕓Fase 5: Achtergrondfase (warm-up) – ${warmupTotal.toFixed(3)}s`
     );
     console.log("─────────────────────────────────────────────\n");
 
@@ -128,16 +128,16 @@ function printPhases(metric) {
   const total = metric.devStartupSeconds;
 
   console.log("\n─────────────────────────────────────────────");
-  console.log("🚀 Dev server is volledig operationeel!");
+  console.log("🚀Dev server is volledig operationeel!");
   console.log("─────────────────────────────────────────────");
-  console.log(`🧱 Fase 1a: Nuxt preload (stil)     – ${nuxtInit.preload.toFixed(3)}s`);
-  console.log(`🧱 Fase 1b: Nuxt init zichtbaar     – ${nuxtInit.visible.toFixed(3)}s`);
-  console.log(`⚙️ Fase 2: Vite client build        – ${vite.client.toFixed(3)}s`);
-  console.log(`🧩 Fase 3: Vite server build        – ${vite.server.toFixed(3)}s`);
-  console.log(`🔥 Fase 4: Nitro setup              – ${nitro.server.toFixed(3)}s`);
+  console.log(`🧱Fase 1a: Nuxt preload (stil)     – ${nuxtInit.preload.toFixed(3)}s`);
+  console.log(`🧱Fase 1b: Nuxt init zichtbaar     – ${nuxtInit.visible.toFixed(3)}s`);
+  console.log(`⚙️Fase 2: Vite client build        – ${vite.client.toFixed(3)}s`);
+  console.log(`🧩Fase 3: Vite server build        – ${vite.server.toFixed(3)}s`);
+  console.log(`🔥Fase 4: Nitro setup              – ${nitro.server.toFixed(3)}s`);
   console.log("─────────────────────────────────────────────");
-  console.log("🌐 Server luistert op: http://localhost:3000");
-  console.log(`✅ Totale opstarttijd               – ${total.toFixed(3)}s`);
+  console.log("🌐Server luistert op: http://localhost:3000");
+  console.log(`✅Totale opstarttijd               – ${total.toFixed(3)}s`);
   console.log("─────────────────────────────────────────────\n");
 }
 
@@ -161,26 +161,34 @@ function saveMetric(entry, replaceLast = false) {
   else data.push(entry);
 
   fs.writeFileSync(file, JSON.stringify(data, null, 2));
-  console.log(`💾 Metrics opgeslagen → ${file}`);
+  console.log(`💾Metrics opgeslagen → ${file}`);
 }
 
 /* ------------------------------------------------------------------
  🧹 CLEAN SHUTDOWN
 -------------------------------------------------------------------*/
 function shutdown(proc) {
+  console.log("🧹Sluit dev-server af...");
+
   try {
-    proc.kill("SIGTERM");
+    // 🟢 Eerst proberen: vriendelijk afsluiten
+    proc.kill("SIGINT");
   } catch {}
 
+  // ⏳ Wacht even, forceer daarna volledige exit
   setTimeout(() => {
-    console.log("🧹 Sluit dev-server af...");
     try {
       proc.kill("SIGKILL");
     } catch {}
+    // ✅ Forceer succesvolle exit — voorkomt ELIFECYCLE
     process.exitCode = 0;
-    process.exit();
+    process.exit(0);
   }, 1500);
 }
+
+// SIGINT Gebruiker drukt op Ctrl+C Soms genegeerd — server blijft hangen 
+// // SIGTERM Netjes “stop nu” Sluit watchers & server meestal correct 
+// // SIGKILL Hard afsluiten (kan niet genegeerd worden) Forceert exit (zeker in CI)
 
 /* ------------------------------------------------------------------
  🧭 HELPER FUNCTIES
@@ -210,18 +218,16 @@ function getNuxtVersion() {
   }
 }
 
-
-
 // ┌─────────────────────────────────────────────────────────────┐
 // │                 🧠 NUXT DEV STARTUP TIMELINE                │
 // └─────────────────────────────────────────────────────────────┘
-
+//
 // Time →
 // │
 // │   0.000s ────────► Script start (performance.now())
 // │                    ↓
 // │                    [SPAWN pnpm run dev]
-// │                    └── fases worden geïnitialiseerd
+// │                    └── Fases worden geïnitialiseerd
 // │
 // │
 // │   ┌─────────────────────────────────────────────────────────────┐
@@ -232,31 +238,31 @@ function getNuxtVersion() {
 // │
 // │        🔹 Wat gebeurt hier?
 // │           - Nuxt bereidt de dev-server in stilte voor.
-// │           - fs watchers, module scanning, config parsing, etc.
+// │           - fs-watchers, module scanning, config parsing, enz.
 // │
-// │        💬 Console toont nog niks.
+// │        💬 Console toont nog niets.
 // │
 // │
 // │   0.4s ────────► "ℹ Nuxt ..." verschijnt
 // │                   ↓
-// │                   nuxtInit.visible = performance.now()
+// │                   phases.nuxtInit.preload = diff(now, start)
 // │
 // │
 // │   ┌─────────────────────────────────────────────────────────────┐
 // │   │ FASE 1b – Nuxt init zichtbaar                              │
 // │   └─────────────────────────────────────────────────────────────┘
 // │        Tijd vanaf eerste Nuxt-log tot start van Vite clientfase.
-// │        → diff(viteClient.start, nuxtInit.visible)
+// │        → diff(Vite-start, nuxtInit.visible)
 // │
 // │        🔹 Wat gebeurt hier?
 // │           - Nuxt initialiseert modules.
 // │           - SSR-engine setup.
-// │           - build-pipeline klaarzetten.
+// │           - build-pipeline klaarmaken.
 // │
 // │
 // │   3.2s ────────► "Vite ..." verschijnt
 // │                   ↓
-// │                   viteClient.start = performance.now()
+// │                   phases.nuxtInit.visible = diff(now, start) − preload
 // │
 // │
 // │   ┌─────────────────────────────────────────────────────────────┐
@@ -265,7 +271,7 @@ function getNuxtVersion() {
 // │        Geparseerd direct uit logregel:
 // │        ✔ Vite client built in 34ms
 // │
-// │        → phases.viteClient.time = 0.034s
+// │        → phases.vite.client = 0.034s
 // │
 // │        🔹 Wat gebeurt hier?
 // │           - Client-side bundling via Vite.
@@ -278,11 +284,11 @@ function getNuxtVersion() {
 // │        Geparseerd direct uit logregel:
 // │        ✔ Vite server built in 33ms
 // │
-// │        → phases.viteServer.time = 0.033s
+// │        → phases.vite.server = 0.033s
 // │
 // │        🔹 Wat gebeurt hier?
-// │           - SSR build van server-side bundel.
-// │           - Pre-render templates.
+// │           - SSR-build van de server-bundel.
+// │           - Pre-render templates en module graph setup.
 // │
 // │
 // │   ┌─────────────────────────────────────────────────────────────┐
@@ -291,17 +297,17 @@ function getNuxtVersion() {
 // │        Geparseerd direct uit logregel:
 // │        [nitro] ✔ Nuxt Nitro server built in 2049ms
 // │
-// │        → phases.nitroServer.time = 2.049s
+// │        → phases.nitro.server = 2.049s
 // │
 // │        🔹 Wat gebeurt hier?
-// │           - De Nitro backend (Node server) wordt gebouwd.
-// │           - Middleware, API-routes, file handlers, caching.
+// │           - De Nitro-backend (Node-server) wordt gebouwd.
+// │           - Middleware, API-routes, file-handlers, caching.
 // │
 // │
-// │   5.8s ────────► Dev server draait volledig.
+// │   5.8s ────────► Dev-server draait volledig
 // │                   ↓
-// │                   total = diff(now, start)
-// │                   ✅ Resultaten gelogd en opgeslagen.
+// │                   totalDevStartupTime = diff(now, start)
+// │                   ✅ Resultaten gelogd en opgeslagen
 // │
 // │
 // │   ┌─────────────────────────────────────────────────────────────┐
@@ -313,17 +319,21 @@ function getNuxtVersion() {
 // │
 // │        → phases.background.client = 0.002s
 // │        → phases.background.server = 0.035s
-// │        → phases.background.total  = 0.037s
+// │        (Totaal enkel berekend in log)
 // │
 // │        🔹 Wat gebeurt hier?
 // │           - Vite cache warmt op.
-// │           - Module graph en HMR-optimizer klaar.
+// │           - Module graph en HMR-optimizer worden geladen.
 // │           - Alles gereed voor snelle rebuilds.
 // │
 // │        Script slaat laatste metrics op en sluit netjes af.
 // │
 // │
 // │   🧹 Sluit dev-server af...
-// │   process.exit(0)
+// │   proc.kill("SIGINT");
+// │   ⏳ wacht 1.5s
+// │   proc.kill("SIGKILL");
+// │   process.exit(0);
 // │
 // └─────────────────────────────────────────────────────────────┘
+

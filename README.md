@@ -91,13 +91,10 @@ act push -j [JOB NAME]
 act push -j [JOB NAME] -P ubuntu-latest=catthehacker/ubuntu:full-latest
 ```
 
-
-
-
 `exec bash `→ "ik trek een nieuw jasje aan, maar ik heb nog steeds dezelfde ID-kaart"
 `newgrp docker` → "ik krijg een nieuwe ID-kaart waarop de nieuwe groepsrechten staan"
 
 
-## Purge Repo
+## Purge repo
 pnpm store prune
 rm -rf .nuxt .output .data dist
