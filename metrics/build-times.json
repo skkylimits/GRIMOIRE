@@ -301,5 +301,25 @@
         "finalize": 0.108
       }
     }
+  },
+  {
+    "timestamp": "2025-10-08T22:27:37.565Z",
+    "gitCommit": "5e2834b",
+    "branch": "v4",
+    "nodeVersion": "v22.17.1",
+    "nuxtVersion": "^4.1.2",
+    "buildSeconds": 47.928460853,
+    "phases": {
+      "nuxtInit": 4.015204423,
+      "vite": {
+        "client": 6.666239708,
+        "server": 3.6268593349999994
+      },
+      "nitro": {
+        "build": 31.540151526,
+        "prerender": 9.439574624,
+        "finalize": 0.10503642499999842
+      }
+    }
   }
 ]

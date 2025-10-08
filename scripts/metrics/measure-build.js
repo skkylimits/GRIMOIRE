@@ -1,16 +1,18 @@
-// scripts/measure-build-time.js
+
 import { spawn } from "node:child_process";
-import fs from "node:fs";
+import { performance } from "node:perf_hooks";
 import {
   getGitCommit,
   getGitBranch,
   getNuxtVersion,
+  readJsonSafe,
+  writeJson,
 } from "../helpers/index.js";
 
 console.log("⏱️ Measuring Nuxt build time (with nested phase JSON)...");
 
 // 🕒 Start timer
-const start = Date.now();
+const start = performance.now();
 const proc = spawn("pnpm", ["run", "build"]);
 
 const phases = {
@@ -31,19 +33,19 @@ proc.stdout.on("data", (data) => {
   process.stdout.write(text);
 
   // --- Nuxt & Vite fases ---
-  if (text.includes("Building client...")) phases.viteClientStart = Date.now();
-  if (text.match(/Client built in ([\d.]+)m?s/)) phases.viteClientEnd = Date.now();
+  if (text.includes("Building client...")) phases.viteClientStart = performance.now();
+  if (text.match(/Client built in ([\d.]+)m?s/)) phases.viteClientEnd = performance.now();
 
-  if (text.includes("Building server...")) phases.viteServerStart = Date.now();
-  if (text.match(/Server built in ([\d.]+)m?s/)) phases.viteServerEnd = Date.now();
+  if (text.includes("Building server...")) phases.viteServerStart = performance.now();
+  if (text.match(/Server built in ([\d.]+)m?s/)) phases.viteServerEnd = performance.now();
 
   // --- Nitro fase ---
-  if (text.includes("Building Nuxt Nitro server")) phases.nitroStart = Date.now();
-  if (text.includes("Nuxt Nitro server built")) phases.nitroEnd = Date.now();
+  if (text.includes("Building Nuxt Nitro server")) phases.nitroStart = performance.now();
+  if (text.includes("Nuxt Nitro server built")) phases.nitroEnd = performance.now();
 
   // --- Prerender fase ---
-  if (text.includes("Initializing prerenderer")) phases.prerenderStart = Date.now();
-  if (text.includes("Prerendered")) phases.prerenderEnd = Date.now();
+  if (text.includes("Initializing prerenderer")) phases.prerenderStart = performance.now();
+  if (text.includes("Prerendered")) phases.prerenderEnd = performance.now();
 
   // --- Output finalize ---
   if (
@@ -51,14 +53,14 @@ proc.stdout.on("data", (data) => {
     text.includes("Output directory:") ||
     text.match(/Built in [\d.]+s$/)
   ) {
-    phases.outputEnd = Date.now();
+    phases.outputEnd = performance.now();
   }
 });
 
 proc.stderr.on("data", (data) => process.stderr.write(data));
 
 proc.on("close", (code) => {
-  const total = (Date.now() - start) / 1000;
+  const total = (performance.now() - start) / 1000;
 
   if (code !== 0) {
     console.error("❌ Build failed.");
@@ -101,23 +103,12 @@ proc.on("close", (code) => {
 });
 
 /* ------------------------------------------------------------------
- 💾 SAVE METRICS — volgt de nieuwe JSON standaard
+ 💾 SAVE METRICS — gebruikt helpers voor veilige JSON I/O
 -------------------------------------------------------------------*/
 function saveMetric(total, flatMetrics) {
   const logFile = "metrics/build-times.json";
-  let metrics = [];
+  const metrics = readJsonSafe(logFile, []);
 
-  if (fs.existsSync(logFile)) {
-    try {
-      const parsed = JSON.parse(fs.readFileSync(logFile, "utf-8"));
-      if (Array.isArray(parsed)) metrics = parsed;
-    } catch {
-      console.warn(`⚠️ ${logFile} is ongeldig of leeg, reset bestand.`);
-      metrics = [];
-    }
-  }
-
-  // ✅ Volgt jouw standaardstructuur
   const entry = {
     timestamp: new Date().toISOString(),
     gitCommit: getGitCommit(),
@@ -140,6 +131,129 @@ function saveMetric(total, flatMetrics) {
   };
 
   metrics.push(entry);
-  fs.writeFileSync(logFile, JSON.stringify(metrics, null, 2));
+  writeJson(logFile, metrics);
   console.log(`💾 Metrics opgeslagen → ${logFile}`);
 }
+
+
+// ┌─────────────────────────────────────────────────────────────┐
+// │                 🧠 NUXT BUILD TIMELINE                     │
+// └─────────────────────────────────────────────────────────────┘
+//
+// Time →
+// │
+// │   0.000s ────────► Script start (Date.now())
+// │                    ↓
+// │                    [SPAWN pnpm run build]
+// │                    └── Buildfase wordt geïnitialiseerd
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 1 – Nuxt init                                          │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Tijd tussen scriptstart en start van de eerste Vite fase.
+// │        → measured as: (viteClientStart - nuxtInitStart)
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - Nuxt initialiseert zijn build context.
+// │           - Config parsing, module discovery, bundler setup.
+// │           - SSR-engine en Nitro-config worden geladen.
+// │
+// │
+// │   2.8s ────────► "Building client..." verschijnt
+// │                   ↓
+// │                   phases.viteClientStart = now()
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 2 – Vite client build                                 │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Duur tussen "Building client..." en "Client built in XXms".
+// │        → measured as: (viteClientEnd - viteClientStart)
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - Client bundling via Vite.
+// │           - CSS, JS en Vue componenten worden gebundeld.
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 3 – Vite server build                                 │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Duur tussen "Building server..." en "Server built in XXms".
+// │        → measured as: (viteServerEnd - viteServerStart)
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - Server-bundel wordt gemaakt voor SSR.
+// │           - Modulegraph en render-entry worden voorbereid.
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 4 – Nitro build                                       │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Duur tussen "Building Nuxt Nitro server" en
+// │        "Nuxt Nitro server built".
+// │        → measured as: (nitroEnd - viteServerEnd)
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - Nitro backend wordt gegenereerd.
+// │           - API-routes, middleware en assets worden opgebouwd.
+// │           - Dit is meestal de zwaarste fase van de build.
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 5 – Prerender                                         │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Duur tussen "Initializing prerenderer" en "Prerendered".
+// │        → measured as: (prerenderEnd - prerenderStart)
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - Alle statische routes worden voorgerenderd.
+// │           - Content wordt geëxporteerd naar .output/public.
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 6 – Finalize                                          │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Duur tussen "Prerendered" en "Output directory:".
+// │        → measured as: (outputEnd - prerenderEnd)
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - Resultaatbestanden worden geschreven.
+// │           - Build manifest, hashes, en .output worden afgerond.
+// │
+// │
+// │   49.8s ────────► Build voltooid
+// │                   ↓
+// │                   totalBuildTime = (now - start)
+// │                   ✅ JSON opgeslagen met alle fasetijden
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ STRUCTUUR VAN METRIC ENTRY                                 │
+// │   └─────────────────────────────────────────────────────────────┘
+// │
+// │   {
+// │     "timestamp": "2025-10-08T22:05:21.228Z",
+// │     "gitCommit": "0916dce",
+// │     "branch": "v4",
+// │     "nodeVersion": "v22.17.1",
+// │     "nuxtVersion": "^4.1.2",
+// │     "buildSeconds": 49.775,
+// │     "phases": {
+// │       "nuxtInit": 2.862,
+// │       "vite": {
+// │         "client": 6.905,
+// │         "server": 3.625
+// │       },
+// │       "nitro": {
+// │         "build": 34.331,
+// │         "prerender": 12.675,
+// │         "finalize": 0.104
+// │       }
+// │     }
+// │   }
+// │
+// │   🔹 buildSeconds ≠ som van fasen
+// │      → omdat sommige fasen parallel lopen (vite/nitro)
+// │
+// └─────────────────────────────────────────────────────────────┘
