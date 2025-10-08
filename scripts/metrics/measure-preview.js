@@ -1,5 +1,5 @@
-import { spawn } from "node:child_process";
-import { performance } from "node:perf_hooks";
+import { spawn } from 'node:child_process'
+import { performance } from 'node:perf_hooks'
 import {
   getGitCommit,
   getGitBranch,
@@ -7,15 +7,15 @@ import {
   readJsonSafe,
   writeJson,
   diff,
-  shutdown,
-} from "../helpers/index.js";
+  shutdown
+} from '../helpers/index.js'
 
-console.log("⏱️ Measuring Nuxt preview startup (detailed phase breakdown)...");
+console.log('⏱️ Measuring Nuxt preview startup (detailed phase breakdown)...')
 
 // 🕒 Start overall timer
-const start = performance.now();
-const proc = spawn("pnpm", ["run", "preview"]);
-const metricsFile = "metrics/preview-startup-times.json";
+const start = performance.now()
+const proc = spawn('pnpm', ['run', 'preview'])
+const metricsFile = 'metrics/preview-startup-times.json'
 
 // ─────────────────────────────────────────────────────────────
 // 🧩 Fases
@@ -24,70 +24,70 @@ const phases = {
   bootstrap: null,
   runtimeInit: null,
   contentLoad: null,
-  bindPort: null,
-};
+  bindPort: null
+}
 
 // ─────────────────────────────────────────────────────────────
 // 📡 Analyseer stdout
 // ─────────────────────────────────────────────────────────────
-proc.stdout.on("data", (data) => {
-  const text = data.toString();
-  process.stdout.write(text);
+proc.stdout.on('data', (data) => {
+  const text = data.toString()
+  process.stdout.write(text)
 
   // 🧱 Fase 1: CLI bootstrap → "Starting preview command"
-  if (text.includes("Starting preview command") && !phases.bootstrap) {
-    phases.bootstrap = diff(performance.now(), start);
+  if (text.includes('Starting preview command') && !phases.bootstrap) {
+    phases.bootstrap = diff(performance.now(), start)
   }
 
   // 📚 Fase 3: @nuxt/content processing
   const matchContent = text.match(
     /Processed (\d+) collections and (\d+) files in ([\d.]+)ms/
-  );
+  )
   if (matchContent && !phases.contentLoad) {
-    phases.contentLoad = parseFloat(matchContent[3]) / 1000;
+    phases.contentLoad = parseFloat(matchContent[3]) / 1000
   }
 
   // 🌐 Fase 4: Port binding → "Listening on"
-  if (text.includes("Listening on") && !phases.bindPort) {
-    const now = performance.now();
-    const totalStartup = diff(now, start);
-    const runtimeInit = diff(now, start) - (phases.bootstrap || 0);
+  if (text.includes('Listening on') && !phases.bindPort) {
+    const now = performance.now()
+    const totalStartup = diff(now, start)
+    const runtimeInit = diff(now, start) - (phases.bootstrap || 0)
 
     // Fase 2 = runtime init (van preview command tot listening)
-    phases.runtimeInit = Math.max(runtimeInit - (phases.contentLoad || 0), 0);
-    phases.bindPort = diff(now, start);
+    phases.runtimeInit = Math.max(runtimeInit - (phases.contentLoad || 0), 0)
+    phases.bindPort = diff(now, start)
 
-    printPhases(totalStartup, phases);
-    saveMetric(totalStartup, phases);
-    shutdown(proc);
+    printPhases(totalStartup, phases)
+    saveMetric(totalStartup, phases)
+    shutdown(proc)
   }
-});
+})
 
-proc.stderr.on("data", (data) => process.stderr.write(data));
+proc.stderr.on('data', data => process.stderr.write(data))
 
 // ─────────────────────────────────────────────────────────────
 // 📊 Logging
 // ─────────────────────────────────────────────────────────────
 function printPhases(total, phases) {
-  console.log("\n─────────────────────────────────────────────");
-  console.log("🚀 Preview server volledig operationeel!");
-  console.log("─────────────────────────────────────────────");
-  console.log(`🧱 Fase 1: CLI bootstrap        – ${(phases.bootstrap || 0).toFixed(3)}s`);
-  console.log(`⚙️ Fase 2: Runtime init         – ${(phases.runtimeInit || 0).toFixed(3)}s`);
+  console.log('\n─────────────────────────────────────────────')
+  console.log('🚀 Preview server volledig operationeel!')
+  console.log('─────────────────────────────────────────────')
+  console.log(`🧱 Fase 1: CLI bootstrap        – ${(phases.bootstrap || 0).toFixed(3)}s`)
+  console.log(`⚙️ Fase 2: Runtime init         – ${(phases.runtimeInit || 0).toFixed(3)}s`)
   if (phases.contentLoad !== null) {
-    console.log(`📚 Fase 3: Content load         – ${phases.contentLoad.toFixed(3)}s`);
+    console.log(`📚 Fase 3: Content load         – ${phases.contentLoad.toFixed(3)}s`)
   }
-  console.log(`🌐 Fase 4: Poort binding        – ${(phases.bindPort || 0).toFixed(3)}s`);
-  console.log("─────────────────────────────────────────────");
-  console.log(`✅ Totale opstarttijd           – ${total.toFixed(3)}s`);
-  console.log("─────────────────────────────────────────────\n");
+  console.log(`🌐 Fase 4: Poort binding        – ${(phases.bindPort || 0).toFixed(3)}s`)
+  console.log('─────────────────────────────────────────────')
+  console.log(`✅ Totale opstarttijd           – ${total.toFixed(3)}s`)
+  console.log('─────────────────────────────────────────────\n')
 }
 
 // ─────────────────────────────────────────────────────────────
 // 💾 Save metrics (gestandaardiseerde JSON)
 // ─────────────────────────────────────────────────────────────
 function saveMetric(total, phases) {
-  const data = readJsonSafe(metricsFile, []);
+  const data = readJsonSafe(metricsFile, [])
 
   const entry = {
     timestamp: new Date().toISOString(),
@@ -100,12 +100,12 @@ function saveMetric(total, phases) {
       bootstrap: phases.bootstrap || 0,
       runtimeInit: phases.runtimeInit || 0,
       contentLoad: phases.contentLoad || 0,
-      bindPort: phases.bindPort || 0,
-    },
-  };
+      bindPort: phases.bindPort || 0
+    }
+  }
 
-  data.push(entry);
-  writeJson(metricsFile, data);
+  data.push(entry)
+  writeJson(metricsFile, data)
 }
 
 // ┌─────────────────────────────────────────────────────────────┐

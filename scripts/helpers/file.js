@@ -1,5 +1,5 @@
-import fs from "node:fs";
-import path from "node:path";
+import fs from 'node:fs'
+import path from 'node:path'
 
 /**
  * 📖 Lees veilig een JSON-bestand.
@@ -7,12 +7,12 @@ import path from "node:path";
  */
 export function readJsonSafe(filePath, fallback = {}) {
   try {
-    if (!fs.existsSync(filePath)) return fallback;
-    const data = fs.readFileSync(filePath, "utf8");
-    return JSON.parse(data);
+    if (!fs.existsSync(filePath)) return fallback
+    const data = fs.readFileSync(filePath, 'utf8')
+    return JSON.parse(data)
   } catch (err) {
-    console.warn(`⚠️ Kon JSON niet lezen: ${filePath} → reset naar fallback`);
-    return fallback;
+    console.warn(`⚠️ Kon JSON niet lezen: ${filePath} → reset naar fallback`, err.message)
+    return fallback
   }
 }
 
@@ -22,14 +22,14 @@ export function readJsonSafe(filePath, fallback = {}) {
 export function writeJson(filePath, data) {
   try {
     // Zorg dat de map bestaat
-    const dir = path.dirname(filePath);
-    fs.mkdirSync(dir, { recursive: true });
+    const dir = path.dirname(filePath)
+    fs.mkdirSync(dir, { recursive: true })
 
     // Schrijf bestand met nette indentatie
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
-    console.log(`💾 Metrics opgeslagen → ${filePath}`);
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8')
+    console.log(`💾 Metrics opgeslagen → ${filePath}`)
   } catch (err) {
-    console.error(`❌ Fout bij schrijven naar ${filePath}:`, err.message);
+    console.error(`❌ Fout bij schrijven naar ${filePath}:`, err.message)
   }
 }
 
@@ -39,11 +39,11 @@ export function writeJson(filePath, data) {
 export function removeFile(filePath) {
   try {
     if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
-      console.log(`🗑️ Verwijderd → ${filePath}`);
+      fs.unlinkSync(filePath)
+      console.log(`🗑️ Verwijderd → ${filePath}`)
     }
   } catch (err) {
-    console.error(`❌ Kon bestand niet verwijderen: ${filePath}`, err.message);
+    console.error(`❌ Kon bestand niet verwijderen: ${filePath}`, err.message)
   }
 }
 
@@ -51,5 +51,5 @@ export function removeFile(filePath) {
  * 📂 Controleer of een bestand bestaat.
  */
 export function fileExists(filePath) {
-  return fs.existsSync(filePath);
+  return fs.existsSync(filePath)
 }

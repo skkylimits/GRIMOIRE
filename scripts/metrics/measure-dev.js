@@ -1,5 +1,5 @@
-import { spawn } from "node:child_process";
-import { performance } from "node:perf_hooks";
+import { spawn } from 'node:child_process'
+import { performance } from 'node:perf_hooks'
 import {
   getGitCommit,
   getGitBranch,
@@ -7,95 +7,95 @@ import {
   readJsonSafe,
   writeJson,
   shutdown,
-  diff,
-} from "../helpers/index.js";
+  diff
+} from '../helpers/index.js'
 
-console.log("⏱️ Measuring Nuxt dev startup...");
+console.log('⏱️ Measuring Nuxt dev startup...')
 
 // ⏱️ Start timer
-const start = performance.now();
-const proc = spawn("pnpm", ["run", "dev"]);
+const start = performance.now()
+const proc = spawn('pnpm', ['run', 'dev'])
 
-const metricsFile = "metrics/dev-startup-times.json";
+const metricsFile = 'metrics/dev-startup-times.json'
 
 const phases = {
   nuxtInit: { preload: null, visible: null },
   vite: { client: null, server: null },
   nitro: { server: null },
-  background: { client: null, server: null },
-};
+  background: { client: null, server: null }
+}
 
-let latestEntry = null;
+let latestEntry = null
 
 // --- Analyseer stdout ---
-proc.stdout.on("data", (data) => {
-  const text = data.toString();
-  process.stdout.write(text);
+proc.stdout.on('data', (data) => {
+  const text = data.toString()
+  process.stdout.write(text)
 
   // 1️⃣ Eerste Nuxt-log → einde preload
-  if (text.includes("Nuxt ") && phases.nuxtInit.preload === null) {
-    phases.nuxtInit.preload = diff(performance.now(), start);
+  if (text.includes('Nuxt ') && phases.nuxtInit.preload === null) {
+    phases.nuxtInit.preload = diff(performance.now(), start)
   }
 
   // 2️⃣ Eerste Vite-log → begin zichtbare initfase
-  if (text.includes("Vite ") && phases.nuxtInit.visible === null) {
-    phases.nuxtInit.visible =
-      diff(performance.now(), start) - phases.nuxtInit.preload;
+  if (text.includes('Vite ') && phases.nuxtInit.visible === null) {
+    phases.nuxtInit.visible
+      = diff(performance.now(), start) - phases.nuxtInit.preload
   }
 
   // 3️⃣ Parse Vite client buildtijd
-  const matchClient = text.match(/✔ Vite client built in (\d+(?:\.\d+)?)ms/);
+  const matchClient = text.match(/✔ Vite client built in (\d+(?:\.\d+)?)ms/)
   if (matchClient && !phases.vite.client) {
-    phases.vite.client = parseFloat(matchClient[1]) / 1000;
+    phases.vite.client = parseFloat(matchClient[1]) / 1000
   }
 
   // 4️⃣ Parse Vite server buildtijd
-  const matchServer = text.match(/✔ Vite server built in (\d+(?:\.\d+)?)ms/);
+  const matchServer = text.match(/✔ Vite server built in (\d+(?:\.\d+)?)ms/)
   if (matchServer && !phases.vite.server) {
-    phases.vite.server = parseFloat(matchServer[1]) / 1000;
+    phases.vite.server = parseFloat(matchServer[1]) / 1000
   }
 
   // 5️⃣ Parse Nitro buildtijd
-  const matchNitro = text.match(/Nuxt Nitro server built in (\d+(?:\.\d+)?)ms/);
+  const matchNitro = text.match(/Nuxt Nitro server built in (\d+(?:\.\d+)?)ms/)
   if (matchNitro && !phases.nitro.server) {
-    phases.nitro.server = parseFloat(matchNitro[1]) / 1000;
+    phases.nitro.server = parseFloat(matchNitro[1]) / 1000
 
-    const totalDevStartupTime = diff(performance.now(), start);
-    latestEntry = buildMetric({ totalDevStartupTime, phases });
+    const totalDevStartupTime = diff(performance.now(), start)
+    latestEntry = buildMetric({ totalDevStartupTime, phases })
 
-    printPhases(latestEntry);
-    saveMetric(latestEntry);
+    printPhases(latestEntry)
+    saveMetric(latestEntry)
   }
 
   // 6️⃣ Parse warm-up tijden
-  const matchClientWarm = text.match(/Vite client warmed up in (\d+(?:\.\d+)?)ms/);
+  const matchClientWarm = text.match(/Vite client warmed up in (\d+(?:\.\d+)?)ms/)
   if (matchClientWarm && !phases.background.client) {
-    phases.background.client = parseFloat(matchClientWarm[1]) / 1000;
+    phases.background.client = parseFloat(matchClientWarm[1]) / 1000
   }
 
-  const matchServerWarm = text.match(/Vite server warmed up in (\d+(?:\.\d+)?)ms/);
+  const matchServerWarm = text.match(/Vite server warmed up in (\d+(?:\.\d+)?)ms/)
   if (matchServerWarm && !phases.background.server) {
-    phases.background.server = parseFloat(matchServerWarm[1]) / 1000;
+    phases.background.server = parseFloat(matchServerWarm[1]) / 1000
   }
 
   // Zodra beide warm-ups bekend zijn → log fase 5
   if (phases.background.client && phases.background.server && latestEntry) {
-    const warmupTotal = phases.background.client + phases.background.server;
-    console.log(`🕓 Fase 5: Achtergrondfase (warm-up) – ${warmupTotal.toFixed(3)}s`);
-    console.log("─────────────────────────────────────────────\n");
+    const warmupTotal = phases.background.client + phases.background.server
+    console.log(`🕓 Fase 5: Achtergrondfase (warm-up) – ${warmupTotal.toFixed(3)}s`)
+    console.log('─────────────────────────────────────────────\n')
 
-    latestEntry.phases.background = { ...phases.background };
-    saveMetric(latestEntry, true);
-    shutdown(proc);
+    latestEntry.phases.background = { ...phases.background }
+    saveMetric(latestEntry, true)
+    shutdown(proc)
   }
-});
+})
 
 // --- Error output ---
-proc.stderr.on("data", (data) => process.stderr.write(data));
+proc.stderr.on('data', data => process.stderr.write(data))
 
 /* ------------------------------------------------------------------
  🧱 BUILD METRIC OBJECT
--------------------------------------------------------------------*/
+------------------------------------------------------------------- */
 function buildMetric({ totalDevStartupTime, phases }) {
   return {
     timestamp: new Date().toISOString(),
@@ -107,54 +107,54 @@ function buildMetric({ totalDevStartupTime, phases }) {
     phases: {
       nuxtInit: {
         preload: phases.nuxtInit.preload || 0,
-        visible: phases.nuxtInit.visible || 0,
+        visible: phases.nuxtInit.visible || 0
       },
       vite: {
         client: phases.vite.client || 0,
-        server: phases.vite.server || 0,
+        server: phases.vite.server || 0
       },
       nitro: {
-        server: phases.nitro.server || 0,
+        server: phases.nitro.server || 0
       },
       background: {
         client: null,
-        server: null,
-      },
-    },
-  };
+        server: null
+      }
+    }
+  }
 }
 
 /* ------------------------------------------------------------------
  📊 PRINT PHASE RESULTS
--------------------------------------------------------------------*/
+------------------------------------------------------------------- */
 function printPhases(metric) {
-  const { nuxtInit, vite, nitro } = metric.phases;
-  const total = metric.devStartupSeconds;
+  const { nuxtInit, vite, nitro } = metric.phases
+  const total = metric.devStartupSeconds
 
-  console.log("\n─────────────────────────────────────────────");
-  console.log("🚀 Dev server is volledig operationeel!");
-  console.log("─────────────────────────────────────────────");
-  console.log(`🧱 Fase 1a: Nuxt preload (stil)     – ${nuxtInit.preload.toFixed(3)}s`);
-  console.log(`🧱 Fase 1b: Nuxt init zichtbaar     – ${nuxtInit.visible.toFixed(3)}s`);
-  console.log(`⚙️ Fase 2: Vite client build        – ${vite.client.toFixed(3)}s`);
-  console.log(`🧩 Fase 3: Vite server build        – ${vite.server.toFixed(3)}s`);
-  console.log(`🔥 Fase 4: Nitro setup              – ${nitro.server.toFixed(3)}s`);
-  console.log("─────────────────────────────────────────────");
-  console.log("🌐 Server luistert op: http://localhost:3000");
-  console.log(`✅ Totale opstarttijd               – ${total.toFixed(3)}s`);
-  console.log("─────────────────────────────────────────────\n");
+  console.log('\n─────────────────────────────────────────────')
+  console.log('🚀 Dev server is volledig operationeel!')
+  console.log('─────────────────────────────────────────────')
+  console.log(`🧱 Fase 1a: Nuxt preload (stil)     – ${nuxtInit.preload.toFixed(3)}s`)
+  console.log(`🧱 Fase 1b: Nuxt init zichtbaar     – ${nuxtInit.visible.toFixed(3)}s`)
+  console.log(`⚙️ Fase 2: Vite client build        – ${vite.client.toFixed(3)}s`)
+  console.log(`🧩 Fase 3: Vite server build        – ${vite.server.toFixed(3)}s`)
+  console.log(`🔥 Fase 4: Nitro setup              – ${nitro.server.toFixed(3)}s`)
+  console.log('─────────────────────────────────────────────')
+  console.log('🌐 Server luistert op: http://localhost:3000')
+  console.log(`✅ Totale opstarttijd               – ${total.toFixed(3)}s`)
+  console.log('─────────────────────────────────────────────\n')
 }
 
 /* ------------------------------------------------------------------
  💾 SAVE METRIC FILE (via helpers)
--------------------------------------------------------------------*/
+------------------------------------------------------------------- */
 function saveMetric(entry, replaceLast = false) {
-  const data = readJsonSafe(metricsFile, []);
+  const data = readJsonSafe(metricsFile, [])
 
-  if (replaceLast && data.length > 0) data[data.length - 1] = entry;
-  else data.push(entry);
+  if (replaceLast && data.length > 0) data[data.length - 1] = entry
+  else data.push(entry)
 
-  writeJson(metricsFile, data);
+  writeJson(metricsFile, data)
 }
 
 // ┌─────────────────────────────────────────────────────────────┐
@@ -275,4 +275,3 @@ function saveMetric(entry, replaceLast = false) {
 // │   process.exit(0);
 // │
 // └─────────────────────────────────────────────────────────────┘
-
