@@ -1,146 +1,190 @@
-// scripts/measure-dev-startup-times.js
 import { spawn, execSync } from "node:child_process";
 import fs from "node:fs";
+import { performance } from "node:perf_hooks";
 
-console.log("⏱️ Measuring Nuxt dev startup time (nested phase JSON)...");
+console.log("⏱️ Measuring Nuxt dev startup (minimal clean version)...");
 
-const start = Date.now();
+// ⏱️ Start overall timer
+const start = performance.now();
 const proc = spawn("pnpm", ["run", "dev"]);
 
 const phases = {
-  nuxtInit: null,
-  viteClient: null,
-  viteServer: null,
-  nitroServer: null,
-  background: null,
+  nuxtInit: { preload: null, visible: null },
+  vite: { client: null, server: null },
+  nitro: { server: null },
+  background: { client: null, server: null },
 };
 
-let totalDuration = null;
 let latestEntry = null;
 
-// --- Log parsing ---
+// Helper voor veilige tijdsverschillen
+const diff = (a, b) => (a && b ? Math.max((a - b) / 1000, 0) : 0);
+
+// --- Analyseer stdout ---
 proc.stdout.on("data", (data) => {
   const text = data.toString();
   process.stdout.write(text);
 
-  // 1️⃣ Detect Nuxt init
-  if (text.includes("Nuxt ") && phases.nuxtInit === null) {
-    phases.nuxtInit = Date.now();
+  // 1️⃣ Eerste Nuxt-log → einde preload
+  if (text.includes("Nuxt ") && phases.nuxtInit.preload === null) {
+    phases.nuxtInit.preload = diff(performance.now(), start);
   }
 
-  // 2️⃣ Detect Vite client build
-  if (text.includes("✔ Vite client built") && phases.viteClient === null) {
-    phases.viteClient = Date.now();
+  // 2️⃣ Eerste Vite-log → begin zichtbare initfase
+  if (text.includes("Vite ") && phases.nuxtInit.visible === null) {
+    phases.nuxtInit.visible = diff(performance.now(), start) - phases.nuxtInit.preload;
   }
 
-  // 3️⃣ Detect Vite server build
-  if (text.includes("✔ Vite server built") && phases.viteServer === null) {
-    phases.viteServer = Date.now();
+  // 3️⃣ Parse Vite client buildtijd
+  const matchClient = text.match(/✔ Vite client built in (\d+(?:\.\d+)?)ms/);
+  if (matchClient && !phases.vite.client) {
+    phases.vite.client = parseFloat(matchClient[1]) / 1000;
   }
 
-  // 4️⃣ Detect Nitro server setup
-  if (text.includes("Nuxt Nitro server built") && phases.nitroServer === null) {
-    phases.nitroServer = Date.now();
+  // 4️⃣ Parse Vite server buildtijd
+  const matchServer = text.match(/✔ Vite server built in (\d+(?:\.\d+)?)ms/);
+  if (matchServer && !phases.vite.server) {
+    phases.vite.server = parseFloat(matchServer[1]) / 1000;
+  }
 
-    const total = (Date.now() - start) / 1000;
-    totalDuration = total;
+  // 5️⃣ Parse Nitro buildtijd
+  const matchNitro = text.match(/Nuxt Nitro server built in (\d+(?:\.\d+)?)ms/);
+  if (matchNitro && !phases.nitro.server) {
+    phases.nitro.server = parseFloat(matchNitro[1]) / 1000;
 
-    const nuxtInitTime = (phases.nuxtInit - start) / 1000;
-    const viteClientTime = (phases.viteClient - phases.nuxtInit) / 1000;
-    const viteServerTime = (phases.viteServer - phases.viteClient) / 1000;
-    const nitroServerTime = (phases.nitroServer - phases.viteServer) / 1000;
+    // Zodra Nitro klaar is → berekeningen
+    const totalDevStartupTime = diff(performance.now(), start);
+    latestEntry = buildMetric({ totalDevStartupTime, phases });
 
-    console.log("\n─────────────────────────────────────────────");
-    console.log("🚀 Dev server is volledig operationeel!");
-    console.log("─────────────────────────────────────────────");
-    console.log(`🧱 Fase 1: Nuxt initialisatie  – ${nuxtInitTime.toFixed(2)}s`);
-    console.log(`⚙️ Fase 2: Vite client build    – ${viteClientTime.toFixed(2)}s`);
-    console.log(`🧩 Fase 3: Vite server build    – ${viteServerTime.toFixed(2)}s`);
-    console.log(`🔥 Fase 4: Nitro setup          – ${nitroServerTime.toFixed(2)}s`);
-    console.log("─────────────────────────────────────────────");
-    console.log("🌐 Server luistert op: http://localhost:3000");
-    console.log(`✅ Totale opstarttijd           – ${total.toFixed(2)}s`);
+    printPhases(latestEntry);
+    saveMetric(latestEntry);
+  }
+
+  // 6️⃣ Parse warm-up tijden (client/server)
+  const matchClientWarm = text.match(/Vite client warmed up in (\d+(?:\.\d+)?)ms/);
+  if (matchClientWarm && !phases.background.client) {
+    phases.background.client = parseFloat(matchClientWarm[1]) / 1000;
+  }
+
+  const matchServerWarm = text.match(/Vite server warmed up in (\d+(?:\.\d+)?)ms/);
+  if (matchServerWarm && !phases.background.server) {
+    phases.background.server = parseFloat(matchServerWarm[1]) / 1000;
+  }
+
+  // Wanneer beide bekend zijn → log achtergrondfase
+  if (phases.background.client && phases.background.server && latestEntry) {
+    const warmupTotal = phases.background.client + phases.background.server;
+
+    console.log(
+      `🕓 Fase 5: Achtergrondfase (warm-up) – ${warmupTotal.toFixed(3)}s`
+    );
     console.log("─────────────────────────────────────────────\n");
 
-    // Maak log-entry (zonder backgroundfase)
-    latestEntry = {
-      timestamp: new Date().toISOString(),
-      gitCommit: getGitCommit(),
-      devStartupSeconds: total,
-      phases: {
-        nuxtInit: nuxtInitTime,
-        vite: {
-          client: viteClientTime,
-          server: viteServerTime,
-        },
-        nitro: {
-          server: nitroServerTime,
-        },
-        background: {
-          warmup: 0,
-        },
-      },
-    };
-    
-    saveMetric(latestEntry, true); // nieuwe entry toevoegen
-    console.log("─────────────────────────────────────────────\n");
-  }
-
-  // 5️⃣ Detect background warm-up
-  if (text.includes("Vite server warmed up")) {
-    phases.background = Date.now();
-    const backgroundTime = (phases.background - phases.nitroServer) / 1000;
-
-    console.log(`🕓 Fase 5: Achtergrondfase (warm-up) – ${backgroundTime.toFixed(2)}s`);
-    console.log("─────────────────────────────────────────────\n");
-
-    if (latestEntry) {
-      latestEntry.phases.background.warmup = backgroundTime;
-      saveMetric(latestEntry, true, true); // laatste entry updaten
-    }
-
-    proc.kill("SIGINT");
-    // ✅ CI-safe afsluiting
-    setTimeout(() => {
-    proc.kill("SIGKILL");
-    process.exit(0);
-    }, 1500);
-
-    // SIGINT	Gebruiker drukt op Ctrl+C	Soms genegeerd — server blijft hangen
-    // SIGTERM	Netjes “stop nu”	Sluit watchers & server meestal correct
-    // SIGKILL	Hard afsluiten (kan niet genegeerd worden)	Forceert exit (zeker in CI)
+    latestEntry.phases.background = { ...phases.background };
+    saveMetric(latestEntry, true);
+    shutdown(proc);
   }
 });
 
+// --- Error output ---
 proc.stderr.on("data", (data) => process.stderr.write(data));
 
-// --- Metrics opslaan ---
-function saveMetric(entry, append = false, replaceLast = false) {
-  const logFile = "metrics/dev-startup-times.json";
-  let metrics = [];
+/* ------------------------------------------------------------------
+ 🧱 BUILD METRIC OBJECT
+-------------------------------------------------------------------*/
+function buildMetric({ totalDevStartupTime, phases }) {
+  return {
+    timestamp: new Date().toISOString(),
+    gitCommit: getGitCommit(),
+    branch: getGitBranch(),
+    nodeVersion: process.version,
+    nuxtVersion: getNuxtVersion(),
+    devStartupSeconds: totalDevStartupTime,
+    phases: {
+      nuxtInit: {
+        preload: phases.nuxtInit.preload || 0,
+        visible: phases.nuxtInit.visible || 0,
+      },
+      vite: {
+        client: phases.vite.client || 0,
+        server: phases.vite.server || 0,
+      },
+      nitro: {
+        server: phases.nitro.server || 0,
+      },
+      background: {
+        client: null,
+        server: null,
+      },
+    },
+  };
+}
 
-  if (fs.existsSync(logFile)) {
+/* ------------------------------------------------------------------
+ 📊 PRINT PHASE RESULTS
+-------------------------------------------------------------------*/
+function printPhases(metric) {
+  const { nuxtInit, vite, nitro } = metric.phases;
+  const total = metric.devStartupSeconds;
+
+  console.log("\n─────────────────────────────────────────────");
+  console.log("🚀 Dev server is volledig operationeel!");
+  console.log("─────────────────────────────────────────────");
+  console.log(`🧱 Fase 1a: Nuxt preload (stil)     – ${nuxtInit.preload.toFixed(3)}s`);
+  console.log(`🧱 Fase 1b: Nuxt init zichtbaar     – ${nuxtInit.visible.toFixed(3)}s`);
+  console.log(`⚙️ Fase 2: Vite client build        – ${vite.client.toFixed(3)}s`);
+  console.log(`🧩 Fase 3: Vite server build        – ${vite.server.toFixed(3)}s`);
+  console.log(`🔥 Fase 4: Nitro setup              – ${nitro.server.toFixed(3)}s`);
+  console.log("─────────────────────────────────────────────");
+  console.log("🌐 Server luistert op: http://localhost:3000");
+  console.log(`✅ Totale opstarttijd               – ${total.toFixed(3)}s`);
+  console.log("─────────────────────────────────────────────\n");
+}
+
+/* ------------------------------------------------------------------
+ 💾 SAVE METRIC FILE
+-------------------------------------------------------------------*/
+function saveMetric(entry, replaceLast = false) {
+  const file = "metrics/dev-startup-times.json";
+  let data = [];
+
+  if (fs.existsSync(file)) {
     try {
-      const parsed = JSON.parse(fs.readFileSync(logFile, "utf-8"));
-      if (Array.isArray(parsed)) metrics = parsed;
+      const parsed = JSON.parse(fs.readFileSync(file, "utf-8"));
+      if (Array.isArray(parsed)) data = parsed;
     } catch {
-      console.warn(`⚠️ ${logFile} is ongeldig of leeg, reset bestand.`);
-      metrics = [];
+      console.warn("⚠️ Ongeldig JSON-bestand, reset.");
     }
   }
 
-  if (replaceLast && metrics.length > 0) {
-    metrics[metrics.length - 1] = entry; // update laatste
-  } else if (append || metrics.length === 0) {
-    metrics.push(entry); // voeg toe
-  }
+  if (replaceLast && data.length > 0) data[data.length - 1] = entry;
+  else data.push(entry);
 
-  fs.writeFileSync(logFile, JSON.stringify(metrics, null, 2));
-  console.log(
-    `💾 Metric ${replaceLast ? "bijgewerkt" : "opgeslagen"} → ${logFile}`
-  );
+  fs.writeFileSync(file, JSON.stringify(data, null, 2));
+  console.log(`💾 Metrics opgeslagen → ${file}`);
 }
 
+/* ------------------------------------------------------------------
+ 🧹 CLEAN SHUTDOWN
+-------------------------------------------------------------------*/
+function shutdown(proc) {
+  try {
+    proc.kill("SIGTERM");
+  } catch {}
+
+  setTimeout(() => {
+    console.log("🧹 Sluit dev-server af...");
+    try {
+      proc.kill("SIGKILL");
+    } catch {}
+    process.exitCode = 0;
+    process.exit();
+  }, 1500);
+}
+
+/* ------------------------------------------------------------------
+ 🧭 HELPER FUNCTIES
+-------------------------------------------------------------------*/
 function getGitCommit() {
   try {
     return execSync("git rev-parse --short HEAD").toString().trim();
@@ -148,3 +192,138 @@ function getGitCommit() {
     return "unknown";
   }
 }
+
+function getGitBranch() {
+  try {
+    return execSync("git rev-parse --abbrev-ref HEAD").toString().trim();
+  } catch {
+    return "unknown";
+  }
+}
+
+function getNuxtVersion() {
+  try {
+    const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
+    return pkg.dependencies?.nuxt || pkg.devDependencies?.nuxt || "unknown";
+  } catch {
+    return "unknown";
+  }
+}
+
+
+
+// ┌─────────────────────────────────────────────────────────────┐
+// │                 🧠 NUXT DEV STARTUP TIMELINE                │
+// └─────────────────────────────────────────────────────────────┘
+
+// Time →
+// │
+// │   0.000s ────────► Script start (performance.now())
+// │                    ↓
+// │                    [SPAWN pnpm run dev]
+// │                    └── fases worden geïnitialiseerd
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 1a – Nuxt preload (stil)                               │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Tijd tussen scriptstart en eerste zichtbare Nuxt-log.
+// │        → measured as: diff(nuxtInit.visible, nuxtInit.start)
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - Nuxt bereidt de dev-server in stilte voor.
+// │           - fs watchers, module scanning, config parsing, etc.
+// │
+// │        💬 Console toont nog niks.
+// │
+// │
+// │   0.4s ────────► "ℹ Nuxt ..." verschijnt
+// │                   ↓
+// │                   nuxtInit.visible = performance.now()
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 1b – Nuxt init zichtbaar                              │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Tijd vanaf eerste Nuxt-log tot start van Vite clientfase.
+// │        → diff(viteClient.start, nuxtInit.visible)
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - Nuxt initialiseert modules.
+// │           - SSR-engine setup.
+// │           - build-pipeline klaarzetten.
+// │
+// │
+// │   3.2s ────────► "Vite ..." verschijnt
+// │                   ↓
+// │                   viteClient.start = performance.now()
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 2 – Vite client build                                 │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Geparseerd direct uit logregel:
+// │        ✔ Vite client built in 34ms
+// │
+// │        → phases.viteClient.time = 0.034s
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - Client-side bundling via Vite.
+// │           - CSS, Vue componenten, JS entry bundels.
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 3 – Vite server build                                 │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Geparseerd direct uit logregel:
+// │        ✔ Vite server built in 33ms
+// │
+// │        → phases.viteServer.time = 0.033s
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - SSR build van server-side bundel.
+// │           - Pre-render templates.
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 4 – Nitro setup                                       │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Geparseerd direct uit logregel:
+// │        [nitro] ✔ Nuxt Nitro server built in 2049ms
+// │
+// │        → phases.nitroServer.time = 2.049s
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - De Nitro backend (Node server) wordt gebouwd.
+// │           - Middleware, API-routes, file handlers, caching.
+// │
+// │
+// │   5.8s ────────► Dev server draait volledig.
+// │                   ↓
+// │                   total = diff(now, start)
+// │                   ✅ Resultaten gelogd en opgeslagen.
+// │
+// │
+// │   ┌─────────────────────────────────────────────────────────────┐
+// │   │ FASE 5 – Achtergrond warm-up                               │
+// │   └─────────────────────────────────────────────────────────────┘
+// │        Gebaseerd op logs:
+// │        ℹ Vite client warmed up in 2ms
+// │        ℹ Vite server warmed up in 35ms
+// │
+// │        → phases.background.client = 0.002s
+// │        → phases.background.server = 0.035s
+// │        → phases.background.total  = 0.037s
+// │
+// │        🔹 Wat gebeurt hier?
+// │           - Vite cache warmt op.
+// │           - Module graph en HMR-optimizer klaar.
+// │           - Alles gereed voor snelle rebuilds.
+// │
+// │        Script slaat laatste metrics op en sluit netjes af.
+// │
+// │
+// │   🧹 Sluit dev-server af...
+// │   process.exit(0)
+// │
+// └─────────────────────────────────────────────────────────────┘

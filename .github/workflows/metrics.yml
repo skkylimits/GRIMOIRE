@@ -6,41 +6,72 @@ on:
 
 jobs:
   measure:
+    name: 🧪 Measure Nuxt Performance
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+        shell: bash
+
+    env:
+      # NODE_ENV: production
+      GITHUB_WORKSPACE: ${{ github.workspace }}
+
     steps:
+      # ⚙️ Fase 1 — Code checkout
       - name: 🧰 Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🧱 Setup Node
-        uses: actions/setup-node@v4
+      # 🧭 Fase 2 — Inspect & debug omgeving
+      - name: 🔍 Debug environment
+        run: |
+          echo "🏗️ Environment info"
+          echo "PWD: $(pwd)"
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          echo "HOME: $HOME"
+          echo "User: $(whoami)"
+          echo "Node: $(command -v node || echo 'none')"
+          echo "pnpm: $(command -v pnpm || echo 'none')"
+          echo "📂 Files in repo:"
+          ls -la
+
+      # 🧱 Fase 3 — Setup Node + pnpm (met caching)
+      - name: 🧱 Setup Node.js + pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: 'pnpm'
 
-      - name: ⚙️ Enable Corepack + install pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@9 --activate
-          pnpm -v  # ✅ check dat pnpm beschikbaar is
-
+      # 📦 Fase 4 — Dependencies installeren
       - name: 📦 Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          echo "Installing dependencies..."
+          pnpm install --frozen-lockfile
+          echo "✅ Dependencies installed successfully"
 
-      - name: 🧪 Measure dev startup
+      # ⚡ Fase 5 — Measure dev startup
+      - name: ⚡ Measure dev startup
         run: node scripts/metrics/measure-dev.js
 
+      # 🏗️ Fase 6 — Measure build time
       - name: 🏗️ Measure build time
         run: node scripts/metrics/measure-build.js
 
+      # 🌐 Fase 7 — Measure preview startup
       - name: 🌐 Measure preview startup
         run: node scripts/metrics/measure-preview.js
 
-      - name: 🚨 Check performance thresholds
+      # 🚨 Fase 8 — Validate thresholds
+      - name: 🚨 Validate performance thresholds
         run: node scripts/metrics/check-performance-thresholds.js
 
-      - name: 📤 Upload metrics JSON
+      # 📤 Fase 9 — Upload metrics-artifacts
+      - name: 📤 Upload metrics JSON files
         uses: actions/upload-artifact@v4
         with:
           name: nuxt-performance-metrics

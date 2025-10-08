@@ -1,3 +1,10 @@
+packages:
+  - .
+  - scripts/*
+  - server/*
+  - app/*
+  - content/*
+  
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - '@tailwindcss/oxide'

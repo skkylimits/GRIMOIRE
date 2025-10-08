@@ -1,19 +1,26 @@
 [
   {
-    "timestamp": "2025-10-08T09:14:52.894Z",
-    "gitCommit": "4c6eb5c",
-    "devStartupSeconds": 5.004,
+    "timestamp": "2025-10-08T20:17:17.435Z",
+    "gitCommit": "07eae24",
+    "branch": "v4",
+    "nodeVersion": "v22.17.1",
+    "nuxtVersion": "^4.1.2",
+    "devStartupSeconds": 5.938508133,
     "phases": {
-      "nuxtInit": 0.336,
+      "nuxtInit": {
+        "preload": 0.389545422,
+        "visible": 3.151370999
+      },
       "vite": {
-        "client": 2.471,
-        "server": 0.035
+        "client": 0.033,
+        "server": 0.033
       },
       "nitro": {
-        "server": 2.162
+        "server": 2.271
       },
       "background": {
-        "warmup": 0.037
+        "client": 0.002,
+        "server": 0.033
       }
     }
   }

@@ -66,3 +66,38 @@ Install [Renovate GitHub app](https://github.com/apps/renovate/installations/sel
 ```bash
 sudo lsof -ti:3000 | xargs kill -9
 ```
+
+## Act
+
+Install 
+
+```bash
+curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash -s -- -b /usr/local/bin latest
+```
+
+Controleer of je workflow wordt herkend en list job names
+
+```bash
+act -l
+```
+
+Run je workflow
+
+```bash
+act push -j [JOB NAME]
+```
+
+```bash
+act push -j [JOB NAME] -P ubuntu-latest=catthehacker/ubuntu:full-latest
+```
+
+
+
+
+`exec bash `→ "ik trek een nieuw jasje aan, maar ik heb nog steeds dezelfde ID-kaart"
+`newgrp docker` → "ik krijg een nieuwe ID-kaart waarop de nieuwe groepsrechten staan"
+
+
+## Purge Repo
+pnpm store prune
+rm -rf .nuxt .output .data dist

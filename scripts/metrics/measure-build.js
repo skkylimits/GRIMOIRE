@@ -88,7 +88,7 @@ proc.on("close", (code) => {
   if (flatMetrics.finalize > 0)
     console.log(`📦 Fase 6: Output finalize   – ${flatMetrics.finalize.toFixed(2)}s`);
   console.log("─────────────────────────────────────────────");
-  console.log(`✅Totale buildtijd          – ${total.toFixed(2)}s`);
+  console.log(`✅ Totale buildtijd          – ${total.toFixed(2)}s`);
   console.log("─────────────────────────────────────────────\n");
 
   // --- Save metric in nieuwe JSON structuur ---
