@@ -4,12 +4,12 @@ import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
 
 // 🧭 belangrijk: dit vertelt Nuxt dat /signin vóór je catch-all komt
 definePageMeta({
-  path: '/signin',
-  priority: 999, // hoger dan [...slug].vue
-  auth: {
-    unauthenticatedOnly: true, // 👈 deze pagina mag juist zonder login
-    navigateAuthenticatedTo: '/', // als al ingelogd, direct naar /
-  },
+//   path: '/signin',
+//   priority: 999, // hoger dan [...slug].vue
+//   auth: {
+//     unauthenticatedOnly: true, // 👈 deze pagina mag juist zonder login
+//     navigateAuthenticatedTo: '/', // als al ingelogd, direct naar /
+//   },
 })
 
 // nuxt-auth composable

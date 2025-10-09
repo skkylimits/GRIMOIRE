@@ -9,23 +9,7 @@ export default defineNuxtConfig({
     'nuxt-llms',
     '@nuxt/scripts',
     '@nuxt/test-utils',
-    '@sidebase/nuxt-auth'
   ],
-
-   auth: {
-    origin: process.env.AUTH_ORIGIN ?? 'http://localhost:3000',
-    baseURL: '/api/auth',            // 👈  belangrijk: vertel nuxt-auth waar de backend zit
-    enableGlobalAppMiddleware: true, // 👈 zorgt dat elke pagina de sessie checkt
-  },
-
-  runtimeConfig: {
-    public: {
-        auth: {
-        origin: process.env.AUTH_ORIGIN ?? 'http://localhost:3000',
-        baseURL: '/api/auth'
-        }
-    }
-},
 
   devtools: {
     enabled: true
