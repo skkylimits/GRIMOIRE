@@ -3,53 +3,37 @@ import * as z from 'zod'
 import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
 
 definePageMeta({
-  path: '/signin', // 👈 komma toegevoegd
+  path: '/signin',
   auth: {
-    unauthenticatedOnly: true, // 👈 deze pagina mag juist zonder login
-    navigateAuthenticatedTo: '/' // als al ingelogd, direct naar /
-  },
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: '/'
+  }
 })
 
-// nuxt-auth composable
 const { signIn } = useAuth()
 const toast = useToast()
+const showError = ref(false) // 👈 error-flag voor validatieblok
 
+const fields: AuthFormField[] = [
+  { name: 'email', type: 'email', label: 'Email', placeholder: 'Enter your email', required: true },
+  { name: 'password', label: 'Password', type: 'password', placeholder: 'Enter your password', required: true },
+  { name: 'remember', label: 'Remember me', type: 'checkbox' }
+]
 
-const fields: AuthFormField[] = [{
-  name: 'email',
-  type: 'email',
-  label: 'Email',
-  placeholder: 'Enter your email',
-  required: true
-}, {
-  name: 'password',
-  label: 'Password',
-  type: 'password',
-  placeholder: 'Enter your password',
-  required: true
-}, {
-  name: 'remember',
-  label: 'Remember me',
-  type: 'checkbox'
-}]
-
-// ✨ providers met echte actie
+// Alleen GitHub-provider
 const providers = [
   {
     label: 'GitHub',
     icon: 'i-simple-icons-github',
+    class: 'cursor-pointer',
     onClick: async () => {
       try {
-        toast.add({
-          title: 'Redirecting to GitHub...',
-          description: 'Please complete the login in the popup or redirect.',
-          timeout: 3000
-        })
-
-        // 🚀 Redirect naar GitHub, met callback naar huidige pagina
+        // toast.add({
+        //   title: 'Redirecting to GitHub...',
+        //   description: 'Please complete the login in the popup or redirect.',
+        //   timeout: 3000
+        // })
         await signIn('github', { callbackUrl: window.location.origin })
-
-        // Je komt daarna automatisch terug via /api/auth/callback/github
       } catch (err) {
         console.error('❌ GitHub sign-in failed:', err)
         toast.add({
@@ -64,13 +48,15 @@ const providers = [
 
 const schema = z.object({
   email: z.string({ required_error: 'Email is required' }).email('Invalid email'),
-  password: z.string({ required_error: 'Password is required' }).min(8, 'Must be at least 8 characters')
+  password: z.string({ required_error: 'Password is required' })
 })
 
 type Schema = z.output<typeof schema>
 
 function onSubmit(payload: FormSubmitEvent<Schema>) {
-  console.log('Submitted', payload)
+  console.log('Submitted fake credentials:', payload.data)
+  // ⚠️ Altijd foutmelding simuleren
+  showError.value = true
 }
 </script>
 
@@ -85,8 +71,17 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
         :fields="fields"
         :providers="providers"
         @submit="onSubmit"
-      />
+      >
+        <template #validation>
+          <UAlert
+            v-if="showError"
+            color="error"
+            icon="i-lucide-info"
+            title="Error signing in"
+            description="Access denied — authentication codes do not match."
+          />
+        </template>
+      </UAuthForm>
     </UPageCard>
   </div>
 </template>
-
