@@ -5,9 +5,9 @@ import type { Collections } from '@nuxt/content'
 
 export default eventHandler(async (event) => {
   // 🚧 heel belangrijk: stop alles wat begint met /api
-//   if (event.path.startsWith('/api/')) {
-//     return undefined // 👈 hiermee stopt de handler echt
-//   }
+  if (event.path.startsWith('/api/')) {
+    return undefined // 👈 hiermee stopt de handler echt
+  }
 
   const slug = getRouterParams(event)['slug.md']
   if (!slug?.endsWith('.md')) {

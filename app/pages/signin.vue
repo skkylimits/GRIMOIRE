@@ -2,14 +2,12 @@
 import * as z from 'zod'
 import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
 
-// 🧭 belangrijk: dit vertelt Nuxt dat /signin vóór je catch-all komt
 definePageMeta({
-  path: '/signin',
-//   priority: 999, // hoger dan [...slug].vue
-//   auth: {
-//     unauthenticatedOnly: true, // 👈 deze pagina mag juist zonder login
-//     navigateAuthenticatedTo: '/', // als al ingelogd, direct naar /
-//   },
+  path: '/signin', // 👈 komma toegevoegd
+  auth: {
+    unauthenticatedOnly: true, // 👈 deze pagina mag juist zonder login
+    navigateAuthenticatedTo: '/' // als al ingelogd, direct naar /
+  },
 })
 
 // nuxt-auth composable
@@ -22,44 +20,54 @@ const fields: AuthFormField[] = [
     type: 'email',
     label: 'Email',
     placeholder: 'Enter your email',
-    required: true,
+    required: true
   },
   {
     name: 'password',
     label: 'Password',
     type: 'password',
     placeholder: 'Enter your password',
-    required: true,
+    required: true
   },
   {
     name: 'remember',
     label: 'Remember me',
-    type: 'checkbox',
-  },
+    type: 'checkbox'
+  }
 ]
 
 // ✨ providers met echte actie
 const providers = [
   {
-    label: 'Google',
-    icon: 'i-simple-icons-google',
-    onClick: () => {
-      toast.add({ title: 'Google', description: 'Login with Google' })
-      // ✅ geen return, gewoon uitvoeren
-    }
-  },
-  {
     label: 'GitHub',
     icon: 'i-simple-icons-github',
     onClick: async () => {
-      await signIn('github') // ✅ Promise<void>
+      try {
+        toast.add({
+          title: 'Redirecting to GitHub...',
+          description: 'Please complete the login in the popup or redirect.',
+          timeout: 3000
+        })
+
+        // 🚀 Redirect naar GitHub, met callback naar huidige pagina
+        await signIn('github', { callbackUrl: window.location.origin })
+
+        // Je komt daarna automatisch terug via /api/auth/callback/github
+      } catch (err) {
+        console.error('❌ GitHub sign-in failed:', err)
+        toast.add({
+          title: 'Sign-in failed',
+          description: 'Something went wrong. Please try again.',
+          color: 'red'
+        })
+      }
     }
   }
 ]
 
 const schema = z.object({
   email: z.string({ required_error: 'Email is required' }).email('Invalid email'),
-  password: z.string({ required_error: 'Password is required' }).min(8, 'Must be at least 8 characters'),
+  password: z.string({ required_error: 'Password is required' }).min(8, 'Must be at least 8 characters')
 })
 
 type Schema = z.output<typeof schema>
@@ -70,7 +78,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center gap-4 p-4">
+  <div class="min-h-screen flex flex-col items-center justify-center gap-4 p-4">
     <UPageCard class="w-full max-w-md">
       <UAuthForm
         :schema="schema"

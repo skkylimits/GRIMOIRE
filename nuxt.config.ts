@@ -1,17 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  // ✅ Runtime-config — gebruikt bij runtime & SSR
-//   runtimeConfig: {
-//     authSecret: process.env.AUTH_SECRET,
-//     public: {
-//       auth: {
-//         origin: process.env.AUTH_ORIGIN ?? 'http://localhost:3000',
-//         baseURL: 'http://localhost:3000/api/auth', // 👈 absolute URL!
-//         enableGlobalAppMiddleware: true
-//       }
-//     }
-//   },
-
   modules: [
     '@nuxt/eslint',
     '@nuxt/image',
@@ -23,29 +11,6 @@ export default defineNuxtConfig({
     '@nuxt/test-utils',
     '@sidebase/nuxt-auth'
   ],
-
-   auth: {
-    globalAppMiddleware: true,
-    originEnvKey: 'NUXT_AUTH_ORIGIN', // 👈 custom env key
-    provider: {
-      type: 'authjs',
-      defaultProvider: 'github',
-      trustHost: true,
-      addDefaultCallbackUrl: true,
-    },
-  },
-
-  runtimeConfig: {
-    authSecret: process.env.AUTH_SECRET,
-    // 👇 hier definieer je het expliciet
-    authOrigin: process.env.NUXT_AUTH_ORIGIN || 'http://localhost:3000',
-    public: {
-      auth: {
-        baseURL: '/api/auth',
-        globalAppMiddleware: true
-      },
-    },
-  },
 
   devtools: {
     enabled: true
@@ -63,6 +28,11 @@ export default defineNuxtConfig({
     }
   },
 
+  runtimeConfig: {
+    authSecret: process.env.AUTH_SECRET, // secret voor het signeren/versleutelen van tokens
+    authOrigin: process.env.NUXT_AUTH_ORIGIN || 'http://localhost:3000' // fallback site-URL voor SSR
+  },
+
   compatibilityDate: '2024-07-11',
 
   nitro: {
@@ -72,6 +42,19 @@ export default defineNuxtConfig({
       ],
       crawlLinks: false,
       autoSubfolderIndex: false
+    }
+  },
+
+  // https://auth.sidebase.io/guide/getting-started/introduction
+  auth: {
+    originEnvKey: 'NUXT_AUTH_ORIGIN', // welke env-var de auth module gebruikt voor je site-URL
+    baseURL: '/api/auth',
+    globalAppMiddleware: false, // ⛔️ NIET door NuxtAuth laten doen
+    provider: {
+      type: 'authjs',
+      defaultProvider: 'github',
+      trustHost: true,
+      addDefaultCallbackUrl: true
     }
   },
 
