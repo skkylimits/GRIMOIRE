@@ -116,3 +116,9 @@ rm -rf .nuxt .output .data dist
 ## AUTH_SECRET genereren
 
 openssl rand -hex 32
+
+
+## Dashboarding (post optimilization)
+
+- build metrics
+- RBAC control
