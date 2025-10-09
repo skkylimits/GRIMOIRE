@@ -25,6 +25,8 @@ useSeoMeta({
 })
 
 provide('navigation', navigation)
+
+console.log(useRuntimeConfig().public.auth)
 </script>
 
 <template>

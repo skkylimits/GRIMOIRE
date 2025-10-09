@@ -14,9 +14,18 @@ export default defineNuxtConfig({
 
    auth: {
     origin: process.env.AUTH_ORIGIN ?? 'http://localhost:3000',
-    enableGlobalAppMiddleware: true,
-    baseURL: '/api/auth'          // 👈  belangrijk: vertel nuxt-auth waar de backend zit
+    baseURL: '/api/auth',            // 👈  belangrijk: vertel nuxt-auth waar de backend zit
+    enableGlobalAppMiddleware: true, // 👈 zorgt dat elke pagina de sessie checkt
   },
+
+  runtimeConfig: {
+    public: {
+        auth: {
+        origin: process.env.AUTH_ORIGIN ?? 'http://localhost:3000',
+        baseURL: '/api/auth'
+        }
+    }
+},
 
   devtools: {
     enabled: true

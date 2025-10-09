@@ -6,6 +6,10 @@ import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
 definePageMeta({
   path: '/signin',
   priority: 999, // hoger dan [...slug].vue
+  auth: {
+    unauthenticatedOnly: true, // 👈 deze pagina mag juist zonder login
+    navigateAuthenticatedTo: '/', // als al ingelogd, direct naar /
+  },
 })
 
 // nuxt-auth composable
