@@ -112,3 +112,7 @@ rm -rf .nuxt .output .data dist
 >
 > Geef me daarbij ook de best practices voor het taggen, labelen en automatisch deployen als een PR de checks haalt.”
 ---
+
+## AUTH_SECRET genereren
+
+openssl rand -hex 32

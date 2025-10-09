@@ -27,6 +27,9 @@ useSeoMeta({
 provide('navigation', navigation)
 
 console.log(useRuntimeConfig().public.auth)
+onMounted(() => {
+  console.log('Runtime auth config:', useRuntimeConfig().public.auth)
+})
 </script>
 
 <template>

@@ -1,19 +1,19 @@
 // export default defineNuxtRouteMiddleware(async (to) => {
 //   const { status } = useAuth()
 
-//   // ⏳ Wacht tot de auth-status bekend is
+//   // Wacht tot auth geladen is
 //   if (status.value === 'loading') return
 
-//   // 🧭 Als user al ingelogd is en naar /signin wil, stuur naar home
-//   if (to.path.startsWith('/signin') && status.value === 'authenticated') {
-//     return navigateTo('/')
-//   }
-
-//   // 🔓 Loginpagina is altijd toegankelijk
+//   // Toestaan: loginpagina zelf
 //   if (to.path.startsWith('/signin')) return
 
-//   // 🔒 Als user niet is ingelogd → redirect naar signin
+//   // Redirect als niet ingelogd
 //   if (status.value === 'unauthenticated') {
 //     return navigateTo('/signin')
+//   }
+
+//   // Als al ingelogd en naar signin → stuur terug naar /
+//   if (to.path.startsWith('/signin') && status.value === 'authenticated') {
+//     return navigateTo('/')
 //   }
 // })

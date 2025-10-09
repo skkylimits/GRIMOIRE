@@ -1,5 +1,17 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  // ✅ Runtime-config — gebruikt bij runtime & SSR
+//   runtimeConfig: {
+//     authSecret: process.env.AUTH_SECRET,
+//     public: {
+//       auth: {
+//         origin: process.env.AUTH_ORIGIN ?? 'http://localhost:3000',
+//         baseURL: 'http://localhost:3000/api/auth', // 👈 absolute URL!
+//         enableGlobalAppMiddleware: true
+//       }
+//     }
+//   },
+
   modules: [
     '@nuxt/eslint',
     '@nuxt/image',
@@ -9,7 +21,19 @@ export default defineNuxtConfig({
     'nuxt-llms',
     '@nuxt/scripts',
     '@nuxt/test-utils',
+    '@sidebase/nuxt-auth'
   ],
+
+
+   // ✅ Module-config — gebruikt bij setup
+//   auth: {
+//     provider: {
+//       type: 'authjs',
+//       defaultProvider: 'github',
+//       trustHost: true,
+//       addDefaultCallbackUrl: true
+//     }
+//   },
 
   devtools: {
     enabled: true

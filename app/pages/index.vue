@@ -25,3 +25,18 @@ useSeoMeta({
     :prose="false"
   />
 </template>
+
+<!-- <script setup lang="ts">
+const { data: session, status } = useAuth()
+watchEffect(() => {
+  console.log('Session:', session.value)
+  console.log('Status:', status.value)
+})
+</script>
+
+<template>
+  <div>
+    <h1>Auth test</h1>
+    <pre>{{ session }}</pre>
+  </div>
+</template> -->
