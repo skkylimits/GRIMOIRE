@@ -24,16 +24,28 @@ export default defineNuxtConfig({
     '@sidebase/nuxt-auth'
   ],
 
+   auth: {
+    globalAppMiddleware: true,
+    originEnvKey: 'NUXT_AUTH_ORIGIN', // 👈 custom env key
+    provider: {
+      type: 'authjs',
+      defaultProvider: 'github',
+      trustHost: true,
+      addDefaultCallbackUrl: true,
+    },
+  },
 
-   // ✅ Module-config — gebruikt bij setup
-//   auth: {
-//     provider: {
-//       type: 'authjs',
-//       defaultProvider: 'github',
-//       trustHost: true,
-//       addDefaultCallbackUrl: true
-//     }
-//   },
+  runtimeConfig: {
+    authSecret: process.env.AUTH_SECRET,
+    // 👇 hier definieer je het expliciet
+    authOrigin: process.env.NUXT_AUTH_ORIGIN || 'http://localhost:3000',
+    public: {
+      auth: {
+        baseURL: '/api/auth',
+        globalAppMiddleware: true
+      },
+    },
+  },
 
   devtools: {
     enabled: true
