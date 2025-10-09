@@ -3,7 +3,9 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageHeadline } from '@nuxt/content/utils'
 
 definePageMeta({
-  layout: 'docs'
+  layout: 'docs',
+  path: '/:slug(.*)*',
+  priority: -1 // zorgt dat /signin voorrang krijgt
 })
 
 const route = useRoute()

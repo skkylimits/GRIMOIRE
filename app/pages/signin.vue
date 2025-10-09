@@ -39,13 +39,18 @@ const providers = [
   {
     label: 'Google',
     icon: 'i-simple-icons-google',
-    onClick: () => toast.add({ title: 'Google', description: 'Login with Google' }),
+    onClick: () => {
+      toast.add({ title: 'Google', description: 'Login with Google' })
+      // ✅ geen return, gewoon uitvoeren
+    }
   },
   {
     label: 'GitHub',
     icon: 'i-simple-icons-github',
-    onClick: () => signIn('github'), // 👉 start echte OAuth-flow
-  },
+    onClick: async () => {
+      await signIn('github') // ✅ Promise<void>
+    }
+  }
 ]
 
 const schema = z.object({
