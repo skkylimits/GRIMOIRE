@@ -1,4 +1,10 @@
 export default defineNuxtRouteMiddleware((to) => {
+  if (process.dev) {
+    console.log('[Auth Middleware] ⚙️ Dev mode active — auth disabled')
+    console.log(process.dev)
+    return // ⛔️ middleware stopt hier in dev
+  }
+
   const { status } = useAuth()
 
   //console.log('✅ Middleware geladen op', import.meta.server ? 'server' : 'client', 'voor route:', to.path)
