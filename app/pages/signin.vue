@@ -14,27 +14,24 @@ definePageMeta({
 const { signIn } = useAuth()
 const toast = useToast()
 
-const fields: AuthFormField[] = [
-  {
-    name: 'email',
-    type: 'email',
-    label: 'Email',
-    placeholder: 'Enter your email',
-    required: true
-  },
-  {
-    name: 'password',
-    label: 'Password',
-    type: 'password',
-    placeholder: 'Enter your password',
-    required: true
-  },
-  {
-    name: 'remember',
-    label: 'Remember me',
-    type: 'checkbox'
-  }
-]
+
+const fields: AuthFormField[] = [{
+  name: 'email',
+  type: 'email',
+  label: 'Email',
+  placeholder: 'Enter your email',
+  required: true
+}, {
+  name: 'password',
+  label: 'Password',
+  type: 'password',
+  placeholder: 'Enter your password',
+  required: true
+}, {
+  name: 'remember',
+  label: 'Remember me',
+  type: 'checkbox'
+}]
 
 // ✨ providers met echte actie
 const providers = [
@@ -92,3 +89,4 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
     </UPageCard>
   </div>
 </template>
+
