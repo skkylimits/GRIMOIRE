@@ -1,4 +1,4 @@
-name: Measure Nuxt Performance
+name: 🧪 Measure Nuxt Performance
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   measure:
-    name: 🧪 Measure Nuxt Performance
+    # name: 🧪 Measure Nuxt Performance
     runs-on: ubuntu-latest
     timeout-minutes: 10
 

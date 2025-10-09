@@ -8,8 +8,15 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     'nuxt-llms',
     '@nuxt/scripts',
-    '@nuxt/test-utils'
+    '@nuxt/test-utils',
+    '@sidebase/nuxt-auth'
   ],
+
+   auth: {
+    origin: process.env.AUTH_ORIGIN ?? 'http://localhost:3000',
+    enableGlobalAppMiddleware: true,
+    baseURL: '/api/auth'          // 👈  belangrijk: vertel nuxt-auth waar de backend zit
+  },
 
   devtools: {
     enabled: true
@@ -34,7 +41,7 @@ export default defineNuxtConfig({
       routes: [
         '/'
       ],
-      crawlLinks: true,
+      crawlLinks: false,
       autoSubfolderIndex: false
     }
   },
