@@ -94,7 +94,6 @@ act push -j [JOB ID] -P ubuntu-latest=catthehacker/ubuntu:full-latest
 `exec bash `→ "ik trek een nieuw jasje aan, maar ik heb nog steeds dezelfde ID-kaart"
 `newgrp docker` → "ik krijg een nieuwe ID-kaart waarop de nieuwe groepsrechten staan"
 
-
 ## Purge repo
 pnpm store prune
 rm -rf .nuxt .output .data dist
@@ -116,7 +115,6 @@ rm -rf .nuxt .output .data dist
 ## AUTH_SECRET genereren
 
 openssl rand -hex 32
-
 
 ## Dashboarding (post optimilization)
 
