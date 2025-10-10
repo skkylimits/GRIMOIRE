@@ -1,31 +1,31 @@
-import { withLeadingSlash } from 'ufo'
-import { stringify } from 'minimark/stringify'
-import { queryCollection } from '@nuxt/content/nitro'
 import type { Collections } from '@nuxt/content'
+import { queryCollection } from '@nuxt/content/nitro'
+import { stringify } from 'minimark/stringify'
+import { withLeadingSlash } from 'ufo'
 
 export default eventHandler(async (event) => {
-  // 🚧 heel belangrijk: stop alles wat begint met /api
-  if (event.path.startsWith('/api/')) {
-    return undefined // 👈 hiermee stopt de handler echt
-  }
+	// 🚧 heel belangrijk: stop alles wat begint met /api
+	if (event.path.startsWith('/api/')) {
+		return undefined // 👈 hiermee stopt de handler echt
+	}
 
-  const slug = getRouterParams(event)['slug.md']
-  if (!slug?.endsWith('.md')) {
-    throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
-  }
+	const slug = getRouterParams(event)['slug.md']
+	if (!slug?.endsWith('.md')) {
+		throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+	}
 
-  const path = withLeadingSlash(slug.replace('.md', ''))
-  const page = await queryCollection(event, 'docs' as keyof Collections).path(path).first()
+	const path = withLeadingSlash(slug.replace('.md', ''))
+	const page = await queryCollection(event, 'docs' as keyof Collections).path(path).first()
 
-  if (!page) {
-    throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
-  }
+	if (!page) {
+		throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+	}
 
-  if (page.body.value[0]?.[0] !== 'h1') {
-    page.body.value.unshift(['blockquote', {}, page.description])
-    page.body.value.unshift(['h1', {}, page.title])
-  }
+	if (page.body.value[0]?.[0] !== 'h1') {
+		page.body.value.unshift(['blockquote', {}, page.description])
+		page.body.value.unshift(['h1', {}, page.title])
+	}
 
-  setHeader(event, 'Content-Type', 'text/markdown; charset=utf-8')
-  return stringify({ ...page.body, type: 'minimark' }, { format: 'markdown/html' })
+	setHeader(event, 'Content-Type', 'text/markdown; charset=utf-8')
+	return stringify({ ...page.body, type: 'minimark' }, { format: 'markdown/html' })
 })
