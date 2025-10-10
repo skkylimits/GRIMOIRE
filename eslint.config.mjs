@@ -25,13 +25,14 @@ export default antfu(
 			'node_modules',
 			'dist',
 			'coverage',
+			'content/**/*.md',
 		],
 
 		// 💅 optionele formatters (werkt als Prettier)
 		formatters: {
 			css: true,
 			html: true,
-			markdown: 'prettier',
+			// markdown: 'prettier', ❌ uitgeschakeld
 		},
 		rules: {
 			// 🌍 Globale uitzonderingen
