@@ -1,26 +1,34 @@
 export default defineNuxtRouteMiddleware((to) => {
+  // 🧪 Skip auth logic entirely when testing
+   if (import.meta.env.NUXT_AUTH_DISABLED === 'true') {
+    console.log('[Auth Middleware] Skipping middleware because NUXT_AUTH_DISABLED=true')
+    return // ⛔️ middleware stopt hier in test
+  }
+
+  // ⚙️ Dev mode: disable auth for local development
   if (process.dev) {
-    console.log('[Auth Middleware] ⚙️ Dev mode active — auth disabled')
-    console.log(process.dev)
+    console.log('[Auth Middleware] ⚙️ DEV mode active — auth disabled', process.dev)
     return // ⛔️ middleware stopt hier in dev
   }
 
+  // 🔒 Normal auth flow
   const { status } = useAuth()
 
   //console.log('✅ Middleware geladen op', import.meta.server ? 'server' : 'client', 'voor route:', to.path)
 
   if (status.value === 'loading') return
 
-  // Signin mag altijd
-  if (to.path === '/signin') return
-
   // Niet ingelogd → redirect naar loginpagina
-  if (status.value === 'unauthenticated') {
-    return navigateTo('/signin')
-  }
-
-  // Al ingelogd maar naar signin → stuur naar home
   if (status.value === 'authenticated' && to.path === '/signin') {
     return navigateTo('/')
   }
+
+  // Al ingelogd maar naar signin → stuur naar home
+  if (status.value === 'unauthenticated' && to.path !== '/signin') {
+    return navigateTo('/signin')
+  }
+
+  // signin mag altijd (voor unauthenticated users)
+  if (to.path === '/signin') return
 })
+

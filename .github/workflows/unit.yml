@@ -1,0 +1,50 @@
+name: 🤖 Unit Tests
+
+on:
+  push:
+    branches: [v4]
+  pull_request:
+    branches: [v4]
+
+jobs:
+  unit:
+    name: 🧱 Run Vitest (Unit Tests)
+    runs-on: ubuntu-latest
+
+    env:
+      NUXT_AUTH_DISABLED: 'true'
+      NODE_ENV: 'test'
+
+    steps:
+      # 🛎️ Checkout repo
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v4
+
+      # ⚙️ Setup Node + pnpm
+      - name: ⚙️ Setup Node.js + pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      # 📦 Install dependencies
+      - name: 📦 Install dependencies
+        run: |
+          echo "Installing dependencies..."
+          pnpm install --frozen-lockfile
+          echo "✅ Dependencies installed successfully"
+
+      # 🧪 Run Unit Tests
+      - name: 🧪 Run Unit Tests (pretty output)
+        run: pnpm vitest run --reporter=dot --coverage
+
+      # 📊 Upload coverage report
+      - name: 📊 Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-coverage
+          path: coverage/
