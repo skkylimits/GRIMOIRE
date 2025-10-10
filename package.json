@@ -8,6 +8,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "reset": "node scripts/helpers/reset.js",
     "typecheck": "nuxt typecheck",
     "measure:dev": "node scripts/metrics/measure-dev.js",
