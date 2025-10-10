@@ -22,6 +22,8 @@
 		// ⚙️ Utilities
 		"naumovs.color-highlight", // Laat CSS-kleuren direct zien
 		"usernamehw.errorlens" // Toont ESLint-fouten inline
+
+		// GitHub Actions
 	]
 }
 
