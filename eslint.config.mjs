@@ -39,7 +39,6 @@ export default antfu(
 			'node/prefer-global/process': 'off',
 			'no-restricted-globals': 'off',
 		},
-
 	},
 )
 

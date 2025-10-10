@@ -22,6 +22,7 @@ export default defineConfig({
 	},
 	esbuild: {
 		// 👇 Zorgt dat Vitest jouw aparte test-tsconfig gebruikt
+		// eslint-disable-next-line ts/no-require-imports
 		tsconfigRaw: require('./tsconfig.test.json'),
 	},
 })
