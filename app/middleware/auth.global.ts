@@ -6,10 +6,10 @@ export default defineNuxtRouteMiddleware((to) => {
   }
 
   // ⚙️ Dev mode: disable auth for local development
-  if (import.meta.dev) {
-    console.log('[Auth Middleware] ⚙️ DEV mode active — auth disabled', import.meta.dev)
-    return // ⛔️ middleware stopt hier in dev
-  }
+//   if (import.meta.dev) {
+//     console.log('[Auth Middleware] ⚙️ DEV mode active — auth disabled', import.meta.dev)
+//     return // ⛔️ middleware stopt hier in dev
+//   }
 
   // 🔒 Normal auth flow
   const { status } = useAuth()

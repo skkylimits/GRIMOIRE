@@ -98,5 +98,30 @@
         "server": 0.035
       }
     }
+  },
+  {
+    "timestamp": "2025-10-10T14:10:40.683Z",
+    "gitCommit": "6776684",
+    "branch": "v4",
+    "nodeVersion": "v22.17.1",
+    "nuxtVersion": "^4.1.2",
+    "devStartupSeconds": 5.072920648,
+    "phases": {
+      "nuxtInit": {
+        "preload": 0.41756242799999993,
+        "visible": 0.00002952000000006061
+      },
+      "vite": {
+        "client": 0.028,
+        "server": 0.031
+      },
+      "nitro": {
+        "server": 2.191
+      },
+      "background": {
+        "client": 0.002,
+        "server": 0.035
+      }
+    }
   }
 ]
