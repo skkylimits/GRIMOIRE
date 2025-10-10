@@ -41,7 +41,7 @@ proc.stdout.on('data', (data) => {
 
 	// 📚 Fase 3: @nuxt/content processing
 	const matchContent = text.match(
-		/Processed (\d+) collections and (\d+) files in ([\d.]+)ms/,
+		/Processed \d+ collections and \d+ files in [\d.]+ms/,
 	)
 	if (matchContent && !phases.contentLoad) {
 		phases.contentLoad = Number.parseFloat(matchContent[3]) / 1000

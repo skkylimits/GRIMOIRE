@@ -34,12 +34,12 @@ proc.stdout.on('data', (data) => {
 	// --- Nuxt & Vite fases ---
 	if (text.includes('Building client...'))
 		phases.viteClientStart = performance.now()
-	if (text.match(/Client built in ([\d.]+)m?s/))
+	if (text.match(/Client built in [\d.]+m?s/))
 		phases.viteClientEnd = performance.now()
 
 	if (text.includes('Building server...'))
 		phases.viteServerStart = performance.now()
-	if (text.match(/Server built in ([\d.]+)m?s/))
+	if (text.match(/Server built in [\d.]+m?s/))
 		phases.viteServerEnd = performance.now()
 
 	// --- Nitro fase ---
@@ -81,13 +81,13 @@ proc.on('close', (code) => {
 		viteServer: (phases.viteServerEnd - phases.viteServerStart) / 1000,
 		nitro: (phases.nitroEnd - phases.viteServerEnd) / 1000,
 		prerender:
-      phases.prerenderStart && phases.prerenderEnd
-      	? (phases.prerenderEnd - phases.prerenderStart) / 1000
-      	: 0,
+			phases.prerenderStart && phases.prerenderEnd
+				? (phases.prerenderEnd - phases.prerenderStart) / 1000
+				: 0,
 		finalize:
-      phases.outputEnd && phases.prerenderEnd
-      	? (phases.outputEnd - phases.prerenderEnd) / 1000
-      	: 0,
+			phases.outputEnd && phases.prerenderEnd
+				? (phases.outputEnd - phases.prerenderEnd) / 1000
+				: 0,
 	}
 
 	// --- Console output (ongewijzigd) ---
