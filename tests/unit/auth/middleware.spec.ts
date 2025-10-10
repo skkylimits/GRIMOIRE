@@ -24,7 +24,7 @@ describe('auth.global middleware', () => {
     expect(global.navigateTo).not.toHaveBeenCalled()
   })
 
-   it('redirects authenticated users away from /signin to /', async () => {
+  it('redirects authenticated users away from /signin to /', async () => {
     global.useAuth = () => ({ status: { value: 'authenticated' } })
     const mod = await import('../../../app/middleware/auth.global')
     const middleware = mod.default
@@ -40,5 +40,5 @@ describe('auth.global middleware', () => {
 
     await middleware({ path: '/dashboard' })
     expect(global.navigateTo).not.toHaveBeenCalled()
-  }) 
+  })
 })

@@ -8,13 +8,13 @@ on:
 
 jobs:
   unit:
-    name: 🧱 Run Vitest (Unit Tests)
+    # name: 🧱 Run Vitest (Unit Tests)
     runs-on: ubuntu-latest
 
     env:
-      NUXT_AUTH_DISABLED: 'true'
       NODE_ENV: 'test'
-
+      NUXT_AUTH_DISABLED: 'true'
+      
     steps:
       # 🛎️ Checkout repo
       - name: 🛎️ Checkout repository

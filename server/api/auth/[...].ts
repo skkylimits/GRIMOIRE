@@ -31,7 +31,7 @@ export default NuxtAuthHandler({
       }
       return token
     }
-  },
+  }
 
 //   pages: {
 //     signIn: '/signin', // 👈 begin login flow
