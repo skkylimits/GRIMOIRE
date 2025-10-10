@@ -1,5 +1,5 @@
 {
-	"name": "nameless",
+	"name": "grimoire",
 	"type": "module",
 	"private": true,
 	"packageManager": "pnpm@10.18.0",
@@ -16,6 +16,8 @@
 		"test": "pnpm vitest",
 		"test:watch": "pnpm vitest --watch",
 		"test:coverage": "pnpm vitest run --coverage",
+		"test:ui": "vitest --ui",
+		"test:report": "vitest run --coverage && vitest-coverage-reporter",
 		"measure:dev": "node scripts/metrics/measure-dev.js",
 		"measure:build": "node scripts/metrics/measure-build.js",
 		"measure:preview": "node scripts/metrics/measure-preview.js",
