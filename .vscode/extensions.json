@@ -1,0 +1,28 @@
+{
+	// 👋 Aanbevolen extensies voor dit project
+	"recommendations": [
+		// 🧠 Basis
+		"vue.volar", // Vue 3 + <script setup> ondersteuning
+		"Vue.vscode-typescript-vue-plugin", // TypeScript in .vue bestanden
+		"editorconfig.editorconfig", // Respecteert .editorconfig instellingen
+		"esbenp.prettier-vscode", // Formatter (voor HTML / CSS / Markdown via ESLint of Prettier)
+		"dbaeumer.vscode-eslint", // ESLint-integratie (werkt samen met @antfu/eslint-config)
+
+		// 🎨 Styling / Tailwind / CSS
+		"bradlc.vscode-tailwindcss", // IntelliSense voor Tailwind classes
+		"csstools.postcss", // Het zorgt ervoor dat VS Code jouw moderne CSS-syntax begrijpt.
+		"stylelint.vscode-stylelint", // (Optioneel) CSS linting, als je dat ooit wilt
+
+		// 🧱 Markdown & Content
+		"unifiedjs.vscode-mdx", // ✨ MDC/MDX support (Markdown Components voor Nuxt Content)
+		"yzhang.markdown-all-in-one", // Beter schrijven in Markdown
+		"bierner.markdown-mermaid", // Mermaid-diagrammen in Markdown
+		"redhat.vscode-yaml", // YAML ondersteuning (voor workflows en config)
+
+		// ⚙️ Utilities
+		"naumovs.color-highlight", // Laat CSS-kleuren direct zien
+		"usernamehw.errorlens" // Toont ESLint-fouten inline
+	]
+}
+
+// cat .vscode/extensions.json | grep -oE '"[a-zA-Z0-9\.-]+\/[a-zA-Z0-9\.-]+"' | tr -d '"' | xargs -n 1 code --install-extension

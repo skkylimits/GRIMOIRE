@@ -45,3 +45,4 @@ export default antfu(
 // .editorconfig = beïnvloedt hoe het eruitziet terwijl je typt
 // .vscode/settings.json = bepaalt hoe VS Code omgaat met linting en auto-fixes
 //  eslint.config.mjs = bepaalt hoe de code écht moet zijn ✅
+//  Markdown All in One = “is het lekker om in te schrijven?”
