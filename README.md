@@ -69,7 +69,7 @@ sudo lsof -ti:3000 | xargs kill -9
 
 ## Act
 
-Install 
+Install
 
 ```bash
 curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash -s -- -b /usr/local/bin latest

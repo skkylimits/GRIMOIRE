@@ -1,127 +1,127 @@
 [
-  {
-    "timestamp": "2025-10-08T20:46:42.411Z",
-    "gitCommit": "451b475",
-    "branch": "v4",
-    "nodeVersion": "v22.17.1",
-    "nuxtVersion": "^4.1.2",
-    "devStartupSeconds": 4.905747610000001,
-    "phases": {
-      "nuxtInit": {
-        "preload": 0.326827251,
-        "visible": 2.3066667560000003
-      },
-      "vite": {
-        "client": 0.026,
-        "server": 0.034
-      },
-      "nitro": {
-        "server": 5.744
-      },
-      "background": {
-        "client": 0.002,
-        "server": 0.033
-      }
-    }
-  },
-  {
-    "timestamp": "2025-10-08T20:51:09.640Z",
-    "gitCommit": "451b475",
-    "branch": "v4",
-    "nodeVersion": "v22.17.1",
-    "nuxtVersion": "^4.1.2",
-    "devStartupSeconds": 6.23428129,
-    "phases": {
-      "nuxtInit": {
-        "preload": 0.461561206,
-        "visible": 3.4502084500000003
-      },
-      "vite": {
-        "client": 0.033,
-        "server": 0.035
-      },
-      "nitro": {
-        "server": 2.201
-      },
-      "background": {
-        "client": 0.002,
-        "server": 0.032
-      }
-    }
-  },
-  {
-    "timestamp": "2025-10-08T20:55:13.690Z",
-    "gitCommit": "451b475",
-    "branch": "v4",
-    "nodeVersion": "v22.17.1",
-    "nuxtVersion": "^4.1.2",
-    "devStartupSeconds": 5.792715212,
-    "phases": {
-      "nuxtInit": {
-        "preload": 0.409164719,
-        "visible": 3.133429371
-      },
-      "vite": {
-        "client": 0.035,
-        "server": 0.036
-      },
-      "nitro": {
-        "server": 2.131
-      },
-      "background": {
-        "client": 0.002,
-        "server": 0.033
-      }
-    }
-  },
-  {
-    "timestamp": "2025-10-08T21:02:49.144Z",
-    "gitCommit": "f5e746b",
-    "branch": "v4",
-    "nodeVersion": "v22.17.1",
-    "nuxtVersion": "^4.1.2",
-    "devStartupSeconds": 5.85406897,
-    "phases": {
-      "nuxtInit": {
-        "preload": 0.40248204899999995,
-        "visible": 3.206862927
-      },
-      "vite": {
-        "client": 0.033,
-        "server": 0.032
-      },
-      "nitro": {
-        "server": 5.711
-      },
-      "background": {
-        "client": 0.002,
-        "server": 0.035
-      }
-    }
-  },
-  {
-    "timestamp": "2025-10-10T14:10:40.683Z",
-    "gitCommit": "6776684",
-    "branch": "v4",
-    "nodeVersion": "v22.17.1",
-    "nuxtVersion": "^4.1.2",
-    "devStartupSeconds": 5.072920648,
-    "phases": {
-      "nuxtInit": {
-        "preload": 0.41756242799999993,
-        "visible": 0.00002952000000006061
-      },
-      "vite": {
-        "client": 0.028,
-        "server": 0.031
-      },
-      "nitro": {
-        "server": 2.191
-      },
-      "background": {
-        "client": 0.002,
-        "server": 0.035
-      }
-    }
-  }
+	{
+		"timestamp": "2025-10-08T20:46:42.411Z",
+		"gitCommit": "451b475",
+		"branch": "v4",
+		"nodeVersion": "v22.17.1",
+		"nuxtVersion": "^4.1.2",
+		"devStartupSeconds": 4.905747610000001,
+		"phases": {
+			"nuxtInit": {
+				"preload": 0.326827251,
+				"visible": 2.3066667560000003
+			},
+			"vite": {
+				"client": 0.026,
+				"server": 0.034
+			},
+			"nitro": {
+				"server": 5.744
+			},
+			"background": {
+				"client": 0.002,
+				"server": 0.033
+			}
+		}
+	},
+	{
+		"timestamp": "2025-10-08T20:51:09.640Z",
+		"gitCommit": "451b475",
+		"branch": "v4",
+		"nodeVersion": "v22.17.1",
+		"nuxtVersion": "^4.1.2",
+		"devStartupSeconds": 6.23428129,
+		"phases": {
+			"nuxtInit": {
+				"preload": 0.461561206,
+				"visible": 3.4502084500000003
+			},
+			"vite": {
+				"client": 0.033,
+				"server": 0.035
+			},
+			"nitro": {
+				"server": 2.201
+			},
+			"background": {
+				"client": 0.002,
+				"server": 0.032
+			}
+		}
+	},
+	{
+		"timestamp": "2025-10-08T20:55:13.690Z",
+		"gitCommit": "451b475",
+		"branch": "v4",
+		"nodeVersion": "v22.17.1",
+		"nuxtVersion": "^4.1.2",
+		"devStartupSeconds": 5.792715212,
+		"phases": {
+			"nuxtInit": {
+				"preload": 0.409164719,
+				"visible": 3.133429371
+			},
+			"vite": {
+				"client": 0.035,
+				"server": 0.036
+			},
+			"nitro": {
+				"server": 2.131
+			},
+			"background": {
+				"client": 0.002,
+				"server": 0.033
+			}
+		}
+	},
+	{
+		"timestamp": "2025-10-08T21:02:49.144Z",
+		"gitCommit": "f5e746b",
+		"branch": "v4",
+		"nodeVersion": "v22.17.1",
+		"nuxtVersion": "^4.1.2",
+		"devStartupSeconds": 5.85406897,
+		"phases": {
+			"nuxtInit": {
+				"preload": 0.40248204899999995,
+				"visible": 3.206862927
+			},
+			"vite": {
+				"client": 0.033,
+				"server": 0.032
+			},
+			"nitro": {
+				"server": 5.711
+			},
+			"background": {
+				"client": 0.002,
+				"server": 0.035
+			}
+		}
+	},
+	{
+		"timestamp": "2025-10-10T14:10:40.683Z",
+		"gitCommit": "6776684",
+		"branch": "v4",
+		"nodeVersion": "v22.17.1",
+		"nuxtVersion": "^4.1.2",
+		"devStartupSeconds": 5.072920648,
+		"phases": {
+			"nuxtInit": {
+				"preload": 0.41756242799999993,
+				"visible": 0.00002952000000006061
+			},
+			"vite": {
+				"client": 0.028,
+				"server": 0.031
+			},
+			"nitro": {
+				"server": 2.191
+			},
+			"background": {
+				"client": 0.002,
+				"server": 0.035
+			}
+		}
+	}
 ]

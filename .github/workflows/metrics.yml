@@ -45,7 +45,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'pnpm'
+          cache: pnpm
 
       # 📦 Fase 4 — Dependencies installeren
       - name: 📦 Install dependencies
