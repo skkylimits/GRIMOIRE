@@ -18,6 +18,7 @@ export default NuxtAuthHandler({
 		 */
 		async session({ session, token }) {
 			// Je kunt custom data toevoegen aan de session
+			// @ts-expect-error – session.user.id exist when logged in
 			session.user.id = token.sub
 			return session
 		},
@@ -32,8 +33,4 @@ export default NuxtAuthHandler({
 			return token
 		},
 	},
-
-//   pages: {
-//     signIn: '/signin', // 👈 begin login flow
-//   },
 })
