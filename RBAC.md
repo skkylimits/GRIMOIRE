@@ -1,10 +1,12 @@
 # 🧱 Prompt: Nuxt Auth Foundation Expansion (RBAC + Admin)
 
 ## 🧠 Context
+
 Je hebt al een werkende GitHub OAuth via `@sidebase/nuxt-auth` en `next-auth@4`.
 `useAuth()` werkt, sessies laden correct, en via `/debug-auth` kun je user-data zien.
 
 Nu wil je dit uitbreiden tot een **professionele auth foundation** die:
+
 - ✅ veilig is
 - ✅ testbaar is
 - ✅ schaalbaar is
@@ -50,6 +52,7 @@ UI: @nuxt/ui
 > met veilige middleware, role-based access control, admin dashboard en teststrategie.
 >
 > Zorg dat:
+>
 > - De code clean, modulair en productierijp is
 > - Alle bestanden in de juiste mappen staan
 > - Elke stap wordt uitgelegd (met best practices en motivatie)
@@ -72,10 +75,11 @@ docs/
 ## 💡 Tip
 
 Je kunt dit bestand koppelen aan AI-tooling zoals:
+
 - VSCode Copilot Chat (`@prompt`)
 - Cursor IDE (`/prompt`)
 - ChatGPT “Custom Knowledge”
-Zodat je altijd deze volledige context kunt terugroepen en verder kunt bouwen.
+  Zodat je altijd deze volledige context kunt terugroepen en verder kunt bouwen.
 
 ---
 

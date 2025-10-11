@@ -32,7 +32,7 @@ export default antfu(
 		formatters: {
 			css: true,
 			html: true,
-			// markdown: 'prettier', ❌ uitgeschakeld
+			markdown: 'prettier', // ❌ uitgeschakeld
 		},
 		rules: {
 			// 🌍 Globale uitzonderingen
