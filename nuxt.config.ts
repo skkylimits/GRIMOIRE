@@ -23,7 +23,17 @@ export default defineNuxtConfig({
 		// fonts: false, // Schakelt de fonts-module uit
 		colorMode: true, // Zet het in, zet het op false om het uit te schakelen
 		theme: {
-			colors: ['primary', 'secondary'], // Specificeer kleuren voor je thema
+			colors: [
+				'primary',
+				'secondary',
+				'tertiary',
+				'neutral',
+				'note',
+				'info',
+				'success',
+				'warning',
+				'error',
+			], // Specificeer kleuren voor je thema
 			transitions: true, // Overgangen inschakelen
 			defaultVariants: {
 				color: 'primary',

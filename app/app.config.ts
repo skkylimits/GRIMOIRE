@@ -2,7 +2,14 @@ export default defineAppConfig({
 	ui: {
 		colors: {
 			primary: 'red',
+			secondary: 'amber',
+			tertiary: 'emerald',
 			neutral: 'zinc',
+			info: 'orange',
+			note: 'pink',
+			success: 'purple',
+			warning: 'yellow',
+			error: 'red',
 		},
 		footer: {
 			slots: {
