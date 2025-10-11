@@ -122,3 +122,7 @@ openssl rand -hex 32
 
 - build metrics
 - RBAC control
+
+## Vercel
+
+:)
