@@ -8,8 +8,13 @@ on:
 
 jobs:
   unit:
-    # name: 🧱 Run Vitest (Unit Tests)
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}  # Dynamisch gebaseerd op de matrix
+    timeout-minutes: 10
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]  # Je kunt dit uitbreiden met andere omgevingen als je wilt
+        node: [16, 18, 20]  # Voorbeeld met meerdere versies van Node.js (of pas aan naar je wens)
 
     env:
       NODE_ENV: test
@@ -26,7 +31,7 @@ jobs:
           version: 9
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ matrix.node }}  # Dynamisch gebaseerd op de matrix
           cache: pnpm
 
       # 📦 Install dependencies
