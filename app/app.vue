@@ -29,7 +29,10 @@ provide('navigation', navigation)
 
 <template>
 	<UApp>
-		<NuxtLoadingIndicator />
+		<NuxtLoadingIndicator
+			color="repeating-linear-gradient(to right,#FFCCCB 0%,#FF5859 60%,#FF0000 100%)"
+			error-color="repeating-linear-gradient(to right,#FF0000 0%,#FF0000 100%)"
+		/>
 
 		<AppHeader />
 
