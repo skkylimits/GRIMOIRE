@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]  # Je kunt dit uitbreiden met andere omgevingen als je wilt
-        node: [16, 18, 20]  # Voorbeeld met meerdere versies van Node.js (of pas aan naar je wens)
+        node: [22]  # Voorbeeld met meerdere versies van Node.js (of pas aan naar je wens)
 
     env:
       NODE_ENV: test
