@@ -24,6 +24,7 @@
 		"usernamehw.errorlens" // Toont ESLint-fouten inline
 
 		// GitHub Actions
+		// Tailwind CSS IntelliSense
 	]
 }
 

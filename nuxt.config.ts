@@ -37,7 +37,7 @@ export default defineNuxtConfig({
 			transitions: true, // Overgangen inschakelen
 			defaultVariants: {
 				color: 'primary',
-				size: 'md',
+				// size: 'md',
 			},
 		},
 	},

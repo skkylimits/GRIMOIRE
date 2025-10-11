@@ -4,8 +4,8 @@
 @source "../../../content/**/*";
 
 @theme static {
-	--container-8xl: 90rem;
-	--font-sans: "Public Sans", sans-serif;
+	/* --container-8xl: 90rem; */
+	--font-sans: "Roboto", sans-serif;
 
 	/* Note */
 	--color-pink-50: #fdf2f8;
@@ -74,6 +74,8 @@
 }
 
 :root {
+	/* https://icones.js.org */
+
 	--ui-radius: 0.125rem;
 	--ui-container: var(--container-7xl);
 	--ui-header-height: --spacing(16);

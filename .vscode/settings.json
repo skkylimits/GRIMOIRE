@@ -51,5 +51,11 @@
 	// 🧩 Editorgedrag
 	"editor.insertSpaces": false,
 	"editor.detectIndentation": true,
-	"editor.tabSize": 4
+	"editor.tabSize": 4,
+
+	// 🖼️ Vetur
+	"tailwindCSS.classAttributes": [
+		"active-class",
+		"inactive-class"
+	]
 }
