@@ -1,5 +1,3 @@
 {
-	"build": {
-		"ignoreCommand": "echo 'Current branch: $VERCEL_GIT_BRANCH'; if [ \"$VERCEL_GIT_BRANCH\" != \"main\" ]; then echo '🛑 Skipping non-main branch:' $VERCEL_GIT_BRANCH; exit 0; fi"
-	}
+	"ignoreCommand": "if [ \"$VERCEL_GIT_BRANCH\" != \"main\" ]; then exit 0; else exit 1; fi"
 }
