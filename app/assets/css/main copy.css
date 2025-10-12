@@ -1,11 +1,11 @@
-@import "tailwindcss";
-@import "@nuxt/ui";
+@import 'tailwindcss';
+@import '@nuxt/ui';
 
 @source "../../../content/**/*";
 
 @theme static {
 	--container-8xl: 90rem;
-	--font-sans: "Roboto", sans-serif;
+	--font-sans: 'Roboto', sans-serif;
 
 	/* Note */
 	--color-pink-50: #fdf2f8;

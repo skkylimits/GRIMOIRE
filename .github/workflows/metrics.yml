@@ -6,13 +6,13 @@ on:
 
 jobs:
   measure:
-    runs-on: ${{ matrix.os }}  # Dynamisch gebaseerd op de matrix
+    runs-on: ${{ matrix.os }} # Dynamisch gebaseerd op de matrix
     timeout-minutes: 10
 
     strategy:
       matrix:
-        os: [ubuntu-latest]  # Je kunt dit uitbreiden met andere omgevingen als je wilt
-        node: [22]  # Voorbeeld met meerdere versies van Node.js (of pas aan naar je wens)
+        os: [ubuntu-latest] # Je kunt dit uitbreiden met andere omgevingen als je wilt
+        node: [22] # Voorbeeld met meerdere versies van Node.js (of pas aan naar je wens)
 
     defaults:
       run:
@@ -47,7 +47,7 @@ jobs:
           version: 9
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node }}  # Dynamisch gebaseerd op de matrix
+          node-version: ${{ matrix.node }} # Dynamisch gebaseerd op de matrix
           cache: pnpm
 
       # 📦 Fase 4 — Dependencies installeren
