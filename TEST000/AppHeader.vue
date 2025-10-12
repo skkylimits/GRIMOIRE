@@ -38,21 +38,11 @@ const { header } = useAppConfig()
 			v-else
 			#left
 		>
-			<NuxtLink
-				:to="header?.to || '/'"
-				class="flex-shrink-0 font-bold text-xl text-gray-900 dark:text-white flex items-center gap-2"
-				aria-label="Grimoire"
-			>
-				<img src="/logo.png" alt="Logo" class="h-12 w-auto border-0 !border-none">
-
-				Grimoire
-				<UBadge
-					label="Docs"
-					variant="subtle"
-				/>
+			<NuxtLink :to="header?.to || '/'">
+				<AppLogo class="w-auto h-6 shrink-0" />
 			</NuxtLink>
 
-			<!-- <TemplateMenu /> -->
+			<TemplateMenu />
 		</template>
 
 		<template #right>

@@ -4,9 +4,6 @@ import { findPageHeadline } from '@nuxt/content/utils'
 
 definePageMeta({
 	layout: 'docs',
-	path: '/:slug(.*)*',
-	priority: -1, // 👈 lager dan signin.vue zorgt dat /signin voorrang krijgt
-	auth: true, // 👈 ook deze routes vereisen login
 })
 
 const route = useRoute()
