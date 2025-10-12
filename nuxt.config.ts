@@ -19,7 +19,7 @@ export default defineNuxtConfig({
 	css: ['~/assets/css/main.css'],
 
 	ui: {
-		// prefix: 'Nuxt', // i.pv. <UButton>, kun je iets zoals <NuxtButton> krijgen.
+		// prefix: 'Nuxt', // i.p.v. <UButton>, kun je iets zoals <NuxtButton> krijgen.
 		// fonts: false, // Schakelt de fonts-module uit
 		colorMode: true, // Zet het in, zet het op false om het uit te schakelen
 		theme: {

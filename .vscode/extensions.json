@@ -11,20 +11,18 @@
 		// 🎨 Styling / Tailwind / CSS
 		"bradlc.vscode-tailwindcss", // IntelliSense voor Tailwind classes
 		"csstools.postcss", // Het zorgt ervoor dat VS Code jouw moderne CSS-syntax begrijpt.
-		"stylelint.vscode-stylelint", // (Optioneel) CSS linting, als je dat ooit wilt
 
 		// 🧱 Markdown & Content
-		"unifiedjs.vscode-mdx", // ✨ MDC/MDX support (Markdown Components voor Nuxt Content)
-		"yzhang.markdown-all-in-one", // Beter schrijven in Markdown
+		"nuxt.mdc", // 0.3.0
 		"bierner.markdown-mermaid", // Mermaid-diagrammen in Markdown
 		"redhat.vscode-yaml", // YAML ondersteuning (voor workflows en config)
 
 		// ⚙️ Utilities
 		"naumovs.color-highlight", // Laat CSS-kleuren direct zien
-		"usernamehw.errorlens" // Toont ESLint-fouten inline
+		"usernamehw.errorlens", // Toont ESLint-fouten inline
 
 		// GitHub Actions
-		// Tailwind CSS IntelliSense
+		"github.vscode-github-actions"
 	]
 }
 

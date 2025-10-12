@@ -16,6 +16,7 @@
 		"test": "pnpm vitest",
 		"test:watch": "pnpm vitest --watch",
 		"test:coverage": "pnpm vitest run --coverage",
+		"test:verbose": "pnpm vitest --reporter verbose",
 		"test:ui": "vitest --ui",
 		"test:report": "vitest run --coverage && vitest-coverage-reporter",
 		"measure:dev": "node scripts/metrics/measure-dev.js",

@@ -1,0 +1,48 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Normalize Image Paths In Markdown",
+			"type": "shell",
+			"command": "node scripts/markdown/NormalizeImagePath.js ${file}",
+			"problemMatcher": [],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"options": {
+				"cwd": "${workspaceFolder}"
+			}
+		},
+		{
+			"label": "Update Alt Text In Markdown",
+			"type": "shell",
+			"command": "node scripts/markdown/UpdateAltText.js ${file}",
+			"problemMatcher": [],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"options": {
+				"cwd": "${workspaceFolder}"
+			}
+		},
+		{
+			"label": "Normalize and Update Markdown Assets",
+			"type": "shell",
+			"dependsOn": [
+				"Normalize Image Paths In Markdown",
+				"Update Alt Text In Markdown"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": [],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"options": {
+				"cwd": "${workspaceFolder}"
+			}
+		}
+	]
+}
