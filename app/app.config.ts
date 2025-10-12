@@ -6,10 +6,18 @@ export default defineAppConfig({
 			tertiary: 'emerald',
 			neutral: 'zinc',
 			info: 'orange',
-			note: 'pink',
+			important: 'pink',
 			success: 'purple',
 			warning: 'yellow',
 			error: 'red',
+		},
+		icons: {
+			info: 'i-lucide:info',
+			success: 'i-ri:folder-info-line',
+			important: 'i-ri:folder-info-line',
+			warning: 'i-lucide:triangle-alert',
+			caution: 'i-lucide:circle-alert',
+
 		},
 		footer: {
 			slots: {
@@ -22,36 +30,22 @@ export default defineAppConfig({
 				base: 'list-square', // of Tailwind classes naar wens
 			},
 			callout: {
-				slots: {
-					base: [
-						'group relative block px-4 py-3 rounded-md text-sm/6 my-5 last:mb-0 [&_code]:text-xs/5 [&_code]:bg-default [&_pre]:bg-default [&>div]:my-2.5 [&_ul]:my-2.5 [&_ol]:my-2.5 [&>*]:last:!mb-0 [&_ul]:ps-4.5 [&_ol]:ps-4.5 [&_li]:my-0',
-						'transition-colors',
-					],
-					icon: [
-						'size-4 shrink-0 align-sub me-1.5',
-						'transition-colors',
-					],
-					externalIcon: [
-						'size-4 align-top absolute right-2 top-2 pointer-events-none',
-						'transition-colors',
-					],
-				},
 				variants: {
 					color: {
 						info: { // note
-							base: 'border border-note/25 bg-note/10 text-note-600 dark:text-note-300 [&_a]:text-note [&_a]:hover:border-note [&_code]:text-note-600 dark:[&_code]:text-note-300 [&_code]:border-note/25 [&_a]:hover:[&>code]:border-note [&_a]:hover:[&>code]:text-note [&>ul]:marker:text-note/50',
-							icon: 'text-note',
+							base: 'border border-info/25 bg-info/10 text-info-600 dark:text-info-300 [&_a]:text-note [&_a]:hover:border-info [&_code]:text-info-600 dark:[&_code]:text-info-300 [&_code]:border-info/25 [&_a]:hover:[&>code]:border-info [&_a]:hover:[&>code]:text-info [&>ul]:marker:text-info/50',
+							icon: 'text-info',
 							externalIcon: 'text-note-600 dark:text-note-300',
 						},
+						// important: { // important
+						// 	base: 'border border-important-600/25 bg-important-100/10 text-important-600 dark:text-important-300 [&_a]:text-important-600 [&_a]:hover:border-important-600 [&_code]:text-important-600 dark:[&_code]:text-important-300 [&_code]:border-important-600/25 [&_a]:hover:[&>code]:border-important-600 [&_a]:hover:[&>code]:text-important-600 [&>ul]:marker:text-important-600/50',
+						// 	icon: 'text-important',
+						// 	externalIcon: 'text-important-600 dark:text-important-300',
+						// },
 						success: { // tip
 							base: 'border border-success/25 bg-success/10 text-success-600 dark:text-success-300 [&_a]:text-success [&_a]:hover:border-success [&_code]:text-success-600 dark:[&_code]:text-success-300 [&_code]:border-success/25 [&_a]:hover:[&>code]:border-success [&_a]:hover:[&>code]:text-success [&>ul]:marker:text-success/50',
-							icon: 'text-succes',
+							icon: 'text-success',
 							externalIcon: 'text-success-600 dark:text-success-300',
-						},
-						important: { // important
-							base: 'border border-red-600/25 bg-red-100/10 text-red-600 dark:text-red-300 [&_a]:text-red-600 [&_a]:hover:border-red-600 [&_code]:text-red-600 dark:[&_code]:text-red-300 [&_code]:border-red-600/25 [&_a]:hover:[&>code]:border-red-600 [&_a]:hover:[&>code]:text-red-600 [&>ul]:marker:text-red-600/50',
-							icon: 'text-red-600',
-							externalIcon: 'text-red-600 dark:text-red-300',
 						},
 						warning: { // warning
 							base: 'border border-warning/25 bg-warning/10 text-warning-600 dark:text-warning-300 [&_a]:text-warning [&_a]:hover:border-warning [&_code]:text-warning-600 dark:[&_code]:text-warning-300 [&_code]:border-warning/25 [&_a]:hover:[&>code]:border-warning [&_a]:hover:[&>code]:text-warning [&>ul]:marker:text-warning/50',
@@ -67,27 +61,6 @@ export default defineAppConfig({
 					to: {
 						true: 'border-dashed',
 					},
-				},
-				compoundVariants: [
-					{
-						color: 'primary',
-						to: true,
-						class: {
-							base: 'hover:border-primary',
-							externalIcon: 'group-hover:text-primary',
-						},
-					},
-					{
-						color: 'neutral',
-						to: true,
-						class: {
-							base: 'hover:border-inverted',
-							externalIcon: 'group-hover:text-highlighted',
-						},
-					},
-				],
-				defaultVariants: {
-					color: 'neutral',
 				},
 			},
 		},
@@ -123,7 +96,7 @@ export default defineAppConfig({
 		}],
 	},
 	footer: {
-		credits: `Built the unseen, Protect the unknown • © ${new Date().getFullYear()}`,
+		cinfoits: `Built the unseen, Protect the unknown • © ${new Date().getFullYear()}`,
 		colorMode: false,
 		links: [{
 			'icon': 'i-simple-icons-discord',

@@ -5,7 +5,7 @@ const appConfig = useAppConfig()
 </script>
 
 <template>
-	<ProseCallout color="error" :icon="appConfig.ui.icons.caution">
+	<ProseCallout color="important" :icon="appConfig.ui.icons.important">
 		<slot mdc-unwrap="p" />
 	</ProseCallout>
 </template>
