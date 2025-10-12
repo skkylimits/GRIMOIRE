@@ -49,9 +49,9 @@ export default defineAppConfig({
 							externalIcon: 'text-success-600 dark:text-success-300',
 						},
 						important: { // important
-							base: 'border border-red-600/25 bg-red-100/10 text-red-600 dark:text-red-300 [&_a]:text-red-600 [&_a]:hover:border-red-600 [&_code]:text-red-600 dark:[&_code]:text-red-300 [&_code]:border-red-600/25 [&_a]:hover:[&>code]:border-red-600 [&_a]:hover:[&>code]:text-red-600 [&>ul]:marker:text-red-600/50',
-							icon: 'text-red-600',
-							externalIcon: 'text-red-600 dark:text-red-300',
+							base: 'border border-note/25 bg-note/10 text-note-600 dark:text-note-300 [&_a]:text-note [&_a]:hover:border-note [&_code]:text-note-600 dark:[&_code]:text-note-300 [&_code]:border-note/25 [&_a]:hover:[&>code]:border-note [&_a]:hover:[&>code]:text-note [&>ul]:marker:text-note/50',
+							icon: 'text-note',
+							externalIcon: 'text-note-600 dark:text-note-300',
 						},
 						warning: { // warning
 							base: 'border border-warning/25 bg-warning/10 text-warning-600 dark:text-warning-300 [&_a]:text-warning [&_a]:hover:border-warning [&_code]:text-warning-600 dark:[&_code]:text-warning-300 [&_code]:border-warning/25 [&_a]:hover:[&>code]:border-warning [&_a]:hover:[&>code]:text-warning [&>ul]:marker:text-warning/50',
@@ -90,6 +90,7 @@ export default defineAppConfig({
 					color: 'neutral',
 				},
 			},
+
 		},
 	},
 	seo: {
