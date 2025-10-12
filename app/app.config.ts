@@ -21,6 +21,16 @@ export default defineAppConfig({
 	seo: {
 		siteName: 'Nuxt Docs Template',
 	},
+	socials: {
+		x: 'https://x.com/skkylimits',
+		discord: 'https://discord.com/invite/ps2h6QT',
+		github: 'https://github.com/skkylimits',
+	},
+	github: {
+		url: 'https://github.com/grimoire',
+		branch: 'main',
+		rootDir: 'docs',
+	},
 	header: {
 		title: '',
 		to: '/',
@@ -62,7 +72,7 @@ export default defineAppConfig({
 		title: 'Table of Contents',
 		bottom: {
 			title: 'Community',
-			edit: 'https://github.com/nuxt-ui-templates/docs/edit/main/content',
+			edit: 'https://github.com/grimoire/edit/main/content',
 			links: [{
 				icon: 'i-lucide-star',
 				label: 'Star on GitHub',

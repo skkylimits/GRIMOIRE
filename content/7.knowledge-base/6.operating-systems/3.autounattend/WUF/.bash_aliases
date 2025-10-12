@@ -1,0 +1,54 @@
+
+################################################################################################################################ 
+################################################################################################################################ 
+
+###############################################
+#                   ALIAS                     #
+###############################################
+
+# type in `alias` to see all these aliases in the terminal
+# TODO: organize your aliases and commands like a proper bash program
+
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# wsl directories
+alias heaven='cd ~ && cd Heaven'
+alias hell='cd ~ && cd Hell'
+
+# windows directories
+alias sun='cd /mnt/c'
+alias moon='cd /mnt/c/Users/skkylimits/Downloads'
+
+alias earth='cd /mnt/c/Users/skkylimits/Desktop'
+alias skky=' cd /mnt/c/Users/skkylimits'
+
+# open explorer in current shell
+alias open='explorer.exe'
+
+# start application
+alias start='cmd.exe /c start'
+
+# pbcopy & pbpaste
+alias pbcopy='clip.exe' # somecommand | pbcopy
+alias pbpaste="powershell.exe -command 'Get-Clipboard' | tr -d '\r' | head -n -1"

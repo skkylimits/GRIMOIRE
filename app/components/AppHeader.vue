@@ -145,15 +145,16 @@ defineShortcuts({
 		>
 			<NuxtLink
 				:to="header?.to || '/'"
-				class="flex-shrink-0 font-bold text-xl text-gray-900 dark:text-white flex items-end gap-1.5"
-				aria-label="Nameless"
+				class="flex-shrink-0 font-bold text-xl text-gray-900 dark:text-white flex items-center gap-2"
+				aria-label="Grimoire"
 			>
-				Nameless
+				<img src="/logo.png" alt="Logo" class="h-12 w-auto border-0 !border-none">
+
+				Grimoire
 				<UBadge
 					label="Docs"
 					variant="subtle"
 				/>
-				<!-- <MainLogo class="w-auto h-6 shrink-0" /> -->
 			</NuxtLink>
 
 			<!-- <TemplateMenu /> -->
