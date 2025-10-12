@@ -52,9 +52,6 @@ export default defineNuxtConfig({
 			path: '~/components',
 		},
 		{
-			path: '~/components/content/prose',
-		},
-		{
 			path: 'node_modules/@nuxt/ui/dist/runtime/components/prose',
 			prefix: 'Prose',
 		},
