@@ -42,7 +42,7 @@ provide('navigation', navigation)
 			</NuxtLayout>
 		</UMain>
 
-		<!-- <AppFooter /> -->
+		<AppFooter />
 
 		<ClientOnly>
 			<LazyUContentSearch

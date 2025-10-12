@@ -4,7 +4,7 @@
 @source "../../../content/**/*";
 
 @theme static {
-	/* --container-8xl: 90rem; */
+	--container-8xl: 90rem;
 	--font-sans: "Roboto", sans-serif;
 
 	/* Note */
