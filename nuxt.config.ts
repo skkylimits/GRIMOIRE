@@ -47,15 +47,15 @@ export default defineNuxtConfig({
 			prose: true,
 		},
 	},
-	components: [
-		{
-			path: '~/components',
-		},
-		{
-			path: 'node_modules/@nuxt/ui/dist/runtime/components/prose',
-			prefix: 'Prose',
-		},
-	],
+	// components: [
+	// 	{
+	// 		path: '~/components',
+	// 	},
+	// 	{
+	// 		path: 'node_modules/@nuxt/ui/dist/runtime/components/prose',
+	// 		prefix: 'Prose',
+	// 	},
+	// ],
 
 	content: {
 		build: {
