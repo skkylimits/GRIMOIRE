@@ -96,7 +96,7 @@ export default defineAppConfig({
 		}],
 	},
 	footer: {
-		cinfoits: `Built the unseen, Protect the unknown • © ${new Date().getFullYear()}`,
+		credits: `Built the unseen, Protect the unknown • © ${new Date().getFullYear()}`,
 		colorMode: false,
 		links: [{
 			'icon': 'i-simple-icons-discord',
