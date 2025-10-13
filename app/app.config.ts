@@ -66,7 +66,7 @@ export default defineAppConfig({
 		},
 	},
 	seo: {
-		siteName: 'Nuxt Docs Template',
+		siteName: 'Grimore',
 	},
 	socials: {
 		x: 'https://x.com/skkylimits',
