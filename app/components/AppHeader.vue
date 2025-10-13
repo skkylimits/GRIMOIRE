@@ -121,7 +121,6 @@ const active = ref()
 			highlight-color="error"
 			content-orientation="vertical"
 		/>
-
 		<template
 			v-if="header?.logo?.dark || header?.logo?.light || header?.title"
 			#title

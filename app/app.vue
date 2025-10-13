@@ -35,6 +35,7 @@ provide('navigation', navigation)
 		/>
 
 		<AppHeader />
+		<AppTabHeader />
 
 		<UMain>
 			<NuxtLayout>
