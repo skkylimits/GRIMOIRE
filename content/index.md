@@ -20,7 +20,7 @@ In de stilte tussen bytes vinden we patronen die systemen binden. Dit werkboek o
 #links
   :::u-button
   ---
-  to: /getting-started
+  to: /the-lab
   size: xl
   trailing-icon: i-lucide-arrow-right
   ---
