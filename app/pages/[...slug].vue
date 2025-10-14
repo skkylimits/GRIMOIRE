@@ -63,18 +63,18 @@ function findFirstValidMdNode(items: ContentNavigationItem[]): ContentNavigation
 const { data: page } = await useAsyncData(route.path, () => queryCollection('docs').path(route.path).first())
 
 if (!page.value) {
-	const tabNode = findNavItemByPath(route.path, navigation.value)
-	console.log('tabNode:', tabNode)
-	if (tabNode && tabNode.tabs === true && tabNode.children?.length) {
-		const redirectTarget = findFirstValidMdNode(tabNode.children)
-		console.log('tabs', tabNode.tabs)
-		console.log('Redirect target:', redirectTarget)
+	const navItem = findNavItemByPath(route.path, navigation.value)
+	console.log('navItem:', navItem)
+
+	// Check of er kinderen zijn (ongeacht tabs)
+	if (navItem?.children?.length) {
+		const redirectTarget = findFirstValidMdNode(navItem.children)
+		console.log('[🔀 Redirect target]', redirectTarget)
 
 		if (redirectTarget) {
 			navigateTo(redirectTarget.path)
 		}
 	}
-
 	throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 

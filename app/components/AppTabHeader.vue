@@ -74,7 +74,7 @@ const validNode = computed(() => {
 
 const items = computed<NavigationMenuItem[][]>(() => {
 	const tabNode = findTabsNavNode(route.path, navigation.value)
-
+	console.log('tabNode', tabNode)
 	if (!tabNode || !tabNode.children)
 		return [[]]
 
@@ -84,7 +84,7 @@ const items = computed<NavigationMenuItem[][]>(() => {
 		to: item.path || '',
 		active: route.path === item.path || route.path.startsWith(`${item.path}/`),
 	}))
-
+	console.log('mappedItems', mappedItems)
 	return [mappedItems]
 })
 
