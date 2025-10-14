@@ -112,6 +112,7 @@ const active = ref()
 	<UHeader
 		:ui="{ center: 'flex-1' }"
 		:to="header?.to || '/'"
+		class="z-99"
 	>
 		<UNavigationMenu
 			v-model="active"

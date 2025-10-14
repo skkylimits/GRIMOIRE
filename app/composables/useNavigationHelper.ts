@@ -33,13 +33,17 @@ export function useNavigationHelper() {
 		let searchPath = currentPath
 
 		while (currentNav) {
-			// Check if currentNav is a valid standalone or stripped node
+			// Check if currentNav is a valid standalone, stripped or tabs node
 			if (currentNav.standalone) {
 				return { node: currentNav, type: 'standalone', path: searchPath }
 			}
 
 			if (currentNav.stripped) {
 				return { node: currentNav, type: 'stripped', path: searchPath }
+			}
+
+			if (currentNav.tabs) {
+				return { node: currentNav, type: 'tabs', path: searchPath }
 			}
 
 			// Move up one level in the path
@@ -54,7 +58,7 @@ export function useNavigationHelper() {
 		return null
 	}
 
-	const filteredNavigation = computed(() => {
+	const sortedNavigation = computed(() => {
 		if (!navigation?.value)
 			return []
 
@@ -98,7 +102,7 @@ export function useNavigationHelper() {
 	})
 
 	return {
-		filteredNavigation,
+		sortedNavigation,
 		open,
 	}
 }
