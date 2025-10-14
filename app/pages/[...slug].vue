@@ -64,17 +64,14 @@ const { data: page } = await useAsyncData(route.path, () => queryCollection('doc
 
 if (!page.value) {
 	const navItem = findNavItemByPath(route.path, navigation.value)
-	console.log('navItem:', navItem)
 
-	// Check of er kinderen zijn (ongeacht tabs)
 	if (navItem?.children?.length) {
 		const redirectTarget = findFirstValidMdNode(navItem.children)
-		console.log('[🔀 Redirect target]', redirectTarget)
-
 		if (redirectTarget) {
-			navigateTo(redirectTarget.path)
+			navigateTo(redirectTarget.path) // await is optioneel, maar explicieter
 		}
 	}
+
 	throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
