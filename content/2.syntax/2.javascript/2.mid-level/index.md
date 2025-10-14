@@ -1,5 +1,7 @@
 ---
 title: Mid level
-description: test
+description: Kamina
 navigation: false
 ---
+
+Instill `growth` and `belief` in people
