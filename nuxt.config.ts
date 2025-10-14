@@ -42,11 +42,21 @@ export default defineNuxtConfig({
 		},
 	},
 
+	// https://ui.nuxt.com/getting-started/icons/nuxt#custom-local-collections
+	icon: {
+		provider: 'iconify',
+		customCollections: [{
+			prefix: 'custom',
+			dir: './assets/icons',
+		}],
+	},
+
 	mdc: {
 		components: {
 			prose: true,
 		},
 	},
+
 	// components: [
 	// 	{
 	// 		path: '~/components',
@@ -104,10 +114,6 @@ export default defineNuxtConfig({
 				braceStyle: '1tbs',
 			},
 		},
-	},
-
-	icon: {
-		provider: 'iconify',
 	},
 
 	llms: {
