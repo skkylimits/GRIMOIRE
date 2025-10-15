@@ -55,23 +55,37 @@ export function findValidNavPath(currentPath: string, navItems: ContentNavigatio
 	return null
 }
 
-// Functie om de navigatie-items te sorteren
-export function sortNavigationItems(items: ContentNavigationItem[]): ContentNavigationItem[] {
-	function extractSortNumber(stem: string): number {
-		const parts = stem.split('/')
-		const lastPart = parts[parts.length - 1]
-		const match = lastPart ? lastPart.match(/^(\d+)/) : null
-		return match && match[1] ? Number.parseInt(match[1], 10) : 1000
-	}
+export function findTabsNavNode(currentPath: string, navItems: ContentNavigationItem[]): ContentNavigationItem | null {
+	let searchPath = currentPath
+	let currentNav = findNavItemByPath(searchPath, navItems)
 
-	function sortItems(items: ContentNavigationItem[]): ContentNavigationItem[] {
-		return items
-			.map(item => ({
-				...item,
-				children: item.children ? sortItems(item.children) : [],
-			}))
-			.sort((a, b) => extractSortNumber(a.stem || '') - extractSortNumber(b.stem || ''))
+	while (currentNav) {
+		if (currentNav.tabs) {
+			return currentNav
+		}
+		const parentPath = searchPath.split('/').slice(0, -1).join('/')
+		if (!parentPath)
+			break
+		searchPath = parentPath
+		currentNav = findNavItemByPath(searchPath, navItems)
 	}
+	return null
+}
 
-	return sortItems(items)
+// 🛠 Helper function to extract the last number in `stem`
+export function extractSortNumber(stem: string): number {
+	const parts = stem.split('/') // Split by "/"
+	const lastPart = parts[parts.length - 1] // Get the last segment
+	const match = lastPart ? lastPart.match(/^(\d+)/) : null // Extract leading number
+	return match && match[1] ? Number.parseInt(match[1], 10) : 1000 // Default to 1000 if no number found
+}
+
+// 🛠 Recursive sorting function
+export function sortItems(items: ContentNavigationItem[]): ContentNavigationItem[] {
+	return items
+		.map(item => ({
+			...item,
+			children: item.children ? sortItems(item.children) : [], // Recursively sort children
+		}))
+		.sort((a, b) => extractSortNumber(a.stem || '') - extractSortNumber(b.stem || ''))
 }

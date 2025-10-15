@@ -1,10 +1,38 @@
 <script setup lang="ts">
+import type { ContentNavigationItem } from '@nuxt/content'
 import { computed } from 'vue'
 
-const { filteredNavigation, open } = useNavigationHelper()
+const route = useRoute()
+const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
 
 const items = computed(() => {
-	return filteredNavigation.value // Gebruik de gefilterde navigatie hier
+	if (!navigation?.value)
+		return []
+
+	const validNav = findValidNavPath(route.path, navigation.value)
+
+	if (validNav) {
+		let items: ContentNavigationItem[] = []
+
+		if (validNav.type === 'standalone') {
+			items = [validNav.node]
+		}
+		else if (validNav.type === 'stripped') {
+			items = validNav.node.children || []
+		}
+
+		// ✅ Apply Sorting
+		const sortedItems = sortItems(items)
+
+		return sortedItems
+	}
+
+	return []
+})
+
+const open = computed(() => {
+	const validNav = findValidNavPath(route.path, navigation.value || [])
+	return validNav ? [validNav.path] : []
 })
 </script>
 

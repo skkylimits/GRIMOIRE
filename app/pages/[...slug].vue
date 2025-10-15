@@ -8,9 +8,9 @@ definePageMeta({
 	layout: 'docs',
 })
 
-const route = useRoute()
 const { toc } = useAppConfig()
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+const route = useRoute()
+const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([])) ?? ref([])
 
 const { data: page } = await useAsyncData(route.path, () => queryCollection('docs').path(route.path).first())
 
