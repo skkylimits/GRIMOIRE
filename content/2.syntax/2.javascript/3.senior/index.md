@@ -1,5 +1,6 @@
 ---
-description: prof jiang xueqin
+title: prof jiang xueqin
+description: Prophecies
 navigation: false
 ---
 

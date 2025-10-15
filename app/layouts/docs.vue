@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useNavigationHelper } from '~/composables/useNavigationHelper'
 
-const { sortedNavigation, open } = useNavigationHelper()
+const { filteredNavigation, open } = useNavigationHelper()
 
 const items = computed(() => {
-	return sortedNavigation.value // Gebruik de gesorteerde navigatie hier
+	return filteredNavigation.value // Gebruik de gefilterde navigatie hier
 })
 </script>
 

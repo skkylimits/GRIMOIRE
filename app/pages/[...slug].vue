@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
 import { findPageHeadline } from '@nuxt/content/utils'
+import { useRoute } from 'vue-router'
 // @ts-nocheck
-/* eslint-disable no-console */
 
 definePageMeta({
 	layout: 'docs',
@@ -11,54 +11,6 @@ definePageMeta({
 const route = useRoute()
 const { toc } = useAppConfig()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
-console.log(navigation)
-
-function findNavItemByPath(path: string, navItems: ContentNavigationItem[]): ContentNavigationItem | undefined {
-	for (const item of navItems) {
-		if (item.path === path)
-			return item
-		if (item.children) {
-			const found = findNavItemByPath(path, item.children)
-			if (found)
-				return found
-		}
-	}
-	return undefined
-}
-
-function findTabsNavNode(currentPath: string, navItems: ContentNavigationItem[]): ContentNavigationItem | null {
-	let searchPath = currentPath
-	let currentNav = findNavItemByPath(searchPath, navItems)
-
-	while (currentNav) {
-		if (currentNav.tabs)
-			return currentNav
-
-		const parentPath = searchPath.split('/').slice(0, -1).join('/')
-		if (!parentPath)
-			break
-
-		searchPath = parentPath
-		currentNav = findNavItemByPath(searchPath, navItems)
-	}
-
-	return null
-}
-
-function findFirstValidMdNode(items: ContentNavigationItem[]): ContentNavigationItem | null {
-	for (const item of items) {
-		if (item.children?.length) {
-			const found = findFirstValidMdNode(item.children)
-			if (found)
-				return found
-		}
-		else if (item.stem) {
-			// Alleen teruggeven als stem aanwezig is (wijst op een content item)
-			return item
-		}
-	}
-	return null
-}
 
 const { data: page } = await useAsyncData(route.path, () => queryCollection('docs').path(route.path).first())
 
@@ -71,7 +23,6 @@ if (!page.value) {
 			navigateTo(redirectTarget.path) // await is optioneel, maar explicieter
 		}
 	}
-
 	throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
