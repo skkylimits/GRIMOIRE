@@ -101,6 +101,7 @@ export default defineNuxtConfig({
 						'powershell',
 						'http',
 						'mdc',
+						'c',
 					],
 				},
 			},

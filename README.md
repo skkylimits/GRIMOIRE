@@ -122,3 +122,7 @@ openssl rand -hex 32
 
 - build metrics
 - RBAC control
+
+## Yahki
+
+https://www.youtube.com/shorts/ntoa3D8hDLg
