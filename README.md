@@ -126,3 +126,14 @@ openssl rand -hex 32
 ## Yahki
 
 https://www.youtube.com/shorts/ntoa3D8hDLg
+
+## Metasploit
+
+sudo apt update
+sudo apt install -y metasploit-framework
+
+# start postgres
+
+sudo service postgresql start
+sudo msfdb init
+msfconsole

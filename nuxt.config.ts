@@ -99,6 +99,7 @@ export default defineNuxtConfig({
 						'sql',
 						'cmd',
 						'powershell',
+						'python',
 						'http',
 						'mdc',
 						'c',
