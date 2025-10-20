@@ -1,0 +1,660 @@
+---
+title: Kernel Callbacks
+description: Before your code breathes, the kernel already whispered.
+toc:
+   depth: 1
+---
+
+## What are Kernel Callbacks?
+
+Kernel callbacks are small, low-level functions inside the Windows operating system kernel. They get triggered automatically when important system events happen — like when a process or thread is created or terminated.
+
+These callbacks **notify security drivers** (like antivirus or Endpoint Detection and Response (EDR) tools) about these events so they can **collect telemetry** (data) and watch for suspicious behavior in real time.
+
+
+## 1 - Process Creation Kernel Callbacks
+
+### What are Process Creation Kernel Callbacks?
+
+**Process Creation Kernel Callbacks** are functions called by the **Windows kernel** whenever a new process is created or terminated. 
+
+Their purpose is to notify registered **kernel drivers** about these process events, enabling them to gather key information like **process ID**, **parent process ID**, **executable path**, and **security details**. This helps security tools like **EDRs** detect suspicious or malicious activity early on.
+
+### When are these callbacks triggered?
+
+These callbacks are triggered whenever a process is **created or terminated** — for example, when opening an application, running a script, or when malware launches a malicious process.
+
+### How does the kernel architecture behind these callbacks work?
+
+The **Windows kernel** keeps an array called `nt!PspCreateProcessNotifyRoutine`. This array contains pointers to all registered callback functions. When a process event occurs (**creation or termination**), the kernel iterates through this array and calls each registered callback, passing relevant process information.
+
+Here’s what happens technically:
+
+* The kernel’s **process manager** allocates a new **EPROCESS structure** for the newly created process.
+* The internal kernel function **`PspCallProcessNotifyRoutines`** is called.
+* This function loops through the `nt!PspCreateProcessNotifyRoutine` array and invokes every registered callback routine.
+
+These callbacks receive details about the process event, such as the **PID**, **executable path**, **command line**, and **security token information**.
+
+These callbacks can then forward data to **user-mode components** of security software via system calls such as:
+
+* `NtCreateUserProcess`
+* `NtCreateProcessEx`
+* and other related APIs
+
+### How can drivers register themselves?
+
+Drivers can register for process creation notifications using these kernel APIs:
+
+* `PsSetCreateProcessNotifyRoutine`
+* `PsSetCreateProcessNotifyRoutineEx`
+* `PsSetCreateProcessNotifyRoutineEx2`
+
+These APIs allow drivers to add their callback functions, which the kernel calls on every process creation or termination.
+
+![process-creation-callback](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/process-creation-callback.png)
+
+### What telemetry is collected?
+
+When a callback triggers, the driver gains access to:
+
+* The **EPROCESS structure** of the new process, which holds detailed kernel-level process information.
+* The **Process ID (PID)** of the new process.
+* A pointer to a **PPS\_CREATE\_NOTIFY\_INFO** structure that contains:
+
+  * `ParentProcessId`: the ID of the process that started the new process
+  * `ImageFileName`: the full path and filename of the executable
+  * `CommandLine`: command line arguments used to start the process
+  * `CreatingThreadId`: ID of the thread in the parent process that created this process
+  * Optionally, `TokenInformation`: security token data including privileges and integrity level
+
+This data is essential to detect suspicious activity like privilege escalation or code injection attempts.
+
+![process-telemetries](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/process-telemetries.png)
+
+
+### Use by EDR
+
+EDRs like **Windows Defender (WdFilter.sys)**, **Microsoft Defender for Endpoint (MsSecFlt.sys)**, **CrowdStrike**, and others use these callbacks to:
+
+* **Enable real-time reaction** by immediately responding to new processes or threads
+* **Provide early detection** by catching malicious activity before it causes harm
+* **Collect useful telemetry** such as PID, command line, and security tokens for anomaly detection
+* **Perform analysis of suspicious activity** including memory inspection, API hooking detection, and remote debugging
+* **Block or mitigate threats** by preventing execution or terminating malicious processes
+
+### What happens technically during a process creation?
+
+![process-parent](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/process-parent.exe.png)
+
+1. **Usermode initiation**
+   A process (e.g., parent.exe) calls an API such as `CreateProcessAsUserW`, often used to start a new process in the context of another process.
+
+2. **System call transition**
+   This user-mode API calls a native API such as `NtCreateUserProcess`, which triggers a transition to kernel mode via a syscall instruction.
+
+3. **Kernel mode handling**
+   The kernel, specifically the Windows Process Manager, receives the syscall and:
+
+   * Allocates an **EPROCESS structure** for the new process.
+   * Calls an internal kernel function: `PspCallProcessNotifyRoutines`.
+
+4. **Callback invocation**
+   This function loops through the `PspCreateProcessNotifyRoutine` array and invokes all registered callbacks (e.g., from EDR drivers such as Defender, MDE, etc.).
+
+5. **Telemetry collection**
+   Each callback collects:
+
+   * PID and Parent PID
+   * Image path and command line
+   * Creating thread ID
+   * Security information (token, privilege, integrity level)
+   * Pointer to EPROCESS structure and PPS\_CREATE\_NOTIFY\_INFO
+
+6. **Data to user mode**
+   The collected data is forwarded to the user-mode EDR component for further analysis, such as:
+
+   * Memory scanning of the new process
+   * API hooking
+   * Behavior monitoring
+   * Optionally debugging or tracing the process
+
+## 2 - Thread Creation Kernel Callbacks
+
+### What are Thread Creation Kernel Callbacks?
+
+**Thread Creation Kernel Callbacks** are low-level routines in the **Windows kernel** triggered when a thread is **created or terminated**.
+
+They notify registered **kernel drivers** about thread events, enabling collection of key telemetry like **Thread ID (TID)**, **Process ID (PID)**, **start address**, and **security token**. Security tools like **EDRs** use these callbacks for early detection of suspicious threads.
+
+### When are these callbacks triggered?
+
+These callbacks fire when a thread is **created or terminated** — for example, when a program spawns a new thread, or when malware injects a malicious thread.
+
+They are triggered by system calls such as:
+
+* `NtCreateThreadEx`
+* `NtTerminateThread`
+* And other thread-related APIs
+
+This involves a **user-mode to kernel-mode transition** via a syscall.
+
+### How does the kernel architecture behind these callbacks work?
+
+The Windows kernel maintains an array called `nt!PspCreateThreadNotifyRoutine`. This array holds pointers to all registered thread notify callback functions.
+
+When a thread event occurs (creation or termination), the kernel calls `PspCallThreadNotifyRoutine`, which:
+
+* Iterates over the `nt!PspCreateThreadNotifyRoutine` array
+* Invokes each registered callback routine, passing relevant thread information
+
+### How can drivers register themselves?
+
+Drivers register thread callbacks via these kernel APIs:
+
+* `PsSetCreateThreadNotifyRoutine`
+* `PsSetCreateThreadNotifyRoutineEx`
+
+### What telemetry is collected?
+
+When the callback triggers, the driver gains access to:
+
+* The **ETHREAD structure** of the newly created thread
+* The **Process ID (PID)** of the parent process
+* The **Thread ID (TID)** of the new thread
+* The **Start Address** of the thread
+* **Security Token Information** including privileges and integrity level
+
+![thread-temeletries](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/thread-temeletries.png)
+
+### Use by EDR
+
+EDRs like **Windows Defender (WdFilter.sys)** and **Microsoft Defender for Endpoint (MsSecFlt.sys)** use these callbacks for:
+
+* **Real-time monitoring** of thread creation
+* **Collection of core telemetry**
+* **Analysis of potentially malicious threads**
+* **Possible actions** including memory inspection, API hooking detection, and remote debugging
+
+### What happens technically during a thread creation?
+
+![thread-creation](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/thread-creation.png)
+
+1. **Usermode thread initiation**
+   A user-mode process calls APIs like **`CreateThread()`**, which invokes the native syscall **`NtCreateThreadEx()`**, causing a transition to kernel mode.
+
+2. **Kernel mode thread creation**
+   The kernel creates a new **ETHREAD** object and links it to its parent **EPROCESS**.
+
+3. **Callback invocation**
+   The kernel calls **`PspCallThreadNotifyRoutine()`** and loops through the internal callback array.
+   Each registered driver callback is invoked with thread details.
+
+4. **Telemetry collection**
+   Each callback receives data like:
+
+   * Thread ID (TID)
+   * Parent Process ID (PID)
+   * Start address
+   * Security token info
+
+5. **Telemetry forwarding**
+   The collected data is forwarded to:
+
+   * User-mode EDR components
+   * Event Tracing for Windows (ETW) sessions
+   * Other monitoring or logging services
+
+6. **EDR analysis and monitoring**
+   The EDR performs active monitoring, such as:
+
+   * Memory scanning of the thread
+   * Detection of code injections or API hooking
+   * Remote debugging or tracing
+   * Behavioral analysis and anomaly detection
+
+7. **Behavioral correlation and response**
+   The EDR correlates thread activity with network events, ETW logs, and other telemetry to detect threats.
+
+8. **Goal: Detection and response**
+   Possible actions include:
+
+   * Generating alerts
+   * Terminating threads or processes
+   * Logging forensic data
+   * Blocking or sandboxing malicious activity
+
+![thread-malware](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/thread-malware.exe.png)
+
+
+
+
+## 3 - Image Load Kernel Callbacks
+
+### What are Image Load Kernel Callbacks?
+
+**Image Load Kernel Callbacks** are low-level routines in the **Windows kernel** triggered whenever an image (such as a `.sys` driver, `.dll`, or `.exe` file) is loaded into memory.
+
+These callbacks notify registered **kernel drivers** about image load events, enabling collection of key telemetry such as **image path**, **process ID (PID)**, **base address**, and **image size**.
+
+Security tools like **EDRs** rely heavily on these callbacks to detect suspicious or malicious image loading techniques including:
+
+* Reflective DLL injection
+* Loading unsigned drivers
+* Process hollowing
+
+### When are these callbacks triggered?
+
+Image load callbacks fire whenever the system maps an image into memory, typically initiated via user-mode APIs such as:
+
+* `NtMapViewOfSection`
+* `LdrLoadDll`
+* `LoadLibrary()` and related functions
+
+These APIs cause a **user-mode to kernel-mode transition** through a syscall.-
+
+### How does the kernel architecture behind these callbacks work?
+
+The Windows kernel maintains an array named `nt!PspLoadImageNotifyRoutine` which holds pointers to registered image load callback functions.
+
+When an image is loaded, the kernel calls `PspCallImageNotifyRoutines`, which:
+
+* Iterates over the `nt!PspLoadImageNotifyRoutine` array
+* Invokes each registered callback, passing details about the image load event
+
+### How can drivers register themselves?
+
+Drivers register image load callbacks via these kernel APIs:
+
+* `PsSetLoadImageNotifyRoutine`
+* `PsSetLoadImageNotifyRoutineEx`
+
+![image-load](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/image-load.png)
+
+### What telemetry is collected?
+
+When triggered, the callbacks receive telemetry such as:
+
+* **Full path (full image name)** of the loaded image
+* **Process ID (PID)** of the loading process
+* **Base address** where the image is mapped in memory
+* **Size** of the loaded image
+
+![image-info](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/image-info.png)
+
+### Use by EDR
+
+EDRs like **Windows Defender (WdFilter.sys)** and **Microsoft Defender for Endpoint (MsSecFlt.sys)** use these callbacks for:
+
+* **Real-time monitoring** of image loads
+* **Collection of core telemetry** including image path and load address
+* **Detection of suspicious or malicious images** such as unsigned drivers or injected DLLs
+* **Possible actions** including memory scanning, integrity checks, and blocking of suspicious images
+
+### What happens technically during an image load?
+
+![image-malware](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/image-malware.exe.png)
+
+1. **User-mode initiation**
+   A process calls an API like `LoadLibrary()` or similar to load a module (`example.dll`).
+
+2. **Transition to native APIs**
+   The API calls underlying native functions such as `LdrLoadDll` and `NtMapViewOfSection`.
+
+3. **System call to kernel**
+   A `syscall` transitions execution to kernel mode.
+
+4. **Kernel handling**
+   The Windows Memory Manager maps the image into the process’s address space and verifies the image’s signature and integrity.
+
+5. **Callback invocation**
+   The kernel calls `PspCallImageNotifyRoutines()`, iterating through the `PspLoadImageNotifyRoutine` array and invoking each registered callback.
+
+6. **Telemetry collection**
+   Each callback receives info like process ID, image path, base address, and size.
+
+7. **Telemetry forwarding**
+   Callbacks forward telemetry to user-mode EDR components or event tracing sessions.
+
+8. **EDR monitoring**
+   The EDR analyzes the image load by scanning memory, verifying signatures, and detecting injections or anomalies.
+
+Sure! Here's the updated section **"4 - Registry Operation Kernel Callbacks"** in English, with the missing headings added:
+
+## 4 - Registry Operation Kernel Callbacks
+
+### What are Registry Operation Kernel Callbacks?
+
+**Registry Operation Kernel Callbacks** are low-level mechanisms in the **Windows kernel** that allow **drivers to register for notifications** whenever registry activity occurs—such as creating, reading, modifying, or deleting registry keys or values.
+
+### When are these callbacks triggered?
+
+These callbacks are triggered when a process performs a registry-related system call, such as:
+
+* `NtOpenKeyEx`
+* `NtSetValueKey`
+* `NtDeleteValueKey`
+* `NtCreateKeyEx`
+* Others in the `Nt*` registry syscall family
+
+The trigger occurs during the **transition from user mode to kernel mode**, when the kernel begins handling the registry request.
+
+### How does the kernel architecture behind these callbacks work?
+
+The Windows kernel keeps a **doubly linked list** of registered registry callbacks via the global structure `nt!CallbackListHead`.
+
+When a registry operation occurs:
+
+1. The kernel calls the internal function **`CmpCallCallBacksEx`**
+2. This function iterates through the list of registered callbacks
+3. Each registered callback routine is invoked in sequence
+4. These routines can **log, inspect, modify, or block** the registry operation
+
+Typical drivers that register these callbacks include:
+
+* `WdFilter.sys` (Windows Defender)
+* `msecflt.sys` (Microsoft Defender for Endpoint)
+* Third-party drivers (CrowdStrike, SentinelOne, Sysmon)
+
+![registery-read-write](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/registery-read-write.png)
+
+### How can drivers register for these callbacks?
+
+Drivers register for registry operation notifications using the function:
+
+```c
+CmRegisterCallbackEx()
+```
+
+The driver must specify:
+
+* A **callback routine**, e.g., `MyRegistryCallbackRoutine()`
+* A **registry filter altitude** (priority level)
+* A unique **registration cookie** to manage the callback later
+
+To unregister, drivers call:
+
+```c
+CmUnRegisterCallback()
+```
+
+This mechanism is part of the documented Windows Driver Kit (WDK) and is commonly used by security products.
+
+### What telemetry is collected?
+
+Each registered callback routine receives a data structure containing:
+
+* The **type of registry operation** (e.g., `RegNtPreSetValueKey`)
+* The **full registry key path** (e.g., `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`)
+* The **value name** and data being set (if applicable)
+* **Process ID** and **Thread ID** of the initiating process
+* **Timestamp** of the operation
+* Flags, desired access rights, and result status
+
+The driver can log or transmit this telemetry to a user-mode component for further analysis.
+
+Ahh helder nu – je wil de **eerder genoemde regels toevoegen aan de "Use by EDR"-sectie**, tenzij ze **inhoudelijk al genoemd zijn**, om **dubbelingen te voorkomen**. Hier is de geoptimaliseerde en samengevoegde versie van de ***Use by EDR***-sectie, met **duplicates verwijderd en overlap netjes samengevoegd**:
+
+### Use by EDR
+
+EDR products leverage **Registry Operation Kernel Callbacks** to:
+
+* Detect **registry-based persistence** tactics (e.g., `Run`, `RunOnce`, or `Services` keys)
+* Identify **privilege escalation** attempts via tampering with sensitive keys (e.g., `HKLM\SYSTEM`)
+* Detect **unauthorized changes** to system or security configuration
+* Monitor for **abuse of system configuration keys**
+* Detect **malware attempts** to hide, autostart, or maintain persistence
+* Correlate **registry activity** with:
+
+  * Process tree and ancestry
+  * Command-line usage
+  * File system I/O
+  * Network behavior
+
+This visibility allows EDRs to **correlate behaviors across multiple telemetry sources**, enhancing detection of sophisticated techniques and post-exploitation activity.
+
+### Detailed flow of a Registry Operation Kernel Callback event
+
+![registery-malware](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/registery-malware.exe.png)
+
+1. A **user-mode process** (e.g., `malware.exe`, PID: 1234) initiates a registry operation (open, modify, delete), often to create persistence or modify system configuration.
+
+2. It calls the high-level Windows API: **`RegOpenKeyExW`**.
+
+3. This API internally calls the **native system call**: `NtOpenKeyEx`.
+
+4. A **syscall instruction** (`syscall` or `int 0x2e`) triggers a **transition to kernel mode**.
+
+5. In **kernel mode**, control passes to the Windows **Registry Configuration Manager (CM)**.
+
+6. The CM locates the requested **registry key** and performs:
+
+   * **Security & Access Control checks** using Access Control Lists (ACLs)
+   * Token validation to confirm the caller has the necessary permissions
+
+7. Before completing the operation, CM calls the internal function **`CmpCallCallBacksEx`**.
+
+8. `CmpCallCallBacksEx` **iterates over the registry callback list** (`nt!CallbackListHead`) — a **doubly linked list** of registered kernel callbacks.
+
+9. Each **callback routine** is invoked by the kernel. Examples include:
+
+   * `WdFilter.sys` – Windows Defender
+   * `msecflt.sys` – Microsoft Defender for Endpoint
+   * Other security products (CrowdStrike, SentinelOne, Sysmon, etc.)
+
+10. The driver’s **Registry Notification Routine** runs (e.g., `RegistryCallbackRoutine()`) and **collects telemetry** such as:
+
+    * **Full path** of the accessed registry key (e.g., `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`)
+    * **Process ID (PID)** and **Thread ID (TID)** of the calling process
+    * **Type of operation** like `RegNtPreSetValueKey`, `RegNtPostCreateKeyEx`, `RegNtDeleteKey`
+    * Optionally, **data being written**, value name, or flags
+
+11. The telemetry is sent from **kernel-mode to user-mode** via mechanisms such as:
+
+    * **ETW (Event Tracing for Windows)**
+    * **Shared memory**
+    * **IOCTL communication**
+
+12. In **user-mode**, the **EDR agent process** (e.g., `MsSense.exe`, `csagent.exe`) receives and processes the telemetry:
+
+    * Correlates it with other system events like process creation, file I/O, and network traffic
+    * Analyzes for suspicious patterns (e.g., writes to startup keys, tampering with antivirus settings)
+    * Can trigger **alerts, logging, or automated responses**
+
+13. This real-time monitoring pipeline allows EDRs to detect advanced techniques such as:
+
+    * **Registry-based persistence**
+    * **Privilege escalation**
+    * **Malware configuration changes**
+    * **Tampering with system or security settings**
+
+## 5 - Objects Operation Kernel Callbacks
+
+### What are **Objects Operation Kernel Callbacks**?
+
+**Objects Operation Kernel Callbacks** are low-level routines within the **Windows kernel** that are triggered whenever a **process** or **thread handle** is **created**, **duplicated**, or **modified**. These callbacks notify registered drivers about **handle-related operations**, enabling them to monitor and collect **telemetry** on suspicious **handle access events**.
+
+### When are these callbacks triggered?
+
+These callbacks are triggered during **user-mode to kernel-mode transitions** caused by **system calls** related to process or thread handle operations. Examples include:
+
+* `NtOpenProcess` — opening a handle to a **process**
+* `NtOpenThread` — opening a handle to a **thread**
+* Other relevant **handle creation** or **duplication syscalls**
+
+When a request to **open**, **duplicate**, or **modify** a process or thread handle is made, the kernel executes these callbacks.
+
+### How does the kernel architecture behind these callbacks work?
+
+The kernel maintains a **doubly linked list** of registered callback routines, stored in structures such as:
+
+* `nt!PsProcessType->CallbackList` for **process handles**
+* `nt!PsThreadType->CallbackList` for **thread handles**
+
+Each list entry contains pointers to **pre-operation** and **post-operation callback routines** registered by drivers.
+
+When an **object operation** occurs (e.g., handle open), the kernel iterates through this linked list and invokes each registered callback, passing relevant information about the operation.
+
+### How can drivers register for these callbacks?
+
+Drivers register their callback routines using the kernel API:
+
+* `ObRegisterCallbacks`
+
+This API allows drivers to provide **pre-operation** and **post-operation callbacks** to monitor or restrict access to process and thread objects.
+
+![object-register-callbacks](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/object-register-callbacks.png)
+
+### What telemetry is collected?
+
+During an objects operation callback event, the following telemetry is commonly collected:
+
+* **Source** and **target process IDs (PID)**
+* **Thread ID** responsible for the handle operation
+* **Requested access rights** (e.g., `PROCESS_VM_READ`, `PROCESS_TERMINATE`)
+* **Type of operation** (handle creation, duplication, or modification)
+* Additional **metadata** such as access flags
+
+This information enables detailed tracking of **handle manipulation events**.
+
+### Use by EDR
+
+EDR and other security solutions leverage objects operation kernel callbacks to:
+
+* Detect malicious **handle accesses** used in **credential dumping** (e.g., targeting `lsass.exe`)
+* Monitor for **process injection** attempts via suspicious handle operations
+* Track **remote thread creation** that enables execution of injected code
+* Collect **real-time telemetry** for correlation with other behavioral indicators
+* Trigger **alerts**, **logging**, or **automated responses** to suspicious handle operations
+
+Typical drivers that register these callbacks include:
+
+* `msecflt.sys` (**Microsoft Defender for Endpoint**)
+* Other EDR/security products such as **CrowdStrike**, **SentinelOne**, **Sysmon**
+
+### Detailed flow of an Objects Operation Kernel Callback event
+
+![object-malware](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/object-malware.exe.png)
+
+1. A **user-mode process** (e.g., `malware.exe`) calls a Windows API such as `OpenProcess` to obtain a handle to another process.
+
+2. The API internally calls the native syscall `NtOpenProcess`.
+
+3. The syscall triggers a transition from **user mode** to **kernel mode**.
+
+4. In kernel mode, the kernel calls all registered objects operation callbacks stored in a **doubly linked list**.
+
+5. Each callback routine (e.g., from `msecflt.sys`) inspects the handle request and collects telemetry including:
+
+   * **Source and target process IDs**
+   * **Requested access rights** (e.g., `PROCESS_VM_READ` for memory reading and dumping)
+
+6. The callback can **allow** or **block** the handle operation based on the driver’s logic.
+
+7. The collected telemetry is sent from kernel mode to user mode (e.g., to the **EDR agent**).
+
+8. The EDR agent correlates this data with other events (**process creation**, **network traffic**) to detect suspicious activity.
+
+## 6 - Filesystem Operation Kernel Callbacks
+
+### What are Filesystem Operation Kernel Callbacks?
+
+Filesystem Operation Kernel Callbacks are **low-level routines** within the Windows kernel that are triggered on **file system events** such as **create**, **read**, **write**, **delete**, or **close**. These callbacks notify **registered filter drivers** whenever such operations occur, allowing them to **monitor file activities** in real time and detect **potential security threats**.
+
+These callbacks are implemented via **MiniFilter drivers**, which are part of the **File System Filter Manager** architecture in Windows.
+
+### When are these callbacks triggered?
+
+Filesystem Operation Kernel Callbacks are triggered on a wide range of **file system actions**, including but not limited to:
+
+* **File creation, modification, deletion**
+* **File read/write operations**
+* **Rename or close events**
+* **Access to sensitive or critical files**
+
+Each callback can be triggered **before** (pre-operation) or **after** (post-operation) the file system action occurs.
+
+### How does the kernel architecture behind these callbacks work?
+
+The underlying architecture uses a layered approach called the **MiniFilter architecture**. Key components include:
+
+* **MiniFilter drivers**: Lightweight drivers that sit between the I/O manager and file systems.
+* **Instances**: Each MiniFilter can have multiple instances, enabling it to hook into different **volumes** or **file system namespaces**.
+* **Callback nodes**: A structure that holds pointers to callback routines.
+
+Each **callback node** is registered for specific file operations (e.g., `IRP_MJ_CREATE`, `IRP_MJ_READ`, `IRP_MJ_WRITE`, etc.) and contains:
+
+* **Pre-operation callback** (offset `+0x18`)
+* **Post-operation callback** (offset `+0x20`)
+
+These routines allow the driver to inspect, log, or even **block** malicious operations.
+
+![filesystem-register-callback](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/filesystem-register-callback.png)
+
+### How can drivers register for these callbacks?
+
+Drivers register callbacks during initialization using the **`FltRegisterFilter`** API, followed by **`FltStartFiltering`** to begin operation. Each callback is specified using the `FLT_OPERATION_REGISTRATION` structure, which binds **pre-operation** and **post-operation** callbacks to a specific file system operation.
+
+Example structure:
+
+```c
+const FLT_OPERATION_REGISTRATION Callbacks[] = {
+    { IRP_MJ_CREATE, 0, PreCreateCallback, PostCreateCallback },
+    { IRP_MJ_WRITE, 0, PreWriteCallback, PostWriteCallback },
+    ...
+};
+```
+
+This allows the driver to **intercept and monitor** file operations across volumes or specific paths.
+
+### What telemetry is collected?
+
+Filesystem Operation Callbacks enable rich telemetry collection, such as:
+
+* **Operation type**: Create, Read, Write, Delete, Rename, Close
+* **Process ID (PID)** and **Thread ID (TID)** of the actor
+* **File path** and file **size**
+* **Access flags** (e.g., read-only, write, execute)
+* **Result** of the operation (allowed, blocked, failed)
+
+### Use by EDR
+
+EDR products leverage **Filesystem Operation Kernel Callbacks** to:
+
+* Detect **malware file drops** (e.g., mimikatz, Cobalt Strike beacons)
+* Identify **ransomware behavior** via bulk file encryption or renaming
+* Detect and monitor **unauthorized file modifications**, such as:
+
+  * Overwriting or deleting critical logs
+  * Tampering with sensitive configurations
+* Detect **persistence mechanisms** that drop or modify autostart files
+* Track **credential dumping tools** that manipulate sensitive files
+* Correlate **file access** with **process behavior**, including:
+
+  * Command-line arguments
+  * Network connections
+  * Registry activity
+  * Memory injections
+
+::note
+By hooking into these callbacks, EDRs can:
+
+* Capture detailed telemetry, including **operation type**, **file path**, **size**, and **actor process**
+* **Correlate file operations with broader threat behaviors**, improving detection fidelity and forensic analysis
+::
+
+### Detailed Flow of a Filesystem Operation Callback Event
+
+![filesystem-callback](/content/7.knowledge-base/7.dead-silence/2.EDR-internals/2.kernel-callbacks/filesystem-callback.png)
+
+1. **A process initiates a file operation**, such as opening or writing to a file.
+2. The **MiniFilter framework dispatches the operation** through its stack of registered filters.
+3. The relevant **MiniFilter instance** invokes its **pre-operation callback** (if registered).
+4. The callback can:
+
+   * **Log telemetry**
+   * **Inspect operation context**
+   * **Deny/block the operation**
+5. The file system performs the operation (if allowed).
+6. The **post-operation callback** (if registered) is triggered, allowing additional telemetry collection.
+7. The MiniFilter driver **passes data to EDR or other consumers** for further correlation or action.
