@@ -3,8 +3,6 @@ title:  Remove Additional Keyboard
 description: Shortcut for the lazy.
 ---
 
-# 🇳🇱 US-internationaal toetsenbord behouden en Nederlands toetsenbord verwijderen
-
 ## 🎯 Doel
 
 Windows voegt soms automatisch een extra **Nederlands toetsenbordindeling** toe (0413:00000413), zelfs als je alleen de **US-internationale layout** wilt gebruiken.
