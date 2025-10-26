@@ -46,6 +46,7 @@ const links = computed<NavigationMenuItem[]>(() => [
 			{ label: 'PHP', to: '/syntax/php', icon: 'i-devicon:php', description: truncateDescription('A popular general-purpose scripting language.') },
 			{ label: 'SQL', to: '/syntax/sql', icon: 'i-devicon:postgresql', description: truncateDescription('Understand SQL to query and manage relational databases effectively.') },
 			{ label: 'YAML', to: '/syntax/yaml', icon: 'i-devicon:yaml', description: truncateDescription('A YAML header contains YAML arguments, such as “title”...') },
+			// { label: 'Math', to: '/syntax/math', icon: 'tabler:math', description: truncateDescription('Common mathmathical concepts explained...') },
 		],
 	},
 	{
