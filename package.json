@@ -22,7 +22,8 @@
 		"measure:dev": "node scripts/metrics/measure-dev.js",
 		"measure:build": "node scripts/metrics/measure-build.js",
 		"measure:preview": "node scripts/metrics/measure-preview.js",
-		"measure:reset": "node scripts/metrics/measure-reset.js"
+		"measure:reset": "node scripts/metrics/measure-reset.js",
+		"sync:context": "cp CLAUDE.md GEMINI.md && cp CLAUDE.md AGENTS.md"
 	},
 	"dependencies": {
 		"@googlemaps/markerclusterer": "^2.6.2",

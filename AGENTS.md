@@ -1,0 +1,268 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project Overview & Purpose
+
+**Grimoire** is een Nuxt.js-gebaseerde documentatiewebsite en persoonlijk kennismanagementsysteem ("second brain") gericht op cybersecurity, offensive security-technieken en defensive security research. De repository bevat educatief materiaal over malware development, Windows internals, penetration testing en security engineering.
+
+### Context & Ambitie
+
+Deze repo is mijn leerpad naar APT-level cybersecurity expertise. Overdag werk ik als Security Engineer/Sysadmin (blue team) in Microsoft-centric enterprise-omgevingen (on-prem & cloud: M365, Intune, Entra ID). 's Avonds train ik offensive skills via TryHackMe en HackTheBox.
+
+**Missie**: Bedrijven beschermen door op extreem diep technisch niveau te begrijpen hoe aanvallers en malware werken, zodat ik betere detecties en verdedigingen kan ontwerpen.
+
+**Waarom malware development & Windows internals**:
+- Betere detection rules schrijven voor XDR/EDR-oplossingen
+- Red team engagements effectiever uitvoeren
+- Bewijzen welke technieken security-oplossingen kunnen omzeilen (voor verbetering)
+
+**Focus-gebieden**: PowerShell automatisering, forensics & incident response, netwerk-analyse (Wireshark), Windows API/internals, C# tooling (o.a. Intune-automatisering), SQL, en deze webdev repo.
+
+## Tech Stack
+
+- **Framework**: Nuxt 4 (Vue 3, TypeScript)
+- **UI Library**: Nuxt UI v4
+- **Content**: Nuxt Content (Markdown-based documentation)
+- **Package Manager**: pnpm 10.18.0
+- **Testing**: Vitest with coverage (v8)
+- **Linting**: ESLint with @antfu/eslint-config
+- **Authentication**: @sidebase/nuxt-auth with NextAuth.js
+
+## Development Commands
+
+```bash
+# Development server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Preview production build
+pnpm preview
+
+# Type checking
+pnpm typecheck
+
+# Linting
+pnpm lint          # Check for issues
+pnpm lint:fix      # Auto-fix issues
+
+# Testing
+pnpm test                # Run tests
+pnpm test:watch          # Watch mode
+pnpm test:coverage       # Generate coverage report
+pnpm test:ui             # Visual test UI
+pnpm test:verbose        # Detailed output
+
+# Setup & maintenance
+pnpm setup               # Run setup script (bash scripts/cli/setup.sh)
+pnpm reset               # Reset project state
+
+# Performance metrics
+pnpm measure:dev         # Measure dev server startup time
+pnpm measure:build       # Measure build time
+pnpm measure:preview     # Measure preview startup time
+pnpm measure:reset       # Reset metrics
+```
+
+## Architecture & Structure
+
+### Content Organization
+
+All documentation lives in `/content/` organized as educational modules:
+
+- **0.instructions/** - Repository setup and configuration guides
+- **1.the-lab/** - Lab environment setup and infrastructure
+- **2.syntax/** - Programming language syntax references
+- **3.kitt/** - Key Interface and Technical Tools
+- **4.gadgets/** - Security tools and utilities
+- **5.vuln/** - Vulnerability research and analysis
+- **6.xpl01ts/** - Exploit development and techniques
+- **7.knowledge-base/** - Primary knowledge repository including:
+  - **6.malware/1.develop/** - Progressive malware development modules (see dedicated CLAUDE.md in that directory for malware-specific guidance)
+
+**Module Structure**:
+- Each module directory contains a `.navigation.yml` file (module metadata: title, icon)
+- `0.index.md` - Module overview
+- Numbered topic files (e.g., `1.topic.md`, `2.topic.md`)
+
+### Application Structure
+
+```
+app/
+├── components/         # Vue components (auto-imported)
+├── composables/        # Vue composables (auto-imported)
+├── layouts/           # Page layouts
+│   └── docs.vue       # Main docs layout
+├── middleware/        # Route middleware
+├── pages/             # File-based routing
+│   ├── index.vue      # Landing page
+│   ├── [...slug].vue  # Dynamic content pages
+│   └── debug-auth.vue # Auth debugging
+└── app.config.ts      # App configuration
+
+server/
+├── api/               # API routes
+│   └── auth/          # NextAuth handlers
+└── routes/            # Server routes
+    └── raw/           # Raw content endpoints
+
+scripts/
+├── cli/               # CLI utilities (setup.sh, reset.js)
+├── helpers/           # Helper functions
+├── markdown/          # Markdown processing
+├── metrics/           # Performance metrics
+└── shellcode/         # Shellcode utilities
+
+tests/
+├── unit/              # Unit tests (Vitest)
+├── e2e/               # End-to-end tests
+└── setup.ts           # Test configuration
+```
+
+## Content Format & Style
+
+**Language**: Primary content is in **Dutch** with technical terms in English. Translation requests should preserve formatting and only translate text.
+
+Try to use simple language where possible without losing detail.
+
+**Markdown Conventions**:
+
+**Frontmatter**:
+- Required fields: `title`, `description`, `navigation`
+- Use `toc: depth: 1` **only** if TOC becomes scrollable
+
+**Callout Blocks**:
+- `::note` - General information
+- `::tip` - Helpful hints and best practices
+- `::important` - Critical information
+- `::warning` - Potential issues or gotchas
+- `::caution` - Dangerous operations or security concerns
+
+**Emoji Usage**:
+- All-or-nothing per heading level (for visual alignment in TOC)
+- Use consistently across same heading level or not at all
+
+**Code Blocks**:
+- Use syntax highlighting (supported languages in nuxt.config.ts)
+- Dutch comments in code examples (with English technical terms preserved)
+- Always include language identifier
+
+**Navigation**:
+
+- Each module has `.navigation.yml` defining title and icon
+- Auto-generated TOC from markdown headings
+- Search powered by Nuxt Content
+
+## Configuration Files
+
+**Key Configuration Files**:
+
+- **nuxt.config.ts** - Nuxt modules, UI theme, content settings, auth config
+- **app.config.ts** - UI customization (colors, icons, header, footer, callout styles)
+- **content.config.ts** - Content collections schema (landing, docs)
+- **eslint.config.mjs** - ESLint with tabs, single quotes, no semicolons
+- **vitest.config.ts** - Test configuration (unit tests only, coverage with v8)
+- **tsconfig.json** + **tsconfig.test.json** - TypeScript configurations
+
+**Important Settings**:
+
+**ESLint**: Tab indentation, single quotes, no semicolons, content markdown files excluded from linting
+
+**Auth Configuration**:
+- globalAppMiddleware is disabled (manual middleware usage)
+- NextAuth.js with GitHub provider
+- Auth routes at `/api/auth`
+
+**Icons**:
+- Iconify provider for standard icons
+- Custom local icon collection in `assets/icons/` with prefix `custom:`
+
+**Theme**:
+- Custom color palette (primary: red, secondary: amber, tertiary: emerald, etc.)
+- Custom callout styling for each type
+- Dark mode support enabled
+
+**Content Rendering**:
+- GitHub Dark theme for code highlighting
+- TOC search depth: 1
+- Prose components enabled
+
+## Special Considerations
+
+### Educational Security Content
+
+This repository contains **educational materials** on malware development and offensive security techniques. All content is intended exclusively for:
+
+- Authorized security testing and penetration testing
+- CTF (Capture The Flag) challenges
+- Security research and defensive analysis
+- Educational and learning purposes
+
+**When working with this codebase:**
+
+✅ **Allowed Activities**:
+- Analyze and document existing techniques
+- Explain how code works and what it does
+- Provide code review and educational explanations
+- Document detection signatures and Indicators of Compromise (IoCs)
+- Suggest defensive countermeasures and mitigations
+- Help understand security concepts for defensive purposes
+
+❌ **Not Allowed Activities**:
+- Improve, extend, or create new evasion techniques
+- Develop new malicious capabilities or payloads
+- Help bypass security controls for non-educational purposes
+- Enhance malware effectiveness or stealth
+- Provide guidance on using techniques for malicious purposes
+
+**Context for Defensive Work**: Understanding offensive techniques deeply enables better defensive strategies. The goal is to build better detection rules, understand attacker methodologies, and design more robust security architectures.
+
+The malware development section (`content/7.knowledge-base/6.malware/1.develop/`) has its own detailed CLAUDE.md with specific guidance on Windows internals, PE file format, injection techniques, EDR/AV evasion methods, and the MDLC (Malware Development Life Cycle) framework.
+
+### Git Workflow
+
+- **Current branch**: v4
+- **Main branch**: main (use for PRs)
+- Recent work focused on malware module reorganization and naming conventions
+
+## Nuxt-Specific Patterns
+
+**Auto-imports**: Components, composables, and Nuxt utilities are auto-imported (no manual imports needed)
+
+**Content queries**: Use `queryContent()` composable for programmatic content access
+
+**Pages**: File-based routing with `[...slug].vue` for dynamic content rendering
+
+**Layouts**: `docs.vue` layout provides standard documentation structure
+
+**Server routes**: Auth handlers in `server/api/auth/`, raw content in `server/routes/raw/`
+
+## Testing Strategy
+
+Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary focus)
+
+**Test commands**:
+
+- `pnpm test` - Run all unit tests
+- `pnpm test:watch` - Watch mode for TDD
+- `pnpm test:coverage` - Generate coverage reports
+- `pnpm test:ui` - Visual test interface
+
+**Coverage**: Uses v8 provider with text, JSON, and HTML reporters
+
+## Build & Deployment
+
+**Build**: `pnpm build` generates static site in `.output/`
+
+**Preview**: `pnpm preview` serves production build locally
+
+**Prerendering**:
+- Homepage (`/`) is prerendered
+- Other pages generated on-demand
+- No automatic link crawling
+
+**Performance Monitoring**:
+- Custom metrics scripts track dev/build/preview startup times
+- Metrics stored in `metrics/` directory as JSON
