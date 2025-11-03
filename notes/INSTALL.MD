@@ -1,205 +1,241 @@
-# Grimoire
+# Grimoire - Project Planning & Research Notes
 
-ADD:
-
-- MCP server
-	https://www.youtube.com/watch?v=_GxopZS8LwU
-	https://www.youtube.com/watch?v=GuTcle5edjk&t=160s
-- code mirror like boot.dev -> needs ui change
-- i18n
-- PowerShell
-- AI POWERED OSINT - https://www.youtube.com/watch?v=JpWbytYrL2s
-- AI jailbreaking - https://www.youtube.com/watch?v=44EJUYMSpzU
-
-That way I own the data. Doesn't matter which model I like to choose.
-
-future: https://www.arcanum-sec.com/
-
+Dit document bevat toekomstige features, research links en technische notities voor het Grimoire project.
 
 ---
 
-https://www.youtube.com/watch?v=K4ilFsm2GvA - firewalls
-https://www.youtube.com/watch?v=JpWbytYrL2s - prompt bombing
+## 🚀 Geplande Features & Verbeteringen
 
+### Website Features
 
--- review all defcon talks
+- **MCP Server Integratie**
+  - [Video: MCP Server Overview](https://www.youtube.com/watch?v=_GxopZS8LwU)
+  - [Video: MCP Implementation](https://www.youtube.com/watch?v=GuTcle5edjk&t=160s)
 
-cybercheff
+- **UI Improvements**
+  - Code Mirror implementatie (zoals boot.dev)
+  - Vereist UI aanpassingen
 
+- **Internationalisatie (i18n)**
+  - Multi-taal ondersteuning toevoegen
 
-sec gemini
-secmeta
+- **Content Uitbreiding**
+  - PowerShell module toevoegen
+  - AI-powered OSINT sectie - [Video Tutorial](https://www.youtube.com/watch?v=JpWbytYrL2s)
+  - AI Jailbreaking research - [Video](https://www.youtube.com/watch?v=44EJUYMSpzU)
 
+### Data Ownership Strategy
 
--- Goede vraag — en nice dat je dit fragment van **Jason Haddix** eruit pikt, want wat hij daar zegt is precies hoe veel offensive-security onderzoekers en bug-hunters hun AI-stack opbouwen.
-Laten we het even in **gewoon Nederlands en concreet technisch** uit elkaar trekken.
+*"That way I own the data. Doesn't matter which model I like to choose."*
 
----
+Het doel is volledige controle over de kennisbank, onafhankelijk van AI model keuze.
 
-## 🎙 Wat Jason bedoelt in dat stuk
+### Toekomst Links
 
-> *“We tend to build our own stuff… they’re usually versions of open-source models that have been pre- or post-trained or jailbroken…”*
-
-Kort vertaald:
-👉 Hij gebruikt **niet** shady AI’s zoals “WormGPT” (die zogenaamd “geen regels” hebben).
-👉 In plaats daarvan bouwt hij **zijn eigen lokale AI-tools** bovenop bestaande **open-source foundation models**.
-👉 Die modellen **fine-tunen of jailbreaken** ze intern zodat ze bruikbaarder zijn voor security-werk (prompt-injection testing, pentest automation, reconnaissance, exploit analysis, etc.).
-
----
-
-## 🧠 Dus… welke open-source modellen bedoelt hij?
-
-Hij noemt ze niet bij naam, maar op basis van wat hij en z’n team (Bishop Fox, HTB-community, Bugcrowd-researchers, etc.) vaker gebruikt, gaat het meestal om deze categorieën:
-
-| Model                                  | Oorsprong                               | Beschrijving                                                                                            | Typische toepassing bij hun werk                             |
-| :------------------------------------- | :-------------------------------------- | :------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------- |
-| **LLaMA 2 / 3 (Meta)**                 | Meta AI                                 | Populaire foundation-models (7B–70B). Veel forks met “uncensored” tuning (Dolphin, Nous, Wizard, etc.). | Lokale chatbot / code-assistent met weinig restricties.      |
-| **Mistral 7B / Mixtral 8x7B**          | Mistral AI (Frans open-source team)     | Zeer sterke, lichte MoE-architectuur. Wordt vaak getweakt als red-team-helper.                          | Snelle agenten voor scanning en automation.                  |
-| **Falcon 40B / 180B**                  | TII UAE                                 | Volledig open, permissieve licentie.                                                                    | Research-model voor red-team prompt-tests en classification. |
-| **Zephyr / OpenHermes / Dolphin 2.9**  | Community fine-tunes op LLaMA / Mistral | Instruct-tuned, vaak weinig “guardrails”.                                                               | Proof-of-concept AI-helpers voor exploit of recon tooling.   |
-| **CodeLLaMA / StarCoder / SantaCoder** | Meta / Hugging Face                     | Code-georiënteerde LLM’s.                                                                               | Voor code-generatie, parser-scripts, exploit-templates.      |
-
-➡️ Kortom: ze gebruiken **gewoon open Hugging Face-modellen** als basis, maar draaien ze **lokaal of op een private cloud** zodat er geen logging of filters tussen zitten.
+- [Arcanum Security Platform](https://www.arcanum-sec.com/)
 
 ---
 
-## 🧩 Wat hij bedoelt met *“build our own stuff”*
+## 📚 Research & Learning Resources
 
-Ze combineren die modellen met frameworks als:
+### Security Topics
 
-* **LangChain** → orkestratie van meerdere modellen + tools (parsing, reconnaissance, exploit-simulation).
-* **LlamaIndex** → om lokale knowledge bases (docs, recon data) te koppelen aan de LLM.
-* **Local Inference Stacks** zoals:
+**Firewalls**
+- [Firewall Deep Dive](https://www.youtube.com/watch?v=K4ilFsm2GvA)
 
-  * `text-generation-webui`,
-  * `Ollama`,
-  * `vLLM`,
-  * `LM Studio`,
-  * of een zelfgehoste FastAPI-wrapper.
+**Prompt Bombing & AI Security**
+- [Prompt Bombing Techniques](https://www.youtube.com/watch?v=JpWbytYrL2s)
 
-Daarbovenop maken ze kleine agent-scripts of CLI’s die:
+**Conference Talks**
+- Review all DefCon talks (systematisch doorwerken)
 
-* API-calls doen naar Burp, Shodan, Censys, etc.
-* Automatisch kwetsbaarheden classificeren met behulp van LLM-output.
-* Rapportage-templates of exploit-writeups genereren.
+### Tools te Exploreren
 
----
-
-## 🚫 Waarom geen WormGPT of FraudGPT
-
-Hij bedoelt met dat stukje ook:
-
-> *“those models are usually not the frontier models that we need the juice from”*
-
-➡️ WormGPT en soortgelijke “dark” varianten zijn meestal **oude open-source modellen** (LLaMA 2 7B of Falcon 7B) die iemand “uncensored” heeft gemaakt en een web-frontend heeft gegeven.
-Ze zijn niet krachtig genoeg (“geen juice”) voor écht diep technisch onderzoek, en vaak instabiel of onveilig.
----
-
-## 🔐 Conclusie
-
-Jason en zijn team gebruiken dus géén obscure “hacker AIs”,
-maar **zelfgebouwde pipelines** op basis van:
-
-* **open-source LLM’s (LLaMA / Mistral / Falcon / Zephyr / Dolphin)**
-* **LangChain / LlamaIndex** om die modellen als tools te laten samenwerken
-* **Eigen fine-tuning** en prompt-engineering om filters te omzeilen op legitieme, onderzoeksgerichte manier.
+- **CyberChef** - Data transformation tool
+- **sec gemini** - Security-focused Gemini variant
+- **secmeta** - Security metadata tool
 
 ---
 
-Als je wilt, kan ik een **voorbeeld-setup** tonen van hoe zo’n pipeline eruitziet (bijv. `Ollama + LangChain + LLaMA3 + Recon agent`) — zodat je dat lokaal kunt draaien net als zij.
-Wil je dat ik dat even uitschrijf?
+## 🤖 AI Stack voor Offensive Security
+
+### Context: Jason Haddix's Aanpak
+
+Gebaseerd op insights van **Jason Haddix** (Bishop Fox, bug bounty community):
+
+> *"We tend to build our own stuff… they're usually versions of open-source models that have been pre- or post-trained or jailbroken…"*
+
+### Kernprincipes
+
+👉 **Geen gebruik** van shady AI's zoals "WormGPT"
+👉 **Wel**: Eigen lokale AI-tools bovenop **open-source foundation models**
+👉 **Fine-tuning**: Intern aangepast voor security-werk (prompt-injection testing, pentest automation, reconnaissance, exploit analysis)
+
+---
+
+### Open-Source Modellen voor Security Research
+
+| Model | Oorsprong | Beschrijving | Toepassing |
+|:------|:----------|:-------------|:-----------|
+| **LLaMA 2 / 3** | Meta AI | Foundation models (7B–70B). Uncensored forks: Dolphin, Nous, Wizard | Lokale chatbot / code-assistent met weinig restricties |
+| **Mistral 7B / Mixtral 8x7B** | Mistral AI | Sterke, lichte MoE-architectuur | Snelle agenten voor scanning en automation |
+| **Falcon 40B / 180B** | TII UAE | Volledig open, permissieve licentie | Red-team prompt-tests en classification |
+| **Zephyr / OpenHermes / Dolphin 2.9** | Community fine-tunes | Instruct-tuned, weinig guardrails | PoC AI-helpers voor exploit/recon tooling |
+| **CodeLLaMA / StarCoder / SantaCoder** | Meta / Hugging Face | Code-georiënteerde LLM's | Code-generatie, parser-scripts, exploit-templates |
+
+**Strategie**: Gebruik **open Hugging Face-modellen** als basis, draai ze **lokaal of op private cloud** (geen logging/filters).
+
+---
+
+### "Build Our Own Stuff" - Framework Stack
+
+**Orkestratie & Integration**:
+- **LangChain** → Meerdere modellen + tools orkestreren (parsing, reconnaissance, exploit-simulation)
+- **LlamaIndex** → Lokale knowledge bases koppelen (docs, recon data)
+- **CrewAI** → een framework waar meerdere AI-agents samenwerken als een team (‘crew’) met rollen, doelen en autonomie.
+
+**Local Inference Stacks**:
+- `text-generation-webui`
+- `Ollama`
+- `vLLM`
+- `LM Studio`
+- Zelfgehoste FastAPI-wrapper
+
+**Agent Scripts & CLI's**:
+- API-calls naar Burp, Shodan, Censys, etc.
+- Automatische kwetsbaarheid classificatie via LLM-output
+- Rapportage-templates en exploit-writeups genereren
+
+---
+
+### Waarom Geen WormGPT/FraudGPT?
+
+> *"Those models are usually not the frontier models that we need the juice from"*
+
+**Reden**: Deze "dark" varianten zijn meestal **oude open-source modellen** (LLaMA 2 7B, Falcon 7B) met "uncensored" label en web-frontend. Ze zijn:
+- Niet krachtig genoeg voor diep technisch onderzoek
+- Vaak instabiel of onveilig
+- Geen "juice" voor serieus security research
+
+---
+
+### Conclusie: Zelfgebouwde AI Pipeline
+
+Jason's team gebruikt **geen obscure "hacker AIs"**, maar **zelfgebouwde pipelines**:
+
+✅ **Open-source LLM's** (LLaMA / Mistral / Falcon / Zephyr / Dolphin)
+✅ **LangChain / LlamaIndex** voor model-orkestratie
+✅ **Eigen fine-tuning** en prompt-engineering (legitiem, onderzoeksgericht)
+
+**Next Step**: Voorbeeld-setup bouwen: `Ollama + LangChain + LLaMA3 + Recon agent`
+
+**Resource**: [Executive Offense - Hacking LLMs](https://executiveoffense.beehiiv.com/p/executive-offense-issue-10-start-hacking-llms)
+
+---
+
+## 🔄 n8n voor Security Workflows
+
+### Transcript: Jason Haddix on n8n
+
+> **Jason Haddix** *(Timestamp: 58:08 – 1:00:14)*
+
+### Over n8n (uitgesproken als *N-A-N*)
+
+> "I use n8n for a lot of non-security stuff, but I'm about to start using it for some **security-based workflows** as well."
+
+**n8n** = Workflow-hub voor AI-agents en automation
+
+**Huidige gebruik**:
+- Social media posting (multi-platform)
+- Onderzoeks- en data-analyse
+- E-mail-triage en businessprocessen
+
+**Workflow Principe**:
+> "I'll give it a topic and it will go out and do analysis with a whole bunch of different AI calls — with different agents that are supposed to enrich it with different things."
+
+Meerdere AI-calls combineren, elk met eigen taak of specialisatie.
+
+---
+
+### Integratie met MCP's en Cloud-SIEMs
+
+> "Now that a lot of the MCPs have come out for the cloud SIEMs — and more people are connecting n8n through regular REST APIs — there will be a lot more people actioning **security workflows**."
+
+**Mogelijkheden**:
+- **Model Context Protocol (MCP)**-integraties voor cloud-SIEMs
+- Direct koppelen aan beveiligingssystemen
+- Veel kant-en-klare modules (weinig code nodig)
+
+---
+
+### Vulnerability Management Automation
+
+> "The one I'm really excited to see — although it's not sexy — is **vulnerability management**."
+
+**Probleem**: Vulnerability management pipelines zijn complex met veel afhankelijkheden:
+
+1. Bug ontvangen (bug bounty, pentest, statische scan)
+2. Eigenaar applicatie achterhalen
+3. Juiste repository vinden
+4. Ticket aanmaken voor fix
+5. Prioriteren en status volgen
+6. Automatische herinneringen (na X dagen)
+7. Ticket sluiten bij oplossing
+8. Heropenen bij regressie + juiste team taggen
+
+> "There's a bunch of minutiae that goes on in the vulnerability-management world."
+
+---
+
+### Security Workflow Automation - Use Cases
+
+> "I taught a class on automating security workflows — I didn't even think it would be a big topic. I just had one image on how n8n could fit in, and we ended up talking about it for an hour and a half!"
+
+**Interesse**: Volledige vulnerability-management-pipelines automatiseren met n8n
+
+**Persoonlijke ervaring**:
+> "I deployed n8n this week for the first time — and I had to stop myself, because I could spend weeks playing with all the workflows I can imagine. It's a rabbit hole — but a super-powerful tool."
+
+---
+
+### n8n Samenvatting
+
+**Wat is het?**
+- No-code / low-code automation platform
+- Koppelt AI-agents en security-systemen
+
+**Mogelijkheden**:
+- Vulnerability management
+- SIEM-automation
+- Threat-intel-enrichment
+
+**Voordeel**: Krachtig alternatief voor dure SOAR-platforms, maar open-source en uitbreidbaar
+
+**Potential Implementation**: Praktisch n8n-voorbeeldflow bouwen:
+- Automatische ticket-aanmaak bij gevonden CVE
+- Notificatie naar Slack/Teams
+- **OSINT WORKFLOW** - Laat n8n het doen!
+
+---
+
+## 🔍 OSINT Resources
+
+**Video Tutorial**:
+- [OSINT Automation](https://www.youtube.com/watch?v=-nQWos7H1LQ&t=2696s)
+
+**Tools Platform**:
+- [MyOSINT Training Tools](https://tools.myosint.training)
+
+---
+
+## 📋 Next Actions
+
+- [ ] MCP server integratie onderzoeken en implementeren
+- [ ] n8n opzetten voor vulnerability management workflow
+- [ ] OSINT automation pipeline bouwen
+- [ ] LLaMA/Mistral lokaal opzetten voor security research
+- [ ] LangChain + LlamaIndex exploreren voor recon automation
+- [ ] CyberChef integreren in workflow
+- [ ] DefCon talks systematisch doorwerken
 
 https://executiveoffense.beehiiv.com/p/executive-offense-issue-10-start-hacking-llms
-
-
----
-Natuurlijk — hier is dat fragment mooi geformatteerd in **duidelijke, gestructureerde Markdown-stijl**, klaar om in je Grimoire-notities te gebruiken.
-
----
-
-# 💬 Transcript: Jason Haddix on Using **n8n** for Security Workflows
-
----
-
-> **Jason Haddix**
-> *(Timestamp: 58:08 – 1:00:14)*
-
----
-
-### 🧠 Over n8n (uitgesproken als *N-A-N*)
-
-> “I use n8n for a lot of non-security stuff, but I’m about to start using it for some **security-based workflows** as well.”
-
-* **n8n** laat je AI-agents koppelen aan allerlei workflows.
-* Ze gebruiken het al intern voor:
-
-  * het posten naar socials (meerdere platformen tegelijk);
-  * onderzoeks- en data-analyse;
-  * e-mail-triage en andere businessprocessen.
-
-> “I’ll give it a topic and it will go out and do analysis with a whole bunch of different AI calls — with different agents that are supposed to enrich it with different things.”
-
-n8n werkt dus als een **workflow-hub** waarin je meerdere AI-calls kunt combineren, elk met een eigen taak of specialisatie.
-
----
-
-### ☁️ Integratie met MCP’s en Cloud-SIEMs
-
-> “Now that a lot of the MCPs have come out for the cloud SIEMs — and more people are connecting n8n through regular REST APIs — there will be a lot more people actioning **security workflows**.”
-
-* Nieuwe **Model Context Protocol (MCP)**-integraties voor cloud-SIEMs maken het eenvoudiger om n8n direct te koppelen aan beveiligingssystemen.
-* n8n heeft ondertussen **veel kant-en-klare modules**, zodat je zonder veel code snel security-flows kunt bouwen.
-
----
-
-### 🔐 Gebruik in Vulnerability Management
-
-> “The one I’m really excited to see — although it’s not sexy — is **vulnerability management**.”
-
-Haddix beschrijft dat **vulnerability management pipelines** in grote organisaties vaak lastig te automatiseren zijn, omdat er veel kleine stappen en afhankelijkheden zijn:
-
-1. Je ontvangt een bug (via bug bounty, pentest, of statische scan).
-2. Je moet achterhalen wie de eigenaar van de applicatie is.
-3. Zoek de juiste repository.
-4. Maak een ticket aan om de bug te fixen.
-5. Prioriteer en volg de status.
-6. Stuur automatische herinneringen (na X dagen).
-7. Sluit het ticket bij oplossing.
-8. Heropen het bij regressie, en zorg dat het juiste team wordt getagd.
-
-> “There’s a bunch of minutiae that goes on in the vulnerability-management world.”
-
----
-
-### 🎓 Automating Security Workflows
-
-> “I taught a class on automating security workflows — I didn’t even think it would be a big topic. I just had one image on how n8n could fit in, and we ended up talking about it for an hour and a half!”
-
-Veel mensen bleken enthousiast over het idee om met **n8n volledige vulnerability-management-pipelines te automatiseren**.
-Haddix noemt dit zijn volgende onderzoeksgebied.
-
----
-
-### 🧩 Persoonlijke noot
-
-> “I deployed n8n this week for the first time — and I had to stop myself, because I could spend weeks playing with all the workflows I can imagine. It’s a rabbit hole — but a super-powerful tool.”
-
----
-
-**📌 Samenvatting**
-
-* **n8n** is een *no-code / low-code automation platform* waarmee je AI-agents en security-systemen kunt koppelen.
-* Dankzij nieuwe **MCP-integraties** kun je nu ook **vulnerability management**, **SIEM-automation** en **threat-intel-enrichment** via n8n laten verlopen.
-* Het vormt een krachtig alternatief voor dure SOAR-platforms, maar blijft open-source en uitbreidbaar.
-
----
-
-Wil je dat ik hier meteen een **praktisch n8n-voorbeeldflow** bij bouw (zoals “automatische ticket-aanmaak bij gevonden CVE” → “notificatie naar Slack/Teams”)?
-
-
-BIJVOORBEELD OSINT WORKFLOW. LAAT N8N HET DOEN!
-
----
-
-https://www.youtube.com/watch?v=-nQWos7H1LQ&t=2696s
-tools.myosint.training
