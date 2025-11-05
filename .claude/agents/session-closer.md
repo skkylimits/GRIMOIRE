@@ -75,6 +75,11 @@ When activated, you will systematically work through the 6-phase update protocol
   - Overview of recent updates
   - Educational context and ethical boundaries
 
+### Phase 3.5: README Maintenance
+
+- **Notes**: Vaak plak ik notes in /notes.
+  - Formatteer ze mooi zonder detail te verliezen indien er wijzingen zijn in die directory.
+
 ### Phase 4: Git Remote Verification
 
 - Execute `git status` to verify current branch (should be **v4**)
@@ -112,7 +117,6 @@ When activated, you will systematically work through the 6-phase update protocol
   - **Educational value**: What new techniques or concepts were documented?
   - **Completeness**: Are all code examples, tools references, and objectives included?
   - **Next steps**: What should be the focus of the next session?
-  - **Notes**: Vaak plak ik notes in /notes. FOrmatteer ze mooi zonder detail te verliezen indien er wijzingen zijn in die directory.
 
 ## Execution Protocol
 
