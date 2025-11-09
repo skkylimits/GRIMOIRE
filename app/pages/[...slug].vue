@@ -14,15 +14,24 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([])) ?
 
 const { data: page } = await useAsyncData(route.path, () => queryCollection('docs').path(route.path).first())
 
+// Handle redirect of directory pages naar eerste markdown node
 if (!page.value) {
 	const navItem = findNavItemByPath(route.path, navigation.value)
 
 	if (navItem?.children?.length) {
 		const redirectTarget = findFirstValidMdNode(navItem.children)
 		if (redirectTarget) {
-			navigateTo(redirectTarget.path) // await is optioneel, maar explicieter
+			// Voer redirect uit - Nuxt stopt automatisch verdere executie
+			throw createError({
+				statusCode: 301,
+				statusMessage: 'Redirecting to first content page',
+				data: { redirectTo: redirectTarget.path },
+				fatal: false,
+			})
 		}
 	}
+
+	// Alleen 404 gooien als er geen redirect was
 	throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
@@ -32,8 +41,8 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
 	})
 })
 
-const title = page.value.seo?.title || page.value.title
-const description = page.value.seo?.description || page.value.description
+const title = page.value!.seo?.title || page.value!.title
+const description = page.value!.seo?.description || page.value!.description
 
 useSeoMeta({
 	title,

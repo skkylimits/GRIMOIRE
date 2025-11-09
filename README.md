@@ -4,7 +4,7 @@
 
 Een Nuxt.js-gebaseerde documentatiewebsite en persoonlijk kennismanagementsysteem gericht op cybersecurity, offensive security-technieken en defensive security research.
 
-## =Ú Missie
+## Missie
 
 Dit project is mijn leerpad naar APT-level cybersecurity expertise. Het doel: **Bedrijven beter beschermen door op extreem diep technisch niveau te begrijpen hoe aanvallers en malware werken**, zodat ik betere detecties en verdedigingen kan ontwerpen.
 
@@ -14,45 +14,49 @@ Dit project is mijn leerpad naar APT-level cybersecurity expertise. Het doel: **
 - **'s Avonds**: Offensive skills training via TryHackMe en HackTheBox
 - **Focus**: PowerShell automatisering, forensics & incident response, netwerk-analyse, Windows API/internals, C# tooling
 
-## <¯ Waarom Malware Development & Windows Internals?
+## Waarom Malware Development & Windows Internals?
 
 1. **Betere detection rules** schrijven voor XDR/EDR-oplossingen
 2. **Red team engagements** effectiever uitvoeren
 3. **Bewijzen** welke technieken security-oplossingen kunnen omzeilen (voor verbetering)
 
-## =Ö Content Structuur
+## Content Structuur
 
 De kennisbank is georganiseerd in 10 progressieve modules:
 
 ### Malware Development Life Cycle (MDLC)
 
-1.  **Bouwstenen** - Fundamentals
-2.  **Windows Internals** - PE format, processes, threads, memory
-3.  **Payload Placement and Encryption** - Storage and protection
-4.  **Payload Execution and Injection** - Code injection techniques
-5.  **Obfuscation and IAT Manipulation** - Stealth and evasion
-6.  **Process and Argumentation Manipulation** - Advanced process control
-7. ø **API Hooking** - Function interception
-8. ø **Syscalls** - Direct system calls
-9. = **Anti-Analysis and Evasion** - *Currently documenting*
-10. ø **Advanced EDR Bypass** - Evasion strategies
+1. âœ… **Bouwstenen** - Fundamentals
+2. âœ… **Windows Internals** - PE format, processes, threads, memory
+3. âœ… **Payload Placement and Encryption** - Storage and protection
+4. âœ… **Payload Execution and Injection** - Code injection techniques
+5. âœ… **Obfuscation and IAT Manipulation** - Stealth and evasion
+6. âœ… **Process and Argumentation Manipulation** - Advanced process control
+7. â¸ï¸ **API Hooking** - Function interception
+8. ðŸ”„ **Syscalls** - *Currently documenting* - Direct system calls
+9. âœ… **Anti-Analysis and Evasion** - Substantial progress
+10. â¸ï¸ **Advanced EDR Bypass** - Evasion strategies
 
-### Recent Updates (2025-11-03)
+### Recent Updates (2025-11-09)
 
-**Module 9: Anti-Analysis and Evasion** - 6 nieuwe documenten toegevoegd:
-- Anti-analysis fundamentals
-- Anti-debugging multiple techniques
-- Self-deletion mechanisms
-- AVE (AV/EDR Evasion) multiple techniques
-- Delayed execution techniques
-- API hammering
+**Module 8: Syscalls** - 4 documenten toegevoegd/geÃ¼pdatet:
+- Syscalls fundamentals (SSN, Nt vs Zw syscalls, syscall structure)
+- Userland hooking en EDR bypass techniques
+- SysWhispers v1/v2/v3 evolution
+- Hell's Gate dynamic SSN resolution
+
+**Module 9: Anti-Analysis and Evasion**:
+- Comprehensive payload loader documentatie (bypassing AVs)
+- Integration van alle technieken: syscalls, encryption, anti-analysis, API hashing, CRT removal
+
+**Module 3: Payload Placement**:
+- .text sectie payload placement updates
 
 **Infrastructure**:
-- AI workflow setup met session-closer agent
-- Context files voor Claude, Agents, en Gemini
-- Notes directory voor project planning
+- Public assets voor syscalls module toegevoegd
+- Application page modifications
 
-## =à Tech Stack
+## Tech Stack
 
 - **Framework**: Nuxt 4 (Vue 3, TypeScript)
 - **UI Library**: Nuxt UI v4
@@ -60,11 +64,11 @@ De kennisbank is georganiseerd in 10 progressieve modules:
 - **Package Manager**: pnpm 10.18.0
 - **Testing**: Vitest with coverage (v8)
 
-## – Educatieve Context & Ethische Grenzen
+## Educatieve Context & Ethische Grenzen
 
 **Dit project bevat educatief materiaal** over malware development en offensive security technieken. Alle content is **uitsluitend** bedoeld voor:
 
- **Toegestaan**:
+âœ… **Toegestaan**:
 - Geautoriseerde security testing en penetration testing
 - CTF (Capture The Flag) challenges
 - Security research en defensive analyse
@@ -72,7 +76,7 @@ De kennisbank is georganiseerd in 10 progressieve modules:
 - Documentatie van detectiesignaturen en IoCs
 - Defensive countermeasures ontwerpen
 
-L **Niet toegestaan**:
+âŒ **Niet toegestaan**:
 - Nieuwe evasion technieken ontwikkelen voor kwaadwillige doeleinden
 - Malware effectiveness verbeteren
 - Security controls omzeilen voor non-educational purposes
@@ -80,7 +84,7 @@ L **Niet toegestaan**:
 
 **Defensive Application**: Het doel is betere detection rules te schrijven, attacker methodologies te begrijpen, en robuustere security architectures te ontwerpen.
 
-## =€ Development
+## Development
 
 ```bash
 # Development server
@@ -98,7 +102,7 @@ pnpm lint
 
 Zie [CLAUDE.md](./CLAUDE.md) voor volledige development instructies en project context.
 
-## =Ý Git Workflow
+## Git Workflow
 
 - **Current branch**: v4
 - **Main branch**: main (voor PRs)
@@ -106,4 +110,4 @@ Zie [CLAUDE.md](./CLAUDE.md) voor volledige development instructies en project c
 
 ---
 
-**  Educational Use Only** - All techniques documented here are for authorized security testing, CTF challenges, security research, and defensive purposes only.
+**âš ï¸ Educational Use Only** - All techniques documented here are for authorized security testing, CTF challenges, security research, and defensive purposes only.

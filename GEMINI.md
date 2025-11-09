@@ -269,7 +269,7 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 
 ## Projectstatus
 
-**Current Module**: 9. Anti-Analysis and Evasion
+**Current Module**: 8. Syscalls
 
 **Progress Through 10-Module Structure**:
 1. ✅ Bouwstenen (fundamentals) - Complete
@@ -279,19 +279,37 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 5. ✅ Obfuscation and IAT Manipulation - Complete
 6. ✅ Process and Argumentation Manipulation - Complete
 7. ⏸️ API Hooking - In progress
-8. ⏸️ Syscalls - In progress
-9. 🔄 Anti-Analysis and Evasion - **Currently documenting**
+8. 🔄 Syscalls - **Currently documenting**
+9. ✅ Anti-Analysis and Evasion - Substantial progress
 10. ⏸️ Advanced EDR Bypass - Planned
 
 **Recent Completed Sections**:
-- Anti-analysis fundamentals
-- Anti-debugging techniques (multiple approaches)
-- Self-deletion mechanisms
-- AV/EDR evasion (AVE) multiple techniques
-- Delayed execution techniques
-- API hammering
+- Syscalls fundamentals (SSN, Nt vs Zw, syscall structure)
+- Userland hooking and EDR bypass techniques
+- SysWhispers v1/v2/v3 evolution and implementation
+- Hell's Gate dynamic SSN resolution
+- Comprehensive payload loader (bypassing AVs)
 
 ## Sessielog
+
+### Sessie 2025-11-09
+- **Module:** 8. Syscalls
+- **Bereikt:**
+  - 3 nieuwe syscalls documenten: Userland Hooking, SysWhispers, Hell's Gate
+  - Update syscalls fundamentals document
+  - Comprehensive payload loader documentatie (bypassing AVs)
+  - Payload placement updates (.text sectie)
+  - Public assets toegevoegd voor syscalls module
+- **Belangrijke beslissingen:**
+  - Hell's Gate gekozen als primary SSN resolution method
+  - Indirect syscalls als evolution voor stealthier execution
+  - Comprehensive loader als culmination van alle technieken
+  - Forwarded functions handling (SystemFunction032 in Cryptsp.dll)
+- **Volgende stappen:**
+  - Halo's Gate en TartarusGate documenteren
+  - Syscall flow diagrams toevoegen
+  - Detection signatures voor syscall patterns
+  - Module cross-referencing verbeteren
 
 ### Sessie 2025-11-03
 - **Module:** 9. Anti-Analysis and Evasion
@@ -313,11 +331,11 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 
 ## Werk-instructies
 
-**Current FOCUS**: Anti-Analysis and Evasion (Module 9) - Documenting advanced AV/EDR evasion techniques
+**Current FOCUS**: Syscalls (Module 8) - Direct/indirect syscalls voor EDR bypass
 
 **Workflow Priorities**:
-1. Complete anti-analysis module with all evasion techniques
-2. Document EDR bypass strategies (Module 10)
-3. Integrate practical code examples and detection signatures
-4. Build out syscalls and API hooking modules for stealth execution
+1. Complete syscalls module met advanced techniques (Halo's Gate, TartarusGate)
+2. Add detection signatures en blue team countermeasures
+3. Improve cross-module referencing (link syscalls met injection, API hooking, EDR bypass)
+4. Document payload loader as integration example
 5. Maintain defensive research context throughout all offensive technique documentation

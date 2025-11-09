@@ -4,6 +4,260 @@ navigation: false
 
 # Session Summary - Grimoire Malware Development Knowledge Base
 
+## Sessie 2025-11-09
+
+### Module(s) Bewerkt
+- Module 8: Syscalls
+- Module 3: Payload Placement and Encryption
+- Module 9: Anti-Analysis and Evasion
+- Application Page Infrastructure
+
+### Wat is Bereikt
+
+#### Module 8: Syscalls - Uitgebreide documentatie toegevoegd
+1. **1.syscalls.md** - Update: Fundamentele syscall concepten, SSN structuur, Nt vs Zw syscalls
+2. **2.userland-hooking.md** - Nieuw: EDR userland hooking, direct/indirect syscalls, unhooking
+3. **3.SysWhispers.md** - Nieuw: SysWhispers v1/v2/v3 evolution en implementatie
+4. **4.hells-gate.md** - Nieuw: Hell's Gate techniek voor dynamische SSN resolving
+
+#### Module 3: Payload Placement and Encryption - Content updates
+- **3.text.md** - Update: .text sectie payload placement met pragma directives
+- **5.encryption.md** - Update: Encryption technieken (inhoud niet gespecificeerd)
+- **8.AES.md** - Update: AES encryption implementatie (inhoud niet gespecificeerd)
+
+#### Module 9: Anti-Analysis and Evasion
+- **9.bypassing-AVs.md** - Update: Comprehensive payload loader met alle technieken combined
+
+#### Application Infrastructure
+- **app/pages/[...slug].vue** - Applicatie page modifications (specifieke wijzigingen onbekend)
+
+#### Public Assets
+- Nieuwe directory: `public/content/7.knowledge-base/6.malware/1.develop/8-syscalls/`
+- Syscall module screenshots en afbeeldingen toegevoegd
+
+### Nieuwe Concepten Gedocumenteerd
+
+#### Syscalls Fundamentals
+- **System Service Numbers (SSN)** - Unieke nummers per syscall, variërend per OS versie
+- **SSN relaties in memory** - Sequentiële nummering (vorige SSN + 1)
+- **Syscall structure** - `mov r10, rcx; mov eax, SSN; syscall` pattern
+- **Nt vs Zw syscalls** - User-mode (Nt) vs kernel-mode (Zw) interfaces
+- **WoW64 compatibility** - test/jne instructies voor 32-bit op 64-bit
+
+#### Userland Hooking & Bypass
+- **API hooking** - EDR monitoring via userland syscall hooks
+- **Hook placement** - Voor syscall instructie, na user-mode transition
+- **Direct syscalls** - Assembly implementation om hooks te omzeilen
+- **Indirect syscalls** - Jump naar syscall instructie in ntdll.dll address space
+- **Unhooking** - Vervangen van gehookte NTDLL met clean versie van disk
+
+#### SysWhispers Evolution
+- **SysWhispers v1** - Hardcoded SSNs per Windows versie via PEB checking
+- **SysWhispers v2** - Sorting by System Call Address voor dynamische SSN resolving
+- **SysWhispers v3** - Indirect syscalls met randomized jumper voor stealthier execution
+
+#### Hell's Gate Technique
+- **Opcode scanning** - Lezen van `0x4c 0x8b 0xd1 0xb8` bytes voor syscall identificatie
+- **Hook traversal** - Incrementeel zoeken door gehookte bytes heen
+- **SSN extraction** - Bitwise operations `(high << 8) | low` voor SSN berekening
+- **Boundary checking** - Detectie van `syscall` (0x0f 0x05) en `ret` (0xc3) instructies
+- **VX_TABLE structure** - Syscall organizatie met address, hash en SSN
+
+#### Comprehensive Payload Loader
+- **Hell's Gate integration** - Direct syscalls voor all injection operations
+- **Mapping injection** - NtCreateSection, NtMapViewOfSection voor payload placement
+- **RC4 encryption** - SystemFunction032 voor payload encryption/decryption
+- **Brute force decryption** - Key recovery via hint byte mechanism
+- **API hashing** - GetProcAddressH en GetModuleHandleH voor IAT obfuscation
+- **Anti-analysis features** - Self-deletion, mouse monitoring, execution delays
+- **CRT removal** - Custom memcpy, memset, toupper implementations
+- **IAT camouflage** - Benign-looking import table
+
+### Tools/Technieken Toegevoegd
+
+#### Syscall Implementation Tools
+- **SysWhispers** (v1/v2/v3) - Python script voor syscall stub generation
+- **Hell's Gate** - Dynamic SSN resolution library
+- **HellShell.exe** - RC4 payload encryption tool
+- **KeyGuard2** - Key encryption tool voor brute force demo
+
+#### WinAPI Functions (Hashing Implementation)
+- `GetTickCount64` - Timing verification voor delays
+- `OpenProcess` - Process handle acquisition
+- `CallNextHookEx` - Hook chain management
+- `SetWindowsHookExW` - Mouse click monitoring setup
+- `GetMessageW` - Message loop voor hooks
+- `DefWindowProcW` - Default window procedure
+- `UnhookWindowsHookEx` - Hook cleanup
+- `GetModuleFileNameW` - Binary path retrieval
+- `CreateFileW` - File handle operations
+- `SetFileInformationByHandle` - File renaming/deletion
+- `CloseHandle` - Handle cleanup
+
+#### Native API / Syscalls (via Hell's Gate)
+- `NtCreateSection` - Section object creation voor mapping
+- `NtMapViewOfSection` - Local en remote memory mapping
+- `NtUnmapViewOfSection` - Memory cleanup
+- `NtClose` - Handle closure
+- `NtCreateThreadEx` - Thread creation voor payload execution
+- `NtWaitForSingleObject` - Thread synchronization
+- `NtQuerySystemInformation` - Process enumeration
+- `NtDelayExecution` - Native execution delay
+- `SystemFunction032` - RC4 encryption/decryption (Advapi32/Cryptsp)
+
+#### Structures & Types
+- `VX_TABLE_ENTRY` - Individual syscall entry (address, hash, SSN)
+- `VX_TABLE` - Complete syscall table structure
+- `API_HASHING` - Function pointer table voor gehashte APIs
+- `USTRING` - Native API string structure voor SystemFunction032
+- `FILE_RENAME_INFO` - File stream renaming
+- `FILE_DISPOSITION_INFO` - File deletion marking
+- `LARGE_INTEGER` - High-precision timing voor NtDelayExecution
+
+### Code Voorbeelden
+
+#### Hell's Gate Implementation (C & ASM)
+- `HellsGate.c` - SSN resolution via opcode scanning
+- `HellAsm.asm` - Assembly stubs met HellsGate en HellDescent
+- `GetVxTableEntry()` - Syscall table entry population
+- `GetImageExportDirectory()` - NTDLL export directory parsing
+- `RtlGetThreadEnvironmentBlock()` - TEB retrieval voor PEB access
+
+#### SysWhispers Generated Code (ASM)
+- SysWhispers v1: PEB-based version checking met hardcoded SSNs
+- SysWhispers v2: WhisperMain stub met SW2_GetSyscallNumber
+- SysWhispers v3: Randomized jumper met SW3_GetRandomSyscallAddress
+
+#### Payload Injection (C)
+- `InitializeSyscalls()` - VX_TABLE en API_HASHING initialization
+- `RemoteMappingInjectionViaSyscalls()` - Local/remote mapping injection
+- `GetRemoteProcessHandle()` - Process enumeration via NtQuerySystemInformation
+- `Rc4EncryptionViSystemFunc032()` - Brute force decryption implementation
+
+#### API Hashing (C)
+- `HashStringJenkinsOneAtATime32BitA/W()` - String hashing functions
+- `GetProcAddressH()` - Hash-based API resolution
+- `GetModuleHandleH()` - Hash-based module handle retrieval
+- `HASHA()` en `HASHW()` macros voor inline hashing
+
+#### Anti-Analysis Integration (C)
+- `AntiAnalysis()` - Combined self-deletion, mouse monitoring, delays
+- `DeleteSelf()` - NTFS stream manipulation voor self-deletion
+- `MouseClicksLogger()` - Hook-based user interaction monitoring
+- `DelayExecutionVia_NtDE()` - NtDelayExecution wrapper met verification
+
+#### CRT Replacement (C)
+- Custom `memcpy()` - Byte-by-byte copy implementation
+- Custom `memset()` - Memory initialization
+- Custom `_toUpper()` - Character case conversion
+- `_fltused` symbol definition voor floating-point support
+
+#### Debug Helpers (C)
+- `PRINTA()` macro - printf replacement met WriteConsoleA
+- `PRINTW()` macro - wprintf replacement met WriteConsoleW
+- Conditional compilation via DEBUG define
+
+### Belangrijke Beslissingen
+
+#### Syscall Implementation Strategy
+- **Hell's Gate gekozen** als primary method voor SSN resolution
+  - Voordeel: Werkt zelfs met gehookte syscalls via opcode scanning
+  - Nadeel: Complexer dan SysWhispers, maar flexibeler
+- **Indirect syscalls** (SysWhispers v3 approach) als evolution
+  - Syscall instructie wordt uitgevoerd vanuit ntdll.dll address space
+  - Moeilijker te detecteren dan direct syscalls van buiten NTDLL
+
+#### Educational Documentation Focus
+- **Comprehensive payload loader** als culmination van alle technieken
+- Demonstreert integratie van:
+  - Syscalls (Hell's Gate)
+  - Encryption (RC4)
+  - Anti-analysis (multiple techniques)
+  - API hashing
+  - CRT removal
+- **Defensive context** maintained: Begrijpen om te detecteren
+
+#### Code Organization
+- Modulaire structuur: HellsGate.c, Inject.c, AntiAnalysis.c, ApiHashing.c, WinApi.c
+- Header files: Common.h, Structs.h, typedef.h, Debug.h
+- Assembly integration: HellAsm.asm voor syscall stubs
+- Separation of concerns voor maintainability
+
+#### Forwarded Functions Handling
+- **SystemFunction032** found in Cryptsp.dll, not Advapi32.dll
+- Forwarded function discovery: String pointer instead of code
+- Requires LoadLibrary("Cryptsp") voor correct address resolution
+- Demonstrates PE export directory complexity
+
+#### String Hashing Algorithm
+- **Jenkins One-At-A-Time** gekozen over Djb2
+- INITIAL_SEED: 8 voor hash generation
+- Gebruikt in zowel syscall hashing als API hashing
+- Hasher project voor hash value generation
+
+### Volgende Stappen
+
+#### Syscalls Module Completion
+- [ ] Add Halo's Gate technique documentation (neighbor syscall SSN inference)
+- [ ] Document TartarusGate for runtime SSN sorting
+- [ ] Add SysWhispers3 practical implementation example
+- [ ] Create detection signatures voor direct/indirect syscall patterns
+
+#### Module Cross-Integration
+- [ ] Link syscalls module met injection modules (Module 4)
+- [ ] Connect with API hooking module (Module 7)
+- [ ] Reference from EDR bypass module (Module 10)
+- [ ] Add syscall flow diagrams voor visual learning
+
+#### Payload Loader Enhancement
+- [ ] Document detection vectors voor comprehensive loader
+- [ ] Add blue team countermeasures per technique
+- [ ] Create IoC analysis section
+- [ ] Test tegen modern EDR solutions (documentatie, niet improvement)
+
+#### Documentation Quality
+- [ ] Add more visual diagrams voor syscall flow
+- [ ] Create comparison tables (Hell's Gate vs SysWhispers)
+- [ ] Expand objectives sections met hands-on labs
+- [ ] Add references naar original research papers
+
+### Notities
+
+#### Syscall Complexity
+De syscall modules demonstreren een fascinerende evolutie van evasion techniques. Van simpele hardcoded SSNs (SysWhispers v1) naar dynamische resolution (v2) naar indirect execution (v3) en uiteindelijk runtime opcode scanning (Hell's Gate). Elke iteratie was een response op defensive improvements.
+
+#### Hell's Gate Ingenuity
+De Hell's Gate techniek is bijzonder slim omdat het de hook letterlijk "overslaat" door byte-per-byte door memory te lopen totdat het de originele syscall instructies vindt. Het gebruikt boundary checking (syscall en ret instructies) om te voorkomen dat het te ver zoekt. De bitwise operations voor SSN extraction zijn elegant.
+
+#### Educational Integration
+De "Bypassing AVs" module is een excellent voorbeeld van hoe alle voorgaande modules samenkomen. Het combineert:
+- Windows internals (PEB, TEB, PE parsing)
+- Payload encryption (RC4)
+- Injection (mapping injection)
+- Syscalls (Hell's Gate)
+- Obfuscation (API hashing, IAT camouflage)
+- Anti-analysis (self-deletion, delays, monitoring)
+- Evasion (CRT removal)
+
+Dit is precies wat een comprehensive malware loader in real-world scenarios zou gebruiken.
+
+#### Forwarded Functions Discovery
+Het ontdekken van forwarded functions (SystemFunction032 in Cryptsp.dll vs Advapi32.dll) is een belangrijke learning moment. Dit demonstreert waarom custom GetProcAddress implementaties complex zijn - je moet edge cases handlen die Microsoft's implementation automatisch afhandelt.
+
+#### Defensive Application
+Voor blue team purposes is deze knowledge cruciaal:
+- **Behavioral detection**: Syscalls van buiten NTDLL address space
+- **Hook integrity checking**: Periodiek NTDLL memory verification
+- **Anomaly detection**: Processen zonder CRT imports
+- **API call patterns**: Unusual combination van file operations (self-deletion)
+- **Timing analysis**: Execution delays en API hammering patterns
+
+#### SSN Volatility Challenge
+Een groot probleem met direct syscalls is SSN volatility tussen Windows versies. SysWhispers v2's "sorting by address" en Hell's Gate's runtime resolution zijn beide elegante oplossingen. Dit verklaart waarom malware vaak multiple fallback mechanisms heeft.
+
+#### Module Naming Consistency
+Module 8 gebruikt "8-syscalls" (dash separator), consistent met andere advanced modules. De dash lijkt te indiceren "advanced/evasive" technieken vs. fundamentele modules die dot-notation gebruiken.
+
 ## Sessie 2025-11-02
 
 ### Module(s) Bewerkt
