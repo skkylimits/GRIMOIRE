@@ -29,7 +29,7 @@
 	--ui-text-highlighted: var(--ui-color-neutral-900);
 	--ui-text-inverted: var(--color-white);
 
-	-ui-bg: var(--color-white);
+	--ui-bg: var(--color-white);
 	--ui-bg-muted: var(--ui-color-neutral-50);
 	--ui-bg-elevated: var(--ui-color-neutral-100);
 	--ui-bg-accented: var(--ui-color-neutral-200);
