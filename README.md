@@ -37,24 +37,24 @@ De kennisbank is georganiseerd in 10 progressieve modules:
 9. ✅ **Anti-Analysis and Evasion** - Substantial progress
 10. ⏸️ **Advanced EDR Bypass** - Evasion strategies
 
-### Recent Updates (2025-11-09)
+### Recent Updates
 
-**Module 8: Syscalls** - 4 documenten toegevoegd/geüpdatet:
+**2025-11-18** - **Module 3: Payload Placement and Encryption**:
+- Binary Entropy Reduction documentatie (complete vertaling EN→NL + formatting)
+- Shannon's Entropy fundamentals (0-8 schaal, malware detection thresholds)
+- 4 entropy reduction technieken: algorithm selection, English strings, padding, CRT removal
+- EntropyCalc.py Python script voor entropy measurement
+- Defensive perspective: YARA rules voor suspicious entropy patterns
+- Best practices vergelijkingstabel
+
+**2025-11-09** - **Module 8: Syscalls** - 4 documenten toegevoegd/geüpdatet:
 - Syscalls fundamentals (SSN, Nt vs Zw syscalls, syscall structure)
 - Userland hooking en EDR bypass techniques
 - SysWhispers v1/v2/v3 evolution
 - Hell's Gate dynamic SSN resolution
-
-**Module 9: Anti-Analysis and Evasion**:
-- Comprehensive payload loader documentatie (bypassing AVs)
-- Integration van alle technieken: syscalls, encryption, anti-analysis, API hashing, CRT removal
-
-**Module 3: Payload Placement**:
-- .text sectie payload placement updates
-
-**Infrastructure**:
-- Public assets voor syscalls module toegevoegd
-- Application page modifications
+- **Module 9**: Comprehensive payload loader documentatie (bypassing AVs)
+- **Module 3**: .text sectie payload placement updates
+- Infrastructure: Public assets voor syscalls module toegevoegd
 
 ## Tech Stack
 

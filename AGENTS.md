@@ -274,7 +274,7 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 **Progress Through 10-Module Structure**:
 1. ✅ Bouwstenen (fundamentals) - Complete
 2. ✅ Windows Internals - Complete
-3. ✅ Payload Placement and Encryption - Complete
+3. ✅ Payload Placement and Encryption - **Recently updated: Binary Entropy Reduction**
 4. ✅ Payload Execution and Injection - Complete
 5. ✅ Obfuscation and IAT Manipulation - Complete
 6. ✅ Process and Argumentation Manipulation - Complete
@@ -284,6 +284,7 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 10. ⏸️ Advanced EDR Bypass - Planned
 
 **Recent Completed Sections**:
+- Binary Entropy Reduction (Module 3) - Complete translation and formatting
 - Syscalls fundamentals (SSN, Nt vs Zw, syscall structure)
 - Userland hooking and EDR bypass techniques
 - SysWhispers v1/v2/v3 evolution and implementation
@@ -291,6 +292,27 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 - Comprehensive payload loader (bypassing AVs)
 
 ## Sessielog
+
+### Sessie 2025-11-18
+- **Module:** 3. Payload Placement and Encryption
+- **Bereikt:**
+  - Vertaald en geformatteerd 13.binary-entropy-reduction.md van Engels naar Nederlands
+  - Shannon's Entropy documentatie (0-8 schaal, malware vs benigne detection)
+  - 4 entropy reduction technieken: algorithm selection, English strings, padding, CRT removal
+  - EntropyCalc.py Python script documentatie
+  - Defensive perspective met YARA rule voorbeelden
+  - Best practices vergelijkingstabel
+  - Header structuur gecorrigeerd (alleen ## met emoji's, ### zonder)
+- **Belangrijke beslissingen:**
+  - CRT removal blijft in Module 3 (entropy context), cross-reference naar Module 5 (IAT)
+  - Style guide enforcement: strikte header emoji consistency
+  - Padding technique als meest effectieve entropy reduction (5.88 → 3.77)
+  - Educational balance: offensive technieken + defensive YARA rules
+- **Volgende stappen:**
+  - Verify overige Module 3 documents formatting
+  - Continue Module 8 (Syscalls) met Halo's Gate en TartarusGate
+  - Add entropy analysis in payload loader examples
+  - Cross-module referencing tussen encryption en entropy
 
 ### Sessie 2025-11-09
 - **Module:** 8. Syscalls
