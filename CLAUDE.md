@@ -269,29 +269,50 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 
 ## Projectstatus
 
-**Current Module**: 8. Syscalls
+**Current Module**: Module reorganization & documentation quality improvements
 
 **Progress Through 10-Module Structure**:
-1. ✅ Bouwstenen (fundamentals) - Complete
+1. ✅ Bouwstenen (fundamentals) - Complete (restructure proposed)
 2. ✅ Windows Internals - Complete
-3. ✅ Payload Placement and Encryption - **Recently updated: Binary Entropy Reduction**
+3. ✅ Payload Placement and Encryption - **Recently reorganized: Binary Signing, Brute Force, CRT**
 4. ✅ Payload Execution and Injection - Complete
-5. ✅ Obfuscation and IAT Manipulation - Complete
+5. 🔄 Obfuscation and IAT Manipulation - **Documentation updates in progress**
 6. ✅ Process and Argumentation Manipulation - Complete
-7. ⏸️ API Hooking - In progress
-8. 🔄 Syscalls - **Currently documenting**
+7. 🔄 API Hooking - **Documentation updates in progress**
+8. 🔄 Syscalls - **Documentation updates in progress**
 9. ✅ Anti-Analysis and Evasion - Substantial progress
 10. ⏸️ Advanced EDR Bypass - Planned
 
 **Recent Completed Sections**:
-- Binary Entropy Reduction (Module 3) - Complete translation and formatting
-- Syscalls fundamentals (SSN, Nt vs Zw, syscall structure)
-- Userland hooking and EDR bypass techniques
-- SysWhispers v1/v2/v3 evolution and implementation
-- Hell's Gate dynamic SSN resolution
-- Comprehensive payload loader (bypassing AVs)
+- Module 3 restructuring: Binary Signing moved from Module 4, HellShell/MiniShell renumbered
+- Module 6 (Runtime/IAT): 7 documentation files updated
+- Module 7 (API Hooking): 4 documentation files updated
+- Module 8 (Syscalls): SysWhispers and Hell's Gate documentation updated
+- Notes directory: TOC planning, chapter ideas, philosophy documentation
 
 ## Sessielog
+
+### Sessie 2025-11-19
+- **Module:** Modules 3, 6, 7, 8 - Reorganization & Documentation Updates
+- **Bereikt:**
+  - Module 3 restructuring: Binary Signing verplaatst van Module 4, HellShell/MiniShell renumbered (14/15 → 17/18)
+  - Brute Force Decryption documentation toegevoegd aan Module 3
+  - Module 6 (Runtime/IAT): 7 documenten bijgewerkt met formatting improvements
+  - Module 7 (API Hooking): 4 documenten bijgewerkt
+  - Module 8 (Syscalls): SysWhispers en Hell's Gate documenten bijgewerkt
+  - Notes directory: TOC.md, chapter-ideas.md, offense-best-defense.md toegevoegd
+  - Public assets directories aangemaakt voor modules 3, 6, 7, 8
+- **Belangrijke beslissingen:**
+  - Binary signing placement: Module 4 → Module 3 (logical: preparation vs execution)
+  - CRT removal duplication identified: needs resolution (appears in Module 3 and 6)
+  - Notes directory als dedicated planning/philosophy space
+  - Proposed Module 1 restructure documented (6.proposed-restructure.md)
+- **Volgende stappen:**
+  - Resolve CRT removal file duplication
+  - Complete Module 7 (API Hooking) remaining sections
+  - Continue Module 8 (Syscalls) met Halo's Gate en TartarusGate
+  - Format notes directory files properly
+  - Verify all cross-references after reorganization
 
 ### Sessie 2025-11-18
 - **Module:** 3. Payload Placement and Encryption
@@ -353,11 +374,13 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 
 ## Werk-instructies
 
-**Current FOCUS**: Syscalls (Module 8) - Direct/indirect syscalls voor EDR bypass
+**Current FOCUS**: Module Quality & Organization - Documentation formatting, file reorganization, cross-referencing
 
 **Workflow Priorities**:
-1. Complete syscalls module met advanced techniques (Halo's Gate, TartarusGate)
-2. Add detection signatures en blue team countermeasures
-3. Improve cross-module referencing (link syscalls met injection, API hooking, EDR bypass)
-4. Document payload loader as integration example
-5. Maintain defensive research context throughout all offensive technique documentation
+1. Resolve CRT removal duplication issue (Module 3 vs Module 6)
+2. Format notes directory files (TOC.md, chapter-ideas.md, offense-best-defense.md)
+3. Review and implement Module 1 (bouwstenen) restructure proposal
+4. Complete Module 7 (API Hooking) remaining sections
+5. Continue Module 8 (Syscalls) with Halo's Gate and TartarusGate
+6. Improve cross-module referencing after recent reorganization
+7. Maintain defensive research context throughout all offensive technique documentation

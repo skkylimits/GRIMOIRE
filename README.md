@@ -26,18 +26,28 @@ De kennisbank is georganiseerd in 10 progressieve modules:
 
 ### Malware Development Life Cycle (MDLC)
 
-1. ✅ **Bouwstenen** - Fundamentals
+1. ✅ **Bouwstenen** - Fundamentals (restructure proposed)
 2. ✅ **Windows Internals** - PE format, processes, threads, memory
-3. ✅ **Payload Placement and Encryption** - Storage and protection
+3. ✅ **Payload Placement and Encryption** - Storage and protection (recently reorganized)
 4. ✅ **Payload Execution and Injection** - Code injection techniques
-5. ✅ **Obfuscation and IAT Manipulation** - Stealth and evasion
+5. 🔄 **Obfuscation and IAT Manipulation** - Stealth and evasion (documentation updates)
 6. ✅ **Process and Argumentation Manipulation** - Advanced process control
-7. ⏸️ **API Hooking** - Function interception
-8. 🔄 **Syscalls** - *Currently documenting* - Direct system calls
+7. 🔄 **API Hooking** - Function interception (documentation updates)
+8. 🔄 **Syscalls** - Direct system calls (documentation updates)
 9. ✅ **Anti-Analysis and Evasion** - Substantial progress
 10. ⏸️ **Advanced EDR Bypass** - Evasion strategies
 
 ### Recent Updates
+
+**2025-11-19** - **Module Reorganization & Documentation Quality**:
+- Module 3 restructuring: Binary Signing moved from Module 4, HellShell/MiniShell renumbered (14/15 → 17/18)
+- Brute Force Decryption documentation added to Module 3
+- Module 6 (Runtime/IAT): 7 documentation files updated with formatting improvements
+- Module 7 (API Hooking): 4 documentation files updated
+- Module 8 (Syscalls): SysWhispers and Hell's Gate documentation updated
+- Notes directory: TOC planning, chapter ideas, philosophy documentation
+- Public assets directories created for modules 3, 6, 7, 8
+- CRT removal duplication identified (requires resolution)
 
 **2025-11-18** - **Module 3: Payload Placement and Encryption**:
 - Binary Entropy Reduction documentatie (complete vertaling EN→NL + formatting)

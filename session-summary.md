@@ -711,3 +711,159 @@ Dit maakt het een favorite technique in modern malware development.
 
 #### Obfuscation vs Encryption
 De obfuscation methods (IPv4/IPv6/MAC/UUID) zijn clever omdat ze lage entropy behouden terwijl ze payload verbergen. Dit is fundamenteel anders dan encryption die hoge entropy creëert. Deze trade-off is belangrijk voor malware developers die entropy-based detection willen omzeilen.
+
+## Sessie 2025-11-19
+
+### Module(s) Bewerkt
+- Module 3: Payload Placement and Encryption - File reorganization
+- Module 6: Runtime/IAT Obfuscation - Documentation updates
+- Module 7: API Hooking - Documentation updates
+- Module 8: Syscalls - Documentation updates
+- Project Organization - Notes formatting
+
+### Wat is Bereikt
+
+#### Module Reorganization & File Cleanup
+- **Module 3 restructuring:**
+  - `14.HellShell.md` en `15.MiniShell.md` verplaatst naar `17.HellShell.md` en `18.MiniShell.md`
+  - `14.binary-signing.md` toegevoegd (was `7.malware-binary-signing.md` in Module 4)
+  - `15.brute-force-decryption.md` toegevoegd
+  - `16.CRT-removal-and-malware-compiling.md` toegevoegd (duplicate - needs cleanup)
+  - Public assets directories aangemaakt voor binary signing en brute force decryption
+- **Module 4 cleanup:**
+  - `7.malware-binary-signing.md` verwijderd (moved to Module 3)
+
+#### Module 6: Runtime/IAT Obfuscation - Documentation Updates
+Modified files (content analysis needed):
+1. `1.IAT-hiding-and-obfuscation.md` - Updated
+2. `2.IAT-hiding-and-obfuscation-custom-GetProcAdress.md` - Updated
+3. `3.IAT-hiding-and-obfuscation-custom-GetModuleHandle.md` - Updated
+4. `5.IAT-hiding-and-obfuscation-custom-pseudo-handles.md` - Updated
+5. `6.IAT-hiding-and-obfuscation-compile-time-API-hasing.md` - Updated
+6. `7.IAT-hiding-and-obfuscation-camouflage.md` - Updated
+7. `8.CRT-removal-and-malware-compiling.md` - Updated
+- Public assets directory created: `public/content/.../6.runtime/`
+
+#### Module 7: API Hooking - Documentation Updates
+Modified files (content analysis needed):
+1. `1.API-hooking.md` - Updated
+2. `3.API-hooking-minhook-library.md` - Updated
+3. `4.API-hooking-custom-code.md` - Updated
+4. `5.API-hooking-using-windows-APIs.md` - Updated
+- Public assets directory created: `public/content/.../7-api-hooking/`
+
+#### Module 8: Syscalls - Documentation Updates
+Modified files (content analysis needed):
+1. `3.syscalls-SysWhispers.md` - Updated
+2. `4.syscalls-hells-gate.md` - Updated
+- Public assets directory maintained: `public/content/.../8-syscalls/3.syscalls-SysWhispers/`
+
+#### Notes Directory - New Files
+- `TOC.md` - Table of contents planning
+- `chapter-ideas.md` - Future chapter planning
+- `offense-best-defense.md` - Philosophy and approach notes
+- `6.proposed-restructure.md` - Module 1 (bouwstenen) restructuring proposal
+
+### Nieuwe Concepten Gedocumenteerd
+
+**Note:** Detailed content analysis requires reading modified files. Likely updates include:
+- Formatting improvements (header structure, emoji consistency)
+- Cross-references between modules
+- Code example refinements
+- Educational context enhancements
+- Defensive perspective additions
+
+### Tools/Technieken Toegevoegd
+
+Based on file reorganization:
+- **Binary Signing** - Moved to Module 3 (appropriate placement for payload preparation)
+- **Brute Force Decryption** - New documentation in Module 3
+- **CRT Removal** - Consolidated documentation (appears in both Module 3 and Module 6)
+
+### Code Voorbeelden
+
+**Note:** Specific code examples require file content analysis. Expected updates in:
+- IAT obfuscation techniques (Module 6)
+- API hooking implementations (Module 7)
+- Syscall stub generation (Module 8)
+
+### Belangrijke Beslissingen
+
+#### Module 3 File Organization
+- **Binary signing** placement correction - Moved from Module 4 (execution) to Module 3 (preparation)
+- **HellShell/MiniShell renumbering** - 14/15 → 17/18 to accommodate new content
+- **CRT removal** - Appears in both Module 3 (entropy context) and Module 6 (IAT context)
+- **Rationale:** Better logical flow - signing happens during payload preparation, not execution
+
+#### Notes Directory Structure
+- **Dedicated planning space** - Separate from main content
+- **TOC planning** - Systematisch overzicht van content structure
+- **Philosophy documentation** - "Offense is the best defense" rationale
+- **Future planning** - Chapter ideas and restructure proposals
+
+#### Public Assets Organization
+- **Per-module directories** - Organized by module number
+- **Screenshot storage** - Dedicated folders for visual documentation
+- **Consistent naming** - Follows module numbering scheme
+
+### Volgende Stappen
+
+#### Module 3 Cleanup
+- [ ] Resolve duplicate CRT removal file (`16.CRT-removal-and-malware-compiling copy.md`)
+- [ ] Verify binary signing documentation completeness
+- [ ] Review brute force decryption content
+- [ ] Ensure cross-references are updated after renumbering
+
+#### Content Analysis & Formatting
+- [ ] Read and document specific changes in Module 6 (IAT) files
+- [ ] Read and document specific changes in Module 7 (API Hooking) files
+- [ ] Read and document specific changes in Module 8 (Syscalls) files
+- [ ] Verify header structure compliance (## with emojis only)
+- [ ] Check callout block usage consistency
+
+#### Notes Processing
+- [ ] Format `TOC.md` according to Markdown standards
+- [ ] Format `chapter-ideas.md` for clarity
+- [ ] Format `offense-best-defense.md` philosophy document
+- [ ] Review `6.proposed-restructure.md` for Module 1 improvements
+
+#### Module Progression
+- [ ] Complete Module 7 (API Hooking) remaining sections
+- [ ] Continue Module 8 (Syscalls) with Halo's Gate and TartarusGate
+- [ ] Plan Module 10 (Advanced EDR Bypass) content
+- [ ] Create cross-module reference map
+
+#### Public Assets Verification
+- [ ] Verify all images are properly linked in documentation
+- [ ] Check file naming conventions in asset directories
+- [ ] Ensure no broken image references after reorganization
+- [ ] Add alt-text descriptions for accessibility
+
+### Notities
+
+#### File Reorganization Impact
+Deze sessie focuste op structurele organisatie in plaats van nieuwe content. Het verplaatsen van binary signing van Module 4 naar Module 3 is logisch omdat code signing deel uitmaakt van payload preparation, niet execution. Dit verbetert de educational flow.
+
+#### CRT Removal Duplication
+Er zijn nu meerdere CRT removal files:
+- `content/.../3.payload-placement-and-encryption/16.CRT-removal-and-malware-compiling.md`
+- `content/.../3.payload-placement-and-encryption/16.CRT-removal-and-malware-compiling copy.md`
+- `content/.../6.runtime/8.CRT-removal-and-malware-compiling.md`
+
+Dit moet worden opgelost. CRT removal is relevant voor beide contexten (entropy reduction in Module 3, IAT manipulation in Module 6), maar duplicate files zijn problematisch. Cross-referencing is de betere oplossing.
+
+#### Notes Directory Purpose
+De notes directory dient als "thinking space" voor project planning en philosophy documentation. Dit is waardevol voor:
+- TOC planning en restructuring proposals
+- Educational approach documentation
+- Future content ideas
+- Research links en external resources
+
+#### Module Updates Pattern
+De updates aan Modules 6, 7, en 8 suggereren een systematische formatting pass of content enhancement. Zonder de file contents te lezen is het lastig te zeggen of dit substantive content changes zijn of formatting improvements. Volgende stap is file content analysis.
+
+#### Public Assets Growth
+Het groeiende aantal public asset directories (binary signing, brute force, runtime, api-hooking, syscalls) toont aan dat de documentation rijker wordt met screenshots en visual aids. Dit verbetert educational value significant.
+
+#### Proposed Restructure
+Het bestand `6.proposed-restructure.md` in bouwstenen directory suggereert dat Module 1 mogelijk herstructurering nodig heeft. Dit moet worden gereviewed om te bepalen of de huidige fundamentals module optimaal georganiseerd is voor het leerpad.
