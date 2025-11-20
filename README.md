@@ -22,22 +22,47 @@ Dit project is mijn leerpad naar APT-level cybersecurity expertise. Het doel: **
 
 ## Content Structuur
 
-De kennisbank is georganiseerd in 10 progressieve modules:
+De kennisbank is georganiseerd volgens een **tier-based architecture** voor betere schaalbaarheid en pedagogische flow:
 
-### Malware Development Life Cycle (MDLC)
+### Tier-Based Malware Development Knowledge Base
 
-1. ✅ **Bouwstenen** - Fundamentals (restructure proposed)
-2. ✅ **Windows Internals** - PE format, processes, threads, memory
-3. ✅ **Payload Placement and Encryption** - Storage and protection (recently reorganized)
-4. ✅ **Payload Execution and Injection** - Code injection techniques
-5. 🔄 **Obfuscation and IAT Manipulation** - Stealth and evasion (documentation updates)
-6. ✅ **Process and Argumentation Manipulation** - Advanced process control
-7. 🔄 **API Hooking** - Function interception (documentation updates)
-8. 🔄 **Syscalls** - Direct system calls (documentation updates)
-9. ✅ **Anti-Analysis and Evasion** - Substantial progress
-10. ⏸️ **Advanced EDR Bypass** - Evasion strategies
+**Migration Status**: Actively reorganizing from 10 sequential modules naar tier-based structure
+
+**Nieuwe Tier Structure**:
+- **Tier 1 (10-15)**: Fundamentals - Payload Engineering, Targeting & Staging
+- **Tier 2 (40-60)**: Core Techniques - Injection, Static Bypass, Runtime Evasion
+- **Tier 3 (70-80)**: Advanced Layer - API/Syscalls, Detection Bypass
+- **Tier 4 (90-93)**: Specialized - Advanced Execution, Credentials, Persistence, C2
+- **Tier 5 (99)**: Kernel - Kernel-level techniques
+
+**Reorganization Progress**:
+- ✅ Tier architecture designed (12 tier directories)
+- ✅ 176 modules mapped to new structure
+- ✅ Pedagogical dependencies validated
+- ✅ Directory scaffolding created
+- ⏸️ Content migration in progress (1.develop/ → tier directories)
+- ⏸️ Navigation infrastructure pending
+- ⏸️ Index documentation pending
+
+**Benefits**:
+- Numbered gaps allow future insertions without renumbering entire structure
+- Thematic clustering instead of rigid linear progression
+- MITRE ATT&CK-inspired categorization for better defensive mapping
+- Scalable architecture for knowledge base growth
 
 ### Recent Updates
+
+**2025-11-20** - **Major Tier-Based Architecture Reorganization**:
+- Designed and implemented tier-based structure (12 tier directories)
+- Mapped 176 modules from old structure to new tiers
+- Created complete-module-mapping.md documentation with full module inventory
+- Validated pedagogical dependencies (3 critical corrections: Thread Manipulation, Custom Implementations, NTDLL Unhooking)
+- Created directory scaffolding for all tiers
+- Backup created (0.develop/), source preserved (1.develop/)
+- Tier numbering system: 10, 15, 40, 50, 60, 70, 80, 90-93, 99
+- MITRE ATT&CK-inspired categorization approach
+- Preservation approach ensures zero data loss during migration
+- Next steps: Content migration, navigation files, index documentation
 
 **2025-11-19** - **Module Reorganization & Documentation Quality**:
 - Module 3 restructuring: Binary Signing moved from Module 4, HellShell/MiniShell renumbered (14/15 → 17/18)

@@ -80,7 +80,18 @@ All documentation lives in `/content/` organized as educational modules:
 - **5.vuln/** - Vulnerability research and analysis
 - **6.xpl01ts/** - Exploit development and techniques
 - **7.knowledge-base/** - Primary knowledge repository including:
-  - **6.malware/1.develop/** - Progressive malware development modules (see dedicated CLAUDE.md in that directory for malware-specific guidance)
+  - **6.malware/** - Malware development knowledge base (tier-based architecture):
+    - **0.develop/** - Backup of previous module structure
+    - **1.develop/** - Original modules (being migrated to tier structure)
+    - **10.payload-engineering/** - Payload fundamentals
+    - **15.targeting-and-staging/** - Process targeting and staging
+    - **40.injection-techniques/** - Injection methods
+    - **50.static/** - Static analysis bypass
+    - **60.runtime/** - Runtime evasion
+    - **70.API-and-syscall/** - API hooking and syscalls
+    - **80.detection-bypass/** - EDR/AV bypass techniques
+    - **90-93.specialized/** - Advanced execution, credentials, persistence, C2
+    - **99.kernel/** - Kernel-level techniques
 
 **Module Structure**:
 - Each module directory contains a `.navigation.yml` file (module metadata: title, icon)
@@ -269,28 +280,57 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 
 ## Projectstatus
 
-**Current Module**: Module reorganization & documentation quality improvements
+**Current Module**: Major Tier-Based Architecture Reorganization
 
-**Progress Through 10-Module Structure**:
-1. ✅ Bouwstenen (fundamentals) - Complete (restructure proposed)
-2. ✅ Windows Internals - Complete
-3. ✅ Payload Placement and Encryption - **Recently reorganized: Binary Signing, Brute Force, CRT**
-4. ✅ Payload Execution and Injection - Complete
-5. 🔄 Obfuscation and IAT Manipulation - **Documentation updates in progress**
-6. ✅ Process and Argumentation Manipulation - Complete
-7. 🔄 API Hooking - **Documentation updates in progress**
-8. 🔄 Syscalls - **Documentation updates in progress**
-9. ✅ Anti-Analysis and Evasion - Substantial progress
-10. ⏸️ Advanced EDR Bypass - Planned
+**New Tier-Based Structure (Migration in Progress)**:
+- **Tier 1 (10-15)**: Fundamentals - Payload Engineering, Targeting & Staging
+- **Tier 2 (40-60)**: Core Techniques - Injection, Static Bypass, Runtime Evasion
+- **Tier 3 (70-80)**: Advanced Layer - API/Syscalls, Detection Bypass
+- **Tier 4 (90-93)**: Specialized - Advanced Execution, Credentials, Persistence, C2
+- **Tier 5 (99)**: Kernel - Kernel-level techniques
+
+**Reorganization Status**:
+- ✅ Tier architecture designed (12 tier directories)
+- ✅ 176 modules mapped to new structure
+- ✅ Pedagogical dependencies validated
+- ✅ Directory scaffolding created
+- ✅ Backup created (0.develop/)
+- ⏸️ Content migration (1.develop/ → tier directories) - **IN PROGRESS**
+- ⏸️ Navigation files (.navigation.yml) - PENDING
+- ⏸️ Index documentation (0.index.md) - PENDING
+
+**Migration Benefits**:
+- Tier numbering allows future insertions without renumbering
+- Thematic clustering instead of linear progression
+- MITRE ATT&CK alignment for better defensive mapping
+- Scalable architecture for knowledge base growth
 
 **Recent Completed Sections**:
-- Module 3 restructuring: Binary Signing moved from Module 4, HellShell/MiniShell renumbered
-- Module 6 (Runtime/IAT): 7 documentation files updated
-- Module 7 (API Hooking): 4 documentation files updated
-- Module 8 (Syscalls): SysWhispers and Hell's Gate documentation updated
-- Notes directory: TOC planning, chapter ideas, philosophy documentation
+- Complete module mapping document (176 modules)
+- Tier architecture design and validation
+- Dependency ordering corrections (Thread Manipulation, Custom Implementations, NTDLL Unhooking)
 
 ## Sessielog
+
+### Sessie 2025-11-20
+- **Module:** Complete Tier-Based Architecture Reorganization
+- **Bereikt:**
+  - Designed and implemented tier-based structure (12 tier directories)
+  - Mapped 176 modules from old structure to new tiers
+  - Created complete-module-mapping.md documentation
+  - Validated pedagogical dependencies (3 critical corrections)
+  - Created directory scaffolding for all tiers
+  - Backup created (0.develop/), source preserved (1.develop/)
+- **Belangrijke beslissingen:**
+  - Tier numbering system (10, 15, 40, 50, 60, 70, 80, 90-93, 99)
+  - MITRE ATT&CK-inspired categorization
+  - Preservation approach (no data loss)
+  - Content migration strategy planned
+- **Volgende stappen:**
+  - Content migration from 1.develop/ to tier directories
+  - Navigation infrastructure (.navigation.yml files)
+  - Index documentation (0.index.md per tier)
+  - Context file updates with tier information
 
 ### Sessie 2025-11-19
 - **Module:** Modules 3, 6, 7, 8 - Reorganization & Documentation Updates
