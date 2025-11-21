@@ -1,45 +1,106 @@
 <script setup lang="ts">
+/* eslint-disable no-console */
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
-import { computed, inject, ref } from 'vue'
+import { computed, inject, nextTick, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
 
-const items = computed<NavigationMenuItem[][]>(() => {
-	const tabNode = findTabsNavNode(route.path, navigation.value)
-	if (!tabNode || !tabNode.children)
-		return [[]]
+const navRoot = ref<HTMLElement | null>(null)
 
-	const mappedItems = tabNode.children.map(item => ({
-		label: item.title || '',
-		icon: item.icon || '',
-		to: item.path || '',
-		active: route.path === item.path || route.path.startsWith(`${item.path}/`),
-	}))
-	return [mappedItems]
+// 👉 States
+const compactMode = ref(false)
+const measuring = ref(true) // ⭐ skeleton tonen zolang we meten
+
+async function measure() {
+	if (!navRoot.value)
+		return
+
+	// Wacht tot layout klaar is
+	await nextTick()
+
+	const ul = navRoot.value.querySelector('ul') as HTMLUListElement | null
+	if (!ul)
+		return
+
+	const container = navRoot.value.closest('div[class*="max-w-"]') as HTMLElement
+	if (!container)
+		return
+
+	const containerWidth = container.clientWidth
+	const tabsWidth = ul.scrollWidth
+
+	console.log('📏 container =', containerWidth)
+	console.log('📏 tabs =', tabsWidth)
+
+	compactMode.value = tabsWidth > containerWidth
+	measuring.value = false // ⭐ klaar, skeleton weg
+}
+
+onMounted(async () => {
+	await measure()
 })
 
-// onMounted(() => {
-// 	console.log('📍 Huidig pad:', route.path)
-// 	console.log('🧩 Gevonden navigation node:', validNode)
-// })
+// Render logica
+const items = computed<NavigationMenuItem[][]>(() => {
+	const tabNode = findTabsNavNode(route.path, navigation.value)
+	if (!tabNode?.children)
+		return [[]]
+
+	return [
+		tabNode.children.map((item) => {
+			const isActive
+				= route.path === item.path
+					|| route.path.startsWith(`${item.path}/`)
+
+			let label = item.title as string
+
+			// compact → alleen active krijgt titel
+			if (compactMode.value && !isActive)
+				label = ''
+
+			return {
+				label,
+				icon: item.icon as string | undefined,
+				to: item.path!,
+				active: isActive,
+			}
+		}),
+	]
+})
 </script>
 
 <template>
-	<UHeader
-		:ui="{ center: 'flex-1' }"
-		class="h-auto z-66"
-	>
+	<UHeader :ui="{ center: 'flex-1' }" class="h-auto z-66">
 		<template #left>
-			<!-- Dynamisch de tabs toevoegen aan het menu als ze bestaan -->
-			<UNavigationMenu
-				highlight
-				highlight-color="primary"
-				orientation="horizontal"
-				:items="items"
-			/>
+			<!-- 1️⃣ Skeleton loader tijdens meten -->
+			<div v-if="measuring" class="flex items-center gap-3 py-2">
+				<USkeleton class="h-6 w-6 rounded-md" />
+				<USkeleton class="h-4 w-24" />
+				<USkeleton class="h-6 w-6 rounded-md" />
+				<USkeleton class="h-4 w-20" />
+				<USkeleton class="h-6 w-6 rounded-md" />
+				<USkeleton class="h-4 w-32" />
+			</div>
+
+			<!-- 2️⃣ Echte menu (verborgen tijdens meten voor juiste breedte) -->
+			<div
+				ref="navRoot"
+				:style="{
+					visibility: measuring ? 'hidden' : 'visible',
+					position: measuring ? 'absolute' : 'static',
+					pointerEvents: measuring ? 'none' : 'auto',
+				}"
+			>
+				<UNavigationMenu
+					highlight
+					highlight-color="primary"
+					orientation="horizontal"
+					:items="items"
+				/>
+			</div>
 		</template>
 	</UHeader>
 </template>
