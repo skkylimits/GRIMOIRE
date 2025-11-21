@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
-import { computed, inject, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, inject, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -111,10 +111,12 @@ const items = computed<NavigationMenuItem[][]>(() => {
 		class="h-auto z-66"
 	>
 		<template #left>
-			<!-- 1️⃣ skeleton -->
+			<!-- 1️⃣ skeleton TODO: measure based on how many items -->
 			<div v-if="measuring" class="flex items-center gap-3 py-2">
 				<USkeleton class="h-6 w-6 rounded-md" />
 				<USkeleton class="h-4 w-24" />
+				<USkeleton class="h-6 w-6 rounded-md" />
+				<USkeleton class="h-4 w-20" />
 				<USkeleton class="h-6 w-6 rounded-md" />
 				<USkeleton class="h-4 w-20" />
 			</div>
