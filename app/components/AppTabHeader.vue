@@ -43,6 +43,17 @@ onMounted(async () => {
 	await measure()
 })
 
+watch(() => route.path, async () => {
+	// Nieuwe route? → eerst skeleton tonen
+	measuring.value = true
+
+	// Wacht nova layout
+	await nextTick()
+
+	// Daarna opnieuw meten
+	await measure()
+})
+
 // Render logica
 const items = computed<NavigationMenuItem[][]>(() => {
 	const tabNode = findTabsNavNode(route.path, navigation.value)
@@ -73,7 +84,13 @@ const items = computed<NavigationMenuItem[][]>(() => {
 </script>
 
 <template>
-	<UHeader :ui="{ center: 'flex-1' }" class="h-auto z-66">
+	<UHeader
+		:ui="{
+			center: 'flex-1',
+			toggle: 'hidden',
+		}"
+		class="h-auto z-66"
+	>
 		<template #left>
 			<!-- 1️⃣ Skeleton loader tijdens meten -->
 			<div v-if="measuring" class="flex items-center gap-3 py-2">
