@@ -1,60 +1,78 @@
 <script setup lang="ts">
-/* eslint-disable no-console */
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
-import { computed, inject, nextTick, onMounted, ref } from 'vue'
+import { computed, inject, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
 
+// echte render root
 const navRoot = ref<HTMLElement | null>(null)
 
-// 👉 States
+// hidden measurement root
+const measureRoot = ref<HTMLElement | null>(null)
+
 const compactMode = ref(false)
-const measuring = ref(true) // ⭐ skeleton tonen zolang we meten
+const measuring = ref(true)
 
-async function measure() {
-	if (!navRoot.value)
-		return
+let resizeObserver: ResizeObserver | null = null
 
-	// Wacht tot layout klaar is
+// hysteresis margin
+const SAFE_MARGIN = 48
+
+async function recompute() {
 	await nextTick()
 
-	const ul = navRoot.value.querySelector('ul') as HTMLUListElement | null
-	if (!ul)
-		return
-
-	const container = navRoot.value.closest('div[class*="max-w-"]') as HTMLElement
+	const container = navRoot.value?.closest('div[class*="max-w-"]') as HTMLElement | null
 	if (!container)
 		return
 
+	const fullUL = measureRoot.value?.querySelector('ul') as HTMLUListElement | null
+	if (!fullUL)
+		return
+
+	const fullWidth = fullUL.scrollWidth
 	const containerWidth = container.clientWidth
-	const tabsWidth = ul.scrollWidth
 
-	console.log('📏 container =', containerWidth)
-	console.log('📏 tabs =', tabsWidth)
+	// 👉 hysteresis logic
+	if (!compactMode.value && fullWidth > containerWidth) {
+		compactMode.value = true
+	}
+	else if (compactMode.value && fullWidth < containerWidth - SAFE_MARGIN) {
+		compactMode.value = false
+	}
 
-	compactMode.value = tabsWidth > containerWidth
-	measuring.value = false // ⭐ klaar, skeleton weg
+	measuring.value = false
+}
+
+function setupResizeObserver() {
+	const container = navRoot.value?.closest('div[class*="max-w-"]') as HTMLElement | null
+	if (!container)
+		return
+
+	resizeObserver = new ResizeObserver(() => {
+		// debounce layout changes
+		requestAnimationFrame(() => {
+			requestAnimationFrame(() => {
+				recompute()
+			})
+		})
+	})
+
+	resizeObserver.observe(container)
 }
 
 onMounted(async () => {
-	await measure()
+	await recompute()
+	setupResizeObserver()
 })
 
-watch(() => route.path, async () => {
-	// Nieuwe route? → eerst skeleton tonen
-	measuring.value = true
-
-	// Wacht nova layout
-	await nextTick()
-
-	// Daarna opnieuw meten
-	await measure()
+onBeforeUnmount(() => {
+	resizeObserver?.disconnect()
 })
 
-// Render logica
+// tabs
 const items = computed<NavigationMenuItem[][]>(() => {
 	const tabNode = findTabsNavNode(route.path, navigation.value)
 	if (!tabNode?.children)
@@ -68,7 +86,6 @@ const items = computed<NavigationMenuItem[][]>(() => {
 
 			let label = item.title as string
 
-			// compact → alleen active krijgt titel
 			if (compactMode.value && !isActive)
 				label = ''
 
@@ -88,21 +105,40 @@ const items = computed<NavigationMenuItem[][]>(() => {
 		:ui="{
 			center: 'flex-1',
 			toggle: 'hidden',
+			content: 'hidden',
+			overlay: 'hidden',
 		}"
 		class="h-auto z-66"
 	>
 		<template #left>
-			<!-- 1️⃣ Skeleton loader tijdens meten -->
+			<!-- 1️⃣ skeleton -->
 			<div v-if="measuring" class="flex items-center gap-3 py-2">
 				<USkeleton class="h-6 w-6 rounded-md" />
 				<USkeleton class="h-4 w-24" />
 				<USkeleton class="h-6 w-6 rounded-md" />
 				<USkeleton class="h-4 w-20" />
-				<USkeleton class="h-6 w-6 rounded-md" />
-				<USkeleton class="h-4 w-32" />
 			</div>
 
-			<!-- 2️⃣ Echte menu (verborgen tijdens meten voor juiste breedte) -->
+			<!-- 2️⃣ hidden FULL layout for measuring -->
+			<div
+				ref="measureRoot"
+				class="absolute opacity-0 pointer-events-none h-0 overflow-hidden"
+			>
+				<UNavigationMenu
+					highlight
+					highlight-color="primary"
+					orientation="horizontal"
+					:items="[
+						findTabsNavNode(route.path, navigation)?.children?.map(i => ({
+							label: i.title,
+							icon: i.icon,
+							to: i.path,
+						})) ?? [],
+					]"
+				/>
+			</div>
+
+			<!-- 3️⃣ actual menu -->
 			<div
 				ref="navRoot"
 				:style="{
@@ -119,5 +155,8 @@ const items = computed<NavigationMenuItem[][]>(() => {
 				/>
 			</div>
 		</template>
+
+		<template #toggle />
+		<template #content />
 	</UHeader>
 </template>
