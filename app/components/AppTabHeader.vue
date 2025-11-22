@@ -6,8 +6,6 @@ import type { NavigationMenuItem } from '@nuxt/ui'
 import { computed, inject, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-console.log('⚡ COMPONENT LOADED')
-
 const route = useRoute()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
 
@@ -18,17 +16,24 @@ const compactMode = ref(false)
 const measuring = ref(true)
 
 let resizeObs: ResizeObserver | null = null
-
 const SAFE_MARGIN = 48
+
+// ╭──────────────────────────────────────────────────────────╮
+// 📦 TOP-LEVEL COMPONENT GROUP
+// ╰──────────────────────────────────────────────────────────╯
+console.groupCollapsed(
+	`%c📦 AppTabHeader → ${route.fullPath}`,
+	'color:#f7768e;font-weight:bold',
+)
 
 // ╭───────────────── STEP 2 — WAIT FOR UL ─────────────────╮
 async function waitForUL() {
-	console.log('STEP 2 — WAIT FOR UL')
+	console.groupCollapsed('%c   STEP 2 — WAIT FOR UL', 'color:#cba6f7')
 
 	let attempts = 0
 
 	while (attempts < 50) {
-		await new Promise(resolve => setTimeout(resolve, 20))
+		await new Promise(r => setTimeout(r, 20))
 
 		if (!measureRoot.value) {
 			attempts++
@@ -37,93 +42,124 @@ async function waitForUL() {
 
 		const ul = measureRoot.value.querySelector('ul')
 		if (ul) {
-			console.log('STEP 2 — UL FOUND ✔️')
-			console.log(`STEP 2 — attempt ${attempts} — ul =`, ul)
+			console.log('      ✔️ UL FOUND', ul)
+			console.groupEnd()
 			return ul
 		}
 
 		attempts++
 	}
 
-	console.warn('STEP 2 — UL NOT FOUND ❌')
+	console.warn('      ❌ UL NOT FOUND after 50 attempts')
+	console.groupEnd()
 	return null
 }
 
-// ╭───────────────── STEP 3 — MEASURE WIDTH ─────────────────╮
+// ╭───────────────── STEP 3 — MEASURE WIDTH ───────────────╮
 async function measure(source: string) {
+	console.groupCollapsed(`%c   STEP 3 — MEASURE WIDTH [${source}]`, 'color:#a6da95')
+
 	await nextTick()
 
 	const container = navRoot.value?.closest('div[class*="max-w-"]') as HTMLElement | null
-	if (!container)
+	if (!container) {
+		console.warn('      ⚠️ no container found')
+		console.groupEnd()
 		return
+	}
 
 	const ul = measureRoot.value?.querySelector('ul') as HTMLUListElement | null
-	if (!ul)
+	if (!ul) {
+		console.warn('      ⚠️ no UL found in measureRoot')
+		console.groupEnd()
 		return
+	}
 
 	const fullWidth = ul.scrollWidth
 	const containerWidth = container.clientWidth
 
-	console.log(`STEP 3 — MEASURE [${source}] full=${fullWidth} container=${containerWidth} mode=${compactMode.value}`)
+	console.log(`      fullWidth=${fullWidth} | container=${containerWidth} | mode=${compactMode.value}`)
 
-	// ╭───────────────── STEP 4 — APPLY MODE ─────────────────╮
+	// ╭───────────────── STEP 4 — APPLY MODE ────────────────╮
+	console.groupCollapsed('%c      STEP 4 — APPLY MODE', 'color:#f9e2af')
+
 	if (!compactMode.value && fullWidth > containerWidth) {
-		console.log('STEP 4 — MODE → COMPACT')
+		console.log('      → Switching to COMPACT')
 		compactMode.value = true
 	}
 	else if (compactMode.value && fullWidth < containerWidth - SAFE_MARGIN) {
-		console.log('STEP 4 — MODE → FULL')
+		console.log('      → Switching to FULL')
 		compactMode.value = false
 	}
+	else {
+		console.log('      (no change)')
+	}
+
+	console.groupEnd() // END APPLY MODE
 
 	measuring.value = false
+	console.groupEnd() // END MEASURE WIDTH
 }
 
-// ╭───────────────── RESIZE OBSERVER SETUP ─────────────────╮
+// ╭───────────────── RESIZE OBSERVER SETUP ───────────────╮
 function setupResizeObserver() {
+	console.groupCollapsed('%c   STEP 6 — RESIZE OBSERVER SETUP', 'color:#89dceb')
+
 	const container = navRoot.value?.closest('div[class*="max-w-"]') as HTMLElement | null
-	if (!container)
+	if (!container) {
+		console.warn('      ⚠️ no container for resize observer')
+		console.groupEnd()
 		return
+	}
 
 	resizeObs = new ResizeObserver(() => {
-		console.log('RESIZE — TRIGGERED')
-		requestAnimationFrame(() => {
-			requestAnimationFrame(() => {
-				measure('RESIZE')
-			})
-		})
+		console.groupCollapsed('%c      RESIZE EVENT', 'color:#f38ba8')
+		measure('RESIZE')
+		console.groupEnd()
 	})
 
 	resizeObs.observe(container)
+	console.log('      ✔️ Resize observer attached')
+	console.groupEnd()
 }
 
-// ╭───────────────── STEP 1 — MOUNT ─────────────────╮
+// ╭───────────────── STEP 1 — MOUNT ──────────────────────╮
+console.groupCollapsed('%c   STEP 1 — INITIAL MOUNT', 'color:#94e2d5')
 onMounted(async () => {
-	console.log('STEP 1 — INITIAL MOUNT')
-
 	const ul = await waitForUL()
-	if (!ul)
+	if (!ul) {
+		console.warn('      ⚠️ cannot continue, UL missing')
+		console.groupEnd()
 		return
+	}
 
 	await measure('MOUNT')
 	setupResizeObserver()
 
-	console.log('STEP 1 — MOUNT COMPLETED ✔️')
+	console.log('      ✔️ MOUNT COMPLETE')
+	console.groupEnd() // END step 1
 })
 
+// ╭───────────────── CLEANUP ─────────────────────────────╮
 onBeforeUnmount(() => {
 	resizeObs?.disconnect()
+	console.groupEnd() // ← CLOSES MAIN COMPONENT GROUP
 })
 
-// ╭───────────────── STEP 5 — ITEMS BUILD ─────────────────╮
+// ╭───────────────── STEP 5 — BUILD ITEMS ────────────────╮
 const items = computed<NavigationMenuItem[][]>(() => {
+	console.groupCollapsed('%c   STEP 5 — BUILD ITEMS', 'color:#f7768e')
+
 	const node = findTabsNavNode(route.path, navigation.value)
-	if (!node?.children)
+	if (!node?.children) {
+		console.log('      no tab children → empty[][]')
+		console.groupEnd()
 		return [[]]
+	}
 
-	console.log(`ITEMS — RECOMPUTE (MODE = ${compactMode.value ? 'COMPACT' : 'FULL'})`)
+	console.log(`      mode = ${compactMode.value ? 'COMPACT' : 'FULL'}`)
 
-	return [
+	const built = [
 		node.children.map((item) => {
 			const isActive
 				= route.path === item.path
@@ -137,6 +173,10 @@ const items = computed<NavigationMenuItem[][]>(() => {
 			}
 		}),
 	]
+
+	console.log('      ✔️ items built:', built)
+	console.groupEnd()
+	return built
 })
 </script>
 
@@ -151,7 +191,7 @@ const items = computed<NavigationMenuItem[][]>(() => {
 		class="h-auto z-66"
 	>
 		<template #left>
-			<!-- 1️⃣ skeleton -->
+			<!-- skeleton -->
 			<div v-if="measuring" class="flex items-center gap-3 py-2">
 				<USkeleton class="h-6 w-6 rounded-md" />
 				<USkeleton class="h-4 w-24" />
@@ -162,10 +202,7 @@ const items = computed<NavigationMenuItem[][]>(() => {
 			</div>
 
 			<!-- hidden full layout -->
-			<div
-				ref="measureRoot"
-				class="absolute opacity-0 pointer-events-none h-0 overflow-hidden"
-			>
+			<div ref="measureRoot" class="absolute opacity-0 pointer-events-none h-0 overflow-hidden">
 				<UNavigationMenu
 					highlight
 					highlight-color="primary"
