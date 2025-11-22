@@ -3,12 +3,15 @@
 
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
-import { computed, inject, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, inject, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
 
+// ╭──────────────────────────────────────────────────────────╮
+// 🤖 TAB DETECTION
+// ╰──────────────────────────────────────────────────────────╯
 const isTabbed = computed(() => {
 	const node = findTabsNavNode(route.path, navigation.value)
 	return !!node?.tabs
@@ -35,24 +38,19 @@ console.groupCollapsed(
 async function waitForUL() {
 	console.groupCollapsed('%c   STEP 2 — WAIT FOR UL', 'color:#cba6f7')
 
-	let attempts = 0
+	let tries = 0
 
-	while (attempts < 50) {
+	while (tries < 50) {
 		await new Promise(r => setTimeout(r, 20))
 
-		if (!measureRoot.value) {
-			attempts++
-			continue
-		}
-
-		const ul = measureRoot.value.querySelector('ul')
+		const ul = measureRoot.value?.querySelector('ul')
 		if (ul) {
-			console.log('      ✔️ UL FOUND', ul)
+			console.log('      ✔️ Shadow UL detected:', ul)
 			console.groupEnd()
 			return ul
 		}
 
-		attempts++
+		tries++
 	}
 
 	console.warn('      ❌ UL NOT FOUND after 50 attempts')
@@ -68,14 +66,14 @@ async function measure(source: string) {
 
 	const container = navRoot.value?.closest('div[class*="max-w-"]') as HTMLElement | null
 	if (!container) {
-		console.warn('      ⚠️ no container found')
+		console.warn('      ⚠ no container found')
 		console.groupEnd()
 		return
 	}
 
 	const ul = measureRoot.value?.querySelector('ul') as HTMLUListElement | null
 	if (!ul) {
-		console.warn('      ⚠️ no UL found in measureRoot')
+		console.warn('      ⚠ no shadow UL found')
 		console.groupEnd()
 		return
 	}
@@ -83,36 +81,36 @@ async function measure(source: string) {
 	const fullWidth = ul.scrollWidth
 	const containerWidth = container.clientWidth
 
-	console.log(`      fullWidth=${fullWidth} | container=${containerWidth} | mode=${compactMode.value}`)
+	console.log(`      full=${fullWidth} | container=${containerWidth} | mode=${compactMode.value}`)
 
 	// ╭───────────────── STEP 4 — APPLY MODE ────────────────╮
 	console.groupCollapsed('%c      STEP 4 — APPLY MODE', 'color:#f9e2af')
 
 	if (!compactMode.value && fullWidth > containerWidth) {
-		console.log('      → Switching to COMPACT')
+		console.log('      → MODE = COMPACT')
 		compactMode.value = true
 	}
 	else if (compactMode.value && fullWidth < containerWidth - SAFE_MARGIN) {
-		console.log('      → Switching to FULL')
+		console.log('      → MODE = FULL')
 		compactMode.value = false
 	}
 	else {
-		console.log('      (no change)')
+		console.log('      → (unchanged)')
 	}
 
-	console.groupEnd() // END APPLY MODE
+	console.groupEnd()
 
 	measuring.value = false
-	console.groupEnd() // END MEASURE WIDTH
+	console.groupEnd()
 }
 
-// ╭───────────────── RESIZE OBSERVER SETUP ───────────────╮
+// ╭───────────────── RESIZE OBSERVER ──────────────────────╮
 function setupResizeObserver() {
 	console.groupCollapsed('%c   STEP 6 — RESIZE OBSERVER SETUP', 'color:#89dceb')
 
 	const container = navRoot.value?.closest('div[class*="max-w-"]') as HTMLElement | null
 	if (!container) {
-		console.warn('      ⚠️ no container for resize observer')
+		console.warn('      ⚠ no container for resize observer')
 		console.groupEnd()
 		return
 	}
@@ -124,38 +122,60 @@ function setupResizeObserver() {
 	})
 
 	resizeObs.observe(container)
+
 	console.log('      ✔️ Resize observer attached')
 	console.groupEnd()
 }
 
-// ╭───────────────── STEP 1 — MOUNT ──────────────────────╮
+// ╭───────────────── STEP 1 — INITIAL MOUNT ───────────────╮
 console.groupCollapsed('%c   STEP 1 — INITIAL MOUNT', 'color:#94e2d5')
 onMounted(async () => {
 	if (!isTabbed.value) {
-		console.log('   → No tabs on this page → skipping measurement & resize observer')
-		measuring.value = false // ensure menu shows immediately
+		console.log('   → This page has NO tabs → skip measurement')
+		measuring.value = false
 		console.groupEnd()
 		return
 	}
 
-	const ul = await waitForUL()
-	if (!ul) {
-		console.warn('      ⚠️ cannot continue, UL missing')
-		console.groupEnd()
-		return
-	}
-
+	await nextTick()
+	await waitForUL()
 	await measure('MOUNT')
 	setupResizeObserver()
 
-	console.log('      ✔️ MOUNT COMPLETE')
-	console.groupEnd() // END step 1
+	console.log('   ✔️ MOUNT COMPLETE')
+	console.groupEnd()
+})
+
+// ───────────────────────────────────────────────────────────
+// ROUTE CHANGE HANDLING
+// ───────────────────────────────────────────────────────────
+watch(() => route.fullPath, async () => {
+	console.groupCollapsed(
+		`%c   ROUTE CHANGE → ${route.fullPath}`,
+		'color:#fab387;font-weight:bold',
+	)
+
+	if (!isTabbed.value) {
+		console.log('   → No tabs on target page → show nothing')
+		measuring.value = false
+		console.groupEnd()
+		return
+	}
+
+	measuring.value = true
+	compactMode.value = false
+
+	await nextTick()
+	await waitForUL()
+	await measure('ROUTE CHANGE')
+
+	console.groupEnd()
 })
 
 // ╭───────────────── CLEANUP ─────────────────────────────╮
 onBeforeUnmount(() => {
 	resizeObs?.disconnect()
-	console.groupEnd() // ← CLOSES MAIN COMPONENT GROUP
+	console.groupEnd() // closes top-level
 })
 
 // ╭───────────────── STEP 5 — BUILD ITEMS ────────────────╮
@@ -163,14 +183,14 @@ const items = computed<NavigationMenuItem[][]>(() => {
 	console.groupCollapsed('%c   STEP 5 — BUILD ITEMS', 'color:#f7768e')
 
 	if (!isTabbed.value) {
-		console.log('      no tabs → items empty')
+		console.log('      → no tabs → empty')
 		console.groupEnd()
 		return [[]]
 	}
 
 	const node = findTabsNavNode(route.path, navigation.value)
 	if (!node?.children) {
-		console.log('      no tab children → empty[][]')
+		console.log('      → no children')
 		console.groupEnd()
 		return [[]]
 	}
@@ -192,7 +212,7 @@ const items = computed<NavigationMenuItem[][]>(() => {
 		}),
 	]
 
-	console.log('      ✔️ items built:', built)
+	console.log('      ✔ items built:', built)
 	console.groupEnd()
 	return built
 })
@@ -209,9 +229,9 @@ const items = computed<NavigationMenuItem[][]>(() => {
 		class="h-auto z-66"
 	>
 		<template #left>
-			<!-- skeleton -->
+			<!-- skeleton only for tabbed pages -->
 			<div
-				v-if="measuring && isTabbed"
+				v-if="isTabbed && measuring"
 				class="flex items-center gap-3 py-2"
 			>
 				<USkeleton class="h-6 w-6 rounded-md" />
@@ -222,9 +242,8 @@ const items = computed<NavigationMenuItem[][]>(() => {
 				<USkeleton class="h-4 w-20" />
 			</div>
 
-			<!-- hidden full layout -->
+			<!-- SHADOW MENU: ALWAYS RENDERED (NEVER v-if!) -->
 			<div
-				v-if="isTabbed"
 				ref="measureRoot"
 				class="absolute opacity-0 pointer-events-none h-0 overflow-hidden"
 			>
@@ -242,8 +261,9 @@ const items = computed<NavigationMenuItem[][]>(() => {
 				/>
 			</div>
 
-			<!-- actual menu -->
+			<!-- REAL MENU (only if tabbed) -->
 			<div
+				v-if="isTabbed"
 				ref="navRoot"
 				:style="{
 					visibility: measuring ? 'hidden' : 'visible',
