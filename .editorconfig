@@ -1,0 +1,27 @@
+# editorconfig.org
+
+# Top-level configuration file
+root = true
+
+[*]
+indent_size = 4
+indent_style = tab
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Override for Windows-specific scripts (CRLF)
+[*.bat]
+end_of_line = crlf
+
+[*.cmd]
+end_of_line = crlf
+
+# Override for markdown and text files
+[*.{md,txt}]
+trim_trailing_whitespace = false
+insert_final_newline = true
+
+# .editorconfig can't be used to remove trailing empty lines at the end of a file.
+# You need to use ESLint or Prettier to automatically remove extra empty lines.

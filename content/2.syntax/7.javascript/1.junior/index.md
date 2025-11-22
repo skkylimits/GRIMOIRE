@@ -1,0 +1,9 @@
+---
+title: Junior
+description: Great Teacher Onizuka
+navigation: false
+---
+
+> A great C++ teacher once said a long long time ago. "To be a great programmer, you first have to write broken, code. Then you have to fix it. You learn just as much fixing your code, then writing it. You can't copy-pasta code and learn, even if you understand what you copied.
+
+`WHY? Because you don't learn the 1 critical step: solving the problem yourself"`

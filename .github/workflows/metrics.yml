@@ -1,0 +1,81 @@
+name: 🧪 Measure Nuxt Performance
+
+on:
+  push:
+    branches: [v4]
+
+jobs:
+  measure:
+    runs-on: ${{ matrix.os }} # Dynamisch gebaseerd op de matrix
+    timeout-minutes: 10
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest] # Je kunt dit uitbreiden met andere omgevingen als je wilt
+        node: [22] # Voorbeeld met meerdere versies van Node.js (of pas aan naar je wens)
+
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+        shell: bash
+
+    env:
+      GITHUB_WORKSPACE: ${{ github.workspace }}
+
+    steps:
+      # ⚙️ Fase 1 — Code checkout
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@v4
+
+      # 🧭 Fase 2 — Inspect & debug omgeving
+      - name: 🔍 Debug environment
+        run: |
+          echo "🏗️ Environment info"
+          echo "PWD: $(pwd)"
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          echo "HOME: $HOME"
+          echo "User: $(whoami)"
+          echo "Node: $(command -v node || echo 'none')"
+          echo "pnpm: $(command -v pnpm || echo 'none')"
+          echo "📂 Files in repo:"
+          ls -la
+
+      # 🧱 Fase 3 — Setup Node + pnpm (met caching)
+      - name: 🧱 Setup Node.js + pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }} # Dynamisch gebaseerd op de matrix
+          cache: pnpm
+
+      # 📦 Fase 4 — Dependencies installeren
+      - name: 📦 Install dependencies
+        run: |
+          echo "Installing dependencies..."
+          pnpm install --frozen-lockfile
+          echo "✅ Dependencies installed successfully"
+
+      # ⚡ Fase 5 — Measure dev startup
+      - name: ⚡ Measure dev startup
+        run: node scripts/metrics/measure-dev.js
+
+      # 🏗️ Fase 6 — Measure build time
+      - name: 🏗️ Measure build time
+        run: node scripts/metrics/measure-build.js
+
+      # 🌐 Fase 7 — Measure preview startup
+      - name: 🌐 Measure preview startup
+        run: node scripts/metrics/measure-preview.js
+
+      # 🚨 Fase 8 — Validate thresholds
+      - name: 🚨 Validate performance thresholds
+        run: node scripts/metrics/check-performance-thresholds.js
+
+      # 📤 Fase 9 — Upload metrics-artifacts
+      - name: 📤 Upload metrics JSON files
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuxt-performance-metrics
+          path: metrics/
