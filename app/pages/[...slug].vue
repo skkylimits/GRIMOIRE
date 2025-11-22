@@ -14,23 +14,27 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([])) ?
 
 const { data: page } = await useAsyncData(route.path, () => queryCollection('docs').path(route.path).first())
 
-if (!page.value) {
-	const navItem = findNavItemByPath(route.path, navigation.value)
+// if (!page.value) {
+// 	const navItem = findNavItemByPath(route.path, navigation.value)
 
-	if (navItem?.children?.length) {
-		const redirectTarget = findFirstValidMdNode(navItem.children)
-		if (redirectTarget) {
-			navigateTo(redirectTarget.path) // await is optioneel, maar explicieter
-		}
-	}
-	throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
-}
+// 	if (navItem?.children?.length) {
+// 		const redirectTarget = findFirstValidMdNode(navItem.children)
+// 		if (redirectTarget) {
+// 			navigateTo(redirectTarget.path) // await is optioneel, maar explicieter
+// 		}
+// 	}
+// 	throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+// }
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
 	return queryCollectionItemSurroundings('docs', route.path, {
 		fields: ['description'],
 	})
 })
+
+if (!page.value) {
+	throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
 
 const title = page.value.seo?.title || page.value.title
 const description = page.value.seo?.description || page.value.description
