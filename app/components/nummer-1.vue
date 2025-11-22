@@ -211,7 +211,7 @@ const items = computed<NavigationMenuItem[][]>(() => {
 		<template #left>
 			<!-- skeleton -->
 			<div
-				v-if="measuring && isTabbed"
+				v-if="isTabbed && measuring"
 				class="flex items-center gap-3 py-2"
 			>
 				<USkeleton class="h-6 w-6 rounded-md" />
@@ -244,6 +244,7 @@ const items = computed<NavigationMenuItem[][]>(() => {
 
 			<!-- actual menu -->
 			<div
+				v-if="isTabbed"
 				ref="navRoot"
 				:style="{
 					visibility: measuring ? 'hidden' : 'visible',
