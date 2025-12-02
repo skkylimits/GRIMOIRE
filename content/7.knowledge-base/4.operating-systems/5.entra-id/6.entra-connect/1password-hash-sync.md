@@ -22,7 +22,7 @@ Password Hash Synchronization is a hybrid identity sign-in method where Microsof
 Use PHS if you want a simpler, highly available cloud authentication with fewer infrastructure needs.
 ::
 
-![arch1](/content/7.knowledge-base/6.operating-systems/5.entra-id/6.entra-connect/1password-hash-sync/arch1.png)
+![arch1](/content/7.knowledge-base/4.operating-systems/5.entra-id/6.entra-connect/1password-hash-sync/arch1.png)
 
 ## Benefits
 
