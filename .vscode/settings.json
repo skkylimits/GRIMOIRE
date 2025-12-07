@@ -57,5 +57,6 @@
 	"tailwindCSS.classAttributes": [
 		"active-class",
 		"inactive-class"
-	]
+	],
+	"cmake.sourceDirectory": "/home/skkylimits/Heaven/GRIMOIRE/node_modules/.pnpm/bare-fs@4.5.1/node_modules/bare-fs"
 }
