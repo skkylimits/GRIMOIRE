@@ -59,6 +59,7 @@ const links = computed<NavigationMenuItem[]>(() => [
 			{ label: 'Git', to: '/kitt/git', icon: 'i-simple-icons-git', description: truncateDescription('A version control system to track changes in source code.') },
 			{ label: 'proxychains4', to: '/kitt/proxychains4', icon: 'i-eos-icons:proxy-outlined', description: truncateDescription('A tool for routing traffic through multiple proxies for anonymity.') },
 			{ label: 'Nmap', to: '/kitt/nmap', icon: 'file-icons:nmap', description: truncateDescription('A network scanning tool used to discover hosts, services.') },
+			{ label: 'Ncat', to: '/kitt/ncat', icon: 'system-uicons:reverse-alt', description: truncateDescription('Ncat is a feature-packed networking utility which reads and writes data across networks from the command line.') },
 			{ label: 'Wireshark', to: '/kitt/wireshark', icon: 'simple-icons:wireshark', description: truncateDescription('Wireshark lets you dive deep into your network traffic') },
 			{ label: 'Burpsuite', to: '/kitt/burpsuite', icon: 'simple-icons:burpsuite', description: truncateDescription('Bursuite: Unlock Every Door, Exploit Every Gap.') },
 			{ label: 'Docker', to: '/kitt/docker', icon: 'i-vscode-icons-file-type-dockertest', description: truncateDescription('Dockerize your life...') },
