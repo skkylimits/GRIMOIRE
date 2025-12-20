@@ -28,12 +28,12 @@ const providers = [
 		class: 'cursor-pointer',
 		onClick: async () => {
 			try {
-				// toast.add({
-				//   title: 'Redirecting to GitHub...',
-				//   description: 'Please complete the login in the popup or redirect.',
-				//   timeout: 3000
-				// })
-				await signIn('github', { callbackUrl: window.location.origin })
+				// SSR-safe: gebruik de route query parameter of fallback naar /
+				const route = useRoute()
+				const callbackUrl = (route.query.callbackUrl as string) || '/'
+
+				console.log('🚀 Starting GitHub sign-in with callback:', callbackUrl)
+				await signIn('github', { callbackUrl, redirect: true })
 			}
 			catch (err) {
 				console.error('❌ GitHub sign-in failed:', err)

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
-import { computed, ref, watchEffect } from 'vue'
 import { queryCollection } from '#content/server'
+import { computed, ref, watchEffect } from 'vue'
 
 const props = defineProps<{
 	tabs: {
@@ -19,7 +19,7 @@ const { data: resolvedDocs, pending, error } = await useAsyncData(fetchKey.value
 	if (!props.tabs.length)
 		return []
 
-	const docs = await Promise.all(props.tabs.map(async tab => {
+	const docs = await Promise.all(props.tabs.map(async (tab) => {
 		const doc = await queryCollection('docs').path(tab.path).first()
 		return { ...tab, doc: doc as ParsedContent | null }
 	}))
@@ -53,7 +53,7 @@ watchEffect(() => {
 
 					<UAlert
 						v-else-if="error || !item.doc"
-						color="red"
+						color="error"
 						icon="i-lucide-alert-triangle"
 						title="Content niet gevonden"
 						description="Controleer het pad in de tab-config."

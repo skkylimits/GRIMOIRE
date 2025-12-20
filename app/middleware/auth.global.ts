@@ -11,6 +11,11 @@ export default defineNuxtRouteMiddleware((to) => {
 	// 	return // ⛔️ middleware stopt hier in dev
 	// }
 
+	if (process.server) {
+		console.warn('NODE_ENV:', process.env.NODE_ENV)
+		console.warn('NUXT_AUTH_ORIGIN:', process.env.NUXT_AUTH_ORIGIN)
+	}
+
 	// 🔒 Normal auth flow
 	const { status } = useAuth()
 
