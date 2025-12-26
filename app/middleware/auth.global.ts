@@ -13,7 +13,9 @@ export default defineNuxtRouteMiddleware((to) => {
 
 	if (process.server) {
 		console.warn('NODE_ENV:', process.env.NODE_ENV)
+		console.log('NODE_ENV:', process.env.NODE_ENV)
 		console.warn('NUXT_AUTH_ORIGIN:', process.env.NUXT_AUTH_ORIGIN)
+		console.log('NUXT_AUTH_ORIGIN:', process.env.NUXT_AUTH_ORIGIN)
 	}
 
 	// 🔒 Normal auth flow
