@@ -131,6 +131,7 @@ int main() {
 ```
 
 **Waarom dit krachtig is:**
+
 - ✅ Draait parallel aan main thread
 - ✅ Detecteert attach binnen ~1 seconde
 - ✅ Moeilijker te patchen (je moet de thread vinden en suspenderen)
@@ -255,14 +256,14 @@ Let op: De `Sleep()` calls tussen de checks creëren een **detection window** va
 
 `IsDebuggerPresent()` is **laag 1** van een multi-layered detectie strategie:
 
-| Laag | Techniek | Omzeiling Moeilijkheid |
-|------|----------|------------------------|
-| **1** | `IsDebuggerPresent()` | ⭐ Makkelijk (patch return value) |
-| **2** | `CheckRemoteDebuggerPresent()` | ⭐⭐ Medium |
-| **3** | PEB flags handmatig checken | ⭐⭐⭐ Moeilijker |
-| **4** | Timing checks (RDTSC) | ⭐⭐⭐⭐ Complex |
-| **5** | Hardware breakpoint detectie | ⭐⭐⭐⭐ Complex |
-| **6** | Process blacklist | ⭐⭐⭐⭐⭐ Zeer moeilijk |
+| Laag  | Techniek                       | Omzeiling Moeilijkheid            |
+| ----- | ------------------------------ | --------------------------------- |
+| **1** | `IsDebuggerPresent()`          | ⭐ Makkelijk (patch return value) |
+| **2** | `CheckRemoteDebuggerPresent()` | ⭐⭐ Medium                       |
+| **3** | PEB flags handmatig checken    | ⭐⭐⭐ Moeilijker                 |
+| **4** | Timing checks (RDTSC)          | ⭐⭐⭐⭐ Complex                  |
+| **5** | Hardware breakpoint detectie   | ⭐⭐⭐⭐ Complex                  |
+| **6** | Process blacklist              | ⭐⭐⭐⭐⭐ Zeer moeilijk          |
 
 **Malware combineert meerdere technieken** - als 1 omzeild wordt, vangen andere het op.
 
@@ -326,6 +327,7 @@ BOOL IsUnderAnalysis() {
    - Transparanter voor malware
 
 3. **Handmatige patch**:
+
 ```asm
 ; Origineel
 IsDebuggerPresent:

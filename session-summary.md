@@ -17,6 +17,7 @@ navigation: false
 #### Major Architectural Reorganization - Tier-Based Structure
 
 **Oude Structuur (1.develop/):**
+
 - 10 sequentiële modules (1-10)
 - Lineair progressie model
 - Modules: bouwstenen, windows-internals, payload-placement-and-encryption, payload-execution-and-injection, obfuscation-and-IAT-manipulation, process-and-argumentation-manipulation, api-hooking, syscalls, anti-analysis-and-evasion, advanced-edr-bypass
@@ -49,6 +50,7 @@ Genummerde directories volgens pedagogisch tier systeem:
 **Totaal:** 176 modules gemapped over alle tiers
 **Pedagogische Correctheid:** 100% (alle dependencies gevalideerd)
 **Belangrijke Correcties:**
+
 1. Thread Manipulation VOOR Classic Injection (Tier 3)
 2. Custom Implementations VOOR Hardware Breakpoints (Tier 6)
 3. NTDLL Unhooking VOOR ETW/AMSI (Tier 7)
@@ -58,40 +60,48 @@ Genummerde directories volgens pedagogisch tier systeem:
 #### Tier-Based Architecture Philosophy
 
 **Fundamentals (10-15):**
+
 - **10.payload-engineering** - Basis payload preparation technieken
 - **15.targeting-and-staging** - Process targeting en remote staging
 
 **Core Techniques (40-60):**
+
 - **40.injection-techniques** - Fundamentele injection methods
 - **50.static** - Static analysis bypass
 - **60.runtime** - Runtime evasion
 
 **Advanced Layer (70-80):**
+
 - **70.API-and-syscall** - API/syscall hooking en reimplementation
 - **80.detection-bypass** - EDR/AV bypass techniques
 
 **Specialized Topics (90-93):**
+
 - **90.advanced-execution** - Geavanceerde execution methods
 - **91.credential-access** - Credential dumping
 - **92.persistence-and-C2** - Persistence en command & control
 - **93.specialized** - Niche technieken
 
 **Kernel Level (99):**
+
 - **99.kernel** - Kernel-level exploitation
 
 #### Pedagogische Voordelen
 
 **Tier Numbering System:**
+
 - Ruimte voor toekomstige insertions (10-15 gap, 70-80 gap, 90-93 gap)
 - Geen complete renumbering nodig bij uitbreidingen
 - Thematische clustering in plaats van lineaire volgorde
 
 **Dependency Management:**
+
 - Thread manipulation komt vóór injection techniques (logische volgorde)
 - Custom implementations vóór hardware breakpoints (foundation first)
 - NTDLL unhooking vóór ETW/AMSI bypass (basic before advanced)
 
 **MITRE ATT&CK Alignment:**
+
 - Better reflects real-world malware development workflow
 - Categorization similar to ATT&CK tactics and techniques
 - Easier mapping to defensive frameworks
@@ -99,12 +109,14 @@ Genummerde directories volgens pedagogisch tier systeem:
 ### Tools/Technieken Toegevoegd
 
 **Planning & Documentation:**
+
 - **complete-module-mapping.md** - Comprehensive 176-module mapping document
 - Tier architecture design document
 - Pedagogical dependency validation
 - Migration strategy documentation
 
 **Directory Structure:**
+
 - 12 nieuwe tier directories
 - Subdirectory scaffolding per tier
 - Consistent naming conventions (numerical prefixes)
@@ -118,26 +130,30 @@ Genummerde directories volgens pedagogisch tier systeem:
 #### Tier-Based Numbering Rationale
 
 **Probleem met oude structuur:**
+
 - Lineaire nummering (1-10) moeilijk uit te breiden
 - Toevoegen van nieuwe modules tussen bestaande vereist renumbering
 - Geen thematische clustering mogelijk
 - Moeilijk te onderhouden bij groei
 
 **Oplossing met tier system:**
+
 - Numbered gaps (10, 15, 40, 50, 60, 70, 80, 90-93, 99)
 - Thematische clustering per tier
-- Ruimte voor toekomstige modules (bijv. 20.*, 30.*, 85.*)
+- Ruimte voor toekomstige modules (bijv. 20._, 30._, 85.\*)
 - Betere alignment met industry frameworks (MITRE ATT&CK)
 
 #### Preservation Approach
 
 **0.develop/ backup:**
+
 - Volledige backup van eerdere state
 - Geen data verlies tijdens migratie
 - Mogelijkheid tot rollback indien nodig
 - Historical reference voor vergelijkingen
 
 **1.develop/ als source:**
+
 - Originele content blijft intact tijdens migratie
 - Verwijdering pas na volledige verificatie
 - Cross-referencing mogelijk tijdens transitie
@@ -145,11 +161,13 @@ Genummerde directories volgens pedagogisch tier systeem:
 #### Pedagogical Ordering Validation
 
 **Dependency correcties:**
+
 1. **Thread Manipulation** - Fundamenteel concept dat vóór injection moet komen
 2. **Custom Implementations** - Basis voor hardware breakpoint hooking
 3. **NTDLL Unhooking** - Vereiste kennis voor ETW/AMSI bypass
 
 **Learning Path Optimization:**
+
 - Fundamentals → Techniques → Evasion → Advanced Topics
 - Elke tier bouwt voort op vorige tiers
 - Cross-tier dependencies expliciet gedocumenteerd
@@ -157,12 +175,14 @@ Genummerde directories volgens pedagogisch tier systeem:
 #### Educational Context Maintenance
 
 **Defensive Research Focus:**
+
 - Tier structure facilitates blue team learning
 - Easier mapping to detection rules per tier
 - Clear categorization voor IoC analysis
 - Better alignment met defensive playbooks
 
 **Balance:**
+
 - Offensive technique documentation
 - Defensive application context
 - Educational objectives per tier
@@ -219,16 +239,18 @@ Dit representeert een **fundamentele verschuiving** in hoe de knowledge base geo
 #### Scalability Benefits
 
 Het tier system staat toekomstige groei toe zonder architectural pain:
-- **Tier 20.*** - Mogelijk voor advanced payload engineering
-- **Tier 30.*** - Ruimte voor network-based techniques
-- **Tier 85.*** - Space tussen detection bypass en advanced execution
-- **Tier 94-98.*** - Additional specialized categories
+
+- **Tier 20.\*** - Mogelijk voor advanced payload engineering
+- **Tier 30.\*** - Ruimte voor network-based techniques
+- **Tier 85.\*** - Space tussen detection bypass en advanced execution
+- **Tier 94-98.\*** - Additional specialized categories
 
 Dit elimineert de need voor massive renumbering operations.
 
 #### MITRE ATT&CK Inspiration
 
 De nieuwe structuur mirror MITRE ATT&CK's approach:
+
 - **Tactics** (Tiers) - High-level categorization
 - **Techniques** (Subdirectories) - Specific methods
 - **Procedures** (Individual modules) - Concrete implementations
@@ -238,6 +260,7 @@ Dit maakt mapping naar defensive frameworks veel intuïtiever.
 #### Learning Path Optimization
 
 De tier structure better reflects actual malware development workflow:
+
 1. Learn payload fundamentals (Tier 10)
 2. Understand targeting (Tier 15)
 3. Master injection (Tier 40)
@@ -253,6 +276,7 @@ Dit is precies hoe een security professional zou leren.
 #### Migration Complexity
 
 Deze reorganization is **niet triviaal**:
+
 - 176 modules moeten worden gemigreerd
 - Alle cross-references moeten worden updated
 - Navigation files moeten worden herschreven
@@ -264,6 +288,7 @@ De backup approach (0.develop/) is cruciaal voor zero data loss.
 #### Backward Compatibility
 
 Door 0.develop/ en 1.develop/ te behouden tijdens migratie:
+
 - Historical git blame blijft werken
 - Links in oude commits blijven valid
 - Rollback is mogelijk indien problemen
@@ -272,6 +297,7 @@ Door 0.develop/ en 1.develop/ te behouden tijdens migratie:
 #### Educational Context Preservation
 
 Deze restructure maintaint het core educational purpose:
+
 - Blue team defensive focus
 - Offensive techniques voor detection development
 - Authorized testing en research context
@@ -282,6 +308,7 @@ De tier structure **versterkt** dit door betere categorization voor defensive pl
 #### Next Session Focus
 
 Volgende sessie moet focussen op:
+
 1. **Content Migration** - Systematisch modules verplaatsen
 2. **Navigation Setup** - .navigation.yml files creëren
 3. **Index Documentation** - 0.index.md per tier
@@ -292,6 +319,7 @@ Volgende sessie moet focussen op:
 #### Tool Alignment
 
 De tier structure maakt toekomstige tooling development makkelijker:
+
 - **Detection rule generators** - Per tier signature generation
 - **IoC extractors** - Tier-based IoC categorization
 - **Learning path generators** - Automated curriculum building
@@ -302,6 +330,7 @@ Dit was niet mogelijk met de oude lineaire structure.
 #### Preservation of Educational Quality
 
 Tijdens migratie moet **content quality** maintained blijven:
+
 - Geen loss van technical detail
 - Formatting standards blijven consistent
 - Cross-references blijven accuraat
@@ -315,6 +344,7 @@ De mapping document dient als quality assurance checklist.
 ## Sessie 2025-11-09
 
 ### Module(s) Bewerkt
+
 - Module 8: Syscalls
 - Module 3: Payload Placement and Encryption
 - Module 9: Anti-Analysis and Evasion
@@ -323,29 +353,35 @@ De mapping document dient als quality assurance checklist.
 ### Wat is Bereikt
 
 #### Module 8: Syscalls - Uitgebreide documentatie toegevoegd
+
 1. **1.syscalls.md** - Update: Fundamentele syscall concepten, SSN structuur, Nt vs Zw syscalls
 2. **2.userland-hooking.md** - Nieuw: EDR userland hooking, direct/indirect syscalls, unhooking
 3. **3.SysWhispers.md** - Nieuw: SysWhispers v1/v2/v3 evolution en implementatie
 4. **4.hells-gate.md** - Nieuw: Hell's Gate techniek voor dynamische SSN resolving
 
 #### Module 3: Payload Placement and Encryption - Content updates
+
 - **3.text.md** - Update: .text sectie payload placement met pragma directives
 - **5.encryption.md** - Update: Encryption technieken (inhoud niet gespecificeerd)
 - **8.AES.md** - Update: AES encryption implementatie (inhoud niet gespecificeerd)
 
 #### Module 9: Anti-Analysis and Evasion
+
 - **9.bypassing-AVs.md** - Update: Comprehensive payload loader met alle technieken combined
 
 #### Application Infrastructure
+
 - **app/pages/[...slug].vue** - Applicatie page modifications (specifieke wijzigingen onbekend)
 
 #### Public Assets
+
 - Nieuwe directory: `public/content/7.knowledge-base/6.malware/1.develop/8-syscalls/`
 - Syscall module screenshots en afbeeldingen toegevoegd
 
 ### Nieuwe Concepten Gedocumenteerd
 
 #### Syscalls Fundamentals
+
 - **System Service Numbers (SSN)** - Unieke nummers per syscall, variërend per OS versie
 - **SSN relaties in memory** - Sequentiële nummering (vorige SSN + 1)
 - **Syscall structure** - `mov r10, rcx; mov eax, SSN; syscall` pattern
@@ -353,6 +389,7 @@ De mapping document dient als quality assurance checklist.
 - **WoW64 compatibility** - test/jne instructies voor 32-bit op 64-bit
 
 #### Userland Hooking & Bypass
+
 - **API hooking** - EDR monitoring via userland syscall hooks
 - **Hook placement** - Voor syscall instructie, na user-mode transition
 - **Direct syscalls** - Assembly implementation om hooks te omzeilen
@@ -360,11 +397,13 @@ De mapping document dient als quality assurance checklist.
 - **Unhooking** - Vervangen van gehookte NTDLL met clean versie van disk
 
 #### SysWhispers Evolution
+
 - **SysWhispers v1** - Hardcoded SSNs per Windows versie via PEB checking
 - **SysWhispers v2** - Sorting by System Call Address voor dynamische SSN resolving
 - **SysWhispers v3** - Indirect syscalls met randomized jumper voor stealthier execution
 
 #### Hell's Gate Technique
+
 - **Opcode scanning** - Lezen van `0x4c 0x8b 0xd1 0xb8` bytes voor syscall identificatie
 - **Hook traversal** - Incrementeel zoeken door gehookte bytes heen
 - **SSN extraction** - Bitwise operations `(high << 8) | low` voor SSN berekening
@@ -372,6 +411,7 @@ De mapping document dient als quality assurance checklist.
 - **VX_TABLE structure** - Syscall organizatie met address, hash en SSN
 
 #### Comprehensive Payload Loader
+
 - **Hell's Gate integration** - Direct syscalls voor all injection operations
 - **Mapping injection** - NtCreateSection, NtMapViewOfSection voor payload placement
 - **RC4 encryption** - SystemFunction032 voor payload encryption/decryption
@@ -384,12 +424,14 @@ De mapping document dient als quality assurance checklist.
 ### Tools/Technieken Toegevoegd
 
 #### Syscall Implementation Tools
+
 - **SysWhispers** (v1/v2/v3) - Python script voor syscall stub generation
 - **Hell's Gate** - Dynamic SSN resolution library
 - **HellShell.exe** - RC4 payload encryption tool
 - **KeyGuard2** - Key encryption tool voor brute force demo
 
 #### WinAPI Functions (Hashing Implementation)
+
 - `GetTickCount64` - Timing verification voor delays
 - `OpenProcess` - Process handle acquisition
 - `CallNextHookEx` - Hook chain management
@@ -403,6 +445,7 @@ De mapping document dient als quality assurance checklist.
 - `CloseHandle` - Handle cleanup
 
 #### Native API / Syscalls (via Hell's Gate)
+
 - `NtCreateSection` - Section object creation voor mapping
 - `NtMapViewOfSection` - Local en remote memory mapping
 - `NtUnmapViewOfSection` - Memory cleanup
@@ -414,6 +457,7 @@ De mapping document dient als quality assurance checklist.
 - `SystemFunction032` - RC4 encryption/decryption (Advapi32/Cryptsp)
 
 #### Structures & Types
+
 - `VX_TABLE_ENTRY` - Individual syscall entry (address, hash, SSN)
 - `VX_TABLE` - Complete syscall table structure
 - `API_HASHING` - Function pointer table voor gehashte APIs
@@ -425,6 +469,7 @@ De mapping document dient als quality assurance checklist.
 ### Belangrijke Beslissingen
 
 #### Syscall Implementation Strategy
+
 - **Hell's Gate gekozen** als primary method voor SSN resolution
   - Voordeel: Werkt zelfs met gehookte syscalls via opcode scanning
   - Nadeel: Complexer dan SysWhispers, maar flexibeler
@@ -433,6 +478,7 @@ De mapping document dient als quality assurance checklist.
   - Moeilijker te detecteren dan direct syscalls van buiten NTDLL
 
 #### Educational Documentation Focus
+
 - **Comprehensive payload loader** als culmination van alle technieken
 - Demonstreert integratie van:
   - Syscalls (Hell's Gate)
@@ -445,12 +491,14 @@ De mapping document dient als quality assurance checklist.
 ### Volgende Stappen
 
 #### Syscalls Module Completion
+
 - [ ] Add Halo's Gate technique documentation (neighbor syscall SSN inference)
 - [ ] Document TartarusGate for runtime SSN sorting
 - [ ] Add SysWhispers3 practical implementation example
 - [ ] Create detection signatures voor direct/indirect syscall patterns
 
 #### Module Cross-Integration
+
 - [ ] Link syscalls module met injection modules (Module 4)
 - [ ] Connect with API hooking module (Module 7)
 - [ ] Reference from EDR bypass module (Module 10)
@@ -459,9 +507,11 @@ De mapping document dient als quality assurance checklist.
 ### Notities
 
 #### Syscall Complexity
+
 De syscall modules demonstreren een fascinerende evolutie van evasion techniques. Van simpele hardcoded SSNs (SysWhispers v1) naar dynamische resolution (v2) naar indirect execution (v3) en uiteindelijk runtime opcode scanning (Hell's Gate). Elke iteratie was een response op defensive improvements.
 
 #### Hell's Gate Ingenuity
+
 De Hell's Gate techniek is bijzonder slim omdat het de hook letterlijk "overslaat" door byte-per-byte door memory te lopen totdat het de originele syscall instructies vindt. Het gebruikt boundary checking (syscall en ret instructies) om te voorkomen dat het te ver zoekt. De bitwise operations voor SSN extraction zijn elegant.
 
 ---

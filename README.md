@@ -29,6 +29,7 @@ De kennisbank is georganiseerd volgens een **tier-based architecture** voor bete
 **Migration Status**: Actively reorganizing from 10 sequential modules naar tier-based structure
 
 **Nieuwe Tier Structure**:
+
 - **Tier 1 (10-15)**: Fundamentals - Payload Engineering, Targeting & Staging
 - **Tier 2 (40-60)**: Core Techniques - Injection, Static Bypass, Runtime Evasion
 - **Tier 3 (70-80)**: Advanced Layer - API/Syscalls, Detection Bypass
@@ -36,6 +37,7 @@ De kennisbank is georganiseerd volgens een **tier-based architecture** voor bete
 - **Tier 5 (99)**: Kernel - Kernel-level techniques
 
 **Reorganization Progress**:
+
 - ✅ Tier architecture designed (12 tier directories)
 - ✅ 176 modules mapped to new structure
 - ✅ Pedagogical dependencies validated
@@ -45,6 +47,7 @@ De kennisbank is georganiseerd volgens een **tier-based architecture** voor bete
 - ⏸️ Index documentation pending
 
 **Benefits**:
+
 - Numbered gaps allow future insertions without renumbering entire structure
 - Thematic clustering instead of rigid linear progression
 - MITRE ATT&CK-inspired categorization for better defensive mapping
@@ -53,6 +56,7 @@ De kennisbank is georganiseerd volgens een **tier-based architecture** voor bete
 ### Recent Updates
 
 **2025-11-20** - **Major Tier-Based Architecture Reorganization**:
+
 - Designed and implemented tier-based structure (12 tier directories)
 - Mapped 176 modules from old structure to new tiers
 - Created complete-module-mapping.md documentation with full module inventory
@@ -65,6 +69,7 @@ De kennisbank is georganiseerd volgens een **tier-based architecture** voor bete
 - Next steps: Content migration, navigation files, index documentation
 
 **2025-11-19** - **Module Reorganization & Documentation Quality**:
+
 - Module 3 restructuring: Binary Signing moved from Module 4, HellShell/MiniShell renumbered (14/15 → 17/18)
 - Brute Force Decryption documentation added to Module 3
 - Module 6 (Runtime/IAT): 7 documentation files updated with formatting improvements
@@ -75,6 +80,7 @@ De kennisbank is georganiseerd volgens een **tier-based architecture** voor bete
 - CRT removal duplication identified (requires resolution)
 
 **2025-11-18** - **Module 3: Payload Placement and Encryption**:
+
 - Binary Entropy Reduction documentatie (complete vertaling EN→NL + formatting)
 - Shannon's Entropy fundamentals (0-8 schaal, malware detection thresholds)
 - 4 entropy reduction technieken: algorithm selection, English strings, padding, CRT removal
@@ -83,6 +89,7 @@ De kennisbank is georganiseerd volgens een **tier-based architecture** voor bete
 - Best practices vergelijkingstabel
 
 **2025-11-09** - **Module 8: Syscalls** - 4 documenten toegevoegd/geüpdatet:
+
 - Syscalls fundamentals (SSN, Nt vs Zw syscalls, syscall structure)
 - Userland hooking en EDR bypass techniques
 - SysWhispers v1/v2/v3 evolution
@@ -104,6 +111,7 @@ De kennisbank is georganiseerd volgens een **tier-based architecture** voor bete
 **Dit project bevat educatief materiaal** over malware development en offensive security technieken. Alle content is **uitsluitend** bedoeld voor:
 
 ✅ **Toegestaan**:
+
 - Geautoriseerde security testing en penetration testing
 - CTF (Capture The Flag) challenges
 - Security research en defensive analyse
@@ -112,6 +120,7 @@ De kennisbank is georganiseerd volgens een **tier-based architecture** voor bete
 - Defensive countermeasures ontwerpen
 
 ❌ **Niet toegestaan**:
+
 - Nieuwe evasion technieken ontwikkelen voor kwaadwillige doeleinden
 - Malware effectiveness verbeteren
 - Security controls omzeilen voor non-educational purposes

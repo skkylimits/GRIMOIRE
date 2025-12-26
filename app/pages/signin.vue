@@ -32,6 +32,7 @@ const providers = [
 				const route = useRoute()
 				const callbackUrl = (route.query.callbackUrl as string) || '/'
 
+				// eslint-disable-next-line no-console
 				console.log('🚀 Starting GitHub sign-in with callback:', callbackUrl)
 				await signIn('github', { callbackUrl, redirect: true })
 			}

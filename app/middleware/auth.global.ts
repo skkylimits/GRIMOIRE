@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 export default defineNuxtRouteMiddleware((to) => {
 	// // 🧪 Skip auth logic entirely when testing
 	// if (import.meta.env.NUXT_AUTH_DISABLED === 'true') {
@@ -11,28 +12,33 @@ export default defineNuxtRouteMiddleware((to) => {
 	// 	return // ⛔️ middleware stopt hier in dev
 	// }
 
+	// 🔍 Debug logging (server-side only)
 	if (process.server) {
-		console.warn('NODE_ENV:', process.env.NODE_ENV)
-		console.log('NODE_ENV:', process.env.NODE_ENV)
-		console.warn('NUXT_AUTH_ORIGIN:', process.env.NUXT_AUTH_ORIGIN)
-		console.log('NUXT_AUTH_ORIGIN:', process.env.NUXT_AUTH_ORIGIN)
+		console.log('🔧 [MIDDLEWARE] Route:', to.path)
+		console.log('🔧 [MIDDLEWARE] NODE_ENV:', process.env.NODE_ENV)
+		console.log('🔧 [MIDDLEWARE] NUXT_AUTH_ORIGIN:', process.env.NUXT_AUTH_ORIGIN)
+		console.log('🔧 [MIDDLEWARE] AUTH_ORIGIN:', process.env.AUTH_ORIGIN)
 	}
 
 	// 🔒 Normal auth flow
 	const { status } = useAuth()
 
-	// console.log('✅ Middleware geladen op', import.meta.server ? 'server' : 'client', 'voor route:', to.path)
+	console.log('🔧 [MIDDLEWARE] Auth status:', status.value, '| Route:', to.path)
 
-	if (status.value === 'loading')
+	if (status.value === 'loading') {
+		console.log('🔧 [MIDDLEWARE] Status is loading, waiting...')
 		return
+	}
 
 	// Niet ingelogd → redirect naar loginpagina
 	if (status.value === 'authenticated' && to.path === '/signin') {
+		console.log('🔧 [MIDDLEWARE] Already authenticated, redirecting to home')
 		return navigateTo('/')
 	}
 
 	// Al ingelogd maar naar signin → stuur naar home
 	if (status.value === 'unauthenticated' && to.path !== '/signin') {
+		console.log('🔧 [MIDDLEWARE] Not authenticated, redirecting to /signin')
 		return navigateTo('/signin')
 	}
 })

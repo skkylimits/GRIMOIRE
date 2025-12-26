@@ -13,6 +13,7 @@ Deze repo is mijn leerpad naar APT-level cybersecurity expertise. Overdag werk i
 **Missie**: Bedrijven beschermen door op extreem diep technisch niveau te begrijpen hoe aanvallers en malware werken, zodat ik betere detecties en verdedigingen kan ontwerpen.
 
 **Waarom malware development & Windows internals**:
+
 - Betere detection rules schrijven voor XDR/EDR-oplossingen
 - Red team engagements effectiever uitvoeren
 - Bewijzen welke technieken security-oplossingen kunnen omzeilen (voor verbetering)
@@ -94,6 +95,7 @@ All documentation lives in `/content/` organized as educational modules:
     - **99.kernel/** - Kernel-level techniques
 
 **Module Structure**:
+
 - Each module directory contains a `.navigation.yml` file (module metadata: title, icon)
 - `0.index.md` - Module overview
 - Numbered topic files (e.g., `1.topic.md`, `2.topic.md`)
@@ -141,10 +143,12 @@ Try to use simple language where possible without losing detail.
 **Markdown Conventions**:
 
 **Frontmatter**:
+
 - Required fields: `title`, `description`, `navigation`
 - Use `toc: depth: 1` **only** if TOC becomes scrollable
 
 **Callout Blocks**:
+
 - `::note` - General information
 - `::tip` - Helpful hints and best practices
 - `::important` - Critical information
@@ -152,10 +156,12 @@ Try to use simple language where possible without losing detail.
 - `::caution` - Dangerous operations or security concerns
 
 **Emoji Usage**:
+
 - All-or-nothing per heading level (for visual alignment in TOC)
 - Use consistently across same heading level or not at all
 
 **Code Blocks**:
+
 - Use syntax highlighting (supported languages in nuxt.config.ts)
 - Dutch comments in code examples (with English technical terms preserved)
 - Always include language identifier
@@ -182,20 +188,24 @@ Try to use simple language where possible without losing detail.
 **ESLint**: Tab indentation, single quotes, no semicolons, content markdown files excluded from linting
 
 **Auth Configuration**:
+
 - globalAppMiddleware is disabled (manual middleware usage)
 - NextAuth.js with GitHub provider
 - Auth routes at `/api/auth`
 
 **Icons**:
+
 - Iconify provider for standard icons
 - Custom local icon collection in `assets/icons/` with prefix `custom:`
 
 **Theme**:
+
 - Custom color palette (primary: red, secondary: amber, tertiary: emerald, etc.)
 - Custom callout styling for each type
 - Dark mode support enabled
 
 **Content Rendering**:
+
 - GitHub Dark theme for code highlighting
 - TOC search depth: 1
 - Prose components enabled
@@ -214,6 +224,7 @@ This repository contains **educational materials** on malware development and of
 **When working with this codebase:**
 
 ✅ **Allowed Activities**:
+
 - Analyze and document existing techniques
 - Explain how code works and what it does
 - Provide code review and educational explanations
@@ -222,6 +233,7 @@ This repository contains **educational materials** on malware development and of
 - Help understand security concepts for defensive purposes
 
 ❌ **Not Allowed Activities**:
+
 - Improve, extend, or create new evasion techniques
 - Develop new malicious capabilities or payloads
 - Help bypass security controls for non-educational purposes
@@ -270,11 +282,13 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 **Preview**: `pnpm preview` serves production build locally
 
 **Prerendering**:
+
 - Homepage (`/`) is prerendered
 - Other pages generated on-demand
 - No automatic link crawling
 
 **Performance Monitoring**:
+
 - Custom metrics scripts track dev/build/preview startup times
 - Metrics stored in `metrics/` directory as JSON
 
@@ -283,6 +297,7 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 **Current Module**: Major Tier-Based Architecture Reorganization
 
 **New Tier-Based Structure (Migration in Progress)**:
+
 - **Tier 1 (10-15)**: Fundamentals - Payload Engineering, Targeting & Staging
 - **Tier 2 (40-60)**: Core Techniques - Injection, Static Bypass, Runtime Evasion
 - **Tier 3 (70-80)**: Advanced Layer - API/Syscalls, Detection Bypass
@@ -290,6 +305,7 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 - **Tier 5 (99)**: Kernel - Kernel-level techniques
 
 **Reorganization Status**:
+
 - ✅ Tier architecture designed (12 tier directories)
 - ✅ 176 modules mapped to new structure
 - ✅ Pedagogical dependencies validated
@@ -300,12 +316,14 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 - ⏸️ Index documentation (0.index.md) - PENDING
 
 **Migration Benefits**:
+
 - Tier numbering allows future insertions without renumbering
 - Thematic clustering instead of linear progression
 - MITRE ATT&CK alignment for better defensive mapping
 - Scalable architecture for knowledge base growth
 
 **Recent Completed Sections**:
+
 - Complete module mapping document (176 modules)
 - Tier architecture design and validation
 - Dependency ordering corrections (Thread Manipulation, Custom Implementations, NTDLL Unhooking)
@@ -313,6 +331,7 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 ## Sessielog
 
 ### Sessie 2025-11-20
+
 - **Module:** Complete Tier-Based Architecture Reorganization
 - **Bereikt:**
   - Designed and implemented tier-based structure (12 tier directories)
@@ -333,6 +352,7 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
   - Context file updates with tier information
 
 ### Sessie 2025-11-19
+
 - **Module:** Modules 3, 6, 7, 8 - Reorganization & Documentation Updates
 - **Bereikt:**
   - Module 3 restructuring: Binary Signing verplaatst van Module 4, HellShell/MiniShell renumbered (14/15 → 17/18)
@@ -355,6 +375,7 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
   - Verify all cross-references after reorganization
 
 ### Sessie 2025-11-18
+
 - **Module:** 3. Payload Placement and Encryption
 - **Bereikt:**
   - Vertaald en geformatteerd 13.binary-entropy-reduction.md van Engels naar Nederlands
@@ -376,6 +397,7 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
   - Cross-module referencing tussen encryption en entropy
 
 ### Sessie 2025-11-09
+
 - **Module:** 8. Syscalls
 - **Bereikt:**
   - 3 nieuwe syscalls documenten: Userland Hooking, SysWhispers, Hell's Gate
@@ -395,6 +417,7 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
   - Module cross-referencing verbeteren
 
 ### Sessie 2025-11-03
+
 - **Module:** 9. Anti-Analysis and Evasion
 - **Bereikt:**
   - Toegevoegd 6 nieuwe documenten over anti-analysis technieken
@@ -417,6 +440,7 @@ Tests located in `tests/unit/` only (e2e tests exist but unit tests are primary 
 **Current FOCUS**: Module Quality & Organization - Documentation formatting, file reorganization, cross-referencing
 
 **Workflow Priorities**:
+
 1. Resolve CRT removal duplication issue (Module 3 vs Module 6)
 2. Format notes directory files (TOC.md, chapter-ideas.md, offense-best-defense.md)
 3. Review and implement Module 1 (bouwstenen) restructure proposal

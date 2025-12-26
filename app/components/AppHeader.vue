@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
+// import type { ContentNavigationItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 const route = useRoute()
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+// const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 const { header } = useAppConfig()
 
 /**
@@ -184,12 +184,12 @@ const active = ref()
 		</template>
 
 		<template #body>
-			<UContentNavigation
+			<!-- <UContentNavigation
 				default-open
 				type="single"
 				highlight
 				:navigation="navigation"
-			/>
+			/> -->
 		</template>
 	</UHeader>
 </template>

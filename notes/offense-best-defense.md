@@ -15,6 +15,7 @@ Offensive tooling is voortdurend onderhevig aan continue evolutie. Een groot dee
 ## Practical Application
 
 Door offensive technieken te begrijpen en te documenteren:
+
 1. **Betere detection rules** - Weten wat je moet detecteren
 2. **Effectievere blue team response** - Begrijpen hoe aanvallers denken
 3. **Proactieve verdediging** - Anticiperen op nieuwe technieken
@@ -31,6 +32,7 @@ Deze blog demonstreert perfect hoe offensive research direct bijdraagt aan defen
 ## Educational Context for Grimoire
 
 Dit principe vormt de **kern van het Grimoire project**:
+
 - Documenteer offensive technieken uitgebreid
 - Analyseer ze vanuit defensive perspectief
 - Ontwikkel detection signatures
