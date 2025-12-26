@@ -20,6 +20,11 @@ export default defineNuxtRouteMiddleware((to) => {
 		console.log('🔧 [MIDDLEWARE] AUTH_ORIGIN:', process.env.AUTH_ORIGIN)
 	}
 
+	if (process.server) {
+		console.log('🔧 [PROD] authOrigin:', useRuntimeConfig().authOrigin)
+		console.log('🔧 [PROD] authSecret length:', useRuntimeConfig().authSecret?.length)
+	}
+
 	// 🔒 Normal auth flow
 	const { status } = useAuth()
 

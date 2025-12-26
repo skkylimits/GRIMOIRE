@@ -115,11 +115,20 @@ export default defineNuxtConfig({
 	// 	authOrigin: process.env.NUXT_AUTH_ORIGIN || 'http://localhost:3000', // fallback site-URL voor SSR
 	// },
 
+	// runtimeConfig: {
+	// 	authSecret: process.env.AUTH_SECRET, // server-side secret
+	// 	authOrigin: process.env.NUXT_PUBLIC_AUTH_ORIGIN || 'http://localhost:3000',
+	// 	public: {
+	// 		siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+	// 	},
+	// },
+
 	runtimeConfig: {
 		authSecret: process.env.AUTH_SECRET, // server-side secret
-		authOrigin: process.env.NUXT_PUBLIC_AUTH_ORIGIN || 'http://localhost:3000',
+		authOrigin: process.env.AUTH_ORIGIN || 'http://localhost:3000', // server-side
 		public: {
 			siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+			authOrigin: process.env.NUXT_PUBLIC_AUTH_ORIGIN || 'http://localhost:3000', // client-side
 		},
 	},
 

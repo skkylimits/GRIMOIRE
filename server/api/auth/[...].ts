@@ -3,11 +3,13 @@ import GithubProvider from 'next-auth/providers/github'
 
 const runtimeConfig = useRuntimeConfig()
 
-console.log('🔧 [AUTH] Secret length:', runtimeConfig.authSecret?.length)
-console.log('🔧 [AUTH] Origin:', runtimeConfig.authOrigin)
+console.log('🔧 [AUTH DEBUG] Secret length:', runtimeConfig.authSecret?.length)
+console.log('🔧 [AUTH DEBUG] Server authOrigin:', runtimeConfig.authOrigin)
+console.log('🔧 [AUTH DEBUG] Public authOrigin:', runtimeConfig.public.authOrigin)
 
 export default NuxtAuthHandler({
 	secret: useRuntimeConfig().authSecret, // ✅ runtime veiliger
+	// origin: useRuntimeConfig().authOrigin, // ← heel belangrijk!
 
 	providers: [
 		// @ts-expect-error: .default is vereist voor SSR in Nuxt
