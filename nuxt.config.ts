@@ -110,9 +110,17 @@ export default defineNuxtConfig({
 		},
 	},
 
+	// runtimeConfig: {
+	// 	authSecret: process.env.AUTH_SECRET, // secret voor het signeren/versleutelen van tokens
+	// 	authOrigin: process.env.NUXT_AUTH_ORIGIN || 'http://localhost:3000', // fallback site-URL voor SSR
+	// },
+
 	runtimeConfig: {
-		authSecret: process.env.AUTH_SECRET, // secret voor het signeren/versleutelen van tokens
-		authOrigin: process.env.NUXT_AUTH_ORIGIN || 'http://localhost:3000', // fallback site-URL voor SSR
+		authSecret: process.env.AUTH_SECRET, // server-side secret
+		authOrigin: process.env.NUXT_PUBLIC_AUTH_ORIGIN || 'http://localhost:3000',
+		public: {
+			siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+		},
 	},
 
 	compatibilityDate: '2024-07-11',
