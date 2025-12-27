@@ -159,13 +159,13 @@ Always present this checklist at completion:
 
 | Stap | Beschrijving                                              | Klaar |
 | ---- | --------------------------------------------------------- | :---: |
-| 1    | session-summary.md bijgewerkt/aangemaakt in root          |  ☑   |
-| 2    | Module-specifieke documentatie gevalideerd                |  ☑   |
-| 3    | Contextfiles (CLAUDE.md, AGENTS.md, GEMINI.md) bijgewerkt |  ☑   |
-| 4    | README.md status geverifieerd (indien aanwezig)           |  ☑   |
-| 5    | Git-remote gecontroleerd en v4 branch actief              |  ☑   |
-| 6    | Alle commits gepusht naar v4 branch                       |  ☑   |
-| 7    | Combined Context toegevoegd                               |  ☑   |
+| 1    | session-summary.md bijgewerkt/aangemaakt in root          |   ☑   |
+| 2    | Module-specifieke documentatie gevalideerd                |   ☑   |
+| 3    | Contextfiles (CLAUDE.md, AGENTS.md, GEMINI.md) bijgewerkt |   ☑   |
+| 4    | README.md status geverifieerd (indien aanwezig)           |   ☑   |
+| 5    | Git-remote gecontroleerd en v4 branch actief              |   ☑   |
+| 6    | Alle commits gepusht naar v4 branch                       |   ☑   |
+| 7    | Combined Context toegevoegd                               |   ☑   |
 
 ## Communication Style
 
