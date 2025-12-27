@@ -1,75 +1,37 @@
 /* eslint-disable no-console */
 export default defineNuxtRouteMiddleware((to) => {
+	// 🔒 Auth status ophalen
 	const { status } = useAuth()
-	const runtimeConfig = useRuntimeConfig()
 
-	const isServer = process.server
-	const phase = isServer ? 'SSR' : 'CLIENT'
+	// 🔍 Debug logging (alleen server-side)
+	if (process.server) {
+		console.log('🔧 [MIDDLEWARE] Route:', to.path)
+		console.log('🔧 [MIDDLEWARE] NODE_ENV:', process.env.NODE_ENV)
+		console.log('🔧 [MIDDLEWARE] authOrigin:', useRuntimeConfig().authOrigin)
+		console.log('🔧 [MIDDLEWARE] authSecret length:', useRuntimeConfig().authSecret?.length)
+		console.log('🔧 [MIDDLEWARE] Auth status:', status.value)
+	}
 
-	// ╭──────────────────────────────────────────────────────────╮
-	// 📦 TOP-LEVEL AUTH MIDDLEWARE GROUP
-	// ╰──────────────────────────────────────────────────────────╯
-	console.groupCollapsed(
-		`%c🔐 auth.global.ts → ${to.fullPath} [${phase}]`,
-		'color:#7aa2f7;font-weight:bold',
-	)
-
-	// ╭───────────────── STEP 1 — REQUEST CONTEXT ─────────────────╮
-	console.groupCollapsed('🔍 STEP 1 — Request context')
-	console.log('Route path:', to.path)
-	console.log('Full path:', to.fullPath)
-	console.log('Execution phase:', phase)
-	console.log('NODE_ENV:', process.env.NODE_ENV)
-	console.log('import.meta.dev:', import.meta.dev)
-	console.groupEnd()
-
-	// ╭───────────────── STEP 2 — AUTH CONFIG SOURCE ─────────────╮
-	console.groupCollapsed('🔐 STEP 2 — Auth configuration')
-	console.log('runtimeConfig.authOrigin:', runtimeConfig.authOrigin)
-	console.log('runtimeConfig.authSecret length:', runtimeConfig.authSecret?.length)
-	console.log('process.env.AUTH_ORIGIN:', process.env.AUTH_ORIGIN)
-	console.log('process.env.NUXT_AUTH_ORIGIN:', process.env.NUXT_AUTH_ORIGIN)
-	console.log('process.env.NUXT_PUBLIC_AUTH_ORIGIN:', process.env.NUXT_PUBLIC_AUTH_ORIGIN)
-	console.log('process.env.NUXT_AUTH_DISABLED:', process.env.NUXT_AUTH_DISABLED)
-	console.groupEnd()
-
-	// ╭───────────────── STEP 3 — AUTH STATE ──────────────────────╮
-	console.groupCollapsed('🍪 STEP 3 — Auth state')
-	console.log('Auth status:', status.value)
-	console.groupEnd()
-
-	// ╭───────────────── STEP 4 — WAIT FOR RESOLUTION ─────────────╮
+	// ⏳ Wacht tot auth status bekend is
 	if (status.value === 'loading') {
-		console.log('⏳ STEP 4 — Auth status is loading → wait')
-		console.groupEnd()
 		return
 	}
 
-	// ╭───────────────── STEP 5 — SIGNIN ROUTE GUARD ──────────────╮
+	// 🚫 Signin is altijd toegestaan
 	if (to.path === '/signin') {
-		console.log('🚪 STEP 5 — On /signin route')
-
+		// Als al ingelogd → naar home
 		if (status.value === 'authenticated') {
-			console.log('✅ Already authenticated → redirect to /')
-			console.groupEnd()
 			return navigateTo('/')
 		}
-
-		console.log('ℹ️ Unauthenticated on /signin → allow')
-		console.groupEnd()
 		return
 	}
 
-	// ╭───────────────── STEP 6 — ENFORCE AUTH ────────────────────╮
+	// 🔒 Niet ingelogd → FORCE redirect
 	if (status.value === 'unauthenticated') {
-		console.warn('🔒 STEP 6 — Not authenticated → redirect to /signin')
-		const callbackUrl = encodeURIComponent(to.fullPath)
-		console.log('🔎 redirecting to:', `/signin?callbackUrl=${callbackUrl}`)
-		console.groupEnd()
-		return navigateTo(`/signin?callbackUrl=${callbackUrl}`)
+		return navigateTo('/signin', {
+			replace: true,
+		})
 	}
 
-	// ╭───────────────── STEP 7 — ACCESS GRANTED ──────────────────╮
-	console.log('✅ STEP 7 — Authenticated → access granted')
-	console.groupEnd()
+	// ✅ Ingelogd → alles toestaan
 })
