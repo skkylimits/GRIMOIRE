@@ -110,19 +110,6 @@ export default defineNuxtConfig({
 		},
 	},
 
-	// runtimeConfig: {
-	// 	authSecret: process.env.AUTH_SECRET, // secret voor het signeren/versleutelen van tokens
-	// 	authOrigin: process.env.NUXT_AUTH_ORIGIN || 'http://localhost:3000', // fallback site-URL voor SSR
-	// },
-
-	// runtimeConfig: {
-	// 	authSecret: process.env.AUTH_SECRET, // server-side secret
-	// 	authOrigin: process.env.NUXT_PUBLIC_AUTH_ORIGIN || 'http://localhost:3000',
-	// 	public: {
-	// 		siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-	// 	},
-	// },
-
 	runtimeConfig: {
 		authSecret: process.env.AUTH_SECRET, // server-side secret
 		authOrigin: process.env.AUTH_ORIGIN || 'http://localhost:3000', // server-side
@@ -145,10 +132,9 @@ export default defineNuxtConfig({
 	},
 
 	// https://auth.sidebase.io/guide/getting-started/introduction
+	// https://github.com/sidebase/nuxt-auth/issues/973
 	auth: {
 		originEnvKey: 'NUXT_AUTH_ORIGIN', // welke env-var de auth module gebruikt voor je site-URL
-		// baseURL: '/api/auth',
-		// baseURL: `${process.env.AUTH_ORIGIN}/api/auth`,
 		globalAppMiddleware: false, // ⛔️ NIET door NuxtAuth laten doen
 		provider: {
 			type: 'authjs',

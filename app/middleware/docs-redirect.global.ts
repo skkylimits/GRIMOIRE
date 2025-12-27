@@ -2,12 +2,17 @@
 import type { ContentNavigationItem } from '@nuxt/content'
 
 export default defineNuxtRouteMiddleware(async (to) => {
-	// ⛔️ AUTH ROUTES VOLLEDIG UITSCHAKELEN
+	// ⛔️ SKIP INTERNALS
+
 	if (
-		to.path.startsWith('/signin')
+		to.path === '/'
+		|| to.path.startsWith('/signin')
 		|| to.path.startsWith('/api/auth')
 		|| to.path.startsWith('/callback')
 		|| to.path.startsWith('/logout')
+		|| to.path.startsWith('/_nuxt')
+		|| to.path === '/favicon.ico'
+		|| to.path === '/robots.txt'
 	) {
 		return
 	}
