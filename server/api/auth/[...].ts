@@ -3,11 +3,11 @@
 import { NuxtAuthHandler } from '#auth'
 import GithubProvider from 'next-auth/providers/github'
 
-const runtimeConfig = useRuntimeConfig()
+// const runtimeConfig = useRuntimeConfig()
 
-console.log('🔧 [AUTH DEBUG] Secret length:', runtimeConfig.authSecret?.length)
-console.log('🔧 [AUTH DEBUG] Server authOrigin:', runtimeConfig.authOrigin)
-console.log('🔧 [AUTH DEBUG] Public authOrigin:', runtimeConfig.public.authOrigin)
+// console.log('🔧 [AUTH DEBUG] Secret length:', runtimeConfig.authSecret?.length)
+// console.log('🔧 [AUTH DEBUG] Server authOrigin:', runtimeConfig.authOrigin)
+// console.log('🔧 [AUTH DEBUG] Public authOrigin:', runtimeConfig.public.authOrigin)
 
 export default NuxtAuthHandler({
 	secret: useRuntimeConfig().authSecret, // ✅ runtime veiliger
