@@ -4,10 +4,10 @@ import * as z from 'zod'
 
 definePageMeta({
 	path: '/signin',
-	auth: {
-		unauthenticatedOnly: true,
-		navigateAuthenticatedTo: '/',
-	},
+	// auth: {
+	// 	unauthenticatedOnly: true,
+	// 	navigateAuthenticatedTo: '/the-lab',
+	// },
 })
 
 const { signIn } = useAuth()
