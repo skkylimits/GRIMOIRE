@@ -2,6 +2,16 @@
 import type { ContentNavigationItem } from '@nuxt/content'
 
 export default defineNuxtRouteMiddleware(async (to) => {
+	// ⛔️ AUTH ROUTES VOLLEDIG UITSCHAKELEN
+	if (
+		to.path.startsWith('/signin')
+		|| to.path.startsWith('/api/auth')
+		|| to.path.startsWith('/callback')
+		|| to.path.startsWith('/logout')
+	) {
+		return
+	}
+
 	// ╭──────────────────────────────────────────────────────────╮
 	// 📦 TOP-LEVEL COMPONENT GROUP
 	// ╰──────────────────────────────────────────────────────────╯
