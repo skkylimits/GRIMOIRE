@@ -2,13 +2,12 @@
 const { status, data: session, signIn, signOut } = useAuth()
 
 // ✅ SSR-veilige callback-URL
-const callbackUrl
-	= typeof window !== 'undefined' ? window.location.origin : '/'
+const callbackUrl = typeof window !== 'undefined' ? window.location.origin : '/'
 </script>
 
 <template>
-	<div class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-6">
-		<UCard class="w-full max-w-2xl p-8 space-y-6 shadow-lg rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800">
+	<div class="min-h-screen flex items-center justify-center p-6">
+		<UCard variant="subtle" class="w-full max-w-2xl p-8 space-y-6 shadow-lg rounded-2xl">
 			<!-- Titel + status -->
 			<div class="flex items-center justify-between">
 				<h2 class="text-2xl font-semibold flex items-center gap-2 text-gray-900 dark:text-gray-100">
@@ -27,10 +26,10 @@ const callbackUrl
 
 			<!-- Session data -->
 			<div>
-				<p class="text-sm text-gray-500 dark:text-gray-400 mb-2 font-medium">
+				<p class="text-sm mb-2 font-medium">
 					Session data
 				</p>
-				<div class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 rounded-lg p-4 font-mono text-sm whitespace-pre-wrap break-all">
+				<div class="bg-gray-100 text-gray-800 dark:bg-gray-100 rounded-lg p-4 font-mono text-sm whitespace-pre-wrap break-all">
 					{{ JSON.stringify(session, null, 2) }}
 				</div>
 			</div>

@@ -137,7 +137,6 @@ function setupResizeObserver() {
 }
 
 // ╭───────────────── STEP 1 — INITIAL MOUNT ───────────────╮
-
 onMounted(async () => {
 	if (skipPaths.includes(route.path) || !isTabbed.value) {
 		console.log('   → Skipped mount for this page')
