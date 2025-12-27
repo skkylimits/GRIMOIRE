@@ -19,6 +19,7 @@ export default defineNuxtRouteMiddleware((to) => {
 	if (process.server) {
 		console.log('🔧 [MIDDLEWARE] Route:', to.path)
 		console.log('🔧 [MIDDLEWARE] NODE_ENV:', process.env.NODE_ENV)
+		console.log('🔧 [MIDDLEWARE] Public Auth:', useRuntimeConfig().public.auth)
 		console.log('🔧 [MIDDLEWARE] authOrigin:', useRuntimeConfig().authOrigin)
 		console.log('🔧 [MIDDLEWARE] authSecret length:', useRuntimeConfig().authSecret?.length)
 		console.log('🔧 [MIDDLEWARE] Auth status:', status.value)
