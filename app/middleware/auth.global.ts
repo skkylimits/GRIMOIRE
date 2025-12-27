@@ -29,7 +29,7 @@ export default defineNuxtRouteMiddleware((to) => {
 
 	// 🔒 Auth check
 	if (status.value === 'authenticated' && to.path === '/signin') {
-		return navigateTo('/', { replace: true }) // redirect naar home als al ingelogd
+		return navigateTo('/the-lab', { replace: true }) // redirect naar home als al ingelogd
 	}
 
 	// ✅ Ingelogd → alles toestaan
