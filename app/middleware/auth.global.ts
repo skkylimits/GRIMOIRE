@@ -19,7 +19,7 @@ export default defineNuxtRouteMiddleware((to) => {
 
 	// 🔒 Auth check
 	if (status.value === 'unauthenticated' && to.path !== '/signin') {
-		return navigateTo('/signin', { replace: true })
+		return navigateTo('/', { replace: true })
 	}
 
 	// // 🚫 Signin is altijd toegestaan
