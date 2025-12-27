@@ -17,6 +17,11 @@ export default defineNuxtRouteMiddleware((to) => {
 		return
 	}
 
+	// 🛠️ /debug-auth altijd toegankelijk
+	if (to.path === '/debug-auth') {
+		return
+	}
+
 	// 🚫 Signin is altijd toegestaan
 	if (status.value === 'unauthenticated' && to.path !== '/signin') {
 		return navigateTo('/signin', { replace: true }) // altijd naar /signin
@@ -26,22 +31,6 @@ export default defineNuxtRouteMiddleware((to) => {
 	if (status.value === 'authenticated' && to.path === '/signin') {
 		return navigateTo('/', { replace: true }) // redirect naar home als al ingelogd
 	}
-
-	// // 🚫 Signin is altijd toegestaan
-	// if (to.path === '/signin') {
-	// 	// Als al ingelogd → naar home
-	// 	if (status.value === 'authenticated') {
-	// 		return navigateTo('/')
-	// 	}
-	// 	return
-	// }
-
-	// // 🔒 Niet ingelogd → FORCE redirect
-	// if (status.value === 'unauthenticated') {
-	// 	return navigateTo('/signin', {
-	// 		replace: true,
-	// 	})
-	// }
 
 	// ✅ Ingelogd → alles toestaan
 })
