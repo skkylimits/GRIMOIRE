@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { NuxtAuthHandler } from '#auth'
 import GithubProvider from 'next-auth/providers/github'
 
