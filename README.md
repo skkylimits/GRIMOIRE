@@ -155,3 +155,4 @@ Zie [CLAUDE.md](./CLAUDE.md) voor volledige development instructies en project c
 ---
 
 **⚠️ Educational Use Only** - All techniques documented here are for authorized security testing, CTF challenges, security research, and defensive purposes only.
+:)
