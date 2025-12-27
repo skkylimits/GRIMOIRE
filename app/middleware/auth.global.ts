@@ -61,7 +61,14 @@ export default defineNuxtRouteMiddleware((to) => {
 	}
 
 	// ╭───────────────── STEP 6 — ENFORCE AUTH ────────────────────╮
-	const excludedPaths = ['/session', '/api/auth']
+	const excludedPaths = [
+		'/session', // session endpoint
+		'/api/auth', // algemene auth route
+		'/api/auth/providers', // ophalen van providers
+		'/providers', // ophalen van providers
+		'/signin', // login pagina zelf
+	]
+
 	console.log('🔍 STEP 6 — Excluded paths check:', excludedPaths, 'Current path:', to.path)
 
 	if (!excludedPaths.some(p => to.path.startsWith(p))) {
