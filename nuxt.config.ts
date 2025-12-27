@@ -147,7 +147,7 @@ export default defineNuxtConfig({
 	// https://auth.sidebase.io/guide/getting-started/introduction
 	auth: {
 		originEnvKey: 'NUXT_AUTH_ORIGIN', // welke env-var de auth module gebruikt voor je site-URL
-		baseURL: '/api/auth',
+		// baseURL: '/api/auth',
 		globalAppMiddleware: false, // ⛔️ NIET door NuxtAuth laten doen
 		provider: {
 			type: 'authjs',
