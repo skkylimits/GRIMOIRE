@@ -19,6 +19,15 @@ let resizeObs: ResizeObserver | null = null
 const SAFE_MARGIN = 48
 
 // ╭──────────────────────────────────────────────────────────╮
+// 😈 SKIP DETECTION
+// ╰──────────────────────────────────────────────────────────╯
+const skipPaths = ['/', '/signin']
+
+if (skipPaths.includes(route.path)) {
+	measuring.value = false
+}
+
+// ╭──────────────────────────────────────────────────────────╮
 // 🤖 TAB DETECTION
 // ╰──────────────────────────────────────────────────────────╯
 const isTabbed = computed(() => {
@@ -130,6 +139,13 @@ function setupResizeObserver() {
 // ╭───────────────── STEP 1 — INITIAL MOUNT ───────────────╮
 console.groupCollapsed('%c   STEP 1 — INITIAL MOUNT', 'color:#94e2d5')
 onMounted(async () => {
+	if (skipPaths.includes(route.path) || !isTabbed.value) {
+		console.log('   → Skipped mount for this page')
+		measuring.value = false
+		console.groupEnd()
+		return
+	}
+
 	if (!isTabbed.value) {
 		console.log('   → This page has NO tabs → skip measurement')
 		measuring.value = false
@@ -150,6 +166,13 @@ onMounted(async () => {
 // ROUTE CHANGE HANDLING
 // ───────────────────────────────────────────────────────────
 watch(() => route.fullPath, async () => {
+	if (skipPaths.includes(route.path) || !isTabbed.value) {
+		console.log('   → Skipped route change for this page')
+		measuring.value = false
+		console.groupEnd()
+		return
+	}
+
 	console.groupCollapsed(
 		`%c   ROUTE CHANGE → ${route.fullPath}`,
 		'color:#fab387;font-weight:bold',
