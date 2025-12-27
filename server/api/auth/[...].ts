@@ -22,11 +22,13 @@ export default NuxtAuthHandler({
 	],
 
 	callbacks: {
-		/**
-		 * 🔐 Wordt elke keer aangeroepen wanneer een sessie wordt opgehaald
-		 */
+	/**
+	 * 🔐 Wordt elke keer aangeroepen wanneer een sessie wordt opgehaald
+	 */
 		async session({ session, token }) {
-			// Je kunt custom data toevoegen aan de session
+			console.log('🔐 [Session callback] session object:', session)
+			console.log('🔐 [Session callback] token object:', token)
+
 			// @ts-expect-error – session.user.id exist when logged in
 			session.user.id = token.sub
 			return session
@@ -36,7 +38,11 @@ export default NuxtAuthHandler({
 		 * 🧠 Wordt elke keer aangeroepen als JWT wordt gemaakt of vernieuwd
 		 */
 		async jwt({ token, account }) {
+			console.log('🧠 [JWT callback] token object:', token)
+			console.log('🧠 [JWT callback] account object:', account)
+
 			if (account?.access_token) {
+				console.log('🧠 Adding access token to JWT:', account.access_token)
 				token.accessToken = account.access_token
 			}
 			return token

@@ -63,10 +63,8 @@ export default defineNuxtRouteMiddleware((to) => {
 	// ╭───────────────── STEP 6 — ENFORCE AUTH ────────────────────╮
 	if (status.value === 'unauthenticated') {
 		console.warn('🔒 STEP 6 — Not authenticated → redirect to /signin')
-		const callbackUrl = encodeURIComponent(to.fullPath)
-		console.log('🔎 redirecting to:', `/signin?callbackUrl=${callbackUrl}`)
 		console.groupEnd()
-		return navigateTo(`/signin?callbackUrl=${callbackUrl}`)
+		return navigateTo('/signin')
 	}
 
 	// ╭───────────────── STEP 7 — ACCESS GRANTED ──────────────────╮
