@@ -15,6 +15,8 @@ export default defineNuxtRouteMiddleware((to) => {
 	// 🔒 Auth status ophalen
 	const { status } = useAuth()
 
+	console.log('🔧 [MIDDLEWARE] Auth status:', status.value, '| Route:', to.path)
+
 	// 🔍 Debug logging (alleen server-side)
 	if (process.server) {
 		console.log('🔧 [MIDDLEWARE] Route:', to.path)
