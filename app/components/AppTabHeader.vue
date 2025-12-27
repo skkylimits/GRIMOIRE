@@ -137,7 +137,7 @@ function setupResizeObserver() {
 }
 
 // ╭───────────────── STEP 1 — INITIAL MOUNT ───────────────╮
-console.groupCollapsed('%c   STEP 1 — INITIAL MOUNT', 'color:#94e2d5')
+
 onMounted(async () => {
 	if (skipPaths.includes(route.path) || !isTabbed.value) {
 		console.log('   → Skipped mount for this page')
@@ -146,6 +146,7 @@ onMounted(async () => {
 		return
 	}
 
+	console.groupCollapsed('%c   STEP 1 — INITIAL MOUNT', 'color:#94e2d5')
 	if (!isTabbed.value) {
 		console.log('   → This page has NO tabs → skip measurement')
 		measuring.value = false
