@@ -29,7 +29,7 @@ const callbackUrl = typeof window !== 'undefined' ? window.location.origin : '/'
 				<p class="text-sm mb-2 font-medium">
 					Session data
 				</p>
-				<div class="bg-gray-100 text-gray-800 dark:bg-gray-100 rounded-lg p-4 font-mono text-sm whitespace-pre-wrap break-all">
+				<div class="bg-gray-100 text-gray-800 rounded-lg p-4 font-mono text-sm whitespace-pre-wrap break-all">
 					{{ JSON.stringify(session, null, 2) }}
 				</div>
 			</div>

@@ -156,3 +156,24 @@ Zie [CLAUDE.md](./CLAUDE.md) voor volledige development instructies en project c
 
 **⚠️ Educational Use Only** - All techniques documented here are for authorized security testing, CTF challenges, security research, and defensive purposes only.
 :) :) :)
+
+## hardening
+
+### 🧱 Optie A — Client‑only data (extreem veilig)
+
+```ts
+const page = ref(null)
+
+onMounted(async () => {
+	page.value = await queryCollection('docs')
+		.path(route.path)
+		.first()
+})
+```
+
+⛔ Geen SSR data
+⛔ Geen HTML exposure
+⛔ Iets langzamer
+✅ Maximaal veilig
+
+⚠️ Alleen doen als threat‑model dit vereist.

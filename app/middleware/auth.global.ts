@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+
 export default defineNuxtRouteMiddleware((to) => {
 	// 🧪 Skip auth logic entirely when testing
 	// if (import.meta.env.NUXT_AUTH_DISABLED === 'true') {
@@ -13,7 +14,8 @@ export default defineNuxtRouteMiddleware((to) => {
 	// }
 
 	// 🔒 Auth status ophalen
-	const { status } = useAuth()
+	const { status, data: session } = useAuth()
+	const user = session.value?.user || null
 
 	console.log('🔧 [MIDDLEWARE] Auth status:', status.value, '| Route:', to.path)
 
@@ -33,23 +35,21 @@ export default defineNuxtRouteMiddleware((to) => {
 		return
 	}
 
-	// 🛠️ /debug-auth altijd toegestaan
-	if (to.path === '/debug-auth') {
-		console.log('🔧 [MIDDLEWARE] Debugging')
+	const publicPaths = ['/signin', '/debug-auth']
+	if (publicPaths.includes(to.path))
 		return
+
+	if (status.value === 'unauthenticated') {
+		return navigateTo('/signin', { replace: true })
 	}
 
-	// 🚫 Signin is altijd toegestaan
-	if (status.value === 'unauthenticated' && to.path !== '/signin') {
-		console.log('🔧 [MIDDLEWARE] Not authenticated, redirecting to /signin')
-		return navigateTo('/signin', { replace: true }) // altijd naar /signin
+	if (status.value === 'authenticated' && user?.name !== 'skkylimits') {
+		return navigateTo('/signin', { replace: true })
 	}
 
-	// 🔒 Auth check
-	if (status.value === 'authenticated' && to.path === '/signin') {
-		console.log('🔧 [MIDDLEWARE] Already authenticated, redirecting to home')
-		return navigateTo('/the-lab', { replace: true }) // redirect naar home als al ingelogd
+	// 🔑 Skkylimits naar /signin → redirect naar /the-lab
+	if (status.value === 'authenticated' && user?.name === 'skkylimits' && to.path === '/signin') {
+		return navigateTo('/the-lab', { replace: true })
 	}
-
 	// ✅ Ingelogd → alles toestaan
 })
